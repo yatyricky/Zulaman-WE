@@ -1,10 +1,10 @@
 //! zinc
 library DamageSystem requires ZAMCore, UnitProperty, BuffSystem {
-#define MISS "|cffffcc00Î´ÃüÖĞ|r"
-#define DODGE "|cffffcc00¶ãÉÁ|r"
-#define BLOCK "|cffffcc00ÕĞ¼Ü|r"
-#define ABSORB "|cffffcc00ÎüÊÕ|r"
-#define IMMUNE "|cffffcc00ÃâÒß|r"
+#define MISS "|cffffcc00æœªå‘½ä¸­|r"
+#define DODGE "|cffffcc00èº²é—ª|r"
+#define BLOCK "|cffffcc00æ‹›æ¶|r"
+#define ABSORB "|cffffcc00å¸æ”¶|r"
+#define IMMUNE "|cffffcc00å…ç–«|r"
 #define NULL_STR ""
     
     public type ResponseDamaged extends function();       
@@ -328,7 +328,7 @@ public boolean lifelock = false;
     private function damaged() -> boolean {
         real dmg = GetEventDamage();
         unit a = GetEventDamageSource(), b = GetTriggerUnit();
-        //print("ÎÒÊé¶ÁµÄÉÙ, Äã±ğÆ­ÎÒ.");
+        //print("æˆ‘ä¹¦è¯»çš„å°‘, ä½ åˆ«éª—æˆ‘.");
         if (dmg == 0.0) {
             //BJDebugMsg(SCOPE_PREFIX+">0 damage detected");
             a = null; b = null; return false;
