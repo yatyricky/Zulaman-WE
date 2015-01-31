@@ -132,7 +132,7 @@ library InfoBoards requires Board, ModelInfo, NefUnion, ZAMCore, BuffSystem, Agg
         real r0;
         UnitDps ud;
         real time;
-        if (!IsUnitDummy(u)) {
+        if (u != null && !IsUnitDummy(u)) {
             mi = ModelInfo[GetUnitTypeId(u)];
             //integer mainAtt;
             playerSelection[id] = u;
@@ -389,12 +389,17 @@ library InfoBoards requires Board, ModelInfo, NefUnion, ZAMCore, BuffSystem, Agg
             
             al = AggroList[u];
             if (al != 0) {
+			print(SCOPE_PREFIX+":392> Player unit error");
                 al.sort();
                 i = 0;
                 while (i < al.aggrosN) {
                     bi = aggroboards[id][0][i + 1];
-                    print("I have an aggro list???");
-                    mi = ModelInfo[GetUnitTypeId(al.aggros[i])];
+                    //print("I have an aggro list???");
+					//if (al.aggros[i] == null) {
+					//	print(SCOPE_PREFIX + ":398> Found error!");
+					//} else {
+					mi = ModelInfo[GetUnitTypeId(al.aggros[i])];
+					//}
                     bi.icon = mi.icon;
                     if (IsUnitType(al.aggros[i], UNIT_TYPE_HERO)) {
                         bi.text = GetHeroProperName(al.aggros[i]);

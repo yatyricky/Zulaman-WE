@@ -295,7 +295,7 @@ library AggroSystem requires MobInit, UnitProperty, Clock, DamageSystem, PlayerU
             CheckHeroLevel();
             if (thistype.done) {
                 thistype.done = false;
-                TimerDialogSetTitle(thistype.td, "等待复活");
+                TimerDialogSetTitle(thistype.td, "绛夊緟澶嶆椿");
                 TimerDialogDisplay(thistype.td, true);
                 TimerStart(thistype.tm, 10.0, false, function thistype.run);
             }
@@ -347,7 +347,7 @@ library AggroSystem requires MobInit, UnitProperty, Clock, DamageSystem, PlayerU
                 combatStateNotifyCallList[i].evaluate();
                 i += 1;
             }
-            BJDebugMsg("|cffffcc00脱离战斗|r");
+            BJDebugMsg("|cffffcc00鑴辩鎴樻枟|r");
             whichBoss = null;
             PauseTimer(thistype.combatTimer);
             thistype.combatTime = -1.0;
@@ -390,7 +390,7 @@ library AggroSystem requires MobInit, UnitProperty, Clock, DamageSystem, PlayerU
                 combatStateNotifyCallList[i].evaluate();
                 i += 1;
             }
-            BJDebugMsg("|cffffcc00进入战斗|r");            
+            BJDebugMsg("|cffffcc00杩涘叆鎴樻枟|r");            
             thistype.combatTime = 0.01;
             TimerStart(thistype.combatTimer, TIME_TICK, true, function thistype.reorderMobs);
         }

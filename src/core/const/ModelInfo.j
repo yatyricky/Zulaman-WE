@@ -25,8 +25,8 @@ library ModelInfo requires Table, Integer {
     
         static method operator[] (integer uid) -> thistype {
             if (!tab.exists(uid)) {
-                BJDebugMsg(SCOPE_PREFIX+">undefined unit type id '" + ID2S(uid) + "'.");
-                return 5/0;
+                print(SCOPE_PREFIX+">undefined unit type id '" + ID2S(uid) + "'.");
+                return 0;
             } else {
                 return thistype(tab[uid]);
             }
