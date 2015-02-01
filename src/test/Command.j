@@ -1,5 +1,5 @@
 //! zinc
-library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSystem, IntegerPool, Regeneration, WarlockGlobal, LightningShield {
+library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSystem, IntegerPool, Regeneration, WarlockGlobal, LightningShield, PlayerUnitList {
     
     function testStunUnit(string str) {
         unit u; 
@@ -272,6 +272,52 @@ library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSys
         
         DestroyGroup(g);
     }
+	
+	function testwarlock(string str) {
+		// PlayerUnits.units
+		// PlayerUnits.n
+		integer i = 0;
+		while (i < PlayerUnits.n) {
+			SetUnitPosition(PlayerUnits.units[i], 3930, -573);
+			i += 1;
+		}
+		CreateItemEx('Ieng', 3930, -573);
+		CreateItemEx('Ieng', 3930, -573);
+		CreateItemEx('Ieng', 3930, -573);
+		CreateItemEx('Ieng', 3930, -573);
+		CreateItemEx('Ieng', 3930, -573);
+		CreateItemEx('Ieng', 3930, -573);
+		CreateItemEx('Ieng', 3930, -573);
+		CreateItemEx('Ieng', 3930, -573);
+		CreateItemEx('Ieng', 3930, -573);
+		CreateItemEx('Ieng', 3930, -573);
+		CreateItemEx('Ieng', 3930, -573);
+		CreateItemEx('Ieng', 3930, -573);
+		CreateItemEx('Ieng', 3930, -573);
+		CreateItemEx('Ieng', 3930, -573);
+		CreateItemEx('Ieng', 3930, -573);
+		CreateItemEx('Ieng', 3930, -573);
+		CreateItemEx('Ieng', 3930, -573);
+		CreateItemEx('Ieng', 3930, -573);
+		CreateItemEx('Ieng', 3930, -573);
+		CreateItemEx('Ieng', 3930, -573);
+		CreateItemEx('Ieng', 3930, -573);
+		CreateItemEx('Ieng', 3930, -573);
+		CreateItemEx('Ieng', 3930, -573);
+		CreateItemEx('Ieng', 3930, -573);
+		CreateItemEx('Ieng', 3930, -573);
+		CreateItemEx('Ieng', 3930, -573);
+		CreateItemEx('Ieng', 3930, -573);
+		CreateItemEx('Ieng', 3930, -573);
+		CreateItemEx('Ieng', 3930, -573);
+		CreateItemEx('Ieng', 3930, -573);
+		CreateItemEx('Ieng', 3930, -573);
+		CreateItemEx('Ieng', 3930, -573);
+		CreateItemEx('Ieng', 3930, -573);
+		CreateItemEx('Ieng', 3930, -573);
+		CreateItemEx('Ieng', 3930, -573);
+		CreateItemEx('Ieng', 3930, -573);
+	}
     
     private function onInit() {
         //Console[Player(0)].add("stun", testStunUnit);
@@ -305,9 +351,10 @@ library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSys
         Console[Player(0)].add("dlog", debuglogs);
         Console[Player(0)].add("prayerofhealing", testprayerofhealing);
         //testlightning = AddLightningEx("SPLK", false, -6786, -1867, 1710, -6342, -1923, 1710);
-        Console[Player(0)].add("ltn", chooselightiningcolour);
+        Console[Player(0)].add("ltn", testwarlock);
         Console[Player(0)].add("podun", poyicengdun);
         Console[Player(0)].add("canuse", testifunitcanuse);
+		// console[Player(0)].add("testwlk", testwarlock);
     }
 }
 //! endzinc

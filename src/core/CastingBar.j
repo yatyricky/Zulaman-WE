@@ -185,7 +185,7 @@ library CastingBar requires SpellEvent, TimerUtils, SpellData, UnitAbilityCD, ZA
         }
 		
 		method launch() {
-            real mscale = ModelInfo[GetUnitTypeId(this.caster)].scale;
+            real mscale = ModelInfo.get(GetUnitTypeId(this.caster), "CastingBar: 188").scale;
             //print(R2S(mscale));
 			thistype.ht[this.caster] = this;
 			this.channeling = this.sd.level;
@@ -218,7 +218,7 @@ library CastingBar requires SpellEvent, TimerUtils, SpellData, UnitAbilityCD, ZA
         }
         
         method channel(integer nodes) {
-            real mscale = ModelInfo[GetUnitTypeId(this.caster)].scale;
+            real mscale = ModelInfo.get(GetUnitTypeId(this.caster), "CastingBar: 221").scale;
             //print(R2S(mscale));
 			thistype.ht[this.caster] = this;
 			this.channeling = this.sd.level;

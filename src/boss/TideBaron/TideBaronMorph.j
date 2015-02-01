@@ -8,6 +8,7 @@ library TideBaronMorph requires BuffSystem, SpellEvent, AggroSystem {
             if (IsInCombat()) {
                 AggroList[u].reset();
             }
+			BuffSlot[u].removeAllBuff();
             
             if (iid == OID_BEARFORM) {
                 UnitProp[u].spellTaken += 0.5;

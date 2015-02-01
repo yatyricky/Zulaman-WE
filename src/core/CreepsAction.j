@@ -55,7 +55,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
                 }
             }
             res = ip.get();
-print("选取技能"+SpellData[res].name);
+// print("选取技能"+SpellData[res].name);
             if (res == 0) {
                 IssueTargetOrderById(source, OID_ATTACK, target);
             } else if (SpellData[res].otp == ORDER_TYPE_TARGET) {
@@ -496,7 +496,7 @@ print("选取技能"+SpellData[res].name);
                     //print("1");
                     ip.add(SIDLANCINATE, 30);
                 }
-                if (UnitCanUse(source, SIDRASPYROAR)) {
+                if (UnitCanUse(source, SIDRASPYROAR) && combatTime > 5) {
                     ip.add(SIDRASPYROAR, 30);
                 }
                 ip.add(0, 20);
@@ -551,9 +551,54 @@ print("选取技能"+SpellData[res].name);
         }    
     }
     
+	/*
+					#0	RAGE
+		P1:	@10s 100%-25%
+			@20s	#2	SIDFLAMEBOMB
+			@35s	#3	SIDSUMMONLAVASPAWN
+					#4	SIDFLAMETHROW
+		P2:	25%-0%
+					#1	SIDFRENZYWARLOCK
+	*/
     function makeOrderWarlock(unit source, unit target, real combatTime) {
-        IssueTargetOrderById(source, OID_ATTACK, target);
+        IntegerPool ip;
+        integer res;
+        if (!IsUnitChanneling(source)) {
+            ip = IntegerPool.create();
+			if (UnitCanUse(source, SIDRAGECREEP) && combatTime > 300) {
+			// print("makeOrderWarlock: Time > 300 add " + ID2S(SIDRAGECREEP));
+				ip.add(SIDRAGECREEP, 30);
+			} else if (UnitCanUse(source, SIDFRENZYWARLOCK) && GetUnitStatePercent(source, UNIT_STATE_LIFE, UNIT_STATE_MAX_LIFE) < 26) {
+			// print("makeOrderWarlock: HP < 25 add " + ID2S(SIDFRENZYWARLOCK));
+				ip.add(SIDFRENZYWARLOCK, 30);
+			} else if (UnitCanUse(source, SIDFLAMEBOMB) && combatTime > 20) {
+			// print("makeOrderWarlock: Time > 20 add " + ID2S(SIDFLAMEBOMB));
+                ip.add(SIDFLAMEBOMB, 30);
+            } else if (UnitCanUse(source, SIDSUMMONLAVASPAWN) && combatTime > 35 && GetUnitStatePercent(source, UNIT_STATE_LIFE, UNIT_STATE_MAX_LIFE) > 25) {
+			// print("makeOrderWarlock: Time > 35 add " + ID2S(SIDSUMMONLAVASPAWN));
+				ip.add(SIDSUMMONLAVASPAWN, 30);
+			} else {
+				if (UnitCanUse(source, SIDFLAMETHROW) && combatTime > 10) {
+			// print("makeOrderWarlock: Time > 10 add " + ID2S(SIDFLAMETHROW));
+					ip.add(SIDFLAMETHROW, 50);
+				}
+				ip.add(0, 20);
+            }
+            res = ip.get();
+            if (res == 0) {
+                IssueTargetOrderById(source, OID_ATTACK, target);
+            } else if (SpellData[res].otp == ORDER_TYPE_TARGET) {
+				IssueTargetOrderById(source, SpellData[res].oid, PlayerUnits.getRandomHero());
+            } else if (SpellData[res].otp == ORDER_TYPE_IMMEDIATE) {
+                IssueImmediateOrderById(source, SpellData[res].oid);
+            }
+            ip.destroy();
+        }    
     }
+	
+	function makeOrderLavaSpawn(unit source, unit target, real combatTime) {
+		IssueTargetOrderById(source, OID_ATTACK, target);
+	}
 
     public function OrderCreeps(unit s, unit t, real c) {
         integer utid = GetUnitTypeId(s);
@@ -570,7 +615,7 @@ print("选取技能"+SpellData[res].name);
         if (pace[s] == 0) {
             //print("命令");
             if (!unitCallBack.exists(utid)) {
-                print(SCOPE_PREFIX + ">Unregistered unit type order actions.");
+                // print(SCOPE_PREFIX + ">Unregistered unit type order actions.");
             } else {
                 UnitActionType(unitCallBack[utid]).evaluate(s, t, c);
             }
@@ -592,6 +637,7 @@ print("选取技能"+SpellData[res].name);
         unitCallBack[UTIDTIDEBARONWATER] = makeOrderTideBaronWater;   // 潮汐男爵 海元素形态
         unitCallBack[UTIDTIDEBARON] = makeOrderTideBaron;   // 潮汐男爵 海元素形态
         unitCallBack[UTIDWARLOCK] = makeOrderWarlock;   // 术士
+        unitCallBack[UTID_LAVA_SPAWN] = makeOrderLavaSpawn;   // Lava Spawn
         unitCallBack[UTIDHEXLORD] = makeOrderHexLord;   // 妖术领主
         unitCallBack[UTIDLIGHTNINGTOTEM] = makeOrderLightningTotem;   // 闪电图腾
         

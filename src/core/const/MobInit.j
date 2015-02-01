@@ -1,5 +1,5 @@
 //! zinc
-library MobInit requires Table, BuffSystem, Patrol, NefUnion {
+library MobInit requires Table, BuffSystem, Patrol, NefUnion, WarlockGlobal {
     private HandleTable idTable;
     private integer numMobs;
     
@@ -9,7 +9,7 @@ library MobInit requires Table, BuffSystem, Patrol, NefUnion {
     
     function cancelStun(DelayTask dt) {
         UnitRemoveAbility(dt.u0, 'BPSE');
-    }
+    }	
 
     public function ResetMob(unit u) {
         integer id = idTable[u];
@@ -22,6 +22,10 @@ library MobInit requires Table, BuffSystem, Patrol, NefUnion {
         if (GetUnitTypeId(u) == UTID_ARCH_TINKER_MORPH || GetUnitTypeId(u) == UTIDTIDEBARONWATER) {
             DelayTask.create(cancelForm, 1.0).u0 = u;
         }
+		
+		if (GetUnitTypeId(u) == UTIDWARLOCK) {
+			ResetFireRunes();
+		}
         
         IssueImmediateOrderById(u, OID_STOP);
         PauseUnit(u, true);

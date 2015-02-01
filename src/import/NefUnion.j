@@ -367,6 +367,19 @@ library NefUnion requires TimerUtils {
             if (IsUnit(o, t)) {return 0.0;}
             else {return thistype.coords(GetUnitX(o), GetUnitY(o), 0.0, GetUnitX(t), GetUnitY(t), 0.0);}
         }
+        
+        static method units2dAngular(unit o, unit t, unit c) -> real {
+			real td;
+            if (IsUnit(o, t)) {
+				return 0.0;
+			} else {
+				td = RAbsBJ(GetAngleDeg(GetUnitX(o), GetUnitY(o), GetUnitX(c), GetUnitY(c)) - GetAngleDeg(GetUnitX(t), GetUnitY(t), GetUnitX(c), GetUnitY(c)));
+				if (td > 180) {
+					td = RAbsBJ(td - 360);
+				}
+				return td;
+			}
+        }
 
         static method coords2d(real xo, real yo, real xt, real yt) -> real {
             return thistype.coords(xo, yo, 0.0, xt, yt, 0.0);

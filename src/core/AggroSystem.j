@@ -600,6 +600,7 @@ library AggroSystem requires MobInit, UnitProperty, Clock, DamageSystem, PlayerU
             } else if (GetPlayerId(GetOwningPlayer(u)) < NUMBER_OF_MAX_PLAYERS) {
                 PlayerUnits.add(u);
                 if (IsInCombat()) {
+					RegisterUnitProperty(u);
                     MobList.addToAll(u);
                 }
             }

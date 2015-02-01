@@ -174,7 +174,7 @@ library UnitProperty requires ModelInfo, ZAMCore {
         }
         
         method Armor() -> real {
-            real ret = I2R(this.armor) + ModelInfo[GetUnitTypeId(this.u)].armor;
+            real ret = I2R(this.armor) + ModelInfo.get(GetUnitTypeId(this.u), "UnitProperty: 177").armor;
             if (ret > 75.0) {
                 ret = 75.0;
             }
@@ -233,7 +233,7 @@ library UnitProperty requires ModelInfo, ZAMCore {
         // 0.1 = 100% / 10
         method ManaRegen() -> real {
             real ret = this.manaRegen + I2R(GetHeroInt(this.u, true)) * 0.03;
-            if (ModelInfo[GetUnitTypeId(this.u)].mainAttribute == ATT_INT) {
+            if (ModelInfo.get(GetUnitTypeId(this.u), "UnitProperty: 236").mainAttribute == ATT_INT) {
                 ret += 6.5;
             } else {
                 ret *= 0.25;
@@ -273,7 +273,7 @@ library UnitProperty requires ModelInfo, ZAMCore {
             ModelInfo mi;
             real ret;
             //print(GetUnitNameEx(this.u));
-            mi = ModelInfo[GetUnitTypeId(this.u)];
+            mi = ModelInfo.get(GetUnitTypeId(this.u), "UnitProperty: 276");
             ret = I2R(this.attackPower + mi.ap + GetRandomInt(0, mi.apr));
             if (mi.mainAttribute == ATT_STR) {
                 ret += GetHeroStr(this.u, true);
@@ -286,7 +286,7 @@ library UnitProperty requires ModelInfo, ZAMCore {
         }
     
         method APMin() -> integer {
-            ModelInfo mi = ModelInfo[GetUnitTypeId(this.u)];
+            ModelInfo mi = ModelInfo.get(GetUnitTypeId(this.u), "UnitProperty: 289");
             integer ret = this.attackPower + mi.ap;
             if (mi.mainAttribute == ATT_STR) {
                 ret += GetHeroStr(this.u, true);
@@ -299,7 +299,7 @@ library UnitProperty requires ModelInfo, ZAMCore {
         }
     
         method APMax() -> integer {
-            return this.APMin() + ModelInfo[GetUnitTypeId(this.u)].apr;
+            return this.APMin() + ModelInfo.get(GetUnitTypeId(this.u), "UnitProperty: 302").apr;
         }
         
         method ModAP(integer num) {
@@ -417,11 +417,11 @@ library UnitProperty requires ModelInfo, ZAMCore {
         UnitProp up;
         ModelInfo mi;
         if (UnitProp.ht.exists(u)) {
-            BJDebugMsg(SCOPE_PREFIX+">Double registering: " + GetUnitName(u));
+            //BJDebugMsg(SCOPE_PREFIX+">Double registering: " + GetUnitName(u));
         } else if (!IsUnitDummy(u)) {
             up = UnitProp.create();
             UnitProp.ht[u] = up;
-            mi = ModelInfo[GetUnitTypeId(u)];
+            mi = ModelInfo.get(GetUnitTypeId(u), "UnitProperty: 424");
             
             up.u = u;
             
@@ -470,6 +470,10 @@ library UnitProperty requires ModelInfo, ZAMCore {
         }
         u = null;
     }
+	
+	public function RegisterUnitProperty(unit u) {
+		register(u);
+	}
     
     private function onInit() {
         RegisterUnitEnterMap(register);

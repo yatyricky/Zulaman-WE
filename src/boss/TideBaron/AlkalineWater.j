@@ -7,7 +7,7 @@ library AlkalineWater requires CastingBar, UnitProperty, PlayerUnitList, DamageS
         integer i = 0;
         Buff buf;
         while (i < PlayerUnits.n) {
-            if (GetDistance.units2d(PlayerUnits.units[i], cd.target) < 200 && !IsUnitDead(PlayerUnits.units[i])) {
+            if (GetDistance.units2d(PlayerUnits.units[i], cd.target) < DBMTideBaron.alkalineWaterAOE && !IsUnitDead(PlayerUnits.units[i])) {
                 DamageTarget(cd.caster, PlayerUnits.units[i], 380.0 + GetRandomReal(0.0, 40.0), SpellData[SIDALKALINEWATER].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
                 
                 buf = Buff.cast(cd.caster, PlayerUnits.units[i], BUFF_ID_ALKALINE_WATER);

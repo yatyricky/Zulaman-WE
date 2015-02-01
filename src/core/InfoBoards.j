@@ -133,7 +133,7 @@ library InfoBoards requires Board, ModelInfo, NefUnion, ZAMCore, BuffSystem, Agg
         UnitDps ud;
         real time;
         if (u != null && !IsUnitDummy(u)) {
-            mi = ModelInfo[GetUnitTypeId(u)];
+            mi = ModelInfo.get(GetUnitTypeId(u), "ModelInfo: 136");
             //integer mainAtt;
             playerSelection[id] = u;
             //BJDebugMsg("Triggered!");
@@ -389,7 +389,7 @@ library InfoBoards requires Board, ModelInfo, NefUnion, ZAMCore, BuffSystem, Agg
             
             al = AggroList[u];
             if (al != 0) {
-			print(SCOPE_PREFIX+":392> Player unit error");
+			//print(SCOPE_PREFIX+":392> Player unit error");
                 al.sort();
                 i = 0;
                 while (i < al.aggrosN) {
@@ -398,7 +398,7 @@ library InfoBoards requires Board, ModelInfo, NefUnion, ZAMCore, BuffSystem, Agg
 					//if (al.aggros[i] == null) {
 					//	print(SCOPE_PREFIX + ":398> Found error!");
 					//} else {
-					mi = ModelInfo[GetUnitTypeId(al.aggros[i])];
+					mi = ModelInfo.get(GetUnitTypeId(al.aggros[i]), "ModelInfo: 401");
 					//}
                     bi.icon = mi.icon;
                     if (IsUnitType(al.aggros[i], UNIT_TYPE_HERO)) {
@@ -411,6 +411,7 @@ library InfoBoards requires Board, ModelInfo, NefUnion, ZAMCore, BuffSystem, Agg
                     bi.text = R2S(al.aps[i]);
                     
                     bi = aggroboards[id][2][i + 1];
+					// print("InfoBoards: 414> al.aps[0]=" + R2S(al.aps[0]));
                     bi.text = R2S(al.aps[i] / al.aps[0] * 100) + "%";
                     
                     i += 1;
@@ -460,9 +461,15 @@ library InfoBoards requires Board, ModelInfo, NefUnion, ZAMCore, BuffSystem, Agg
                 bi.text = I2S(Rounding(r0));
                 
                 bi = dps[id][2][i + 2];
-                bi.text = R2S(r0 * 100 / ud.sum) + "%";
+				// print("InfoBoards: 464> ud.sum="+R2S(ud.sum));
+				if (ud.sum < 0.01) {
+					bi.text = "0.00%";
+				} else {
+					bi.text = R2S(r0 * 100 / ud.sum) + "%";
+				}
                 
                 bi = dps[id][3][i + 2];
+				// print("InfoBoards: 468> time="+R2S(time));
                 bi.text = R2S(r0 / time);
                 
                 i += 1;
@@ -472,6 +479,7 @@ library InfoBoards requires Board, ModelInfo, NefUnion, ZAMCore, BuffSystem, Agg
             bi = dps[id][1][i + 2];
             bi.text = I2S(ud.sum);
             bi = dps[id][3][i + 2];
+			// print("InfoBoards: 479> time="+R2S(time));
             bi.text = I2S(Rounding(I2R(ud.sum) / time));
             
             i = 0;
@@ -485,9 +493,15 @@ library InfoBoards requires Board, ModelInfo, NefUnion, ZAMCore, BuffSystem, Agg
                 bi.text = I2S(Rounding(r0));
                 
                 bi = dps[id][6][i + 2];
-                bi.text = R2S(r0 * 100 / ud.hsum) + "%";
+				// print("InfoBoards: 492> ud.hsum="+R2S(ud.hsum));
+				if (ud.hsum < 0.01) {
+					bi.text = "0.00%";
+				} else {
+					bi.text = R2S(r0 * 100 / ud.hsum) + "%";
+				}
                 
                 bi = dps[id][7][i + 2];
+				// print("InfoBoards: 496> time="+R2S(time));
                 bi.text = R2S(r0 / time);
                 
                 i += 1;
@@ -497,6 +511,7 @@ library InfoBoards requires Board, ModelInfo, NefUnion, ZAMCore, BuffSystem, Agg
             bi = dps[id][5][i + 2];
             bi.text = I2S(ud.hsum);
             bi = dps[id][7][i + 2];
+			// print("InfoBoards: 507> time="+R2S(time));
             bi.text = I2S(Rounding(I2R(ud.hsum) / time));
         }        
         //staboards[id].visible[p] = true;
@@ -548,10 +563,10 @@ library InfoBoards requires Board, ModelInfo, NefUnion, ZAMCore, BuffSystem, Agg
             //BJDebugMsg("Copy from " + I2S(i) + " to " + I2S(i-1));
             if (CombatLogRecord[i].target != null) {
                 bi = combatboards[0][0][i];
-                bi.icon = ModelInfo[GetUnitTypeId(CombatLogRecord[i].source)].icon;
+                bi.icon = ModelInfo.get(GetUnitTypeId(CombatLogRecord[i].source), "InfoBoards: 551").icon;
                 bi.text = GetUnitNameEx(CombatLogRecord[i].source);
                 bi = combatboards[0][1][i];
-                bi.icon = ModelInfo[GetUnitTypeId(CombatLogRecord[i].target)].icon;
+                bi.icon = ModelInfo.get(GetUnitTypeId(CombatLogRecord[i].target), "InfoBoards: 554").icon;
                 bi.text = GetUnitNameEx(CombatLogRecord[i].target);
                 bi = combatboards[0][2][i];
                 bi.text = CombatLogRecord[i].message;      
@@ -563,14 +578,14 @@ library InfoBoards requires Board, ModelInfo, NefUnion, ZAMCore, BuffSystem, Agg
         CombatLogRecord[0].message = CombatLogRecord[COMBAT_LOG_MAX].message;
         bi = combatboards[0][0][0];        
         if (CombatLogRecord[0].source != null) {
-            bi.icon = ModelInfo[GetUnitTypeId(CombatLogRecord[0].source)].icon;
+            bi.icon = ModelInfo.get(GetUnitTypeId(CombatLogRecord[0].source), "InfoBoards: 566").icon;
         } else {
             bi.icon = "";
         }
         bi.text = GetUnitNameEx(CombatLogRecord[0].source);
         bi = combatboards[0][1][0];
         if (CombatLogRecord[0].target != null) {
-            bi.icon = ModelInfo[GetUnitTypeId(CombatLogRecord[0].target)].icon;
+            bi.icon = ModelInfo.get(GetUnitTypeId(CombatLogRecord[0].target), "InfoBoards: 573").icon;
         } else {
             bi.icon = "";
         }
@@ -592,8 +607,8 @@ library InfoBoards requires Board, ModelInfo, NefUnion, ZAMCore, BuffSystem, Agg
                                           */ + B2S(DamageResult.isImmune) + "\",\"" /*
                                           */ + B2S(DamageResult.isPhyx) + "\",\"" /*
                                           */ + B2S(DamageResult.wasDodgable) + "\",\"" /*
-                                          */ + ModelInfo[GetUnitTypeId(DamageResult.source)].Career() + "\",\"" /*
-                                          */ + ModelInfo[GetUnitTypeId(DamageResult.target)].Career() + "\"]";
+                                          */ + ModelInfo.get(GetUnitTypeId(DamageResult.source), "InfoBoards: 595").Career() + "\",\"" /*
+                                          */ + ModelInfo.get(GetUnitTypeId(DamageResult.target), "InfoBoards: 596").Career() + "\"]";
         } else if (eventType == 2) {
             combatLogAll[combatLogAllIndex] = "[\"heal\",\"" /*
                                           */ + R2S(GetGameTime()) + "\",\"" /*
@@ -603,8 +618,8 @@ library InfoBoards requires Board, ModelInfo, NefUnion, ZAMCore, BuffSystem, Agg
                                           */ + R2S(HealResult.effective) + "\",\"" /*
                                           */ + R2S(HealResult.amount - HealResult.effective) + "\",\"" /*
                                           */ + B2S(HealResult.isCritical) + "\",\"" /*
-                                          */ + ModelInfo[GetUnitTypeId(HealResult.source)].Career() + "\",\"" /*
-                                          */ + ModelInfo[GetUnitTypeId(HealResult.target)].Career() + "\"]";
+                                          */ + ModelInfo.get(GetUnitTypeId(HealResult.source), "InfoBoards: 606").Career() + "\",\"" /*
+                                          */ + ModelInfo.get(GetUnitTypeId(HealResult.target), "InfoBoards: 607").Career() + "\"]";
         } else if (eventType == 3) {
             combatLogAll[combatLogAllIndex] = "[\"cast\",\"" /*
                                           */ + R2S(GetGameTime()) + "\",\"" /*

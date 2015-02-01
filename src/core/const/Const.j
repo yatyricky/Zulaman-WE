@@ -221,6 +221,7 @@
 #define SIDFLAMEBOMB 'A060'
 #define SIDSUMMONLAVASPAWN 'A061'
 #define SIDFRENZYWARLOCK 'A062'
+#define BID_FRENZY_WARLOCK 'A0AW'
 
 // 深渊摄政官
 #define UTID_PIT_ARCHON 'Ucrl'
@@ -448,6 +449,7 @@
 #define ART_BLOOD_LUST_LEFT "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustTarget.mdl"
 #define ART_BLOOD_LUST_RIGHT "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustSpecial.mdl"
 #define ART_DISPEL "Abilities\\Spells\\Human\\DispelMagic\\DispelMagicTarget.mdl"
+#define ART_DOOM "Abilities\\Spells\\Other\\Doom\\DoomDeath.mdl"
 #define ART_DUST "Objects\\Spawnmodels\\Undead\\ImpaleTargetDust\\ImpaleTargetDust.mdl"
 #define ART_GORE "Objects\\Spawnmodels\\Orc\\OrcLargeDeathExplode\\OrcLargeDeathExplode.mdl"
 #define ART_HEAL "Abilities\\Spells\\Items\\AIhe\\AIheTarget.mdl"

@@ -21,6 +21,24 @@ library CombatFacts {
         static real safeRange = 450.0;
         static boolean isStorm = false;
     }
+	
+	public struct DBMTideBaron {
+		static real safeAngle = 30.0;
+		static real alkalineWaterAOE = 200.0;
+		static real safeAggroPercent = 0.75;
+	}
+	
+	public struct DBMWarlock {
+	
+	}
+	
+	public struct DBMAbyssArchon {
+	
+	}
+	
+	public struct DBMTheFelguards {
+	
+	}
     
     public struct DBMHexLord {
         static integer absorb = 0;
@@ -28,5 +46,9 @@ library CombatFacts {
         static integer spell2 = 0;
         static boolean canOverpower = false;
     }
+	
+	public struct DBMHighWarlord {
+	
+	}
 }
 //! endzinc

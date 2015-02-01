@@ -13,7 +13,7 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
     //real positionR[];
     
     function ShouldIGiveWay(unit source, unit tar) -> boolean {
-        ModelInfo ms = ModelInfo[GetUnitTypeId(source)];
+        ModelInfo ms = ModelInfo.get(GetUnitTypeId(source), "AllianceAIAction: 16");
         //ModelInfo mt = ModelInfo[GetUnitTypeId(tar)];
         if (ms.career == CAREER_TYPE_TANK) {
             return false;
@@ -181,6 +181,64 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
         }
     }
     
+    function PositioningTideBaron(unit source) -> boolean {
+        unit tar;
+		ModelInfo ms;
+		AggroList al;
+		//vector vo, vm, vc;
+		real t1, t2;
+        if (GetUnitTypeId(whichBoss) == UTIDTIDEBARON) {
+            // Naga form, nothing painful
+            return true;
+        } else {
+            // Water form
+			//	- keep away from allies
+			tar = PlayerUnits.getNearest(source);
+			if (tar != null && GetDistance.units2d(tar, source) <= DBMTideBaron.alkalineWaterAOE) {
+				// too close, separate
+				IssuePointOrderById(source, OID_MOVE, 2 * GetUnitX(source) - GetUnitX(tar), 2 * GetUnitY(source) - GetUnitY(tar));
+				return false;
+			} else {
+				//	- tank should not aggro
+				ms = ModelInfo.get(GetUnitTypeId(source), "AllianceAIAction: 194");
+				if (ms.career == CAREER_TYPE_TANK) {
+					al = AggroList[whichBoss];
+					t1 = al.getAggro(source) + 500;
+					t2 = al.getAggro(al.getFirst());
+					if (t1 / t2 > DBMTideBaron.safeAggroPercent) {
+						IssueImmediateOrderById(source, OID_HOLD);
+						return false;
+					} else {
+						return true;
+					}
+				} else {
+					// normal
+					return true;
+				}
+			}
+			/*else {
+				tar = PlayerUnits.getNearestAngular(source, whichBoss);
+				if (tar != null && GetDistance.units2dAngular(tar, source, whichBoss) <= DBMTideBaron.safeAngle && ShouldIGiveWay(source, tar)) {
+					// 	- don't line up
+					vm = vector.create(0,0,0);
+					vo = vector.create(0,0,0);
+					vc = vector.create(0,0,0);
+					vm.pointToUnit(source);
+					vo.pointToUnit(tar);
+					vc.pointToUnit(whichBoss);
+					vm.subtract(vc);
+					vo.subtract(vc);
+					vo.setLength(vm.getLength());
+					vm.subtract(vo);
+					IssuePointOrderById(source, OID_MOVE, GetUnitX(source) + vm.x, GetUnitY(source) + vm.y);
+					return false;
+				} else {
+
+				}
+			}*/
+        }
+    }
+    
     function PositioningDone(unit source) -> boolean {
         unit tar;
         integer bossutid = GetUnitTypeId(whichBoss);
@@ -188,6 +246,8 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
             return PositioningArchTinker(source);
         } else if (GetUnitTypeId(whichBoss) == UTIDNAGASEAWITCH) {
             return PositioningNagaSeaWitch(source);
+        } else if (bossutid == UTIDTIDEBARON || bossutid == UTIDTIDEBARONWATER) {
+            return PositioningTideBaron(source);
         } else {
             return true;
         }
@@ -557,6 +617,7 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
         unit ot;
         integer i;
         integer state = 0; // 0 - normal; 1 - OT;
+		integer findAny;
         if (GetUnitLifePercent(source) < 20) {
             // low health danger
             if (UnitCanUse(source, SID_SURVIVAL_INSTINCTS)) {
@@ -591,7 +652,7 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
             ot = AggroList[MobList.units[i]].getFirst();
             if (!IsUnit(ot, source)) {
                 state = 1;
-                if (UnitCanUse(source, SID_LACERATE)) {
+                if (UnitCanUse(source, SID_LACERATE) && GetUnitTypeId(MobList.units[i]) != UTIDTIDEBARONWATER) {
                     // lacerate
                     IssueTargetOrderById(source, SpellData[SID_LACERATE].oid, MobList.units[i]);
                 } else {
@@ -614,13 +675,18 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
             } else if (UnitCanUse(source, SID_LACERATE)) {
                 // lacerate 1 by 1
                 i = 0;
+				findAny = 0;
                 while (i < MobList.n) {
-                    if (GetUnitAbilityLevel(MobList.units[i], BID_LACERATE) == 0) {
-                        IssueTargetOrderById(source, SpellData[SID_LACERATE].oid, MobList.units[i]);
+                    if (GetUnitAbilityLevel(MobList.units[i], BID_LACERATE) == 0 && GetUnitTypeId(MobList.units[i]) != UTIDTIDEBARONWATER) {
+						IssueTargetOrderById(source, SpellData[SID_LACERATE].oid, MobList.units[i]);
+						findAny += 1;
                         i += MobList.n;
                     }
                     i += 1;
                 }
+				if (findAny == 0) {
+					IssueTargetOrderById(source, OID_ATTACK, MobList.getLowestHP());
+				}
             } else {
                 // attack lowest hp
                 IssueTargetOrderById(source, OID_ATTACK, MobList.getLowestHP());

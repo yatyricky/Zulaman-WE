@@ -230,7 +230,7 @@ SpellData.create(SIDRASPYROAR,          "刺耳咆哮",     0.0,     0.0,    25.
 SpellData.create(SIDRASPYROARDUMMY,     "刺耳咆哮",     0.0,     0.0,    1.0,    OrderId("silence"),        1,  ORDER_TYPE_POINT); 
 
 // 术士          id                     name            cost     cast    cd      oid                        lvl order type
-SpellData.create(SIDFLAMETHROW,         "火焰喷射",     100.0,   0.0,    20.0,   OrderId("sleep"),          1,  ORDER_TYPE_TARGET); 
+SpellData.create(SIDFLAMETHROW,         "火焰喷射",     100.0,   0.0,    5.0,   OrderId("sleep"),          1,  ORDER_TYPE_TARGET); 
 SpellData.create(SIDFLAMEBOMB,          "火焰炸弹",     100.0,   10.0,   40.0,   OrderId("slow"),           2,  ORDER_TYPE_IMMEDIATE); 
 SpellData.create(SIDSUMMONLAVASPAWN,    "召唤炎魔",     100.0,   10.0,   30.0,   OrderId("soulburn"),       1,  ORDER_TYPE_IMMEDIATE); 
 SpellData.create(SIDFRENZYWARLOCK,      "激怒",         0.0,     0.0,    200.0,  OrderId("stomp"),          1,  ORDER_TYPE_IMMEDIATE); 
