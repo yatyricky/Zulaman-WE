@@ -4,7 +4,7 @@ library Lancinate requires BuffSystem, SpellEvent, UnitProperty, DamageSystem, T
     function onEffect(Buff buf) {
         real amt = 225.0 + GetRandomReal(0.0, 50.0);
         if (GetUnitAbilityLevel(buf.bd.target, BUFF_ID_ALKALINE_WATER) > 0) {
-            amt += amt;
+            amt *= 3.0;
         }
         DamageTarget(buf.bd.caster, buf.bd.target, amt, SpellData[SIDLANCINATE].name, true, false, false, WEAPON_TYPE_WHOKNOWS);
         AddTimedEffect.atUnit(ART_BLEED, buf.bd.target, "origin", 0.2);

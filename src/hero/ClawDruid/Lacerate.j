@@ -43,6 +43,7 @@ library Lacerate requires BuffSystem, SpellEvent, UnitProperty, ClawDruidGlobal,
         buf.bd.boe = RabiesOnEffect;
         buf.bd.bor = RabiesOnRemove;
         buf.run();        
+		// print("手贱");
     }
 
     function onInit() {
