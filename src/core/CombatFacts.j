@@ -29,7 +29,7 @@ library CombatFacts {
 	}
 	
 	public struct DBMWarlock {
-	
+		static unit theBolt = null;
 	}
 	
 	public struct DBMAbyssArchon {

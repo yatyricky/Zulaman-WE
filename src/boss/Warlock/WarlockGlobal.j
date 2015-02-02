@@ -5,6 +5,46 @@ library WarlockGlobal requires NefUnion, ZAMCore {
     real xoff[];
     real yoff[];
     real facing[];
+	real xfb[];
+	real yfb[];
+	integer nfb = 0;
+	real fbAOE = 150.0;
+	integer hexN;
+	public real platformRadius = 950;
+	
+	function InitFireBombPlot() {
+		integer i, j;
+		real y, x, d;
+		hexN = R2I(platformRadius / 1.732050807568877 / fbAOE) * 2;
+		// http://stackoverflow.com/questions/14280831/algorithm-to-generate-2d-magic-hexagon-lattice
+		d = fbAOE;// d is the distance between 2 points as indicated in your schema
+		i = 0;
+		while (i < hexN) {
+			y = (1.732050807568877 * i * d) / 2.0;
+			j = 0;
+			while (j < (2 * hexN - 1 - i)) {
+				x = (-(2*hexN-i-2)*d)/2.0 + j*d;
+				//plot the point with coordinate (x,y) here
+				xfb[nfb] = x + WLKSQRCENTREX;
+				yfb[nfb] = y + WLKSQRCENTREY;
+				nfb += 1;
+				if (y != 0) {
+					// plot the point with coordinate (x,-y) here
+					xfb[nfb] = x + WLKSQRCENTREX;
+					yfb[nfb] = WLKSQRCENTREY - y;
+					nfb += 1;
+				}
+				j += 1;
+			}
+			i += 1;
+		}
+		// test
+		i = 0;
+		while (i < nfb) {
+			CreateUnit(Player(10), 'ewsp', xfb[i], yfb[i], 0);
+			i += 1;
+		}
+	}
     
     public function GetFireRune() -> unit {
         if (index < 26) {
@@ -77,6 +117,7 @@ xoff[25] = 0;	yoff[25] = -49.4037352687364;
     function onInit() {
         InitRuneVariables();
         InitRunes();
+		InitFireBombPlot();
     }
 }
 //! endzinc
