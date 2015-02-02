@@ -37,6 +37,7 @@ library FireBomb requires SpellEvent, ZAMCore, DamageSystem, WarlockGlobal {
             if (height < 0.0) {
                 height = 0.0;
                 GroupAddUnit(bombs, CreateUnit(Player(10), BOMB_ID, GetUnitX(this.missile), GetUnitY(this.missile), GetUnitFacing(this.missile)));
+                MarkFireBomb(GetUnitX(this.missile), GetUnitY(this.missile));
                 this.destroy();
             } else {            
                 SetUnitX(this.missile, tx);
@@ -78,6 +79,8 @@ library FireBomb requires SpellEvent, ZAMCore, DamageSystem, WarlockGlobal {
             KillUnit(tu);
             tu = FirstOfGroup(bombs);
         }
+        // MarkFireBombClear();
+        printMarkMap();
         tu = null;
     }
 

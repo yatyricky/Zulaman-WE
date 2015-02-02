@@ -318,6 +318,10 @@ library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSys
 		CreateItemEx('Ieng', 3930, -573);
 		CreateItemEx('Ieng', 3930, -573);
 	}
+
+    function testPrintFireBomb(string str) {
+        printMarkMap();
+    }
     
     private function onInit() {
         //Console[Player(0)].add("stun", testStunUnit);
@@ -354,6 +358,7 @@ library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSys
         Console[Player(0)].add("ltn", testwarlock);
         Console[Player(0)].add("podun", poyicengdun);
         Console[Player(0)].add("canuse", testifunitcanuse);
+        Console[Player(0)].add("pfb", testPrintFireBomb);
 		// console[Player(0)].add("testwlk", testwarlock);
     }
 }

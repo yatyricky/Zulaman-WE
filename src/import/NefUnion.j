@@ -282,6 +282,7 @@ library NefUnion requires TimerUtils {
         private timer tm;
         private DelayedTaskExecute response;
         unit u0;
+        integer i0;
         
         private method destroy() {
             ReleaseTimer(this.tm);
