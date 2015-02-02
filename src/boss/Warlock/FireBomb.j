@@ -1,5 +1,5 @@
 //! zinc
-library FireBomb requires SpellEvent, ZAMCore, DamageSystem, WarlockGlobal {
+library FireBomb requires SpellEvent, ZAMCore, DamageSystem {
 #define MISSILE "Abilities\\Weapons\\PhoenixMissile\\Phoenix_Missile.mdl"
 #define EXPLOSION_ART "Abilities\\Weapons\\Mortar\\MortarMissile.mdl"
 #define BOMB_ID 'e00G'
@@ -83,7 +83,7 @@ library FireBomb requires SpellEvent, ZAMCore, DamageSystem, WarlockGlobal {
 
     function response(CastingBar cd) {
         real angle = GetRandomReal(0.0, 6.283);
-        real distance = SquareRoot(GetRandomReal(1.0, platformRadius * platformRadius)); // 950^2
+        real distance = SquareRoot(GetRandomReal(1.0, 902500.0)); // 950^2
         Parabola.create(cd.caster, angle, distance);
     }
 

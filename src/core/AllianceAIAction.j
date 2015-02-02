@@ -239,42 +239,6 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
         }
     }
     
-    /*function PositioningWarlock(unit source) -> boolean {
-        unit tar;
-		//vector vo, vm, vc;
-		real t1, t2;
-        if (GetUnitTypeId(whichBoss) == UTIDTIDEBARON) {
-            // Naga form, nothing painful
-            return true;
-        } else {
-            // Water form
-			//	- keep away from allies
-			tar = PlayerUnits.getNearest(source);
-			if (tar != null && GetDistance.units2d(tar, source) <= DBMTideBaron.alkalineWaterAOE) {
-				// too close, separate
-				IssuePointOrderById(source, OID_MOVE, 2 * GetUnitX(source) - GetUnitX(tar), 2 * GetUnitY(source) - GetUnitY(tar));
-				return false;
-			} else {
-				//	- tank should not aggro
-				ms = ModelInfo.get(GetUnitTypeId(source), "AllianceAIAction: 194");
-				if (ms.career == CAREER_TYPE_TANK) {
-					al = AggroList[whichBoss];
-					t1 = al.getAggro(source) + 500;
-					t2 = al.getAggro(al.getFirst());
-					if (t1 / t2 > DBMTideBaron.safeAggroPercent) {
-						IssueImmediateOrderById(source, OID_HOLD);
-						return false;
-					} else {
-						return true;
-					}
-				} else {
-					// normal
-					return true;
-				}
-			}
-        }
-    }*/
-    
     function PositioningDone(unit source) -> boolean {
         unit tar;
         integer bossutid = GetUnitTypeId(whichBoss);
@@ -284,9 +248,6 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
             return PositioningNagaSeaWitch(source);
         } else if (bossutid == UTIDTIDEBARON || bossutid == UTIDTIDEBARONWATER) {
             return PositioningTideBaron(source);
-        } else if (bossutid == UTIDWARLOCK) {
-            //return PositioningWarlock(source);
-			return true;
         } else {
             return true;
         }
