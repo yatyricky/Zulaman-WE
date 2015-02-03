@@ -6,7 +6,7 @@ This map was originally built based on the Zul'Aman dungeon in World of Warcraft
 ## Jan 29 2015
 * Started to continue with this project on Github for better version control.
 
-# Legacy Stuff 
+# History
 
 ##File: *log ZH-CN*
 
@@ -255,9 +255,9 @@ O 任何昏迷效果在被解除的时候将会直接解除昏迷,而不管身�
 		* http://www.wc3c.net/showthread.php?t=83467
 
 * RetroSexual
-	* @Project:
+	* Project:
 		* Progressbar V2
-	* @Description:
+	* Description:
 		* Model, that is meant to be used for various channeling spells and etc. Basic lenght is one second, but it can be scaled via triggers. Idea of using screen button texture is borrowed from Hatebreeder's model, you might want to give him credits too.
 	* Link:
 		* http://www.hiveworkshop.com

@@ -10,16 +10,34 @@ library WarlockGlobal requires NefUnion, ZAMCore, Math, Table {
     real pixel = 10;
 	integer nfb = 0;
 	real fbAOE = 150.0;
+    real humanSize = 64;
 	public real platformRadius = 950;
 
-    public function MarkFireBomb(real px, real py) {
+    struct FootPrints {
+        static integer n = 0;
+        real x;
+        real y;
+
+        static method locate(real x, real y) -> integer {
+            return -1;
+        }
+    }
+
+    public function MarkFireBomb(real px, real py, boolean isBomb) {
         integer i, j;
         real x = px - WLKSQRCENTREX + platformRadius;
         real y = py - WLKSQRCENTREY + platformRadius;
-        integer leftMostDanger = MathCeil((x - fbAOE) / pixel);
-        integer rightMostDanger = MathFloor((x + fbAOE) / pixel);
-        integer bottomMostDanger = MathCeil((y - fbAOE) / pixel);
-        integer topMostDanger = MathFloor((y + fbAOE) / pixel);
+        integer leftMostDanger, rightMostDanger, bottomMostDanger, topMostDanger;
+        real radius;
+        if (isBomb) {
+            radius = fbAOE;
+        } else {
+            radius = humanSize;
+        }
+        leftMostDanger = MathCeil((x - radius) / pixel);
+        rightMostDanger = MathFloor((x + radius) / pixel);
+        bottomMostDanger = MathCeil((y - radius) / pixel);
+        topMostDanger = MathFloor((y + radius) / pixel);
         x = MathCeil(x / pixel);
         y = MathCeil(y / pixel);
         // print("input = [" + R2S(px) + ", " + R2S(py) + "]");
@@ -35,11 +53,29 @@ library WarlockGlobal requires NefUnion, ZAMCore, Math, Table {
         while (i <= rightMostDanger) {
             j = bottomMostDanger;
             while (j <= topMostDanger) {
-                if ((i - x) * (i - x) + (j - y) * (j - y) < fbAOE * fbAOE) {
-                    fbCheck[i][j] = 12;
+                if ((i - x) * (i - x) + (j - y) * (j - y) < radius * radius / pixel / pixel) {
+                    fbCheck[i][j] = 10;
+                    if (!isBomb) {
+                        // FootPrints.add(i, j);
+                        // TODO
+                    }
                 }
                 j += 1;
             }
+            i += 1;
+        }
+    }
+
+    public function MarkFireBombClearFootprint() {
+        integer i = 0;
+        while (i < FootPrints.n) {
+            // if (fbCheck[FootPrints[i].x].exists(FootPrints[i].y)) {
+            //     if (ModuloInteger(fbCheck[FootPrints[i].x][FootPrints[i].y], 2) == 0) {
+            //         ModuloInteger(fbCheck[FootPrints[i].x][FootPrints[i].y], 3) = 2;
+            //     } else {
+
+            //     }
+            // }
             i += 1;
         }
     }
@@ -66,6 +102,7 @@ library WarlockGlobal requires NefUnion, ZAMCore, Math, Table {
             DelayTask.create(dlt, 0.02 * i).i0 = i;
             i += 1;
         }
+        // print("Success="+I2S(success)+", fail="+I2S(fail));
     }
 
     public function MarkFireBombClear() {

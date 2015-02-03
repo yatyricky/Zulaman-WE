@@ -30,6 +30,7 @@ library CombatFacts {
 	
 	public struct DBMWarlock {
 		static unit theBolt = null;
+        static boolean isFireBomb = false;
 	}
 	
 	public struct DBMAbyssArchon {

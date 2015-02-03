@@ -37,7 +37,7 @@ library FireBomb requires SpellEvent, ZAMCore, DamageSystem, WarlockGlobal {
             if (height < 0.0) {
                 height = 0.0;
                 GroupAddUnit(bombs, CreateUnit(Player(10), BOMB_ID, GetUnitX(this.missile), GetUnitY(this.missile), GetUnitFacing(this.missile)));
-                MarkFireBomb(GetUnitX(this.missile), GetUnitY(this.missile));
+                MarkFireBomb(GetUnitX(this.missile), GetUnitY(this.missile), true);
                 this.destroy();
             } else {            
                 SetUnitX(this.missile, tx);
@@ -81,6 +81,7 @@ library FireBomb requires SpellEvent, ZAMCore, DamageSystem, WarlockGlobal {
         }
         // MarkFireBombClear();
         printMarkMap();
+        DBMWarlock.isFireBomb = false;
         tu = null;
     }
 
@@ -108,6 +109,7 @@ library FireBomb requires SpellEvent, ZAMCore, DamageSystem, WarlockGlobal {
         AddTimedLight.atCoords3D("CLPB", WLKSQRCENTREX, WLKSQRCENTREY, GetLocationZ(loc) + 900.0, WLKSQRCENTREX, WLKSQRCENTREY, GetLocationZ(loc), 1.0).setColour(1.0, 0.0, 0.0, 1.0);
         CastingBar.create(response).channel(NUM_MISSILES);
         DelayTask.create(explosion, 13.0).u0 = SpellEvent.CastingUnit;
+        DBMWarlock.isFireBomb = true;
     }
 
     function onInit() {
