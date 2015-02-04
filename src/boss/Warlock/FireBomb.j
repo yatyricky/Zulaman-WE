@@ -79,8 +79,8 @@ library FireBomb requires SpellEvent, ZAMCore, DamageSystem, WarlockGlobal {
             KillUnit(tu);
             tu = FirstOfGroup(bombs);
         }
-        // MarkFireBombClear();
-        printMarkMap();
+        MarkFireBombClear(true);
+        // printMarkMap();
         DBMWarlock.isFireBomb = false;
         tu = null;
     }
