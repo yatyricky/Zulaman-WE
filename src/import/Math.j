@@ -32,7 +32,7 @@ library Math {
 	}
 
 	public function IsPointInCircle(Point p, Circle c) -> boolean {
-		return true;
+		return false;
 	}
 
 	public function MathCeil(real r) -> integer {
