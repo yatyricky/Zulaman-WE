@@ -217,6 +217,7 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
 				}
 			}
 			/*else {
+            // separate allies in angular way
 				tar = PlayerUnits.getNearestAngular(source, whichBoss);
 				if (tar != null && GetDistance.units2dAngular(tar, source, whichBoss) <= DBMTideBaron.safeAngle && ShouldIGiveWay(source, tar)) {
 					// 	- don't line up
@@ -239,48 +240,20 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
         }
     }
 
-    // struct 
-    // TODO
-    
     function PositioningWarlock(unit source) -> boolean {
-        integer i, j;
-        integer r, cx, cy;
-        real x, y;
+        vector v;
+        real tx, ty;
         if (DBMWarlock.isFireBomb) {
             // position on firebomb
-            i = 0;
-            while (i < PlayerUnits.n) {
-                if (!IsUnit(source, PlayerUnits.units[i])) {
-                    MarkFireBomb(GetUnitX(PlayerUnits.units[i]), GetUnitY(PlayerUnits.units[i]), false);
-                }
-                i += 1;
-            }
-            cx = MarkFireBombConvertX(GetUnitX(source));
-            cy = MarkFireBombConvertY(GetUnitY(source));
-            x = -1;
-            y = -1;
-            r = 1;
-            while (x < 0) {
-                i = 0;
-                while (i < r * 2 - 1) {
-                    j = 0;
-                    while (j < r * 2 - 1) {
-                        if (MarkFireBombIsSafe(cx + 1 - r + i, cy + 1 - r + j)) {
-                            x = MarkFireBombReflectX(cx + 1 - r + i);
-                            y = MarkFireBombReflectY(cy + 1 - r + j);
-                        }
-                        j += 1;
-                    }
-                    i += 1;
-                }
-                r += 1;
-            }
-            MarkFireBombClear(false);
-            if (GetDistance.coords2d(x, y, GetUnitX(source), GetUnitY(source)) < 32) {
+            v = FireBombMarker.getSafeDir(GetUnitX(source), GetUnitY(source));
+            tx = v.x;
+            ty = v.y;
+            v.destroy();
+            if (tx < 0.1 && ty < 0.1) {
                 IssueImmediateOrderById(source, OID_HOLD);
                 return true;   
             } else {
-                IssuePointOrderById(source, OID_MOVE, x, y);
+                IssuePointOrderById(source, OID_MOVE, GetUnitX(source) + tx, GetUnitY(source) + ty);
                 return false;
             }
         } else {

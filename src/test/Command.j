@@ -320,7 +320,13 @@ library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSys
 	}
 
     function testPrintFireBomb(string str) {
-        printMarkMap();
+        //printMarkMap();
+    }
+
+    function testgetangle(string str) {
+        print(R2S(GetAngleDeg(1,1,2,0.75)));
+        print(R2S(GetAngleDeg(1,1,0,0.5)));
+        print(R2S(AcosBJ(0.7)));
     }
     
     private function onInit() {
@@ -360,6 +366,7 @@ library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSys
         Console[Player(0)].add("canuse", testifunitcanuse);
         Console[Player(0)].add("pfb", testPrintFireBomb);
 		// console[Player(0)].add("testwlk", testwarlock);
+        Console[Player(0)].add("angle", testgetangle);
     }
 }
 //! endzinc

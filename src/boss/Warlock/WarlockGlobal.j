@@ -1,164 +1,94 @@
 //! zinc
-library WarlockGlobal requires NefUnion, ZAMCore, Math, Table {
+library WarlockGlobal requires NefUnion, ZAMCore, Table {
     unit runes[];
     integer index;
     real xoff[];
     real yoff[];
     real facing[]; // facing for fire runes
 
-	Table fbCheck[];
-    Table fbFootPrint[];
-    real pixel = 10;
-	integer nfb = 0;
 	real fbAOE = 150.0;
-    real humanSize = 64;
 	public real platformRadius = 950;
 
-    public function MarkFireBombConvertX(real px) -> integer {
-        return MathCeil((px - WLKSQRCENTREX + platformRadius) / pixel);
-    }
+    public struct FireBombMarker {
+        static real x[];
+        static real y[];
+        static integer n;
 
-    public function MarkFireBombConvertY(real py) -> integer {
-        return MathCeil((py - WLKSQRCENTREY + platformRadius) / pixel);
-    }
-
-    public function MarkFireBombReflectX(integer x) -> real {
-        return x * pixel + WLKSQRCENTREX - platformRadius;
-    }
-
-    public function MarkFireBombReflectY(integer y) -> real {
-        return y * pixel + WLKSQRCENTREY - platformRadius;
-    }
-
-    public function MarkFireBomb(real px, real py, boolean isBomb) {
-        integer i, j;
-        real x = px - WLKSQRCENTREX + platformRadius;
-        real y = py - WLKSQRCENTREY + platformRadius;
-        integer leftMostDanger, rightMostDanger, bottomMostDanger, topMostDanger;
-        real radius;
-        if (isBomb) {
-            radius = fbAOE;
-        } else {
-            radius = humanSize;
-        }
-        leftMostDanger = MathCeil((x - radius) / pixel);
-        rightMostDanger = MathFloor((x + radius) / pixel);
-        bottomMostDanger = MathCeil((y - radius) / pixel);
-        topMostDanger = MathFloor((y + radius) / pixel);
-        x = MathCeil(x / pixel);
-        y = MathCeil(y / pixel);
-        // print("input = [" + R2S(px) + ", " + R2S(py) + "]");
-        // print("fixed = [" + R2S(x) + ", " + R2S(y) + "]");
-
-        if (leftMostDanger < 0) leftMostDanger = 0;
-        if (rightMostDanger > nfb - 1) rightMostDanger = nfb - 1;
-        if (bottomMostDanger < 0) bottomMostDanger = 0;
-        if (topMostDanger > nfb - 1) topMostDanger = nfb - 1;
-        // print("L/R/B/T = [" + I2S(leftMostDanger) + ", " + I2S(rightMostDanger) + ", " + I2S(bottomMostDanger) + ", " + I2S(topMostDanger) + "]");
-
-        i = leftMostDanger;
-        while (i <= rightMostDanger) {
-            j = bottomMostDanger;
-            while (j <= topMostDanger) {
-                if ((i - x) * (i - x) + (j - y) * (j - y) < radius * radius / pixel / pixel) {
-                    if (isBomb) {
-                        fbCheck[i][j] = 10;
-                    } else {
-                        fbFootPrint[i][j] = 10;
-                    }
+        static method getSafeDir(real x, real y) -> vector {
+            integer i;
+            integer found;
+            real angle, range, distance;
+            real nas[];
+            real nae[];
+            integer nan;
+            real safeAngle, bigRange, tmpA;
+            // if in any circle
+            found = -1;
+            i = 0;
+            while (i < thistype.n && found == -1) {
+                if (GetDistance.coords2d(x, y, thistype.x[i], thistype.y[i]) <= fbAOE) {
+                    found = i;
                 }
-                j += 1;
+                i += 1;
             }
-            i += 1;
-        }
-    }
-
-    public function MarkFireBombIsSafe(integer x, integer y) -> boolean {
-        if (x < 0 || y < 0 || x >= nfb - 1 || y > nfb - 1) 
-            return false;
-        return (!fbCheck[x].exists(y) && !fbFootPrint[x].exists(y));
-    }
-
-// DEBUG ////////////////////////////////
-    function dlt(DelayTask dt) {
-        integer j;
-        string str;
-        str = "";
-        j = 0;
-        while (j < nfb) {
-            if (fbCheck[dt.i0].exists(j)) {
-                str += "x";
+            if (found == -1) {
+                // not found, return stationary
+                print("safe: return stationary");
+                return vector.create(0, 0, 0);
             } else {
-                str += "_";
+                // remove unavailable arcs if any
+                nan = 0;
+                i = 0;
+                while (i < thistype.n) {
+                    if (found != i) {
+                        distance = GetDistance.coords2d(thistype.x[i], thistype.y[i], thistype.x[found], thistype.y[found]);
+                        if (distance <= fbAOE * 2) {
+                            angle = GetAngleDeg(thistype.x[found], thistype.y[found], thistype.x[i], thistype.y[i]);
+                            range = AcosBJ(distance / 2.0 / fbAOE);
+                            nas[nan] = angle - range;
+                            nae[nan] = angle + range;
+                            nan += 1;
+                        }
+                    }
+                    i += 1;
+                }
+                bigRange = 0;
+                safeAngle = -1;
+                i = 0;
+                while (i < nan - 1) {
+                    tmpA = nas[i + 1] - nae[i];
+                    if (tmpA > bigRange) {
+                        bigRange = tmpA;
+                        safeAngle = nae[i] + tmpA / 2.0;
+                    }
+                    i += 1;
+                }
+                if (safeAngle > 0) {
+                    print("found the right way");
+                    return vector.create(CosBJ(safeAngle) * (fbAOE + 5.0), SinBJ(angle) * (fbAOE + 5.0), 0);
+                } else {
+                    print("only 1 circle or dont know where to go");
+                    angle = GetRandomReal(0.0, 6.283);
+                    return vector.create(Cos(angle) * (fbAOE + 5.0), Sin(angle) * (fbAOE + 5.0), 0);
+                }
             }
-            j += 1;
         }
-        print(str);
+
+        static method mark(real x, real y) {
+            thistype.x[thistype.n] = x;
+            thistype.y[thistype.n] = y;
+            thistype.n += 1;
+        }
+
+        static method clear() {
+            thistype.n = 0;
+        }
+
+        private static method onInit() {
+            thistype.clear();
+        }
     }
 
-    public function printMarkMap() {
-        integer i = 0;
-        while (i < nfb) {
-            DelayTask.create(dlt, 0.02 * i).i0 = i;
-            i += 1;
-        }
-        // print("Success="+I2S(success)+", fail="+I2S(fail));
-    }
-// DEBUG ////////////////////////////////
-
-    public function MarkFireBombClear(boolean isBomb) {
-        integer i = 0;
-        while (i < nfb) {
-            if (isBomb) {
-                fbCheck[i].reset();
-            }
-            fbFootPrint[i].reset();
-            i += 1;
-        }
-    }
-	
-	function InitFireBombPlot() {
-        integer i = 0;
-        nfb = R2I(platformRadius / pixel) * 2;
-        while (i < nfb) {
-            fbCheck[i] = Table.create();
-            fbFootPrint[i] = Table.create();
-            i += 1;
-        }
-        MarkFireBombClear(true);
-		// integer i, j;
-		// real y, x, d;
-		// hexN = R2I(platformRadius / 1.732050807568877 / fbAOE) * 2;
-		// // http://stackoverflow.com/questions/14280831/algorithm-to-generate-2d-magic-hexagon-lattice
-		// d = fbAOE;// d is the distance between 2 points as indicated in your schema
-		// i = 0;
-		// while (i < hexN) {
-		// 	y = (1.732050807568877 * i * d) / 2.0;
-		// 	j = 0;
-		// 	while (j < (2 * hexN - 1 - i)) {
-		// 		x = (-(2*hexN-i-2)*d)/2.0 + j*d;
-		// 		//plot the point with coordinate (x,y) here
-		// 		xfb[nfb] = x + WLKSQRCENTREX;
-		// 		yfb[nfb] = y + WLKSQRCENTREY;
-		// 		nfb += 1;
-		// 		if (y != 0) {
-		// 			// plot the point with coordinate (x,-y) here
-		// 			xfb[nfb] = x + WLKSQRCENTREX;
-		// 			yfb[nfb] = WLKSQRCENTREY - y;
-		// 			nfb += 1;
-		// 		}
-		// 		j += 1;
-		// 	}
-		// 	i += 1;
-		// }
-		// // test
-		// i = 0;
-		// while (i < nfb) {
-		// 	CreateUnit(Player(10), 'ewsp', xfb[i], yfb[i], 0);
-		// 	i += 1;
-		// }
-	}
-    
     public function GetFireRune() -> unit {
         if (index < 26) {
             return runes[index];
@@ -230,7 +160,6 @@ xoff[25] = 0;	yoff[25] = -49.4037352687364;
     function onInit() {
         InitRuneVariables();
         InitRunes();
-		InitFireBombPlot();
     }
 }
 //! endzinc
