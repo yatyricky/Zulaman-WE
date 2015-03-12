@@ -1,5 +1,8 @@
 //! zinc
 library WarlockGlobal requires NefUnion, ZAMCore, Table {
+    constant integer SAMPLE_SIDES = 8;
+    constant real SAMPLE_MOVE_DISTANCE = 50.0;
+
     unit runes[];
     integer index;
     real xoff[];
@@ -7,7 +10,16 @@ library WarlockGlobal requires NefUnion, ZAMCore, Table {
     real facing[]; // facing for fire runes
 
 	real fbAOE = 150.0;
+    real heroBodySize = 60.0;
 	public real platformRadius = 950;
+
+    function MergeCircle(Circle c1, Circle c2) -> Circle {
+        Circle c = Circle.create();
+        c.x = (c1.x + c2.x) / 2;
+        c.y = (c1.y + c2.y) / 2;
+        c.r = (GetDistance.coords2d(c1.x, c1.y, c2.x, c2.y) + c1.r + c2.r) / 2;
+        return c;
+    }
 
     public struct FireBombMarker {
         static real x[];
@@ -15,63 +27,30 @@ library WarlockGlobal requires NefUnion, ZAMCore, Table {
         static integer n;
 
         static method getSafeDir(real x, real y) -> vector {
-            integer i;
-            integer found;
-            real angle, range, distance;
-            real nas[];
-            real nae[];
-            integer nan;
-            real safeAngle, bigRange, tmpA;
-            // if in any circle
-            found = -1;
+            integer i, j;
+            real sampleX = x;
+            real sampleY = y;
+            real angle;
+
             i = 0;
-            while (i < thistype.n && found == -1) {
-                if (GetDistance.coords2d(x, y, thistype.x[i], thistype.y[i]) <= fbAOE) {
-                    found = i;
+            while (i < thistype.n) {
+                if (GetDistance.coords2d(thistype.x[i], thistype.y[i], x, y) < fbAOE + heroBodySize) {
+                    i += thistype.n;
+                    // intersect with a cricle
+                    j = 0;
+                    while (j < SAMPLE_SIDES) {
+                        angle = bj_PI * 2.0 / SAMPLE_SIDES * j;
+                        sampleX = Cos(angle) * SAMPLE_MOVE_DISTANCE + x;
+                        sampleY = Sin(angle) * SAMPLE_MOVE_DISTANCE + y;
+                        if (GetDistance.coords2d(thistype.x[i], thistype.y[i], sampleX, sampleY) < fbAOE + heroBodySize) {
+                            j += SAMPLE_SIDES;
+                        }
+                        j += 1;
+                    }
                 }
                 i += 1;
             }
-            if (found == -1) {
-                // not found, return stationary
-                print("safe: return stationary");
-                return vector.create(0, 0, 0);
-            } else {
-                // remove unavailable arcs if any
-                nan = 0;
-                i = 0;
-                while (i < thistype.n) {
-                    if (found != i) {
-                        distance = GetDistance.coords2d(thistype.x[i], thistype.y[i], thistype.x[found], thistype.y[found]);
-                        if (distance <= fbAOE * 2) {
-                            angle = GetAngleDeg(thistype.x[found], thistype.y[found], thistype.x[i], thistype.y[i]);
-                            range = AcosBJ(distance / 2.0 / fbAOE);
-                            nas[nan] = angle - range;
-                            nae[nan] = angle + range;
-                            nan += 1;
-                        }
-                    }
-                    i += 1;
-                }
-                bigRange = 0;
-                safeAngle = -1;
-                i = 0;
-                while (i < nan - 1) {
-                    tmpA = nas[i + 1] - nae[i];
-                    if (tmpA > bigRange) {
-                        bigRange = tmpA;
-                        safeAngle = nae[i] + tmpA / 2.0;
-                    }
-                    i += 1;
-                }
-                if (safeAngle > 0) {
-                    print("found the right way");
-                    return vector.create(CosBJ(safeAngle) * (fbAOE + 5.0), SinBJ(angle) * (fbAOE + 5.0), 0);
-                } else {
-                    print("only 1 circle or dont know where to go");
-                    angle = GetRandomReal(0.0, 6.283);
-                    return vector.create(Cos(angle) * (fbAOE + 5.0), Sin(angle) * (fbAOE + 5.0), 0);
-                }
-            }
+            return vector.create(sampleX - x, sampleY - y, 1);
         }
 
         static method mark(real x, real y) {
