@@ -2,7 +2,6 @@
 library FireBomb requires SpellEvent, ZAMCore, DamageSystem, WarlockGlobal {
 #define MISSILE "Abilities\\Weapons\\PhoenixMissile\\Phoenix_Missile.mdl"
 #define EXPLOSION_ART "Abilities\\Weapons\\Mortar\\MortarMissile.mdl"
-#define BOMB_ID 'e00G'
 #define MISSILE_SPEED 35
 #define NUM_MISSILES 40
 #define H_OVER_D 0.45
@@ -36,7 +35,7 @@ library FireBomb requires SpellEvent, ZAMCore, DamageSystem, WarlockGlobal {
             height = Sin(this.count * MISSILE_SPEED / this.distance * 3.1415) * this.distance * H_OVER_D;
             if (height < 0.0) {
                 height = 0.0;
-                GroupAddUnit(bombs, CreateUnit(Player(10), BOMB_ID, GetUnitX(this.missile), GetUnitY(this.missile), GetUnitFacing(this.missile)));
+                GroupAddUnit(bombs, CreateUnit(Player(10), UTID_FIRE_BOMB, GetUnitX(this.missile), GetUnitY(this.missile), GetUnitFacing(this.missile)));
                 // MarkFireBomb(GetUnitX(this.missile), GetUnitY(this.missile), true);
                 FireBombMarker.mark(GetUnitX(this.missile), GetUnitY(this.missile));
                 this.destroy();
@@ -121,7 +120,6 @@ library FireBomb requires SpellEvent, ZAMCore, DamageSystem, WarlockGlobal {
 #undef H_OVER_D
 #undef NUM_MISSILES
 #undef MISSILE_SPEED
-#undef BOMB_ID
 #undef EXPLOSION_ART
 #undef MISSILE
 }

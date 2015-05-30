@@ -13,44 +13,36 @@ library WarlockGlobal requires NefUnion, ZAMCore, Table {
     real heroBodySize = 60.0;
 	public real platformRadius = 950;
 
-    function MergeCircle(Circle c1, Circle c2) -> Circle {
-        Circle c = Circle.create();
-        c.x = (c1.x + c2.x) / 2;
-        c.y = (c1.y + c2.y) / 2;
-        c.r = (GetDistance.coords2d(c1.x, c1.y, c2.x, c2.y) + c1.r + c2.r) / 2;
-        return c;
-    }
-
     public struct FireBombMarker {
         static real x[];
         static real y[];
         static integer n;
 
-        static method getSafeDir(real x, real y) -> vector {
-            integer i, j;
-            real sampleX = x;
-            real sampleY = y;
-            real angle;
-
-            i = 0;
-            while (i < thistype.n) {
-                if (GetDistance.coords2d(thistype.x[i], thistype.y[i], x, y) < fbAOE + heroBodySize) {
-                    i += thistype.n;
-                    // intersect with a cricle
-                    j = 0;
-                    while (j < SAMPLE_SIDES) {
-                        angle = bj_PI * 2.0 / SAMPLE_SIDES * j;
-                        sampleX = Cos(angle) * SAMPLE_MOVE_DISTANCE + x;
-                        sampleY = Sin(angle) * SAMPLE_MOVE_DISTANCE + y;
-                        if (GetDistance.coords2d(thistype.x[i], thistype.y[i], sampleX, sampleY) < fbAOE + heroBodySize) {
-                            j += SAMPLE_SIDES;
-                        }
-                        j += 1;
-                    }
+        static method getSafeDir(unit source, real x, real y) -> vector {
+            vector ret = vector.create(0.0, 0.0, 0.0);
+            integer count = 0;
+            unit it;
+            GroupUnitsInArea(ENUM_GROUP, x, y, fbAOE * 2);
+            it = FirstOfGroup(ENUM_GROUP);
+            while (it != null) {
+                GroupRemoveUnit(ENUM_GROUP, it);
+                print(GetUnitNameEx(source) + " found " + ID2S(GetUnitTypeId(it)));
+                if (GetUnitTypeId(it) == UTID_FIRE_BOMB) {
+                    print(GetUnitNameEx(source) + " found one");
+                    ret.add(vector.create(x - GetUnitX(it), y - GetUnitY(it), 0.0));
+                    print("ret = " + R2S(ret.x) + ","+R2S(ret.y)+","+R2S(ret.z));
+                    count += 1;
                 }
-                i += 1;
+                it = FirstOfGroup(ENUM_GROUP);
             }
-            return vector.create(sampleX - x, sampleY - y, 1);
+            if (count == 0) {
+                return vector.create(0.0, 0.0, 0.0);
+            }
+            if (ret.getLength() > fbAOE) {
+                return ret;
+            }
+            ret.setLength(fbAOE);
+            return ret;
         }
 
         static method mark(real x, real y) {

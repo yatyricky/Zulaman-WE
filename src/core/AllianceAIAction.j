@@ -1,5 +1,6 @@
 //! zinc
 library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinGlobal, FrostNova, WarlockGlobal {
+#define AIACTION_INTERVAL 0.33
     
     Table unitCallBack, unitLearSkill;
     type UnitActionType extends function(unit);
@@ -245,7 +246,8 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
         real tx, ty;
         if (DBMWarlock.isFireBomb) {
             // position on firebomb
-            v = FireBombMarker.getSafeDir(GetUnitX(source), GetUnitY(source));
+            // TODO
+            /*v = FireBombMarker.getSafeDir(source, GetUnitX(source), GetUnitY(source));
             tx = v.x;
             ty = v.y;
             v.destroy();
@@ -255,7 +257,8 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
             } else {
                 IssuePointOrderById(source, OID_MOVE, GetUnitX(source) + tx, GetUnitY(source) + ty);
                 return false;
-            }
+            }*/
+            return true;
         } else {
             // dodge flame throw
             if (DBMWarlock.theBolt != null) {
@@ -1564,7 +1567,7 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
         if (flip) {
             PauseTimer(globalTimer);
         } else {
-            TimerStart(globalTimer, 0.33, true, function AIActions);
+            TimerStart(globalTimer, AIACTION_INTERVAL, true, function AIActions);
         }
         flip = !flip;
     }

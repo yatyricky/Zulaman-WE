@@ -134,8 +134,8 @@ library ZAMCore requires NefUnion {
         
         CURRENT_HERO_LEVEL = 1;
         
-        SetPlayerName(Player(10), "阿曼尼帝国");
-        SetPlayerName(Player(11), "探险者");
+        SetPlayerName(Player(10), FORCE_ENEMY);
+        SetPlayerName(Player(11), FORCE_NPCS);
         FogEnable(false);
         FogMaskEnable(false);
         

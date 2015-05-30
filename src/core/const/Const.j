@@ -1,10 +1,12 @@
 #define NUMBER_OF_MAX_PLAYERS 6
 #define MOB_PID 10
+#define FORCE_NPCS "Adventurers"
+#define FORCE_ENEMY "The Dark Below"
 
 #define INIT_X 384.0
 #define INIT_Y -11904.0
 
-#define DAMAGE_NAME_MELEE "普通攻击"
+#define DAMAGE_NAME_MELEE "Normal Attack"
 
 #define ATT_STR 1
 #define ATT_AGI 2
@@ -216,6 +218,7 @@
 #define WLKSQRCENTREY 768.00
 #define UTIDWARLOCK 'Ulic'
 #define UTIDFIRERUNE 'e004'
+#define UTID_FIRE_BOMB 'e00G'
 #define UTID_LAVA_SPAWN 'n009'
 #define SIDFLAMETHROW 'A05Z'
 #define SIDFLAMEBOMB 'A060'
