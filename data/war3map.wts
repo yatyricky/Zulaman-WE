@@ -3922,7 +3922,7 @@ debuff
 STRING 5266
 // Buff: B00V (mortal strike - increase crit), Bufftip (Tooltip[ftip])
 {
-|cff00ff00寻找弱点|r
+|cff00ff00Seek Weakness|r
 }
 
 STRING 5268
@@ -4060,7 +4060,7 @@ STRING 5350
 STRING 5351
 // Buff: B00W (execute - dummy), Buffubertip (Tooltip - ext[fube])
 {
-Neutral: 受到Execution的攻击. 
+Neutral: Being executed. 
 }
 
 STRING 5352
@@ -4084,9 +4084,9 @@ learn
 STRING 5375
 // Ability: A007 (valour aura), Ubertip (Tooltip - normal - ext[aub1])
 {
-提升附近范围内所有友军的物理攻击和技能的暴击几率3%, 如果在Valor Aura的作用下造成暴击, 则恢复5%的生命值. 
+Increase 3% critical strike chance of physical attacks and abilities for all allies. If an ally inflicts critical strike under the effect of valor aura, heal for 5% of max hp.
 
-|cff99ccff影响区域: |r900 yards
+|cff99ccffAOE: |r900 yards
 }
 
 STRING 5376
@@ -4104,7 +4104,7 @@ valour aura
 STRING 5378
 // Buff: B001 (valour aura), Buffubertip (Tooltip - ext[fube])
 {
-Neutral: 物理攻击和技能的暴击几率提升3%, 如果暴击, 恢复5%的生命值. 
+Neutral: Critical strike chance of physical attacks and abilities are increased by 3%, dealing critical strike will heal you. 
 }
 
 STRING 5407
@@ -4128,7 +4128,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 5410
 // Ability: A061 (summon lava spawn), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -4145,18 +4145,18 @@ F
 STRING 5412
 // Ability: A02W (lightning bolt), Ubertip (Tooltip - normal - ext[aub1])
 {
-对目标造成320伤害. 
+Deals 320 damage to target.
 
-|cff99ccff施法时间: |r3 s
+|cff99ccffCast: |r3 s
 |cff99ccffRange: |r600 yards
-|cff99ccffCost: |r75点
+|cff99ccffCost: |r75
 |cff99ccffCool: |r2 s
 }
 
 STRING 5413
 // Ability: A02W (lightning bolt), Tip (Tooltip - normal[atp1])
 {
-闪电箭(|cffffcc00F|r)
+Lightning Bolt(|cffffcc00F|r)
 }
 
 STRING 5415
@@ -4186,18 +4186,18 @@ E
 STRING 5427
 // Ability: A02Y (blazing haste), Ubertip (Tooltip - normal - ext[aub1])
 {
-法术急速提升75%. 
+Spell haste is increased by 75%. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r75点
-|cff99ccff持续时间: |r20 s
+|cff99ccffCost: |r75
+|cff99ccffDuration: |r20 s
 |cff99ccffCool: |r5 s
 }
 
 STRING 5428
 // Ability: A02Y (blazing haste), Tip (Tooltip - normal[atp1])
 {
-炽热疾速(|cffffcc00F|r)
+Blazing Haste(|cffffcc00F|r)
 }
 
 STRING 5429
@@ -4251,7 +4251,7 @@ buff
 STRING 5438
 // Buff: B00X (blazing haste), Bufftip (Tooltip[ftip])
 {
-|cff00ff00炽热疾速|r
+|cff00ff00Blazing Haste|r
 }
 
 STRING 5441
@@ -4269,7 +4269,7 @@ discord
 STRING 5463
 // Buff: BPSE (), Buffubertip (Tooltip - ext[fube])
 {
-Neutral: 无法攻击, 移动, 施法. 
+Neutral: Unable to attack, more or cast. 
 }
 
 STRING 5464
@@ -4293,44 +4293,44 @@ debuff
 STRING 5467
 // Buff: B00Y (discord), Bufftip (Tooltip[ftip])
 {
-纷争
+Discord
 }
 
 STRING 5468
 // Buff: B00Y (discord), Buffubertip (Tooltip - ext[fube])
 {
-|cff6666ffMagical|r: 攻击强度大幅度降低, 略微提高攻击速度. 
+|cff6666ffMagical|r: Attack power decreased, attack speed slightly increased. 
 }
 
 STRING 5469
 // Ability: A006 (shield of sin'dorei), Ubertip (Tooltip - normal - ext[aub1])
 {
-使血精灵防御者受到的所有伤害降低35%. 
+Blood Elf Defender takes 35% less damage. 
 
-|cff99ccff持续时间: |r8 s
+|cff99ccffDuration: |r8 s
 |cff99ccffCool: |r30 s
 }
 
 STRING 5470
 // Ability: A006 (shield of sin'dorei), Ubertip (Tooltip - normal - ext[aub1])
 {
-使血精灵防御者受到的所有伤害降低50%. 
+Blood Elf Defender takes 50% less damage. 
 
-|cff99ccff持续时间: |r8 s
+|cff99ccffDuration: |r8 s
 |cff99ccffCool: |r30 s
 }
 
 STRING 5472
 // Ability: A006 (shield of sin'dorei), Researchubertip (Tooltip - Learn - ext[arut])
 {
-使血精灵防御者受到的所有伤害降低. 
+Blood Elf Defender takes less damage. 
 
-|cff99ccff持续时间: |r8 s
+|cff99ccffDuration: |r8 s
 |cff99ccffCool: |r30 s
 
-|cffffcc00Level 1|r - 伤害降低35%. 
-|cffffcc00Level 2|r - 伤害降低50%. 
-|cffffcc00Level 3|r - 伤害降低65%. 
+|cffffcc00Level 1|r - Damage taken decreased by 35%. 
+|cffffcc00Level 2|r - Damage taken decreased by 50%. 
+|cffffcc00Level 3|r - Damage taken decreased by 65%. 
 }
 
 STRING 5473
@@ -4360,33 +4360,33 @@ buff
 STRING 5477
 // Buff: B00Z (shield of sin'dorei), Bufftip (Tooltip[ftip])
 {
-|cff00ff00辛多雷之盾|r
+|cff00ff00Shield of Sin'dorei|r
 }
 
 STRING 5478
 // Buff: B00Z (shield of sin'dorei), Buffubertip (Tooltip - ext[fube])
 {
-|cff6666ffMagical|r: 受到的伤害降低. 
+|cff6666ffMagical|r: Damage taken decreased. 
 }
 
 STRING 5480
 // Ability: A000 (defensive aura), Tip (Tooltip - normal[atp1])
 {
-防御光环
+Defensive Aura
 }
 
 STRING 5481
 // Buff: B000 (defensive aura), Bufftip (Tooltip[ftip])
 {
-防御光环
+Defensive Aura
 }
 
 STRING 5482
 // Ability: A000 (defensive aura), Ubertip (Tooltip - normal - ext[aub1])
 {
-提升附近范围内所有友军的物理免伤6%. 
+Increase physical resistance of all allies nearby by 6%. 
 
-|cff99ccff影响区域: |r900 yards
+|cff99ccffAOE: |r900 yards
 }
 
 STRING 5487
@@ -4416,13 +4416,13 @@ buff
 STRING 5491
 // Buff: B010 (storm strike), Bufftip (Tooltip[ftip])
 {
-风暴打击
+Storm Strike
 }
 
 STRING 5492
 // Buff: B010 (storm strike), Buffubertip (Tooltip - ext[fube])
 {
-|cff6666ffMagical|r: 受到的大地震击伤害提升. 
+|cff6666ffMagical|r: Takes more damage from Earth Shock. 
 }
 
 STRING 5497
@@ -4446,13 +4446,13 @@ E
 STRING 5512
 // Buff: B011 (earth shock - dummy), Bufftip (Tooltip[ftip])
 {
-|cffff0000大地震击|r
+|cffff0000Earth Shock|r
 }
 
 STRING 5513
 // Buff: B011 (earth shock - dummy), Buffubertip (Tooltip - ext[fube])
 {
-Neutral: 受到大地震击的攻击. 
+Neutral: Attacked by Earth Shock. 
 }
 
 STRING 5514
@@ -4464,7 +4464,7 @@ earth shock - dummy
 STRING 5515
 // Ability: A033 (earth shock), Ubertip (Tooltip - normal - ext[aub1])
 {
-冲击目标, 对目标造成150点伤害, 同时可以打断其施法. 
+Shock a target, dealing 150 damage and counter target casting spell. 
 
 |cff99ccffRange: |r400 yards
 }
@@ -4472,7 +4472,7 @@ STRING 5515
 STRING 5516
 // Ability: A033 (earth shock), Ubertip (Tooltip - normal - ext[aub1])
 {
-冲击目标, 对目标造成250点伤害, 同时可以打断其施法. 
+Shock a target dealing 250 damage and counter target casting spell. 
 
 |cff99ccffRange: |r400 yards
 }
@@ -4480,7 +4480,7 @@ STRING 5516
 STRING 5517
 // Ability: A033 (earth shock), Ubertip (Tooltip - normal - ext[aub1])
 {
-冲击目标, 对目标造成350点伤害, 同时可以打断其施法. 
+Shock a target dealing 350 damage and counter target casting spell. 
 
 |cff99ccffRange: |r400 yards
 }
@@ -4760,7 +4760,7 @@ STRING 5602
 {
 提升附近范围内所有友军的攻击速度5%, 法术急速7%. 
 
-|cff99ccff影响区域: |r900 yards
+|cff99ccffAOE: |r900 yards
 }
 
 STRING 5603
@@ -4768,8 +4768,8 @@ STRING 5603
 {
 激发自然之力, 使地缚者造成的所有伤害提高30%. 
 
-|cff99ccffCost: |r25点
-|cff99ccff持续时间: |r12 s
+|cff99ccffCost: |r25
+|cff99ccffDuration: |r12 s
 |cff99ccffCool: |r40 s
 }
 
@@ -4778,8 +4778,8 @@ STRING 5604
 {
 激发自然之力, 使地缚者造成的所有伤害提高30%. 
 
-|cff99ccffCost: |r25点
-|cff99ccff持续时间: |r16 s
+|cff99ccffCost: |r25
+|cff99ccffDuration: |r16 s
 |cff99ccffCool: |r40 s
 }
 
@@ -4788,8 +4788,8 @@ STRING 5605
 {
 激发自然之力, 使地缚者造成的所有伤害提高30%. 
 
-|cff99ccffCost: |r25点
-|cff99ccff持续时间: |r20 s
+|cff99ccffCost: |r25
+|cff99ccffDuration: |r20 s
 |cff99ccffCool: |r40 s
 }
 
@@ -4798,13 +4798,13 @@ STRING 5606
 {
 激发自然之力, 使地缚者造成的所有伤害提高30%. 
 
-|cff99ccffCost: |r25点
-|cff99ccff持续时间: |r12/16/20 s
+|cff99ccffCost: |r25
+|cff99ccffDuration: |r12/16/20 s
 |cff99ccffCool: |r40 s
 
-|cffffcc00Level 1|r - 持续12 s. 
-|cffffcc00Level 2|r - 持续16 s. 
-|cffffcc00Level 3|r - 持续20 s. 
+|cffffcc00Level 1|r - Lasts for 12 s. 
+|cffffcc00Level 2|r - Lasts for 16 s. 
+|cffffcc00Level 3|r - Lasts for 20 s. 
 }
 
 STRING 5607
@@ -4816,56 +4816,56 @@ wind grace
 STRING 5608
 // Buff: B018 (wind grace), Bufftip (Tooltip[ftip])
 {
-风之优雅
+Wind Grace
 }
 
 STRING 5609
 // Buff: B018 (wind grace), Buffubertip (Tooltip - ext[fube])
 {
-Neutral: 攻击速度和法术急速提高. 
+Neutral: Increase attack speed and spell haste. 
 }
 
 STRING 5635
 // Ability: A00N (divine favor), Ubertip (Tooltip - normal - ext[aub1])
 {
-激活以后, 使你的下一个治疗法术一定造成极效治疗. 
+When activated, your next healing spell will deal critical strike.
 
-|cff99ccffCost: |r50点
+|cff99ccffCost: |r50
 |cff99ccffCool: |r20 s
 }
 
 STRING 5636
 // Ability: A00N (divine favor), Ubertip (Tooltip - normal - ext[aub1])
 {
-激活以后, 使你的下一个治疗法术一定造成极效治疗. 
+When activated, your next healing spell will deal critical strike.
 同时立即降低自己的仇恨值35%. 
 
-|cff99ccffCost: |r50点
+|cff99ccffCost: |r50
 |cff99ccffCool: |r18 s
 }
 
 STRING 5637
 // Ability: A00N (divine favor), Ubertip (Tooltip - normal - ext[aub1])
 {
-激活以后, 使你的下一个治疗法术一定造成极效治疗. 
+When activated, your next healing spell will deal critical strike.
 同时立即降低自己的仇恨值35%. 
-并且, 被动地降低闪耀之光的Cool1 s, 降低Holy Light的施法时间0.4 s. 
+并且, 被动地降低闪耀之光的Cool1 s, 降低Holy Light的Cast0.4 s. 
 
-|cff99ccffCost: |r50点
+|cff99ccffCost: |r50
 |cff99ccffCool: |r16 s
 }
 
 STRING 5638
 // Ability: A00N (divine favor), Researchubertip (Tooltip - Learn - ext[arut])
 {
-激活以后, 使你的下一个治疗法术一定造成极效治疗. 
+When activated, your next healing spell will deal critical strike.
 
-|cff99ccffCost: |r50点
+|cff99ccffCost: |r50
 |cff99ccffCool: |r20/18/16 s
 
 |cffffcc00Level 1|r - 使下一个治疗法术一定造成极效治疗. 
 |cffffcc00Level 2|r - 使下一个治疗法术一定造成极效治疗. 同时立即降低自己的仇恨值35%. 
-|cffffcc00Level 3|r - 使下一个治疗法术一定造成极效治疗. 同时立即降低自己的仇恨值35%. 并且, 被动地降低闪耀之光的Cool1 s, 降低Holy Light的施法时间0.4 s. 
+|cffffcc00Level 3|r - 使下一个治疗法术一定造成极效治疗. 同时立即降低自己的仇恨值35%. 并且, 被动地降低闪耀之光的Cool1 s, 降低Holy Light的Cast0.4 s. 
 }
 
 STRING 5643
@@ -5002,10 +5002,10 @@ STRING 5669
 
 |cffff3333无法对过于强大的敌人造成变形效果. |r
 
-|cff99ccff施法时间: |r0 s
+|cff99ccffCast: |r0 s
 |cff99ccffRange: |r600 yards
-|cff99ccffCost: |r25点
-|cff99ccff持续时间: |r30 s
+|cff99ccffCost: |r25
+|cff99ccffDuration: |r30 s
 |cff99ccffCool: |r5 s
 }
 
@@ -5090,33 +5090,33 @@ STRING 5687
 STRING 5692
 // Ability: A01T (blizzard), Ubertip (Tooltip - normal - ext[aub1])
 {
-召唤出5阵冰片攻击, 每 s对目标区域内的敌人造成150点法术伤害. 
+召唤出5阵冰片攻击, 每 s对目标区域内的敌人造成150法术伤害. 
 
 |cff99ccff引导时间: |r5 s
 |cff99ccffRange: |r800 yards
-|cff99ccff影响区域: |r250 yards
-|cff99ccffCost: |r100点
+|cff99ccffAOE: |r250 yards
+|cff99ccffCost: |r100
 }
 
 STRING 5693
 // Ability: A01T (blizzard), Ubertip (Tooltip - normal - ext[aub1])
 {
-召唤出5阵冰片攻击, 每 s对目标区域内的敌人造成200点法术伤害. 
+召唤出5阵冰片攻击, 每 s对目标区域内的敌人造成200法术伤害. 
 
 |cff99ccff引导时间: |r5 s
 |cff99ccffRange: |r800 yards
-|cff99ccff影响区域: |r350 yards
-|cff99ccffCost: |r135点
+|cff99ccffAOE: |r350 yards
+|cff99ccffCost: |r135
 }
 
 STRING 5694
 // Ability: A03H (blizzard - no channel), Ubertip (Tooltip - normal - ext[aub1])
 {
-召唤出5阵冰片攻击, 每 s对目标区域内的敌人造成250点法术伤害. 
+召唤出5阵冰片攻击, 每 s对目标区域内的敌人造成250法术伤害. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccff影响区域: |r450 yards
-|cff99ccffCost: |r170点
+|cff99ccffAOE: |r450 yards
+|cff99ccffCost: |r170
 |cff99ccffCool: |r5 s
 }
 
@@ -5127,13 +5127,13 @@ STRING 5695
 
 |cff99ccff引导时间: |r5/5/0 s
 |cff99ccffRange: |r800 yards
-|cff99ccff影响区域: |r250/350/450 yards
-|cff99ccffCost: |r100/135/170点
+|cff99ccffAOE: |r250/350/450 yards
+|cff99ccffCost: |r100/135/170
 |cff99ccffCool: |r0/0/5 s
 
-|cffffcc00Level 1|r - 每次造成150点伤害. 
-|cffffcc00Level 2|r - 每次造成200点伤害. 
-|cffffcc00Level 3|r - 每次造成250点伤害. 
+|cffffcc00Level 1|r - 每次造成150伤害. 
+|cffffcc00Level 2|r - 每次造成200伤害. 
+|cffffcc00Level 3|r - 每次造成250伤害. 
 }
 
 STRING 5696
@@ -5145,11 +5145,11 @@ blizzard - no channel
 STRING 5699
 // Ability: A01T (blizzard), Ubertip (Tooltip - normal - ext[aub1])
 {
-召唤出5阵冰片攻击, 每 s对目标区域内的敌人造成250点法术伤害. 
+召唤出5阵冰片攻击, 每 s对目标区域内的敌人造成250法术伤害. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccff影响区域: |r450 yards
-|cff99ccffCost: |r170点
+|cff99ccffAOE: |r450 yards
+|cff99ccffCost: |r170
 |cff99ccffCool: |r5 s
 }
 
@@ -5237,8 +5237,8 @@ STRING 5725
 扩散恐惧的力量, 使附近的所有敌人因恐惧而丧失一切行动能力. 
 造成1-4 s的Stun效果, 目标在异教徒250 yards范围内时, 受到的Stun时间越长. 
 
-|cff99ccff影响区域: |r800 yards
-|cff99ccffCost: |r75点
+|cff99ccffAOE: |r800 yards
+|cff99ccffCost: |r75
 |cff99ccffCool: |r12 s
 }
 
@@ -5248,8 +5248,8 @@ STRING 5726
 扩散恐惧的力量, 使附近的所有敌人因恐惧而丧失一切行动能力. 
 造成1-4 s的Stun效果, 目标在异教徒400 yards范围内时, 受到的Stun时间越长. 
 
-|cff99ccff影响区域: |r800 yards
-|cff99ccffCost: |r75点
+|cff99ccffAOE: |r800 yards
+|cff99ccffCost: |r75
 |cff99ccffCool: |r12 s
 }
 
@@ -5259,8 +5259,8 @@ STRING 5727
 扩散恐惧的力量, 使附近的所有敌人因恐惧而丧失一切行动能力. 
 造成1-4 s的Stun效果, 目标在异教徒550 yards范围内时, 受到的Stun时间越长. 
 
-|cff99ccff影响区域: |r800 yards
-|cff99ccffCost: |r75点
+|cff99ccffAOE: |r800 yards
+|cff99ccffCost: |r75
 |cff99ccffCool: |r12 s
 }
 
@@ -5269,8 +5269,8 @@ STRING 5728
 {
 扩散恐惧的力量, 使附近的所有敌人因恐惧而丧失一切行动能力. 造成1-4 s的Stun效果, 目标离异教徒越近, 造成的Stun时间越长. 
 
-|cff99ccff影响区域: |r800 yards
-|cff99ccffCost: |r75点
+|cff99ccffAOE: |r800 yards
+|cff99ccffCost: |r75
 |cff99ccffCool: |r12 s
 
 |cffffcc00Level 1|r - 异教徒250 yards范围内的敌人会受到最大影响. 
@@ -5305,7 +5305,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 5740
 // Ability: A062 (frenzy warlock), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -5325,7 +5325,7 @@ STRING 5742
 召唤一阵强风将目标吹至空中, 对目标造成33%其最大生命值的物理伤害. 
 
 |cff99ccffRange: |r1200 yards
-|cff99ccffCost: |r100点
+|cff99ccffCost: |r100
 |cff99ccffCool: |r10 s
 }
 
@@ -5356,7 +5356,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 5747
 // Ability: A053 (spirit bolt), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -5367,9 +5367,9 @@ STRING 5747
 STRING 5749
 // Ability: A03N (summon serpents), Ubertip (Tooltip - normal - ext[aub1])
 {
-召唤出两只飞蛇来协助作战. 
+Summons 2 serpents. 
 
-|cff99ccffCost: |r100点
+|cff99ccffCost: |r100
 |cff99ccffCool: |r20 s
 }
 
@@ -5400,7 +5400,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 5754
 // Ability: A054 (sunfire storm hex), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -5417,11 +5417,11 @@ R
 STRING 5756
 // Ability: A03O (thunder storm), Ubertip (Tooltip - normal - ext[aub1])
 {
-以一个敌方目标为暴风眼, 召唤一阵雷电风暴, 只有暴风眼300 yards范围内的敌人不会受到伤害, 暴风眼外的敌人会受到100点法术伤害, 每 s累加增幅50%. 
+以一个敌方目标为暴风眼, 召唤一阵雷电风暴, 只有暴风眼300 yards范围内的敌人不会受到伤害, 暴风眼外的敌人会受到100法术伤害, 每 s累加增幅50%. 
 
 |cff99ccff引导时间: |r10 s
 |cff99ccffRange: |r1200 yards
-|cff99ccff影响区域: |r全图
+|cff99ccffAOE: |r全图
 |cff99ccffCool: |r70 s
 }
 
@@ -5452,7 +5452,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 5761
 // Ability: A055 (shield of sindorei hex), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -5465,7 +5465,7 @@ STRING 5763
 {
 攻击速度提高50%, 所造成的伤害提高30%. 
 
-|cff99ccff持续时间: |r600 s
+|cff99ccffDuration: |r600 s
 }
 
 STRING 5764
@@ -5495,7 +5495,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 5768
 // Ability: A056 (mangle hex), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -5520,7 +5520,7 @@ STRING 5771
 {
 攻击速度提高150%, 所造成的伤害提高500%. 
 
-|cff99ccff持续时间: |r600 s
+|cff99ccffDuration: |r600 s
 }
 
 STRING 5772
@@ -5550,7 +5550,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 5776
 // Ability: A057 (rabies hex), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -5597,19 +5597,19 @@ STRING 5783
 STRING 5784
 // Buff: B01E (fucked lightning - dmg amp), Buffubertip (Tooltip - ext[fube])
 {
-|cff6666ffMagical|r: 受到的叉状闪电伤害提升, 这个效果会无限叠加. 
+|cff6666ffMagical|r: 受到的叉状闪电伤害提升, 这个效果会Infinity叠加. 
 }
 
 STRING 5785
 // Ability: A03L (fucked lightning), Ubertip (Tooltip - normal - ext[aub1])
 {
 发射一道闪电对目标造成伤害, 同时会分裂出数道闪电对目标附近的所有敌人造成伤害. 
-造成300点法术伤害, 并且使被击中的目标受到的叉状闪电的伤害提升50%, 可以无限叠加. 
+造成300法术伤害, 并且使被击中的目标受到的叉状闪电的伤害提升50%, 可以Infinity叠加. 
 
 |cff99ccffRange: |r1200 yards
-|cff99ccff影响区域: |r250 yards
-|cff99ccffCost: |r100点
-|cff99ccff持续时间: |r12 s
+|cff99ccffAOE: |r250 yards
+|cff99ccffCost: |r100
+|cff99ccffDuration: |r12 s
 |cff99ccffCool: |r7 s
 }
 
@@ -5916,75 +5916,75 @@ STRING 5848
 STRING 5849
 // Buff: B01J (dispel - self haste), Buffubertip (Tooltip - ext[fube])
 {
-|cff6666ffMagical|r: 法术急速提升. 
+|cff6666ffMagical|r: Spell haste is increased by . 
 }
 
 STRING 5854
 // Ability: A01E (prayer of healing), Ubertip (Tooltip - normal - ext[aub1])
 {
-牧师集中精神朗诵一段Prayer of Healing, 可以显著地治疗附近范围所有友军300点生命值. 
+牧师集中精神朗诵一段Prayer of Healing, 可以显著地治疗附近范围所有友军300生命值. 
 对生命值40%以下的友军有最多30%额外的极效治疗几率. 
 
-|cff99ccff施法时间: |r3 s
-|cff99ccff影响区域: |r800 yards
-|cff99ccffCost: |r140点
+|cff99ccffCast: |r3 s
+|cff99ccffAOE: |r800 yards
+|cff99ccffCost: |r140
 }
 
 STRING 5855
 // Ability: A01E (prayer of healing), Ubertip (Tooltip - normal - ext[aub1])
 {
-牧师集中精神朗诵一段Prayer of Healing, 可以显著地治疗附近范围所有友军300点生命值. 
+牧师集中精神朗诵一段Prayer of Healing, 可以显著地治疗附近范围所有友军300生命值. 
 对生命值55%以下的友军有最多40%额外的极效治疗几率. 
-同时, 可以被动地降低Heal的施法时间0.25 s. 
+同时, 可以被动地降低Heal的Cast0.25 s. 
 
-|cff99ccff施法时间: |r2.75 s
-|cff99ccff影响区域: |r800 yards
-|cff99ccffCost: |r140点
+|cff99ccffCast: |r2.75 s
+|cff99ccffAOE: |r800 yards
+|cff99ccffCost: |r140
 }
 
 STRING 5856
 // Ability: A01E (prayer of healing), Ubertip (Tooltip - normal - ext[aub1])
 {
-牧师集中精神朗诵一段Prayer of Healing, 可以显著地治疗附近范围所有友军300点生命值. 
+牧师集中精神朗诵一段Prayer of Healing, 可以显著地治疗附近范围所有友军300生命值. 
 对生命值70%以下的友军有最多50%额外的极效治疗几率. 
-同时, 可以被动地降低Heal的施法时间0.5 s. 
+同时, 可以被动地降低Heal的Cast0.5 s. 
 
-|cff99ccff施法时间: |r2.5 s
-|cff99ccff影响区域: |r800 yards
-|cff99ccffCost: |r140点
+|cff99ccffCast: |r2.5 s
+|cff99ccffAOE: |r800 yards
+|cff99ccffCost: |r140
 }
 
 STRING 5858
 // Ability: A019 (heal), Ubertip (Tooltip - normal - ext[aub1])
 {
-治疗目标友军150点生命值, 同时目标以及附近的所有友军会受到总计当次治疗35%的效果. 
+治疗目标友军150生命值, 同时目标以及附近的所有友军会受到总计当次治疗35%的效果. 
 
-|cff99ccff施法时间: |r2(1.75, 1.5) s
+|cff99ccffCast: |r2(1.75, 1.5) s
 |cff99ccffRange: |r800 yards
-|cff99ccff影响区域: |r300 yards
-|cff99ccffCost: |r50点
+|cff99ccffAOE: |r300 yards
+|cff99ccffCost: |r50
 }
 
 STRING 5859
 // Ability: A019 (heal), Ubertip (Tooltip - normal - ext[aub1])
 {
-治疗目标友军300点生命值, 同时目标以及附近的所有友军会受到总计当次治疗35%的效果. 
+治疗目标友军300生命值, 同时目标以及附近的所有友军会受到总计当次治疗35%的效果. 
 
-|cff99ccff施法时间: |r2(1.75, 1.5) s
+|cff99ccffCast: |r2(1.75, 1.5) s
 |cff99ccffRange: |r800 yards
-|cff99ccff影响区域: |r300 yards
-|cff99ccffCost: |r75点
+|cff99ccffAOE: |r300 yards
+|cff99ccffCost: |r75
 }
 
 STRING 5860
 // Ability: A019 (heal), Ubertip (Tooltip - normal - ext[aub1])
 {
-治疗目标友军450点生命值, 同时目标以及附近的所有友军会受到总计当次治疗35%的效果. 
+治疗目标友军450生命值, 同时目标以及附近的所有友军会受到总计当次治疗35%的效果. 
 
-|cff99ccff施法时间: |r2(1.75, 1.5) s
+|cff99ccffCast: |r2(1.75, 1.5) s
 |cff99ccffRange: |r800 yards
-|cff99ccff影响区域: |r300 yards
-|cff99ccffCost: |r100点
+|cff99ccffAOE: |r300 yards
+|cff99ccffCost: |r100
 }
 
 STRING 5861
@@ -5992,14 +5992,14 @@ STRING 5861
 {
 治疗目标友军, 同时目标以及附近的所有友军会受到总计当次治疗35%的效果. 
 
-|cff99ccff施法时间: |r2(1.75, 1.5) s
+|cff99ccffCast: |r2(1.75, 1.5) s
 |cff99ccffRange: |r800 yards
-|cff99ccff影响区域: |r300 yards
-|cff99ccffCost: |r50/75/100点
+|cff99ccffAOE: |r300 yards
+|cff99ccffCost: |r50/75/100
 
-|cffffcc00Level 1|r - 治疗150点生命值. 
-|cffffcc00Level 2|r - 治疗300点生命值. 
-|cffffcc00Level 3|r - 治疗450点生命值. 
+|cffffcc00Level 1|r - 治疗150生命值. 
+|cffffcc00Level 2|r - 治疗300生命值. 
+|cffffcc00Level 3|r - 治疗450生命值. 
 }
 
 STRING 5862
@@ -6023,17 +6023,17 @@ Prayer of Healing(|cffffcc00F|r) - [|cffffcc00Level 3|r]
 STRING 5865
 // Ability: A01E (prayer of healing), Researchubertip (Tooltip - Learn - ext[arut])
 {
-牧师集中精神朗诵一段Prayer of Healing, 可以显著地治疗附近范围所有友军300点生命值. 对于伤势更加严重的目标会有更高的极效治疗几率. 
+牧师集中精神朗诵一段Prayer of Healing, 可以显著地治疗附近范围所有友军300生命值. 对于伤势更加严重的目标会有更高的极效治疗几率. 
 
-|cff99ccff施法时间: |r3/2.75/2.5 s
-|cff99ccff影响区域: |r800 yards
-|cff99ccffCost: |r140点
+|cff99ccffCast: |r3/2.75/2.5 s
+|cff99ccffAOE: |r800 yards
+|cff99ccffCost: |r140
 
 |cffffcc00Level 1|r - 对生命值40%以下的友军有最多30%额外的极效治疗几率. 
 |cffffcc00Level 2|r - 对生命值55%以下的友军有最多40%额外的极效治疗几率. 
-同时, 可以被动地降低Heal的施法时间0.25 s. 
+同时, 可以被动地降低Heal的Cast0.25 s. 
 |cffffcc00Level 3|r - 对生命值70%以下的友军有最多50%额外的极效治疗几率. 
-同时, 可以被动地降低Heal的施法时间0.5 s. 
+同时, 可以被动地降低Heal的Cast0.5 s. 
 }
 
 STRING 5866
@@ -6054,7 +6054,7 @@ STRING 5868
 驱散友军目标身上的一个有害魔法状态或者敌军目标身上的一个有益魔法状态. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r45点
+|cff99ccffCost: |r45
 |cff99ccffCool: |r3 s
 }
 
@@ -6065,8 +6065,8 @@ STRING 5869
 施展Dispel以后, 牧师的法术急速会提升15%. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r60点
-|cff99ccff持续时间: |r3 s
+|cff99ccffCost: |r60
+|cff99ccffDuration: |r3 s
 |cff99ccffCool: |r3 s
 }
 
@@ -6077,8 +6077,8 @@ STRING 5870
 施展Dispel以后, 牧师的法术急速会提升30%. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r75点
-|cff99ccff持续时间: |r3 s
+|cff99ccffCost: |r75
+|cff99ccffDuration: |r3 s
 |cff99ccffCool: |r3 s
 }
 
@@ -6088,7 +6088,7 @@ STRING 5871
 驱散友军目标身上的一个有害魔法状态或者敌军目标身上的一个有益魔法状态. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r45/60/75点
+|cff99ccffCost: |r45/60/75
 |cff99ccffCool: |r3 s
 
 |cffffcc00Level 1|r - 驱散一个魔法状态. 
@@ -6195,34 +6195,34 @@ Prayer of Mending(|cffffcc00R|r) - [|cffffcc00Level 3|r]
 STRING 5912
 // Ability: A01D (prayer of mending), Ubertip (Tooltip - normal - ext[aub1])
 {
-附着一道纯净能量于一个友军目标, 在目标受到伤害以后立即Regrowth其伤口, 造成当次伤害50%的治疗, 至少会治疗40点, 然后这道能量会转移到最近的一个友军身上, 最多转移3次. 
+附着一道纯净能量于一个友军目标, 在目标受到伤害以后立即Regrowth其伤口, 造成当次伤害50%的治疗, 至少会治疗40, 然后这道能量会转移到最近的一个友军身上, 最多转移3次. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r75点
-|cff99ccff持续时间: |r20 s
+|cff99ccffCost: |r75
+|cff99ccffDuration: |r20 s
 |cff99ccffCool: |r9 s
 }
 
 STRING 5913
 // Ability: A01D (prayer of mending), Ubertip (Tooltip - normal - ext[aub1])
 {
-附着一道纯净能量于一个友军目标, 在目标受到伤害以后立即Regrowth其伤口, 造成当次伤害100%的治疗, 至少会治疗80点, 然后这道能量会转移到最近的一个友军身上, 最多转移4次. 
+附着一道纯净能量于一个友军目标, 在目标受到伤害以后立即Regrowth其伤口, 造成当次伤害100%的治疗, 至少会治疗80, 然后这道能量会转移到最近的一个友军身上, 最多转移4次. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r85点
-|cff99ccff持续时间: |r20 s
+|cff99ccffCost: |r85
+|cff99ccffDuration: |r20 s
 |cff99ccffCool: |r7 s
 }
 
 STRING 5914
 // Ability: A01D (prayer of mending), Ubertip (Tooltip - normal - ext[aub1])
 {
-附着一道纯净能量于一个友军目标, 在目标受到伤害以后立即Regrowth其伤口, 造成当次伤害150%的治疗, 至少会治疗120点, 然后这道能量会转移到最近的一个友军身上, 最多转移5次. 
+附着一道纯净能量于一个友军目标, 在目标受到伤害以后立即Regrowth其伤口, 造成当次伤害150%的治疗, 至少会治疗120, 然后这道能量会转移到最近的一个友军身上, 最多转移5次. 
 如果在治疗生效以后目标的生命值仍然低于50%, 那么Prayer of Mending将不会转移. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r95点
-|cff99ccff持续时间: |r20 s
+|cff99ccffCost: |r95
+|cff99ccffDuration: |r20 s
 |cff99ccffCool: |r5 s
 }
 
@@ -6232,13 +6232,13 @@ STRING 5915
 附着一道纯净能量于一个友军目标, 在目标受到伤害以后立即Regrowth其伤口, 造成治疗, 然后这道能量会转移到最近的一个友军身上. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r75/85/95点
-|cff99ccff持续时间: |r20 s
+|cff99ccffCost: |r75/85/95
+|cff99ccffDuration: |r20 s
 |cff99ccffCool: |r9/7/5 s
 
-|cffffcc00Level 1|r - 治疗受到伤害的50%, 至少会治疗40点, 最多转移3次. 
-|cffffcc00Level 2|r - 治疗受到伤害的100%, 至少会治疗80点, 最多转移4次. 
-|cffffcc00Level 3|r - 治疗受到伤害的150%, 至少会治疗120点, 最多转移5次. 如果在治疗生效以后目标的生命值仍然低于50%, 那么Prayer of Mending将不会转移. 
+|cffffcc00Level 1|r - 治疗受到伤害的50%, 至少会治疗40, 最多转移3次. 
+|cffffcc00Level 2|r - 治疗受到伤害的100%, 至少会治疗80, 最多转移4次. 
+|cffffcc00Level 3|r - 治疗受到伤害的150%, 至少会治疗120, 最多转移5次. 如果在治疗生效以后目标的生命值仍然低于50%, 那么Prayer of Mending将不会转移. 
 }
 
 STRING 5916
@@ -6270,7 +6270,7 @@ STRING 5924
 {
 黑暗猎手使自身以及食尸鬼仆从进入专注攻击状态, 她们的下一次攻击将导致各自的攻击目标Stun1 s, 同时会击碎敌人的护甲, 降低他们的物理免伤2点. 
 
-|cff99ccff持续时间: |r4 s
+|cff99ccffDuration: |r4 s
 |cff99ccffCool: |r13 s
 }
 
@@ -6279,7 +6279,7 @@ STRING 5925
 {
 黑暗猎手使自身以及食尸鬼仆从进入专注攻击状态, 她们的下一次攻击将导致各自的攻击目标Stun1 s, 同时会击碎敌人的护甲, 降低他们的物理免伤3点. 
 
-|cff99ccff持续时间: |r8 s
+|cff99ccffDuration: |r8 s
 |cff99ccffCool: |r13 s
 }
 
@@ -6288,7 +6288,7 @@ STRING 5926
 {
 黑暗猎手使自身以及食尸鬼仆从进入专注攻击状态, 她们的下一次攻击将导致各自的攻击目标Stun1 s, 同时会击碎敌人的护甲, 降低他们的物理免伤4点. 
 
-|cff99ccff持续时间: |r12 s
+|cff99ccffDuration: |r12 s
 |cff99ccffCool: |r13 s
 }
 
@@ -6297,7 +6297,7 @@ STRING 5930
 {
 黑暗猎手使自身以及食尸鬼仆从进入专注攻击状态, 她们的下一次攻击将导致各自的攻击目标Stun1 s, 同时会击碎敌人的护甲, 降低他们的物理免伤. 
 
-|cff99ccff持续时间: |r4/8/12 s
+|cff99ccffDuration: |r4/8/12 s
 |cff99ccffCool: |r13 s
 
 |cffffcc00Level 1|r - 降低目标2点物理免伤. 
@@ -6344,7 +6344,7 @@ power of abomination (caster)
 STRING 5950
 // Buff: B01N (power of abomination), Buffubertip (Tooltip - ext[fube])
 {
-Neutral: 提升自身攻击强度10点和食尸鬼仆从的攻击速度50%. 
+Neutral: 提升自身攻击强度10和食尸鬼仆从的攻击速度50%. 
 }
 
 STRING 5951
@@ -6368,7 +6368,7 @@ STRING 5953
 STRING 5954
 // Buff: B01P (power of abomination), Buffubertip (Tooltip - ext[fube])
 {
-Neutral: 提升自身攻击强度15点和食尸鬼仆从的攻击速度50%. 
+Neutral: 提升自身攻击强度15和食尸鬼仆从的攻击速度50%. 
 }
 
 STRING 5955
@@ -6392,7 +6392,7 @@ STRING 5957
 STRING 5958
 // Buff: B01Q (power of abomination), Buffubertip (Tooltip - ext[fube])
 {
-Neutral: 提升自身攻击强度20点和食尸鬼仆从的攻击速度50%. 
+Neutral: 提升自身攻击强度20和食尸鬼仆从的攻击速度50%. 
 }
 
 STRING 5959
@@ -6442,7 +6442,7 @@ STRING 5967
 {
 召唤一个食尸鬼仆从来为你作战. 
 
-|cff99ccffCost: |r50点
+|cff99ccffCost: |r50
 |cff99ccffCool: |r60 s
 
 食尸鬼仆从拥有以下被动技能: 
@@ -6451,9 +6451,9 @@ STRING 5967
 每次攻击将会从目标偷取自身生命值上限5%的生命值. 
 
 |cffffcc00邪能灌注|r
-食尸鬼仆从死亡后将导致主人狂暴, 主人会因此而提升20%的攻击速度, 10点攻击强度, 以及每 s5点的额外法力值回复. 
+食尸鬼仆从死亡后将导致主人狂暴, 主人会因此而提升20%的攻击速度, 10攻击强度, 以及每 s5的额外法力值回复. 
 
-|cff99ccff持续时间: |r15 s
+|cff99ccffDuration: |r15 s
 }
 
 STRING 5968
@@ -6461,7 +6461,7 @@ STRING 5968
 {
 召唤一个食尸鬼仆从来为你作战. 
 
-|cff99ccffCost: |r50点
+|cff99ccffCost: |r50
 |cff99ccffCool: |r45 s
 
 食尸鬼仆从拥有以下被动技能: 
@@ -6470,9 +6470,9 @@ STRING 5968
 每次攻击将会从目标偷取自身生命值上限5%的生命值. 
 
 |cffffcc00邪能灌注|r
-食尸鬼仆从死亡后将导致主人狂暴, 主人会因此而提升20%的攻击速度, 10点攻击强度, 以及每 s5点的额外法力值回复. 
+食尸鬼仆从死亡后将导致主人狂暴, 主人会因此而提升20%的攻击速度, 10攻击强度, 以及每 s5的额外法力值回复. 
 
-|cff99ccff持续时间: |r15 s
+|cff99ccffDuration: |r15 s
 }
 
 STRING 5969
@@ -6480,7 +6480,7 @@ STRING 5969
 {
 召唤一个食尸鬼仆从来为你作战. 
 
-|cff99ccffCost: |r50点
+|cff99ccffCost: |r50
 |cff99ccffCool: |r30 s
 
 食尸鬼仆从拥有以下被动技能: 
@@ -6489,9 +6489,9 @@ STRING 5969
 每次攻击将会从目标偷取自身生命值上限5%的生命值. 
 
 |cffffcc00邪能灌注|r
-食尸鬼仆从死亡后将导致主人狂暴, 主人会因此而提升20%的攻击速度, 10点攻击强度, 以及每 s5点的额外法力值回复. 
+食尸鬼仆从死亡后将导致主人狂暴, 主人会因此而提升20%的攻击速度, 10攻击强度, 以及每 s5的额外法力值回复. 
 
-|cff99ccff持续时间: |r15 s
+|cff99ccffDuration: |r15 s
 }
 
 STRING 5985
@@ -6713,9 +6713,9 @@ Neutral: 无法狂暴.
 STRING 6030
 // Ability: A00S (loyal minion), Ubertip (Tooltip - normal - ext[aub1])
 {
-食尸鬼仆从死亡后将导致主人狂暴, 主人会因此而提升20%的攻击速度, 10点攻击强度. 
+食尸鬼仆从死亡后将导致主人狂暴, 主人会因此而提升20%的攻击速度, 10攻击强度. 
 
-|cff99ccff持续时间: |r15 s
+|cff99ccffDuration: |r15 s
 }
 
 STRING 6031
@@ -6751,7 +6751,7 @@ STRING 6035
 STRING 6036
 // Buff: B01X (evil imbue), Buffubertip (Tooltip - ext[fube])
 {
-|cff6666ffMagical|r: 攻击强度提高10点, 攻击速度提高20%. 
+|cff6666ffMagical|r: 攻击强度提高10, 攻击速度提高20%. 
 }
 
 STRING 6045
@@ -6787,7 +6787,7 @@ STRING 6049
 STRING 6050
 // Buff: B01Y (sinister strike - mana regen), Buffubertip (Tooltip - ext[fube])
 {
-|cff6666ffMagical|r: 在8 s内恢复200点法力值. 
+|cff6666ffMagical|r: 在8 s内恢复200法力值. 
 }
 
 STRING 6055
@@ -6867,8 +6867,8 @@ STRING 6065
 {
 提升40%的攻击速度, 并且可以对攻击目标附近的敌人都造成70%的伤害. 
 
-|cff99ccff影响区域: |r200 yards
-|cff99ccff持续时间: |r10 s
+|cff99ccffAOE: |r200 yards
+|cff99ccffDuration: |r10 s
 |cff99ccffCool: |r30 s
 }
 
@@ -6877,8 +6877,8 @@ STRING 6066
 {
 提升40%的攻击速度, 并且可以对攻击目标附近的敌人都造成85%的伤害. 
 
-|cff99ccff影响区域: |r200 yards
-|cff99ccff持续时间: |r11 s
+|cff99ccffAOE: |r200 yards
+|cff99ccffDuration: |r11 s
 |cff99ccffCool: |r26 s
 }
 
@@ -6887,8 +6887,8 @@ STRING 6067
 {
 提升40%的攻击速度, 并且可以对攻击目标附近的敌人都造成100%的伤害. 
 
-|cff99ccff影响区域: |r200 yards
-|cff99ccff持续时间: |r12 s
+|cff99ccffAOE: |r200 yards
+|cff99ccffDuration: |r12 s
 |cff99ccffCool: |r22 s
 }
 
@@ -6897,8 +6897,8 @@ STRING 6068
 {
 提升40%的攻击速度, 并且可以对攻击目标附近的敌人都造成一定的伤害. 
 
-|cff99ccff影响区域: |r200 yards
-|cff99ccff持续时间: |r10/11/12 s
+|cff99ccffAOE: |r200 yards
+|cff99ccffDuration: |r10/11/12 s
 |cff99ccffCool: |r30/26/22 s
 
 |cffffcc00Level 1|r - 对附近的敌人造成70%的伤害. 
@@ -7020,7 +7020,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 6105
 // Ability: A058 (tranquility hex), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -7055,7 +7055,7 @@ buff
 STRING 6111
 // Buff: B022 (defensive aura (buff method)), Bufftip (Tooltip[ftip])
 {
-|cff00ff00防御光环|r
+|cff00ff00Defensive Aura|r
 }
 
 STRING 6113
@@ -7097,15 +7097,15 @@ STRING 6118
 STRING 6119
 // Buff: B023 (beast aura (buff method)), Buffubertip (Tooltip - ext[fube])
 {
-Neutral: 攻击强度提升10点. 
+Neutral: 攻击强度提升10. 
 }
 
 STRING 6120
 // Ability: A00Y (leader of the pack), Ubertip (Tooltip - normal - ext[aub1])
 {
-被动地提升附近900 yards范围内所有友军的攻击强度10点. 
+被动地提升附近900 yards范围内所有友军的攻击强度10. 
 
-|cff99ccff影响区域: |r900 yards
+|cff99ccffAOE: |r900 yards
 }
 
 STRING 6125
@@ -7219,27 +7219,27 @@ Neutral: 从受到的伤害中获取法力值.
 STRING 6151
 // Ability: A015 (gnaw), Ubertip (Tooltip - normal - ext[aub1])
 {
-扩散目标身上的Rabies至其附近的友军, 并且立即对受到感染的所有目标造成一次Rabies伤害, 同时, 可以吸取所造成的伤害总量的生命值和20点法力值. 
+扩散目标身上的Rabies至其附近的友军, 并且立即对受到感染的所有目标造成一次Rabies伤害, 同时, 可以吸取所造成的伤害总量的生命值和20法力值. 
 
-|cff99ccff影响区域: |r300 yards
+|cff99ccffAOE: |r300 yards
 |cff99ccffCool: |r6 s
 }
 
 STRING 6152
 // Ability: A015 (gnaw), Ubertip (Tooltip - normal - ext[aub1])
 {
-扩散目标身上的Rabies至其附近的友军, 并且立即对受到感染的所有目标造成一次Rabies伤害, 同时, 可以吸取所造成的伤害总量的生命值和30点法力值. 
+扩散目标身上的Rabies至其附近的友军, 并且立即对受到感染的所有目标造成一次Rabies伤害, 同时, 可以吸取所造成的伤害总量的生命值和30法力值. 
 
-|cff99ccff影响区域: |r300 yards
+|cff99ccffAOE: |r300 yards
 |cff99ccffCool: |r6 s
 }
 
 STRING 6153
 // Ability: A015 (gnaw), Ubertip (Tooltip - normal - ext[aub1])
 {
-扩散目标身上的Rabies至其附近的友军, 并且立即对受到感染的所有目标造成一次Rabies伤害, 同时, 可以吸取所造成的伤害总量的生命值和40点法力值. 
+扩散目标身上的Rabies至其附近的友军, 并且立即对受到感染的所有目标造成一次Rabies伤害, 同时, 可以吸取所造成的伤害总量的生命值和40法力值. 
 
-|cff99ccff影响区域: |r300 yards
+|cff99ccffAOE: |r300 yards
 |cff99ccffCool: |r6 s
 }
 
@@ -7248,44 +7248,44 @@ STRING 6154
 {
 扩散目标身上的Rabies至其附近的友军, 并且立即对受到感染的所有目标造成一次Rabies伤害, 同时, 可以吸取所造成的伤害总量的生命值和一定的法力值. 
 
-|cff99ccff影响区域: |r300 yards
+|cff99ccffAOE: |r300 yards
 |cff99ccffCool: |r6 s
 
-|cffffcc00Level 1|r - 从每个单位吸取20点法力值. 
-|cffffcc00Level 2|r - 从每个单位吸取30点法力值. 
-|cffffcc00Level 3|r - 从每个单位吸取40点法力值. 
+|cffffcc00Level 1|r - 从每个单位吸取20法力值. 
+|cffffcc00Level 2|r - 从每个单位吸取30法力值. 
+|cffffcc00Level 3|r - 从每个单位吸取40法力值. 
 }
 
 STRING 6155
 // Ability: A014 (mangle), Ubertip (Tooltip - normal - ext[aub1])
 {
-击打目标, 造成100点伤害并降低4点护甲, 同时使目标受到的Rabies伤害提升20%. 
+击打目标, 造成100伤害并降低4点护甲, 同时使目标受到的Rabies伤害提升20%. 
 会造成大量的仇恨值. 
 
-|cff99ccffCost: |r15点
-|cff99ccff持续时间: |r10 s
+|cff99ccffCost: |r15
+|cff99ccffDuration: |r10 s
 |cff99ccffCool: |r3 s
 }
 
 STRING 6156
 // Ability: A014 (mangle), Ubertip (Tooltip - normal - ext[aub1])
 {
-击打目标, 造成200点伤害并降低7点护甲, 同时使目标受到的Rabies伤害提升20%. 
+击打目标, 造成200伤害并降低7点护甲, 同时使目标受到的Rabies伤害提升20%. 
 会造成大量的仇恨值. 
 
-|cff99ccffCost: |r25点
-|cff99ccff持续时间: |r10 s
+|cff99ccffCost: |r25
+|cff99ccffDuration: |r10 s
 |cff99ccffCool: |r3 s
 }
 
 STRING 6157
 // Ability: A014 (mangle), Ubertip (Tooltip - normal - ext[aub1])
 {
-击打目标, 造成300点伤害并降低10点护甲, 同时使目标受到的Rabies伤害提升20%. 
+击打目标, 造成300伤害并降低10护甲, 同时使目标受到的Rabies伤害提升20%. 
 会造成大量的仇恨值. 
 
-|cff99ccffCost: |r35点
-|cff99ccff持续时间: |r10 s
+|cff99ccffCost: |r35
+|cff99ccffDuration: |r10 s
 |cff99ccffCool: |r3 s
 }
 
@@ -7294,13 +7294,13 @@ STRING 6158
 {
 击打目标, 造成一定的伤害并降低其护甲, 同时使目标受到的Rabies伤害提升20%. 会造成大量的仇恨值. 
 
-|cff99ccffCost: |r15/25/35点
-|cff99ccff持续时间: |r10 s
+|cff99ccffCost: |r15/25/35
+|cff99ccffDuration: |r10 s
 |cff99ccffCool: |r3 s
 
-|cffffcc00Level 1|r - 造成100点伤害, 降低4点护甲. 
-|cffffcc00Level 2|r - 造成200点伤害, 降低7点护甲. 
-|cffffcc00Level 3|r - 造成300点伤害, 降低10点护甲. 
+|cffffcc00Level 1|r - 造成100伤害, 降低4点护甲. 
+|cffffcc00Level 2|r - 造成200伤害, 降低7点护甲. 
+|cffffcc00Level 3|r - 造成300伤害, 降低10护甲. 
 }
 
 STRING 6164
@@ -7320,7 +7320,7 @@ STRING 6166
 {
 能使周围所有友军不停地掉血. 
 
-|cff99ccff影响区域: |r900 yards
+|cff99ccffAOE: |r900 yards
 }
 
 STRING 6167
@@ -7376,7 +7376,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 6175
 // Ability: A059 (life bloom hex), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -7427,7 +7427,7 @@ STRING 6199
 会优先选择Regrowth. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r150点
+|cff99ccffCost: |r150
 |cff99ccffCool: |r11 s
 }
 
@@ -7439,8 +7439,8 @@ STRING 6200
 会优先选择Regrowth. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r150点
-|cff99ccff持续时间: |r10 s
+|cff99ccffCost: |r150
+|cff99ccffDuration: |r10 s
 |cff99ccffCool: |r11 s
 }
 
@@ -7452,8 +7452,8 @@ STRING 6201
 会优先选择Regrowth. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r150点
-|cff99ccff持续时间: |r10 s
+|cff99ccffCost: |r150
+|cff99ccffDuration: |r10 s
 |cff99ccffCool: |r11 s
 }
 
@@ -7463,7 +7463,7 @@ STRING 6202
 立即吞噬目标身上的一个Regrowth或者Rejuvenation效果, 对其造成被吞噬的持续治疗总和的治疗效果. 会优先选择Regrowth. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r150点
+|cff99ccffCost: |r150
 |cff99ccffCool: |r11 s
 
 |cffffcc00Level 1|r - 吞噬一个Regrowth或者Rejuvenation效果. 
@@ -7480,39 +7480,39 @@ tranquility - CD spell
 STRING 6212
 // Ability: A04J (tranquility - CD spell), Ubertip (Tooltip - normal - ext[aub1])
 {
-召唤一大片能量之雨, 每 s治疗附近的友军200点生命值. 
+召唤一大片能量之雨, 每 s治疗附近的友军200生命值. 
 同时, 能为受到宁静效果影响的友军恢复总共30%的法力值. 
 由宁静产生的治疗效果不会造成任何威胁值. 
 
 |cff99ccff引导时间: |r8 s
-|cff99ccff影响区域: |r1200 yards
-|cff99ccffCost: |r200点
+|cff99ccffAOE: |r1200 yards
+|cff99ccffCost: |r200
 |cff99ccffCool: |r40 s
 }
 
 STRING 6213
 // Ability: A04J (tranquility - CD spell), Ubertip (Tooltip - normal - ext[aub1])
 {
-召唤一大片能量之雨, 每 s治疗附近的友军300点生命值. 
+召唤一大片能量之雨, 每 s治疗附近的友军300生命值. 
 同时, 能为受到宁静效果影响的友军恢复总共30%的法力值. 
 由宁静产生的治疗效果不会造成任何威胁值. 
 
 |cff99ccff引导时间: |r8 s
-|cff99ccff影响区域: |r1200 yards
-|cff99ccffCost: |r250点
+|cff99ccffAOE: |r1200 yards
+|cff99ccffCost: |r250
 |cff99ccffCool: |r40 s
 }
 
 STRING 6214
 // Ability: A04J (tranquility - CD spell), Ubertip (Tooltip - normal - ext[aub1])
 {
-召唤一大片能量之雨, 每 s治疗附近的友军400点生命值. 
+召唤一大片能量之雨, 每 s治疗附近的友军400生命值. 
 同时, 能为受到宁静效果影响的友军恢复总共30%的法力值. 
 由宁静产生的治疗效果不会造成任何威胁值. 
 
 |cff99ccff引导时间: |r8 s
-|cff99ccff影响区域: |r1200 yards
-|cff99ccffCost: |r300点
+|cff99ccffAOE: |r1200 yards
+|cff99ccffCost: |r300
 |cff99ccffCool: |r40 s
 }
 
@@ -7522,51 +7522,51 @@ STRING 6215
 召唤一大片能量之雨, 迅速地治愈附近的所有友军. 同时, 能为受到宁静效果影响的友军恢复总共30%的法力值. 由宁静产生的治疗效果不会造成任何威胁值. 
 
 |cff99ccff引导时间: |r8 s
-|cff99ccff影响区域: |r1200 yards
-|cff99ccffCost: |r200/250/300点
+|cff99ccffAOE: |r1200 yards
+|cff99ccffCost: |r200/250/300
 |cff99ccffCool: |r40 s
 
-|cffffcc00Level 1|r - 每 s治疗200点生命值. 
-|cffffcc00Level 2|r - 每 s治疗300点生命值. 
-|cffffcc00Level 3|r - 每 s治疗400点生命值. 
+|cffffcc00Level 1|r - 每 s治疗200生命值. 
+|cffffcc00Level 2|r - 每 s治疗300生命值. 
+|cffffcc00Level 3|r - 每 s治疗400生命值. 
 }
 
 STRING 6216
 // Ability: A01Z (tranquility), Ubertip (Tooltip - normal - ext[aub1])
 {
-召唤一大片能量之雨, 每 s治疗附近的友军200点生命值. 
+召唤一大片能量之雨, 每 s治疗附近的友军200生命值. 
 同时, 能为受到宁静效果影响的友军恢复总共30%的法力值. 
 由宁静产生的治疗效果不会造成任何威胁值. 
 
 |cff99ccff引导时间: |r8 s
-|cff99ccff影响区域: |r1200 yards
-|cff99ccffCost: |r200点
+|cff99ccffAOE: |r1200 yards
+|cff99ccffCost: |r200
 |cff99ccffCool: |r40 s
 }
 
 STRING 6217
 // Ability: A01Z (tranquility), Ubertip (Tooltip - normal - ext[aub1])
 {
-召唤一大片能量之雨, 每 s治疗附近的友军300点生命值. 
+召唤一大片能量之雨, 每 s治疗附近的友军300生命值. 
 同时, 能为受到宁静效果影响的友军恢复总共30%的法力值. 
 由宁静产生的治疗效果不会造成任何威胁值. 
 
 |cff99ccff引导时间: |r8 s
-|cff99ccff影响区域: |r1200 yards
-|cff99ccffCost: |r250点
+|cff99ccffAOE: |r1200 yards
+|cff99ccffCost: |r250
 |cff99ccffCool: |r40 s
 }
 
 STRING 6218
 // Ability: A01Z (tranquility), Ubertip (Tooltip - normal - ext[aub1])
 {
-召唤一大片能量之雨, 每 s治疗附近的友军400点生命值. 
+召唤一大片能量之雨, 每 s治疗附近的友军400生命值. 
 同时, 能为受到宁静效果影响的友军恢复总共30%的法力值. 
 由宁静产生的治疗效果不会造成任何威胁值. 
 
 |cff99ccff引导时间: |r8 s
-|cff99ccff影响区域: |r1200 yards
-|cff99ccffCost: |r300点
+|cff99ccffAOE: |r1200 yards
+|cff99ccffCost: |r300
 |cff99ccffCool: |r40 s
 }
 
@@ -7609,9 +7609,9 @@ Neutral: 不会造成任何威胁值.
 STRING 6227
 // Ability: A018 (fortitude aura), Ubertip (Tooltip - normal - ext[aub1])
 {
-提升附近范围内所有友军的生命值上限100点. 
+提升附近范围内所有友军的生命值上限100. 
 
-|cff99ccff影响区域: |r900 yards
+|cff99ccffAOE: |r900 yards
 }
 
 STRING 6228
@@ -7647,36 +7647,36 @@ STRING 6232
 STRING 6233
 // Buff: B02A (fortitude aura (buff method)), Buffubertip (Tooltip - ext[fube])
 {
-Neutral: 生命值上限提高100点. 
+Neutral: 生命值上限提高100. 
 }
 
 STRING 6236
 // Ability: A00K (flash of light), Ubertip (Tooltip - normal - ext[aub1])
 {
-使用一道圣光立即对目标造成100点的治疗效果, 闪耀之光有10%额外的几率造成极效治疗, 并且在造成极效治疗之后, 你的下一次Holy Light将变为瞬发且不消耗法力值. 
+使用一道圣光立即对目标造成100的治疗效果, 闪耀之光有10%额外的几率造成极效治疗, 并且在造成极效治疗之后, 你的下一次Holy Light将变为瞬发且不消耗法力值. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r50点
+|cff99ccffCost: |r50
 |cff99ccffCool: |r4 s
 }
 
 STRING 6237
 // Ability: A00K (flash of light), Ubertip (Tooltip - normal - ext[aub1])
 {
-使用一道圣光立即对目标造成175点的治疗效果, 闪耀之光有20%额外的几率造成极效治疗, 并且在造成极效治疗之后, 你的下一次Holy Light将变为瞬发且不消耗法力值. 
+使用一道圣光立即对目标造成175的治疗效果, 闪耀之光有20%额外的几率造成极效治疗, 并且在造成极效治疗之后, 你的下一次Holy Light将变为瞬发且不消耗法力值. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r50点
+|cff99ccffCost: |r50
 |cff99ccffCool: |r4 s
 }
 
 STRING 6238
 // Ability: A00K (flash of light), Ubertip (Tooltip - normal - ext[aub1])
 {
-使用一道圣光立即对目标造成250点的治疗效果, 闪耀之光有30%额外的几率造成极效治疗, 并且在造成极效治疗之后, 你的下一次Holy Light将变为瞬发且不消耗法力值. 
+使用一道圣光立即对目标造成250的治疗效果, 闪耀之光有30%额外的几率造成极效治疗, 并且在造成极效治疗之后, 你的下一次Holy Light将变为瞬发且不消耗法力值. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r50点
+|cff99ccffCost: |r50
 |cff99ccffCool: |r4 s
 }
 
@@ -7686,12 +7686,12 @@ STRING 6239
 使用一道圣光立即对目标造成一定的治疗效果, 闪耀之光有较高的几率造成极效治疗, 并且在造成极效治疗之后, 你的下一次Holy Light将变为瞬发且不消耗法力值. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r50点
+|cff99ccffCost: |r50
 |cff99ccffCool: |r4 s
 
-|cffffcc00Level 1|r - 造成100点治疗, 有10%额外的极效治疗几率. 
-|cffffcc00Level 2|r - 造成175点治疗, 有20%额外的极效治疗几率. 
-|cffffcc00Level 3|r - 造成250点治疗, 有30%额外的极效治疗几率. 
+|cffffcc00Level 1|r - 造成100治疗, 有10%额外的极效治疗几率. 
+|cffffcc00Level 2|r - 造成175治疗, 有20%额外的极效治疗几率. 
+|cffffcc00Level 3|r - 造成250治疗, 有30%额外的极效治疗几率. 
 }
 
 STRING 6240
@@ -7703,8 +7703,8 @@ STRING 6240
 |cffff3333只能同时有一个目标通过施放该法术而受到圣光印记效果的影响. |r
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r10点
-|cff99ccff持续时间: |r15 s
+|cff99ccffCost: |r10
+|cff99ccffDuration: |r15 s
 |cff99ccffCool: |r10 s
 }
 
@@ -7717,8 +7717,8 @@ STRING 6241
 |cffff3333只能同时有一个目标通过施放该法术而受到圣光印记效果的影响. |r
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r10点
-|cff99ccff持续时间: |r20 s
+|cff99ccffCost: |r10
+|cff99ccffDuration: |r20 s
 |cff99ccffCool: |r10 s
 }
 
@@ -7731,8 +7731,8 @@ STRING 6242
 |cffff3333只能同时有一个目标通过施放该法术而受到圣光印记效果的影响. |r
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r10点
-|cff99ccff持续时间: |r25 s
+|cff99ccffCost: |r10
+|cff99ccffDuration: |r25 s
 |cff99ccffCool: |r10 s
 }
 
@@ -7744,8 +7744,8 @@ STRING 6243
 |cffff3333只能同时有一个目标通过施放该法术而受到圣光印记效果的影响. |r
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r10点
-|cff99ccff持续时间: |r15/20/25 s
+|cff99ccffCost: |r10
+|cff99ccffDuration: |r15/20/25 s
 |cff99ccffCool: |r10 s
 
 |cffffcc00Level 1|r - 圣光印记的目标会获得所造成治疗50%的效果. 
@@ -7756,66 +7756,66 @@ STRING 6243
 STRING 6255
 // Ability: A028 (holy light - instant), Untip (Tooltip - off[aut1])
 {
-|cff99ccff持续时间: |r5 s
+|cff99ccffDuration: |r5 s
 }
 
 STRING 6256
 // Ability: A028 (holy light - instant), Untip (Tooltip - off[aut1])
 {
-|cff99ccff持续时间: |r5 s
+|cff99ccffDuration: |r5 s
 }
 
 STRING 6257
 // Ability: A028 (holy light - instant), Untip (Tooltip - off[aut1])
 {
-|cff99ccff持续时间: |r5 s
+|cff99ccffDuration: |r5 s
 }
 
 STRING 6258
 // Ability: A028 (holy light - instant), Unubertip (Tooltip - off - ext[auu1])
 {
-|cff99ccff持续时间: |r5 s
+|cff99ccffDuration: |r5 s
 }
 
 STRING 6259
 // Ability: A028 (holy light - instant), Unubertip (Tooltip - off - ext[auu1])
 {
-|cff99ccff持续时间: |r5 s
+|cff99ccffDuration: |r5 s
 }
 
 STRING 6260
 // Ability: A028 (holy light - instant), Unubertip (Tooltip - off - ext[auu1])
 {
-|cff99ccff持续时间: |r5 s
+|cff99ccffDuration: |r5 s
 }
 
 STRING 6261
 // Ability: A02C (flash of light - improved), Ubertip (Tooltip - normal - ext[aub1])
 {
-使用一道圣光立即对目标造成100点的治疗效果, 闪耀之光有10%额外的几率造成极效治疗, 并且在造成极效治疗之后, 你的下一次Holy Light将变为瞬发且不消耗法力值. 
+使用一道圣光立即对目标造成100的治疗效果, 闪耀之光有10%额外的几率造成极效治疗, 并且在造成极效治疗之后, 你的下一次Holy Light将变为瞬发且不消耗法力值. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r50点
+|cff99ccffCost: |r50
 |cff99ccffCool: |r2 s
 }
 
 STRING 6262
 // Ability: A02C (flash of light - improved), Ubertip (Tooltip - normal - ext[aub1])
 {
-使用一道圣光立即对目标造成175点的治疗效果, 闪耀之光有20%额外的几率造成极效治疗, 并且在造成极效治疗之后, 你的下一次Holy Light将变为瞬发且不消耗法力值. 
+使用一道圣光立即对目标造成175的治疗效果, 闪耀之光有20%额外的几率造成极效治疗, 并且在造成极效治疗之后, 你的下一次Holy Light将变为瞬发且不消耗法力值. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r50点
+|cff99ccffCost: |r50
 |cff99ccffCool: |r2 s
 }
 
 STRING 6263
 // Ability: A02C (flash of light - improved), Ubertip (Tooltip - normal - ext[aub1])
 {
-使用一道圣光立即对目标造成250点的治疗效果, 闪耀之光有30%额外的几率造成极效治疗, 并且在造成极效治疗之后, 你的下一次Holy Light将变为瞬发且不消耗法力值. 
+使用一道圣光立即对目标造成250的治疗效果, 闪耀之光有30%额外的几率造成极效治疗, 并且在造成极效治疗之后, 你的下一次Holy Light将变为瞬发且不消耗法力值. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r50点
+|cff99ccffCost: |r50
 |cff99ccffCool: |r2 s
 }
 
@@ -7825,12 +7825,12 @@ STRING 6264
 使用一道圣光立即对目标造成一定的治疗效果, 闪耀之光有较高的几率造成极效治疗, 并且在造成极效治疗之后, 你的下一次Holy Light将变为瞬发且不消耗法力值. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r50点
+|cff99ccffCost: |r50
 |cff99ccffCool: |r2 s
 
-|cffffcc00Level 1|r - 造成100点治疗, 有10%额外的极效治疗几率. 
-|cffffcc00Level 2|r - 造成175点治疗, 有20%额外的极效治疗几率. 
-|cffffcc00Level 3|r - 造成250点治疗, 有30%额外的极效治疗几率. 
+|cffffcc00Level 1|r - 造成100治疗, 有10%额外的极效治疗几率. 
+|cffffcc00Level 2|r - 造成175治疗, 有20%额外的极效治疗几率. 
+|cffffcc00Level 3|r - 造成250治疗, 有30%额外的极效治疗几率. 
 }
 
 STRING 6265
@@ -7842,35 +7842,35 @@ STRING 6265
 STRING 6266
 // Ability: A00L (holy light), Ubertip (Tooltip - normal - ext[aub1])
 {
-朗诵祷文以召唤一道强力的圣光来有效地治疗一个友军目标, 治疗目标200点生命值, 并且使受到治疗的目标有5%额外的概率受到圣骑士的极效治疗. 
+朗诵祷文以召唤一道强力的圣光来有效地治疗一个友军目标, 治疗目标200生命值, 并且使受到治疗的目标有5%额外的概率受到圣骑士的极效治疗. 
 
-|cff99ccff施法时间: |r2.6(2.2) s
+|cff99ccffCast: |r2.6(2.2) s
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r100点
-|cff99ccff持续时间: |r5 s
+|cff99ccffCost: |r100
+|cff99ccffDuration: |r5 s
 }
 
 STRING 6267
 // Ability: A00L (holy light), Ubertip (Tooltip - normal - ext[aub1])
 {
-朗诵祷文以召唤一道强力的圣光来有效地治疗一个友军目标, 治疗目标400点生命值, 并且使受到治疗的目标有10%额外的概率受到圣骑士的极效治疗. 
+朗诵祷文以召唤一道强力的圣光来有效地治疗一个友军目标, 治疗目标400生命值, 并且使受到治疗的目标有10%额外的概率受到圣骑士的极效治疗. 
 
-|cff99ccff施法时间: |r2.6(2.2) s
+|cff99ccffCast: |r2.6(2.2) s
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r115点
-|cff99ccff持续时间: |r5 s
+|cff99ccffCost: |r115
+|cff99ccffDuration: |r5 s
 }
 
 STRING 6268
 // Ability: A00L (holy light), Ubertip (Tooltip - normal - ext[aub1])
 {
-朗诵祷文以召唤一道强力的圣光来有效地治疗一个友军目标, 治疗目标600点生命值, 并且使受到治疗的目标有15%额外的概率受到圣骑士的极效治疗. 
+朗诵祷文以召唤一道强力的圣光来有效地治疗一个友军目标, 治疗目标600生命值, 并且使受到治疗的目标有15%额外的概率受到圣骑士的极效治疗. 
 同时, Holy Light治疗效果的溢出部分将会转化成护盾, 为目标Absorb damage, 最多持续4 s. 
 
-|cff99ccff施法时间: |r2.6(2.2) s
+|cff99ccffCast: |r2.6(2.2) s
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r130点
-|cff99ccff持续时间: |r5 s
+|cff99ccffCost: |r130
+|cff99ccffDuration: |r5 s
 }
 
 STRING 6269
@@ -7878,20 +7878,20 @@ STRING 6269
 {
 朗诵祷文以召唤一道强力的圣光来有效地治疗一个友军目标, 并且使受到治疗的目标有更高的概率受到圣骑士的极效治疗. 
 
-|cff99ccff施法时间: |r2.6(2.2) s
+|cff99ccffCast: |r2.6(2.2) s
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r100/115/130点
-|cff99ccff持续时间: |r5 s
+|cff99ccffCost: |r100/115/130
+|cff99ccffDuration: |r5 s
 
-|cffffcc00Level 1|r - 治疗目标200点生命值, 使目标有5%额外的概率受到圣骑士的极效治疗. 
-|cffffcc00Level 2|r - 治疗目标400点生命值, 使目标有10%额外的概率受到圣骑士的极效治疗. 
-|cffffcc00Level 3|r - 治疗目标600点生命值, 使目标有15%额外的概率受到圣骑士的极效治疗. 同时, Holy Light治疗效果的溢出部分将会转化成护盾, 为目标Absorb damage, 最多持续4 s. 
+|cffffcc00Level 1|r - 治疗目标200生命值, 使目标有5%额外的概率受到圣骑士的极效治疗. 
+|cffffcc00Level 2|r - 治疗目标400生命值, 使目标有10%额外的概率受到圣骑士的极效治疗. 
+|cffffcc00Level 3|r - 治疗目标600生命值, 使目标有15%额外的概率受到圣骑士的极效治疗. 同时, Holy Light治疗效果的溢出部分将会转化成护盾, 为目标Absorb damage, 最多持续4 s. 
 }
 
 STRING 6270
 // Ability: A028 (holy light - instant), Ubertip (Tooltip - normal - ext[aub1])
 {
-朗诵祷文以召唤一道强力的圣光来有效地治疗一个友军目标, 治疗目标200点生命值, 并且使受到治疗的目标有5%额外的概率受到圣骑士的极效治疗. 
+朗诵祷文以召唤一道强力的圣光来有效地治疗一个友军目标, 治疗目标200生命值, 并且使受到治疗的目标有5%额外的概率受到圣骑士的极效治疗. 
 
 |cff99ccffRange: |r800 yards
 }
@@ -7899,7 +7899,7 @@ STRING 6270
 STRING 6271
 // Ability: A028 (holy light - instant), Ubertip (Tooltip - normal - ext[aub1])
 {
-朗诵祷文以召唤一道强力的圣光来有效地治疗一个友军目标, 治疗目标400点生命值, 并且使受到治疗的目标有10%额外的概率受到圣骑士的极效治疗. 
+朗诵祷文以召唤一道强力的圣光来有效地治疗一个友军目标, 治疗目标400生命值, 并且使受到治疗的目标有10%额外的概率受到圣骑士的极效治疗. 
 
 |cff99ccffRange: |r800 yards
 }
@@ -7907,7 +7907,7 @@ STRING 6271
 STRING 6272
 // Ability: A028 (holy light - instant), Ubertip (Tooltip - normal - ext[aub1])
 {
-朗诵祷文以召唤一道强力的圣光来有效地治疗一个友军目标, 治疗目标600点生命值, 并且使受到治疗的目标有15%额外的概率受到圣骑士的极效治疗. 
+朗诵祷文以召唤一道强力的圣光来有效地治疗一个友军目标, 治疗目标600生命值, 并且使受到治疗的目标有15%额外的概率受到圣骑士的极效治疗. 
 同时, Holy Light治疗效果的溢出部分将会转化成护盾, 为目标Absorb damage, 最多持续4 s. 
 
 |cff99ccffRange: |r800 yards
@@ -7919,8 +7919,8 @@ STRING 6273
 使用神圣能量冲击目标, 对其造成缺失生命值75%的治疗效果. 并且会暂时提升目标的攻击速度和法术急速10%. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r100点
-|cff99ccff持续时间: |r6 s
+|cff99ccffCost: |r100
+|cff99ccffDuration: |r6 s
 |cff99ccffCool: |r15 s
 }
 
@@ -7930,8 +7930,8 @@ STRING 6274
 使用神圣能量冲击目标, 对其造成缺失生命值75%的治疗效果. 并且会暂时提升目标的攻击速度和法术急速20%. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r150点
-|cff99ccff持续时间: |r6 s
+|cff99ccffCost: |r150
+|cff99ccffDuration: |r6 s
 |cff99ccffCool: |r15 s
 }
 
@@ -7942,8 +7942,8 @@ STRING 6275
 如果神圣震击造成极效治疗, 那么会立即会目标施加圣光印记的效果, 取决于你的圣光印记Level, 但是无法抵挡致死伤害. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r200点
-|cff99ccff持续时间: |r6 s
+|cff99ccffCost: |r200
+|cff99ccffDuration: |r6 s
 |cff99ccffCool: |r15 s
 }
 
@@ -7953,8 +7953,8 @@ STRING 6276
 使用神圣能量冲击目标, 对其造成缺失生命值75%的治疗效果. 并且会暂时提升目标的攻击速度和法术急速. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r100/150/200点
-|cff99ccff持续时间: |r6 s
+|cff99ccffCost: |r100/150/200
+|cff99ccffDuration: |r6 s
 |cff99ccffCool: |r15 s
 
 |cffffcc00Level 1|r - 提升10%的攻击速度和法术急速. 
@@ -8004,8 +8004,8 @@ STRING 6283
 Rend目标, 使其每2.5 s受到一次流血伤害, 造成普通攻击100%的伤害. 在Rend暴击以后, 剑圣的下一次普通攻击一定暴击. 
 同时, Rend的每次流血伤害让剑圣可以使用压制. 
 
-|cff99ccffCost: |r30点
-|cff99ccff持续时间: |r10 s
+|cff99ccffCost: |r30
+|cff99ccffDuration: |r10 s
 |cff99ccffCool: |r6 s
 }
 
@@ -8016,8 +8016,8 @@ Rend目标, 使其每2.5 s受到一次流血伤害, 造成普通攻击150%的伤
 同时, Rend的每次流血伤害让剑圣可以使用压制. 
 并且可以使目标受到Rend-Slow效果的影响, 降低其移动速度45%, 持续7 s. 
 
-|cff99ccffCost: |r30点
-|cff99ccff持续时间: |r10 s
+|cff99ccffCost: |r30
+|cff99ccffDuration: |r10 s
 |cff99ccffCool: |r6 s
 }
 
@@ -8028,8 +8028,8 @@ Rend目标, 使其每2.5 s受到一次流血伤害, 造成普通攻击200%的伤
 同时, Rend的每次流血伤害让剑圣可以使用压制. 
 并且可以使目标受到Rend-Slow效果的影响, 降低其移动速度45%, 持续7 s. 
 
-|cff99ccffCost: |r30点
-|cff99ccff持续时间: |r10 s
+|cff99ccffCost: |r30
+|cff99ccffDuration: |r10 s
 |cff99ccffCool: |r6 s
 }
 
@@ -8039,8 +8039,8 @@ STRING 6286
 Rend目标, 使其每2.5 s受到一次流血伤害. 在Rend暴击以后, 剑圣的下一次普通攻击一定暴击. 
 同时, Rend的每次流血伤害让剑圣可以使用压制. 
 
-|cff99ccffCost: |r30点
-|cff99ccff持续时间: |r10 s
+|cff99ccffCost: |r30
+|cff99ccffDuration: |r10 s
 |cff99ccffCool: |r6 s
 
 |cffffcc00Level 1|r - 造成普通攻击100%的伤害. 
@@ -8052,7 +8052,7 @@ STRING 6287
 // Ability: A027 (overpower), Ubertip (Tooltip - normal - ext[aub1])
 {
 立即打击目标, 造成1.5倍普通攻击的伤害, 只能在目标躲闪或者受到Rend伤害以后使用, 压制无法被躲闪并且有25%额外的暴击几率. 
-成功地命中目标以后, 恢复10点法力值. 
+成功地命中目标以后, 恢复10法力值. 
 
 |cff99ccffCool: |r3.5 s
 }
@@ -8061,7 +8061,7 @@ STRING 6288
 // Ability: A027 (overpower), Ubertip (Tooltip - normal - ext[aub1])
 {
 立即打击目标, 造成1.5倍普通攻击的伤害, 只能在目标躲闪或者受到Rend伤害以后使用, 压制无法被躲闪并且有50%额外的暴击几率. 
-成功地命中目标以后, 恢复15点法力值. 
+成功地命中目标以后, 恢复15法力值. 
 
 |cff99ccffCool: |r3.5 s
 }
@@ -8070,7 +8070,7 @@ STRING 6289
 // Ability: A027 (overpower), Ubertip (Tooltip - normal - ext[aub1])
 {
 立即打击目标, 造成1.5倍普通攻击的伤害, 只能在目标躲闪或者受到Rend伤害以后使用, 压制无法被躲闪并且有75%额外的暴击几率. 
-成功地命中目标以后, 恢复20点法力值. 
+成功地命中目标以后, 恢复20法力值. 
 
 |cff99ccffCool: |r3.5 s
 }
@@ -8083,42 +8083,42 @@ STRING 6290
 
 |cff99ccffCool: |r3.5 s
 
-|cffffcc00Level 1|r - 恢复10点法力值, 有25%额外的暴击几率. 
-|cffffcc00Level 2|r - 恢复15点法力值, 有50%额外的暴击几率. 
-|cffffcc00Level 3|r - 恢复20点法力值, 有75%额外的暴击几率. 
+|cffffcc00Level 1|r - 恢复10法力值, 有25%额外的暴击几率. 
+|cffffcc00Level 2|r - 恢复15法力值, 有50%额外的暴击几率. 
+|cffffcc00Level 3|r - 恢复20法力值, 有75%额外的暴击几率. 
 }
 
 STRING 6291
 // Ability: A00E (mortal strike), Ubertip (Tooltip - normal - ext[aub1])
 {
-对目标造成一次强力的攻击, 造成2倍的普通攻击伤害再附加100点的额外伤害, 并且使目标Receives 50% less healing, 同时可以刷新目标身上的Rend效果. 
+对目标造成一次强力的攻击, 造成2倍的普通攻击伤害再附加100的额外伤害, 并且使目标Receives 50% less healing, 同时可以刷新目标身上的Rend效果. 
 
-|cff99ccffCost: |r15点
-|cff99ccff持续时间: |r15 s
+|cff99ccffCost: |r15
+|cff99ccffDuration: |r15 s
 |cff99ccffCool: |r9 s
 }
 
 STRING 6292
 // Ability: A00E (mortal strike), Ubertip (Tooltip - normal - ext[aub1])
 {
-对目标造成一次强力的攻击, 造成3倍的普通攻击伤害再附加150点的额外伤害, 并且使目标Receives 50% less healing, 同时可以刷新目标身上的Rend效果. 
+对目标造成一次强力的攻击, 造成3倍的普通攻击伤害再附加150的额外伤害, 并且使目标Receives 50% less healing, 同时可以刷新目标身上的Rend效果. 
 提升附近所有友军的暴击几率5%, 持续3 s. 
 
-|cff99ccff影响区域: |r450 yards
-|cff99ccffCost: |r25点
-|cff99ccff持续时间: |r15 s
+|cff99ccffAOE: |r450 yards
+|cff99ccffCost: |r25
+|cff99ccffDuration: |r15 s
 |cff99ccffCool: |r8 s
 }
 
 STRING 6293
 // Ability: A00E (mortal strike), Ubertip (Tooltip - normal - ext[aub1])
 {
-对目标造成一次强力的攻击, 造成4倍的普通攻击伤害再附加200点的额外伤害, 并且使目标Receives 50% less healing, 同时可以刷新目标身上的Rend效果. 
+对目标造成一次强力的攻击, 造成4倍的普通攻击伤害再附加200的额外伤害, 并且使目标Receives 50% less healing, 同时可以刷新目标身上的Rend效果. 
 提升附近所有友军的暴击几率10%, 持续3 s. 
 
-|cff99ccff影响区域: |r450 yards
-|cff99ccffCost: |r35点
-|cff99ccff持续时间: |r15 s
+|cff99ccffAOE: |r450 yards
+|cff99ccffCost: |r35
+|cff99ccffDuration: |r15 s
 |cff99ccffCool: |r7 s
 }
 
@@ -8127,20 +8127,20 @@ STRING 6294
 {
 对目标造成一次强力的攻击, 造成致命的伤害, 并且使目标Receives 50% less healing, 同时可以刷新目标身上的Rend效果. 
 
-|cff99ccffCost: |r15/25/35点
-|cff99ccff持续时间: |r15 s
+|cff99ccffCost: |r15/25/35
+|cff99ccffDuration: |r15 s
 |cff99ccffCool: |r9/8/7 s
 
-|cffffcc00Level 1|r - 造成2倍的普通攻击并附加100点伤害. 
-|cffffcc00Level 2|r - 造成3倍的普通攻击并附加150点伤害. 同时, 在使用Mortal Strike以后会提升附近450 yards范围内所有友军的暴击几率5%, 持续3 s. 
-|cffffcc00Level 3|r - 造成4倍的普通攻击并附加200点伤害. 同时, 在使用Mortal Strike以后会提升附近450 yards范围内所有友军的暴击几率10%, 持续3 s. 
+|cffffcc00Level 1|r - 造成2倍的普通攻击并附加100伤害. 
+|cffffcc00Level 2|r - 造成3倍的普通攻击并附加150伤害. 同时, 在使用Mortal Strike以后会提升附近450 yards范围内所有友军的暴击几率5%, 持续3 s. 
+|cffffcc00Level 3|r - 造成4倍的普通攻击并附加200伤害. 同时, 在使用Mortal Strike以后会提升附近450 yards范围内所有友军的暴击几率10%, 持续3 s. 
 }
 
 STRING 6295
 // Ability: A02Q (execute), Ubertip (Tooltip - normal - ext[aub1])
 {
 当普通攻击, Heroic Strike, 或者Mortal Strike暴击之后, 会增加1点勇气点数和3点法力值, 连续的暴击会使勇气点数成倍增长, 勇气点数的上限为17点. 战斗状态中每5 s自动获得1点勇气点数. 
-Execution会消耗所有的勇气点数对目标造成强力一击, 每点勇气点数转化为40点伤害. 
+Execution会消耗所有的勇气点数对目标造成强力一击, 每点勇气点数转化为40伤害. 
 
 |cff99ccff勇气点数: |r无
 }
@@ -8149,7 +8149,7 @@ STRING 6296
 // Ability: A02Q (execute), Ubertip (Tooltip - normal - ext[aub1])
 {
 当普通攻击, Heroic Strike, 或者Mortal Strike暴击之后, 会增加1点勇气点数和4点法力值, 连续的暴击会使勇气点数成倍增长, 勇气点数的上限为17点. 战斗状态中每4 s自动获得1点勇气点数. 
-Execution会消耗所有的勇气点数对目标造成强力一击, 每点勇气点数转化为40点伤害. 
+Execution会消耗所有的勇气点数对目标造成强力一击, 每点勇气点数转化为40伤害. 
 
 |cff99ccff勇气点数: |r无
 }
@@ -8157,8 +8157,8 @@ Execution会消耗所有的勇气点数对目标造成强力一击, 每点勇气
 STRING 6297
 // Ability: A02Q (execute), Ubertip (Tooltip - normal - ext[aub1])
 {
-当普通攻击, Heroic Strike, 或者Mortal Strike暴击之后, 会增加1点勇气点数和5点法力值, 连续的暴击会使勇气点数成倍增长, 勇气点数的上限为17点. 战斗状态中每3 s自动获得1点勇气点数. 
-Execution会消耗所有的勇气点数对目标造成强力一击, 每点勇气点数转化为40点伤害. 
+当普通攻击, Heroic Strike, 或者Mortal Strike暴击之后, 会增加1点勇气点数和5法力值, 连续的暴击会使勇气点数成倍增长, 勇气点数的上限为17点. 战斗状态中每3 s自动获得1点勇气点数. 
+Execution会消耗所有的勇气点数对目标造成强力一击, 每点勇气点数转化为40伤害. 
 
 |cff99ccff勇气点数: |r无
 }
@@ -8167,7 +8167,7 @@ STRING 6298
 // Ability: A02R (execute), Ubertip (Tooltip - normal - ext[aub1])
 {
 当普通攻击, Heroic Strike, 或者Mortal Strike暴击之后, 会增加1点勇气点数和3点法力值, 连续的暴击会使勇气点数成倍增长, 勇气点数的上限为17点. 战斗状态中每5 s自动获得1点勇气点数. 
-Execution会消耗所有的勇气点数对目标造成强力一击, 每点勇气点数转化为40点伤害. 
+Execution会消耗所有的勇气点数对目标造成强力一击, 每点勇气点数转化为40伤害. 
 
 |cff99ccff勇气点数: |r少
 }
@@ -8176,7 +8176,7 @@ STRING 6299
 // Ability: A02R (execute), Ubertip (Tooltip - normal - ext[aub1])
 {
 当普通攻击, Heroic Strike, 或者Mortal Strike暴击之后, 会增加1点勇气点数和4点法力值, 连续的暴击会使勇气点数成倍增长, 勇气点数的上限为17点. 战斗状态中每4 s自动获得1点勇气点数. 
-Execution会消耗所有的勇气点数对目标造成强力一击, 每点勇气点数转化为40点伤害. 
+Execution会消耗所有的勇气点数对目标造成强力一击, 每点勇气点数转化为40伤害. 
 
 |cff99ccff勇气点数: |r少
 }
@@ -8184,8 +8184,8 @@ Execution会消耗所有的勇气点数对目标造成强力一击, 每点勇气
 STRING 6300
 // Ability: A02R (execute), Ubertip (Tooltip - normal - ext[aub1])
 {
-当普通攻击, Heroic Strike, 或者Mortal Strike暴击之后, 会增加1点勇气点数和5点法力值, 连续的暴击会使勇气点数成倍增长, 勇气点数的上限为17点. 战斗状态中每3 s自动获得1点勇气点数. 
-Execution会消耗所有的勇气点数对目标造成强力一击, 每点勇气点数转化为40点伤害. 
+当普通攻击, Heroic Strike, 或者Mortal Strike暴击之后, 会增加1点勇气点数和5法力值, 连续的暴击会使勇气点数成倍增长, 勇气点数的上限为17点. 战斗状态中每3 s自动获得1点勇气点数. 
+Execution会消耗所有的勇气点数对目标造成强力一击, 每点勇气点数转化为40伤害. 
 
 |cff99ccff勇气点数: |r少
 }
@@ -8194,7 +8194,7 @@ STRING 6301
 // Ability: A02S (execute), Ubertip (Tooltip - normal - ext[aub1])
 {
 当普通攻击, Heroic Strike, 或者Mortal Strike暴击之后, 会增加1点勇气点数和3点法力值, 连续的暴击会使勇气点数成倍增长, 勇气点数的上限为17点. 战斗状态中每5 s自动获得1点勇气点数. 
-Execution会消耗所有的勇气点数对目标造成强力一击, 每点勇气点数转化为40点伤害. 
+Execution会消耗所有的勇气点数对目标造成强力一击, 每点勇气点数转化为40伤害. 
 
 |cff99ccff勇气点数: |r中
 }
@@ -8203,7 +8203,7 @@ STRING 6302
 // Ability: A02S (execute), Ubertip (Tooltip - normal - ext[aub1])
 {
 当普通攻击, Heroic Strike, 或者Mortal Strike暴击之后, 会增加1点勇气点数和4点法力值, 连续的暴击会使勇气点数成倍增长, 勇气点数的上限为17点. 战斗状态中每4 s自动获得1点勇气点数. 
-Execution会消耗所有的勇气点数对目标造成强力一击, 每点勇气点数转化为40点伤害. 
+Execution会消耗所有的勇气点数对目标造成强力一击, 每点勇气点数转化为40伤害. 
 
 |cff99ccff勇气点数: |r中
 }
@@ -8211,8 +8211,8 @@ Execution会消耗所有的勇气点数对目标造成强力一击, 每点勇气
 STRING 6303
 // Ability: A02S (execute), Ubertip (Tooltip - normal - ext[aub1])
 {
-当普通攻击, Heroic Strike, 或者Mortal Strike暴击之后, 会增加1点勇气点数和5点法力值, 连续的暴击会使勇气点数成倍增长, 勇气点数的上限为17点. 战斗状态中每3 s自动获得1点勇气点数. 
-Execution会消耗所有的勇气点数对目标造成强力一击, 每点勇气点数转化为40点伤害. 
+当普通攻击, Heroic Strike, 或者Mortal Strike暴击之后, 会增加1点勇气点数和5法力值, 连续的暴击会使勇气点数成倍增长, 勇气点数的上限为17点. 战斗状态中每3 s自动获得1点勇气点数. 
+Execution会消耗所有的勇气点数对目标造成强力一击, 每点勇气点数转化为40伤害. 
 
 |cff99ccff勇气点数: |r中
 }
@@ -8221,7 +8221,7 @@ STRING 6304
 // Ability: A02T (execute), Ubertip (Tooltip - normal - ext[aub1])
 {
 当普通攻击, Heroic Strike, 或者Mortal Strike暴击之后, 会增加1点勇气点数和3点法力值, 连续的暴击会使勇气点数成倍增长, 勇气点数的上限为17点. 战斗状态中每5 s自动获得1点勇气点数. 
-Execution会消耗所有的勇气点数对目标造成强力一击, 每点勇气点数转化为40点伤害. 
+Execution会消耗所有的勇气点数对目标造成强力一击, 每点勇气点数转化为40伤害. 
 
 |cff99ccff勇气点数: |r多
 }
@@ -8230,7 +8230,7 @@ STRING 6305
 // Ability: A02T (execute), Ubertip (Tooltip - normal - ext[aub1])
 {
 当普通攻击, Heroic Strike, 或者Mortal Strike暴击之后, 会增加1点勇气点数和4点法力值, 连续的暴击会使勇气点数成倍增长, 勇气点数的上限为17点. 战斗状态中每4 s自动获得1点勇气点数. 
-Execution会消耗所有的勇气点数对目标造成强力一击, 每点勇气点数转化为40点伤害. 
+Execution会消耗所有的勇气点数对目标造成强力一击, 每点勇气点数转化为40伤害. 
 
 |cff99ccff勇气点数: |r多
 }
@@ -8238,8 +8238,8 @@ Execution会消耗所有的勇气点数对目标造成强力一击, 每点勇气
 STRING 6306
 // Ability: A02T (execute), Ubertip (Tooltip - normal - ext[aub1])
 {
-当普通攻击, Heroic Strike, 或者Mortal Strike暴击之后, 会增加1点勇气点数和5点法力值, 连续的暴击会使勇气点数成倍增长, 勇气点数的上限为17点. 战斗状态中每3 s自动获得1点勇气点数. 
-Execution会消耗所有的勇气点数对目标造成强力一击, 每点勇气点数转化为40点伤害. 
+当普通攻击, Heroic Strike, 或者Mortal Strike暴击之后, 会增加1点勇气点数和5法力值, 连续的暴击会使勇气点数成倍增长, 勇气点数的上限为17点. 战斗状态中每3 s自动获得1点勇气点数. 
+Execution会消耗所有的勇气点数对目标造成强力一击, 每点勇气点数转化为40伤害. 
 
 |cff99ccff勇气点数: |r多
 }
@@ -8248,7 +8248,7 @@ STRING 6307
 // Ability: A02U (execute), Ubertip (Tooltip - normal - ext[aub1])
 {
 当普通攻击, Heroic Strike, 或者Mortal Strike暴击之后, 会增加1点勇气点数和3点法力值, 连续的暴击会使勇气点数成倍增长, 勇气点数的上限为17点. 战斗状态中每5 s自动获得1点勇气点数. 
-Execution会消耗所有的勇气点数对目标造成强力一击, 每点勇气点数转化为40点伤害. 
+Execution会消耗所有的勇气点数对目标造成强力一击, 每点勇气点数转化为40伤害. 
 
 |cff99ccff勇气点数: |r大量
 }
@@ -8257,7 +8257,7 @@ STRING 6308
 // Ability: A02U (execute), Ubertip (Tooltip - normal - ext[aub1])
 {
 当普通攻击, Heroic Strike, 或者Mortal Strike暴击之后, 会增加1点勇气点数和4点法力值, 连续的暴击会使勇气点数成倍增长, 勇气点数的上限为17点. 战斗状态中每4 s自动获得1点勇气点数. 
-Execution会消耗所有的勇气点数对目标造成强力一击, 每点勇气点数转化为40点伤害. 
+Execution会消耗所有的勇气点数对目标造成强力一击, 每点勇气点数转化为40伤害. 
 
 |cff99ccff勇气点数: |r大量
 }
@@ -8265,8 +8265,8 @@ Execution会消耗所有的勇气点数对目标造成强力一击, 每点勇气
 STRING 6309
 // Ability: A02U (execute), Ubertip (Tooltip - normal - ext[aub1])
 {
-当普通攻击, Heroic Strike, 或者Mortal Strike暴击之后, 会增加1点勇气点数和5点法力值, 连续的暴击会使勇气点数成倍增长, 勇气点数的上限为17点. 战斗状态中每3 s自动获得1点勇气点数. 
-Execution会消耗所有的勇气点数对目标造成强力一击, 每点勇气点数转化为40点伤害. 
+当普通攻击, Heroic Strike, 或者Mortal Strike暴击之后, 会增加1点勇气点数和5法力值, 连续的暴击会使勇气点数成倍增长, 勇气点数的上限为17点. 战斗状态中每3 s自动获得1点勇气点数. 
+Execution会消耗所有的勇气点数对目标造成强力一击, 每点勇气点数转化为40伤害. 
 
 |cff99ccff勇气点数: |r大量
 }
@@ -8275,21 +8275,21 @@ STRING 6310
 // Ability: A02V (execute), Ubertip (Tooltip - normal - ext[aub1])
 {
 当普通攻击, Heroic Strike, 或者Mortal Strike暴击之后, 会增加1点勇气点数和3点法力值, 连续的暴击会使勇气点数成倍增长, 勇气点数的上限为17点. 战斗状态中每5 s自动获得1点勇气点数. 
-Execution会消耗所有的勇气点数对目标造成强力一击, 每点勇气点数转化为40点伤害. 
+Execution会消耗所有的勇气点数对目标造成强力一击, 每点勇气点数转化为40伤害. 
 }
 
 STRING 6311
 // Ability: A02V (execute), Ubertip (Tooltip - normal - ext[aub1])
 {
 当普通攻击, Heroic Strike, 或者Mortal Strike暴击之后, 会增加1点勇气点数和4点法力值, 连续的暴击会使勇气点数成倍增长, 勇气点数的上限为17点. 战斗状态中每4 s自动获得1点勇气点数. 
-Execution会消耗所有的勇气点数对目标造成强力一击, 每点勇气点数转化为40点伤害. 
+Execution会消耗所有的勇气点数对目标造成强力一击, 每点勇气点数转化为40伤害. 
 }
 
 STRING 6312
 // Ability: A02V (execute), Ubertip (Tooltip - normal - ext[aub1])
 {
-当普通攻击, Heroic Strike, 或者Mortal Strike暴击之后, 会增加1点勇气点数和5点法力值, 连续的暴击会使勇气点数成倍增长, 勇气点数的上限为17点. 战斗状态中每3 s自动获得1点勇气点数. 
-Execution会消耗所有的勇气点数对目标造成强力一击, 每点勇气点数转化为40点伤害. 
+当普通攻击, Heroic Strike, 或者Mortal Strike暴击之后, 会增加1点勇气点数和5法力值, 连续的暴击会使勇气点数成倍增长, 勇气点数的上限为17点. 战斗状态中每3 s自动获得1点勇气点数. 
+Execution会消耗所有的勇气点数对目标造成强力一击, 每点勇气点数转化为40伤害. 
 }
 
 STRING 6313
@@ -8332,12 +8332,12 @@ STRING 6319
 // Ability: A00I (execute), Researchubertip (Tooltip - Learn - ext[arut])
 {
 当普通攻击, Heroic Strike, 或者Mortal Strike暴击之后, 会增加1点勇气点数和少量法力值, 连续的暴击会使勇气点数成倍增长, 勇气点数的上限为17点. 
-Execution会消耗所有的勇气点数对目标造成强力一击, 每点勇气点数转化为40点伤害. 
+Execution会消耗所有的勇气点数对目标造成强力一击, 每点勇气点数转化为40伤害. 
 
 
 |cffffcc00Level 1|r - 恢复3点法力值, 战斗状态中每5 s自动获得1点勇气点数. 
 |cffffcc00Level 2|r - 恢复4点法力值, 战斗状态中每4 s自动获得1点勇气点数. 
-|cffffcc00Level 3|r - 恢复5点法力值, 战斗状态中每3 s自动获得1点勇气点数. 
+|cffffcc00Level 3|r - 恢复5法力值, 战斗状态中每3 s自动获得1点勇气点数. 
 }
 
 STRING 6320
@@ -8349,9 +8349,9 @@ Neutral: 暴击几率提升.
 STRING 6336
 // Ability: A04N (garrote), Ubertip (Tooltip - normal - ext[aub1])
 {
-偷袭敌人的施法者, 每4 s对其造成75点伤害并打断施法, 获得两个连击点. 
+偷袭敌人的施法者, 每4 s对其造成75伤害并打断施法, 获得两个连击点. 
 
-|cff99ccff持续时间: |r12 s
+|cff99ccffDuration: |r12 s
 }
 
 STRING 6338
@@ -8363,9 +8363,9 @@ garrote
 STRING 6340
 // Ability: A04O (ambush), Ubertip (Tooltip - normal - ext[aub1])
 {
-袭击毫无防备的敌人并预谋下一步行动, 造成300点伤害并导致其Stun, 获得五个连击点. 
+袭击毫无防备的敌人并预谋下一步行动, 造成300伤害并导致其Stun, 获得五个连击点. 
 
-|cff99ccff持续时间: |r4 s
+|cff99ccffDuration: |r4 s
 }
 
 STRING 6342
@@ -8385,18 +8385,18 @@ STRING 6344
 {
 使流浪剑客遁入阴影, 移动速度提升20%, 可以使用潜行状态的特殊技能. 该技能会使流浪剑客脱离战斗并清空威胁值. 一旦流浪剑客以任何形式脱离潜行状态, 他将造成30%额外的伤害. 
 
-|cff99ccff持续时间: |r10 s
+|cff99ccffDuration: |r10 s
 |cff99ccffCool: |r45 s
 
 在潜行状态中, 无法使用|cffffcc00剔骨|r和|cffffcc00突袭|r, 但是可以使用以下两个技能. 
 
-|cffffcc00绞喉|r, 每4 s对目标敌人造成75点伤害并打断其施法, 获得两个连击点. 
+|cffffcc00绞喉|r, 每4 s对目标敌人造成75伤害并打断其施法, 获得两个连击点. 
 
-|cff99ccff持续时间: |r12 s
+|cff99ccffDuration: |r12 s
 
-|cffffcc00伏击|r, 造成300点伤害并导致目标Stun, 获得五个连击点. 
+|cffffcc00伏击|r, 造成300伤害并导致目标Stun, 获得五个连击点. 
 
-|cff99ccff持续时间: |r4 s
+|cff99ccffDuration: |r4 s
 }
 
 STRING 6345
@@ -8404,18 +8404,18 @@ STRING 6345
 {
 使流浪剑客遁入阴影, 移动速度提升20%, 可以使用潜行状态的特殊技能. 该技能会使流浪剑客脱离战斗并清空威胁值. 一旦流浪剑客以任何形式脱离潜行状态, 他将造成30%额外的伤害. 
 
-|cff99ccff持续时间: |r10 s
+|cff99ccffDuration: |r10 s
 |cff99ccffCool: |r35 s
 
 在潜行状态中, 无法使用|cffffcc00剔骨|r和|cffffcc00突袭|r, 但是可以使用以下两个技能. 
 
-|cffffcc00绞喉|r, 每4 s对目标敌人造成75点伤害并打断其施法, 获得两个连击点. 
+|cffffcc00绞喉|r, 每4 s对目标敌人造成75伤害并打断其施法, 获得两个连击点. 
 
-|cff99ccff持续时间: |r12 s
+|cff99ccffDuration: |r12 s
 
-|cffffcc00伏击|r, 造成300点伤害并导致目标Stun, 获得五个连击点. 
+|cffffcc00伏击|r, 造成300伤害并导致目标Stun, 获得五个连击点. 
 
-|cff99ccff持续时间: |r4 s
+|cff99ccffDuration: |r4 s
 }
 
 STRING 6346
@@ -8423,18 +8423,18 @@ STRING 6346
 {
 使流浪剑客遁入阴影, 移动速度提升20%, 可以使用潜行状态的特殊技能. 该技能会使流浪剑客脱离战斗并清空威胁值. 一旦流浪剑客以任何形式脱离潜行状态, 他将造成30%额外的伤害. 
 
-|cff99ccff持续时间: |r10 s
+|cff99ccffDuration: |r10 s
 |cff99ccffCool: |r25 s
 
 在潜行状态中, 无法使用|cffffcc00剔骨|r和|cffffcc00突袭|r, 但是可以使用以下两个技能. 
 
-|cffffcc00绞喉|r, 每4 s对目标敌人造成75点伤害并打断其施法, 获得两个连击点. 
+|cffffcc00绞喉|r, 每4 s对目标敌人造成75伤害并打断其施法, 获得两个连击点. 
 
-|cff99ccff持续时间: |r12 s
+|cff99ccffDuration: |r12 s
 
-|cffffcc00伏击|r, 造成300点伤害并导致目标Stun, 获得五个连击点. 
+|cffffcc00伏击|r, 造成300伤害并导致目标Stun, 获得五个连击点. 
 
-|cff99ccff持续时间: |r4 s
+|cff99ccffDuration: |r4 s
 }
 
 STRING 6347
@@ -8442,18 +8442,18 @@ STRING 6347
 {
 使流浪剑客遁入阴影, 移动速度提升20%, 可以使用潜行状态的特殊技能. 该技能会使流浪剑客脱离战斗并清空威胁值. 一旦流浪剑客以任何形式脱离潜行状态, 他将造成30%额外的伤害. 
 
-|cff99ccff持续时间: |r10 s
+|cff99ccffDuration: |r10 s
 |cff99ccffCool: |r45/35/25 s
 
 在潜行状态中, 无法使用|cffffcc00剔骨|r和|cffffcc00突袭|r, 但是可以使用以下两个技能. 
 
-|cffffcc00绞喉|r, 每4 s对目标敌人造成75点伤害并打断其施法, 获得两个连击点. 
+|cffffcc00绞喉|r, 每4 s对目标敌人造成75伤害并打断其施法, 获得两个连击点. 
 
-|cff99ccff持续时间: |r12 s
+|cff99ccffDuration: |r12 s
 
-|cffffcc00伏击|r, 造成300点伤害并导致目标Stun, 获得五个连击点. 
+|cffffcc00伏击|r, 造成300伤害并导致目标Stun, 获得五个连击点. 
 
-|cff99ccff持续时间: |r4 s
+|cff99ccffDuration: |r4 s
 }
 
 STRING 6349
@@ -8495,69 +8495,69 @@ STRING 6354
 STRING 6355
 // Ability: A01L (pain), Ubertip (Tooltip - normal - ext[aub1])
 {
-诅咒目标, 使其每3 s受到100点伤害. 
+诅咒目标, 使其每3 s受到100伤害. 
 并且让目标受到额外5%的法术伤害. 
 
 |cff99ccffRange: |r600 yards
-|cff99ccffCost: |r100点
-|cff99ccff持续时间: |r12 s
+|cff99ccffCost: |r100
+|cff99ccffDuration: |r12 s
 |cff99ccffCool: |r2 s
 }
 
 STRING 6357
 // Ability: A01L (pain), Ubertip (Tooltip - normal - ext[aub1])
 {
-诅咒目标, 使其每2 s受到160点伤害. 
+诅咒目标, 使其每2 s受到160伤害. 
 并且让目标受到额外9%的法术伤害. 
 
 |cff99ccffRange: |r600 yards
-|cff99ccffCost: |r130点
-|cff99ccff持续时间: |r12 s
+|cff99ccffCost: |r130
+|cff99ccffDuration: |r12 s
 |cff99ccffCool: |r2 s
 }
 
 STRING 6359
 // Ability: A01N (marrow squeeze), Ubertip (Tooltip - normal - ext[aub1])
 {
-吸收目标的精髓, 对其造成100点伤害, 异教徒同时从造成的伤害中获得100%的治疗, 并且暂时提高同等数值的生命值上限, 最多不超过原始生命值上限的25%. 
+吸收目标的精髓, 对其造成100伤害, 异教徒同时从造成的伤害中获得100%的治疗, 并且暂时提高同等数值的生命值上限, 最多不超过原始生命值上限的25%. 
 
-|cff99ccff施法时间: |r2.3 s
+|cff99ccffCast: |r2.3 s
 |cff99ccffRange: |r600 yards
-|cff99ccffCost: |r70点
-|cff99ccff持续时间: |r10 s
+|cff99ccffCost: |r70
+|cff99ccffDuration: |r10 s
 }
 
 STRING 6360
 // Ability: A01N (marrow squeeze), Ubertip (Tooltip - normal - ext[aub1])
 {
-吸收目标的精髓, 对其造成100点伤害, 异教徒同时从造成的伤害中获得150%的治疗, 并且暂时提高同等数值的生命值上限, 最多不超过原始生命值上限的50%. 
+吸收目标的精髓, 对其造成100伤害, 异教徒同时从造成的伤害中获得150%的治疗, 并且暂时提高同等数值的生命值上限, 最多不超过原始生命值上限的50%. 
 
-|cff99ccff施法时间: |r2 s
+|cff99ccffCast: |r2 s
 |cff99ccffRange: |r600 yards
-|cff99ccffCost: |r130点
-|cff99ccff持续时间: |r10 s
+|cff99ccffCost: |r130
+|cff99ccffDuration: |r10 s
 }
 
 STRING 6361
 // Ability: A01N (marrow squeeze), Ubertip (Tooltip - normal - ext[aub1])
 {
-吸收目标的精髓, 对其造成100点伤害, 异教徒同时从造成的伤害中获得200%的治疗, 并且暂时提高同等数值的生命值上限, 最多不超过原始生命值上限的75%. 
+吸收目标的精髓, 对其造成100伤害, 异教徒同时从造成的伤害中获得200%的治疗, 并且暂时提高同等数值的生命值上限, 最多不超过原始生命值上限的75%. 
 
-|cff99ccff施法时间: |r1.7 s
+|cff99ccffCast: |r1.7 s
 |cff99ccffRange: |r600 yards
-|cff99ccffCost: |r190点
-|cff99ccff持续时间: |r10 s
+|cff99ccffCost: |r190
+|cff99ccffDuration: |r10 s
 }
 
 STRING 6362
 // Ability: A01N (marrow squeeze), Researchubertip (Tooltip - Learn - ext[arut])
 {
-吸收目标的精髓, 对其造成100点伤害, 异教徒同时可以从造成的伤害中获得治疗并且暂时提高自身生命值上限. 
+吸收目标的精髓, 对其造成100伤害, 异教徒同时可以从造成的伤害中获得治疗并且暂时提高自身生命值上限. 
 
-|cff99ccff施法时间: |r2.3/2/1.7 s
+|cff99ccffCast: |r2.3/2/1.7 s
 |cff99ccffRange: |r600 yards
-|cff99ccffCost: |r70/130/190点
-|cff99ccff持续时间: |r10 s
+|cff99ccffCost: |r70/130/190
+|cff99ccffDuration: |r10 s
 
 |cffffcc00Level 1|r - 吸收100%的治疗和生命值上限, 最多不超过原始生命值上限的25%. 
 |cffffcc00Level 2|r - 吸收150%的治疗和生命值上限, 最多不超过原始生命值上限的50%. 
@@ -8627,7 +8627,7 @@ buff
 STRING 6373
 // Buff: B02E (wind grace (buff method)), Bufftip (Tooltip[ftip])
 {
-|cff00ff00风之优雅|r
+|cff00ff00Wind Grace|r
 }
 
 STRING 6374
@@ -8729,7 +8729,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 6391
 // Ability: A04A (haunt), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -8779,7 +8779,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 6398
 // Ability: A05A (holy bolt hex), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -8790,9 +8790,9 @@ STRING 6398
 STRING 6400
 // Ability: A04W (tear up), Ubertip (Tooltip - normal - ext[aub1])
 {
-使目标因流血而每2 s受到200点伤害. 
+使目标因流血而每2 s受到200伤害. 
 
-|cff99ccff持续时间: |r12 s
+|cff99ccffDuration: |r12 s
 |cff99ccffCool: |r12 s
 }
 
@@ -8823,7 +8823,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 6405
 // Ability: A05B (holy shock hex), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -8834,9 +8834,9 @@ STRING 6405
 STRING 6407
 // Ability: A04X (lancinate), Ubertip (Tooltip - normal - ext[aub1])
 {
-造成500伤害, 使目标因流血而每1 s受到250点伤害. 
+造成500伤害, 使目标因流血而每1 s受到250伤害. 
 
-|cff99ccff持续时间: |r5 s
+|cff99ccffDuration: |r5 s
 |cff99ccffCool: |r15 s
 }
 
@@ -8867,7 +8867,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 6412
 // Ability: A05C (heal hex), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -8880,7 +8880,7 @@ STRING 6413
 {
 全场沉默. 
 
-|cff99ccff持续时间: |r3 s
+|cff99ccffDuration: |r3 s
 |cff99ccffCool: |r25 s
 }
 
@@ -8911,7 +8911,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 6418
 // Ability: A05D (shield hex), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -8970,7 +8970,7 @@ Rend
 STRING 6427
 // Buff: B02G (tear up), Buffubertip (Tooltip - ext[fube])
 {
-Neutral: 每2 s受到200点流血伤害. 
+Neutral: 每2 s受到200流血伤害. 
 }
 
 STRING 6428
@@ -8994,7 +8994,7 @@ STRING 6430
 STRING 6431
 // Buff: B02H (lancinate), Buffubertip (Tooltip - ext[fube])
 {
-Neutral: 每1 s受到250点流血伤害. 
+Neutral: 每1 s受到250流血伤害. 
 }
 
 STRING 6432
@@ -9002,9 +9002,9 @@ STRING 6432
 {
 对目标和附近的敌人造成400法术伤害. 
 
-|cff99ccff施法时间: |r3.5 s
+|cff99ccffCast: |r3.5 s
 |cff99ccffRange: |r450 yards
-|cff99ccff影响区域: |r200 yards
+|cff99ccffAOE: |r200 yards
 |cff99ccffCool: |r5 s
 }
 
@@ -9071,11 +9071,11 @@ STRING 6442
 STRING 6450
 // Ability: A053 (spirit bolt), Ubertip (Tooltip - normal - ext[aub1])
 {
-每0.5 s对全场敌人造成30点法术伤害. 
+每0.5 s对全场敌人造成30法术伤害. 
 
 |cff99ccff引导时间: |r10 s
-|cff99ccff影响区域: |r3600 yards
-|cff99ccffCost: |r50点
+|cff99ccffAOE: |r3600 yards
+|cff99ccffCost: |r50
 |cff99ccffCool: |r40 s
 }
 
@@ -9106,7 +9106,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 6455
 // Ability: A05E (mortal strike hex), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -9141,7 +9141,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 6463
 // Ability: A05F (overpower hex), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -9160,7 +9160,7 @@ STRING 6465
 {
 受到的伤害降低100%. 
 
-|cff99ccff持续时间: |r7 s
+|cff99ccffDuration: |r7 s
 |cff99ccffCool: |r10 s
 }
 
@@ -9185,7 +9185,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 6470
 // Ability: A05G (dark arrow hex), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -9196,9 +9196,9 @@ STRING 6470
 STRING 6472
 // Ability: A056 (mangle hex), Ubertip (Tooltip - normal - ext[aub1])
 {
-造成一次普通攻击再加上200点的伤害, 并且使目标受到的Rabies的伤害提高100%. 
+造成一次普通攻击再加上200的伤害, 并且使目标受到的Rabies的伤害提高100%. 
 
-|cff99ccff持续时间: |r5 s
+|cff99ccffDuration: |r5 s
 |cff99ccffCool: |r5 s
 }
 
@@ -9223,7 +9223,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 6477
 // Ability: A04H (heal tester), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -9234,11 +9234,11 @@ STRING 6477
 STRING 6479
 // Ability: A057 (rabies hex), Ubertip (Tooltip - normal - ext[aub1])
 {
-每两 s造成200点法术伤害. 
+每两 s造成200法术伤害. 
 
 |cff99ccffRange: |r600 yards
-|cff99ccffCost: |r100点
-|cff99ccff持续时间: |r10 s
+|cff99ccffCost: |r100
+|cff99ccffDuration: |r10 s
 |cff99ccffCool: |r5 s
 }
 
@@ -9263,7 +9263,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 6484
 // Ability: A05H (freezing trap hex), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -9298,7 +9298,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 6491
 // Ability: A05I (frost bolt hex), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -9318,19 +9318,19 @@ STRING 6493
 每 s恢复附近所有友军3000生命值. 
 
 |cff99ccff引导时间: |r8 s
-|cff99ccff影响区域: |r3600 yards
-|cff99ccffCost: |r100点
+|cff99ccffAOE: |r3600 yards
+|cff99ccffCost: |r100
 |cff99ccffCool: |r40 s
 }
 
 STRING 6494
 // Ability: A059 (life bloom hex), Ubertip (Tooltip - normal - ext[aub1])
 {
-每 s治疗目标1000生命值, 当该效果以任何方式从目标身上移除的时候, 会一次性治疗2000点生命值. 
+每 s治疗目标1000生命值, 当该效果以任何方式从目标身上移除的时候, 会一次性治疗2000生命值. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r25点
-|cff99ccff持续时间: |r9 s
+|cff99ccffCost: |r25
+|cff99ccffDuration: |r9 s
 |cff99ccffCool: |r10 s
 }
 
@@ -9355,7 +9355,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 6499
 // Ability: A05J (polymorph hex), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -9374,9 +9374,9 @@ STRING 6501
 {
 治疗目标15000生命值. 
 
-|cff99ccff施法时间: |r4 s
+|cff99ccffCast: |r4 s
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r100点
+|cff99ccffCost: |r100
 |cff99ccffCool: |r10 s
 }
 
@@ -9401,7 +9401,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 6506
 // Ability: A05K (lightning totem hex), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -9418,10 +9418,10 @@ F
 STRING 6508
 // Ability: A05B (holy shock hex), Ubertip (Tooltip - normal - ext[aub1])
 {
-治疗一个友军目标3000点生命值, 或者是对一个敌军目标造成300点伤害. 
+治疗一个友军目标3000生命值, 或者是对一个敌军目标造成300伤害. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r50点
+|cff99ccffCost: |r50
 |cff99ccffCool: |r10 s
 }
 
@@ -9446,7 +9446,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 6513
 // Ability: A03L (fucked lightning), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -9463,7 +9463,7 @@ STRING 6514
 STRING 6515
 // Ability: A055 (shield of sindorei hex), Tip (Tooltip - normal[atp1])
 {
-辛多雷之盾(|cffffcc00R|r)
+Shield of Sin'dorei(|cffffcc00R|r)
 }
 
 STRING 6516
@@ -9535,11 +9535,11 @@ R
 STRING 6527
 // Ability: A05C (heal hex), Ubertip (Tooltip - normal - ext[aub1])
 {
-治疗目标, 每2 s造成2000点治疗效果. 
+治疗目标, 每2 s造成2000治疗效果. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r50点
-|cff99ccff持续时间: |r8 s
+|cff99ccffCost: |r50
+|cff99ccffDuration: |r8 s
 |cff99ccffCool: |r10 s
 }
 
@@ -9564,7 +9564,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 6531
 // Ability: A05L (charge hex), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -9581,11 +9581,11 @@ E
 STRING 6533
 // Ability: A05D (shield hex), Ubertip (Tooltip - normal - ext[aub1])
 {
-为目标施放一个护盾, 吸收5000点伤害. 
+为目标施放一个护盾, 吸收5000伤害. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r100点
-|cff99ccff持续时间: |r10 s
+|cff99ccffCost: |r100
+|cff99ccffDuration: |r10 s
 |cff99ccffCool: |r10 s
 }
 
@@ -9610,7 +9610,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 6537
 // Ability: A03M (strong breeze), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -9627,10 +9627,10 @@ R
 STRING 6539
 // Ability: A05E (mortal strike hex), Ubertip (Tooltip - normal - ext[aub1])
 {
-造成一次普通攻击的伤害再加上300点伤害, 使目标Receives 50% less healing. 
+造成一次普通攻击的伤害再加上300伤害, 使目标Receives 50% less healing. 
 
 |cff99ccffRange: |r100 yards
-|cff99ccff持续时间: |r4 s
+|cff99ccffDuration: |r4 s
 |cff99ccffCool: |r10 s
 }
 
@@ -9661,7 +9661,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 6544
 // Ability: A05M (stealth hex), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -9678,7 +9678,7 @@ E
 STRING 6546
 // Ability: A05F (overpower hex), Ubertip (Tooltip - normal - ext[aub1])
 {
-在目标躲闪之后使用, 造成700点伤害. 
+在目标躲闪之后使用, 造成700伤害. 
 
 |cff99ccffRange: |r100 yards
 |cff99ccffCool: |r7 s
@@ -9711,7 +9711,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 6551
 // Ability: A03N (summon serpents), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -9728,7 +9728,7 @@ R
 STRING 6553
 // Ability: A05G (dark arrow hex), Ubertip (Tooltip - normal - ext[aub1])
 {
-向随机目标射出一枝黑箭, 造成200点伤害. 
+向随机目标射出一枝黑箭, 造成200伤害. 
 
 |cff99ccffRange: |r800 yards
 |cff99ccffCool: |r4 s
@@ -9761,7 +9761,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 6558
 // Ability: A05N (blade flurry hex), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -9781,7 +9781,7 @@ STRING 6560
 在目标脚下设置一个陷阱, 两 s以后触发, 冻结100 yards范围内最近的一个敌人, 并清空其威胁值. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccff持续时间: |r5 s
+|cff99ccffDuration: |r5 s
 |cff99ccffCool: |r10 s
 }
 
@@ -9812,7 +9812,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 6565
 // Ability: A03O (thunder storm), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -9829,11 +9829,11 @@ R
 STRING 6567
 // Ability: A05I (frost bolt hex), Ubertip (Tooltip - normal - ext[aub1])
 {
-造成400点法术伤害. 
+造成400法术伤害. 
 
-|cff99ccff施法时间: |r3 s
+|cff99ccffCast: |r3 s
 |cff99ccffRange: |r600 yards
-|cff99ccffCost: |r50点
+|cff99ccffCost: |r50
 |cff99ccffCool: |r5 s
 }
 
@@ -9864,7 +9864,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 6572
 // Ability: A05O (pain hex), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -9878,8 +9878,8 @@ STRING 6574
 将一个敌军单位变成一头温顺的小绵羊. 
 
 |cff99ccffRange: |r600 yards
-|cff99ccffCost: |r50点
-|cff99ccff持续时间: |r10 s
+|cff99ccffCost: |r50
+|cff99ccffDuration: |r10 s
 |cff99ccffCool: |r10 s
 }
 
@@ -9910,7 +9910,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 6579
 // Ability: A03P (frenzy), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -9927,10 +9927,10 @@ R
 STRING 6581
 // Ability: A05K (lightning totem hex), Ubertip (Tooltip - normal - ext[aub1])
 {
-设置一个拥有500生命值的闪电图腾, 每 s对附近生命值最高的敌人造成100点法术伤害. 
+设置一个拥有500生命值的闪电图腾, 每 s对附近生命值最高的敌人造成100法术伤害. 
 
 |cff99ccffRange: |r200 yards
-|cff99ccff影响区域: |r800 yards
+|cff99ccffAOE: |r800 yards
 |cff99ccffCool: |r10 s
 }
 
@@ -9961,7 +9961,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 6586
 // Ability: A05P (terror hex), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -9996,7 +9996,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 6593
 // Ability: A03Q (rage), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -10013,7 +10013,7 @@ R
 STRING 6595
 // Ability: A05M (stealth hex), Ubertip (Tooltip - normal - ext[aub1])
 {
-遁入阴影中, 在出现时对指定目标造成800点伤害. 
+遁入阴影中, 在出现时对指定目标造成800伤害. 
 
 |cff99ccffRange: |r3600 yards
 |cff99ccffCool: |r15 s
@@ -10046,7 +10046,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 6600
 // Ability: A05Q (spirit harvest), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -10075,7 +10075,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 6606
 // Ability: A04U (alkaline water), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -10092,11 +10092,11 @@ R
 STRING 6608
 // Ability: A05O (pain hex), Ubertip (Tooltip - normal - ext[aub1])
 {
-每2 s造成200点伤害, 并且使目标受到的法术伤害提高30%. 
+每2 s造成200伤害, 并且使目标受到的法术伤害提高30%. 
 
 |cff99ccffRange: |r600 yards
-|cff99ccffCost: |r100点
-|cff99ccff持续时间: |r10 s
+|cff99ccffCost: |r100
+|cff99ccffDuration: |r10 s
 |cff99ccffCool: |r15 s
 }
 
@@ -10127,7 +10127,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 6613
 // Ability: A04V (tide), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -10140,9 +10140,9 @@ STRING 6615
 {
 使所有的敌人Stun. 
 
-|cff99ccff影响区域: |r3600 yards
-|cff99ccffCost: |r100点
-|cff99ccff持续时间: |r3 s
+|cff99ccffAOE: |r3600 yards
+|cff99ccffCost: |r100
+|cff99ccffDuration: |r3 s
 |cff99ccffCool: |r10 s
 }
 
@@ -10173,7 +10173,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 6620
 // Ability: A02W (lightning bolt), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -10190,10 +10190,10 @@ R
 STRING 6622
 // Ability: A05Q (spirit harvest), Ubertip (Tooltip - normal - ext[aub1])
 {
-使所有敌军单位造成的伤害降低2%, 同时, 每个受到影响的敌军英雄将会提升自己造成的伤害2%, 可无限叠加. 
+使所有敌军单位造成的伤害降低2%, 同时, 每个受到影响的敌军英雄将会提升自己造成的伤害2%, 可Infinity叠加. 
 
-|cff99ccff影响区域: |r3600 yards
-|cff99ccff持续时间: |r60 s
+|cff99ccffAOE: |r3600 yards
+|cff99ccffDuration: |r60 s
 |cff99ccffCool: |r35 s
 }
 
@@ -10224,7 +10224,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 6627
 // Ability: A04W (tear up), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -10385,7 +10385,7 @@ debuff hex
 STRING 6659
 // Buff: B02O (rabies), Buffubertip (Tooltip - ext[fube])
 {
-|cff6666ffMagical|r: 每2 s受到200点法术伤害. 
+|cff6666ffMagical|r: 每2 s受到200法术伤害. 
 }
 
 STRING 6660
@@ -10393,15 +10393,15 @@ STRING 6660
 {
 造成的伤害和治疗效果提高50%. 
 
-|cff99ccffCost: |r100点
-|cff99ccff持续时间: |r7 s
+|cff99ccffCost: |r100
+|cff99ccffDuration: |r7 s
 |cff99ccffCool: |r15 s
 }
 
 STRING 6662
 // Ability: A05W (stealth ambush), Ubertip (Tooltip - normal - ext[aub1])
 {
-造成800点伤害. 
+造成800伤害. 
 
 |cff99ccffRange: |r100 yards
 |cff99ccffCool: |r1 s
@@ -10434,7 +10434,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 6667
 // Ability: A05W (stealth ambush), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -10453,7 +10453,7 @@ STRING 6669
 {
 攻击速度提高100%. 
 
-|cff99ccff持续时间: |r4 s
+|cff99ccffDuration: |r4 s
 |cff99ccffCool: |r10 s
 }
 
@@ -10496,12 +10496,12 @@ Neutral: 攻击速度提高100%.
 STRING 6676
 // Ability: A054 (sunfire storm hex), Ubertip (Tooltip - normal - ext[aub1])
 {
-在指定区域发起一场阳炎风暴, 对其中的敌人造成每 s300点法术伤害. 
+在指定区域发起一场阳炎风暴, 对其中的敌人造成每 s300法术伤害. 
 
 |cff99ccffRange: |r3600 yards
-|cff99ccff影响区域: |r150 yards
-|cff99ccffCost: |r100点
-|cff99ccff持续时间: |r8 s
+|cff99ccffAOE: |r150 yards
+|cff99ccffCost: |r100
+|cff99ccffDuration: |r8 s
 |cff99ccffCool: |r10 s
 }
 
@@ -10568,7 +10568,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 6688
 // Ability: A04X (lancinate), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -10585,11 +10585,11 @@ R
 STRING 6690
 // Ability: A060 (flame bomb), Ubertip (Tooltip - normal - ext[aub1])
 {
-在10 s内召唤大堆火焰炸弹在战场上, 召唤结束2 s之后, 所有炸弹将爆炸, 每个炸弹造成200点法术伤害, AOE100 yards. 
+在10 s内召唤大堆火焰炸弹在战场上, 召唤结束2 s之后, 所有炸弹将爆炸, 每个炸弹造成200法术伤害, AOE100 yards. 
 
 |cff99ccff引导时间: |r10 s
-|cff99ccff影响区域: |r1200 yards
-|cff99ccffCost: |r100点
+|cff99ccffAOE: |r1200 yards
+|cff99ccffCost: |r100
 |cff99ccffCool: |r40 s
 }
 
@@ -10620,7 +10620,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 6695
 // Ability: A02Y (blazing haste), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -10634,7 +10634,7 @@ STRING 6697
 持续性地每 s从一个火焰符文中召唤炎魔, 比前一 s钟多召唤一个. 
 
 |cff99ccff引导时间: |r10 s
-|cff99ccffCost: |r100点
+|cff99ccffCost: |r100
 |cff99ccffCool: |r30 s
 }
 
@@ -10665,7 +10665,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 6702
 // Ability: A04Y (raspy roar), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -10706,7 +10706,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 6709
 // Ability: A05Z (flame throw), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -10723,11 +10723,11 @@ F
 STRING 6716
 // Ability: A05Z (flame throw), Ubertip (Tooltip - normal - ext[aub1])
 {
-向一个单位方向投掷一道火焰, 对路径上的敌人造成250-350点法术伤害. 
+向一个单位方向投掷一道火焰, 对路径上的敌人造成250-350法术伤害. 
 
 |cff99ccffRange: |r3600 yards
-|cff99ccff影响区域: |r150 yards
-|cff99ccffCost: |r100点
+|cff99ccffAOE: |r150 yards
+|cff99ccffCost: |r100
 |cff99ccffCool: |r20 s
 }
 
@@ -10774,245 +10774,245 @@ STRING 6723
 }
 
 STRING 6724
-// Item: I01P (|cffff8c00无限|r), Name (Name[unam])
+// Item: I01P (|cffff8c00Infinity|r), Name (Name[unam])
 {
-|cffff8c00无限|r
+|cffff8c00Infinity|r
 }
 
 STRING 6727
-// Item: I01P (|cffff8c00无限|r), Tip (Tooltip - base[utip])
+// Item: I01P (|cffff8c00Infinity|r), Tip (Tooltip - base[utip])
 {
-|cffff8c00无限|r
+|cffff8c00Infinity|r
 }
 
 STRING 6728
-// Item: I001 (|cffff8c00死亡呼吸|r), Name (Name[unam])
+// Item: I001 (|cffff8c00Breath of the Dying|r), Name (Name[unam])
 {
-|cffff8c00死亡呼吸|r
+|cffff8c00Breath of the Dying|r
 }
 
 STRING 6731
-// Item: I001 (|cffff8c00死亡呼吸|r), Tip (Tooltip - base[utip])
+// Item: I001 (|cffff8c00Breath of the Dying|r), Tip (Tooltip - base[utip])
 {
-|cffff8c00死亡呼吸|r
+|cffff8c00Breath of the Dying|r
 }
 
 STRING 6734
-// Item: I01P (|cffff8c00无限|r), Description (说明[ides])
+// Item: I01P (|cffff8c00Infinity|r), Description (说明[ides])
 {
 |cffff8c00神器|r
-|cffffdead无限是薄暮之魂的灵魂精华, 它所蕴含的闪电能量让先知德雷克萨尔都感到惊叹, 传说带有绿色云状光环的薄暮之魂是所有探险者的噩梦. |r
+|cffffdeadInfinity是薄暮之魂的灵魂精华, 它所蕴含的闪电能量让先知德雷克萨尔都感到惊叹, 传说带有绿色云状光环的薄暮之魂是所有探险者的噩梦. |r
 }
 
 STRING 6735
-// Item: I001 (|cffff8c00死亡呼吸|r), Description (说明[ides])
+// Item: I001 (|cffff8c00Breath of the Dying|r), Description (说明[ides])
 {
 |cffff8c00神器|r
 |cffffdead格里斯华尔德变为不死生物以后的巅峰之作, 在暗淡无光的矛柄上隐隐闪动着六个晦涩难懂的神符: Vex-Hel-El-Eld-Zod-Eth. |r
 }
 
 STRING 6740
-// Item: Igz0 (|cffffffff攻击之爪|r), Ubertip (Tooltip - ext[utub])
+// Item: Igz0 (|cffffffffClaw|r), Ubertip (Tooltip - ext[utub])
 {
 +5攻击强度
 }
 
 STRING 6741
-// Item: Igz0 (|cffffffff攻击之爪|r), Description (说明[ides])
+// Item: Igz0 (|cffffffffClaw|r), Description (说明[ides])
 {
 +5攻击强度
 }
 
 STRING 6742
-// Item: Igz0 (|cffffffff攻击之爪|r), Name (Name[unam])
+// Item: Igz0 (|cffffffffClaw|r), Name (Name[unam])
 {
-|cffffffff攻击之爪|r
+|cffffffffClaw|r
 }
 
 STRING 6828
-// Item: Igz1 (|cff11ff11狮心之攻击之爪|r), Ubertip (Tooltip - ext[utub])
+// Item: Igz1 (|cff11ff11狮心之Claw|r), Ubertip (Tooltip - ext[utub])
 {
 +5力量|n+5敏捷|n+5攻击强度
 }
 
 STRING 6829
-// Item: Igz1 (|cff11ff11狮心之攻击之爪|r), Name (Name[unam])
+// Item: Igz1 (|cff11ff11狮心之Claw|r), Name (Name[unam])
 {
-|cff11ff11狮心之攻击之爪|r
+|cff11ff11狮心之Claw|r
 }
 
 STRING 6830
-// Item: Igz1 (|cff11ff11狮心之攻击之爪|r), Description (说明[ides])
+// Item: Igz1 (|cff11ff11狮心之Claw|r), Description (说明[ides])
 {
 +5力量|n+5敏捷|n+5攻击强度
 }
 
 STRING 6831
-// Item: Igz2 (|cff11ff11巨猿之攻击之爪|r), Ubertip (Tooltip - ext[utub])
+// Item: Igz2 (|cff11ff11巨猿之Claw|r), Ubertip (Tooltip - ext[utub])
 {
 +5力量|n+5智力|n+5攻击强度
 }
 
 STRING 6832
-// Item: Igz2 (|cff11ff11巨猿之攻击之爪|r), Name (Name[unam])
+// Item: Igz2 (|cff11ff11巨猿之Claw|r), Name (Name[unam])
 {
-|cff11ff11巨猿之攻击之爪|r
+|cff11ff11巨猿之Claw|r
 }
 
 STRING 6833
-// Item: Igz2 (|cff11ff11巨猿之攻击之爪|r), Description (说明[ides])
+// Item: Igz2 (|cff11ff11巨猿之Claw|r), Description (说明[ides])
 {
 +5力量|n+5智力|n+5攻击强度
 }
 
 STRING 6834
-// Item: Igz3 (|cff11ff11红狐之攻击之爪|r), Ubertip (Tooltip - ext[utub])
+// Item: Igz3 (|cff11ff11红狐之Claw|r), Ubertip (Tooltip - ext[utub])
 {
 +5敏捷|n+5智力|n+5攻击强度
 }
 
 STRING 6835
-// Item: Igz3 (|cff11ff11红狐之攻击之爪|r), Name (Name[unam])
+// Item: Igz3 (|cff11ff11红狐之Claw|r), Name (Name[unam])
 {
-|cff11ff11红狐之攻击之爪|r
+|cff11ff11红狐之Claw|r
 }
 
 STRING 6836
-// Item: Igz3 (|cff11ff11红狐之攻击之爪|r), Description (说明[ides])
+// Item: Igz3 (|cff11ff11红狐之Claw|r), Description (说明[ides])
 {
 +5敏捷|n+5智力|n+5攻击强度
 }
 
 STRING 6837
-// Item: Igz4 (|cff11ff11蛮力之攻击之爪|r), Ubertip (Tooltip - ext[utub])
+// Item: Igz4 (|cff11ff11蛮力之Claw|r), Ubertip (Tooltip - ext[utub])
 {
 +8力量|n+5攻击强度
 }
 
 STRING 6838
-// Item: Igz4 (|cff11ff11蛮力之攻击之爪|r), Name (Name[unam])
+// Item: Igz4 (|cff11ff11蛮力之Claw|r), Name (Name[unam])
 {
-|cff11ff11蛮力之攻击之爪|r
+|cff11ff11蛮力之Claw|r
 }
 
 STRING 6839
-// Item: Igz4 (|cff11ff11蛮力之攻击之爪|r), Description (说明[ides])
+// Item: Igz4 (|cff11ff11蛮力之Claw|r), Description (说明[ides])
 {
 +8力量|n+5攻击强度
 }
 
 STRING 6840
-// Item: Igz5 (|cff11ff11灵巧之攻击之爪|r), Ubertip (Tooltip - ext[utub])
+// Item: Igz5 (|cff11ff11灵巧之Claw|r), Ubertip (Tooltip - ext[utub])
 {
 +8敏捷|n+5攻击强度
 }
 
 STRING 6841
-// Item: Igz5 (|cff11ff11灵巧之攻击之爪|r), Name (Name[unam])
+// Item: Igz5 (|cff11ff11灵巧之Claw|r), Name (Name[unam])
 {
-|cff11ff11灵巧之攻击之爪|r
+|cff11ff11灵巧之Claw|r
 }
 
 STRING 6842
-// Item: Igz5 (|cff11ff11灵巧之攻击之爪|r), Description (说明[ides])
+// Item: Igz5 (|cff11ff11灵巧之Claw|r), Description (说明[ides])
 {
 +8敏捷|n+5攻击强度
 }
 
 STRING 6843
-// Item: Igz6 (|cff11ff11学识之攻击之爪|r), Ubertip (Tooltip - ext[utub])
+// Item: Igz6 (|cff11ff11学识之Claw|r), Ubertip (Tooltip - ext[utub])
 {
 +8智力|n+5攻击强度
 }
 
 STRING 6844
-// Item: Igz6 (|cff11ff11学识之攻击之爪|r), Name (Name[unam])
+// Item: Igz6 (|cff11ff11学识之Claw|r), Name (Name[unam])
 {
-|cff11ff11学识之攻击之爪|r
+|cff11ff11学识之Claw|r
 }
 
 STRING 6845
-// Item: Igz6 (|cff11ff11学识之攻击之爪|r), Description (说明[ides])
+// Item: Igz6 (|cff11ff11学识之Claw|r), Description (说明[ides])
 {
 +8智力|n+5攻击强度
 }
 
 STRING 6846
-// Item: Igz7 (|cff11ff11勇士之攻击之爪|r), Ubertip (Tooltip - ext[utub])
+// Item: Igz7 (|cff11ff11勇士之Claw|r), Ubertip (Tooltip - ext[utub])
 {
 +5力量|n+13攻击强度
 }
 
 STRING 6847
-// Item: Igz7 (|cff11ff11勇士之攻击之爪|r), Name (Name[unam])
+// Item: Igz7 (|cff11ff11勇士之Claw|r), Name (Name[unam])
 {
-|cff11ff11勇士之攻击之爪|r
+|cff11ff11勇士之Claw|r
 }
 
 STRING 6848
-// Item: Igz7 (|cff11ff11勇士之攻击之爪|r), Description (说明[ides])
+// Item: Igz7 (|cff11ff11勇士之Claw|r), Description (说明[ides])
 {
 +5力量|n+13攻击强度
 }
 
 STRING 6850
-// Item: Igz8 (|cff11ff11屠夫之攻击之爪|r), Name (Name[unam])
+// Item: Igz8 (|cff11ff11屠夫之Claw|r), Name (Name[unam])
 {
-|cff11ff11屠夫之攻击之爪|r
+|cff11ff11屠夫之Claw|r
 }
 
 STRING 6853
-// Item: Igz9 (|cff11ff11刺客之攻击之爪|r), Name (Name[unam])
+// Item: Igz9 (|cff11ff11刺客之Claw|r), Name (Name[unam])
 {
-|cff11ff11刺客之攻击之爪|r
+|cff11ff11刺客之Claw|r
 }
 
 STRING 6856
-// Item: Igza (|cff11ff11刽子手之攻击之爪|r), Ubertip (Tooltip - ext[utub])
+// Item: Igza (|cff11ff11刽子手之Claw|r), Ubertip (Tooltip - ext[utub])
 {
 +5敏捷|n+13攻击强度
 }
 
 STRING 6857
-// Item: Igza (|cff11ff11刽子手之攻击之爪|r), Name (Name[unam])
+// Item: Igza (|cff11ff11刽子手之Claw|r), Name (Name[unam])
 {
-|cff11ff11刽子手之攻击之爪|r
+|cff11ff11刽子手之Claw|r
 }
 
 STRING 6858
-// Item: Igza (|cff11ff11刽子手之攻击之爪|r), Description (说明[ides])
+// Item: Igza (|cff11ff11刽子手之Claw|r), Description (说明[ides])
 {
 +5敏捷|n+13攻击强度
 }
 
 STRING 6860
-// Item: Igzb (|cff11ff11巫师之攻击之爪|r), Name (Name[unam])
+// Item: Igzb (|cff11ff11巫师之Claw|r), Name (Name[unam])
 {
-|cff11ff11巫师之攻击之爪|r
+|cff11ff11巫师之Claw|r
 }
 
 STRING 6862
-// Item: Igzc (|cff11ff11祭司之攻击之爪|r), Ubertip (Tooltip - ext[utub])
+// Item: Igzc (|cff11ff11祭司之Claw|r), Ubertip (Tooltip - ext[utub])
 {
 +5智力|n每 s回复3点法力值|n+5攻击强度
 }
 
 STRING 6863
-// Item: Igzc (|cff11ff11祭司之攻击之爪|r), Name (Name[unam])
+// Item: Igzc (|cff11ff11祭司之Claw|r), Name (Name[unam])
 {
-|cff11ff11祭司之攻击之爪|r
+|cff11ff11祭司之Claw|r
 }
 
 STRING 6864
-// Item: Igzc (|cff11ff11祭司之攻击之爪|r), Description (说明[ides])
+// Item: Igzc (|cff11ff11祭司之Claw|r), Description (说明[ides])
 {
 +5智力|n每 s回复3点法力值|n+5攻击强度
 }
 
 STRING 6866
-// Item: Igzd (|cff11ff11护卫之攻击之爪|r), Name (Name[unam])
+// Item: Igzd (|cff11ff11Claw of guardian|r), Name (Name[unam])
 {
-|cff11ff11护卫之攻击之爪|r
+|cff11ff11Claw of guardian|r
 }
 
 STRING 6871
@@ -11214,9 +11214,9 @@ STRING 6909
 }
 
 STRING 6911
-// Item: Ijsd (|cff11ff11护卫之加速手套|r), Name (Name[unam])
+// Item: Ijsd (|cff11ff11加速手套 of guardian|r), Name (Name[unam])
 {
-|cff11ff11护卫之加速手套|r
+|cff11ff11加速手套 of guardian|r
 }
 
 STRING 6913
@@ -11418,9 +11418,9 @@ STRING 6951
 }
 
 STRING 6953
-// Item: Icsd (|cff11ff11护卫之刺杀剑|r), Name (Name[unam])
+// Item: Icsd (|cff11ff11刺杀剑 of guardian|r), Name (Name[unam])
 {
-|cff11ff11护卫之刺杀剑|r
+|cff11ff11刺杀剑 of guardian|r
 }
 
 STRING 6955
@@ -11646,9 +11646,9 @@ STRING 6993
 }
 
 STRING 6995
-// Item: Ixpd (|cff11ff11护卫之生命护符|r), Name (Name[unam])
+// Item: Ixpd (|cff11ff11生命护符 of guardian|r), Name (Name[unam])
 {
-|cff11ff11护卫之生命护符|r
+|cff11ff11生命护符 of guardian|r
 }
 
 STRING 6998
@@ -11886,9 +11886,9 @@ STRING 7036
 }
 
 STRING 7038
-// Item: Ishd (|cff11ff11护卫之守护指环|r), Name (Name[unam])
+// Item: Ishd (|cff11ff11守护指环 of guardian|r), Name (Name[unam])
 {
-|cff11ff11护卫之守护指环|r
+|cff11ff11守护指环 of guardian|r
 }
 
 STRING 7040
@@ -12126,9 +12126,9 @@ STRING 7078
 }
 
 STRING 7080
-// Item: Isbd (|cff11ff11护卫之闪避护符|r), Name (Name[unam])
+// Item: Isbd (|cff11ff11闪避护符 of guardian|r), Name (Name[unam])
 {
-|cff11ff11护卫之闪避护符|r
+|cff11ff11闪避护符 of guardian|r
 }
 
 STRING 7082
@@ -12366,9 +12366,9 @@ STRING 7120
 }
 
 STRING 7122
-// Item: Inld (|cff11ff11护卫之能量垂饰|r), Name (Name[unam])
+// Item: Inld (|cff11ff11能量垂饰 of guardian|r), Name (Name[unam])
 {
-|cff11ff11护卫之能量垂饰|r
+|cff11ff11能量垂饰 of guardian|r
 }
 
 STRING 7125
@@ -12684,15 +12684,15 @@ STRING 7188
 }
 
 STRING 7190
-// Item: Imzd (|cff11ff11护卫之艺人面罩|r), Name (Name[unam])
+// Item: Imzd (|cff11ff11艺人面罩 of guardian|r), Name (Name[unam])
 {
-|cff11ff11护卫之艺人面罩|r
+|cff11ff11艺人面罩 of guardian|r
 }
 
 STRING 7192
-// Item: Iwzd (|cff11ff11护卫之巫医法杖|r), Name (Name[unam])
+// Item: Iwzd (|cff11ff11巫医法杖 of guardian|r), Name (Name[unam])
 {
-|cff11ff11护卫之巫医法杖|r
+|cff11ff11巫医法杖 of guardian|r
 }
 
 STRING 7194
@@ -12852,73 +12852,73 @@ STRING 7219
 }
 
 STRING 7222
-// Item: Isbd (|cff11ff11护卫之闪避护符|r), Ubertip (Tooltip - ext[utub])
+// Item: Isbd (|cff11ff11闪避护符 of guardian|r), Ubertip (Tooltip - ext[utub])
 {
 +75生命上限|n+2%躲闪几率
 }
 
 STRING 7223
-// Item: Isbd (|cff11ff11护卫之闪避护符|r), Description (说明[ides])
+// Item: Isbd (|cff11ff11闪避护符 of guardian|r), Description (说明[ides])
 {
 +75生命上限|n+2%躲闪几率
 }
 
 STRING 7224
-// Item: Ishd (|cff11ff11护卫之守护指环|r), Ubertip (Tooltip - ext[utub])
+// Item: Ishd (|cff11ff11守护指环 of guardian|r), Ubertip (Tooltip - ext[utub])
 {
 +75生命上限|n+1%躲闪几率|n+2物理免伤
 }
 
 STRING 7225
-// Item: Ishd (|cff11ff11护卫之守护指环|r), Description (说明[ides])
+// Item: Ishd (|cff11ff11守护指环 of guardian|r), Description (说明[ides])
 {
 +75生命上限|n+1%躲闪几率|n+2物理免伤
 }
 
 STRING 7226
-// Item: Inld (|cff11ff11护卫之能量垂饰|r), Ubertip (Tooltip - ext[utub])
+// Item: Inld (|cff11ff11能量垂饰 of guardian|r), Ubertip (Tooltip - ext[utub])
 {
 +75生命上限|n+1%躲闪几率|n+100法力上限
 }
 
 STRING 7227
-// Item: Inld (|cff11ff11护卫之能量垂饰|r), Description (说明[ides])
+// Item: Inld (|cff11ff11能量垂饰 of guardian|r), Description (说明[ides])
 {
 +75生命上限|n+1%躲闪几率|n+100法力上限
 }
 
 STRING 7228
-// Item: Ixpd (|cff11ff11护卫之生命护符|r), Ubertip (Tooltip - ext[utub])
+// Item: Ixpd (|cff11ff11生命护符 of guardian|r), Ubertip (Tooltip - ext[utub])
 {
 +155生命上限|n+1%躲闪几率
 }
 
 STRING 7229
-// Item: Ixpd (|cff11ff11护卫之生命护符|r), Description (说明[ides])
+// Item: Ixpd (|cff11ff11生命护符 of guardian|r), Description (说明[ides])
 {
 +155生命上限|n+1%躲闪几率
 }
 
 STRING 7236
-// Item: Imzd (|cff11ff11护卫之艺人面罩|r), Ubertip (Tooltip - ext[utub])
+// Item: Imzd (|cff11ff11艺人面罩 of guardian|r), Ubertip (Tooltip - ext[utub])
 {
 +75生命上限|n+1%躲闪几率|n每 s回复4点法力值
 }
 
 STRING 7237
-// Item: Imzd (|cff11ff11护卫之艺人面罩|r), Description (说明[ides])
+// Item: Imzd (|cff11ff11艺人面罩 of guardian|r), Description (说明[ides])
 {
 +75生命上限|n+1%躲闪几率|n每 s回复4点法力值
 }
 
 STRING 7238
-// Item: Iwzd (|cff11ff11护卫之巫医法杖|r), Ubertip (Tooltip - ext[utub])
+// Item: Iwzd (|cff11ff11巫医法杖 of guardian|r), Ubertip (Tooltip - ext[utub])
 {
 +75生命上限|n+1%躲闪几率|n+10法术强度
 }
 
 STRING 7239
-// Item: Iwzd (|cff11ff11护卫之巫医法杖|r), Description (说明[ides])
+// Item: Iwzd (|cff11ff11巫医法杖 of guardian|r), Description (说明[ides])
 {
 +75生命上限|n+1%躲闪几率|n+10法术强度
 }
@@ -13002,9 +13002,9 @@ STRING 7275
 }
 
 STRING 7277
-// Item: Ighd (|cff11ff11护卫之贵族圆环|r), Name (Name[unam])
+// Item: Ighd (|cff11ff11贵族圆环 of guardian|r), Name (Name[unam])
 {
-|cff11ff11护卫之贵族圆环|r
+|cff11ff11贵族圆环 of guardian|r
 }
 
 STRING 7278
@@ -13164,13 +13164,13 @@ STRING 7303
 }
 
 STRING 7304
-// Item: Ighd (|cff11ff11护卫之贵族圆环|r), Ubertip (Tooltip - ext[utub])
+// Item: Ighd (|cff11ff11贵族圆环 of guardian|r), Ubertip (Tooltip - ext[utub])
 {
 |cffffffff+75生命值|n+1%躲闪几率|n+3所有属性|r
 }
 
 STRING 7305
-// Item: Ighd (|cff11ff11护卫之贵族圆环|r), Description (说明[ides])
+// Item: Ighd (|cff11ff11贵族圆环 of guardian|r), Description (说明[ides])
 {
 |cffffffff+75生命值|n+1%躲闪几率|n+3所有属性|r
 }
@@ -13189,9 +13189,9 @@ STRING 7308
 }
 
 STRING 7311
-// Item: I001 (|cffff8c00死亡呼吸|r), Ubertip (Tooltip - ext[utub])
+// Item: I001 (|cffff8c00Breath of the Dying|r), Ubertip (Tooltip - ext[utub])
 {
-+10点所有属性
++10所有属性
 +40攻击强度
 +20%攻击速度
 |cff33ff33命中: 吸取造成伤害10%的生命值和法力值. 
@@ -13201,15 +13201,15 @@ STRING 7311
 }
 
 STRING 7312
-// Item: I01P (|cffff8c00无限|r), Ubertip (Tooltip - ext[utub])
+// Item: I01P (|cffff8c00Infinity|r), Ubertip (Tooltip - ext[utub])
 {
 +15智力
-+35点生命值每英雄Level
++35生命值每英雄Level
 +15法术强度
-|cff33ff33赋予无限光环: 使附近600 yards范围内所有敌人受到的法术伤害提高5%. 
-在造成任何法术伤害的时候: 有10%的概率对目标敌人施展闪电链, 造成150点法术伤害. |r
+|cff33ff33赋予Infinity光环: 使附近600 yards范围内所有敌人受到的法术伤害提高5%. 
+在造成任何法术伤害的时候: 有10%的概率对目标敌人施展闪电链, 造成150法术伤害. |r
 |cffffcc00历史|r
-|cffffdead无限是薄暮之魂的灵魂精华, 它所蕴含的闪电能量让先知德雷克萨尔都感到惊叹, 传说带有绿色云状光环的薄暮之魂是所有探险者的噩梦. |r
+|cffffdeadInfinity是薄暮之魂的灵魂精华, 它所蕴含的闪电能量让先知德雷克萨尔都感到惊叹, 传说带有绿色云状光环的薄暮之魂是所有探险者的噩梦. |r
 }
 
 STRING 7313
@@ -13368,13 +13368,13 @@ debuff
 STRING 7355
 // Buff: B02R (breath of the dying), Bufftip (Tooltip[ftip])
 {
-死亡呼吸
+Breath of the Dying
 }
 
 STRING 7356
 // Buff: B02R (breath of the dying), Buffubertip (Tooltip - ext[fube])
 {
-|cff6666ffMagical|r: 每 s受到30点法术伤害. 
+|cff6666ffMagical|r: 每 s受到30法术伤害. 
 }
 
 STRING 7357
@@ -13424,7 +13424,7 @@ debuff
 STRING 7368
 // Buff: B02S (infinity aura), Bufftip (Tooltip[ftip])
 {
-无限
+Infinity
 }
 
 STRING 7369
@@ -13476,7 +13476,7 @@ STRING 7376
 +15攻击强度
 +25法术强度
 +10%法术急速
-|cff33ff33命中: 造成45点法术伤害. 
+|cff33ff33命中: 造成45法术伤害. 
 将普通攻击转化为法术攻击. 
 赋予洞察光环, 使附近600 yards范围内的所有友军每 s额外回复6点法力值. |r
 |cffffcc00历史|r
@@ -13538,7 +13538,7 @@ STRING 7387
 +20攻击强度
 +15法术强度
 每 s回复12点生命值
-|cff33ff33命中: 造成30点法术伤害. 
+|cff33ff33命中: 造成30法术伤害. 
 命中: 吸取造成伤害7%的生命值和法力值. 
 使用: 提升附近600 yards范围内所有友军的生命上限12%, 持续20 s. |r
 |cffffcc00历史|r
@@ -13594,7 +13594,7 @@ STRING 7432
 +125生命上限
 +25法术强度
 +7%格挡几率
-|cff33ff33使你的辛多雷之盾能提供20%额外的伤害减免, 并且在开启时可以强迫附近所有敌人攻击你. |r
+|cff33ff33使你的Shield of Sin'dorei能提供20%额外的伤害减免, 并且在开启时可以强迫附近所有敌人攻击你. |r
 |cffffdead杰出血精灵卫士的荣耀象征. |r
 }
 
@@ -13660,7 +13660,7 @@ STRING 7452
 +25法术强度
 +10%攻击速度
 +5%法术急速
-|cff33ff33使你的风暴打击一定能冷却大地震击. |r
+|cff33ff33使你的风暴打击一定能冷却Earth Shock. |r
 |cffffdead采自雷霆山, 这颗雷电花芯似乎拥有真正的雷电能量. |r
 }
 
@@ -14052,7 +14052,7 @@ STRING 7526
 +125生命上限
 +25法术强度
 +7%格挡几率
-|cff33ff33使你的辛多雷之盾能提供20%额外的伤害减免, 并且在开启时可以强迫附近所有敌人攻击你. |r
+|cff33ff33使你的Shield of Sin'dorei能提供20%额外的伤害减免, 并且在开启时可以强迫附近所有敌人攻击你. |r
 |cffffdead杰出血精灵卫士的荣耀象征. |r
 }
 
@@ -14142,7 +14142,7 @@ STRING 7542
 +25法术强度
 +10%攻击速度
 +5%法术急速
-|cff33ff33使你的风暴打击一定能冷却大地震击. |r
+|cff33ff33使你的风暴打击一定能冷却Earth Shock. |r
 |cffffdead采自雷霆山, 这颗雷电花芯似乎拥有真正的雷电能量. |r
 }
 
@@ -14215,14 +14215,14 @@ STRING 7560
 // Item: mnst (|cff11ff11魔法石|r), Ubertip (Tooltip - ext[utub])
 {
 每 s回复4点法力值. 
-|cff33ff33使用: 回复200-400点法力值. |r
+|cff33ff33使用: 回复200-400法力值. |r
 }
 
 STRING 7561
 // Item: mnst (|cff11ff11魔法石|r), Description (说明[ides])
 {
 每 s回复4点法力值. 
-|cff33ff33使用: 回复200-400点法力值. |r
+|cff33ff33使用: 回复200-400法力值. |r
 }
 
 STRING 7562
@@ -14234,15 +14234,15 @@ STRING 7562
 STRING 7563
 // Item: hlst (|cff11ff11医疗石|r), Ubertip (Tooltip - ext[utub])
 {
-每 s回复5点生命值. 
-|cff33ff33使用: 回复300-600点生命值. |r
+每 s回复5生命值. 
+|cff33ff33使用: 回复300-600生命值. |r
 }
 
 STRING 7564
 // Item: hlst (|cff11ff11医疗石|r), Description (说明[ides])
 {
-每 s回复5点生命值. 
-|cff33ff33使用: 回复300-600点生命值. |r
+每 s回复5生命值. 
+|cff33ff33使用: 回复300-600生命值. |r
 }
 
 STRING 7565
@@ -14269,7 +14269,7 @@ STRING 7570
 // Item: I01K (|cff11ff11无光的新月徽记|r), Ubertip (Tooltip - ext[utub])
 {
 +7智力
-|cff33ff33使用: 提高15点智力, 持续20 s. |r
+|cff33ff33使用: 提高15智力, 持续20 s. |r
 |cff999999依稀可以看出这个徽记曾经是漂亮的银色. |r
 }
 
@@ -14283,14 +14283,14 @@ STRING 7572
 // Item: I01K (|cff11ff11无光的新月徽记|r), Description (说明[ides])
 {
 +7智力
-|cff33ff33使用: 提高15点智力, 持续20 s. |r
+|cff33ff33使用: 提高15智力, 持续20 s. |r
 |cff999999依稀可以看出这个徽记曾经是漂亮的银色. |r
 }
 
 STRING 7573
 // Item: I00T (|cff11ff11罗密欧的过期毒药|r), Ubertip (Tooltip - ext[utub])
 {
-|cff33ff33命中: 有25%的几率对目标造成80-115点法术伤害. |r
+|cff33ff33命中: 有25%的几率对目标造成80-115法术伤害. |r
 |cff999999还能用. |r
 }
 
@@ -14303,32 +14303,32 @@ STRING 7574
 STRING 7575
 // Item: I00T (|cff11ff11罗密欧的过期毒药|r), Description (说明[ides])
 {
-|cff33ff33命中: 有25%的几率对目标造成80-115点法术伤害. |r
+|cff33ff33命中: 有25%的几率对目标造成80-115法术伤害. |r
 |cff999999还能用. |r
 }
 
 STRING 7582
 // Item: pman (魔法药水), Ubertip (Tooltip - ext[utub])
 {
-|cff33ff33使用: 恢复100-300点的魔法值. |r
+|cff33ff33使用: 恢复100-300的魔法值. |r
 }
 
 STRING 7583
 // Item: pman (魔法药水), Description (说明[ides])
 {
-|cff33ff33使用: 恢复100-300点的魔法值. |r
+|cff33ff33使用: 恢复100-300的魔法值. |r
 }
 
 STRING 7584
 // Item: phea (生命药水), Ubertip (Tooltip - ext[utub])
 {
-|cff33ff33使用: 恢复200-400点的生命值. |r
+|cff33ff33使用: 恢复200-400的生命值. |r
 }
 
 STRING 7585
 // Item: phea (生命药水), Description (说明[ides])
 {
-|cff33ff33使用: 恢复200-400点的生命值. |r
+|cff33ff33使用: 恢复200-400的生命值. |r
 }
 
 STRING 7587
@@ -14386,13 +14386,13 @@ STRING 7595
 STRING 7596
 // Item: sror (|cff11ff11野兽卷轴|r), Ubertip (Tooltip - ext[utub])
 {
-|cff33ff33使用: 提升附近900 yards范围内所有友军15点攻击强度, 持续20 s. |r
+|cff33ff33使用: 提升附近900 yards范围内所有友军15攻击强度, 持续20 s. |r
 }
 
 STRING 7597
 // Item: sror (|cff11ff11野兽卷轴|r), Description (说明[ides])
 {
-|cff33ff33使用: 提升附近900 yards范围内所有友军15点攻击强度, 持续20 s. |r
+|cff33ff33使用: 提升附近900 yards范围内所有友军15攻击强度, 持续20 s. |r
 }
 
 STRING 7598
@@ -14428,14 +14428,14 @@ STRING 7611
 STRING 7612
 // Item: I005 (|cff8b66ff闪电链符咒|r), Ubertip (Tooltip - ext[utub])
 {
-|cff33ff33使用: 施展一道跳跃的闪电链, 对目标造成1000点法术伤害, 以后逐个减半, 总共杀伤4个目标. |r
+|cff33ff33使用: 施展一道跳跃的闪电链, 对目标造成1000法术伤害, 以后逐个减半, 总共杀伤4个目标. |r
 }
 
 STRING 7613
 // Item: I005 (|cff8b66ff闪电链符咒|r), Description (说明[ides])
 {
 |cff8b66ff稀有|r
-|cff33ff33使用: 施展一道跳跃的闪电链, 对目标造成1000点法术伤害, 以后逐个减半, 总共杀伤4个目标. |r
+|cff33ff33使用: 施展一道跳跃的闪电链, 对目标造成1000法术伤害, 以后逐个减半, 总共杀伤4个目标. |r
 }
 
 STRING 7614
@@ -14483,13 +14483,13 @@ STRING 7622
 STRING 7623
 // Item: I009 (|cff11ff11敏捷药水|r), Ubertip (Tooltip - ext[utub])
 {
-|cff33ff33使用: 提升15点敏捷, 持续15 s. |r
+|cff33ff33使用: 提升15敏捷, 持续15 s. |r
 }
 
 STRING 7624
 // Item: I009 (|cff11ff11敏捷药水|r), Description (说明[ides])
 {
-|cff33ff33使用: 提升15点敏捷, 持续15 s. |r
+|cff33ff33使用: 提升15敏捷, 持续15 s. |r
 }
 
 STRING 7625
@@ -14507,13 +14507,13 @@ STRING 7628
 STRING 7629
 // Item: I00B (|cff11ff11法能药水|r), Ubertip (Tooltip - ext[utub])
 {
-|cff33ff33使用: 提升20点法术强度, 持续15 s. |r
+|cff33ff33使用: 提升20法术强度, 持续15 s. |r
 }
 
 STRING 7630
 // Item: I00B (|cff11ff11法能药水|r), Description (说明[ides])
 {
-|cff33ff33使用: 提升20点法术强度, 持续15 s. |r
+|cff33ff33使用: 提升20法术强度, 持续15 s. |r
 }
 
 STRING 7631
@@ -14531,14 +14531,14 @@ STRING 7632
 STRING 7633
 // Item: I00G (|cff8b66ff死亡之指符咒|r), Ubertip (Tooltip - ext[utub])
 {
-|cff33ff33使用: 施展一道红色闪电, 摧毁敌人, 造成1500点法术伤害. |r
+|cff33ff33使用: 施展一道红色闪电, 摧毁敌人, 造成1500法术伤害. |r
 }
 
 STRING 7634
 // Item: I00G (|cff8b66ff死亡之指符咒|r), Description (说明[ides])
 {
 |cff8b66ff稀有|r
-|cff33ff33使用: 施展一道红色闪电, 摧毁敌人, 造成1500点法术伤害. |r
+|cff33ff33使用: 施展一道红色闪电, 摧毁敌人, 造成1500法术伤害. |r
 }
 
 STRING 7638
@@ -14586,7 +14586,7 @@ buff
 STRING 7653
 // Buff: B02Z (icon of the unglazed crescent), Buffubertip (Tooltip - ext[fube])
 {
-|cff6666ffMagical|r: 智力提高15点. 
+|cff6666ffMagical|r: 智力提高15. 
 }
 
 STRING 7663
@@ -14614,13 +14614,13 @@ STRING 7666
 }
 
 STRING 7667
-// Item: Igz9 (|cff11ff11刺客之攻击之爪|r), Ubertip (Tooltip - ext[utub])
+// Item: Igz9 (|cff11ff11刺客之Claw|r), Ubertip (Tooltip - ext[utub])
 {
 +5敏捷|n+1%暴击几率|n+5攻击强度
 }
 
 STRING 7668
-// Item: Igz9 (|cff11ff11刺客之攻击之爪|r), Description (说明[ides])
+// Item: Igz9 (|cff11ff11刺客之Claw|r), Description (说明[ides])
 {
 +5敏捷|n+1%暴击几率|n+5攻击强度
 }
@@ -14650,13 +14650,13 @@ STRING 7672
 }
 
 STRING 7673
-// Item: Igz8 (|cff11ff11屠夫之攻击之爪|r), Ubertip (Tooltip - ext[utub])
+// Item: Igz8 (|cff11ff11屠夫之Claw|r), Ubertip (Tooltip - ext[utub])
 {
 +5力量|n+1%暴击几率|n+5攻击强度
 }
 
 STRING 7674
-// Item: Igz8 (|cff11ff11屠夫之攻击之爪|r), Description (说明[ides])
+// Item: Igz8 (|cff11ff11屠夫之Claw|r), Description (说明[ides])
 {
 +5力量|n+1%暴击几率|n+5攻击强度
 }
@@ -14686,49 +14686,49 @@ STRING 7678
 }
 
 STRING 7679
-// Item: Igzb (|cff11ff11巫师之攻击之爪|r), Ubertip (Tooltip - ext[utub])
+// Item: Igzb (|cff11ff11巫师之Claw|r), Ubertip (Tooltip - ext[utub])
 {
 +5智力|n+2%法术急速|n+5攻击强度
 }
 
 STRING 7680
-// Item: Igzb (|cff11ff11巫师之攻击之爪|r), Description (说明[ides])
+// Item: Igzb (|cff11ff11巫师之Claw|r), Description (说明[ides])
 {
 +5智力|n+2%法术急速|n+5攻击强度
 }
 
 STRING 7681
-// Item: Icsd (|cff11ff11护卫之刺杀剑|r), Ubertip (Tooltip - ext[utub])
+// Item: Icsd (|cff11ff11刺杀剑 of guardian|r), Ubertip (Tooltip - ext[utub])
 {
 +75生命上限|n+1%躲闪几率|n+3%暴击几率
 }
 
 STRING 7682
-// Item: Icsd (|cff11ff11护卫之刺杀剑|r), Description (说明[ides])
+// Item: Icsd (|cff11ff11刺杀剑 of guardian|r), Description (说明[ides])
 {
 +75生命上限|n+1%躲闪几率|n+3%暴击几率
 }
 
 STRING 7683
-// Item: Ijsd (|cff11ff11护卫之加速手套|r), Ubertip (Tooltip - ext[utub])
+// Item: Ijsd (|cff11ff11加速手套 of guardian|r), Ubertip (Tooltip - ext[utub])
 {
 +75生命上限|n+1%躲闪几率|n+5%攻击速度
 }
 
 STRING 7684
-// Item: Ijsd (|cff11ff11护卫之加速手套|r), Description (说明[ides])
+// Item: Ijsd (|cff11ff11加速手套 of guardian|r), Description (说明[ides])
 {
 +75生命上限|n+1%躲闪几率|n+5%攻击速度
 }
 
 STRING 7685
-// Item: Igzd (|cff11ff11护卫之攻击之爪|r), Ubertip (Tooltip - ext[utub])
+// Item: Igzd (|cff11ff11Claw of guardian|r), Ubertip (Tooltip - ext[utub])
 {
 +75生命上限|n+1%躲闪几率|n+5攻击强度
 }
 
 STRING 7686
-// Item: Igzd (|cff11ff11护卫之攻击之爪|r), Description (说明[ides])
+// Item: Igzd (|cff11ff11Claw of guardian|r), Description (说明[ides])
 {
 +75生命上限|n+1%躲闪几率|n+5攻击强度
 }
@@ -14847,7 +14847,7 @@ STRING 7724
 +4物理免伤
 +15力量
 +35招架值
-战斗中每 s流失5点生命值
+战斗中每 s流失5生命值
 |cff33ff33被击中以后会导致目标的攻击强度降低. |r
 |cffffdead"迟缓大法、恶咒附身、虚弱无力、大难临头！"|r
 }
@@ -14859,7 +14859,7 @@ STRING 7725
 +4物理免伤
 +15力量
 +35招架值
-战斗中每 s流失5点生命值
+战斗中每 s流失5生命值
 |cff33ff33被击中以后会导致目标的攻击强度降低. |r
 |cffffdead"迟缓大法、恶咒附身、虚弱无力、大难临头！"|r
 }
@@ -14883,7 +14883,7 @@ STRING 7729
 +20力量
 +5攻击强度每英雄Level
 +4%暴击几率
-战斗中每 s流失40点生命值
+战斗中每 s流失40生命值
 |cff33ff33在命中目标以后, 吸取造成伤害14%的生命值. 
 每次命中获得1%额外的攻击速度, 持续3 s, 最多10%. 
 使用: 暂时获得上古狂乱的效果, 提升40%攻击速度, 受到的伤害提高100%. |r
@@ -15121,7 +15121,7 @@ STRING 7780
 STRING 7781
 // Item: I00H (|cff8b66ff纯净秘法|r), Ubertip (Tooltip - ext[utub])
 {
-|cff33ff33法术伤害造成暴击以后会积累一层秘法能量, 在积累到三层以后会自动释放, 对目标造成300点法术伤害. 
+|cff33ff33法术伤害造成暴击以后会积累一层秘法能量, 在积累到三层以后会自动释放, 对目标造成300法术伤害. 
 每 s最多只能积累一层. |r
 |cff999999"梅卡托克对此不屑一顾, 他认为一个简单的电容器就能达到这个效果. "|r
 }
@@ -15130,7 +15130,7 @@ STRING 7782
 // Item: I00H (|cff8b66ff纯净秘法|r), Description (说明[ides])
 {
 |cff8b66ff稀有|r
-|cff33ff33法术伤害造成暴击以后会积累一层秘法能量, 在积累到三层以后会自动释放, 对目标造成300点法术伤害. 
+|cff33ff33法术伤害造成暴击以后会积累一层秘法能量, 在积累到三层以后会自动释放, 对目标造成300法术伤害. 
 每 s最多只能积累一层. |r
 |cff999999"梅卡托克对此不屑一顾, 他认为一个简单的电容器就能达到这个效果. "|r
 }
@@ -15294,13 +15294,13 @@ STRING 7815
 STRING 7817
 // Item: I00Q (|cff11ff11再生药水|r), Ubertip (Tooltip - ext[utub])
 {
-|cff33ff33使用: 每 s回复10点生命值, 持续75 s. |r
+|cff33ff33使用: 每 s回复10生命值, 持续75 s. |r
 }
 
 STRING 7818
 // Item: I00Q (|cff11ff11再生药水|r), Description (说明[ides])
 {
-|cff33ff33使用: 每 s回复10点生命值, 持续75 s. |r
+|cff33ff33使用: 每 s回复10生命值, 持续75 s. |r
 }
 
 STRING 7819
@@ -15312,13 +15312,13 @@ STRING 7819
 STRING 7820
 // Item: I00R (|cff11ff11清晰预兆药水|r), Ubertip (Tooltip - ext[utub])
 {
-|cff33ff33使用: 每 s回复5点法力值, 持续120 s. |r
+|cff33ff33使用: 每 s回复5法力值, 持续120 s. |r
 }
 
 STRING 7821
 // Item: I00R (|cff11ff11清晰预兆药水|r), Description (说明[ides])
 {
-|cff33ff33使用: 每 s回复5点法力值, 持续120 s. |r
+|cff33ff33使用: 每 s回复5法力值, 持续120 s. |r
 }
 
 STRING 7822
@@ -15336,13 +15336,13 @@ STRING 7823
 STRING 7824
 // Item: I01E (|cff11ff11心灵之火符咒|r), Ubertip (Tooltip - ext[utub])
 {
-|cff33ff33使用: 提升目标友军8点物理免伤, 10点攻击强度, 持续15 s. |r
+|cff33ff33使用: 提升目标友军8点物理免伤, 10攻击强度, 持续15 s. |r
 }
 
 STRING 7825
 // Item: I01E (|cff11ff11心灵之火符咒|r), Description (说明[ides])
 {
-|cff33ff33使用: 提升目标友军8点物理免伤, 10点攻击强度, 持续15 s. |r
+|cff33ff33使用: 提升目标友军8点物理免伤, 10攻击强度, 持续15 s. |r
 }
 
 STRING 7826
@@ -15378,13 +15378,13 @@ STRING 7832
 STRING 7833
 // Item: I01I (|cff11ff11简易治疗符咒|r), Ubertip (Tooltip - ext[utub])
 {
-|cff33ff33使用: 治疗目标200点生命值. |r
+|cff33ff33使用: 治疗目标200生命值. |r
 }
 
 STRING 7834
 // Item: I01I (|cff11ff11简易治疗符咒|r), Description (说明[ides])
 {
-|cff33ff33使用: 治疗目标200点生命值. |r
+|cff33ff33使用: 治疗目标200生命值. |r
 }
 
 STRING 7835
@@ -15474,7 +15474,7 @@ mana scroll
 STRING 7865
 // Item: shea (|cff8b66ff医疗卷轴|r), Ubertip (Tooltip - ext[utub])
 {
-|cff33ff33使用: 恢复附近950 yards范围内所有友军750点生命值. |r
+|cff33ff33使用: 恢复附近950 yards范围内所有友军750生命值. |r
 }
 
 STRING 7870
@@ -15493,7 +15493,7 @@ STRING 7874
 // Item: shea (|cff8b66ff医疗卷轴|r), Description (说明[ides])
 {
 |cff8b66ff稀有|r
-|cff33ff33使用: 恢复附近950 yards范围内所有友军750点生命值. |r
+|cff33ff33使用: 恢复附近950 yards范围内所有友军750生命值. |r
 }
 
 STRING 7875
@@ -15758,7 +15758,7 @@ STRING 7942
 {
 +17智力
 +17法术强度
-|cff33ff33使用: 提高法术强度35点, 持续15 s. |r
+|cff33ff33使用: 提高法术强度35, 持续15 s. |r
 |cff999999妖术领主现在已经足够强大, 不再需要这样的小玩意了. |r
 }
 
@@ -15768,7 +15768,7 @@ STRING 7943
 |cff8b66ff稀有|r
 +17智力
 +17法术强度
-|cff33ff33使用: 提高法术强度35点, 持续15 s. |r
+|cff33ff33使用: 提高法术强度35, 持续15 s. |r
 |cff999999妖术领主现在已经足够强大, 不再需要这样的小玩意了. |r
 }
 
@@ -15976,13 +15976,13 @@ STRING 7984
 STRING 7985
 // Item: I00I (|cff11ff11大生命药水|r), Ubertip (Tooltip - ext[utub])
 {
-|cff33ff33使用: 恢复400-800点生命值. |r
+|cff33ff33使用: 恢复400-800生命值. |r
 }
 
 STRING 7986
 // Item: I00I (|cff11ff11大生命药水|r), Description (说明[ides])
 {
-|cff33ff33使用: 恢复400-800点生命值. |r
+|cff33ff33使用: 恢复400-800生命值. |r
 }
 
 STRING 7987
@@ -16033,14 +16033,14 @@ STRING 7993
 STRING 7994
 // Item: I00N (|cff8b66ff战斗大师药剂|r), Ubertip (Tooltip - ext[utub])
 {
-|cff33ff33使用: 提升300点生命上限, 持续20 s. |r
+|cff33ff33使用: 提升300生命上限, 持续20 s. |r
 }
 
 STRING 7995
 // Item: I00N (|cff8b66ff战斗大师药剂|r), Description (说明[ides])
 {
 |cff8b66ff稀有|r
-|cff33ff33使用: 提升300点生命上限, 持续20 s. |r
+|cff33ff33使用: 提升300生命上限, 持续20 s. |r
 }
 
 STRING 7996
@@ -16082,14 +16082,14 @@ STRING 8001
 STRING 8002
 // Item: I00S (|cff8b66ff护盾药剂|r), Ubertip (Tooltip - ext[utub])
 {
-|cff33ff33使用: 吸收1000点伤害, 持续15 s. |r
+|cff33ff33使用: 吸收1000伤害, 持续15 s. |r
 }
 
 STRING 8003
 // Item: I00S (|cff8b66ff护盾药剂|r), Description (说明[ides])
 {
 |cff8b66ff稀有|r
-|cff33ff33使用: 吸收1000点伤害, 持续15 s. |r
+|cff33ff33使用: 吸收1000伤害, 持续15 s. |r
 }
 
 STRING 8004
@@ -16303,7 +16303,7 @@ STRING 8039
 +175法力上限
 +1%躲闪
 +20移动速度
-|cff33ff33使用: 提高300点移动速度, 持续10 s, 可能故障. |r
+|cff33ff33使用: 提高300移动速度, 持续10 s, 可能故障. |r
 |cff999999限量发售, 可毕竟是地精产品. |r
 }
 
@@ -16321,7 +16321,7 @@ STRING 8041
 +175法力上限
 +1%躲闪
 +20移动速度
-|cff33ff33使用: 提高300点移动速度, 持续10 s, 可能故障. |r
+|cff33ff33使用: 提高300移动速度, 持续10 s, 可能故障. |r
 |cff999999限量发售, 可毕竟是地精产品. |r
 }
 
@@ -16527,7 +16527,7 @@ STRING 8067
 +10力量
 +15智力
 每 s回复6点法力值
-|cff33ff33造成法术伤害时, 有1%的概率立即回复100点法力值. |r
+|cff33ff33造成法术伤害时, 有1%的概率立即回复100法力值. |r
 |cff999999这枚戒指当年是为了对抗火焰之王的军团而打造的, 现在已经找不到其火焰抵抗能力了. |r
 }
 
@@ -16544,7 +16544,7 @@ STRING 8069
 +10力量
 +15智力
 每 s回复6点法力值
-|cff33ff33造成法术伤害时, 有1%的概率立即回复100点法力值. |r
+|cff33ff33造成法术伤害时, 有1%的概率立即回复100法力值. |r
 |cff999999这枚戒指当年是为了对抗火焰之王的军团而打造的, 现在已经找不到其火焰抵抗能力了. |r
 }
 
@@ -16593,7 +16593,7 @@ STRING 8081
 STRING 8082
 // Buff: B03C (goblin rocket boots limited edition), Buffubertip (Tooltip - ext[fube])
 {
-|cff6666ffMagical|r: 提高300点移动速度. 
+|cff6666ffMagical|r: 提高300移动速度. 
 }
 
 STRING 8083
@@ -16743,7 +16743,7 @@ STRING 8111
 STRING 8112
 // Buff: B03G (hex shrunken head), Buffubertip (Tooltip - ext[fube])
 {
-|cff6666ffMagical|r: 提高35点法术强度, 持续15 s. 
+|cff6666ffMagical|r: 提高35法术强度, 持续15 s. 
 }
 
 STRING 8116
@@ -16989,11 +16989,11 @@ STRING 8183
 STRING 8185
 // Item: I01L (|cffffcc00霜之哀伤|r1), Ubertip (Tooltip - ext[utub])
 {
-|cffffcc00点击以查看套装效果
+|cffffcc00击以查看套装效果
 阿尔萨斯的堕落（复仇的决心, 斯坦索姆惨剧, 弑父者, 霜之哀伤）|r
 +15力量
 |cff33ff33命中: 吸取造成的伤害11%的生命值. 
-每 s吸取附近所有敌人30点生命值到自身. |r
+每 s吸取附近所有敌人30生命值到自身. |r
 |cffffd966命中: 吸取造成的伤害9%的法力值. |r
 |cff666666对攻击目标会造成额外的法术伤害, 对受伤的目标造成更高伤害. （4件）|r
 |cffffdead"巫妖王的礼物. "|r
@@ -17002,11 +17002,11 @@ STRING 8185
 STRING 8186
 // Item: I01M (|cffffcc00霜之哀伤|r2), Ubertip (Tooltip - ext[utub])
 {
-|cffffcc00点击以查看套装效果
+|cffffcc00击以查看套装效果
 阿尔萨斯的堕落（复仇的决心, 斯坦索姆惨剧, 弑父者, 霜之哀伤）|r
 +15力量
 |cff33ff33命中: 吸取造成的伤害11%的生命值. 
-每 s吸取附近所有敌人30点生命值到自身. |r
+每 s吸取附近所有敌人30生命值到自身. |r
 |cffffd966命中: 吸取造成的伤害9%的法力值. 
 对攻击目标会造成额外的法术伤害, 对受伤的目标造成更高伤害. |r
 |cffffdead"巫妖王的礼物. "|r
@@ -17034,11 +17034,11 @@ STRING 8189
 STRING 8190
 // Item: I01O (|cffffcc00霜之哀伤|r), Ubertip (Tooltip - ext[utub])
 {
-|cffffcc00点击以查看套装效果
+|cffffcc00击以查看套装效果
 阿尔萨斯的堕落（复仇的决心, 斯坦索姆惨剧, 弑父者, 霜之哀伤）|r
 +15力量
 |cff33ff33命中: 吸取造成的伤害11%的生命值. 
-每 s吸取附近所有敌人30点生命值到自身. |r
+每 s吸取附近所有敌人30生命值到自身. |r
 |cff666666命中: 吸取造成的伤害9%的法力值. （3件）
 对攻击目标会造成额外的法术伤害, 对受伤的目标造成更高伤害. （4件）|r
 |cffffdead"巫妖王的礼物. "|r
@@ -17054,7 +17054,7 @@ STRING 8192
 STRING 8194
 // Item: I01R (|cffffcc00复仇的决心|r1), Ubertip (Tooltip - ext[utub])
 {
-|cffffcc00点击以查看套装效果
+|cffffcc00击以查看套装效果
 阿尔萨斯的堕落（复仇的决心, 斯坦索姆惨剧, 弑父者, 霜之哀伤）|r
 +15敏捷
 +100生命上限
@@ -17085,7 +17085,7 @@ STRING 8197
 STRING 8198
 // Item: I01S (|cffffcc00复仇的决心|r), Ubertip (Tooltip - ext[utub])
 {
-|cffffcc00点击以查看套装效果
+|cffffcc00击以查看套装效果
 阿尔萨斯的堕落（复仇的决心, 斯坦索姆惨剧, 弑父者, 霜之哀伤）|r
 +15敏捷
 +100生命上限
@@ -17110,7 +17110,7 @@ STRING 8200
 STRING 8202
 // Item: I01T (|cffffcc00斯坦索姆惨剧|r), Ubertip (Tooltip - ext[utub])
 {
-|cffffcc00点击以查看套装效果
+|cffffcc00击以查看套装效果
 阿尔萨斯的堕落（复仇的决心, 斯坦索姆惨剧, 弑父者, 霜之哀伤）|r
 +15%攻击速度
 +20移动速度
@@ -17141,7 +17141,7 @@ STRING 8205
 STRING 8206
 // Item: I01U (|cffffcc00斯坦索姆惨剧|r1), Ubertip (Tooltip - ext[utub])
 {
-|cffffcc00点击以查看套装效果
+|cffffcc00击以查看套装效果
 阿尔萨斯的堕落（复仇的决心, 斯坦索姆惨剧, 弑父者, 霜之哀伤）|r
 +15%攻击速度
 +20移动速度
@@ -17166,7 +17166,7 @@ STRING 8208
 STRING 8210
 // Item: I01V (|cffffcc00弑父者|r2), Ubertip (Tooltip - ext[utub])
 {
-|cffffcc00点击以查看套装效果
+|cffffcc00击以查看套装效果
 阿尔萨斯的堕落（复仇的决心, 斯坦索姆惨剧, 弑父者, 霜之哀伤）|r
 +30攻击强度
 |cff33ff33命中: 有20%的概率造成流血效果, 使目标受到持续伤害. 
@@ -17191,7 +17191,7 @@ STRING 8213
 STRING 8214
 // Item: I01W (|cffffcc00弑父者|r1), Ubertip (Tooltip - ext[utub])
 {
-|cffffcc00点击以查看套装效果
+|cffffcc00击以查看套装效果
 阿尔萨斯的堕落（复仇的决心, 斯坦索姆惨剧, 弑父者, 霜之哀伤）|r
 +30攻击强度
 |cff33ff33命中: 有20%的概率造成流血效果, 使目标受到持续伤害. 
@@ -17216,7 +17216,7 @@ STRING 8217
 STRING 8218
 // Item: I01X (|cffffcc00弑父者|r), Ubertip (Tooltip - ext[utub])
 {
-|cffffcc00点击以查看套装效果
+|cffffcc00击以查看套装效果
 阿尔萨斯的堕落（复仇的决心, 斯坦索姆惨剧, 弑父者, 霜之哀伤）|r
 +30攻击强度
 |cff33ff33命中: 有20%的概率造成流血效果, 使目标受到持续伤害. 
@@ -17952,7 +17952,7 @@ STRING 8341
 STRING 8342
 // Buff: B03L (life regen potion), Buffubertip (Tooltip - ext[fube])
 {
-|cff6666ffMagical|r: 生命回复速度提升10点. 
+|cff6666ffMagical|r: 生命回复速度提升10. 
 }
 
 STRING 8343
@@ -17976,7 +17976,7 @@ STRING 8345
 STRING 8346
 // Buff: B03M (mana regen potion), Buffubertip (Tooltip - ext[fube])
 {
-|cff6666ffMagical|r: 法力回复速度提升5点. 
+|cff6666ffMagical|r: 法力回复速度提升5. 
 }
 
 STRING 8347
@@ -18072,7 +18072,7 @@ STRING 8361
 STRING 8362
 // Buff: B03Q (combat master potion), Buffubertip (Tooltip - ext[fube])
 {
-|cff6666ffMagical|r: 生命上限提升300点. 
+|cff6666ffMagical|r: 生命上限提升300. 
 }
 
 STRING 8363
@@ -18144,7 +18144,7 @@ STRING 8373
 STRING 8374
 // Buff: B03U (shield potion), Buffubertip (Tooltip - ext[fube])
 {
-|cff6666ffMagical|r: 吸收1000点伤害. 
+|cff6666ffMagical|r: 吸收1000伤害. 
 }
 
 STRING 8375
@@ -18288,7 +18288,7 @@ STRING 8397
 STRING 8398
 // Buff: B040 (spell power potion), Buffubertip (Tooltip - ext[fube])
 {
-|cff6666ffMagical|r: 提升20点法术强度. 
+|cff6666ffMagical|r: 提升20法术强度. 
 }
 
 STRING 8399
@@ -18312,7 +18312,7 @@ STRING 8401
 STRING 8402
 // Buff: B041 (spell master potion), Buffubertip (Tooltip - ext[fube])
 {
-|cff6666ffMagical|r: 法术强度提升100%, 法术急速提升100%. 
+|cff6666ffMagical|r: 法术强度提升100%, Spell haste is increased by 100%. 
 }
 
 STRING 8403
@@ -18360,7 +18360,7 @@ STRING 8409
 STRING 8410
 // Buff: B043 (angry cast potion), Buffubertip (Tooltip - ext[fube])
 {
-|cff6666ffMagical|r: 法术急速提升10%. 
+|cff6666ffMagical|r: Spell haste is increased by 10%. 
 }
 
 STRING 8411
@@ -18432,7 +18432,7 @@ STRING 8421
 STRING 8422
 // Buff: B046 (agility potion), Buffubertip (Tooltip - ext[fube])
 {
-|cff6666ffMagical|r: 使你的敏捷提升15点. 
+|cff6666ffMagical|r: 使你的敏捷提升15. 
 }
 
 STRING 8423
@@ -18773,9 +18773,9 @@ STRING 8480
 STRING 8481
 // Ability: A006 (shield of sin'dorei), Ubertip (Tooltip - normal - ext[aub1])
 {
-使血精灵防御者受到的所有伤害降低65%. 
+Blood Elf Defender takes 65%. 
 
-|cff99ccff持续时间: |r8 s
+|cff99ccffDuration: |r8 s
 |cff99ccffCool: |r30 s
 }
 
@@ -18815,7 +18815,7 @@ STRING 8488
 造成200伤害, 攻速和施法速度降低20%, 移动速度30%. 
 
 |cff99ccffRange: |r600 yards
-|cff99ccff持续时间: |r5 s
+|cff99ccffDuration: |r5 s
 |cff99ccffCool: |r8 s
 }
 
@@ -18846,7 +18846,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 8493
 // Ability: A097 (frost shock), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -18913,7 +18913,7 @@ STRING 8508
 {
 治疗一个目标1000生命值, 每个目标递增50%, 最多3个目标. 
 
-|cff99ccff施法时间: |r3 s
+|cff99ccffCast: |r3 s
 |cff99ccffRange: |r800 yards
 |cff99ccffCool: |r5 s
 }
@@ -18945,7 +18945,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 8513
 // Ability: A098 (chain healing), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -18958,7 +18958,7 @@ STRING 8514
 {
 制造一个100生命值的守卫, 每 s治疗附近友军350生命值. 
 
-|cff99ccff持续时间: |r20 s
+|cff99ccffDuration: |r20 s
 |cff99ccffCool: |r6 s
 }
 
@@ -18983,7 +18983,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 8519
 // Ability: A099 (healing ward), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -18996,7 +18996,7 @@ STRING 8520
 {
 制造一个100生命值的守卫, 使附近所有友军受到的伤害降低95%. 
 
-|cff99ccff持续时间: |r30 s
+|cff99ccffDuration: |r30 s
 |cff99ccffCool: |r10 s
 }
 
@@ -19021,7 +19021,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 8525
 // Ability: A09A (protection ward), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -19094,7 +19094,7 @@ STRING 8539
 {
 攻击速度提高100%. 
 
-|cff99ccff持续时间: |r4 s
+|cff99ccffDuration: |r4 s
 |cff99ccffCool: |r10 s
 }
 
@@ -19125,7 +19125,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 8544
 // Ability: A09C (Naga Frenzy), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -19144,7 +19144,7 @@ STRING 8546
 {
 攻击速度提高100%. 
 
-|cff99ccff持续时间: |r4 s
+|cff99ccffDuration: |r4 s
 |cff99ccffCool: |r10 s
 }
 
@@ -19175,7 +19175,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 8551
 // Ability: A09D (Armor Crushing), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -19194,7 +19194,7 @@ STRING 8553
 {
 攻击速度提高100%. 
 
-|cff99ccff持续时间: |r4 s
+|cff99ccffDuration: |r4 s
 |cff99ccffCool: |r10 s
 }
 
@@ -19225,7 +19225,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 8558
 // Ability: A09E (Thunder Clap), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -19244,7 +19244,7 @@ STRING 8560
 {
 攻击速度提高100%. 
 
-|cff99ccff持续时间: |r4 s
+|cff99ccffDuration: |r4 s
 |cff99ccffCool: |r10 s
 }
 
@@ -19275,7 +19275,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 8565
 // Ability: A09F (Rage Roar), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -19300,7 +19300,7 @@ STRING 8570
 {
 攻击速度提高100%. 
 
-|cff99ccff持续时间: |r4 s
+|cff99ccffDuration: |r4 s
 |cff99ccffCool: |r10 s
 }
 
@@ -19331,7 +19331,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 8575
 // Ability: A09H (Unholy Frenzy), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -19350,7 +19350,7 @@ STRING 8577
 {
 攻击速度提高100%. 
 
-|cff99ccff持续时间: |r4 s
+|cff99ccffDuration: |r4 s
 |cff99ccffCool: |r10 s
 }
 
@@ -19381,7 +19381,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 8582
 // Ability: A09I (Chaos Leap), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -19400,7 +19400,7 @@ STRING 8584
 {
 攻击速度提高100%. 
 
-|cff99ccff持续时间: |r4 s
+|cff99ccffDuration: |r4 s
 |cff99ccffCool: |r10 s
 }
 
@@ -19431,7 +19431,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 8589
 // Ability: A09J (Battle Roar), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -19450,7 +19450,7 @@ STRING 8591
 {
 攻击速度提高100%. 
 
-|cff99ccff持续时间: |r4 s
+|cff99ccffDuration: |r4 s
 |cff99ccffCool: |r10 s
 }
 
@@ -19481,7 +19481,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 8596
 // Ability: A09K (Demoralizing Curse), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -19500,7 +19500,7 @@ STRING 8598
 {
 攻击速度提高100%. 
 
-|cff99ccff持续时间: |r4 s
+|cff99ccffDuration: |r4 s
 |cff99ccffCool: |r10 s
 }
 
@@ -19531,7 +19531,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 8603
 // Ability: A09L (Fireball), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -19550,7 +19550,7 @@ STRING 8605
 {
 攻击速度提高100%. 
 
-|cff99ccff持续时间: |r4 s
+|cff99ccffDuration: |r4 s
 |cff99ccffCool: |r10 s
 }
 
@@ -19581,7 +19581,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 8610
 // Ability: A09M (Flame Shock), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -19600,7 +19600,7 @@ STRING 8612
 {
 攻击速度提高100%. 
 
-|cff99ccff持续时间: |r4 s
+|cff99ccffDuration: |r4 s
 |cff99ccffCool: |r10 s
 }
 
@@ -19631,7 +19631,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 8617
 // Ability: A09N (Nether Bolt), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -19650,7 +19650,7 @@ STRING 8619
 {
 攻击速度提高100%. 
 
-|cff99ccff持续时间: |r4 s
+|cff99ccffDuration: |r4 s
 |cff99ccffCool: |r10 s
 }
 
@@ -19681,7 +19681,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 8624
 // Ability: A09O (Shadow Shift), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -19700,7 +19700,7 @@ STRING 8626
 {
 攻击速度提高100%. 
 
-|cff99ccff持续时间: |r4 s
+|cff99ccffDuration: |r4 s
 |cff99ccffCool: |r10 s
 }
 
@@ -19731,7 +19731,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 8631
 // Ability: A09P (Nether Enhancement), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -19750,7 +19750,7 @@ STRING 8633
 {
 攻击速度提高100%. 
 
-|cff99ccff持续时间: |r4 s
+|cff99ccffDuration: |r4 s
 |cff99ccffCool: |r10 s
 }
 
@@ -19781,7 +19781,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 8638
 // Ability: A09Q (Mana Burn), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -19816,7 +19816,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 8645
 // Ability: A09R (Shadow Spike), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -19845,7 +19845,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 8652
 // Ability: A09S (Shadow Whirl), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -19874,7 +19874,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 8659
 // Ability: A09T (Bash), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -19897,7 +19897,7 @@ Stomp
 STRING 8666
 // Ability: A09U (Stomp), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -19910,7 +19910,7 @@ STRING 8668
 {
 提升100%攻击速度. （在目标受到压碎护甲效果影响后开启. ）
 
-|cff99ccff持续时间: |r10 s
+|cff99ccffDuration: |r10 s
 |cff99ccffCool: |r1 s
 }
 
@@ -19923,10 +19923,10 @@ STRING 8669
 STRING 8670
 // Ability: A09D (Armor Crushing), Ubertip (Tooltip - normal - ext[aub1])
 {
-降低目标100点物理免伤. 
+降低目标100物理免伤. 
 
 |cff99ccffRange: |r200 yards
-|cff99ccff持续时间: |r7 s
+|cff99ccffDuration: |r7 s
 |cff99ccffCool: |r15 s
 }
 
@@ -20005,7 +20005,7 @@ STRING 8682
 STRING 8683
 // Buff: B04D (armor crushing), Buffubertip (Tooltip - ext[fube])
 {
-Neutral: 物理免伤降低100点. 
+Neutral: 物理免伤降低100. 
 }
 
 STRING 8684
@@ -20013,8 +20013,8 @@ STRING 8684
 {
 附近所有敌军受到50%额外伤害. 
 
-|cff99ccff影响区域: |r400 yards
-|cff99ccff持续时间: |r10 s
+|cff99ccffAOE: |r400 yards
+|cff99ccffDuration: |r10 s
 |cff99ccffCool: |r20 s
 }
 
@@ -20093,7 +20093,7 @@ STRING 8696
 STRING 8697
 // Buff: B04F (thunder clap), Buffubertip (Tooltip - ext[fube])
 {
-|cff6666ffMagical|r: 每1 s受到100点法术伤害. 
+|cff6666ffMagical|r: 每1 s受到100法术伤害. 
 }
 
 STRING 8698
@@ -20129,7 +20129,7 @@ STRING 8702
 STRING 8703
 // Buff: B04G (sting), Buffubertip (Tooltip - ext[fube])
 {
-Neutral: 每2 s受到50点法术伤害. 
+Neutral: 每2 s受到50法术伤害. 
 }
 
 STRING 8706
@@ -20213,9 +20213,9 @@ STRING 8718
 }
 
 STRING 8719
-// Item: Igz0 (|cffffffff攻击之爪|r), Tip (Tooltip - base[utip])
+// Item: Igz0 (|cffffffffClaw|r), Tip (Tooltip - base[utip])
 {
-领取攻击之爪
+领取Claw
 }
 
 STRING 8720
@@ -20235,7 +20235,7 @@ STRING 8722
 {
 400 yardsAOE400伤害, 如果目标被狂怒咆哮, 附加法术DOT, 100/s.  
 
-|cff99ccff持续时间: |r6 s
+|cff99ccffDuration: |r6 s
 |cff99ccffCool: |r12 s
 }
 
@@ -20319,11 +20319,11 @@ STRING 8740
 // Ability: A01B (storm strike), Ubertip (Tooltip - normal - ext[aub1])
 {
 将手中的武器注入风暴能量, 立即对目标造成一次普通攻击130%的法术伤害. 
-并且使目标受到的大地震击伤害提升50%. 
+并且使目标受到的Earth Shock伤害提升50%. 
 
 |cff99ccffRange: |r600 yards
-|cff99ccffCost: |r50点
-|cff99ccff持续时间: |r3 s
+|cff99ccffCost: |r50
+|cff99ccffDuration: |r3 s
 |cff99ccffCool: |r6 s
 }
 
@@ -20331,12 +20331,12 @@ STRING 8741
 // Ability: A01B (storm strike), Ubertip (Tooltip - normal - ext[aub1])
 {
 将手中的武器注入风暴能量, 立即对目标造成一次普通攻击160%的法术伤害. 
-并且使目标受到的大地震击伤害提升75%. 
-有15%的几率立即冷却大地震击, 并且使3 s内施放的下一次大地震击不消耗任何法力值. 
+并且使目标受到的Earth Shock伤害提升75%. 
+有15%的几率立即冷却Earth Shock, 并且使3 s内施放的下一次Earth Shock不消耗任何法力值. 
 
 |cff99ccffRange: |r600 yards
-|cff99ccffCost: |r50点
-|cff99ccff持续时间: |r3 s
+|cff99ccffCost: |r50
+|cff99ccffDuration: |r3 s
 |cff99ccffCool: |r6 s
 }
 
@@ -20344,12 +20344,12 @@ STRING 8742
 // Ability: A01B (storm strike), Ubertip (Tooltip - normal - ext[aub1])
 {
 将手中的武器注入风暴能量, 立即对目标造成一次普通攻击190%的法术伤害. 
-并且使目标受到的大地震击伤害提升100%. 
-有25%的几率立即冷却大地震击, 并且使3 s内施放的下一次大地震击不消耗任何法力值. 
+并且使目标受到的Earth Shock伤害提升100%. 
+有25%的几率立即冷却Earth Shock, 并且使3 s内施放的下一次Earth Shock不消耗任何法力值. 
 
 |cff99ccffRange: |r600 yards
-|cff99ccffCost: |r50点
-|cff99ccff持续时间: |r3 s
+|cff99ccffCost: |r50
+|cff99ccffDuration: |r3 s
 |cff99ccffCool: |r6 s
 }
 
@@ -20357,45 +20357,45 @@ STRING 8743
 // Ability: A01B (storm strike), Researchubertip (Tooltip - Learn - ext[arut])
 {
 将手中的武器注入风暴能量, 立即对目标造成一次闪电伤害. 
-并且使目标受到的大地震击伤害提升. 
+并且使目标受到的Earth Shock伤害提升. 
 
 |cff99ccffRange: |r600 yards
-|cff99ccffCost: |r50点
-|cff99ccff持续时间: |r3 s
+|cff99ccffCost: |r50
+|cff99ccffDuration: |r3 s
 |cff99ccffCool: |r6 s
 
-|cffffcc00Level 1|r - 造成普通攻击130%的法术伤害, 使大地震击的伤害提高50%. 
-|cffffcc00Level 2|r - 造成普通攻击160%的法术伤害, 使大地震击的伤害提高75%. 有15%的几率立即冷却大地震击, 并且使3 s内施放的下一次大地震击不消耗任何法力值. 
-|cffffcc00Level 3|r - 造成普通攻击190%的法术伤害, 使大地震击的伤害提高100%. 有25%的几率立即冷却大地震击, 并且使3 s内施放的下一次大地震击不消耗任何法力值. 
+|cffffcc00Level 1|r - 造成普通攻击130%的法术伤害, 使Earth Shock的伤害提高50%. 
+|cffffcc00Level 2|r - 造成普通攻击160%的法术伤害, 使Earth Shock的伤害提高75%. 有15%的几率立即冷却Earth Shock, 并且使3 s内施放的下一次Earth Shock不消耗任何法力值. 
+|cffffcc00Level 3|r - 造成普通攻击190%的法术伤害, 使Earth Shock的伤害提高100%. 有25%的几率立即冷却Earth Shock, 并且使3 s内施放的下一次Earth Shock不消耗任何法力值. 
 }
 
 STRING 8744
 // Ability: A01G (earth shock), Ubertip (Tooltip - normal - ext[aub1])
 {
-冲击目标, 对目标造成150点伤害, 同时可以打断其施法. 
+冲击目标, 对目标造成150伤害, 同时可以打断其施法. 
 
 |cff99ccffRange: |r600 yards
-|cff99ccffCost: |r85点
+|cff99ccffCost: |r85
 |cff99ccffCool: |r9 s
 }
 
 STRING 8745
 // Ability: A01G (earth shock), Ubertip (Tooltip - normal - ext[aub1])
 {
-冲击目标, 对目标造成250点伤害, 同时可以打断其施法. 
+冲击目标, 对目标造成250伤害, 同时可以打断其施法. 
 
 |cff99ccffRange: |r600 yards
-|cff99ccffCost: |r95点
+|cff99ccffCost: |r95
 |cff99ccffCool: |r9 s
 }
 
 STRING 8746
 // Ability: A01G (earth shock), Ubertip (Tooltip - normal - ext[aub1])
 {
-冲击目标, 对目标造成350点伤害, 同时可以打断其施法. 
+冲击目标, 对目标造成350伤害, 同时可以打断其施法. 
 
 |cff99ccffRange: |r600 yards
-|cff99ccffCost: |r105点
+|cff99ccffCost: |r105
 |cff99ccffCool: |r9 s
 }
 
@@ -20405,12 +20405,12 @@ STRING 8747
 冲击目标, 对目标造成大量伤害, 同时可以打断其施法. 
 
 |cff99ccffRange: |r600 yards
-|cff99ccffCost: |r85/95/105点
+|cff99ccffCost: |r85/95/105
 |cff99ccffCool: |r9 s
 
-|cffffcc00Level 1|r - 造成150点伤害. 
-|cffffcc00Level 2|r - 造成250点伤害. 
-|cffffcc00Level 3|r - 造成350点伤害. 
+|cffffcc00Level 1|r - 造成150伤害. 
+|cffffcc00Level 2|r - 造成250伤害. 
+|cffffcc00Level 3|r - 造成350伤害. 
 }
 
 STRING 8755
@@ -20442,8 +20442,8 @@ STRING 8772
 {
 地缚者激发自然之力, 将自己转化为纯元素形态, 普通攻击转化为法术伤害, 造成的所有伤害提高30%并提高75%物理免伤. 
 
-|cff99ccffCost: |r25点
-|cff99ccff持续时间: |r12 s
+|cff99ccffCost: |r25
+|cff99ccffDuration: |r12 s
 |cff99ccffCool: |r40 s
 }
 
@@ -20452,8 +20452,8 @@ STRING 8773
 {
 地缚者激发自然之力, 将自己转化为纯元素形态, 普通攻击转化为法术伤害, 造成的所有伤害提高30%并提高75%物理免伤. 
 
-|cff99ccffCost: |r25点
-|cff99ccff持续时间: |r16 s
+|cff99ccffCost: |r25
+|cff99ccffDuration: |r16 s
 |cff99ccffCool: |r40 s
 }
 
@@ -20462,8 +20462,8 @@ STRING 8774
 {
 地缚者激发自然之力, 将自己转化为纯元素形态, 普通攻击转化为法术伤害, 造成的所有伤害提高30%并提高75%物理免伤. 
 
-|cff99ccffCost: |r25点
-|cff99ccff持续时间: |r20 s
+|cff99ccffCost: |r25
+|cff99ccffDuration: |r20 s
 |cff99ccffCool: |r40 s
 }
 
@@ -20472,8 +20472,8 @@ STRING 8775
 {
 地缚者激发自然之力, 将自己转化为纯元素形态, 普通攻击转化为法术伤害, 造成的所有伤害提高30%并提高75%物理免伤. 
 
-|cff99ccffCost: |r25点
-|cff99ccff持续时间: |r12/16/20 s
+|cff99ccffCost: |r25
+|cff99ccffDuration: |r12/16/20 s
 |cff99ccffCool: |r40 s
 
 |cffffcc00Level 1|r - 持续12 s. 
@@ -20514,33 +20514,33 @@ Neutral: 升腾为元素形态, 普通攻击转化为法术伤害, 造成的所�
 STRING 8784
 // Ability: A01U (frost nova), Ubertip (Tooltip - normal - ext[aub1])
 {
-释放一阵冰霜冲击波, 对他们造成50点法术伤害, 同时使他们因被冻结而陷入Stun, 并使他们在12 s内受到的法术伤害提升3%. 
+释放一阵冰霜冲击波, 对他们造成50法术伤害, 同时使他们因被冻结而陷入Stun, 并使他们在12 s内受到的法术伤害提升3%. 
 
-|cff99ccff影响区域: |r300 yards
-|cff99ccffCost: |r70点
-|cff99ccff持续时间: |r4 s
+|cff99ccffAOE: |r300 yards
+|cff99ccffCost: |r70
+|cff99ccffDuration: |r4 s
 |cff99ccffCool: |r15 s
 }
 
 STRING 8785
 // Ability: A01U (frost nova), Ubertip (Tooltip - normal - ext[aub1])
 {
-释放一阵冰霜冲击波, 对他们造成75点法术伤害, 同时使他们因被冻结而陷入Stun, 并使他们在12 s内Taking 6% extra magical damage. 
+释放一阵冰霜冲击波, 对他们造成75法术伤害, 同时使他们因被冻结而陷入Stun, 并使他们在12 s内Taking 6% extra magical damage. 
 
-|cff99ccff影响区域: |r400 yards
-|cff99ccffCost: |r140点
-|cff99ccff持续时间: |r5 s
+|cff99ccffAOE: |r400 yards
+|cff99ccffCost: |r140
+|cff99ccffDuration: |r5 s
 |cff99ccffCool: |r15 s
 }
 
 STRING 8786
 // Ability: A01U (frost nova), Ubertip (Tooltip - normal - ext[aub1])
 {
-释放一阵冰霜冲击波, 对他们造成100点法术伤害, 同时使他们因被冻结而陷入Stun, 并使他们在12 s内受到的法术伤害提升9%. 
+释放一阵冰霜冲击波, 对他们造成100法术伤害, 同时使他们因被冻结而陷入Stun, 并使他们在12 s内受到的法术伤害提升9%. 
 
-|cff99ccff影响区域: |r500 yards
-|cff99ccffCost: |r280点
-|cff99ccff持续时间: |r6 s
+|cff99ccffAOE: |r500 yards
+|cff99ccffCost: |r280
+|cff99ccffDuration: |r6 s
 |cff99ccffCool: |r12 s
 }
 
@@ -20549,14 +20549,14 @@ STRING 8787
 {
 释放一阵冰霜冲击波, 冻结附近的所有敌人, 让他们陷入Stun, 并使他们在12 s内受到的法术伤害提升. 
 
-|cff99ccff影响区域: |r300/400/500 yards
-|cff99ccffCost: |r70/140/280点
-|cff99ccff持续时间: |r4/5/6 s
+|cff99ccffAOE: |r300/400/500 yards
+|cff99ccffCost: |r70/140/280
+|cff99ccffDuration: |r4/5/6 s
 |cff99ccffCool: |r15/15/12 s
 
-|cffffcc00Level 1|r - 造成50点法术伤害, 被影响的目标受到的法术伤害提升3%. 
-|cffffcc00Level 2|r - 造成75点法术伤害, 被影响的目标Taking 6% extra magical damage. 
-|cffffcc00Level 3|r - 造成100点法术伤害, 被影响的目标受到的法术伤害提升9%. 
+|cffffcc00Level 1|r - 造成50法术伤害, 被影响的目标受到的法术伤害提升3%. 
+|cffffcc00Level 2|r - 造成75法术伤害, 被影响的目标Taking 6% extra magical damage. 
+|cffffcc00Level 3|r - 造成100法术伤害, 被影响的目标受到的法术伤害提升9%. 
 }
 
 STRING 8788
@@ -20585,33 +20585,33 @@ STRING 8789
 STRING 8790
 // Ability: A00D (lifebloom), Ubertip (Tooltip - normal - ext[aub1])
 {
-治疗目标, 每 s为其恢复35点生命值, 当该效果以任何方式从目标身上移除的时候, 会对直接治疗目标100点生命值. 
+治疗目标, 每 s为其恢复35生命值, 当该效果以任何方式从目标身上移除的时候, 会对直接治疗目标100生命值. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r50点
-|cff99ccff持续时间: |r7(10) s
+|cff99ccffCost: |r50
+|cff99ccffDuration: |r7(10) s
 |cff99ccffCool: |r1 s
 }
 
 STRING 8791
 // Ability: A00D (lifebloom), Ubertip (Tooltip - normal - ext[aub1])
 {
-治疗目标, 每 s为其恢复70点生命值, 当该效果以任何方式从目标身上移除的时候, 会对直接治疗目标200点生命值. 
+治疗目标, 每 s为其恢复70生命值, 当该效果以任何方式从目标身上移除的时候, 会对直接治疗目标200生命值. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r50点
-|cff99ccff持续时间: |r7(10) s
+|cff99ccffCost: |r50
+|cff99ccffDuration: |r7(10) s
 |cff99ccffCool: |r1 s
 }
 
 STRING 8792
 // Ability: A00D (lifebloom), Ubertip (Tooltip - normal - ext[aub1])
 {
-治疗目标, 每 s为其恢复105点生命值, 当该效果以任何方式从目标身上移除的时候, 会对直接治疗目标300点生命值. 
+治疗目标, 每 s为其恢复105生命值, 当该效果以任何方式从目标身上移除的时候, 会对直接治疗目标300生命值. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r50点
-|cff99ccff持续时间: |r7(10) s
+|cff99ccffCost: |r50
+|cff99ccffDuration: |r7(10) s
 |cff99ccffCool: |r1 s
 }
 
@@ -20621,49 +20621,49 @@ STRING 8793
 治疗目标, 每 s为其恢复生命值, 当该效果以任何方式从目标身上移除的时候, 会对目标进行一次强力的直接治疗. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r50点
-|cff99ccff持续时间: |r7(10) s
+|cff99ccffCost: |r50
+|cff99ccffDuration: |r7(10) s
 |cff99ccffCool: |r1 s
 
-|cffffcc00Level 1|r - 每 s治疗35点生命值, 效果移除时治疗100点. 
-|cffffcc00Level 2|r - 每 s治疗70点生命值, 效果移除时治疗200点. 
-|cffffcc00Level 3|r - 每 s治疗105点生命值, 效果移除时治疗300点. 
+|cffffcc00Level 1|r - 每 s治疗35生命值, 效果移除时治疗100. 
+|cffffcc00Level 2|r - 每 s治疗70生命值, 效果移除时治疗200. 
+|cffffcc00Level 3|r - 每 s治疗105生命值, 效果移除时治疗300. 
 }
 
 STRING 8794
 // Ability: A01X (rejuvenation), Ubertip (Tooltip - normal - ext[aub1])
 {
-使目标友军受到持续性的治疗, 每3 s治疗80点生命值, 对生命值最少20%的目标将会有最多50%额外的极效治疗几率. 
+使目标友军受到持续性的治疗, 每3 s治疗80生命值, 对生命值最少20%的目标将会有最多50%额外的极效治疗几率. 
 同时为目标附加Grove Guard效果, 使其躲闪几率提升7%, 持续12 s. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r75点
-|cff99ccff持续时间: |r12(18) s
+|cff99ccffCost: |r75
+|cff99ccffDuration: |r12(18) s
 |cff99ccffCool: |r1 s
 }
 
 STRING 8795
 // Ability: A01X (rejuvenation), Ubertip (Tooltip - normal - ext[aub1])
 {
-使目标友军受到持续性的治疗, 每3 s治疗140点生命值, 对生命值最少40%的目标将会有最多50%额外的极效治疗几率. 
+使目标友军受到持续性的治疗, 每3 s治疗140生命值, 对生命值最少40%的目标将会有最多50%额外的极效治疗几率. 
 同时为目标附加Grove Guard效果, 使其躲闪几率提升7%, 持续12 s. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r110点
-|cff99ccff持续时间: |r12(18) s
+|cff99ccffCost: |r110
+|cff99ccffDuration: |r12(18) s
 |cff99ccffCool: |r1 s
 }
 
 STRING 8796
 // Ability: A01X (rejuvenation), Ubertip (Tooltip - normal - ext[aub1])
 {
-使目标友军受到持续性的治疗, 每3 s治疗200点生命值, 对生命值最少60%的目标将会有最多50%额外的极效治疗几率. 
+使目标友军受到持续性的治疗, 每3 s治疗200生命值, 对生命值最少60%的目标将会有最多50%额外的极效治疗几率. 
 同时为目标附加Grove Guard效果, 使其躲闪几率提升7%, 持续12 s. 
 并且被动地使回Life Bloom的最终治疗的极效治疗的几率提升50%. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r145点
-|cff99ccff持续时间: |r12(18) s
+|cff99ccffCost: |r145
+|cff99ccffDuration: |r12(18) s
 |cff99ccffCool: |r1 s
 }
 
@@ -20673,46 +20673,46 @@ STRING 8797
 使目标友军受到持续性的治疗, 每3 s对其造成一定的治疗, 对受伤更严重的目标将会有最多50%额外的极效治疗几率. 同时为目标附加Grove Guard效果, 使其躲闪几率提升7%, 持续12 s. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r75/110/145点
-|cff99ccff持续时间: |r12(18) s
+|cff99ccffCost: |r75/110/145
+|cff99ccffDuration: |r12(18) s
 |cff99ccffCool: |r1 s
 
-|cffffcc00Level 1|r - 造成80点治疗, 对生命值剩余20%的目标提供最大额外的极效治疗几率. 
-|cffffcc00Level 2|r - 造成140点治疗, 对生命值剩余40%的目标提供最大额外的极效治疗几率. 
-|cffffcc00Level 3|r - 造成200点治疗, 对生命值剩余60%的目标提供最大额外的极效治疗几率. 并且被动地使回Life Bloom的最终治疗的极效治疗的几率提升50%. 
+|cffffcc00Level 1|r - 造成80治疗, 对生命值剩余20%的目标提供最大额外的极效治疗几率. 
+|cffffcc00Level 2|r - 造成140治疗, 对生命值剩余40%的目标提供最大额外的极效治疗几率. 
+|cffffcc00Level 3|r - 造成200治疗, 对生命值剩余60%的目标提供最大额外的极效治疗几率. 并且被动地使回Life Bloom的最终治疗的极效治疗的几率提升50%. 
 }
 
 STRING 8798
 // Ability: A01Y (regrowth), Ubertip (Tooltip - normal - ext[aub1])
 {
-咏唱一段较复杂的咒语为一个目标友军治疗200点生命值, 然后并且每5 s为其治疗100点生命值. 如果目标的生命值低于35%, 那么Regrowth将变为瞬发, 该效果每35 s只能触发一次. 
+咏唱一段较复杂的咒语为一个目标友军治疗200生命值, 然后并且每5 s为其治疗100生命值. 如果目标的生命值低于35%, 那么Regrowth将变为瞬发, 该效果每35 s只能触发一次. 
 
-|cff99ccff施法时间: |r3 s
+|cff99ccffCast: |r3 s
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r100点
-|cff99ccff持续时间: |r25 s
+|cff99ccffCost: |r100
+|cff99ccffDuration: |r25 s
 }
 
 STRING 8799
 // Ability: A01Y (regrowth), Ubertip (Tooltip - normal - ext[aub1])
 {
-咏唱一段较复杂的咒语为一个目标友军治疗350点生命值, 然后并且每5 s为其治疗200点生命值. 如果目标的生命值低于35%, 那么Regrowth将变为瞬发, 该效果每25 s只能触发一次. 并且被动地使Life Bloom的持续时间延长3 s. 
+咏唱一段较复杂的咒语为一个目标友军治疗350生命值, 然后并且每5 s为其治疗200生命值. 如果目标的生命值低于35%, 那么Regrowth将变为瞬发, 该效果每25 s只能触发一次. 并且被动地使Life Bloom的Duration延长3 s. 
 
-|cff99ccff施法时间: |r3 s
+|cff99ccffCast: |r3 s
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r120点
-|cff99ccff持续时间: |r25 s
+|cff99ccffCost: |r120
+|cff99ccffDuration: |r25 s
 }
 
 STRING 8800
 // Ability: A01Y (regrowth), Ubertip (Tooltip - normal - ext[aub1])
 {
-咏唱一段较复杂的咒语为一个目标友军治疗500点生命值, 然后并且每5 s为其治疗300点生命值. 如果目标的生命值低于35%, 那么Regrowth将变为瞬发, 该效果每15 s只能触发一次. 并且被动地使Rejuvenation的持续时间延长6 s. 
+咏唱一段较复杂的咒语为一个目标友军治疗500生命值, 然后并且每5 s为其治疗300生命值. 如果目标的生命值低于35%, 那么Regrowth将变为瞬发, 该效果每15 s只能触发一次. 并且被动地使Rejuvenation的Duration延长6 s. 
 
-|cff99ccff施法时间: |r3 s
+|cff99ccffCast: |r3 s
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r140点
-|cff99ccff持续时间: |r25 s
+|cff99ccffCost: |r140
+|cff99ccffDuration: |r25 s
 }
 
 STRING 8801
@@ -20720,25 +20720,25 @@ STRING 8801
 {
 咏唱一段较复杂的咒语对一个目标友军进行强力的治疗, 并且在接下来的很长一段时间内对其进行缓慢的治疗, 每5 s治疗一次. 如果目标的生命值低于35%, 那么Regrowth将变为瞬发, 该效果隔一段时间才能触发一次. 
 
-|cff99ccff施法时间: |r3 s
+|cff99ccffCast: |r3 s
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r100/120/140点
-|cff99ccff持续时间: |r25 s
+|cff99ccffCost: |r100/120/140
+|cff99ccffDuration: |r25 s
 
-|cffffcc00Level 1|r - 直接治疗200点, 持续治疗100点. 瞬发效果每35 s触发一次. 
-|cffffcc00Level 2|r - 直接治疗350点, 持续治疗200点. 瞬发效果每25 s触发一次. 并且被动地使Life Bloom的持续时间延长3 s. 
-|cffffcc00Level 3|r - 直接治疗500点, 持续治疗300点. 瞬发效果每15 s触发一次. 并且被动地使Rejuvenation的持续时间延长6 s. 
+|cffffcc00Level 1|r - 直接治疗200, 持续治疗100. 瞬发效果每35 s触发一次. 
+|cffffcc00Level 2|r - 直接治疗350, 持续治疗200. 瞬发效果每25 s触发一次. 并且被动地使Life Bloom的Duration延长3 s. 
+|cffffcc00Level 3|r - 直接治疗500, 持续治疗300. 瞬发效果每15 s触发一次. 并且被动地使Rejuvenation的Duration延长6 s. 
 }
 
 STRING 8802
 // Ability: A01L (pain), Ubertip (Tooltip - normal - ext[aub1])
 {
-诅咒目标, 使其每2.5 s受到130点伤害. 
+诅咒目标, 使其每2.5 s受到130伤害. 
 并且让目标受到额外7%的法术伤害. 
 
 |cff99ccffRange: |r600 yards
-|cff99ccffCost: |r115点
-|cff99ccff持续时间: |r12 s
+|cff99ccffCost: |r115
+|cff99ccffDuration: |r12 s
 |cff99ccffCool: |r2 s
 }
 
@@ -20748,13 +20748,13 @@ STRING 8803
 诅咒目标, 使其受到持续性的法术伤害, 并且让被诅咒的目标受到更高的法术伤害. 
 
 |cff99ccffRange: |r600 yards
-|cff99ccffCost: |r100/115/130点
-|cff99ccff持续时间: |r12 s
+|cff99ccffCost: |r100/115/130
+|cff99ccffDuration: |r12 s
 |cff99ccffCool: |r2 s
 
-|cffffcc00Level 1|r - 每3 s造成100点伤害. 目标受到额外5%的法术伤害. 
-|cffffcc00Level 2|r - 每2.5 s造成130点伤害. 目标受到额外7%的法术伤害. 
-|cffffcc00Level 3|r - 每2 s造成160点伤害. 目标受到额外9%的法术伤害. 
+|cffffcc00Level 1|r - 每3 s造成100伤害. 目标受到额外5%的法术伤害. 
+|cffffcc00Level 2|r - 每2.5 s造成130伤害. 目标受到额外7%的法术伤害. 
+|cffffcc00Level 3|r - 每2 s造成160伤害. 目标受到额外9%的法术伤害. 
 }
 
 STRING 8804
@@ -20763,18 +20763,18 @@ STRING 8804
 将最后一个成功盗取的魔法状态转移至目标友军. 
 
 |cff99ccffRange: |r600 yards
-|cff99ccffCost: |r15点
+|cff99ccffCost: |r15
 |cff99ccffCool: |r2 s
 }
 
 STRING 8807
 // Ability: A03V (heal), Ubertip (Tooltip - normal - ext[aub1])
 {
-对一个友军目标施放医疗术的效果, 使其每3 s受到250点治疗, 并且使目标受到的治疗效果提升12%. 
+对一个友军目标施放医疗术的效果, 使其每3 s受到250治疗, 并且使目标受到的治疗效果提升12%. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r125点
-|cff99ccff持续时间: |r12 s
+|cff99ccffCost: |r125
+|cff99ccffDuration: |r12 s
 |cff99ccffCool: |r1 s
 }
 
@@ -20797,7 +20797,7 @@ STRING 8814
 +10智力
 +100生命上限
 +20法术强度
-每 s回复5点法力值
+每 s回复5法力值
 |cff33ff33医疗术使目标受到治疗增幅的效果翻倍, 并且移除Shield造成的虚弱效果. |r
 |cffffdead在光的背后, 是阴影. |r
 }
@@ -20809,7 +20809,7 @@ STRING 8815
 +10智力
 +100生命上限
 +20法术强度
-每 s回复5点法力值
+每 s回复5法力值
 |cff33ff33医疗术使目标受到治疗增幅的效果翻倍, 并且移除Shield造成的虚弱效果. |r
 |cffffdead在光的背后, 是阴影. |r
 }
@@ -20821,7 +20821,7 @@ STRING 8816
 +10敏捷
 +15攻击强度
 +4%暴击几率
-|cff33ff33使Heroic Strike消耗的法力值减少5点. |r
+|cff33ff33使Heroic Strike消耗的法力值减少5. |r
 |cffffdead带着部落的荣耀, 斩下入侵者的头颅. |r
 }
 
@@ -20833,7 +20833,7 @@ STRING 8817
 +10敏捷
 +15攻击强度
 +4%暴击几率
-|cff33ff33使Heroic Strike消耗的法力值减少5点. |r
+|cff33ff33使Heroic Strike消耗的法力值减少5. |r
 |cffffdead带着部落的荣耀, 斩下入侵者的头颅. |r
 }
 
@@ -20842,8 +20842,8 @@ STRING 8818
 {
 发出挑衅的咆哮, 降低附近敌人5%的攻击强度并震裂他们的伤口, 同时会恢复25%的法力值. 被割伤影响的目标受到割伤的伤害提高8%并且立即受到一次割伤的流血伤害, 每个受割伤影响的目标还会为你恢复额外的1%法力值. 
 
-|cff99ccff影响区域: |r600 yards
-|cff99ccff持续时间: |r10 s
+|cff99ccffAOE: |r600 yards
+|cff99ccffDuration: |r10 s
 |cff99ccffCool: |r5 s
 }
 
@@ -20852,8 +20852,8 @@ STRING 8819
 {
 发出挑衅的咆哮, 降低附近敌人10%的攻击强度并震裂他们的伤口, 同时会恢复25%的法力值. 被割伤影响的目标受到割伤的伤害提高16%并且立即受到一次割伤的流血伤害, 每个受割伤影响的目标还会为你恢复额外的1%法力值. 
 
-|cff99ccff影响区域: |r600 yards
-|cff99ccff持续时间: |r10 s
+|cff99ccffAOE: |r600 yards
+|cff99ccffDuration: |r10 s
 |cff99ccffCool: |r5 s
 }
 
@@ -20862,8 +20862,8 @@ STRING 8820
 {
 发出挑衅的咆哮, 降低附近敌人15%的攻击强度并震裂他们的伤口, 同时会恢复25%的法力值. 被割伤影响的目标受到割伤的伤害提高24%并且立即受到一次割伤的流血伤害, 每个受割伤影响的目标还会为你恢复额外的1%法力值. 
 
-|cff99ccff影响区域: |r600 yards
-|cff99ccff持续时间: |r10 s
+|cff99ccffAOE: |r600 yards
+|cff99ccffDuration: |r10 s
 |cff99ccffCool: |r5 s
 }
 
@@ -20878,8 +20878,8 @@ STRING 8826
 {
 发出挑衅的咆哮, 使附近敌人的攻击强度降低并震裂他们的伤口, 同时会恢复25%的法力值. 被割伤影响的目标受到割伤的伤害提高并且立即受到一次割伤的流血伤害, 每个受割伤影响的目标还会为你恢复额外的1%法力值. 
 
-|cff99ccff影响区域: |r600 yards
-|cff99ccff持续时间: |r10 s
+|cff99ccffAOE: |r600 yards
+|cff99ccffDuration: |r10 s
 |cff99ccffCool: |r5 s
 
 |cffffcc00Level 1|r - 降低5%的攻击强度, 目标受到割伤的伤害提高8%. 
@@ -20892,7 +20892,7 @@ STRING 8827
 {
 被动地使利爪德鲁依可以在躲闪敌人的攻击之后自动消耗最多10%的法力值来治疗自己2%的最大生命值, 开启之后将不再需要任何法力值来治疗并且提升12%的躲闪几率. 
 
-|cff99ccff持续时间: |r5 s
+|cff99ccffDuration: |r5 s
 |cff99ccffCool: |r15 s
 }
 
@@ -20901,7 +20901,7 @@ STRING 8828
 {
 被动地使利爪德鲁依可以在躲闪敌人的攻击之后自动消耗最多10%的法力值来治疗自己4%的最大生命值, 开启之后将不再需要任何法力值来治疗并且提升18%的躲闪几率. 
 
-|cff99ccff持续时间: |r5 s
+|cff99ccffDuration: |r5 s
 |cff99ccffCool: |r15 s
 }
 
@@ -20910,7 +20910,7 @@ STRING 8829
 {
 被动地使利爪德鲁依可以在躲闪敌人的攻击之后自动消耗最多10%的法力值来治疗自己6%的最大生命值, 开启之后将不再需要任何法力值来治疗并且提升24%的躲闪几率. 
 
-|cff99ccff持续时间: |r5 s
+|cff99ccffDuration: |r5 s
 |cff99ccffCool: |r15 s
 }
 
@@ -20919,7 +20919,7 @@ STRING 8834
 {
 被动地使利爪德鲁依可以在躲闪敌人的攻击之后自动消耗最多10%的法力值来治疗自己, 开启之后将不再需要任何法力值来治疗并且提升一定的躲闪几率. 
 
-|cff99ccff持续时间: |r5 s
+|cff99ccffDuration: |r5 s
 |cff99ccffCool: |r15 s
 
 |cffffcc00Level 1|r - 最多治疗2%的最大生命值, 使用提升12%的躲闪. 
@@ -21103,25 +21103,25 @@ STRING 8883
 STRING 8901
 // Ability: A006 (shield of sin'dorei), Tip (Tooltip - normal[atp1])
 {
-辛多雷之盾(|cffffcc00F|r) - [|cffffcc00Level 1|r]
+Shield of Sin'dorei(|cffffcc00F|r) - [|cffffcc00Level 1|r]
 }
 
 STRING 8902
 // Ability: A006 (shield of sin'dorei), Tip (Tooltip - normal[atp1])
 {
-辛多雷之盾(|cffffcc00F|r) - [|cffffcc00Level 2|r]
+Shield of Sin'dorei(|cffffcc00F|r) - [|cffffcc00Level 2|r]
 }
 
 STRING 8903
 // Ability: A006 (shield of sin'dorei), Tip (Tooltip - normal[atp1])
 {
-辛多雷之盾(|cffffcc00F|r) - [|cffffcc00Level 3|r]
+Shield of Sin'dorei(|cffffcc00F|r) - [|cffffcc00Level 3|r]
 }
 
 STRING 8904
 // Ability: A006 (shield of sin'dorei), Researchtip (Tooltip - Learn[aret])
 {
-Learn 辛多雷之盾(|cffffcc00F|r) - [|cffffcc00Level %d|r]
+Learn Shield of Sin'dorei(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 }
 
 STRING 8905
@@ -21154,8 +21154,8 @@ STRING 8921
 使一个弱小的敌人陷入混乱, 立即强迫其攻击你, 削弱目标50%的攻击强度, 但是会略微提高目标的攻击速度. 
 
 |cff99ccffRange: |r600 yards
-|cff99ccffCost: |r50点
-|cff99ccff持续时间: |r5 s
+|cff99ccffCost: |r50
+|cff99ccffDuration: |r5 s
 |cff99ccffCool: |r14 s
 }
 
@@ -21165,8 +21165,8 @@ STRING 8922
 使一个弱小的敌人陷入混乱, 立即强迫其攻击你, 削弱目标60%的攻击强度, 但是会略微提高目标的攻击速度. 
 
 |cff99ccffRange: |r600 yards
-|cff99ccffCost: |r50点
-|cff99ccff持续时间: |r5 s
+|cff99ccffCost: |r50
+|cff99ccffDuration: |r5 s
 |cff99ccffCool: |r12 s
 }
 
@@ -21176,8 +21176,8 @@ STRING 8923
 使一个弱小的敌人陷入混乱, 立即强迫其攻击你, 削弱目标70%的攻击强度, 但是会略微提高目标的攻击速度. 
 
 |cff99ccffRange: |r600 yards
-|cff99ccffCost: |r50点
-|cff99ccff持续时间: |r5 s
+|cff99ccffCost: |r50
+|cff99ccffDuration: |r5 s
 |cff99ccffCool: |r10 s
 }
 
@@ -21187,8 +21187,8 @@ STRING 8924
 使一个弱小的敌人陷入混乱, 立即强迫其攻击你, 大幅度削弱目标的攻击强度, 但是会略微提高目标的攻击速度. 
 
 |cff99ccffRange: |r600 yards
-|cff99ccffCost: |r50点
-|cff99ccff持续时间: |r5 s
+|cff99ccffCost: |r50
+|cff99ccffDuration: |r5 s
 |cff99ccffCool: |r14/12/10 s
 
 |cffffcc00Level 1|r - 削弱50%攻击强度. 
@@ -21199,7 +21199,7 @@ STRING 8924
 STRING 8929
 // Ability: A00F (power of abomination), Ubertip (Tooltip - normal - ext[aub1])
 {
-激活憎恶之力以后可以提升自身的攻击强度10点. 
+激活憎恶之力以后可以提升自身的攻击强度10. 
 并且在15 s内提高食尸鬼仆从的攻击速度50%, 这个效果每30 s只能出现一次. 
 
 |cff99ccffCost: |r每 s4点
@@ -21211,21 +21211,21 @@ STRING 8929
 STRING 8930
 // Ability: A00F (power of abomination), Ubertip (Tooltip - normal - ext[aub1])
 {
-激活憎恶之力以后可以提升自身的攻击强度15点. 
+激活憎恶之力以后可以提升自身的攻击强度15. 
 并且在15 s内提高食尸鬼仆从的攻击速度50%, 这个效果每30 s只能出现一次. 
 
-|cff99ccffCost: |r每 s5点
+|cff99ccffCost: |r每 s5
 
 |cffffcc00当前状态|r: 女妖之力
 获得每 s4点的更快法力回复速度, 并且每次攻击将附加诅咒效果, 使敌人的攻击有5%的几率落空. 
 
-|cff99ccff持续时间: |r10 s
+|cff99ccffDuration: |r10 s
 }
 
 STRING 8931
 // Ability: A00F (power of abomination), Ubertip (Tooltip - normal - ext[aub1])
 {
-激活憎恶之力以后可以提升自身的攻击强度20点. 
+激活憎恶之力以后可以提升自身的攻击强度20. 
 并且在15 s内提高食尸鬼仆从的攻击速度50%, 这个效果每30 s只能出现一次. 
 
 |cff99ccffCost: |r每 s6点
@@ -21233,7 +21233,7 @@ STRING 8931
 |cffffcc00当前状态|r: 女妖之力
 获得每 s6点的更快法力回复速度, 并且每次攻击将附加诅咒效果, 使敌人的攻击有10%的几率落空. 
 
-|cff99ccff持续时间: |r10 s
+|cff99ccffDuration: |r10 s
 }
 
 STRING 8932
@@ -21242,7 +21242,7 @@ STRING 8932
 激活女妖之力以后可以获得每 s2点的更快法力回复速度. 
 
 |cffffcc00当前状态|r: 憎恶之力
-提升自身的攻击强度10点, 食尸鬼仆从的攻击速度50%. 
+提升自身的攻击强度10, 食尸鬼仆从的攻击速度50%. 
 
 |cff99ccffCost: |r每 s4点
 }
@@ -21252,12 +21252,12 @@ STRING 8933
 {
 激活女妖之力以后可以获得每 s4点的更快法力回复速度, 并且每次攻击将附加诅咒效果, 使敌人的攻击有5%的几率落空. 
 
-|cff99ccff持续时间: |r10 s
+|cff99ccffDuration: |r10 s
 
 |cffffcc00当前状态|r: 憎恶之力
-提升自身的攻击强度15点, 食尸鬼仆从的攻击速度50%. . 
+提升自身的攻击强度15, 食尸鬼仆从的攻击速度50%. . 
 
-|cff99ccffCost: |r每 s5点
+|cff99ccffCost: |r每 s5
 }
 
 STRING 8934
@@ -21265,10 +21265,10 @@ STRING 8934
 {
 激活女妖之力以后可以获得每 s6点的更快法力回复速度, 并且每次攻击将附加诅咒效果, 使敌人的攻击有10%的几率落空. 
 
-|cff99ccff持续时间: |r10 s
+|cff99ccffDuration: |r10 s
 
 |cffffcc00当前状态|r: 憎恶之力
-提升自身的攻击强度20点, 食尸鬼仆从的攻击速度50%. . 
+提升自身的攻击强度20, 食尸鬼仆从的攻击速度50%. . 
 
 |cff99ccffCost: |r每 s6点
 }
@@ -21281,11 +21281,11 @@ Learn 憎恶之力将激发黑暗猎手的女妖之力, 可以被动地获得更
 
 |cff99ccffCost: |r每 s4/5/6点
 
-|cffffcc00Level 1|r - 提升每 s2点的法力回复. 激活憎恶之力以获得10点攻击强度. 
+|cffffcc00Level 1|r - 提升每 s2点的法力回复. 激活憎恶之力以获得10攻击强度. 
 |cffffcc00Level 2|r - 提升每 s4点的法力回复, 并且每次攻击将附加诅咒效果, 使敌人的攻击有5%的几率落空, 持续10 s. 
-激活憎恶之力以获得15点攻击强度. 
+激活憎恶之力以获得15攻击强度. 
 |cffffcc00Level 3|r - 提升每 s6点的法力回复, 并且每次攻击将附加诅咒效果, 使敌人的攻击有10%的几率落空, 持续10 s. 
-激活憎恶之力以获得20点攻击强度. 
+激活憎恶之力以获得20攻击强度. 
 }
 
 STRING 8936
@@ -21297,13 +21297,13 @@ STRING 8936
 STRING 8937
 // Item: I020 (|cff11ff11生命虹吸符咒|r), Ubertip (Tooltip - ext[utub])
 {
-|cff33ff33使用: 每3 s目标吸取200点生命值. |r
+|cff33ff33使用: 每3 s目标吸取200生命值. |r
 }
 
 STRING 8938
 // Item: I020 (|cff11ff11生命虹吸符咒|r), Description (说明[ides])
 {
-|cff33ff33使用: 每3 s目标吸取200点生命值. |r
+|cff33ff33使用: 每3 s目标吸取200生命值. |r
 }
 
 STRING 8939
@@ -21381,13 +21381,13 @@ strange wand
 STRING 8955
 // Item: I01F (|cff11ff11治疗结界符咒|r), Ubertip (Tooltip - ext[utub])
 {
-|cff33ff33使用: 每 s回复结界600 yards范围内的友军100点生命值, 持续10 s. |r
+|cff33ff33使用: 每 s回复结界600 yards范围内的友军100生命值, 持续10 s. |r
 }
 
 STRING 8956
 // Item: I01F (|cff11ff11治疗结界符咒|r), Description (说明[ides])
 {
-|cff33ff33使用: 每 s回复结界600 yards范围内的友军100点生命值, 持续10 s. |r
+|cff33ff33使用: 每 s回复结界600 yards范围内的友军100生命值, 持续10 s. |r
 }
 
 STRING 8957
@@ -21650,25 +21650,25 @@ Learn 秘法震击(|cffffcc00E|r) - [|cffffcc00Level %d|r]
 STRING 8999
 // Ability: A005 (discord), Tip (Tooltip - normal[atp1])
 {
-纷争(|cffffcc00R|r) - [|cffffcc00Level 1|r]
+Discord(|cffffcc00R|r) - [|cffffcc00Level 1|r]
 }
 
 STRING 9000
 // Ability: A005 (discord), Tip (Tooltip - normal[atp1])
 {
-纷争(|cffffcc00R|r) - [|cffffcc00Level 2|r]
+Discord(|cffffcc00R|r) - [|cffffcc00Level 2|r]
 }
 
 STRING 9001
 // Ability: A005 (discord), Tip (Tooltip - normal[atp1])
 {
-纷争(|cffffcc00R|r) - [|cffffcc00Level 3|r]
+Discord(|cffffcc00R|r) - [|cffffcc00Level 3|r]
 }
 
 STRING 9002
 // Ability: A005 (discord), Researchtip (Tooltip - Learn[aret])
 {
-Learn 纷争(|cffffcc00R|r) - [|cffffcc00Level %d|r]
+Learn Discord(|cffffcc00R|r) - [|cffffcc00Level %d|r]
 }
 
 STRING 9003
@@ -22226,25 +22226,25 @@ Learn 死亡契约(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 9095
 // Ability: A033 (earth shock), Tip (Tooltip - normal[atp1])
 {
-大地震击(|cffffcc00W|r) - [|cffffcc00Level 1|r]
+Earth Shock(|cffffcc00W|r) - [|cffffcc00Level 1|r]
 }
 
 STRING 9096
 // Ability: A033 (earth shock), Tip (Tooltip - normal[atp1])
 {
-大地震击(|cffffcc00W|r) - [|cffffcc00Level 2|r]
+Earth Shock(|cffffcc00W|r) - [|cffffcc00Level 2|r]
 }
 
 STRING 9097
 // Ability: A033 (earth shock), Tip (Tooltip - normal[atp1])
 {
-大地震击(|cffffcc00W|r) - [|cffffcc00Level 3|r]
+Earth Shock(|cffffcc00W|r) - [|cffffcc00Level 3|r]
 }
 
 STRING 9098
 // Ability: A01G (earth shock), Researchtip (Tooltip - Learn[aret])
 {
-Learn 大地震击(|cffffcc00W|r) - [|cffffcc00Level %d|r]
+Learn Earth Shock(|cffffcc00W|r) - [|cffffcc00Level %d|r]
 }
 
 STRING 9099
@@ -23276,19 +23276,19 @@ F
 STRING 9275
 // Ability: A01G (earth shock), Tip (Tooltip - normal[atp1])
 {
-大地震击(|cffffcc00W|r) - [|cffffcc00Level 1|r]
+Earth Shock(|cffffcc00W|r) - [|cffffcc00Level 1|r]
 }
 
 STRING 9276
 // Ability: A01G (earth shock), Tip (Tooltip - normal[atp1])
 {
-大地震击(|cffffcc00W|r) - [|cffffcc00Level 2|r]
+Earth Shock(|cffffcc00W|r) - [|cffffcc00Level 2|r]
 }
 
 STRING 9277
 // Ability: A01G (earth shock), Tip (Tooltip - normal[atp1])
 {
-大地震击(|cffffcc00W|r) - [|cffffcc00Level 3|r]
+Earth Shock(|cffffcc00W|r) - [|cffffcc00Level 3|r]
 }
 
 STRING 9278
@@ -23300,23 +23300,23 @@ W
 STRING 9279
 // Buff: B00X (blazing haste), Buffubertip (Tooltip - ext[fube])
 {
-|cff6666ffMagical|r: 法术急速提升300%, 移动速度提升至极限. 
+|cff6666ffMagical|r: Spell haste is increased by 300%, 移动速度提升至极限. 
 }
 
 STRING 9281
 // Ability: A01F (lacerate), Ubertip (Tooltip - normal - ext[aub1])
 {
-Rend目标, 造成50点物理伤害并且每2 s造成50点物理伤害. 该技能伤害会造成大量仇恨. 
+Rend目标, 造成50物理伤害并且每2 s造成50物理伤害. 该技能伤害会造成大量仇恨. 
 
 |cff99ccffRange: |r100 yards
-|cff99ccff持续时间: |r16 s
+|cff99ccffDuration: |r16 s
 |cff99ccffCool: |r1.5 s
 }
 
 STRING 9284
 // Ability: A0A1 (forest cure), Ubertip (Tooltip - normal - ext[aub1])
 {
-召唤丛林之魂, 消耗最多50%的法力值来治疗自己. 最多治疗3%的最大生命值再加上60点生命值. 
+召唤丛林之魂, 消耗最多50%的法力值来治疗自己. 最多治疗3%的最大生命值再加上60生命值. 
 
 |cff99ccffCool: |r1 s
 }
@@ -23324,7 +23324,7 @@ STRING 9284
 STRING 9285
 // Ability: A0A1 (forest cure), Ubertip (Tooltip - normal - ext[aub1])
 {
-召唤丛林之魂, 消耗最多50%的法力值来治疗自己. 最多治疗6%的最大生命值再加上120点生命值. 
+召唤丛林之魂, 消耗最多50%的法力值来治疗自己. 最多治疗6%的最大生命值再加上120生命值. 
 
 |cff99ccffCool: |r1 s
 }
@@ -23332,7 +23332,7 @@ STRING 9285
 STRING 9286
 // Ability: A0A1 (forest cure), Ubertip (Tooltip - normal - ext[aub1])
 {
-召唤丛林之魂, 消耗最多50%的法力值来治疗自己. 最多治疗9%的最大生命值再加上240点生命值. 
+召唤丛林之魂, 消耗最多50%的法力值来治疗自己. 最多治疗9%的最大生命值再加上240生命值. 
 
 |cff99ccffCool: |r1 s
 }
@@ -23344,9 +23344,9 @@ STRING 9287
 
 |cff99ccffCool: |r1 s
 
-|cffffcc00Level 1|r - 最多治疗3%的最大生命值再加上60点生命值. 
-|cffffcc00Level 2|r - 最多治疗6%的最大生命值再加上120点生命值. 
-|cffffcc00Level 3|r - 最多治疗9%的最大生命值再加上240点生命值. 
+|cffffcc00Level 1|r - 最多治疗3%的最大生命值再加上60生命值. 
+|cffffcc00Level 2|r - 最多治疗6%的最大生命值再加上120生命值. 
+|cffffcc00Level 3|r - 最多治疗9%的最大生命值再加上240生命值. 
 }
 
 STRING 9288
@@ -23354,7 +23354,7 @@ STRING 9288
 {
 立即恢复30%的生命值和生命值上限, 并且受到的所有伤害降低5%. 
 
-|cff99ccff持续时间: |r5 s
+|cff99ccffDuration: |r5 s
 |cff99ccffCool: |r60 s
 }
 
@@ -23363,7 +23363,7 @@ STRING 9289
 {
 立即恢复40%的生命值和生命值上限, 并且受到的所有伤害降低20%. 
 
-|cff99ccff持续时间: |r8 s
+|cff99ccffDuration: |r8 s
 |cff99ccffCool: |r60 s
 }
 
@@ -23372,7 +23372,7 @@ STRING 9290
 {
 立即恢复50%的生命值和生命值上限, 并且受到的所有伤害降低35%. 
 
-|cff99ccff持续时间: |r11 s
+|cff99ccffDuration: |r11 s
 |cff99ccffCool: |r60 s
 }
 
@@ -23381,7 +23381,7 @@ STRING 9291
 {
 立即恢复大量的生命值和生命值上限, 并且受到的所有伤害降低. 
 
-|cff99ccff持续时间: |r5/8/11 s
+|cff99ccffDuration: |r5/8/11 s
 |cff99ccffCool: |r60 s
 
 |cffffcc00Level 1|r - 恢复30%的生命值和生命值上限, 并且受到的所有伤害降低5%. . 
@@ -23398,33 +23398,33 @@ Neutral: 生命值上限提升, 受到的所有伤害降低.
 STRING 9293
 // Ability: A003 (sunfire storm), Ubertip (Tooltip - normal - ext[aub1])
 {
-激活阳炎之力灼伤附近的所有敌军单位, 造成50点法术伤害, 并且在接下来的8 s内每 s对附近的敌人造成50点法术伤害. 这个技能会造成大量仇恨. 
+激活阳炎之力灼伤附近的所有敌军单位, 造成50法术伤害, 并且在接下来的8 s内每 s对附近的敌人造成50法术伤害. 这个技能会造成大量仇恨. 
 
-|cff99ccff影响区域: |r250 yards
-|cff99ccffCost: |r20点
-|cff99ccff持续时间: |r8 s
+|cff99ccffAOE: |r250 yards
+|cff99ccffCost: |r20
+|cff99ccffDuration: |r8 s
 |cff99ccffCool: |r8 s
 }
 
 STRING 9294
 // Ability: A003 (sunfire storm), Ubertip (Tooltip - normal - ext[aub1])
 {
-激活阳炎之力灼伤附近的所有敌军单位, 造成100点法术伤害, 并且在接下来的8 s内每 s对附近的敌人造成100点法术伤害. 这个技能会造成大量仇恨. 
+激活阳炎之力灼伤附近的所有敌军单位, 造成100法术伤害, 并且在接下来的8 s内每 s对附近的敌人造成100法术伤害. 这个技能会造成大量仇恨. 
 
-|cff99ccff影响区域: |r250 yards
-|cff99ccffCost: |r20点
-|cff99ccff持续时间: |r8 s
+|cff99ccffAOE: |r250 yards
+|cff99ccffCost: |r20
+|cff99ccffDuration: |r8 s
 |cff99ccffCool: |r8 s
 }
 
 STRING 9295
 // Ability: A003 (sunfire storm), Ubertip (Tooltip - normal - ext[aub1])
 {
-激活阳炎之力灼伤附近的所有敌军单位, 造成150点法术伤害, 并且在接下来的8 s内每 s对附近的敌人造成150点法术伤害. 这个技能会造成大量仇恨. 
+激活阳炎之力灼伤附近的所有敌军单位, 造成150法术伤害, 并且在接下来的8 s内每 s对附近的敌人造成150法术伤害. 这个技能会造成大量仇恨. 
 
-|cff99ccff影响区域: |r250 yards
-|cff99ccffCost: |r20点
-|cff99ccff持续时间: |r8 s
+|cff99ccffAOE: |r250 yards
+|cff99ccffCost: |r20
+|cff99ccffDuration: |r8 s
 |cff99ccffCool: |r8 s
 }
 
@@ -23433,14 +23433,14 @@ STRING 9296
 {
 激活阳炎之力灼伤附近的所有敌军单位, 并且在接下来的8 s内每 s对附近的敌人造成伤害. 这个技能会造成大量仇恨. 
 
-|cff99ccff影响区域: |r250 yards
-|cff99ccffCost: |r20点
-|cff99ccff持续时间: |r8 s
+|cff99ccffAOE: |r250 yards
+|cff99ccffCost: |r20
+|cff99ccffDuration: |r8 s
 |cff99ccffCool: |r8 s
 
-|cffffcc00Level 1|r - 造成50点法术伤害. 
-|cffffcc00Level 2|r - 造成100点法术伤害. 
-|cffffcc00Level 3|r - 造成150点法术伤害. 
+|cffffcc00Level 1|r - 造成50法术伤害. 
+|cffffcc00Level 2|r - 造成100法术伤害. 
+|cffffcc00Level 3|r - 造成150法术伤害. 
 }
 
 STRING 9301
@@ -23455,8 +23455,8 @@ STRING 9302
 使用防御姿态, 提升招架几率45%和招架免伤100%, 并且反射下一次指向你的法术. 
 在成功地招架攻击以后, 会反弹招架攻击吸收的伤害并且造成大量仇恨. 
 
-|cff99ccffCost: |r30点
-|cff99ccff持续时间: |r5 s
+|cff99ccffCost: |r30
+|cff99ccffDuration: |r5 s
 |cff99ccffCool: |r7 s
 }
 
@@ -23466,8 +23466,8 @@ STRING 9303
 使用防御姿态, 提升招架几率60%和招架免伤150%, 并且反射下一次指向你的法术. 
 在成功地招架攻击以后, 会反弹招架攻击吸收的伤害并且造成大量仇恨. 
 
-|cff99ccffCost: |r30点
-|cff99ccff持续时间: |r5 s
+|cff99ccffCost: |r30
+|cff99ccffDuration: |r5 s
 |cff99ccffCool: |r7 s
 }
 
@@ -23477,8 +23477,8 @@ STRING 9304
 使用防御姿态, 提升招架几率75%和招架免伤200%, 并且反射下一次指向你的法术. 
 在成功地招架攻击以后, 会反弹招架攻击吸收的伤害并且造成大量仇恨. 
 
-|cff99ccffCost: |r30点
-|cff99ccff持续时间: |r5 s
+|cff99ccffCost: |r30
+|cff99ccffDuration: |r5 s
 |cff99ccffCool: |r7 s
 }
 
@@ -23488,8 +23488,8 @@ STRING 9305
 使用防御姿态, 提升招架几率, 并且反射下一次指向你的法术. 
 在成功地招架攻击以后, 会反弹招架攻击吸收的伤害并且造成大量仇恨. 
 
-|cff99ccffCost: |r30点
-|cff99ccff持续时间: |r5 s
+|cff99ccffCost: |r30
+|cff99ccffDuration: |r5 s
 |cff99ccffCool: |r7 s
 
 |cffffcc00Level 1|r - 提升招架几率45%, 提升招架免伤100%. 
@@ -23500,33 +23500,33 @@ STRING 9305
 STRING 9310
 // Ability: A004 (arcane shock), Ubertip (Tooltip - normal - ext[aub1])
 {
-冲击目标, 造成40点法术伤害, 并且使目标的命中几率降低4%. 受秘法震击影响的敌人对你造成的任何伤害都会为你恢复伤害量5%的法力值, 如果你处于格挡状态, 从伤害中恢复10%的法力值. 
+冲击目标, 造成40法术伤害, 并且使目标的命中几率降低4%. 受秘法震击影响的敌人对你造成的任何伤害都会为你恢复伤害量5%的法力值, 如果你处于格挡状态, 从伤害中恢复10%的法力值. 
 
 |cff99ccffRange: |r400 yards
-|cff99ccffCost: |r10点
-|cff99ccff持续时间: |r5 s
+|cff99ccffCost: |r10
+|cff99ccffDuration: |r5 s
 |cff99ccffCool: |r2 s
 }
 
 STRING 9311
 // Ability: A004 (arcane shock), Ubertip (Tooltip - normal - ext[aub1])
 {
-冲击目标, 造成80点法术伤害, 并且使目标的命中几率降低8%. 受秘法震击影响的敌人对你造成的任何伤害都会为你恢复伤害量5%的法力值, 如果你处于格挡状态, 从伤害中恢复10%的法力值. 
+冲击目标, 造成80法术伤害, 并且使目标的命中几率降低8%. 受秘法震击影响的敌人对你造成的任何伤害都会为你恢复伤害量5%的法力值, 如果你处于格挡状态, 从伤害中恢复10%的法力值. 
 
 |cff99ccffRange: |r400 yards
 |cff99ccffCost: |r17点
-|cff99ccff持续时间: |r5 s
+|cff99ccffDuration: |r5 s
 |cff99ccffCool: |r2 s
 }
 
 STRING 9312
 // Ability: A004 (arcane shock), Ubertip (Tooltip - normal - ext[aub1])
 {
-冲击目标, 造成120点法术伤害, 并且使目标的命中几率降低12%. 受秘法震击影响的敌人对你造成的任何伤害都会为你恢复伤害量5%的法力值, 如果你处于格挡状态, 从伤害中恢复10%的法力值. 
+冲击目标, 造成120法术伤害, 并且使目标的命中几率降低12%. 受秘法震击影响的敌人对你造成的任何伤害都会为你恢复伤害量5%的法力值, 如果你处于格挡状态, 从伤害中恢复10%的法力值. 
 
 |cff99ccffRange: |r400 yards
 |cff99ccffCost: |r24点
-|cff99ccff持续时间: |r5 s
+|cff99ccffDuration: |r5 s
 |cff99ccffCool: |r2 s
 }
 
@@ -23537,12 +23537,12 @@ STRING 9313
 
 |cff99ccffRange: |r400 yards
 |cff99ccffCost: |r10/17/24点
-|cff99ccff持续时间: |r5 s
+|cff99ccffDuration: |r5 s
 |cff99ccffCool: |r2 s
 
-|cffffcc00Level 1|r - 造成40点伤害, 并且使目标的命中几率降低4%. 
-|cffffcc00Level 2|r - 造成80点伤害, 并且使目标的命中几率降低8%. 
-|cffffcc00Level 3|r - 造成120点伤害, 并且使目标的命中几率降低12%. 
+|cffffcc00Level 1|r - 造成40伤害, 并且使目标的命中几率降低4%. 
+|cffffcc00Level 2|r - 造成80伤害, 并且使目标的命中几率降低8%. 
+|cffffcc00Level 3|r - 造成120伤害, 并且使目标的命中几率降低12%. 
 }
 
 STRING 9314
@@ -23620,7 +23620,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 9328
 // Ability: A0AF (grip of static electricity), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -23673,80 +23673,80 @@ Q
 STRING 9341
 // Ability: A0AG (storm lash), Ubertip (Tooltip - normal - ext[aub1])
 {
-将手中的武器注入风暴能量, 对目标造成一次相当于普通攻击110%的法术伤害, 该伤害有20%的几率立即冷却大地震击, 并且使3 s内施放的下一次大地震击不消耗任何法力值. 
+将手中的武器注入风暴能量, 对目标造成一次相当于普通攻击110%的法术伤害, 该伤害有20%的几率立即冷却Earth Shock, 并且使3 s内施放的下一次Earth Shock不消耗任何法力值. 
 
-|cff99ccff施法时间: |r等于攻击间隔
+|cff99ccffCast: |r等于攻击间隔
 |cff99ccffRange: |r600 yards
-|cff99ccffCost: |r30点
+|cff99ccffCost: |r30
 }
 
 STRING 9342
 // Ability: A0AG (storm lash), Ubertip (Tooltip - normal - ext[aub1])
 {
-将手中的武器注入风暴能量, 对目标造成一次相当于普通攻击120%的法术伤害, 该伤害有40%的几率立即冷却大地震击, 并且使3 s内施放的下一次大地震击不消耗任何法力值. 
+将手中的武器注入风暴能量, 对目标造成一次相当于普通攻击120%的法术伤害, 该伤害有40%的几率立即冷却Earth Shock, 并且使3 s内施放的下一次Earth Shock不消耗任何法力值. 
 
-|cff99ccff施法时间: |r等于攻击间隔
+|cff99ccffCast: |r等于攻击间隔
 |cff99ccffRange: |r600 yards
-|cff99ccffCost: |r30点
+|cff99ccffCost: |r30
 }
 
 STRING 9343
 // Ability: A0AG (storm lash), Ubertip (Tooltip - normal - ext[aub1])
 {
-将手中的武器注入风暴能量, 对目标造成一次相当于普通攻击130%的法术伤害, 该伤害有60%的几率立即冷却大地震击, 并且使3 s内施放的下一次大地震击不消耗任何法力值. 
+将手中的武器注入风暴能量, 对目标造成一次相当于普通攻击130%的法术伤害, 该伤害有60%的几率立即冷却Earth Shock, 并且使3 s内施放的下一次Earth Shock不消耗任何法力值. 
 
-|cff99ccff施法时间: |r等于攻击间隔
+|cff99ccffCast: |r等于攻击间隔
 |cff99ccffRange: |r600 yards
-|cff99ccffCost: |r30点
+|cff99ccffCost: |r30
 }
 
 STRING 9344
 // Ability: A0AG (storm lash), Researchubertip (Tooltip - Learn - ext[arut])
 {
-将手中的武器注入风暴能量, 对目标造成一次法术伤害, 该伤害有一定的几率立即冷却大地震击, 并且使3 s内施放的下一次大地震击不消耗任何法力值. 
+将手中的武器注入风暴能量, 对目标造成一次法术伤害, 该伤害有一定的几率立即冷却Earth Shock, 并且使3 s内施放的下一次Earth Shock不消耗任何法力值. 
 
-|cff99ccff施法时间: |r等于攻击间隔
+|cff99ccffCast: |r等于攻击间隔
 |cff99ccffRange: |r600 yards
-|cff99ccffCost: |r30点
+|cff99ccffCost: |r30
 
-|cffffcc00Level 1|r - 造成普通攻击110%的法术伤害, 有20%的几率冷却使大地震击. 
-|cffffcc00Level 2|r - 造成普通攻击120%的法术伤害, 有40%的几率冷却使大地震击. 
-|cffffcc00Level 3|r - 造成普通攻击130%的法术伤害, 有60%的几率冷却使大地震击. 
+|cffffcc00Level 1|r - 造成普通攻击110%的法术伤害, 有20%的几率冷却使Earth Shock. 
+|cffffcc00Level 2|r - 造成普通攻击120%的法术伤害, 有40%的几率冷却使Earth Shock. 
+|cffffcc00Level 3|r - 造成普通攻击130%的法术伤害, 有60%的几率冷却使Earth Shock. 
 }
 
 STRING 9345
 // Ability: A036 (lightning totem), Ubertip (Tooltip - normal - ext[aub1])
 {
-闪电图腾会对最近的一个目标施展高速的电击, 攻击速度受你的攻击速度和法术急速影响, 每次造成10点伤害, 并且使目标受到的法术伤害提高7%. 
+闪电图腾会对最近的一个目标施展高速的电击, 攻击速度受你的攻击速度和法术急速影响, 每次造成10伤害, 并且使目标受到的法术伤害提高7%. 
 
 |cffff3333你只能同时拥有一个图腾. |r
 
-|cff99ccff影响区域: |r600 yards
-|cff99ccff持续时间: |r20 s
+|cff99ccffAOE: |r600 yards
+|cff99ccffDuration: |r20 s
 |cff99ccffCool: |r10 s
 }
 
 STRING 9346
 // Ability: A036 (lightning totem), Ubertip (Tooltip - normal - ext[aub1])
 {
-闪电图腾会对最近的一个目标施展高速的电击, 攻击速度受你的攻击速度和法术急速影响, 每次造成20点伤害, 并且使目标受到的法术伤害提高9%. 
+闪电图腾会对最近的一个目标施展高速的电击, 攻击速度受你的攻击速度和法术急速影响, 每次造成20伤害, 并且使目标受到的法术伤害提高9%. 
 
 |cffff3333你只能同时拥有一个图腾. |r
 
-|cff99ccff影响区域: |r600 yards
-|cff99ccff持续时间: |r20 s
+|cff99ccffAOE: |r600 yards
+|cff99ccffDuration: |r20 s
 |cff99ccffCool: |r10 s
 }
 
 STRING 9347
 // Ability: A036 (lightning totem), Ubertip (Tooltip - normal - ext[aub1])
 {
-闪电图腾会对最近的一个目标施展高速的电击, 攻击速度受你的攻击速度和法术急速影响, 每次造成30点伤害, 并且使目标受到的法术伤害提高11%. 
+闪电图腾会对最近的一个目标施展高速的电击, 攻击速度受你的攻击速度和法术急速影响, 每次造成30伤害, 并且使目标受到的法术伤害提高11%. 
 
 |cffff3333你只能同时拥有一个图腾. |r
 
-|cff99ccff影响区域: |r600 yards
-|cff99ccff持续时间: |r20 s
+|cff99ccffAOE: |r600 yards
+|cff99ccffDuration: |r20 s
 |cff99ccffCool: |r10 s
 }
 
@@ -23757,8 +23757,8 @@ STRING 9348
 
 |cffff3333你只能同时拥有一个图腾. |r
 
-|cff99ccff影响区域: |r300 yards
-|cff99ccff持续时间: |r20 s
+|cff99ccffAOE: |r300 yards
+|cff99ccffDuration: |r20 s
 |cff99ccffCool: |r10 s
 }
 
@@ -23769,8 +23769,8 @@ STRING 9349
 
 |cffff3333你只能同时拥有一个图腾. |r
 
-|cff99ccff影响区域: |r300 yards
-|cff99ccff持续时间: |r20 s
+|cff99ccffAOE: |r300 yards
+|cff99ccffDuration: |r20 s
 |cff99ccffCool: |r10 s
 }
 
@@ -23781,8 +23781,8 @@ STRING 9350
 
 |cffff3333你只能同时拥有一个图腾. |r
 
-|cff99ccff影响区域: |r300 yards
-|cff99ccff持续时间: |r20 s
+|cff99ccffAOE: |r300 yards
+|cff99ccffDuration: |r20 s
 |cff99ccffCool: |r10 s
 }
 
@@ -23793,8 +23793,8 @@ STRING 9351
 
 |cffff3333你只能同时拥有一个图腾. |r
 
-|cff99ccff影响区域: |r600 yards
-|cff99ccff持续时间: |r20 s
+|cff99ccffAOE: |r600 yards
+|cff99ccffDuration: |r20 s
 |cff99ccffCool: |r10 s
 }
 
@@ -23805,8 +23805,8 @@ STRING 9352
 
 |cffff3333你只能同时拥有一个图腾. |r
 
-|cff99ccff影响区域: |r750 yards
-|cff99ccff持续时间: |r20 s
+|cff99ccffAOE: |r750 yards
+|cff99ccffDuration: |r20 s
 |cff99ccffCool: |r10 s
 }
 
@@ -23817,8 +23817,8 @@ STRING 9353
 
 |cffff3333你只能同时拥有一个图腾. |r
 
-|cff99ccff影响区域: |r900 yards
-|cff99ccff持续时间: |r20 s
+|cff99ccffAOE: |r900 yards
+|cff99ccffDuration: |r20 s
 |cff99ccffCool: |r10 s
 }
 
@@ -23826,12 +23826,12 @@ STRING 9354
 // Ability: A01M (enchanted totem), Researchubertip (Tooltip - Learn - ext[arut])
 {
 使用风暴鞭笞之后, 可以使用闪电图腾, 闪电图腾会对最近的一个目标施展高速的电击, 并且使附近的所有敌方单位受到更高的法术伤害. 
-使用大地震击之后, 可以使用地缚图腾, 降低附近的所有敌方单位的移动速度. 
+使用Earth Shock之后, 可以使用地缚图腾, 降低附近的所有敌方单位的移动速度. 
 使用净化术之后, 可以使用激流图腾, 周期性地恢复附近所有友军单位的法力值. 
 
 |cffff3333你只能同时拥有一个图腾. |r
 
-|cff99ccff持续时间: |r20 s
+|cff99ccffDuration: |r20 s
 |cff99ccffCool: |r10 s
 
 |cffffcc00提升Level|r - 闪电图腾: 增加攻击频率和敌军受到的法术伤害. 
@@ -23847,8 +23847,8 @@ STRING 9355
 同时降低/提升目标的攻击速度15%, 这个效果每25 s只能出现一次. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r15点
-|cff99ccff持续时间: |r6 s
+|cff99ccffCost: |r15
+|cff99ccffDuration: |r6 s
 |cff99ccffCool: |r4 s
 }
 
@@ -23859,8 +23859,8 @@ STRING 9356
 同时降低/提升目标的攻击速度15%, 这个效果每20 s只能出现一次. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r15点
-|cff99ccff持续时间: |r6 s
+|cff99ccffCost: |r15
+|cff99ccffDuration: |r6 s
 |cff99ccffCool: |r4 s
 }
 
@@ -23871,8 +23871,8 @@ STRING 9357
 同时降低/提升目标的攻击速度15%, 这个效果每15 s只能出现一次. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r15点
-|cff99ccff持续时间: |r6 s
+|cff99ccffCost: |r15
+|cff99ccffDuration: |r6 s
 |cff99ccffCool: |r4 s
 }
 
@@ -23883,8 +23883,8 @@ STRING 9358
 同时降低/提升目标的攻击速度15%. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r15点
-|cff99ccff持续时间: |r6 s
+|cff99ccffCost: |r15
+|cff99ccffDuration: |r6 s
 |cff99ccffCool: |r4 s
 
 |cffffcc00Level 1|r - 降低/Increase Attack Speed的效果每25 s只能出现一次. 
@@ -23904,11 +23904,11 @@ STRING 9362
 STRING 9363
 // Ability: A0AH (pulse bomb), Ubertip (Tooltip - normal - ext[aub1])
 {
-指定一名目标, 每 s对其造成100点的法术伤害, 每次造成伤害的时候还会使目标对其附近的友军造成200点伤害. 
+指定一名目标, 每 s对其造成100的法术伤害, 每次造成伤害的时候还会使目标对其附近的友军造成200伤害. 
 
 |cff99ccffRange: |r1200 yards
-|cff99ccff影响区域: |r200 yards
-|cff99ccff持续时间: |r8 s
+|cff99ccffAOE: |r200 yards
+|cff99ccffDuration: |r8 s
 |cff99ccffCool: |r10 s
 }
 
@@ -23939,7 +23939,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 9368
 // Ability: A0AH (pulse bomb), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -23954,8 +23954,8 @@ STRING 9369
 
 |cff99ccff引导时间: |r10 s
 |cff99ccffRange: |r900 yards
-|cff99ccff影响区域: |r200 yards
-|cff99ccff持续时间: |r10 s
+|cff99ccffAOE: |r200 yards
+|cff99ccffDuration: |r10 s
 |cff99ccffCool: |r25 s
 }
 
@@ -23986,7 +23986,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 9374
 // Ability: A0AI (laser beam), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -24029,7 +24029,7 @@ STRING 9381
 {
 3个闪电球环绕, 每个电球提供100%的免伤. 闪电护盾被打掉会导致大修补匠Stun20 s, 受到的伤害提高500%. 
 
-|cff99ccff持续时间: |r60 s
+|cff99ccffDuration: |r60 s
 |cff99ccffCool: |r1 s
 }
 
@@ -24060,7 +24060,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 9386
 // Ability: A0AK (lightning shield), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -24071,9 +24071,9 @@ STRING 9386
 STRING 9387
 // Ability: A0AL (pocket factory), Ubertip (Tooltip - normal - ext[aub1])
 {
-在随机点召唤一个口袋工厂, 口袋工厂每2 s会生产一个人工地精, 人工地精会移动到随机目标点, 然后开始自爆, 造成300点法术200AOE伤害. 
+在随机点召唤一个口袋工厂, 口袋工厂每2 s会生产一个人工地精, 人工地精会移动到随机目标点, 然后开始自爆, 造成300法术200AOE伤害. 
 
-|cff99ccff持续时间: |r60 s
+|cff99ccffDuration: |r60 s
 |cff99ccffCool: |r10 s
 }
 
@@ -24104,7 +24104,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 9392
 // Ability: A0AL (pocket factory), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -24115,9 +24115,9 @@ STRING 9392
 STRING 9393
 // Ability: A0AM (cluster rockets), Ubertip (Tooltip - normal - ext[aub1])
 {
-装填自动导向导弹, 对每个目标造成450点法术伤害. 
+装填自动导向导弹, 对每个目标造成450法术伤害. 
 
-|cff99ccff施法时间: |r1 s
+|cff99ccffCast: |r1 s
 |cff99ccffCool: |r1 s
 }
 
@@ -24148,7 +24148,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 9398
 // Ability: A0AM (cluster rockets), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -24161,8 +24161,8 @@ STRING 9399
 {
 对附近敌人造成300法术伤害. 
 
-|cff99ccff施法时间: |r3 s
-|cff99ccff影响区域: |r200 yards
+|cff99ccffCast: |r3 s
+|cff99ccffAOE: |r200 yards
 }
 
 STRING 9400
@@ -24192,7 +24192,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 9404
 // Ability: A0AN (self destruct), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -24319,7 +24319,7 @@ STRING 9425
 {
 生产一个人工地精. 
 
-|cff99ccff施法时间: |r2 s
+|cff99ccffCast: |r2 s
 }
 
 STRING 9426
@@ -24349,7 +24349,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 9430
 // Ability: A0AR (summon clockwork goblin), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -24396,40 +24396,40 @@ HP+
 STRING 9437
 // Ability: A00V (spell transfer), Ubertip (Tooltip - normal - ext[aub1])
 {
-尝试操纵魔法的运行轨迹, 改变已经生效的魔法状态. 将敌方目标身上的1个有益法术效果转移到自身, 或者是将友军目标身上的1个有害法术返还给施法者. 转移的每个法术效果会使受影响的敌军目标受到100点法术伤害. 
+尝试操纵魔法的运行轨迹, 改变已经生效的魔法状态. 将敌方目标身上的1个有益法术效果转移到自身, 或者是将友军目标身上的1个有害法术返还给施法者. 转移的每个法术效果会使受影响的敌军目标受到100法术伤害. 
 
 |cff99ccffRange: |r600 yards
-|cff99ccffCost: |r70点
+|cff99ccffCost: |r70
 |cff99ccffCool: |r6 s
 }
 
 STRING 9438
 // Ability: A00V (spell transfer), Ubertip (Tooltip - normal - ext[aub1])
 {
-尝试操纵魔法的运行轨迹, 改变已经生效的魔法状态. 将敌方目标身上的2个有益法术效果转移到自身, 或者是将友军目标身上的2个有害法术返还给施法者. 转移的每个法术效果会使受影响的敌军目标受到100点法术伤害. 
+尝试操纵魔法的运行轨迹, 改变已经生效的魔法状态. 将敌方目标身上的2个有益法术效果转移到自身, 或者是将友军目标身上的2个有害法术返还给施法者. 转移的每个法术效果会使受影响的敌军目标受到100法术伤害. 
 
 |cff99ccffRange: |r600 yards
-|cff99ccffCost: |r210点
+|cff99ccffCost: |r210
 |cff99ccffCool: |r3 s
 }
 
 STRING 9439
 // Ability: A00V (spell transfer), Ubertip (Tooltip - normal - ext[aub1])
 {
-尝试操纵魔法的运行轨迹, 改变已经生效的魔法状态. 将敌方目标身上的全部有益法术效果转移到自身, 或者是将友军目标身上的全部有害法术返还给施法者. 转移的每个法术效果会使受影响的敌军目标受到100点法术伤害. 
+尝试操纵魔法的运行轨迹, 改变已经生效的魔法状态. 将敌方目标身上的全部有益法术效果转移到自身, 或者是将友军目标身上的全部有害法术返还给施法者. 转移的每个法术效果会使受影响的敌军目标受到100法术伤害. 
 
 |cff99ccffRange: |r600 yards
-|cff99ccffCost: |r350点
+|cff99ccffCost: |r350
 |cff99ccffCool: |r1 s
 }
 
 STRING 9440
 // Ability: A00V (spell transfer), Researchubertip (Tooltip - Learn - ext[arut])
 {
-尝试操纵魔法的运行轨迹, 改变已经生效的魔法状态. 将敌方目标身上的有益法术效果转移到自身, 或者是将友军目标身上的有害法术返还给施法者. 转移的每个法术效果会使受影响的敌军目标受到100点法术伤害. 
+尝试操纵魔法的运行轨迹, 改变已经生效的魔法状态. 将敌方目标身上的有益法术效果转移到自身, 或者是将友军目标身上的有害法术返还给施法者. 转移的每个法术效果会使受影响的敌军目标受到100法术伤害. 
 
 |cff99ccffRange: |r600 yards
-|cff99ccffCost: |r70/210/350点
+|cff99ccffCost: |r70/210/350
 |cff99ccffCool: |r6/3/1 s
 
 |cffffcc00Level 1|r - 转移1个法术效果. 
@@ -24445,8 +24445,8 @@ STRING 9441
 |cffff3333同一时间只能有一个目标受到变形术效果的影响. |r
 
 |cff99ccffRange: |r600 yards
-|cff99ccffCost: |r25点
-|cff99ccff持续时间: |r10 s
+|cff99ccffCost: |r25
+|cff99ccffDuration: |r10 s
 |cff99ccffCool: |r30 s
 }
 
@@ -24458,8 +24458,8 @@ STRING 9442
 |cffff3333同一时间只能有一个目标受到变形术效果的影响. |r
 
 |cff99ccffRange: |r600 yards
-|cff99ccffCost: |r25点
-|cff99ccff持续时间: |r10 s
+|cff99ccffCost: |r25
+|cff99ccffDuration: |r10 s
 |cff99ccffCool: |r22 s
 }
 
@@ -24471,8 +24471,8 @@ STRING 9443
 |cffff3333同一时间只能有一个目标受到变形术效果的影响. |r
 
 |cff99ccffRange: |r600 yards
-|cff99ccffCost: |r25点
-|cff99ccff持续时间: |r10 s
+|cff99ccffCost: |r25
+|cff99ccffDuration: |r10 s
 |cff99ccffCool: |r14 s
 }
 
@@ -24484,8 +24484,8 @@ STRING 9444
 |cffff3333同一时间只能有一个目标受到变形术效果的影响. |r
 
 |cff99ccffRange: |r600 yards
-|cff99ccffCost: |r25点
-|cff99ccff持续时间: |r10 s
+|cff99ccffCost: |r25
+|cff99ccffDuration: |r10 s
 |cff99ccffCool: |r30/22/14 s
 
 |cffffcc00Level 1|r - 使目标受到的所有伤害提高3%. 
@@ -24541,8 +24541,8 @@ STRING 9453
 在指定点召唤一个冰冻陷阱, 0.9 s后将会生效, 冻结100 yards范围内最近的一个敌方目标5 s. 冰块碎裂以后, 冰霜将覆盖附近的地面, 在5 s内降低处于冰霜地面上的敌军移动速度40%. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccff影响区域: |r300 yards
-|cff99ccff持续时间: |r30 s
+|cff99ccffAOE: |r300 yards
+|cff99ccffDuration: |r30 s
 |cff99ccffCool: |r16 s
 }
 
@@ -24552,8 +24552,8 @@ STRING 9457
 在指定点召唤一个冰冻陷阱, 0.6 s后将会生效, 冻结100 yards范围内最近的一个敌方目标5 s. 冰块碎裂以后, 冰霜将覆盖附近的地面, 在5 s内降低处于冰霜地面上的敌军移动速度55%. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccff影响区域: |r450 yards
-|cff99ccff持续时间: |r30 s
+|cff99ccffAOE: |r450 yards
+|cff99ccffDuration: |r30 s
 |cff99ccffCool: |r13 s
 }
 
@@ -24563,8 +24563,8 @@ STRING 9458
 在指定点召唤一个冰冻陷阱, 0.3 s后将会生效, 冻结100 yards范围内最近的一个敌方目标5 s. 冰块碎裂以后, 冰霜将覆盖附近的地面, 在5 s内降低处于冰霜地面上的敌军移动速度70%. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccff影响区域: |r600 yards
-|cff99ccff持续时间: |r30 s
+|cff99ccffAOE: |r600 yards
+|cff99ccffDuration: |r30 s
 |cff99ccffCool: |r10 s
 }
 
@@ -24574,8 +24574,8 @@ STRING 9459
 在指定点召唤一个冰冻陷阱, 一段时间后将会生效, 冻结100 yards范围内最近的一个敌方目标5 s. 冰块碎裂以后, 冰霜将覆盖附近的地面, 在5 s内降低处于冰霜地面上的敌军移动速度. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccff影响区域: |r300/450/600 yards
-|cff99ccff持续时间: |r30 s
+|cff99ccffAOE: |r300/450/600 yards
+|cff99ccffDuration: |r30 s
 |cff99ccffCool: |r16/13/10 s
 
 |cffffcc00Level 1|r - 0.9 s生效延迟, 降低40%移动速度. 
@@ -24622,34 +24622,34 @@ Neutral: 受到持续的物理伤害.
 STRING 9474
 // Ability: A01O (mind flay), Ubertip (Tooltip - normal - ext[aub1])
 {
-在3 s内每 s对目标造成100点法术伤害, 并降低其移动速度30%, 异教徒可以从伤害中恢复20%的法力值, 附近的友军则可以从伤害中恢复5%的法力值. 
+在3 s内每 s对目标造成100法术伤害, 并降低其移动速度30%, 异教徒可以从伤害中恢复20%的法力值, 附近的友军则可以从伤害中恢复5%的法力值. 
 
 |cff99ccff引导时间: |r3 s
 |cff99ccffRange: |r600 yards
-|cff99ccff影响区域: |r350 yards
-|cff99ccffCost: |r50点
+|cff99ccffAOE: |r350 yards
+|cff99ccffCost: |r50
 }
 
 STRING 9475
 // Ability: A01O (mind flay), Ubertip (Tooltip - normal - ext[aub1])
 {
-在3 s内每 s对目标造成150点法术伤害, 并降低其移动速度30%, 异教徒可以从伤害中恢复25%的法力值, 附近的友军则可以从伤害中恢复15%的法力值. 
+在3 s内每 s对目标造成150法术伤害, 并降低其移动速度30%, 异教徒可以从伤害中恢复25%的法力值, 附近的友军则可以从伤害中恢复15%的法力值. 
 
 |cff99ccff引导时间: |r3 s
 |cff99ccffRange: |r600 yards
-|cff99ccff影响区域: |r350 yards
-|cff99ccffCost: |r50点
+|cff99ccffAOE: |r350 yards
+|cff99ccffCost: |r50
 }
 
 STRING 9476
 // Ability: A01O (mind flay), Ubertip (Tooltip - normal - ext[aub1])
 {
-在3 s内每 s对目标造成200点法术伤害, 并降低其移动速度30%, 异教徒可以从伤害中恢复30%的法力值, 附近的友军则可以从伤害中恢复25%的法力值. 
+在3 s内每 s对目标造成200法术伤害, 并降低其移动速度30%, 异教徒可以从伤害中恢复30%的法力值, 附近的友军则可以从伤害中恢复25%的法力值. 
 
 |cff99ccff引导时间: |r3 s
 |cff99ccffRange: |r600 yards
-|cff99ccff影响区域: |r350 yards
-|cff99ccffCost: |r50点
+|cff99ccffAOE: |r350 yards
+|cff99ccffCost: |r50
 }
 
 STRING 9477
@@ -24659,12 +24659,12 @@ STRING 9477
 
 |cff99ccff引导时间: |r3 s
 |cff99ccffRange: |r600 yards
-|cff99ccff影响区域: |r350 yards
-|cff99ccffCost: |r50点
+|cff99ccffAOE: |r350 yards
+|cff99ccffCost: |r50
 
-|cffffcc00Level 1|r - 造成100点伤害, 异教徒从伤害中恢复20%的法力值, 友军从伤害中恢复5%的法力值. 
-|cffffcc00Level 2|r - 造成150点伤害, 异教徒从伤害中恢复25%的法力值, 友军从伤害中恢复15%的法力值. 
-|cffffcc00Level 3|r - 造成200点伤害, 异教徒从伤害中恢复30%的法力值, 友军从伤害中恢复25%的法力值. 
+|cffffcc00Level 1|r - 造成100伤害, 异教徒从伤害中恢复20%的法力值, 友军从伤害中恢复5%的法力值. 
+|cffffcc00Level 2|r - 造成150伤害, 异教徒从伤害中恢复25%的法力值, 友军从伤害中恢复15%的法力值. 
+|cffffcc00Level 3|r - 造成200伤害, 异教徒从伤害中恢复30%的法力值, 友军从伤害中恢复25%的法力值. 
 }
 
 STRING 9478
@@ -24683,7 +24683,7 @@ STRING 9479
 向目标射出一支黑暗之箭, 对其造成普通攻击160%的伤害, 黑暗之箭无法被躲闪. 有40%的几率会连续射出两支黑暗之箭. 
 
 |cff99ccffRange: |r820 yards
-|cff99ccffCost: |r5点
+|cff99ccffCost: |r5
 |cff99ccffCool: |r5 s
 }
 
@@ -24714,20 +24714,20 @@ STRING 9481
 STRING 9482
 // Ability: A01F (lacerate), Ubertip (Tooltip - normal - ext[aub1])
 {
-Rend目标, 造成100点物理伤害并且每2 s造成100点物理伤害. 该技能伤害会造成大量仇恨. 
+Rend目标, 造成100物理伤害并且每2 s造成100物理伤害. 该技能伤害会造成大量仇恨. 
 
 |cff99ccffRange: |r100 yards
-|cff99ccff持续时间: |r16 s
+|cff99ccffDuration: |r16 s
 |cff99ccffCool: |r1.5 s
 }
 
 STRING 9483
 // Ability: A01F (lacerate), Ubertip (Tooltip - normal - ext[aub1])
 {
-Rend目标, 造成150点物理伤害并且每2 s造成150点物理伤害. 该技能伤害会造成大量仇恨. 
+Rend目标, 造成150物理伤害并且每2 s造成150物理伤害. 该技能伤害会造成大量仇恨. 
 
 |cff99ccffRange: |r100 yards
-|cff99ccff持续时间: |r16 s
+|cff99ccffDuration: |r16 s
 |cff99ccffCool: |r1.5 s
 }
 
@@ -24737,7 +24737,7 @@ STRING 9484
 Rend目标, 造成一定的伤害并且每2 s造成持续的物理伤害. 该技能伤害会造成大量仇恨. 
 
 |cff99ccffRange: |r100 yards
-|cff99ccff持续时间: |r16 s
+|cff99ccffDuration: |r16 s
 |cff99ccffCool: |r1.5 s
 
 |cffffcc00Level 1|r - 造成50直接伤害, 50持续伤害. 
@@ -24748,57 +24748,57 @@ Rend目标, 造成一定的伤害并且每2 s造成持续的物理伤害. 该技
 STRING 9485
 // Ability: A01S (frost bolt), Ubertip (Tooltip - normal - ext[aub1])
 {
-吟唱最基础的冰冷法术咒语, 发射一枝Frost Bolt对目标造成175点冰冷伤害, 并使其Movement speed is decreased by 40%. 
+吟唱最基础的冰冷法术咒语, Cast a Frost Bolt对目标造成175冰冷伤害, 并使其Movement speed is decreased by 40%. 
 
-|cff99ccff施法时间: |r2 s
+|cff99ccffCast: |r2 s
 |cff99ccffRange: |r600 yards
-|cff99ccffCost: |r15点
-|cff99ccff持续时间: |r5 s
+|cff99ccffCost: |r15
+|cff99ccffDuration: |r5 s
 }
 
 STRING 9486
 // Ability: A01S (frost bolt), Ubertip (Tooltip - normal - ext[aub1])
 {
-吟唱最基础的冰冷法术咒语, 发射一枝Frost Bolt对目标造成350点冰冷伤害, 并使其Movement speed is decreased by 40%. 
+吟唱最基础的冰冷法术咒语, Cast a Frost Bolt对目标造成350冰冷伤害, 并使其Movement speed is decreased by 40%. 
 同时被动地提升你所有冰冷法术的伤害5%. 
 
-|cff99ccff施法时间: |r2 s
+|cff99ccffCast: |r2 s
 |cff99ccffRange: |r600 yards
-|cff99ccffCost: |r30点
-|cff99ccff持续时间: |r5 s
+|cff99ccffCost: |r30
+|cff99ccffDuration: |r5 s
 }
 
 STRING 9487
 // Ability: A01S (frost bolt), Ubertip (Tooltip - normal - ext[aub1])
 {
-吟唱最基础的冰冷法术咒语, 发射一枝Frost Bolt对目标造成525点冰冷伤害, 并使其Movement speed is decreased by 40%. 
+吟唱最基础的冰冷法术咒语, Cast a Frost Bolt对目标造成525冰冷伤害, 并使其Movement speed is decreased by 40%. 
 同时被动地提升你所有冰冷法术的伤害10%. 
 
-|cff99ccff施法时间: |r2 s
+|cff99ccffCast: |r2 s
 |cff99ccffRange: |r600 yards
-|cff99ccffCost: |r45点
-|cff99ccff持续时间: |r5 s
+|cff99ccffCost: |r45
+|cff99ccffDuration: |r5 s
 }
 
 STRING 9488
 // Ability: A01S (frost bolt), Researchubertip (Tooltip - Learn - ext[arut])
 {
-吟唱最基础的冰冷法术咒语, 发射一枝Frost Bolt来杀伤目标, 并使其Movement speed is decreased by 40%. 
+吟唱最基础的冰冷法术咒语, Cast a Frost Bolt 来杀伤目标, 并使其Movement speed is decreased by 40%. 
 
-|cff99ccff施法时间: |r2 s
+|cff99ccffCast: |r2 s
 |cff99ccffRange: |r600 yards
-|cff99ccffCost: |r15/30/45点
-|cff99ccff持续时间: |r5 s
+|cff99ccffCost: |r15/30/45
+|cff99ccffDuration: |r5 s
 
-|cffffcc00Level 1|r - 造成175点冰冷伤害. 
-|cffffcc00Level 2|r - 造成350点冰冷伤害. 同时被动地提升你所有冰冷法术的伤害5%. 
-|cffffcc00Level 3|r - 造成525点冰冷伤害. 同时被动地提升你所有冰冷法术的伤害10%. 
+|cffffcc00Level 1|r - 造成175冰冷伤害. 
+|cffffcc00Level 2|r - 造成350冰冷伤害. 同时被动地提升你所有冰冷法术的伤害5%. 
+|cffffcc00Level 3|r - 造成525冰冷伤害. 同时被动地提升你所有冰冷法术的伤害10%. 
 }
 
 STRING 9489
 // Ability: A00W (sinister strike), Ubertip (Tooltip - normal - ext[aub1])
 {
-一次邪恶的攻击, 消耗最多40%的法力值对目标敌人造成100%的基础伤害再附加100点额外伤害, 获得一个连击点. 同时在10 s内恢复所有法力值. 如果消耗的法力值没有超过30%, 则不会产生任何效果. 
+一次邪恶的攻击, 消耗最多40%的法力值对目标敌人造成100%的基础伤害再附加100额外伤害, 获得一个连击点. 同时在10 s内恢复所有法力值. 如果消耗的法力值没有超过30%, 则不会产生任何效果. 
 
 |cffff3333对同一个目标使用连击技能才能累积连击点, 最多能获得5个连击点. |r
 
@@ -24809,7 +24809,7 @@ STRING 9489
 STRING 9490
 // Ability: A00W (sinister strike), Ubertip (Tooltip - normal - ext[aub1])
 {
-一次邪恶的攻击, 消耗最多40%的法力值对目标敌人造成160%的基础伤害再附加200点额外伤害, 获得一个连击点. 同时在10 s内恢复所有法力值. 如果消耗的法力值没有超过30%, 则不会产生任何效果. 
+一次邪恶的攻击, 消耗最多40%的法力值对目标敌人造成160%的基础伤害再附加200额外伤害, 获得一个连击点. 同时在10 s内恢复所有法力值. 如果消耗的法力值没有超过30%, 则不会产生任何效果. 
 
 |cffff3333对同一个目标使用连击技能才能累积连击点, 最多能获得5个连击点. |r
 
@@ -24820,7 +24820,7 @@ STRING 9490
 STRING 9491
 // Ability: A00W (sinister strike), Ubertip (Tooltip - normal - ext[aub1])
 {
-一次邪恶的攻击, 消耗最多40%的法力值对目标敌人造成220%的基础伤害再附加300点额外伤害, 获得一个连击点. 同时在10 s内恢复所有法力值. 如果消耗的法力值没有超过30%, 则不会产生任何效果. 
+一次邪恶的攻击, 消耗最多40%的法力值对目标敌人造成220%的基础伤害再附加300额外伤害, 获得一个连击点. 同时在10 s内恢复所有法力值. 如果消耗的法力值没有超过30%, 则不会产生任何效果. 
 
 |cffff3333对同一个目标使用连击技能才能累积连击点, 最多能获得5个连击点. |r
 
@@ -24838,47 +24838,47 @@ STRING 9492
 |cff99ccffCost: |r40%
 |cff99ccffCool: |r2 s
 
-|cffffcc00Level 1|r - 造成100%的普通攻击伤害, 附加100点额外伤害. 
-|cffffcc00Level 2|r - 造成160%的普通攻击伤害, 附加200点额外伤害. 
-|cffffcc00Level 3|r - 造成220%的普通攻击伤害, 附加300点额外伤害. 
+|cffffcc00Level 1|r - 造成100%的普通攻击伤害, 附加100额外伤害. 
+|cffffcc00Level 2|r - 造成160%的普通攻击伤害, 附加200额外伤害. 
+|cffffcc00Level 3|r - 造成220%的普通攻击伤害, 附加300额外伤害. 
 }
 
 STRING 9493
 // Ability: A00X (eviscerate), Ubertip (Tooltip - normal - ext[aub1])
 {
-找到敌人的弱点并发起致命一击, 使用最多25%的法力值, 消耗掉所有的连击点, 最多削弱10点物理免伤, 造成200%的普通攻击伤害, 每3 s造成50点持续伤害. 如果消耗的法力值没有超过20%, 则不会产生任何效果. 
+找到敌人的弱点并发起致命一击, 使用最多25%的法力值, 消耗掉所有的连击点, 最多削弱10物理免伤, 造成200%的普通攻击伤害, 每3 s造成50持续伤害. 如果消耗的法力值没有超过20%, 则不会产生任何效果. 
 
 |cffff3333对非连击目标使用则无效. |r
 
 |cff99ccffCost: |r25%
-|cff99ccff破甲持续时间: |r8 s
-|cff99ccff流血持续时间: |r18 s
+|cff99ccff破甲Duration: |r8 s
+|cff99ccff流血Duration: |r18 s
 |cff99ccffCool: |r2 s
 }
 
 STRING 9494
 // Ability: A00X (eviscerate), Ubertip (Tooltip - normal - ext[aub1])
 {
-找到敌人的弱点并发起致命一击, 使用最多25%的法力值, 消耗掉所有的连击点, 最多削弱10点物理免伤, 造成400%的普通攻击伤害, 每3 s造成100点持续伤害. 如果消耗的法力值没有超过20%, 则不会产生任何效果. 
+找到敌人的弱点并发起致命一击, 使用最多25%的法力值, 消耗掉所有的连击点, 最多削弱10物理免伤, 造成400%的普通攻击伤害, 每3 s造成100持续伤害. 如果消耗的法力值没有超过20%, 则不会产生任何效果. 
 
 |cffff3333对非连击目标使用则无效. |r
 
 |cff99ccffCost: |r25%
-|cff99ccff破甲持续时间: |r8 s
-|cff99ccff流血持续时间: |r18 s
+|cff99ccff破甲Duration: |r8 s
+|cff99ccff流血Duration: |r18 s
 |cff99ccffCool: |r2 s
 }
 
 STRING 9495
 // Ability: A00X (eviscerate), Ubertip (Tooltip - normal - ext[aub1])
 {
-找到敌人的弱点并发起致命一击, 使用最多25%的法力值, 消耗掉所有的连击点, 最多削弱10点物理免伤, 造成600%的普通攻击伤害, 每3 s造成150点持续伤害. 如果消耗的法力值没有超过20%, 则不会产生任何效果. 
+找到敌人的弱点并发起致命一击, 使用最多25%的法力值, 消耗掉所有的连击点, 最多削弱10物理免伤, 造成600%的普通攻击伤害, 每3 s造成150持续伤害. 如果消耗的法力值没有超过20%, 则不会产生任何效果. 
 
 |cffff3333对非连击目标使用则无效. |r
 
 |cff99ccffCost: |r25%
-|cff99ccff破甲持续时间: |r8 s
-|cff99ccff流血持续时间: |r18 s
+|cff99ccff破甲Duration: |r8 s
+|cff99ccff流血Duration: |r18 s
 |cff99ccffCool: |r2 s
 }
 
@@ -24890,50 +24890,50 @@ STRING 9496
 |cffff3333对非连击目标使用则无效. |r
 
 |cff99ccffCost: |r25%
-|cff99ccff破甲持续时间: |r8 s
-|cff99ccff流血持续时间: |r18 s
+|cff99ccff破甲Duration: |r8 s
+|cff99ccff流血Duration: |r18 s
 |cff99ccffCool: |r2 s
 
-|cffffcc00Level 1|r - 最多削弱10点物理免伤, 造成200%的普通攻击伤害, 50点持续伤害. 
-|cffffcc00Level 2|r - 最多削弱10点物理免伤, 造成400%的普通攻击伤害, 100点持续伤害. 
-|cffffcc00Level 3|r - 最多削弱10点物理免伤, 造成600%的普通攻击伤害, 150点持续伤害. 
+|cffffcc00Level 1|r - 最多削弱10物理免伤, 造成200%的普通攻击伤害, 50持续伤害. 
+|cffffcc00Level 2|r - 最多削弱10物理免伤, 造成400%的普通攻击伤害, 100持续伤害. 
+|cffffcc00Level 3|r - 最多削弱10物理免伤, 造成600%的普通攻击伤害, 150持续伤害. 
 }
 
 STRING 9497
 // Ability: A01C (shield), Ubertip (Tooltip - normal - ext[aub1])
 {
-施展一个护盾来保护目标友军, 为其吸收750点伤害. 
+施展一个护盾来保护目标友军, 为其吸收750伤害. 
 同一个目标在10 s无法受到第二次Shield的保护. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r100点
-|cff99ccff持续时间: |r20 s
+|cff99ccffCost: |r100
+|cff99ccffDuration: |r20 s
 |cff99ccffCool: |r4 s
 }
 
 STRING 9498
 // Ability: A01C (shield), Ubertip (Tooltip - normal - ext[aub1])
 {
-施展一个护盾来保护目标友军, 为其吸收1500点伤害. 
+施展一个护盾来保护目标友军, 为其吸收1500伤害. 
 同时, 有35%的几率立即对目标造成2次医疗术的效果, 取决于你的医疗术的Level. 
 同一个目标在10 s无法受到第二次Shield的保护. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r125点
-|cff99ccff持续时间: |r20 s
+|cff99ccffCost: |r125
+|cff99ccffDuration: |r20 s
 |cff99ccffCool: |r4 s
 }
 
 STRING 9499
 // Ability: A01C (shield), Ubertip (Tooltip - normal - ext[aub1])
 {
-施展一个护盾来保护目标友军, 为其吸收2250点伤害. 
+施展一个护盾来保护目标友军, 为其吸收2250伤害. 
 同时, 有35%的几率立即对目标造成4次医疗术的效果, 取决于你的医疗术的Level. 
 同一个目标在10 s无法受到第二次Shield的保护. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r150点
-|cff99ccff持续时间: |r20 s
+|cff99ccffCost: |r150
+|cff99ccffDuration: |r20 s
 |cff99ccffCool: |r4 s
 }
 
@@ -24943,34 +24943,34 @@ STRING 9500
 施展一个护盾来保护目标友军, 为其Absorb damage, 同一个目标在10 s无法受到第二次Shield的保护. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r100/125/150点
-|cff99ccff持续时间: |r20 s
+|cff99ccffCost: |r100/125/150
+|cff99ccffDuration: |r20 s
 |cff99ccffCool: |r4 s
 
-|cffffcc00Level 1|r - 吸收750点伤害. 
-|cffffcc00Level 2|r - 吸收1500点伤害. 同时, 有35%的几率立即对目标造成2次医疗术的效果, 取决于你的医疗术的Level. 
-|cffffcc00Level 3|r - 吸收2250点伤害. 同时, 有35%的几率立即对目标造成4次医疗术的效果, 取决于你的医疗术的Level. 
+|cffffcc00Level 1|r - 吸收750伤害. 
+|cffffcc00Level 2|r - 吸收1500伤害. 同时, 有35%的几率立即对目标造成2次医疗术的效果, 取决于你的医疗术的Level. 
+|cffffcc00Level 3|r - 吸收2250伤害. 同时, 有35%的几率立即对目标造成4次医疗术的效果, 取决于你的医疗术的Level. 
 }
 
 STRING 9501
 // Ability: A03V (heal), Ubertip (Tooltip - normal - ext[aub1])
 {
-对一个友军目标施放医疗术的效果, 使其每3 s受到150点治疗, 并且使目标受到的治疗效果提升4%. 
+对一个友军目标施放医疗术的效果, 使其每3 s受到150治疗, 并且使目标受到的治疗效果提升4%. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r75点
-|cff99ccff持续时间: |r12 s
+|cff99ccffCost: |r75
+|cff99ccffDuration: |r12 s
 |cff99ccffCool: |r1 s
 }
 
 STRING 9502
 // Ability: A03V (heal), Ubertip (Tooltip - normal - ext[aub1])
 {
-对一个友军目标施放医疗术的效果, 使其每3 s受到200点治疗, 并且使目标受到的治疗效果提升8%. 
+对一个友军目标施放医疗术的效果, 使其每3 s受到200治疗, 并且使目标受到的治疗效果提升8%. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r100点
-|cff99ccff持续时间: |r12 s
+|cff99ccffCost: |r100
+|cff99ccffDuration: |r12 s
 |cff99ccffCool: |r1 s
 }
 
@@ -24980,46 +24980,46 @@ STRING 9503
 对一个友军目标施放医疗术的效果, 使其每3 s受到一次治疗, 并且使目标受到的治疗效果提升. 
 
 |cff99ccffRange: |r800 yards
-|cff99ccffCost: |r75/100/125点
-|cff99ccff持续时间: |r12 s
+|cff99ccffCost: |r75/100/125
+|cff99ccffDuration: |r12 s
 |cff99ccffCool: |r1 s
 
-|cffffcc00Level 1|r - 每3 s治疗150点生命值, 受到的治疗效果提升4%. 
-|cffffcc00Level 2|r - 每3 s治疗200点生命值, 受到的治疗效果提升8%. 
-|cffffcc00Level 3|r - 每3 s治疗250点生命值, 受到的治疗效果提升12%. 
+|cffffcc00Level 1|r - 每3 s治疗150生命值, 受到的治疗效果提升4%. 
+|cffffcc00Level 2|r - 每3 s治疗200生命值, 受到的治疗效果提升8%. 
+|cffffcc00Level 3|r - 每3 s治疗250生命值, 受到的治疗效果提升12%. 
 }
 
 STRING 9504
 // Ability: A03W (prayer of healing), Ubertip (Tooltip - normal - ext[aub1])
 {
-牧师集中精神朗诵一段Prayer of Healing, 显著地治疗目标区域内所有友军, 目标区域内的单位将会分担这个治疗效果. 总共造成250点治疗, 单个目标受到的治疗效果不会超过100点. 
+牧师集中精神朗诵一段Prayer of Healing, 显著地治疗目标区域内所有友军, 目标区域内的单位将会分担这个治疗效果. 总共造成250治疗, 单个目标受到的治疗效果不会超过100. 
 
-|cff99ccff施法时间: |r3 s
+|cff99ccffCast: |r3 s
 |cff99ccffRange: |r800 yards
-|cff99ccff影响区域: |r250 yards
-|cff99ccffCost: |r100点
+|cff99ccffAOE: |r250 yards
+|cff99ccffCost: |r100
 }
 
 STRING 9505
 // Ability: A03W (prayer of healing), Ubertip (Tooltip - normal - ext[aub1])
 {
-牧师集中精神朗诵一段Prayer of Healing, 显著地治疗目标区域内所有友军, 目标区域内的单位将会分担这个治疗效果. 总共造成375点治疗, 单个目标受到的治疗效果不会超过150点. 
+牧师集中精神朗诵一段Prayer of Healing, 显著地治疗目标区域内所有友军, 目标区域内的单位将会分担这个治疗效果. 总共造成375治疗, 单个目标受到的治疗效果不会超过150. 
 
-|cff99ccff施法时间: |r2.7 s
+|cff99ccffCast: |r2.7 s
 |cff99ccffRange: |r800 yards
-|cff99ccff影响区域: |r300 yards
-|cff99ccffCost: |r100点
+|cff99ccffAOE: |r300 yards
+|cff99ccffCost: |r100
 }
 
 STRING 9506
 // Ability: A03W (prayer of healing), Ubertip (Tooltip - normal - ext[aub1])
 {
-牧师集中精神朗诵一段Prayer of Healing, 显著地治疗目标区域内所有友军, 目标区域内的单位将会分担这个治疗效果. 总共造成500点治疗, 单个目标受到的治疗效果不会超过200点. 
+牧师集中精神朗诵一段Prayer of Healing, 显著地治疗目标区域内所有友军, 目标区域内的单位将会分担这个治疗效果. 总共造成500治疗, 单个目标受到的治疗效果不会超过200. 
 
-|cff99ccff施法时间: |r2.4 s
+|cff99ccffCast: |r2.4 s
 |cff99ccffRange: |r800 yards
-|cff99ccff影响区域: |r350 yards
-|cff99ccffCost: |r100点
+|cff99ccffAOE: |r350 yards
+|cff99ccffCost: |r100
 }
 
 STRING 9507
@@ -25027,14 +25027,14 @@ STRING 9507
 {
 牧师集中精神朗诵一段Prayer of Healing, 显著地治疗目标区域内所有友军, 目标区域内的单位将会分担这个治疗效果. 
 
-|cff99ccff施法时间: |r3/2.7/2.4 s
+|cff99ccffCast: |r3/2.7/2.4 s
 |cff99ccffRange: |r800 yards
-|cff99ccff影响区域: |r250/300/350 yards
-|cff99ccffCost: |r100点
+|cff99ccffAOE: |r250/300/350 yards
+|cff99ccffCost: |r100
 
-|cffffcc00Level 1|r - 总共造成250点治疗, 单个目标受到的治疗效果不会超过100点. 
-|cffffcc00Level 2|r - 总共造成375点治疗, 单个目标受到的治疗效果不会超过150点. 
-|cffffcc00Level 3|r - 总共造成500点治疗, 单个目标受到的治疗效果不会超过200点. 
+|cffffcc00Level 1|r - 总共造成250治疗, 单个目标受到的治疗效果不会超过100. 
+|cffffcc00Level 2|r - 总共造成375治疗, 单个目标受到的治疗效果不会超过150. 
+|cffffcc00Level 3|r - 总共造成500治疗, 单个目标受到的治疗效果不会超过200. 
 }
 
 STRING 9508
@@ -25084,7 +25084,7 @@ STRING 9517
 {
 消耗掉所有法力值对附近所有敌军目标造成等同自己法力值的法术伤害. 
 
-|cff99ccff影响区域: |r600 yards
+|cff99ccffAOE: |r600 yards
 |cff99ccffCost: |r所有法力值
 |cff99ccffCool: |r10 s
 }
@@ -25116,7 +25116,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 9522
 // Ability: A0AU (Charged Breath), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
@@ -25160,7 +25160,7 @@ Learn Frost Bolt(|cffffcc00F|r) - [|cffffcc00Level %d|r]
 STRING 9528
 // Ability: A0AV (Mana Leech), Researchubertip (Tooltip - Learn - ext[arut])
 {
-发射一枝Frost Bolt来杀伤目标, 并使其减速. 
+Cast a Frost Bolt to damage target and slow them. 
 2.5s cast. 
 
 |cffffcc00Level 1|r - Inflicting X damage, target Movement speed is decreased by 40%. 
