@@ -72,8 +72,8 @@ library SpiritBolt requires CastingBar, Projectile, CombatFacts {
         spell2Tab = Table.create();
         spell1Tab[UTIDBLOODELFDEFENDER] = SIDSUNFIRESTORMHEX;
         spell2Tab[UTIDBLOODELFDEFENDER] = SIDSHIELDOFSINDOREIHEX;
-        spell1Tab[UTIDCLAWDRUID] = SIDMANGLEHEX;
-        spell2Tab[UTIDCLAWDRUID] = SIDRABIESHEX;
+        spell1Tab[UTIDCLAWDRUID] = SID_SAVAGE_ROAR_HEX;
+        spell2Tab[UTIDCLAWDRUID] = SID_NATURAL_REFLEX_HEX;
         spell1Tab[UTIDKEEPEROFGROVE] = SIDTRANQUILITYHEX;
         spell2Tab[UTIDKEEPEROFGROVE] = SIDLIFEBLOOMHEX;
         spell1Tab[UTIDPALADIN] = SIDHOLYBOLTHEX;

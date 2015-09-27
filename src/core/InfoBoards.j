@@ -525,9 +525,10 @@ library InfoBoards requires Board, ModelInfo, NefUnion, ZAMCore, BuffSystem, Agg
     
     private string combatLogAll[];
     private integer combatLogAllIndex = 0;
+    private integer generateCombatLogCtr = 0;
     
     public function GenerateCombatLog(string namespace) {
-        string filename = "D:\\WExport\\" + namespace + I2HEX(GetRandomInt(0, 0x7FFFFFFF)) + ".welog";
+        string filename = "D:\\WExport\\" + namespace + "-" + I2S(generateCombatLogCtr) + "-" + I2HEX(GetRandomInt(0, 0x7FFFFFFF)) + ".welog";
         integer i = 0;
         PreloadGenStart();
         Preload("[");
@@ -544,6 +545,7 @@ library InfoBoards requires Board, ModelInfo, NefUnion, ZAMCore, BuffSystem, Agg
         PreloadGenClear();
         combatLogAllIndex = 0;
         filename = null;
+        generateCombatLogCtr += 1;
     }
     
     unit manaRecordUnit;

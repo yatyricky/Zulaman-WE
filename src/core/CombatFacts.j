@@ -1,5 +1,9 @@
 //! zinc
 library CombatFacts {
+/*
+Should be deprecated, all constants go [Boss]Global library
+*/
+
     public unit whichBoss = null;    
     
     public struct DBMArchTinker {
@@ -31,6 +35,7 @@ library CombatFacts {
 	public struct DBMWarlock {
 		static unit theBolt = null;
         static boolean isFireBomb = false;
+        static real fireBombRadius = 150.0;
 	}
 	
 	public struct DBMAbyssArchon {

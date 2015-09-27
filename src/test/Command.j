@@ -274,49 +274,49 @@ library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSys
     }
 	
 	function testwarlock(string str) {
-		// PlayerUnits.units
-		// PlayerUnits.n
+        real testx = 536;
+        real testy = 3686;
 		integer i = 0;
 		while (i < PlayerUnits.n) {
-			SetUnitPosition(PlayerUnits.units[i], 3930, -573);
+			SetUnitPosition(PlayerUnits.units[i], testx, testy);
 			i += 1;
 		}
-		CreateItemEx('Ieng', 3930, -573);
-		CreateItemEx('Ieng', 3930, -573);
-		CreateItemEx('Ieng', 3930, -573);
-		CreateItemEx('Ieng', 3930, -573);
-		CreateItemEx('Ieng', 3930, -573);
-		CreateItemEx('Ieng', 3930, -573);
-		CreateItemEx('Ieng', 3930, -573);
-		CreateItemEx('Ieng', 3930, -573);
-		CreateItemEx('Ieng', 3930, -573);
-		CreateItemEx('Ieng', 3930, -573);
-		CreateItemEx('Ieng', 3930, -573);
-		CreateItemEx('Ieng', 3930, -573);
-		CreateItemEx('Ieng', 3930, -573);
-		CreateItemEx('Ieng', 3930, -573);
-		CreateItemEx('Ieng', 3930, -573);
-		CreateItemEx('Ieng', 3930, -573);
-		CreateItemEx('Ieng', 3930, -573);
-		CreateItemEx('Ieng', 3930, -573);
-		CreateItemEx('Ieng', 3930, -573);
-		CreateItemEx('Ieng', 3930, -573);
-		CreateItemEx('Ieng', 3930, -573);
-		CreateItemEx('Ieng', 3930, -573);
-		CreateItemEx('Ieng', 3930, -573);
-		CreateItemEx('Ieng', 3930, -573);
-		CreateItemEx('Ieng', 3930, -573);
-		CreateItemEx('Ieng', 3930, -573);
-		CreateItemEx('Ieng', 3930, -573);
-		CreateItemEx('Ieng', 3930, -573);
-		CreateItemEx('Ieng', 3930, -573);
-		CreateItemEx('Ieng', 3930, -573);
-		CreateItemEx('Ieng', 3930, -573);
-		CreateItemEx('Ieng', 3930, -573);
-		CreateItemEx('Ieng', 3930, -573);
-		CreateItemEx('Ieng', 3930, -573);
-		CreateItemEx('Ieng', 3930, -573);
-		CreateItemEx('Ieng', 3930, -573);
+		CreateItemEx('Ieng', testx, testy);
+		CreateItemEx('Ieng', testx, testy);
+		CreateItemEx('Ieng', testx, testy);
+		CreateItemEx('Ieng', testx, testy);
+		CreateItemEx('Ieng', testx, testy);
+		CreateItemEx('Ieng', testx, testy);
+		CreateItemEx('Ieng', testx, testy);
+		CreateItemEx('Ieng', testx, testy);
+		CreateItemEx('Ieng', testx, testy);
+		CreateItemEx('Ieng', testx, testy);
+		CreateItemEx('Ieng', testx, testy);
+		CreateItemEx('Ieng', testx, testy);
+		CreateItemEx('Ieng', testx, testy);
+		CreateItemEx('Ieng', testx, testy);
+		CreateItemEx('Ieng', testx, testy);
+		CreateItemEx('Ieng', testx, testy);
+		CreateItemEx('Ieng', testx, testy);
+		CreateItemEx('Ieng', testx, testy);
+		CreateItemEx('Ieng', testx, testy);
+		CreateItemEx('Ieng', testx, testy);
+		CreateItemEx('Ieng', testx, testy);
+		CreateItemEx('Ieng', testx, testy);
+		CreateItemEx('Ieng', testx, testy);
+		CreateItemEx('Ieng', testx, testy);
+		CreateItemEx('Ieng', testx, testy);
+		CreateItemEx('Ieng', testx, testy);
+		CreateItemEx('Ieng', testx, testy);
+		CreateItemEx('Ieng', testx, testy);
+		CreateItemEx('Ieng', testx, testy);
+		CreateItemEx('Ieng', testx, testy);
+		CreateItemEx('Ieng', testx, testy);
+		CreateItemEx('Ieng', testx, testy);
+		CreateItemEx('Ieng', testx, testy);
+		CreateItemEx('Ieng', testx, testy);
+		CreateItemEx('Ieng', testx, testy);
+		CreateItemEx('Ieng', testx, testy);
 	}
 
     function testPrintFireBomb(string str) {
@@ -335,7 +335,7 @@ library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSys
         //Console[Player(0)].add("countunits", countAllUnitsInMap);
         Console[Player(0)].add("lvlup", levelUp);
         //Console[Player(0)].add("oid", seeOID);
-        //Console[Player(0)].add("add", addAbility);
+        Console[Player(0)].add("add", addAbility);
         //Console[Player(0)].add("ra", resetAbility);
         //Console[Player(0)].add("alvl", abillvl);
         //Console[Player(0)].add("rem", removeAbility);
@@ -364,7 +364,7 @@ library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSys
         Console[Player(0)].add("ltn", testwarlock);
         Console[Player(0)].add("podun", poyicengdun);
         Console[Player(0)].add("canuse", testifunitcanuse);
-        Console[Player(0)].add("pfb", testPrintFireBomb);
+        // Console[Player(0)].add("pfb", testPrintFireBomb);
 		// console[Player(0)].add("testwlk", testwarlock);
         Console[Player(0)].add("angle", testgetangle);
     }

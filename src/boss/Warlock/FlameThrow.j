@@ -21,6 +21,8 @@ library FlameThrow requires SpellEvent, DamageSystem, GroupUtils {
             this.a = null;
             this.mis = null;
             this.deallocate();
+
+            FlameThrowAux.theBolt = null;
         }
         
         private static method run() {
@@ -36,7 +38,7 @@ library FlameThrow requires SpellEvent, DamageSystem, GroupUtils {
                 this.tick += 1;
                 
                 while (i < PlayerUnits.n) {
-                    if (GetDistance.units2d(PlayerUnits.units[i], this.mis) < 150 && !IsUnitDead(PlayerUnits.units[i]) && !IsUnitInGroup(PlayerUnits.units[i], this.damaged)) {
+                    if (GetDistance.units2d(PlayerUnits.units[i], this.mis) < FlameThrowAux.radius && !IsUnitDead(PlayerUnits.units[i]) && !IsUnitInGroup(PlayerUnits.units[i], this.damaged)) {
                         DamageTarget(this.a, PlayerUnits.units[i], 250.0 + GetRandomReal(0.0, 100.0), SpellData[SIDFLAMETHROW].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
                         AddTimedEffect.atUnit(IMPACT, PlayerUnits.units[i], "origin", 0.0);
                         GroupAddUnit(this.damaged, PlayerUnits.units[i]);
@@ -64,6 +66,8 @@ library FlameThrow requires SpellEvent, DamageSystem, GroupUtils {
             //SetUnitScale(this.mis, 2.0, 2.0, 2.0);
             this.eff = AddSpecialEffectTarget(MISSILE, this.mis, "origin");
             TimerStart(this.tm, 0.04, true, function thistype.run);
+
+            FlameThrowAux.theBolt = this.mis;
         }
     }
 

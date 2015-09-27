@@ -28,6 +28,14 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
             }
         }*/
     }
+
+    function IssueNormalAttackOrder(unit source, unit target) {
+        if (HexLordGlobalConst.normalAttackForbid) {
+            IssueImmediateOrderById(source, OID_HOLD);
+        } else {
+            IssueTargetOrderById(source, OID_ATTACK, target);
+        }
+    }
     
     // true: i'm good / false: hang on, i've got business
     function PositioningArchTinker(unit source) -> boolean {
@@ -150,7 +158,8 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
                 }
                 IssuePointOrderById(source, OID_MOVE, GetUnitX(DBMNagaSeaWitch.stormTarget), GetUnitY(DBMNagaSeaWitch.stormTarget));                    
             } else {
-                IssueImmediateOrderById(source, OID_HOLD);
+                // IssueImmediateOrderById(source, OID_HOLD);
+                return true;
             }
             return false;
         } else {
@@ -242,32 +251,161 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
     }
 
     function PositioningWarlock(unit source) -> boolean {
-        vector v;
-        real tx, ty;
+        // vector v;
+        // real tx, ty;
+        boolean safe;
+        real dis, dx, dy;
+        unit danger;
+        integer i;
+
+        real k1, b1, k2, b2, sx, sy, ym, xm, yo, xo, yt, xt;
         if (DBMWarlock.isFireBomb) {
             // position on firebomb
-            // TODO
-            /*v = FireBombMarker.getSafeDir(source, GetUnitX(source), GetUnitY(source));
-            tx = v.x;
-            ty = v.y;
-            v.destroy();
-            if (tx < 0.1 && ty < 0.1) {
-                IssueImmediateOrderById(source, OID_HOLD);
+            safe = true;
+            for (0 <= i < FireBombGroup.size) {
+                dis = GetDistance.units2d(source, FireBombGroup.bombs[i]);
+                if (dis <= DBMWarlock.fireBombRadius) {
+                    safe = false;
+                    danger = FireBombGroup.bombs[i];
+                    break;
+                }
+            }
+
+            if (safe) {
+                // IssueImmediateOrderById(source, OID_HOLD);
                 return true;   
             } else {
-                IssuePointOrderById(source, OID_MOVE, GetUnitX(source) + tx, GetUnitY(source) + ty);
+                dx = 200 * (GetUnitX(source) - GetUnitX(danger)) / dis;
+                dy = 200 * (GetUnitY(source) - GetUnitY(danger)) / dis;
+                IssuePointOrderById(source, OID_MOVE, GetUnitX(source) + dx, GetUnitY(source) + dy);
                 return false;
-            }*/
-            return true;
+            }
+
         } else {
             // dodge flame throw
-            if (DBMWarlock.theBolt != null) {
+            if (FlameThrowAux.theBolt == null) {
                 return true;
             } else {
+                if (GetDistance.units2d(source, FlameThrowAux.theBolt) <= FlameThrowAux.radius * 1.7) {
+                    ym = GetUnitY(FlameThrowAux.theBolt);
+                    xm = GetUnitX(FlameThrowAux.theBolt);
+                    yo = GetUnitY(whichBoss);
+                    xo = GetUnitX(whichBoss);
+                    yt = GetUnitY(source);
+                    xt = GetUnitX(source);
+                    k1 = (ym - yo) / (xm - xo);
+                    b1 = (xm * yo - ym * xo) / (xm - xo);
+                    k2 = -1.0 / k1;
+                    b2 = yt - k2 * xt;
+                    sx = (b2 - b1) / (k1 - k2);
+                    sy = k1 * sx + b1;
+                    dis = GetDistance.unitCoord(source, sx, sy);
+                    dx = 200 * (xt - sx) / dis;
+                    dy = 200 * (yt - sy) / dis;
+                    IssuePointOrderById(source, OID_MOVE, xt + dx, yt + dy);
+                    return false;
+                }
                 return true;
             }
         }
         return true;
+    }
+
+    function PositioningHexLord(unit source) -> boolean {
+        integer i;
+        real dis, tmp;
+        boolean safe, goFreeze;
+        vector v1, v2;
+        unit tar;
+        Point p1;
+        if (DBMHexLord.absorb == UTIDBLOODELFDEFENDER) {
+            safe = true;
+            for (0 <= i < SunFireStormHexSpots.size()) {
+                dis = GetDistance.unitCoord(source, SunFireStormHexSpots.get(i).x, SunFireStormHexSpots.get(i).y);
+                if (dis <= HexLordGlobalConst.sunFireAOE) {
+                    v1 = vector.create(SunFireStormHexSpots.get(i).x, SunFireStormHexSpots.get(i).y, 0);
+                    safe = false;
+                    break;
+                }
+            }
+            if (!safe) {
+                v2 = vector.create(GetUnitX(source), GetUnitY(source), 0);
+                v2.subtract(v1);
+                if (v2.getLength() == 0.0) {
+                    v2.reset(GetRandomReal(-1, 1), GetRandomReal(-1, 1), 0);
+                    if (v2.y == 0.0) {v2.y = 1.0;}
+                }
+                v2.setLength(HexLordGlobalConst.sunFireAOE * 1.5);
+                v2.add(v1);
+                IssuePointOrderById(source, OID_MOVE, v2.x, v2.y);
+                v1.destroy();
+                v2.destroy();
+                return false;
+            } else {
+                return true;
+            }
+        } else if (DBMHexLord.absorb == UTIDCLAWDRUID) {
+            if (GetUnitAbilityLevel(whichBoss, BID_NATURAL_REFLEX_HEX) > 0) {
+                HexLordGlobalConst.normalAttackForbid = true;
+            } else {
+                HexLordGlobalConst.normalAttackForbid = false;
+            }
+            return true;
+        } else if (DBMHexLord.absorb == UTIDDARKRANGER) {
+            goFreeze = false;
+            if (!IsUnitTank(source)) {
+                tar = AggroList[whichBoss].getFirst();
+                if (IsUnit(source, tar)) {
+                    goFreeze = true;
+                }
+            }
+            if (goFreeze) {
+                // OT, go to clear aggro
+                dis = 99999;
+                for (0 <= i < FreezingTrapHexSpots.size()) {
+                    tmp = GetDistance.unitCoord(source, FreezingTrapHexSpots.get(i).x, FreezingTrapHexSpots.get(i).y);
+                    if (tmp < dis) {
+                        dis = tmp;
+                        p1 = FreezingTrapHexSpots.get(i);
+                    }
+                }
+                if (dis < 9999) {
+                    IssuePointOrderById(source, OID_MOVE, p1.x, p1.y);
+                    return false;
+                } else {
+                    return true;
+                }
+            } else {
+                // normal or im tank
+                safe = true;
+                for (0 <= i < FreezingTrapHexSpots.size()) {
+                    dis = GetDistance.unitCoord(source, FreezingTrapHexSpots.get(i).x, FreezingTrapHexSpots.get(i).y);
+                    if (dis <= HexLordGlobalConst.freezingTrapAOE * 1.5) { // stay safe is always good
+                        v1 = vector.create(FreezingTrapHexSpots.get(i).x, FreezingTrapHexSpots.get(i).y, 0);
+                        safe = false;
+                        break;
+                    }
+                }
+                if (!safe) {
+                    v2 = vector.create(GetUnitX(source), GetUnitY(source), 0);
+                    v2.subtract(v1);
+                    if (v2.getLength() == 0.0) {
+                        v2.reset(GetRandomReal(-1, 1), GetRandomReal(-1, 1), 0);
+                        if (v2.y == 0.0) {v2.y = 1.0;}
+                    }
+                    v2.setLength(HexLordGlobalConst.freezingTrapAOE * 2.0);
+                    v2.add(v1);
+                    IssuePointOrderById(source, OID_MOVE, v2.x, v2.y);
+                    v1.destroy();
+                    v2.destroy();
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        } else {
+            return true;
+        }
     }
     
     function PositioningDone(unit source) -> boolean {
@@ -281,7 +419,8 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
             return PositioningTideBaron(source);
         } else if (bossutid == UTIDWARLOCK) {
             return PositioningWarlock(source);
-			// return true;
+		} else if (bossutid == UTIDHEXLORD) {
+            return PositioningHexLord(source);
         } else {
             return true;
         }
@@ -621,7 +760,7 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
                     IssueTargetOrderById(source, SpellData[SIDARCANESHOCK].oid, MobList.units[i]);
                 } else {
                     // attack
-                    IssueTargetOrderById(source, OID_ATTACK, MobList.units[i]);
+                    IssueNormalAttackOrder(source, MobList.units[i]);
                 }
                 i += MobList.n;
             }
@@ -642,7 +781,7 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
                 IssueImmediateOrderById(source, SpellData[SIDSUNFIRESTORM].oid);
             } else {
                 // attack lowest hp
-                IssueTargetOrderById(source, OID_ATTACK, MobList.getLowestHPPercent());
+                IssueNormalAttackOrder(source, MobList.getLowestHPPercent());
             }
         }
     }
@@ -686,12 +825,12 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
             ot = AggroList[MobList.units[i]].getFirst();
             if (!IsUnit(ot, source)) {
                 state = 1;
-                if (UnitCanUse(source, SID_LACERATE) && GetUnitTypeId(MobList.units[i]) != UTIDTIDEBARONWATER) {
+                if (UnitCanUse(source, SID_LACERATE) && GetUnitTypeId(MobList.units[i]) != UTIDTIDEBARONWATER && !HexLordGlobalConst.normalAttackForbid) {
                     // lacerate
                     IssueTargetOrderById(source, SpellData[SID_LACERATE].oid, MobList.units[i]);
                 } else {
                     // attack
-                    IssueTargetOrderById(source, OID_ATTACK, MobList.units[i]);
+                    IssueNormalAttackOrder(source, MobList.units[i]);
                 }
                 i += MobList.n;
             }
@@ -706,7 +845,7 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
             } else if (UnitCanUse(source, SID_SAVAGE_ROAR) && GetUnitManaPercent(source) < 90) {
                 // roar if mana not full
                 IssueImmediateOrderById(source, SpellData[SID_SAVAGE_ROAR].oid);
-            } else if (UnitCanUse(source, SID_LACERATE)) {
+            } else if (UnitCanUse(source, SID_LACERATE) && !HexLordGlobalConst.normalAttackForbid) {
                 // lacerate 1 by 1
                 i = 0;
 				findAny = 0;
@@ -719,11 +858,11 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
                     i += 1;
                 }
 				if (findAny == 0) {
-					IssueTargetOrderById(source, OID_ATTACK, MobList.getLowestHP());
+					IssueNormalAttackOrder(source, MobList.getLowestHP());
 				}
             } else {
                 // attack lowest hp
-                IssueTargetOrderById(source, OID_ATTACK, MobList.getLowestHP());
+                IssueNormalAttackOrder(source, MobList.getLowestHP());
             }
         }
     }
@@ -793,7 +932,7 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
                     i += 1;
                 }
                 if (state == 0) {
-                    IssueTargetOrderById(source, OID_ATTACK, MobList.getLowestHP());
+                    IssueNormalAttackOrder(source, MobList.getLowestHP());
                 }
             }
         }
@@ -867,7 +1006,7 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
                     i += 1;
                 }
                 if (state == 0) {
-                    IssueTargetOrderById(source, OID_ATTACK, MobList.getLowestHP());
+                    IssueNormalAttackOrder(source, MobList.getLowestHP());
                 }
             }
         }
@@ -931,7 +1070,7 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
                     }
                 }
                 if (state == 0) {
-                    IssueTargetOrderById(source, OID_ATTACK, MobList.getLowestHP());
+                    IssueNormalAttackOrder(source, MobList.getLowestHP());
                 }
             }
         }
@@ -980,7 +1119,7 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
                                 state = 1;
                             }
                             if (DarkRangerHasGhoul(source)) {
-                                IssueTargetOrderById(DarkRangerGetGhoul(source), OID_ATTACK, tar);
+                                IssueNormalAttackOrder(DarkRangerGetGhoul(source), tar);
                                 stateG = 1;
                             }
                         }
@@ -1021,11 +1160,11 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
             }
             // attack
             if (state == 0) {
-                IssueTargetOrderById(source, OID_ATTACK, MobList.getLowestHP());
+                IssueNormalAttackOrder(source, MobList.getLowestHP());
             }
             if (stateG == 0) {
                 if (DarkRangerHasGhoul(source)) {
-                    IssueTargetOrderById(DarkRangerGetGhoul(source), OID_ATTACK, MobList.getLowestHP());
+                    IssueNormalAttackOrder(DarkRangerGetGhoul(source), MobList.getLowestHP());
                 }
             }
         }
@@ -1041,26 +1180,26 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
             // I have only one target!
             tar = MobList.getLowestHP();
             // overpower: when ready
-            if (UnitCanUse(source, SIDOVERPOWER)) {
+            if (UnitCanUse(source, SIDOVERPOWER) && !HexLordGlobalConst.normalAttackForbid) {
                 if (BladeMasterCanOverpower(source) && GetUnitManaLost(source) >= BladeMasterGetOverpowerManaRep(source)) {
                     IssueTargetOrderById(source, SpellData[SIDOVERPOWER].oid, tar);
                     state = 1;
                 }
             }
             // rend: if no rend
-            if (state == 0 && UnitCanUse(source, SIDREND)) {
+            if (state == 0 && UnitCanUse(source, SIDREND) && !HexLordGlobalConst.normalAttackForbid) {
                 if (GetUnitAbilityLevel(tar, BID_REND) == 0) {
                     IssueTargetOrderById(source, SpellData[SIDREND].oid, tar);
                     state = 1;
                 }
             }
             // mortal strike: rend about to expire
-            if (state == 0 && UnitCanUse(source, SIDMORTALSTRIKE)) {
+            if (state == 0 && UnitCanUse(source, SIDMORTALSTRIKE) && !HexLordGlobalConst.normalAttackForbid) {
                 IssueTargetOrderById(source, SpellData[SIDMORTALSTRIKE].oid, tar);
                 state = 1;
             }
             // execute: when > 16
-            if (state == 0) {
+            if (state == 0 && !HexLordGlobalConst.normalAttackForbid) {
                 if (BladeMasterPeekValour(source) > 16) {
                     IssueTargetOrderById(source, SpellData[SIDEXECUTEEND].oid, tar);
                     state = 1;
@@ -1081,7 +1220,7 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
             }
             // attack
             if (state == 0) {
-                IssueTargetOrderById(source, OID_ATTACK, tar);
+                IssueNormalAttackOrder(source, tar);
             }
         }
     }
@@ -1178,7 +1317,7 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
             }            
             // attack
             if (state == 0) {
-                IssueTargetOrderById(source, OID_ATTACK, MobList.getLowestHP());
+                IssueNormalAttackOrder(source, MobList.getLowestHP());
             }
         }
     }
@@ -1317,7 +1456,7 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
             }
             // attack
             if (state == 0 || state == 2) {
-                IssueTargetOrderById(source, OID_ATTACK, MobList.getLowestHP());
+                IssueNormalAttackOrder(source, MobList.getLowestHP());
             }
         }
     }
@@ -1346,12 +1485,12 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
                 }
             }
             // blade flurry: use when ready
-            if (state == 0 && UnitCanUse(source, SIDBLADEFLURRY) && !IsUnitStealth(source)) {
+            if (state == 0 && UnitCanUse(source, SIDBLADEFLURRY) && !IsUnitStealth(source) && !HexLordGlobalConst.normalAttackForbid) {
                 IssueImmediateOrderById(source, SpellData[SIDBLADEFLURRY].oid);
                 state = 1;
             }
             // stealth abilities
-            if (state == 0 && IsUnitStealth(source)) {
+            if (state == 0 && IsUnitStealth(source) && !HexLordGlobalConst.normalAttackForbid) {
                 tar = MobList.getLowestHP();
                 if (GetUnitMana(tar) == 0) {
                     IssueTargetOrderById(source, SpellData[SIDAMBUSH].oid, tar);
@@ -1361,7 +1500,7 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
                 state = 1;
             }
             // assault: counter spell
-            if (state == 0 && UnitCanUse(source, SIDASSAULT)) {
+            if (state == 0 && UnitCanUse(source, SIDASSAULT) && !HexLordGlobalConst.normalAttackForbid) {
                 ot = MobList.getChanneling();
                 if (ot != null) {
                     IssueTargetOrderById(source, SpellData[SIDASSAULT].oid, ot);
@@ -1369,20 +1508,20 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
                 }
             }
             // eviscerate: when 5*
-            if (state == 0 && UnitCanUse(source, SIDEVISCERATE)) {
+            if (state == 0 && UnitCanUse(source, SIDEVISCERATE) && !HexLordGlobalConst.normalAttackForbid) {
                 if (ComboPoints[source].n == 5 && GetUnitManaPercent(source) >= 25) {
                     IssueTargetOrderById(source, SpellData[SIDEVISCERATE].oid, MobList.getLowestHP());
                     state = 1;
                 }
             }
             // sinister strike
-            if (state == 0 && UnitCanUse(source, SIDSINISTERSTRIKE) && GetUnitManaPercent(source) >= 40) {
+            if (state == 0 && UnitCanUse(source, SIDSINISTERSTRIKE) && GetUnitManaPercent(source) >= 40 && !HexLordGlobalConst.normalAttackForbid) {
                 IssueTargetOrderById(source, SpellData[SIDSINISTERSTRIKE].oid, MobList.getLowestHP());
                 state = 1;
             }
             // attack
             if (state == 0) {
-                IssueTargetOrderById(source, OID_ATTACK, MobList.getLowestHP());
+                IssueNormalAttackOrder(source, MobList.getLowestHP());
             }
         }
     }
@@ -1474,7 +1613,7 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
             }
             // attack
             if (state == 0) {
-                IssueTargetOrderById(source, OID_ATTACK, MobList.getLowestHP());
+                IssueNormalAttackOrder(source, MobList.getLowestHP());
             }
         }
     }

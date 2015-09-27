@@ -9,11 +9,29 @@ library WarlockGlobal requires NefUnion, ZAMCore, Table {
     real yoff[];
     real facing[]; // facing for fire runes
 
-	real fbAOE = 150.0;
     real heroBodySize = 60.0;
 	public real platformRadius = 950;
 
-    public struct FireBombMarker {
+    public struct FireBombGroup {
+        static unit bombs[];
+        static integer size = 0;
+
+        static method add(unit u) {
+            thistype.bombs[thistype.size] = u;
+            thistype.size += 1;
+        }
+
+        static method clear() {
+            thistype.size = 0;
+        }
+    }
+
+    public struct FlameThrowAux {
+        static real radius = 150.0;
+        static unit theBolt = null;
+    }
+
+    /*public struct FireBombMarker {
         static real x[];
         static real y[];
         static integer n;
@@ -22,7 +40,7 @@ library WarlockGlobal requires NefUnion, ZAMCore, Table {
             vector ret = vector.create(0.0, 0.0, 0.0);
             integer count = 0;
             unit it;
-            GroupUnitsInArea(ENUM_GROUP, x, y, fbAOE * 2);
+            GroupUnitsInArea(ENUM_GROUP, x, y, DBMWarlock.fireBombRadius * 2);
             it = FirstOfGroup(ENUM_GROUP);
             while (it != null) {
                 GroupRemoveUnit(ENUM_GROUP, it);
@@ -38,10 +56,10 @@ library WarlockGlobal requires NefUnion, ZAMCore, Table {
             if (count == 0) {
                 return vector.create(0.0, 0.0, 0.0);
             }
-            if (ret.getLength() > fbAOE) {
+            if (ret.getLength() > DBMWarlock.fireBombRadius) {
                 return ret;
             }
-            ret.setLength(fbAOE);
+            ret.setLength(DBMWarlock.fireBombRadius);
             return ret;
         }
 
@@ -58,7 +76,7 @@ library WarlockGlobal requires NefUnion, ZAMCore, Table {
         private static method onInit() {
             thistype.clear();
         }
-    }
+    }*/
 
     public function GetFireRune() -> unit {
         if (index < 26) {

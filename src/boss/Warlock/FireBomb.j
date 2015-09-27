@@ -6,8 +6,6 @@ library FireBomb requires SpellEvent, ZAMCore, DamageSystem, WarlockGlobal {
 #define NUM_MISSILES 40
 #define H_OVER_D 0.45
 
-    group bombs;
-
     struct Parabola {
         private timer tm;
         private unit missile;
@@ -35,9 +33,8 @@ library FireBomb requires SpellEvent, ZAMCore, DamageSystem, WarlockGlobal {
             height = Sin(this.count * MISSILE_SPEED / this.distance * 3.1415) * this.distance * H_OVER_D;
             if (height < 0.0) {
                 height = 0.0;
-                GroupAddUnit(bombs, CreateUnit(Player(10), UTID_FIRE_BOMB, GetUnitX(this.missile), GetUnitY(this.missile), GetUnitFacing(this.missile)));
+                FireBombGroup.add(CreateUnit(Player(10), UTID_FIRE_BOMB, GetUnitX(this.missile), GetUnitY(this.missile), GetUnitFacing(this.missile)));
                 // MarkFireBomb(GetUnitX(this.missile), GetUnitY(this.missile), true);
-                FireBombMarker.mark(GetUnitX(this.missile), GetUnitY(this.missile));
                 this.destroy();
             } else {            
                 SetUnitX(this.missile, tx);
@@ -63,27 +60,23 @@ library FireBomb requires SpellEvent, ZAMCore, DamageSystem, WarlockGlobal {
     }
     
     function explosion(DelayTask dt) {
-        unit tu = FirstOfGroup(bombs);
-        integer i;
-        while (tu != null) {
-            GroupRemoveUnit(bombs, tu);
+        integer i, j;
+        for (0 <= j < FireBombGroup.size) {
             i = 0;
             while (i < PlayerUnits.n) {
-                if (GetDistance.units2d(PlayerUnits.units[i], tu) < 150 && !IsUnitDead(PlayerUnits.units[i])) {
+                if (GetDistance.units2d(PlayerUnits.units[i], FireBombGroup.bombs[j]) < DBMWarlock.fireBombRadius && !IsUnitDead(PlayerUnits.units[i])) {
                     DamageTarget(dt.u0, PlayerUnits.units[i], 350.0 + GetRandomReal(0.0, 200.0), SpellData[SIDFLAMEBOMB].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
                     AddTimedEffect.atUnit(MISSILE, PlayerUnits.units[i], "origin", 0.0);
                 }
                 i += 1;
             }
-            AddTimedEffect.atUnit(EXPLOSION_ART, tu, "origin", 0.0);
-            KillUnit(tu);
-            tu = FirstOfGroup(bombs);
+            AddTimedEffect.atUnit(EXPLOSION_ART, FireBombGroup.bombs[j], "origin", 0.0);
+            KillUnit(FireBombGroup.bombs[j]);
         }
         // MarkFireBombClear(true);
         // printMarkMap();
-        FireBombMarker.clear();
+        FireBombGroup.clear();
         DBMWarlock.isFireBomb = false;
-        tu = null;
     }
 
     function response(CastingBar cd) {
@@ -114,7 +107,6 @@ library FireBomb requires SpellEvent, ZAMCore, DamageSystem, WarlockGlobal {
     }
 
     function onInit() {
-        bombs = NewGroup();
         RegisterSpellChannelResponse(SIDFLAMEBOMB, onChannel);
     }
 #undef H_OVER_D

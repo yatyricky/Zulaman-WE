@@ -9,11 +9,13 @@ library FreezingTrapHex requires SpellEvent, StunUtils, AggroSystem {
     struct FreezngTrap {
         private timer tm;
         private unit u;
-        private real x, y;
+        private Point p;
         private effect trap;
         private integer count;
         
         private method destroy() {
+            FreezingTrapHexSpots.remove(this.p);
+            this.p.destroy();
             ReleaseTimer(this.tm);
             this.tm = null;
             this.u = null;
@@ -25,10 +27,10 @@ library FreezingTrapHex requires SpellEvent, StunUtils, AggroSystem {
             thistype this = GetTimerData(GetExpiredTimer());
             integer i = 0;
             unit near = null;
-            real dis = 100.0;
+            real dis = HexLordGlobalConst.freezingTrapAOE;
             real tmp;
             while (i < PlayerUnits.n) {
-                tmp = GetDistance.unitCoord2d(PlayerUnits.units[i], this.x, this.y);
+                tmp = GetDistance.unitCoord2d(PlayerUnits.units[i], this.p.x, this.p.y);
                 if (tmp <= dis) {
                     near = PlayerUnits.units[i];
                     dis = tmp;
@@ -36,8 +38,8 @@ library FreezingTrapHex requires SpellEvent, StunUtils, AggroSystem {
                 i += 1;
             }
             if (near != null) {
-                AddTimedEffect.atCoord(ART, this.x, this.y, 2.0);
-                AddTimedEffect.atCoord(ART1, this.x, this.y, 0.1);
+                AddTimedEffect.atCoord(ART, this.p.x, this.p.y, 2.0);
+                AddTimedEffect.atCoord(ART1, this.p.x, this.p.y, 0.1);
                 StunUnit(this.u, near, 5.0);                
                 AddTimedEffect.atUnit(SFX, near, "origin", 5.0);
                 AggroClear(near, 0.99);
@@ -54,26 +56,26 @@ library FreezingTrapHex requires SpellEvent, StunUtils, AggroSystem {
         
         private static method trapReady() {
             thistype this = GetTimerData(GetExpiredTimer());
-            this.trap = AddSpecialEffect(PATH, this.x, this.y);
+            this.trap = AddSpecialEffect(PATH, this.p.x, this.p.y);
             this.count = 100;
             TimerStart(this.tm, 0.3, true, function thistype.watchout);
         }
     
-        static method start(unit u, real x, real y, real dur) {
+        static method start(unit u, Point p, real dur) {
             thistype this = thistype.allocate();
             this.tm = NewTimer();
             SetTimerData(this.tm, this);
             this.u = u;
-            this.x = x;
-            this.y = y;
-            AddTimedEffect.atCoord(PATH1, x, y, 0.1);
+            this.p = p;
+            FreezingTrapHexSpots.add(this.p);
+            AddTimedEffect.atCoord(PATH1, this.p.x, this.p.y, 0.1);
             TimerStart(this.tm, dur, false, function thistype.trapReady);
         }
     }
 
     function onCast() {
         unit target = AggroList[SpellEvent.CastingUnit].getFirst();
-        FreezngTrap.start(SpellEvent.CastingUnit, GetUnitX(target), GetUnitY(target), 2.0);
+        FreezngTrap.start(SpellEvent.CastingUnit, Point.new(GetUnitX(target), GetUnitY(target)), 2.0);
         //TerrainChange.start(SpellEvent.TargetX, SpellEvent.TargetY);
     }
 

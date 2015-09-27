@@ -240,9 +240,9 @@ SpellData.create(SIDSPIRITBOLT,         "灵魂之箭",     50.0,    10.0,   40.
 SpellData.create(SIDSPIRITHARVEST,      "灵魂收割",     0.0,     0.0,    35.0,   OrderId("hex"),            1,  ORDER_TYPE_IMMEDIATE); 
 SpellData.create(SIDSUNFIRESTORMHEX,    "阳炎风暴",     100.0,   0.0,    10.0,   OrderId("slow"),           1,  ORDER_TYPE_IMMEDIATE); 
 SpellData.create(SIDSHIELDOFSINDOREIHEX,"辛多雷之盾",   0.0,     0.0,    10.0,   OrderId("sleep"),          1,  ORDER_TYPE_IMMEDIATE); 
-SpellData.create(SIDMANGLEHEX,          "裂伤",         0.0,     0.0,    5.0,    OrderId("slow"),           1,  ORDER_TYPE_TARGET); 
-SpellData.create(SIDRABIESHEX,          "狂犬病",       100.0,   0.0,    5.0,    OrderId("sleep"),          1,  ORDER_TYPE_TARGET); 
-SpellData.create(SIDTRANQUILITYHEX,     "宁静",         100.0,   8.0,    40.0,   OrderId("slow"),           1,  ORDER_TYPE_IMMEDIATE); 
+SpellData.create(SID_SAVAGE_ROAR_HEX,   "Savage Roar",  0.0,     0.0,    10.0,   OrderId("sleep"),          1,  ORDER_TYPE_IMMEDIATE); 
+SpellData.create(SID_NATURAL_REFLEX_HEX,"Natural Reflex",0.0,    0.0,    12.0,   OrderId("slow"),           1,  ORDER_TYPE_IMMEDIATE); 
+SpellData.create(SIDTRANQUILITYHEX,     "宁静",         100.0,   8.0,    10.0,   OrderId("slow"),           1,  ORDER_TYPE_IMMEDIATE); 
 SpellData.create(SIDLIFEBLOOMHEX,       "生命绽放",     25.0,    0.0,    10.0,   OrderId("sleep"),          1,  ORDER_TYPE_TARGET); 
 SpellData.create(SIDHOLYBOLTHEX,        "圣光术",       100.0,   4.0,    10.0,   OrderId("slow"),           1,  ORDER_TYPE_TARGET); 
 SpellData.create(SIDHOLYSHOCKHEX,       "神圣震击",     50.0,    0.0,    10.0,   OrderId("sleep"),          1,  ORDER_TYPE_TARGET); 

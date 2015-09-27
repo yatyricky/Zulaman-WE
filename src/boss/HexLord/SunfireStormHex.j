@@ -1,5 +1,5 @@
 //! zinc
-library SunfireStorm requires SpellEvent, TimerUtils, AggroSystem {
+library SunfireStorm requires SpellEvent, TimerUtils, AggroSystem, HexLordGlobal {
 #define ART_CASTER "Abilities\\Weapons\\DemolisherFireMissile\\DemolisherFireMissile.mdl"
 #define ART_EFFECT "Abilities\\Spells\\Orc\\LiquidFire\\Liquidfire.mdl"
 
@@ -9,13 +9,16 @@ library SunfireStorm requires SpellEvent, TimerUtils, AggroSystem {
         unit caster;
         real aoe;
         timer tm;
-        real x, y;
+        Point p;
         
         method destroy() {
+            SunFireStormHexSpots.remove(this.p);
+            this.p.destroy();
             ReleaseTimer(this.tm);
             this.caster = null;
             this.tm = null;
             this.deallocate();
+            // BJDebugMsg(I2S(SunFireStormHexSpots.size()));
         }
         
         static method run() {
@@ -23,7 +26,7 @@ library SunfireStorm requires SpellEvent, TimerUtils, AggroSystem {
             integer i = 0;
             if (IsInCombat()) {
                 while (i < PlayerUnits.n) {
-                    if (GetDistance.unitCoord(PlayerUnits.units[i], this.x, this.y) < 150 && !IsUnitDead(PlayerUnits.units[i])) {
+                    if (GetDistance.unitCoord(PlayerUnits.units[i], this.p.x, this.p.y) < HexLordGlobalConst.sunFireAOE && !IsUnitDead(PlayerUnits.units[i])) {
                         DamageTarget(this.caster, PlayerUnits.units[i], this.dmg, SpellData[SIDSUNFIRESTORMHEX].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
                     }
                     i += 1;
@@ -35,19 +38,19 @@ library SunfireStorm requires SpellEvent, TimerUtils, AggroSystem {
             }
         }
     
-        static method new(unit u, real x, real y) {
+        static method new(unit u, Point p) {
             thistype this = thistype.allocate();
             this.caster = u;
             this.aoe = 150.0;
             this.count = 8;
             this.dmg = 300.0;
-            this.x = x;
-            this.y = y;
+            this.p = p;
             this.tm = NewTimer();
             SetTimerData(this.tm, this);
             TimerStart(this.tm, 1.0, true, function thistype.run);
-            AddTimedEffect.atCoord(ART_CASTER, this.x, this.y, 0.0);
-            AddTimedEffect.atCoord(ART_EFFECT, this.x, this.y, this.count);
+            SunFireStormHexSpots.push(this.p);
+            AddTimedEffect.atCoord(ART_CASTER, this.p.x, this.p.y, 0.0);
+            AddTimedEffect.atCoord(ART_EFFECT, this.p.x, this.p.y, this.count);
         }
     }
 
@@ -60,7 +63,7 @@ library SunfireStorm requires SpellEvent, TimerUtils, AggroSystem {
             x = GetUnitX(tar);
             y = GetUnitY(tar);
         }
-        SunFieldHex.new(SpellEvent.CastingUnit, x, y);  
+        SunFieldHex.new(SpellEvent.CastingUnit, Point.new(x, y));  
     }
 
     function onInit() {

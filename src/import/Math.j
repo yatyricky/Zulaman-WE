@@ -29,6 +29,13 @@ library Math {
 			this.y = 0.0;
 			return this;
 		}
+
+		static method new(real x, real y) -> thistype {
+			thistype this = thistype.allocate();
+			this.x = x;
+			this.y = y;
+			return this;
+		}
 	}
 
 	public function IsPointInCircle(Point p, Circle c) -> boolean {
