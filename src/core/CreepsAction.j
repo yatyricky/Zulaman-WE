@@ -600,6 +600,24 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
 		IssueTargetOrderById(source, OID_ATTACK, target);
 	}
 
+    function makeOrderAbyssArchon(unit source, unit target, real combatTime) {
+        IssueTargetOrderById(source, OID_ATTACK, target);   
+    }
+
+    function makeOrderSpike(unit source, unit target, real combatTime) {}
+
+    function makeOrderPoisonousCrawler(unit source, unit target, real combatTime) {
+        IssueTargetOrderById(source, OID_ATTACK, target);   
+    }
+
+    function makeOrderAbomination(unit source, unit target, real combatTime) {
+        IssueTargetOrderById(source, OID_ATTACK, target);   
+    }
+
+    function makeOrderWraith(unit source, unit target, real combatTime) {
+        IssueTargetOrderById(source, OID_ATTACK, target);   
+    }
+
     public function OrderCreeps(unit s, unit t, real c) {
         integer utid = GetUnitTypeId(s);
         //print(I2S(R2I(c)));
@@ -638,6 +656,13 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         unitCallBack[UTIDTIDEBARON] = makeOrderTideBaron;   // 潮汐男爵 海元素形态
         unitCallBack[UTIDWARLOCK] = makeOrderWarlock;   // 术士
         unitCallBack[UTID_LAVA_SPAWN] = makeOrderLavaSpawn;   // Lava Spawn
+
+        unitCallBack[UTID_PIT_ARCHON] = makeOrderAbyssArchon;
+        unitCallBack[UTID_SPIKE] = makeOrderSpike;
+        unitCallBack[UTID_POISONOUS_CRAWLER] = makeOrderPoisonousCrawler;
+        unitCallBack[UTID_ABOMINATION] = makeOrderAbomination;
+        unitCallBack[UTID_WRAITH] = makeOrderWraith;
+
         unitCallBack[UTIDHEXLORD] = makeOrderHexLord;   // 妖术领主
         unitCallBack[UTIDLIGHTNINGTOTEM] = makeOrderLightningTotem;   // 闪电图腾
         

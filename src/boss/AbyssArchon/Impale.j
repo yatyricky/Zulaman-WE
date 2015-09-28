@@ -1,6 +1,5 @@
 //! zinc
-library Impale requires SpellEvent, BuffSystem {
-#define ART "blood effect"
+library Impale requires SpellEvent, StunUtils, TimerUtils, DamageSystem {
 
     struct Impale {
         private static HandleTable ht1;
@@ -24,9 +23,9 @@ library Impale requires SpellEvent, BuffSystem {
 
         private static method run() {
             thistype this = GetTimerData(GetExpiredTimer());
-            DamageTarget(this.source, this.target, 300.0, SpellData[SPELL_ID], true, false, false, WEAPON_TYPE_WHOKNOWS);
+            DamageTarget(this.source, this.target, 300.0, SpellData[SID_IMPALE].name, true, false, false, WEAPON_TYPE_WHOKNOWS);
 
-            AddTimedEffect.atUnit(ART, this.target, "origin", 0.5);
+            AddTimedEffect.atUnit(ART_BLEED, this.target, "origin", 0.5);
         }
 
         static method start(unit source, unit target) {
@@ -38,7 +37,7 @@ library Impale requires SpellEvent, BuffSystem {
                 this = thistype.allocate();
                 this.source = source;
                 this.target = target;
-                this.spike = CreateUnit(Player(MOB_PID), UTID, GetUnitX(target), GetUnitY(target), GetUnitFacing(target));
+                this.spike = CreateUnit(Player(MOB_PID), UTID_SPIKE, GetUnitX(target), GetUnitY(target), GetUnitFacing(target));
                 this.tm = NewTimer();
                 SetTimerData(this.tm, this);
                 thistype.ht1[this.target] = this;
@@ -48,7 +47,7 @@ library Impale requires SpellEvent, BuffSystem {
             }
 
             StunUnit(source, target, 999);
-            AddTimedEffect.atUnit(ART, target, "origin", 1.0);
+            AddTimedEffect.atUnit(ART_BLEED, target, "origin", 1.0);
         }
 
         static method playerDeath(unit u) {
@@ -78,7 +77,7 @@ library Impale requires SpellEvent, BuffSystem {
     }
 
     function impaleSpikeDeath(unit u) {
-        if (GetUnitTypeId(u) == UTID) {
+        if (GetUnitTypeId(u) == UTID_SPIKE) {
             Impale.spikeDeath(u);
         }
     }
@@ -88,10 +87,9 @@ library Impale requires SpellEvent, BuffSystem {
     }
 
     function onInit() {
-        RegisterSpellEffectResponse(SPELL_ID, onCast);
+        RegisterSpellEffectResponse(SID_IMPALE, onCast);
         RegisterUnitDeath(impalePlayerDeath);
         RegisterUnitDeath(impaleSpikeDeath);
     }
-#undef ART
 }
 //! endzinc

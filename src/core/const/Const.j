@@ -45,11 +45,11 @@
 #define ORDER_TYPE_TARGET 4
 #define ORDER_TYPE_POINT 2
 
-// Debug
-#define SIDHEALTESTER 'A04H'
-
 // dummy ability
 #define SIDATTACKLL 1
+#define SID_GENERAL_STUN 'A001'
+#define SID_HAUNT 'A04A'
+#define SIDHEALTESTER 'A04H'
 
 // 血精灵防御者
 #define UTIDBLOODELFDEFENDER 'Hmkg'
@@ -201,6 +201,9 @@
 #define SID_FUCKED_LIGHTNING 'A03L'
 #define BID_FUCKED_LIGHTNING 'A03R'
 #define UTID_FLYING_SERPENT 'n003'
+#define SID_STRONG_BREEZE 'A03M'
+#define SID_SUMMON_SERPENTS 'A03N'
+#define SID_THUNDER_STORM 'A03O'
 
 // 潮汐男爵
 #define UTIDTIDEBARON 'Udea'
@@ -228,9 +231,23 @@
 
 // Abyss Archon
 #define UTID_PIT_ARCHON 'Ucrl'
+
+#define SID_IMPALE 'A0B1'
+#define UTID_SPIKE 'n00O'
+
+#define SID_SUMMON_POISONOUS_CRAWLER 'A0B2'
 #define UTID_POISONOUS_CRAWLER 'ucry'
+#define BID_SUMMON_POISONOUS_CRAWLER 'A0B6'
+
+#define SID_SUMMON_ABOMINATION 'A0B4'
 #define UTID_ABOMINATION 'uabo'
+#define BID_SUMMON_ABOMINATION 'A0B7'
+
+#define SID_SUMMON_WRAITH 'A0B5'
 #define UTID_WRAITH 'ushd'
+#define BID_SUMMON_WRAITH 'A0B8'
+
+#define SID_LIFE_SIPHON 'A0B3'
 
 // 恶魔守卫
 #define UTID_FEL_GUARD 'Nplh'
@@ -304,7 +321,10 @@
 #define UTID_FEL_GRUNT 'n00C'
 #define UTID_FEL_RIDER 'n00H'
 #define UTID_FEL_WAR_BRINGER 'n00D'
+
 #define UTID_DEMONIC_WITCH 'n001'
+#define SID_BLAZING_HASTE 'A02Y'
+
 #define UTID_VOID_WALKER 'n00I'
 #define UTID_FEL_HOUND 'n00J'
 #define UTID_MAID_OF_AGONY 'n00K'

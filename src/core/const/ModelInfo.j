@@ -121,6 +121,7 @@ ModelInfo.rg(UTIDTIDEBARONWATER,    ATT_STR,    99599,  160,    100,    40, 0.1,
 ModelInfo.rg(UTIDWARLOCK,   ATT_INT,    79899,  170,    20, 5,  0.05,   0.0,    0.0,    1.0,    0.03,   CAREER_TYPE_BOSS,   "ReplaceableTextures\\CommandButtons\\BTNOrcWarlock.blp");
 ModelInfo.rg(UTID_LAVA_SPAWN,   ATT_NON,    799,    50, 0,  0,  0.05,   0.0,    0.0,    1.0,    0.05,   CAREER_TYPE_CREEP,  "ReplaceableTextures\\CommandButtons\\BTNLavaSpawn.blp");
 ModelInfo.rg(UTID_PIT_ARCHON,   ATT_STR,    449899, 740,    500,    5,  0.05,   0.0,    0.0,    1.0,    0.03,   CAREER_TYPE_BOSS,   "ReplaceableTextures\\CommandButtons\\BTNHeroCryptLord.blp").setScale(1.7);
+ModelInfo.rg(UTID_SPIKE,    ATT_NON,    2999,   0,  10, 0,  0.00,   0.00,   0.00,   1.0,    0.00,   CAREER_TYPE_CREEP,  "ReplaceableTextures\\CommandButtons\\BTNImpale.blp");
 ModelInfo.rg(UTID_POISONOUS_CRAWLER,    ATT_NON,    4999,   100,    200,    0,  0.00,   0.00,   0.00,   1.0,    0.05,   CAREER_TYPE_CREEP,  "ReplaceableTextures\\CommandButtons\\BTNCryptFiend.blp");
 ModelInfo.rg(UTID_ABOMINATION,  ATT_NON,    19999,  300,    200,    0,  0.00,   0.00,   0.00,   1.0,    0.15,   CAREER_TYPE_CREEP,  "ReplaceableTextures\\CommandButtons\\BTNAbomination.blp");
 ModelInfo.rg(UTID_WRAITH,   ATT_NON,    499,    5,  5,  0,  1.00,   0.00,   0.00,   0.00,   0.00,   CAREER_TYPE_CREEP,  "ReplaceableTextures\\CommandButtons\\BTNShade.blp");

@@ -557,43 +557,45 @@ library InfoBoards requires Board, ModelInfo, NefUnion, ZAMCore, BuffSystem, Agg
     function pushCombatLog(integer eventType) {
         BoardItem bi;
         integer i;
-        i = COMBAT_LOG_MAX - 1;
-        while (i > 0) {     
-            CombatLogRecord[i].source = CombatLogRecord[i - 1].source;
-            CombatLogRecord[i].target = CombatLogRecord[i - 1].target;
-            CombatLogRecord[i].message = CombatLogRecord[i - 1].message;  
-            //BJDebugMsg("Copy from " + I2S(i) + " to " + I2S(i-1));
-            if (CombatLogRecord[i].target != null) {
-                bi = combatboards[0][0][i];
-                bi.icon = ModelInfo.get(GetUnitTypeId(CombatLogRecord[i].source), "InfoBoards: 551").icon;
-                bi.text = GetUnitNameEx(CombatLogRecord[i].source);
-                bi = combatboards[0][1][i];
-                bi.icon = ModelInfo.get(GetUnitTypeId(CombatLogRecord[i].target), "InfoBoards: 554").icon;
-                bi.text = GetUnitNameEx(CombatLogRecord[i].target);
-                bi = combatboards[0][2][i];
-                bi.text = CombatLogRecord[i].message;      
+        if (eventType < 3) {
+            i = COMBAT_LOG_MAX - 1;
+            while (i > 0) {     
+                CombatLogRecord[i].source = CombatLogRecord[i - 1].source;
+                CombatLogRecord[i].target = CombatLogRecord[i - 1].target;
+                CombatLogRecord[i].message = CombatLogRecord[i - 1].message;  
+                //BJDebugMsg("Copy from " + I2S(i) + " to " + I2S(i-1));
+                if (CombatLogRecord[i].target != null) {
+                    bi = combatboards[0][0][i];
+                    bi.icon = ModelInfo.get(GetUnitTypeId(CombatLogRecord[i].source), "InfoBoards: 551").icon;
+                    bi.text = GetUnitNameEx(CombatLogRecord[i].source);
+                    bi = combatboards[0][1][i];
+                    bi.icon = ModelInfo.get(GetUnitTypeId(CombatLogRecord[i].target), "InfoBoards: 554").icon;
+                    bi.text = GetUnitNameEx(CombatLogRecord[i].target);
+                    bi = combatboards[0][2][i];
+                    bi.text = CombatLogRecord[i].message;      
+                }
+                i -= 1;
             }
-            i -= 1;
+            CombatLogRecord[0].source = CombatLogRecord[COMBAT_LOG_MAX].source;
+            CombatLogRecord[0].target = CombatLogRecord[COMBAT_LOG_MAX].target;
+            CombatLogRecord[0].message = CombatLogRecord[COMBAT_LOG_MAX].message;
+            bi = combatboards[0][0][0];        
+            if (CombatLogRecord[0].source != null) {
+                bi.icon = ModelInfo.get(GetUnitTypeId(CombatLogRecord[0].source), "InfoBoards: 566").icon;
+            } else {
+                bi.icon = "";
+            }
+            bi.text = GetUnitNameEx(CombatLogRecord[0].source);
+            bi = combatboards[0][1][0];
+            if (CombatLogRecord[0].target != null) {
+                bi.icon = ModelInfo.get(GetUnitTypeId(CombatLogRecord[0].target), "InfoBoards: 573").icon;
+            } else {
+                bi.icon = "";
+            }
+            bi.text = GetUnitNameEx(CombatLogRecord[0].target);
+            bi = combatboards[0][2][0];
+            bi.text = CombatLogRecord[0].message;  
         }
-        CombatLogRecord[0].source = CombatLogRecord[COMBAT_LOG_MAX].source;
-        CombatLogRecord[0].target = CombatLogRecord[COMBAT_LOG_MAX].target;
-        CombatLogRecord[0].message = CombatLogRecord[COMBAT_LOG_MAX].message;
-        bi = combatboards[0][0][0];        
-        if (CombatLogRecord[0].source != null) {
-            bi.icon = ModelInfo.get(GetUnitTypeId(CombatLogRecord[0].source), "InfoBoards: 566").icon;
-        } else {
-            bi.icon = "";
-        }
-        bi.text = GetUnitNameEx(CombatLogRecord[0].source);
-        bi = combatboards[0][1][0];
-        if (CombatLogRecord[0].target != null) {
-            bi.icon = ModelInfo.get(GetUnitTypeId(CombatLogRecord[0].target), "InfoBoards: 573").icon;
-        } else {
-            bi.icon = "";
-        }
-        bi.text = GetUnitNameEx(CombatLogRecord[0].target);
-        bi = combatboards[0][2][0];
-        bi.text = CombatLogRecord[0].message;  
         
         if (eventType == 1) {
             combatLogAll[combatLogAllIndex] = "[\"damage\",\"" /*

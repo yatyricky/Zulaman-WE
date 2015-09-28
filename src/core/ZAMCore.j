@@ -10,6 +10,12 @@ library ZAMCore requires NefUnion {
 //              boolean:    IsUnitStealth(unit u)
 //              boolean:    DummyFilter()
 //==============================================================================
+// Dummy          : 2
+// Able to block  : 3
+// Able to attack : 5
+// Summoned       : 7
+// Ignore         : 11
+//==============================================================================
     public region MAP_AREA;
     public integer CURRENT_HERO_LEVEL;
     
