@@ -228,6 +228,14 @@ library UnitProperty requires ModelInfo, ZAMCore {
         method Stunned() -> boolean {
             return this.stunned;
         }
+
+        method disable() {
+            this.disabled += 1;
+        }
+
+        method enable() {
+            this.disabled -= 1;   
+        }
         
         // 1 int = 10 mp, 1 mp = 10 secs, thus 100 secs = 1 full mana slot
         // 0.1 = 100% / 10

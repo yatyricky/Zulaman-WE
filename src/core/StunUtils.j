@@ -8,9 +8,8 @@ library StunUtils requires NefUnion, Table, TimerUtils, UnitProperty {
         private static HandleTable ht;
         private timer tm;
         private unit u;
-        
-        private static method execute() {
-            thistype this = GetTimerData(GetExpiredTimer());
+
+        private method destroy() {
             ReleaseTimer(this.tm);
             UnitProp[this.u].stunned = false;
             UnitRemoveAbility(this.u, STUN_DEBUFF_ID);
@@ -18,6 +17,19 @@ library StunUtils requires NefUnion, Table, TimerUtils, UnitProperty {
             this.tm = null;
             this.u = null;
             this.deallocate();
+        }
+        
+        private static method execute() {
+            thistype this = GetTimerData(GetExpiredTimer());
+            this.destroy();
+        }
+
+        static method terminate(unit u) {
+            thistype this;
+            if (thistype.ht.exists(u)) {
+                this = thistype.ht[u];
+                this.destroy();
+            }
         }
         
         static method start(unit u, real dur) {
@@ -53,6 +65,10 @@ library StunUtils requires NefUnion, Table, TimerUtils, UnitProperty {
     
     public function StunBoss(unit c, unit t, real dur) {
         StunUtils.start(t, dur);
+    }
+
+    public function RemoveStun(unit t) {
+        StunUtils.terminate(t);
     }
 #undef STUN_ID 
 #undef STUN_DEBUFF_ID 
