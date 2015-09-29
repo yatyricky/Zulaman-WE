@@ -62,6 +62,11 @@ library ZAMCore requires NefUnion {
         integer id = GetUnitTypeId(u);
         return (id == UTIDBLOODELFDEFENDER || id == UTIDCLAWDRUID);
     }
+
+    public function IsUnitDPS(unit u) -> boolean {
+        integer id = GetUnitTypeId(u);
+        return (id == UTIDDARKRANGER || id == UTIDBLADEMASTER || id == UTIDFROSTMAGE || id == UTIDEARTHBINDER || id == UTID_EARTH_BINDER_ASC || id == UTIDROGUE || id == UTIDHEATHEN);
+    }
     
     /*
     public function IsUnitDruid(unit u) -> boolean {

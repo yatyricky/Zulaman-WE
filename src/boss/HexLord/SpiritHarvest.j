@@ -32,7 +32,7 @@ library SpiritHarvest requires Projectile {
             if (!IsUnitDead(PlayerUnits.units[i])) {
                 buf = Buff.cast(SpellEvent.CastingUnit, PlayerUnits.units[i], DEBUFF_ID);
                 buf.bd.tick = -1;
-                buf.bd.interval = 60.0;
+                buf.bd.interval = 600.0;
                 UnitProp[buf.bd.target].damageDealt += buf.bd.r0;
                 buf.bd.r0 += 0.02;
                 buf.bd.boe = onEffect;

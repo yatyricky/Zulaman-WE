@@ -1,0 +1,5 @@
+//! zinc
+library EyeBeam {
+	
+}
+//! endzinc
