@@ -1,5 +1,5 @@
 //! zinc
-library LifeSiphon {
+library LifeSiphon requires DamageSystem, BuffSystem {
 
 	struct LifeSiphon {
 		private timer tm;
@@ -21,25 +21,28 @@ library LifeSiphon {
 			this.ctr -= 1;
 			if (ModuloInteger(this.ctr, 10) == 0) {
 				for (0 <= i < PlayerUnits.n) {
-					StunUnit(this.caster, PlayerUnits.units[i], 0.15);
+					StunUnit(this.caster, PlayerUnits.units[i], 1.1);
 
-					if (GetUnitAbilityLevel(PlayerUnits.units[i], BID) > 0) {
-						AddTimedLight.atUnits("DRAL", this.caster, PlayerUnits.units[i], 0.1);
+					if (GetUnitAbilityLevel(PlayerUnits.units[i], BID_SUMMON_POISONOUS_CRAWLER) > 0) {
+						AddTimedLight.atUnits("DRAL", this.caster, PlayerUnits.units[i], 1.0);
 					} else {
-						AddTimedLight.atUnits("DRAM", this.caster, PlayerUnits.units[i], 0.1);
+						AddTimedLight.atUnits("DRAL", this.caster, PlayerUnits.units[i], 1.0).setColour(1,0.2,0.2,1);
 						amt = GetUnitState(PlayerUnits.units[i], UNIT_STATE_MAX_LIFE) * 0.16;
-						DamageTarget(this.caster, PlayerUnits.units[i], amt, SpellData[SID].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
-						HealTarget(this.caster, this.caster, amt * 30.0, SpellData[SID].name, 0.0);
+						DamageTarget(this.caster, PlayerUnits.units[i], amt, SpellData[SID_LIFE_SIPHON].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+						HealTarget(this.caster, this.caster, amt * 30.0, SpellData[SID_LIFE_SIPHON].name, 0.0);
 						AddTimedEffect.atUnit(ART_HEAL, this.caster, "origin", 0.2);
 					}
 				}
 			}
 			if (this.ctr == 0) {
+				// PauseUnit(caster, false);
 				UnitProp[caster].enable();
 				for (0 <= i < PlayerUnits.n) {
-					buf = BuffSlot[PlayerUnits.units[i]].getBuffByBid(BID);
+					buf = BuffSlot[PlayerUnits.units[i]].getBuffByBid(BID_SUMMON_POISONOUS_CRAWLER);
 					if (buf != 0) {
+						// print("remove buff for " + GetUnitNameEx(PlayerUnits.units[i]));
 						BuffSlot[PlayerUnits.units[i]].dispelByBuff(buf);
+						buf.destroy();
 					}
 				}
 				this.destroy();
@@ -52,6 +55,7 @@ library LifeSiphon {
 			this.caster = caster;
 			this.ctr = 50;
 			this.tm = NewTimer();
+			// PauseUnit(caster, true);
 			UnitProp[caster].disable();
 			SetTimerData(this.tm, this);
 			TimerStart(this.tm, 0.1, true, function thistype.run);
@@ -59,10 +63,10 @@ library LifeSiphon {
 			for (0 <= i < PlayerUnits.n) {
 				StunUnit(caster, PlayerUnits.units[i], 0.15);
 
-				if (GetUnitAbilityLevel(PlayerUnits.units[i], BID) > 0) {
-					AddTimedLight.atUnits("DRAL", caster, PlayerUnits.units[i], 0.1);
+				if (GetUnitAbilityLevel(PlayerUnits.units[i], BID_SUMMON_POISONOUS_CRAWLER) > 0) {
+					AddTimedLight.atUnits("DRAL", caster, PlayerUnits.units[i], 1.0);
 				} else {
-					AddTimedLight.atUnits("DRAM", caster, PlayerUnits.units[i], 0.1);
+					AddTimedLight.atUnits("DRAL", caster, PlayerUnits.units[i], 1.0).setColour(1,0.2,0.2,1);
 				}
 			}
 		}
@@ -77,7 +81,7 @@ library LifeSiphon {
     }
 
     function onInit() {
-        RegisterSpellChannelResponse(SID, onChannel);
+        RegisterSpellChannelResponse(SID_LIFE_SIPHON, onChannel);
     }
 }
 //! endzinc

@@ -274,49 +274,19 @@ library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSys
     }
 	
 	function testwarlock(string str) {
-        real testx = 536;
-        real testy = 3686;
+        real testx = 7221;
+        real testy = 9027;
 		integer i = 0;
 		while (i < PlayerUnits.n) {
 			SetUnitPosition(PlayerUnits.units[i], testx, testy);
+            UnitAddItem(PlayerUnits.units[i], CreateItemEx('Ieng', testx, testy));
+            UnitAddItem(PlayerUnits.units[i], CreateItemEx('Ieng', testx, testy));
+            UnitAddItem(PlayerUnits.units[i], CreateItemEx('Ieng', testx, testy));
+            UnitAddItem(PlayerUnits.units[i], CreateItemEx('Ieng', testx, testy));
+            UnitAddItem(PlayerUnits.units[i], CreateItemEx('Ieng', testx, testy));
+            UnitAddItem(PlayerUnits.units[i], CreateItemEx('Ieng', testx, testy));
 			i += 1;
 		}
-		CreateItemEx('Ieng', testx, testy);
-		CreateItemEx('Ieng', testx, testy);
-		CreateItemEx('Ieng', testx, testy);
-		CreateItemEx('Ieng', testx, testy);
-		CreateItemEx('Ieng', testx, testy);
-		CreateItemEx('Ieng', testx, testy);
-		CreateItemEx('Ieng', testx, testy);
-		CreateItemEx('Ieng', testx, testy);
-		CreateItemEx('Ieng', testx, testy);
-		CreateItemEx('Ieng', testx, testy);
-		CreateItemEx('Ieng', testx, testy);
-		CreateItemEx('Ieng', testx, testy);
-		CreateItemEx('Ieng', testx, testy);
-		CreateItemEx('Ieng', testx, testy);
-		CreateItemEx('Ieng', testx, testy);
-		CreateItemEx('Ieng', testx, testy);
-		CreateItemEx('Ieng', testx, testy);
-		CreateItemEx('Ieng', testx, testy);
-		CreateItemEx('Ieng', testx, testy);
-		CreateItemEx('Ieng', testx, testy);
-		CreateItemEx('Ieng', testx, testy);
-		CreateItemEx('Ieng', testx, testy);
-		CreateItemEx('Ieng', testx, testy);
-		CreateItemEx('Ieng', testx, testy);
-		CreateItemEx('Ieng', testx, testy);
-		CreateItemEx('Ieng', testx, testy);
-		CreateItemEx('Ieng', testx, testy);
-		CreateItemEx('Ieng', testx, testy);
-		CreateItemEx('Ieng', testx, testy);
-		CreateItemEx('Ieng', testx, testy);
-		CreateItemEx('Ieng', testx, testy);
-		CreateItemEx('Ieng', testx, testy);
-		CreateItemEx('Ieng', testx, testy);
-		CreateItemEx('Ieng', testx, testy);
-		CreateItemEx('Ieng', testx, testy);
-		CreateItemEx('Ieng', testx, testy);
 	}
 
     function testPrintFireBomb(string str) {

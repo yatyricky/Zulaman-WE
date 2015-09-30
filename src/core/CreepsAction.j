@@ -601,7 +601,9 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
 	}
 
     function makeOrderAbyssArchon(unit source, unit target, real combatTime) {
-        IssueTargetOrderById(source, OID_ATTACK, target);   
+        if (!IsUnitChanneling(source)) {
+            IssueTargetOrderById(source, OID_ATTACK, target);   
+        }
     }
 
     function makeOrderSpike(unit source, unit target, real combatTime) {}

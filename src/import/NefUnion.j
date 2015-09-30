@@ -89,20 +89,20 @@ library NefUnion requires TimerUtils {
         }*/
     }
     
-	// "CLPB" 闪电链-主 
-    // "CLSB" 闪电链-次
-    // "DRAB" 汲取
-    // "DRAL" 生命汲取
-    // "DRAM" 魔法汲取
-    // "AFOD" 死亡之指
-    // "FORK" 叉状闪电
-    // "HWPB" 医疗波-主
-    // "HWSB" 医疗波-次
-    // "CHIM" 闪电攻击
-    // "LEAS" 魔法镣铐
-    // "MBUR" 法力燃烧
-    // "MFPB" 魔力之焰
-    // "SPLK" 灵魂锁链
+    // "CLPB" chain lightning - main
+    // "CLSB" chain lightning - secondary
+    // "DRAB" life drain
+    // "DRAL" life drain
+    // "DRAM" mana drain
+    // "AFOD" finger of death
+    // "FORK" forked lightning
+    // "HWPB" healing wave - main
+    // "HWSB" healing wave - secondary
+    // "CHIM" lightning attack - chimera
+    // "LEAS" magic shackle - dragonhawk knight
+    // "MBUR" mana burn
+    // "MFPB" magic flare
+    // "SPLK" spirit chain
     public struct AddTimedLight {
         private lightning l;
         private unit a;
@@ -321,6 +321,14 @@ library NefUnion requires TimerUtils {
         IssuePointOrderById(dc, OrderId(oid), x, y);
         UnitApplyTimedLife(dc, 'BHwe', 2.0);
         dc = null;
+    }
+
+    public function DrawCircle(real x, real y, real r, integer n, string id, real intv) {
+        integer i;
+        real sub = bj_PI * 2.0 / n;
+        for (0 <= i < n) {
+            AddTimedEffect.atCoord(id, x + r * Cos(sub * i), y + r * Sin(sub * i), intv);
+        }
     }
     
     public function GetAngleDeg(real xa, real ya, real xb, real yb) -> real {

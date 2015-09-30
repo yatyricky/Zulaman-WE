@@ -66,7 +66,7 @@ library MobInit requires Table, BuffSystem, Patrol, NefUnion, WarlockGlobal {
             //! runtextmacro WriteInitMobInfo("Hvsh", "-6593.5", "-5616.7", "0.0")
             //! runtextmacro WriteInitMobInfo("Udea", "5819.00", "-4582.0", "90.0")
             //! runtextmacro WriteInitMobInfo("Ulic", "4608.00", "768.0", "270.0")
-            // runtextmacro WriteInitMobInfo("Ucrl", "6667.00", "6448.0", "270.0")
+            //! runtextmacro WriteInitMobInfo("Ucrl", "5133.00", "8502.0", "0.0")
             // runtextmacro WriteInitMobInfo("Nplh", "-5511.00", "579.0", "90.0")
             //! runtextmacro WriteInitMobInfo("Oshd", "573.00", "4800.0", "270.0")
             // runtextmacro WriteInitMobInfo("Opgh", "741.00", "8989.0", "270.0")

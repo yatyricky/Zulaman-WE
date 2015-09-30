@@ -1,6 +1,11 @@
 //! zinc
 library Impale requires SpellEvent, StunUtils, TimerUtils, DamageSystem {
 
+
+    function delayedCallBack(DelayTask dt) {
+        SetUnitTimeScale(dt.u0, 0.0);
+    }
+
     struct Impale {
         private static HandleTable ht1;
         private static HandleTable ht2;
@@ -10,6 +15,7 @@ library Impale requires SpellEvent, StunUtils, TimerUtils, DamageSystem {
         private timer tm;
 
         private method terminate() {
+            SetUnitTimeScale(this.spike, 1.0);
             RemoveStun(this.target);
             ReleaseTimer(this.tm);
             thistype.ht1.flush(this.target);
@@ -30,6 +36,8 @@ library Impale requires SpellEvent, StunUtils, TimerUtils, DamageSystem {
 
         static method start(unit source, unit target) {
             thistype this;
+            DelayedTaskExecute callback;
+            DelayTask dt;
             if (thistype.ht1.exists(target)) {
                 this = thistype.ht1[target];
                 SetWidgetLife(this.spike, GetUnitState(this.spike, UNIT_STATE_MAX_LIFE));
@@ -44,6 +52,10 @@ library Impale requires SpellEvent, StunUtils, TimerUtils, DamageSystem {
                 thistype.ht2[this.spike] = this;
 
                 TimerStart(this.tm, 2.0, true, function thistype.run);
+
+                callback = delayedCallBack;
+                dt = DelayTask.create(callback, 0.31);
+                dt.u0 = this.spike;
             }
 
             StunUnit(source, target, 999);
