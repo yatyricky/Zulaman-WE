@@ -1,5 +1,5 @@
 //! zinc
-library Math {
+library Math requires Vector {
 	public struct Circle {
 		public real x, y, r;
 
@@ -53,6 +53,45 @@ library Math {
 
 	public function MathFloor(real r) -> integer {
 		return R2I(r);
+	}
+
+	public function DistancePointAndLineSegment(vector a, vector b, vector p) -> real {
+		vector pa = vector.difference(a, p);
+		vector ba = vector.difference(a, b);
+		vector ab = vector.difference(b, a);
+		vector pb = vector.difference(b, p);
+		real pab = vector.getAngle(pa, ba);
+		real pba = vector.getAngle(pb, ab);
+		real dis;
+		// print("pa="+pa.toString());
+		// print("ba="+ba.toString());
+		// print("ab="+ab.toString());
+		// print("pb="+pb.toString());
+		// print("pab="+R2S(pab));
+		// print("pba="+R2S(pba));
+		if (pab > bj_PI * 0.5) {
+			dis = pa.getLength();
+			pa.destroy();
+			pb.destroy();
+			ab.destroy();
+			ba.destroy();
+		} else if (pab > bj_PI * 0.5) {
+			dis = pb.getLength();
+			pa.destroy();
+			pb.destroy();
+			ab.destroy();
+			ba.destroy();
+		} else {
+			pa.x = 0 - pa.x;
+			pa.y = 0 - pa.y;
+			pa.z = 0 - pa.z;
+			dis = RAbsBJ(ab.y * pa.x - ab.x * pa.y) / ab.getLength();
+			pa.destroy();
+			pb.destroy();
+			ab.destroy();
+			ba.destroy();
+		}
+		return dis;
 	}
 }
 //! endzinc

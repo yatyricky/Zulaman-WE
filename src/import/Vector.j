@@ -122,6 +122,10 @@ library Vector
             set v.z=z
             return v
         endmethod
+
+        method toString takes nothing returns string
+            return "[x:" + R2S(.x) + ",y:" + R2S(.y) + ",z:"+R2S(.z)+"], Length="+R2S(.getLength())
+        endmethod
         
         method reset takes real x, real y, real z returns nothing
             set this.x = x

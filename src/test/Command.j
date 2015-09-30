@@ -328,6 +328,17 @@ library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSys
         print(R2S(GetAngleDeg(1,1,0,0.5)));
         print(R2S(AcosBJ(0.7)));
     }
+
+    function testGeneral(string str) {
+        vector v2 = vector.create(13727, 14374, 0);
+        vector v1 = vector.create(13540, 14817, 0);
+        vector v3 = vector.create(13585, 14410, 0);
+        print(R2S(DistancePointAndLineSegment(v1, v2, v3)));
+        v3.reset(13400, 14483, 0);
+        print(R2S(DistancePointAndLineSegment(v1, v2, v3)));
+        v3.reset(13216, 14647, 0);
+        print(R2S(DistancePointAndLineSegment(v1, v2, v3)));
+    }
     
     private function onInit() {
         //Console[Player(0)].add("stun", testStunUnit);
@@ -341,32 +352,33 @@ library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSys
         //Console[Player(0)].add("rem", removeAbility);
         //Console[Player(0)].add("atk", modUnitAttackPower);
         //Console[Player(0)].add("get", getUnitAtt);
-        Console[Player(0)].add("bl", printBuffList);
+        // Console[Player(0)].add("bl", printBuffList);
         Console[Player(0)].add("unit", createunit);
         Console[Player(0)].add("item", createitem);
-        Console[Player(0)].add("anime", playanimation);
-        Console[Player(0)].add("lifelock", lifelocker);
-        Console[Player(0)].add("regenlock", regenlocker);
-        Console[Player(0)].add("colourmix", colourMix);
-        Console[Player(0)].add("dispelall", dispelall);
-        Console[Player(0)].add("testpool", testpool);
+        // Console[Player(0)].add("anime", playanimation);
+        // Console[Player(0)].add("lifelock", lifelocker);
+        // Console[Player(0)].add("regenlock", regenlocker);
+        // Console[Player(0)].add("colourmix", colourMix);
+        // Console[Player(0)].add("dispelall", dispelall);
+        // Console[Player(0)].add("testpool", testpool);
         Console[Player(0)].add("die", die);
         //Console[Player(0)].add("hid", gethandleidunit);
         //Console[Player(0)].add("utid", getutid);
         //Console[Player(0)].add("seefrs", getseefrs);
-        Console[Player(0)].add("potions", spawnpotions);
+        // Console[Player(0)].add("potions", spawnpotions);
         Console[Player(0)].add("exec", execfuncs);
-        Console[Player(0)].add("resetlava", doresetlavas);
+        // Console[Player(0)].add("resetlava", doresetlavas);
         Console[Player(0)].add("log", generatecombatlogs);
         Console[Player(0)].add("dlog", debuglogs);
-        Console[Player(0)].add("prayerofhealing", testprayerofhealing);
+        // Console[Player(0)].add("prayerofhealing", testprayerofhealing);
         //testlightning = AddLightningEx("SPLK", false, -6786, -1867, 1710, -6342, -1923, 1710);
         Console[Player(0)].add("ltn", testwarlock);
-        Console[Player(0)].add("podun", poyicengdun);
-        Console[Player(0)].add("canuse", testifunitcanuse);
+        // Console[Player(0)].add("podun", poyicengdun);
+        // Console[Player(0)].add("canuse", testifunitcanuse);
         // Console[Player(0)].add("pfb", testPrintFireBomb);
 		// console[Player(0)].add("testwlk", testwarlock);
-        Console[Player(0)].add("angle", testgetangle);
+        // Console[Player(0)].add("angle", testgetangle);
+        Console[Player(0)].add("test", testGeneral);
     }
 }
 //! endzinc
