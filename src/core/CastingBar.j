@@ -264,9 +264,9 @@ library CastingBar requires SpellEvent, TimerUtils, SpellData, UnitAbilityCD, ZA
             if (cb.castMode == CAST_MODE_CAST) {
                 lastChannelSuccess[SpellEvent.CastingUnit] = 0;
                 if (!cb.success) {
-                    SimError(GetOwningPlayer(SpellEvent.CastingUnit), "施法被中断。");
+                    SimError(GetOwningPlayer(SpellEvent.CastingUnit), "Spell Countered");
                 } else if (GetUnitState(SpellEvent.CastingUnit, UNIT_STATE_MANA) < cb.cost) {
-                    SimError(GetOwningPlayer(SpellEvent.CastingUnit), "魔法值不够。");
+                    SimError(GetOwningPlayer(SpellEvent.CastingUnit), "Not Enough Mana");
                 } else {
                     lastChannelSuccess[SpellEvent.CastingUnit] = 1;
                     UnitAbilityCD.start(SpellEvent.CastingUnit, SpellEvent.AbilityId);
@@ -279,7 +279,7 @@ library CastingBar requires SpellEvent, TimerUtils, SpellData, UnitAbilityCD, ZA
                 lastChannelSuccess[SpellEvent.CastingUnit] = 1;
                 UnitAbilityCD.start(SpellEvent.CastingUnit, SpellEvent.AbilityId);
                 if (!cb.success) {
-                    SimError(GetOwningPlayer(SpellEvent.CastingUnit), "施法被中断。");
+                    SimError(GetOwningPlayer(SpellEvent.CastingUnit), "Spell Countered");
                 }
                 cb.nodes = -1;
                 cb.finishResponse.evaluate(cb);
