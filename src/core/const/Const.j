@@ -3,8 +3,8 @@
 #define FORCE_NPCS "Adventurers"
 #define FORCE_ENEMY "The Dark Below"
 
-#define INIT_X 384.0
-#define INIT_Y -11904.0
+#define INIT_X 5822.0
+#define INIT_Y -11907.0
 
 #define DAMAGE_NAME_MELEE "Normal Attack"
 
