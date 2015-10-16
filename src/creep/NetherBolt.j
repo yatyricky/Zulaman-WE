@@ -10,7 +10,7 @@ deals 20% of max hp damage to self, deals 1000 magical damage to target
             p.reverse();
             return false;
         } else {
-            DamageTarget(p.caster, p.target, p.r0, SpellData[SIDFROSTBOLT].name, false, true, false, WEAPON_TYPE_WHOKNOWS);   
+            DamageTarget(p.caster, p.target, p.r0, SpellData[SID].name, false, true, false, WEAPON_TYPE_WHOKNOWS);   
             
             return true;
         }

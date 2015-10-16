@@ -283,6 +283,7 @@ library NefUnion requires TimerUtils {
         private DelayedTaskExecute response;
         unit u0;
         integer i0;
+        integer data;
         
         private method destroy() {
             ReleaseTimer(this.tm);
@@ -337,6 +338,14 @@ library NefUnion requires TimerUtils {
     
     public function GetAngle(real xa, real ya, real xb, real yb) -> real {
         return Atan2(ya - yb, xa - xb) + bj_PI;
+    }
+
+    public function GetAngleDiffDeg(real a1, real a2) -> real {
+        real ret = RAbsBJ(a1 - a2);
+        if (ret > 180) {
+            ret = RAbsBJ(ret - 360);
+        }
+        return ret;
     }
     
     public struct GetDistance {
