@@ -319,8 +319,11 @@
 #define SID_CHARGED_BREATH 'A0AU'
 #define SID_MANA_LEECH 'A0AV'
 
-// 2区
+// fel grunt
 #define UTID_FEL_GRUNT 'n00C'
+#define SID_UNHOLY_FRENZY 'A09H'
+#define BID_UNHOLY_FRENZY 'A0B9'
+
 #define UTID_FEL_RIDER 'n00H'
 #define UTID_FEL_WAR_BRINGER 'n00D'
 

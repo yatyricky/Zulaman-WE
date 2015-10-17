@@ -1,11 +1,12 @@
 //! zinc
-library UnholyFrenzy {
+library UnholyFrenzy requires UnitProperty {
 /*
 Increase attack speed by 100%.
 Duration 6 seconds
 Magical positive effect
 */
 #define ART "Abilities\\Spells\\Undead\\UnholyFrenzy\\UnholyFrenzyTarget.mdl"
+#define DURATION 8.0
 
     function onEffect(Buff buf) {
         UnitProp[buf.bd.target].ModAttackSpeed(buf.bd.i0);
@@ -16,9 +17,9 @@ Magical positive effect
     }
 
 	function onCast() {
-        Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BID);
+        Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BID_UNHOLY_FRENZY);
         buf.bd.tick = -1;
-        buf.bd.interval = 6;
+        buf.bd.interval = DURATION;
         UnitProp[buf.bd.target].ModAttackSpeed(0 - buf.bd.i0);
         buf.bd.i0 = 100;
         if (buf.bd.e0 == 0) {buf.bd.e0 = BuffEffect.create(ART, buf, "overhead");}
@@ -28,9 +29,10 @@ Magical positive effect
 	}
 
 	function onInit() {
-		RegisterSpellEffectResponse(SID, onCast);
-		BuffType.register(BID, BUFF_MAGE, BUFF_POS);
+		RegisterSpellEffectResponse(SID_UNHOLY_FRENZY, onCast);
+		BuffType.register(BID_UNHOLY_FRENZY, BUFF_MAGE, BUFF_POS);
 	}
+#undef DURATION
 #undef ART
 }
 //! endzinc

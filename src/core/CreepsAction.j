@@ -107,7 +107,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         integer res;
         unit tu;
         /*        print("-- - - - - - - - - - - -  -");*/
-        if (!IsUnitChanneling(source)) {
+        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
             ip = IntegerPool.create();
             if (UnitCanUse(source, 'A03O') && combatTime > 49) {
                 ip.add('A03O', 30);
@@ -163,7 +163,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         // boss spec vars 
         real dis;
         unit tu;
-        if (!IsUnitChanneling(source)) {
+        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
             ip = IntegerPool.create();
             if (combatTime > 300) {
                 ip.add(SID_CLUSTER_ROCKETS, 50);
@@ -211,7 +211,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         // boss spec vars 
         real dis;
         unit tu;
-        if (!IsUnitChanneling(source)) {
+        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
             ip = IntegerPool.create();
             if (combatTime > 300) {
                 ip.add(SID_CLUSTER_ROCKETS, 50);
@@ -296,7 +296,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
     function makeOrdern001(unit source, unit target, real combatTime) {
         real chance = GetRandomInt(0, 100);
         //print("1");
-        if (!IsUnitChanneling(source)) {
+        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
             if (chance < 35) {
                 if (UnitCanUse(source, 'A02Y')) {
                     //NotAttacking(source);
@@ -421,7 +421,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
     }
     
     // wind serpent        
-    function makeOrdern00N(unit source, unit target, real combatTime) {
+    function makeOrderWindSerpent(unit source, unit target, real combatTime) {
         IntegerPool ip;
         integer res;
         integer i;
@@ -434,7 +434,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
                 ip.add(SID_CHARGED_BREATH, 200);
             }
             if (UnitCanUse(source, SID_MANA_LEECH)) {
-                ip.add(SID_MANA_LEECH, 100);
+                ip.add(SID_MANA_LEECH, 35);
             }
             res = ip.get();
             if (res == 0) {
@@ -469,13 +469,13 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
     }
     
     function makeOrderncgb(unit source, unit target, real combatTime) {
-        if (!IsUnitChanneling(source)) {
+        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
             IssueTargetOrderById(source, SpellData[SID_SELF_DESTRUCT].oid, PlayerUnits.getRandomHero());
         }
     }
     
     function makeOrdernfac(unit source, unit target, real combatTime) {
-        if (!IsUnitChanneling(source)) {
+        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
             IssueImmediateOrderById(source, SpellData[SID_SUMMON_CLOCKWORK_GOBLIN].oid);
         }
     }
@@ -484,7 +484,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         IntegerPool ip;
         integer res;
         /*        print("-- - - - - - - - - - - -  -");*/
-        if (!IsUnitChanneling(source)) {
+        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
             ip = IntegerPool.create();
             if (UnitCanUse(source, SIDTIDEBARONMORPH) && combatTime > 34) {
                 ip.add(SIDTIDEBARONMORPH, 50);
@@ -517,7 +517,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         IntegerPool ip;
         integer res;
         /*        print("-- - - - - - - - - - - -  -");*/
-        if (!IsUnitChanneling(source)) {
+        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
             ip = IntegerPool.create();
             if (UnitCanUse(source, SIDTIDEBARONMORPH) && combatTime > 34) {
                 ip.add(SIDTIDEBARONMORPH, 50);
@@ -563,7 +563,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
     function makeOrderWarlock(unit source, unit target, real combatTime) {
         IntegerPool ip;
         integer res;
-        if (!IsUnitChanneling(source)) {
+        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
             ip = IntegerPool.create();
 			if (UnitCanUse(source, SIDRAGECREEP) && combatTime > 300) {
 			// print("makeOrderWarlock: Time > 300 add " + ID2S(SIDRAGECREEP));
@@ -601,7 +601,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
 	}
 
     function makeOrderAbyssArchon(unit source, unit target, real combatTime) {
-        if (!IsUnitChanneling(source)) {
+        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
             IssueTargetOrderById(source, OID_ATTACK, target);   
         }
     }
@@ -618,6 +618,27 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
 
     function makeOrderWraith(unit source, unit target, real combatTime) {
         IssueTargetOrderById(source, OID_ATTACK, target);   
+    }
+
+    function makeOrderFelGrunt(unit source, unit target, real combatTime) {
+        IntegerPool ip;
+        integer res;
+        unit tu;
+        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+            ip = IntegerPool.create();
+            ip.add(0, 20);
+            if (UnitCanUse(source, SID_UNHOLY_FRENZY) && combatTime > 10.0) {
+                ip.add(SID_UNHOLY_FRENZY, 50);
+            }
+            res = ip.get();
+            if (res == 0) {
+                IssueTargetOrderById(source, OID_ATTACK, target);
+            } else {
+                IssueImmediateOrderById(source, SpellData[res].oid);
+            }
+            ip.destroy();
+        }
+        tu = null;
     }
 
     public function OrderCreeps(unit s, unit t, real c) {
@@ -676,11 +697,13 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         unitCallBack['n00E'] = makeOrdern00E;   // Naga Royal Guard
         unitCallBack['n00F'] = makeOrdern00F;   // Sea Lizard
         unitCallBack['n00G'] = makeOrdern00G;   // Murloc Slave
-        unitCallBack['n00N'] = makeOrdern00N;   // Wind Serpent
+        unitCallBack['n00N'] = makeOrderWindSerpent;   // Wind Serpent
+
+        unitCallBack[UTID_FEL_GRUNT] = makeOrderFelGrunt;   // Fel Grunt
         
-        unitCallBack['n001'] = makeOrdern001;   // ¶ñÄ§Î×Ê¦
-        unitCallBack['h000'] = makeOrderh000;   // °Ð×Ó
-        unitCallBack['h002'] = makeOrderh002;   // °Ð×Ó
+        unitCallBack['n001'] = makeOrdern001;   // 
+        unitCallBack['h000'] = makeOrderh000;   //
+        unitCallBack['h002'] = makeOrderh002;   //
     }
     
     function onInit() {
