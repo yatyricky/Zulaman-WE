@@ -524,6 +524,16 @@ library AggroSystem requires MobInit, UnitProperty, Clock, DamageSystem, PlayerU
                 return ret;
             }
         }
+
+        static method getWithoutBuff(integer bid) -> unit {
+            integer i;
+            for (0 <= i < thistype.n) {
+                if (GetUnitAbilityLevel(thistype.units[i], bid) == 0) {
+                    return thistype.units[i];
+                }
+            }
+            return null;
+        }
         
         // mob death
         static method flushDeath(unit u) {

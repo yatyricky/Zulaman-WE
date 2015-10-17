@@ -138,6 +138,7 @@ ModelInfo.rg(UTID_MURLOC_SLAVE,ATT_NON,4999,100,50,2,0,0.05,20,1,0.02,CAREER_TYP
 ModelInfo.rg(UTID_WIND_SERPENT,ATT_NON,8249,275,125,7,0.1,0,0,1,0.1,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNWindSerpent.blp");
 ModelInfo.rg(UTID_FEL_GRUNT,ATT_NON,21999,650,300,5,0.05,0.05,100,0.95,0.05,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNChaosGrunt.blp");
 ModelInfo.rg(UTID_FEL_RIDER,ATT_NON,19499,600,200,10,0.05,0,0,1,0.1,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNChaosWolfRider.blp");
+ModelInfo.rg(UTID_FEL_WAR_BRINGER,ATT_NON,62999,750,150,5,0.05,0.15,240,0.8,0.05,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNChaosKotoBeast.blp");
 ModelInfo.rg(UTID_DEMONIC_WITCH,ATT_NON,17499,400,200,5,0.05,0,0,1,0.05,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNChaosWarlock.blp");
 
         });

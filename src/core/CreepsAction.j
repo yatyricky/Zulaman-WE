@@ -663,6 +663,36 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         tu = null;
     }
 
+    function makeOrderFelWarBringer(unit source, unit target, real combatTime) {
+        IntegerPool ip;
+        integer res;
+        unit tu;
+        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+            ip = IntegerPool.create();
+            ip.add(0, 20);
+            if (UnitCanUse(source, SID_BATTLE_COMMAND) && combatTime > 5.0) {
+                ip.add(SID_BATTLE_COMMAND, 200);
+            }
+            if (UnitCanUse(source, SID_WAR_STOMP) && combatTime > 10.0) {
+                ip.add(SID_WAR_STOMP, 90);
+            }
+            res = ip.get();
+            if (res == 0) {
+                IssueTargetOrderById(source, OID_ATTACK, target);
+            } else if (res == SID_WAR_STOMP) {
+                IssueImmediateOrderById(source, SpellData[res].oid);
+            } else {
+                tu = MobList.getWithoutBuff(BID_BATTLE_COMMAND);
+                if (tu == null) {
+                    tu = source;
+                }
+                IssueTargetOrderById(source, SpellData[res].oid, tu);
+            }
+            ip.destroy();
+        }
+        tu = null;
+    }
+
     public function OrderCreeps(unit s, unit t, real c) {
         integer utid = GetUnitTypeId(s);
         //print(I2S(R2I(c)));
@@ -723,6 +753,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
 
         unitCallBack[UTID_FEL_GRUNT] = makeOrderFelGrunt;   // Fel Grunt
         unitCallBack[UTID_FEL_RIDER] = makeOrderFelRider;   // Fel Rider
+        unitCallBack[UTID_FEL_WAR_BRINGER] = makeOrderFelWarBringer; // Fel war bringer
 
         unitCallBack['n001'] = makeOrdern001;   // 
         unitCallBack['h000'] = makeOrderh000;   //

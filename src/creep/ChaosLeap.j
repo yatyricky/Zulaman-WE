@@ -103,12 +103,13 @@ Physical negative effect
     	BuffType.register(BID_CHAOS_LEAP, BUFF_PHYX, BUFF_NEG);
     	RegisterSpellEffectResponse(SID_CHAOS_LEAP, onCast);
     }
-#define DAMAGE 300.0
-#define AOE 250.0
-#define MAX_HEIGHT 400.0
-#define SPEED 900.0
-#define INTERVAL 0.04
-#define IMPACT
-#define ART
+#undef EFF
+#undef ART
+#undef IMPACT
+#undef INTERVAL
+#undef SPEED
+#undef MAX_HEIGHT
+#undef AOE
+#undef DAMAGE
 }
 //! endzinc

@@ -327,8 +327,11 @@
 #define UTID_FEL_RIDER 'n00H'
 #define SID_CHAOS_LEAP 'A09I'
 #define BID_CHAOS_LEAP 'A0BA'
-
+// fel war bringer
 #define UTID_FEL_WAR_BRINGER 'n00D'
+#define SID_WAR_STOMP 'A0BB'
+#define SID_BATTLE_COMMAND 'A0BC'
+#define BID_BATTLE_COMMAND 'A0BD'
 
 #define UTID_DEMONIC_WITCH 'n001'
 #define SID_BLAZING_HASTE 'A02Y'
