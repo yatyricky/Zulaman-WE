@@ -141,6 +141,8 @@
 #define UTIDEARTHBINDER 'Hapm'
 #define UTID_EARTH_BINDER_ASC 'H006'
 #define UTIDLIGHTNINGTOTEM 'u000'
+#define UTID_EARTH_BIND_TOTEM 'u001'
+#define UTID_TORRENT_TOTEM 'u002'
 #define SIDSTORMSTRIKE 'A01B'
 #define SID_STORM_LASH 'A0AG'
 #define SIDEARTHSHOCK 'A01G'
@@ -287,32 +289,32 @@
 // God of Death
 #define UTID_GOD_OF_DEATH 'Uear'
 
-// 所有小怪TYPE ID
-// 1区
+// All creeps type id
+// naga siren
 #define UTID_NAGA_SIREN 'n000'
 #define SID_LIGHTNING_BOLT 'A02W'
 #define SID_FROST_SHOCK 'A097'
-
+// naga tide priest
 #define UTID_NAGA_TIDE_PRIEST 'n00B'
 #define SID_CHAIN_HEALING 'A098'
 #define SID_HEALING_WARD 'A099'
 #define SID_PROTECTION_WARD 'A09A'
 #define UTID_NTR_HEALING_WARD 'h004'
 #define UTID_NTR_PROTECTION_WARD 'h005'
-
+// naga myrmidon
 #define UTID_NAGA_MYRMIDON 'n00A'
 #define SID_NAGA_FRENZY 'A09C'
 #define SID_ARMOR_CRUSHING 'A09D'
-
+// naga royal guard
 #define UTID_NAGA_ROYAL_GUARD 'n00E'
 #define SID_THUNDER_CLAP 'A09E'
 #define SID_RAGE_ROAR 'A09F'
-
+// sea lizard
 #define UTID_SEA_LIZARD 'n00F'
 #define SID_STING 'A09G'
-
+// murloc slave
 #define UTID_MURLOC_SLAVE 'n00G'
-
+// wind serpent
 #define UTID_WIND_SERPENT 'n00N'
 #define SID_CHARGED_BREATH 'A0AU'
 #define SID_MANA_LEECH 'A0AV'
@@ -332,11 +334,11 @@
 #define UTID_FOREST_TROLL 'n00L'
 
 
-// 小怪技能
-// Fire
-// Lightning
-// Frost
-// Holy
+// test unit type id
+#define UTID_STATIC_TARGET 'h000'
+#define UTID_TARGET 'h001'
+#define UTID_TANK_TESTER 'h002'
+#define UTID_HEALER_TESTER 'h003'
 
 // 装备
 // 一次性

@@ -248,7 +248,7 @@ SpellData.create(SID_ARMOR_CRUSHING,"Armor Crushing",0,0,20,OrderId("sleep"),1,O
 SpellData.create(SID_THUNDER_CLAP,"Thunder Clap",0,0,12,OrderId("thunderclap"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_RAGE_ROAR,"Rage Roar",0,0,20,OrderId("slow"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_STING,"Sting",0,0,1,0,1,ORDER_TYPE_IMMEDIATE);
-SpellData.create(SID_CHARGED_BREATH,"Charged Breath",0,0,10,OrderId("heal"),1,ORDER_TYPE_IMMEDIATE);
+SpellData.create(SID_CHARGED_BREATH,"Charged Breath",0,0,5,OrderId("heal"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_MANA_LEECH,"Mana Leech",0,0,5,OrderId("healingwave"),1,ORDER_TYPE_TARGET);
 SpellData.create(SID_BLAZING_HASTE,"Blazing Haste",75,0,5,852063,1,ORDER_TYPE_TARGET);
 SpellData.create(SIDCALLTOARMS,"Call To Arms",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
@@ -316,6 +316,7 @@ SpellData.create(SID_CHARM_OF_DEATH_FINGER,"Charm of Death Finger",0,0,1,OrderId
 SpellData.create(SID_CHARM_OF_SIPHON_LIFE,"Charm of Siphon Life",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_DEMONIC_RUNE,"Demonic Rune",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_STRANGE_WAND,"Strange Wand",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
+
         }
     }
 }
