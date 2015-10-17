@@ -332,9 +332,13 @@
 #define SID_WAR_STOMP 'A0BB'
 #define SID_BATTLE_COMMAND 'A0BC'
 #define BID_BATTLE_COMMAND 'A0BD'
-
+// demonic witch
 #define UTID_DEMONIC_WITCH 'n001'
 #define SID_BLAZING_HASTE 'A02Y'
+#define BID_BLAZING_HASTE 'A02Z'
+#define SID_FIRE_BALL 'A09L'
+#define SID_FLAME_SHOCK 'A09M'
+#define BID_FLAME_SHOCK 'A0BE'
 
 #define UTID_VOID_WALKER 'n00I'
 #define UTID_FEL_HOUND 'n00J'

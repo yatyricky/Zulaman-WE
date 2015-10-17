@@ -1,16 +1,18 @@
 //! zinc
-library FireBall {
+library FireBall requires DamageSystem {
 /*
 AOE fire balls, deals 600 damage to all targets
 
 */
-#define PATH
+#define PATH "Abilities\\Weapons\\FireBallMissile\\FireBallMissile.mdl"
+#define DAMAGE 600.0
+
     function onhit(Projectile p) -> boolean {
         if (TryReflect(p.target)) {
             p.reverse();
             return false;
         } else {
-            DamageTarget(p.caster, p.target, p.r0, SpellData[SID].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+            DamageTarget(p.caster, p.target, p.r0, SpellData[SID_FIRE_BALL].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
             return true;
         }
     }
@@ -25,8 +27,7 @@ AOE fire balls, deals 600 damage to all targets
 	        p.path = PATH;
 	        p.pr = onhit;
 	        p.speed = 700;
-	        p.r0 = 600.0;
-	        //BJDebugMsg("1??");
+	        p.r0 = DAMAGE;
 	        p.launch();
         }
     }
@@ -36,8 +37,9 @@ AOE fire balls, deals 600 damage to all targets
     }
 
     function onInit() {
-        RegisterSpellChannelResponse(SID, onChannel);
+        RegisterSpellChannelResponse(SID_FIRE_BALL, onChannel);
     }
+#undef DAMAGE
 #undef PATH
 }
 //! endzinc

@@ -293,31 +293,48 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
     }
     
     // demon witch
-    function makeOrdern001(unit source, unit target, real combatTime) {
-        real chance = GetRandomInt(0, 100);
-        //print("1");
+    function makeOrderDemonicWitch(unit source, unit target, real combatTime) {
+        IntegerPool ip;
+        integer res;
+        unit tu;
         if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
-            if (chance < 35) {
-                if (UnitCanUse(source, 'A02Y')) {
-                    //NotAttacking(source);
-                    IssueTargetOrderById(source, SpellData['A02Y'].oid, source);
-                } else {
-                    IssueTargetOrderById(source, OID_ATTACK, target);
-                }
-            } else if (chance < 85) {
-                if (UnitCanUse(source, 'A02W')) {
-                    //NotAttacking(source);
-                    IssueTargetOrderById(source, SpellData['A02W'].oid, target);
-                } else {
-                    IssueTargetOrderById(source, OID_ATTACK, target);
-                }
-            } else {
-                //print("3");
-                IssueTargetOrderById(source, OID_ATTACK, target);
+            ip = IntegerPool.create();
+            ip.add(0, 10);
+            if (UnitCanUse(source, SID_BLAZING_HASTE) && combatTime > 5.0) {
+                ip.add(SID_BLAZING_HASTE, 300);
             }
-        } else {
-                //print("4");
+            if (UnitCanUse(source, SID_FIRE_BALL)) {
+                ip.add(SID_FIRE_BALL, 200);
+            }
+            if (UnitCanUse(source, SID_FLAME_SHOCK)) {
+                ip.add(SID_FLAME_SHOCK, 200);
+            }
+            res = ip.get();
+            if (res == 0) {
+                IssueTargetOrderById(source, OID_ATTACK, target);
+            } else if (res == SID_FIRE_BALL) {
+                IssueImmediateOrderById(source, SpellData[res].oid);
+            } else if (res == SID_BLAZING_HASTE) {
+                if (GetUnitAbilityLevel(source, BID_BLAZING_HASTE) == 0) {
+                    tu = source;
+                } else {
+                    tu = MobList.getWithoutBuff(BID_BLAZING_HASTE);
+                    if (tu == null) {
+                        tu = source;
+                    }
+                }
+                IssueTargetOrderById(source, SpellData[res].oid, tu);
+            } else {
+                tu = PlayerUnits.getRandomHero();
+                if (tu != null) {
+                    IssueTargetOrderById(source, SpellData[res].oid, tu);
+                } else {
+                    IssueTargetOrderById(source, OID_ATTACK, source);
+                }
+            }
+            ip.destroy();
         }
+        tu = null;
     }
     
     // serpent inferior
@@ -754,8 +771,8 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         unitCallBack[UTID_FEL_GRUNT] = makeOrderFelGrunt;   // Fel Grunt
         unitCallBack[UTID_FEL_RIDER] = makeOrderFelRider;   // Fel Rider
         unitCallBack[UTID_FEL_WAR_BRINGER] = makeOrderFelWarBringer; // Fel war bringer
+        unitCallBack[UTID_DEMONIC_WITCH] = makeOrderDemonicWitch;   // 
 
-        unitCallBack['n001'] = makeOrdern001;   // 
         unitCallBack['h000'] = makeOrderh000;   //
         unitCallBack['h002'] = makeOrderh002;   //
     }

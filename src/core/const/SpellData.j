@@ -257,6 +257,8 @@ SpellData.create(SID_CHAOS_LEAP,"混乱跳跃",0,0,20,OrderId("sleep"),1,ORDER_T
 SpellData.create(SID_WAR_STOMP,"战争践踏",0,4,8,OrderId("sleep"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_BATTLE_COMMAND,"战斗命令",0,0,6,OrderId("slow"),1,ORDER_TYPE_TARGET);
 SpellData.create(SID_BLAZING_HASTE,"炽热疾速",75,0,5,852063,1,ORDER_TYPE_TARGET);
+SpellData.create(SID_FIRE_BALL,"连珠火球",100,3,1,OrderId("sleep"),1,ORDER_TYPE_IMMEDIATE);
+SpellData.create(SID_FLAME_SHOCK,"烈焰震击",50,0,5,OrderId("slow"),1,ORDER_TYPE_TARGET);
 SpellData.create(SIDCALLTOARMS,"战斗召唤",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_CTHUNS_DERANGEMENT,"上古狂乱",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SIDENIGMA,"谜团",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
