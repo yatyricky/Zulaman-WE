@@ -641,6 +641,28 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         tu = null;
     }
 
+    function makeOrderFelRider(unit source, unit target, real combatTime) {
+        IntegerPool ip;
+        integer res;
+        unit tu;
+        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+            ip = IntegerPool.create();
+            ip.add(0, 20);
+            if (UnitCanUse(source, SID_CHAOS_LEAP) && combatTime > 10.0) {
+                ip.add(SID_CHAOS_LEAP, 90);
+            }
+            res = ip.get();
+            if (res == 0) {
+                IssueTargetOrderById(source, OID_ATTACK, target);
+            } else {
+                tu = PlayerUnits.getFarest(source);
+                IssueTargetOrderById(source, SpellData[res].oid, tu);
+            }
+            ip.destroy();
+        }
+        tu = null;
+    }
+
     public function OrderCreeps(unit s, unit t, real c) {
         integer utid = GetUnitTypeId(s);
         //print(I2S(R2I(c)));
@@ -700,7 +722,8 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         unitCallBack['n00N'] = makeOrderWindSerpent;   // Wind Serpent
 
         unitCallBack[UTID_FEL_GRUNT] = makeOrderFelGrunt;   // Fel Grunt
-        
+        unitCallBack[UTID_FEL_RIDER] = makeOrderFelRider;   // Fel Rider
+
         unitCallBack['n001'] = makeOrdern001;   // 
         unitCallBack['h000'] = makeOrderh000;   //
         unitCallBack['h002'] = makeOrderh002;   //

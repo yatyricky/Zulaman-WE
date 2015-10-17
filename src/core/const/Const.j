@@ -323,8 +323,11 @@
 #define UTID_FEL_GRUNT 'n00C'
 #define SID_UNHOLY_FRENZY 'A09H'
 #define BID_UNHOLY_FRENZY 'A0B9'
-
+// fel rider
 #define UTID_FEL_RIDER 'n00H'
+#define SID_CHAOS_LEAP 'A09I'
+#define BID_CHAOS_LEAP 'A0BA'
+
 #define UTID_FEL_WAR_BRINGER 'n00D'
 
 #define UTID_DEMONIC_WITCH 'n001'

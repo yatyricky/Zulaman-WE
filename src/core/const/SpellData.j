@@ -253,6 +253,7 @@ SpellData.create(SID_STING,"毒刺(被动)",0,0,1,0,1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_CHARGED_BREATH,"充能之息",0,0,5,OrderId("heal"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_MANA_LEECH,"法力汲取",0,0,5,OrderId("healingwave"),1,ORDER_TYPE_TARGET);
 SpellData.create(SID_UNHOLY_FRENZY,"邪恶狂热",0,0,12,OrderId("sleep"),1,ORDER_TYPE_IMMEDIATE);
+SpellData.create(SID_CHAOS_LEAP,"混乱跳跃",0,0,20,OrderId("sleep"),1,ORDER_TYPE_TARGET);
 SpellData.create(SID_BLAZING_HASTE,"炽热疾速",75,0,5,852063,1,ORDER_TYPE_TARGET);
 SpellData.create(SIDCALLTOARMS,"战斗召唤",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_CTHUNS_DERANGEMENT,"上古狂乱",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
