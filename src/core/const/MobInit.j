@@ -67,6 +67,7 @@ library MobInit requires Table, BuffSystem, Patrol, NefUnion, WarlockGlobal, Stu
                         if (mobInfo[i].respawnCounter <= 0) {
                             mobInfo[i].respawning = -1;
                             mobInfo[i].u = CreateUnit(Player(MOB_PID), mobInfo[i].utid, mobInfo[i].x, mobInfo[i].y, mobInfo[i].f);
+                            mobInfo[i].p.update(mobInfo[i].u);
                             idTable[mobInfo[i].u] = i;
                         }
                     }
@@ -108,6 +109,9 @@ library MobInit requires Table, BuffSystem, Patrol, NefUnion, WarlockGlobal, Stu
             // ********************* 固定 ************************
 
             //! runtextmacro WriteInitMobInfo("n00G", "3241", "-11914", "0")
+            p = Patroller.create(u);
+            p.add(1873, -12094).add(1962, -12688);
+            mobInfo[numMobs - 1].p = p;
             //! runtextmacro WriteInitMobInfo("n00G", "3228", "-12590", "0")
         
             // - - - - - - - - 老 1 - - - - - - - - 
@@ -169,63 +173,80 @@ library MobInit requires Table, BuffSystem, Patrol, NefUnion, WarlockGlobal, Stu
             //! runtextmacro WriteInitMobInfo("n00F", "-3225", "-12331", "0")
             p = Patroller.create(u);
             p.add(-5018, -12323).add(-4765, -9593).add(-3123, -10680);
+            mobInfo[numMobs - 1].p = p;
             //! runtextmacro WriteInitMobInfo("n00F", "-4630", "-13888", "0")
             p = Patroller.create(u);
             p.add(-7841, -13484).add(-4262, -10977);
+            mobInfo[numMobs - 1].p = p;
             //! runtextmacro WriteInitMobInfo("n00F", "-6744", "-13557", "0")
             p = Patroller.create(u);
             p.add(-4457, -9691);
+            mobInfo[numMobs - 1].p = p;
             //! runtextmacro WriteInitMobInfo("n00G", "-6035", "-11797", "0")
             p = Patroller.create(u);
             p.add(-3843, -12525);
+            mobInfo[numMobs - 1].p = p;
             //! runtextmacro WriteInitMobInfo("n00G", "-3843", "-12525", "0")
             p = Patroller.create(u);
             p.add(-6035, -11797);
+            mobInfo[numMobs - 1].p = p;
             // 老1到老2巡逻暴徒
             //! runtextmacro WriteInitMobInfo("n00A", "-4482", "-7778", "90")            
             p = Patroller.create(u);
             p.add(-4671, -6485).add(-3783, -6241);
+            mobInfo[numMobs - 1].p = p;
             // 老1大道2巡逻暴徒，楼上开始一个，楼下开始一个
             //! runtextmacro WriteInitMobInfo("n00A", "-3710", "-5416", "0")
             p = Patroller.create(u);
             p.add(-1557, -5693).add(-1549, -7458).add(-785, -7353).add(-692, -6261);
+            mobInfo[numMobs - 1].p = p;
             //! runtextmacro WriteInitMobInfo("n00A", "-328", "-6216", "180")
             p = Patroller.create(u);
             p.add(-1022, -7682).add(-1704, -7312).add(-1438, -5695).add(-2192, -4962).add(-3919, -5882).add(-4512, -7884);
+            mobInfo[numMobs - 1].p = p;
             // 老1院子小鱼人
             //! runtextmacro WriteInitMobInfo("n00G", "-2938", "-5436", "0")
             p = Patroller.create(u);
             p.add(-1923, -5230);
+            mobInfo[numMobs - 1].p = p;
             // 密道女妖和小鱼人
             //! runtextmacro WriteInitMobInfo("n000", "-346", "-5030", "137")
             p = Patroller.create(u);
             p.add(-2509, -3170);
+            mobInfo[numMobs - 1].p = p;
             //! runtextmacro WriteInitMobInfo("n00G", "-450", "-5171", "137")
             p = Patroller.create(u);
             p.add(-2509, -3170);
+            mobInfo[numMobs - 1].p = p;
             // 环桥暴徒
             //! runtextmacro WriteInitMobInfo("n00A", "505", "-6304", "90")
             p = Patroller.create(u);
             p.add(501, -5077);// p.add(-1704, -7312); p.add(-1438, -5695); p.add(-2192, -4962); p.add(-3919, -5882); p.add(-4512, -7884);
+            mobInfo[numMobs - 1].p = p;
             // 门口木楼梯下2三角巡逻小鱼人
             //! runtextmacro WriteInitMobInfo("n00G", "-62", "-5195", "270")
             p = Patroller.create(u);
             p.add(12, -6362).add(1191, -5290);
+            mobInfo[numMobs - 1].p = p;
             //! runtextmacro WriteInitMobInfo("n00G", "1092", "-6412", "90")
             p = Patroller.create(u);
             p.add(1208, -5049).add(136, -6395);
+            mobInfo[numMobs - 1].p = p;
             // 水中环桥巡逻海蜥
             //! runtextmacro WriteInitMobInfo("n00F", "1412", "-4008", "180")
             p = Patroller.create(u);
             p.add(1629, -1629).add(-730, -1797).add(-593, -3892);
+            mobInfo[numMobs - 1].p = p;
             // 上老3台子小鱼人
             //! runtextmacro WriteInitMobInfo("n00G", "1444", "-5191", "0")
             p = Patroller.create(u);
             p.add(3173, -5314).add(4567, -6594);
+            mobInfo[numMobs - 1].p = p;
             // 深水小鱼人
             //! runtextmacro WriteInitMobInfo("n00G", "2220", "-6036", "129")
             p = Patroller.create(u);
             p.add(1461, -4185);
+            mobInfo[numMobs - 1].p = p;
 
             u = null;
         });

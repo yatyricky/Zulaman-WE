@@ -1,5 +1,5 @@
 //! zinc
-library Patrol requires NefUnion {    
+library Patrol requires NefUnion, ZAMCore {    
 #define RADIUS 200
 
     Patroller pats[];
@@ -25,10 +25,12 @@ library Patrol requires NefUnion {
         private PatrolNode mission;
         
         public method run() {
-            if (GetDistance.unitCoord(this.u, this.mission.x, this.mission.y) < RADIUS) {
-                this.mission = this.mission.next;
-            }            
-            IssuePointOrderById(this.u, OID_ATTACK, this.mission.x, this.mission.y);
+            if (!IsUnitDead(this.u)) {
+                if (GetDistance.unitCoord(this.u, this.mission.x, this.mission.y) < RADIUS) {
+                    this.mission = this.mission.next;
+                }            
+                IssuePointOrderById(this.u, OID_ATTACK, this.mission.x, this.mission.y);
+            }
         }
 
         static method operator[] (unit u) -> thistype {
@@ -37,6 +39,11 @@ library Patrol requires NefUnion {
             } else {
                 return 0;
             }
+        }
+
+        method update(unit u) {
+            thistype.ht[u] = this;
+            this.u = u;
         }
         
         public method add(real x, real y) -> thistype {
