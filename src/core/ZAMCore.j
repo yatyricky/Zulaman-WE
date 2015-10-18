@@ -147,8 +147,8 @@ library ZAMCore requires NefUnion {
         
         SetPlayerName(Player(10), FORCE_ENEMY);
         SetPlayerName(Player(11), FORCE_NPCS);
-        FogEnable(false);
-        FogMaskEnable(false);
+        // FogEnable(false);
+        // FogMaskEnable(false);
         
         SetPlayerAlliance(Player(11), Player(0), ALLIANCE_SHARED_CONTROL, true);
         SetPlayerAlliance(Player(11), Player(0), ALLIANCE_PASSIVE, true);
