@@ -1,5 +1,8 @@
 //! zinc
-library MobInit requires Table, BuffSystem, Patrol, NefUnion, WarlockGlobal {
+library MobInit requires Table, BuffSystem, Patrol, NefUnion, WarlockGlobal, StunUtils {
+#define MOBINIT_RESPAWN_L 10
+#define MOBINIT_RESPAWN_H 20
+
     private HandleTable idTable;
     private integer numMobs;
     
@@ -8,14 +11,14 @@ library MobInit requires Table, BuffSystem, Patrol, NefUnion, WarlockGlobal {
     }
     
     function cancelStun(DelayTask dt) {
-        UnitRemoveAbility(dt.u0, 'BPSE');
+        RemoveStun(dt.u0);
     }	
 
     public function ResetMob(unit u) {
         integer id = idTable[u];
         BuffSlot[u].removeAllBuff();   
         if (UnitProp[u].Stunned()) {
-            print("cancel stun");
+            // print("cancel stun");
             DelayTask.create(cancelStun, 0.5).u0 = u;
         }     
 
@@ -38,14 +41,39 @@ library MobInit requires Table, BuffSystem, Patrol, NefUnion, WarlockGlobal {
     }
     
     private struct mobInfo[] {
-        integer typeid;
+        integer utid;
         real x, y, f;
         unit u;
+        integer respawnCounter;
+        integer respawning;
+        integer respawnTime;
+        integer respawnTimeVar;
+        Patroller p;
     }
     
     private function onInit() {
         numMobs = 0;
         idTable = HandleTable.create();
+
+        TimerStart(CreateTimer(), 5.0, true, function() {
+            integer i;
+            for (0 <= i < numMobs) {
+                if (IsUnitDead(mobInfo[i].u)) {
+                    if (mobInfo[i].respawning == -1) {
+                        mobInfo[i].respawning = 1;
+                        mobInfo[i].respawnCounter = GetRandomInt(mobInfo[i].respawnTime, mobInfo[i].respawnTimeVar);
+                    } else {
+                        mobInfo[i].respawnCounter -= 5;
+                        if (mobInfo[i].respawnCounter <= 0) {
+                            mobInfo[i].respawning = -1;
+                            mobInfo[i].u = CreateUnit(Player(MOB_PID), mobInfo[i].utid, mobInfo[i].x, mobInfo[i].y, mobInfo[i].f);
+                            idTable[mobInfo[i].u] = i;
+                        }
+                    }
+                }
+            }
+        });
+
         TimerStart(CreateTimer(), 0.15, false, function() {
         
             //! textmacro WriteInitMobInfo takes typeid, x, y, f
@@ -53,7 +81,13 @@ library MobInit requires Table, BuffSystem, Patrol, NefUnion, WarlockGlobal {
             mobInfo[numMobs].x = $x$; 
             mobInfo[numMobs].y = $y$; 
             mobInfo[numMobs].f = $f$; 
+            mobInfo[numMobs].utid = '$typeid$';
             mobInfo[numMobs].u = u;
+            mobInfo[numMobs].respawnCounter = 0;
+            mobInfo[numMobs].respawning = -1;
+            mobInfo[numMobs].respawnTime = MOBINIT_RESPAWN_L;
+            mobInfo[numMobs].respawnTimeVar = MOBINIT_RESPAWN_H;
+            mobInfo[numMobs].p = 0;
             idTable[u] = numMobs;
             numMobs = numMobs + 1;
             //! endtextmacro
@@ -72,6 +106,9 @@ library MobInit requires Table, BuffSystem, Patrol, NefUnion, WarlockGlobal {
             // runtextmacro WriteInitMobInfo("Opgh", "741.00", "8989.0", "270.0")
             
             // ********************* 固定 ************************
+
+            //! runtextmacro WriteInitMobInfo("n00G", "3241", "-11914", "0")
+            //! runtextmacro WriteInitMobInfo("n00G", "3228", "-12590", "0")
         
             // - - - - - - - - 老 1 - - - - - - - - 
             // 左门开始2鱼人
@@ -189,7 +226,11 @@ library MobInit requires Table, BuffSystem, Patrol, NefUnion, WarlockGlobal {
             //! runtextmacro WriteInitMobInfo("n00G", "2220", "-6036", "129")
             p = Patroller.create(u);
             p.add(1461, -4185);
+
+            u = null;
         });
     }
+#undef MOBINIT_RESPAWN_L
+#undef MOBINIT_RESPAWN_H
 }
 //! endzinc

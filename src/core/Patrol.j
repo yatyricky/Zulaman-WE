@@ -19,6 +19,7 @@ library Patrol requires NefUnion {
     }
 
     public struct Patroller {
+        private static HandleTable ht;
         unit u;
         private PatrolNode head, tail;
         private PatrolNode mission;
@@ -28,6 +29,14 @@ library Patrol requires NefUnion {
                 this.mission = this.mission.next;
             }            
             IssuePointOrderById(this.u, OID_ATTACK, this.mission.x, this.mission.y);
+        }
+
+        static method operator[] (unit u) -> thistype {
+            if (thistype.ht.exists(u)) {
+                return thistype.ht[u];
+            } else {
+                return 0;
+            }
         }
         
         public method add(real x, real y) -> thistype {
@@ -44,9 +53,14 @@ library Patrol requires NefUnion {
             this.head = PatrolNode.create(GetUnitX(u), GetUnitY(u));
             this.tail = this.head;
             this.mission = this.head;
+            thistype.ht[u] = this;
             pats[nump] = this;
             nump += 1;
             return this;
+        }
+
+        private static method onInit() {
+            thistype.ht = HandleTable.create();
         }
     }
     

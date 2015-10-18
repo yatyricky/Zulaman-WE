@@ -601,9 +601,9 @@ library AggroSystem requires MobInit, UnitProperty, Clock, DamageSystem, PlayerU
     function register(unit u) {
         if (!IsUnitDummy(u)) {
             if (GetPlayerId(GetOwningPlayer(u)) == MOB_PID) {
-                if (IsInCombat()) {
-                    MobList.add(u);
-                }
+                // if (IsInCombat()) {
+                //     MobList.add(u);
+                // }
                 if (CanUnitAttack(u)) {
                     TriggerRegisterUnitEvent(acqtrg, u, EVENT_UNIT_ACQUIRED_TARGET);
                 }
