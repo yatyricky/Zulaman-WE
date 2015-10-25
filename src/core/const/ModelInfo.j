@@ -114,11 +114,11 @@ ModelInfo.rg(UTID_ARCH_TINKER,ATT_INT,42299,205,50,5,0.05,0,0,1,0.03,CAREER_TYPE
 ModelInfo.rg(UTID_ARCH_TINKER_MORPH,ATT_INT,42299,205,50,5,0.05,0,0,1,0.03,CAREER_TYPE_BOSS,"ReplaceableTextures\\CommandButtons\\BTNHeroTinker.blp").setScale(1.7);
 ModelInfo.rg(UTID_POCKET_FACTORY,ATT_NON,1999,1,0,0,0,0,0,1,0,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNPocketFactory.blp");
 ModelInfo.rg(UTID_CLOCKWORK_GOBLIN,ATT_NON,9999,10,40,0,0,0,0,1,0.1,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNClockWerkGoblin.blp");
-ModelInfo.rg(UTIDNAGASEAWITCH,ATT_AGI,94899,190,200,5,0.05,0,0,1,0.03,CAREER_TYPE_BOSS,"ReplaceableTextures\\CommandButtons\\BTNNagaSeaWitch.blp").setScale(1.7);
+ModelInfo.rg(UTIDNAGASEAWITCH,ATT_AGI,94899,340,150,5,0.05,0,0,1,0.03,CAREER_TYPE_BOSS,"ReplaceableTextures\\CommandButtons\\BTNNagaSeaWitch.blp").setScale(1.7);
 ModelInfo.rg(UTID_FLYING_SERPENT,ATT_NON,1499,21,59,5,0.05,0,0,1,0.1,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNWindSerpent.blp");
-ModelInfo.rg(UTIDTIDEBARON,ATT_STR,99599,310,150,5,0.05,0,0,1,0.03,CAREER_TYPE_BOSS,"ReplaceableTextures\\CommandButtons\\BTNNagaMyrmidonRoyalGuard.blp");
-ModelInfo.rg(UTIDTIDEBARONWATER,ATT_STR,99599,160,100,40,0.1,0,0,1,0.03,CAREER_TYPE_BOSS,"ReplaceableTextures\\CommandButtons\\BTNSeaElemental.blp");
-ModelInfo.rg(UTIDWARLOCK,ATT_INT,79899,170,20,5,0.05,0,0,1,0.03,CAREER_TYPE_BOSS,"ReplaceableTextures\\CommandButtons\\BTNOrcWarlock.blp");
+ModelInfo.rg(UTIDTIDEBARON,ATT_STR,149599,560,100,5,0.05,0,0,1,0.03,CAREER_TYPE_BOSS,"ReplaceableTextures\\CommandButtons\\BTNNagaMyrmidonRoyalGuard.blp");
+ModelInfo.rg(UTIDTIDEBARONWATER,ATT_STR,149599,160,100,40,0.1,0,0,1,0.03,CAREER_TYPE_BOSS,"ReplaceableTextures\\CommandButtons\\BTNSeaElemental.blp");
+ModelInfo.rg(UTIDWARLOCK,ATT_INT,199899,820,150,5,0.05,0,0,1,0.03,CAREER_TYPE_BOSS,"ReplaceableTextures\\CommandButtons\\BTNOrcWarlock.blp");
 ModelInfo.rg(UTID_LAVA_SPAWN,ATT_NON,799,50,0,0,0.05,0,0,1,0.05,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNLavaSpawn.blp");
 ModelInfo.rg(UTID_PIT_ARCHON,ATT_STR,449899,740,500,5,0.05,0,0,1,0.03,CAREER_TYPE_BOSS,"ReplaceableTextures\\CommandButtons\\BTNHeroCryptLord.blp").setScale(1.7);
 ModelInfo.rg(UTID_SPIKE,ATT_NON,2999,0,10,0,0,0,0,1,0,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNImpale.blp");

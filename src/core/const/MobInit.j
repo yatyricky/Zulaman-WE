@@ -1,7 +1,7 @@
 //! zinc
 library MobInit requires Table, BuffSystem, Patrol, NefUnion, WarlockGlobal, StunUtils {
-#define MOBINIT_RESPAWN_L 10
-#define MOBINIT_RESPAWN_H 20
+#define MOBINIT_RESPAWN_L 90
+#define MOBINIT_RESPAWN_H 120
 
     private HandleTable idTable;
     private integer numMobs;
