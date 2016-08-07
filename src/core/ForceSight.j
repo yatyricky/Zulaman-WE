@@ -22,6 +22,8 @@ library ForceSight {
             SetCameraField(CAMERA_FIELD_TARGET_DISTANCE, value_CAMERA_FIELD_TARGET_DISTANCE, DELAY);
             SetCameraField(CAMERA_FIELD_ZOFFSET, value_CAMERA_FIELD_ZOFFSET, DELAY);
         });
+        // FogMaskEnable(false);
+        FogEnable(false);
         /*
         BJDebugMsg(R2S(GetCameraField(CAMERA_FIELD_ANGLE_OF_ATTACK)));
         BJDebugMsg(R2S(GetCameraField(CAMERA_FIELD_FARZ)));
