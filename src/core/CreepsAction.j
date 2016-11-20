@@ -55,7 +55,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
                 }
             }
             res = ip.get();
-// print("Ñ¡È¡¼¼ÄÜ"+SpellData[res].name);
+// print("é€‰å–æŠ€èƒ½"+SpellData[res].name);
             if (res == 0) {
                 IssueTargetOrderById(source, OID_ATTACK, target);
             } else if (SpellData[res].otp == ORDER_TYPE_TARGET) {
@@ -710,20 +710,39 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         tu = null;
     }
 
+    function makeOrderDracoLich(unit source, unit target, real combatTime) {
+        IntegerPool ip;
+        integer res;
+        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+            ip = IntegerPool.create();
+            ip.add(0, 20);
+            if (UnitCanUse(source, SID_DEATH_AND_DECAY) && combatTime > 5.0) {
+                ip.add(SID_DEATH_AND_DECAY, 140);
+            }
+            res = ip.get();
+            if (res == 0) {
+                IssueTargetOrderById(source, OID_ATTACK, target);
+            } else if (res == SID_DEATH_AND_DECAY) {
+                IssueTargetOrderById(source, SpellData[res].oid, PlayerUnits.getRandomHero());
+            }
+            ip.destroy();
+        }
+    }
+
     public function OrderCreeps(unit s, unit t, real c) {
         integer utid = GetUnitTypeId(s);
         //print(I2S(R2I(c)));
         if (!focus.exists(s)) {
-            //print("×¢²áÒ»´Î");
+            //print("æ³¨å†Œä¸€æ¬¡");
             focus[s] = 1;
         }
         if (GetHandleId(t) != focus[s]) {
-            //print("¸Ä±äÄ¿±ê");
+            //print("æ”¹å˜ç›®æ ‡");
             focus[s] = GetHandleId(t);
             pace[s] = 0;
         }
         if (pace[s] == 0) {
-            //print("ÃüÁî");
+            //print("å‘½ä»¤");
             if (!unitCallBack.exists(utid)) {
                 // print(SCOPE_PREFIX + ">Unregistered unit type order actions.");
             } else {
@@ -741,12 +760,12 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         unitCallBack['nfac'] = makeOrdernfac;   // Pocket Factory
         unitCallBack['ncgb'] = makeOrderncgb;   // Clockwork Goblin
         
-        unitCallBack['Hvsh'] = makeOrderHvsh;   // ÄÈåÈÅ®Î×
-        unitCallBack['n003'] = makeOrdern003;   // ·ÉÉß,ÁÓÖÊµÄ
+        unitCallBack['Hvsh'] = makeOrderHvsh;   // å¨œè¿¦å¥³å·«
+        unitCallBack['n003'] = makeOrdern003;   // é£è›‡,åŠ£è´¨çš„
         
-        unitCallBack[UTIDTIDEBARONWATER] = makeOrderTideBaronWater;   // ³±Ï«ÄĞ¾ô º£ÔªËØĞÎÌ¬
-        unitCallBack[UTIDTIDEBARON] = makeOrderTideBaron;   // ³±Ï«ÄĞ¾ô º£ÔªËØĞÎÌ¬
-        unitCallBack[UTIDWARLOCK] = makeOrderWarlock;   // ÊõÊ¿
+        unitCallBack[UTIDTIDEBARONWATER] = makeOrderTideBaronWater;   // æ½®æ±ç”·çˆµ æµ·å…ƒç´ å½¢æ€
+        unitCallBack[UTIDTIDEBARON] = makeOrderTideBaron;   // æ½®æ±ç”·çˆµ æµ·å…ƒç´ å½¢æ€
+        unitCallBack[UTIDWARLOCK] = makeOrderWarlock;   // æœ¯å£«
         unitCallBack[UTID_LAVA_SPAWN] = makeOrderLavaSpawn;   // Lava Spawn
 
         unitCallBack[UTID_PIT_ARCHON] = makeOrderAbyssArchon;
@@ -755,18 +774,20 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         unitCallBack[UTID_ABOMINATION] = makeOrderAbomination;
         unitCallBack[UTID_WRAITH] = makeOrderWraith;
 
-        unitCallBack[UTIDHEXLORD] = makeOrderHexLord;   // ÑıÊõÁìÖ÷
-        unitCallBack[UTIDLIGHTNINGTOTEM] = makeOrderLightningTotem;   // ÉÁµçÍ¼ÌÚ
+        unitCallBack[UTIDHEXLORD] = makeOrderHexLord;   // å¦–æœ¯é¢†ä¸»
+        unitCallBack[UTIDLIGHTNINGTOTEM] = makeOrderLightningTotem;   // é—ªç”µå›¾è…¾
         
-        unitCallBack['n000'] = makeOrdern000;   // ÄÈåÈÅ®Ñı
-        unitCallBack['n00B'] = makeOrdern00B;   // ÄÈåÈ³±Ï«¼ÀË¾
-        unitCallBack['h004'] = makeOrderh004;   // ÖÎÁÆÊØÎÀ
-        unitCallBack['h005'] = makeOrderh005;   // ·À»¤ÊØÎÀ
+        unitCallBack['n000'] = makeOrdern000;   // å¨œè¿¦å¥³å¦–
+        unitCallBack['n00B'] = makeOrdern00B;   // å¨œè¿¦æ½®æ±ç¥­å¸
+        unitCallBack['h004'] = makeOrderh004;   // æ²»ç–—å®ˆå«
+        unitCallBack['h005'] = makeOrderh005;   // é˜²æŠ¤å®ˆå«
         unitCallBack['n00A'] = makeOrdern00A;   // Naga Myrmidon
         unitCallBack['n00E'] = makeOrdern00E;   // Naga Royal Guard
         unitCallBack['n00F'] = makeOrdern00F;   // Sea Lizard
         unitCallBack['n00G'] = makeOrdern00G;   // Murloc Slave
         unitCallBack['n00N'] = makeOrderWindSerpent;   // Wind Serpent
+
+        unitCallBack[UTID_DRACOLICH] = makeOrderDracoLich;    // dracolich   
 
         unitCallBack[UTID_FEL_GRUNT] = makeOrderFelGrunt;   // Fel Grunt
         unitCallBack[UTID_FEL_RIDER] = makeOrderFelRider;   // Fel Rider

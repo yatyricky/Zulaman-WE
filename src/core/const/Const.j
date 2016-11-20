@@ -346,6 +346,9 @@
 // 3区
 #define UTID_FOREST_TROLL 'n00L'
 
+// 4区
+#define UTID_DRACOLICH 'ufro'
+#define SID_DEATH_AND_DECAY 'A0BF'
 
 // test unit type id
 #define UTID_STATIC_TARGET 'h000'
@@ -493,6 +496,7 @@
 #define ART_BLEED "Objects\\Spawnmodels\\Human\\HumanBlood\\HeroBloodElfBlood.mdl"
 #define ART_BLOOD_LUST_LEFT "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustTarget.mdl"
 #define ART_BLOOD_LUST_RIGHT "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustSpecial.mdl"
+#define ART_DEATH_AND_DECAY "Abilities\\Spells\\Undead\\DeathandDecay\\DeathandDecayTarget.mdl"
 #define ART_DISPEL "Abilities\\Spells\\Human\\DispelMagic\\DispelMagicTarget.mdl"
 #define ART_DOOM "Abilities\\Spells\\Other\\Doom\\DoomDeath.mdl"
 #define ART_DUST "Objects\\Spawnmodels\\Undead\\ImpaleTargetDust\\ImpaleTargetDust.mdl"

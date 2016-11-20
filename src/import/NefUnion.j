@@ -472,6 +472,20 @@ library NefUnion requires TimerUtils {
             TimerStart(this.tm, 0.1, false, function thistype.run);
         }
     }
+
+    public function SpamEffectsInCircle(string se, real x, real y, real r, integer num, real timeout) {
+        integer i;
+        real angle;
+        real distance;
+        real dx, dy;
+        for (0 <= i < num) {
+            angle = GetRandomReal(0.0, 6.283);
+            distance = SquareRoot(GetRandomReal(1.0, r * r));
+            dx = Cos(angle) * distance;
+            dy = Sin(angle) * distance;
+            AddTimedEffect.atCoord(se, x + dx, y + dy, timeout);
+        }
+    }
     
     public function ModUnitMana(unit u, real amt) {
         SetUnitState(u, UNIT_STATE_MANA, GetUnitState(u, UNIT_STATE_MANA) + amt);
