@@ -349,6 +349,7 @@
 // 4区
 #define UTID_DRACOLICH 'ufro'
 #define SID_DEATH_AND_DECAY 'A0BF'
+#define SID_FROST_GRAVE 'A0BG'
 
 // test unit type id
 #define UTID_STATIC_TARGET 'h000'
@@ -500,6 +501,8 @@
 #define ART_DISPEL "Abilities\\Spells\\Human\\DispelMagic\\DispelMagicTarget.mdl"
 #define ART_DOOM "Abilities\\Spells\\Other\\Doom\\DoomDeath.mdl"
 #define ART_DUST "Objects\\Spawnmodels\\Undead\\ImpaleTargetDust\\ImpaleTargetDust.mdl"
+#define ART_FREEZING_BREATH "Abilities\\Spells\\Undead\\FreezingBreath\\FreezingBreathTargetArt.mdl"
+#define ART_FROST_NOVA "Abilities\\Spells\\Undead\\FrostNova\\FrostNovaTarget.mdl"
 #define ART_GORE "Objects\\Spawnmodels\\Orc\\OrcLargeDeathExplode\\OrcLargeDeathExplode.mdl"
 #define ART_HEAL "Abilities\\Spells\\Items\\AIhe\\AIheTarget.mdl"
 #define ART_HEAL_SALVE "Abilities\\Spells\\Items\\HealingSalve\\HealingSalveTarget.mdl"

@@ -715,14 +715,17 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         integer res;
         if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
             ip = IntegerPool.create();
-            ip.add(0, 20);
-            if (UnitCanUse(source, SID_DEATH_AND_DECAY) && combatTime > 5.0) {
+            ip.add(0, 10);
+            if (UnitCanUse(source, SID_DEATH_AND_DECAY) && combatTime > 10.0) {
                 ip.add(SID_DEATH_AND_DECAY, 140);
+            }
+            if (UnitCanUse(source, SID_FROST_GRAVE) && combatTime > 5.0) {
+                ip.add(SID_FROST_GRAVE, 140);
             }
             res = ip.get();
             if (res == 0) {
                 IssueTargetOrderById(source, OID_ATTACK, target);
-            } else if (res == SID_DEATH_AND_DECAY) {
+            } else {
                 IssueTargetOrderById(source, SpellData[res].oid, PlayerUnits.getRandomHero());
             }
             ip.destroy();
