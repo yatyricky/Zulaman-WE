@@ -333,7 +333,7 @@ library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSys
         // Console[Player(0)].add("testpool", testpool);
         Console[Player(0)].add("die", die);
         //Console[Player(0)].add("hid", gethandleidunit);
-        //Console[Player(0)].add("utid", getutid);
+        Console[Player(0)].add("utid", getutid);
         //Console[Player(0)].add("seefrs", getseefrs);
         // Console[Player(0)].add("potions", spawnpotions);
         Console[Player(0)].add("exec", execfuncs);

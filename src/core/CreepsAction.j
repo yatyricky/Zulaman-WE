@@ -732,6 +732,10 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         }
     }
 
+    function makeOrderObsidianConstruct(unit source, unit target, real combatTime) {
+        IssueTargetOrderById(source, OID_ATTACK, target);  
+    }
+
     public function OrderCreeps(unit s, unit t, real c) {
         integer utid = GetUnitTypeId(s);
         //print(I2S(R2I(c)));
@@ -795,6 +799,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         unitCallBack[UTID_FEL_GRUNT] = makeOrderFelGrunt;   // Fel Grunt
         unitCallBack[UTID_FEL_RIDER] = makeOrderFelRider;   // Fel Rider
         unitCallBack[UTID_FEL_WAR_BRINGER] = makeOrderFelWarBringer; // Fel war bringer
+        unitCallBack[UTID_OBSIDIAN_CONSTRUCT] = makeOrderObsidianConstruct;   // 
         unitCallBack[UTID_DEMONIC_WITCH] = makeOrderDemonicWitch;   // 
 
         unitCallBack['h000'] = makeOrderh000;   //

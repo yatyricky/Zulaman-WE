@@ -351,6 +351,9 @@
 #define SID_DEATH_AND_DECAY 'A0BF'
 #define SID_FROST_GRAVE 'A0BG'
 
+#define UTID_OBSIDIAN_CONSTRUCT 'uobs'
+#define BID_REFLECTION_AURA 'A0BH'
+
 // test unit type id
 #define UTID_STATIC_TARGET 'h000'
 #define UTID_TARGET 'h001'
