@@ -733,7 +733,25 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
     }
 
     function makeOrderObsidianConstruct(unit source, unit target, real combatTime) {
-        IssueTargetOrderById(source, OID_ATTACK, target);  
+        IntegerPool ip;
+        integer res;
+        unit tu;
+        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+            ip = IntegerPool.create();
+            ip.add(0, 10);
+            if (UnitCanUse(source, SID_MANA_TAP) && combatTime > 8.0) {
+                ip.add(SID_MANA_TAP, 50);
+            }
+            res = ip.get();
+            if (res == 0) {
+                IssueTargetOrderById(source, OID_ATTACK, target);
+            } else {
+                tu = PlayerUnits.getRandomHero();
+                IssuePointOrderById(source, SpellData[res].oid, GetUnitX(tu), GetUnitY(tu));
+                tu = null;
+            }
+            ip.destroy();
+        }
     }
 
     public function OrderCreeps(unit s, unit t, real c) {

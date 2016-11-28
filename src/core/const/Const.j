@@ -353,6 +353,8 @@
 
 #define UTID_OBSIDIAN_CONSTRUCT 'uobs'
 #define BID_REFLECTION_AURA 'A0BH'
+#define SID_MANA_TAP 'A0BI'
+#define BID_MANA_TAP 'A0BJ'
 
 // test unit type id
 #define UTID_STATIC_TARGET 'h000'
@@ -512,6 +514,7 @@
 #define ART_IMPACT "Abilities\\Weapons\\Bolt\\BoltImpact.mdl"
 #define ART_INVULNERABLE "Abilities\\Spells\\Human\\DivineShield\\DivineShieldTarget.mdl"
 #define ART_MANA "Abilities\\Spells\\Items\\AIma\\AImaTarget.mdl"
+#define ART_MANA_DRAIN_TARGET "Abilities\\Spells\\Other\\Drain\\ManaDrainTarget.mdl"
 #define ART_PLAGUE "units\\undead\\PlagueCloud\\PlagueCloud.mdl"
 #define ART_POISON "Abilities\\Weapons\\PoisonSting\\PoisonStingTarget.mdl"
 #define ART_RED_IMPACT "Abilities\\Spells\\Demon\\DemonBoltImpact\\DemonBoltImpact.mdl"
