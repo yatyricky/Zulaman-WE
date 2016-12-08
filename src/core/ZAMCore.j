@@ -18,6 +18,8 @@ library ZAMCore requires NefUnion {
 //==============================================================================
     public region MAP_AREA;
     public integer CURRENT_HERO_LEVEL;
+    public unit PlayerSelection[NUMBER_OF_MAX_PLAYERS];
+    private trigger playerSelectionTrigger;
     
     // true if unit1 > unit2
     public type UnitListSortRule extends function(unit, unit) -> boolean;
@@ -184,6 +186,25 @@ library ZAMCore requires NefUnion {
             }
             return false;
         }));
+
+        playerSelectionTrigger = CreateTrigger();
+        TimerStart(CreateTimer(), 0.5, false, function() {
+            integer i;
+            DestroyTimer(GetExpiredTimer());
+            for (0 <= i < NUMBER_OF_MAX_PLAYERS) {
+                if (IsPlayerUserOnline(Player(i))) {
+                    TriggerRegisterPlayerUnitEvent(playerSelectionTrigger, Player(i), EVENT_PLAYER_UNIT_SELECTED, null);
+                }
+            }
+        });
+        TriggerAddAction(playerSelectionTrigger, function() {
+            unit u = GetTriggerUnit();
+            if (u != null && !IsUnitDummy(u)) {
+                PlayerSelection[GetPlayerId(GetTriggerPlayer())] = u;
+            }
+            u = null;
+        });
+
     }
 }
 //! endzinc

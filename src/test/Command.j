@@ -227,9 +227,9 @@ library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSys
         ResetFireRunes();
     }
     
-    function generatecombatlogs(string str) {
-        GenerateCombatLog(SubString(str, 4, StringLength(str)));
-    }
+    // function generatecombatlogs(string str) {
+    //     GenerateCombatLog(SubString(str, 4, StringLength(str)));
+    // }
     
     function debuglogs(string str) {
         ExportDebugLog();
@@ -338,7 +338,7 @@ library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSys
         // Console[Player(0)].add("potions", spawnpotions);
         Console[Player(0)].add("exec", execfuncs);
         // Console[Player(0)].add("resetlava", doresetlavas);
-        Console[Player(0)].add("log", generatecombatlogs);
+        // Console[Player(0)].add("log", generatecombatlogs);
         Console[Player(0)].add("dlog", debuglogs);
         // Console[Player(0)].add("prayerofhealing", testprayerofhealing);
         //testlightning = AddLightningEx("SPLK", false, -6786, -1867, 1710, -6342, -1923, 1710);
