@@ -347,14 +347,17 @@
 #define UTID_FOREST_TROLL 'n00L'
 
 // 4区
-#define UTID_DRACOLICH 'ufro'
-#define SID_DEATH_AND_DECAY 'A0BF'
-#define SID_FROST_GRAVE 'A0BG'
+#define UTID_ZOMBIE 'nzom'
+#define SID_GNAW 'A0BK'
 
 #define UTID_OBSIDIAN_CONSTRUCT 'uobs'
 #define BID_REFLECTION_AURA 'A0BH'
 #define SID_MANA_TAP 'A0BI'
 #define BID_MANA_TAP 'A0BJ'
+
+#define UTID_DRACOLICH 'ufro'
+#define SID_DEATH_AND_DECAY 'A0BF'
+#define SID_FROST_GRAVE 'A0BG'
 
 // test unit type id
 #define UTID_STATIC_TARGET 'h000'

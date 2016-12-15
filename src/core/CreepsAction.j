@@ -754,6 +754,25 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         }
     }
 
+    function makeOrderZombie(unit source, unit target, real combatTime) {
+        IntegerPool ip;
+        integer res;
+        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+            ip = IntegerPool.create();
+            ip.add(0, 10);
+            if (UnitCanUse(source, SID_GNAW) && combatTime > 5.0) {
+                ip.add(SID_GNAW, 30);
+            }
+            res = ip.get();
+            if (res == 0) {
+                IssueTargetOrderById(source, OID_ATTACK, target);
+            } else {
+                IssueTargetOrderById(source, SpellData[res].oid, target);
+            }
+            ip.destroy();
+        }   
+    }
+
     public function OrderCreeps(unit s, unit t, real c) {
         integer utid = GetUnitTypeId(s);
         //print(I2S(R2I(c)));
@@ -812,7 +831,8 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         unitCallBack['n00G'] = makeOrdern00G;   // Murloc Slave
         unitCallBack['n00N'] = makeOrderWindSerpent;   // Wind Serpent
 
-        unitCallBack[UTID_DRACOLICH] = makeOrderDracoLich;    // dracolich   
+        unitCallBack[UTID_ZOMBIE] = makeOrderZombie;    // zombie
+        unitCallBack[UTID_DRACOLICH] = makeOrderDracoLich;    // dracolich
 
         unitCallBack[UTID_FEL_GRUNT] = makeOrderFelGrunt;   // Fel Grunt
         unitCallBack[UTID_FEL_RIDER] = makeOrderFelRider;   // Fel Rider
