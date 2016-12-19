@@ -18,6 +18,3 @@ library Gnaw requires CastingBar {
     }
 }
 //! endzinc
-
-
-
