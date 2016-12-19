@@ -1,5 +1,5 @@
 //! zinc
-library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitList, IntegerPool, UnitProperty, CombatFacts, RandomPoint {
+library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitList, IntegerPool, UnitProperty, CombatFacts, RandomPoint, Parasite {
 
     Table unitCallBack;
     HandleTable focus, pace;
@@ -754,6 +754,16 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         }
     }
 
+    function makeOrderParasiticalRoach(unit source, unit target, real combatTime) {
+        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+            if (combatTime > 10.0) {
+                ParasiteOnTarget(source, PlayerUnits.getRandomHero());
+            } else {
+                IssueTargetOrderById(source, OID_ATTACK, target);
+            }
+        }   
+    }
+
     function makeOrderZombie(unit source, unit target, real combatTime) {
         IntegerPool ip;
         integer res;
@@ -831,6 +841,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         unitCallBack['n00G'] = makeOrdern00G;   // Murloc Slave
         unitCallBack['n00N'] = makeOrderWindSerpent;   // Wind Serpent
 
+        unitCallBack[UTID_PARASITICAL_ROACH] = makeOrderParasiticalRoach;    // ParasiticalRoach
         unitCallBack[UTID_ZOMBIE] = makeOrderZombie;    // zombie
         unitCallBack[UTID_DRACOLICH] = makeOrderDracoLich;    // dracolich
 

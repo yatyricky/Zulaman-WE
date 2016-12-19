@@ -347,6 +347,10 @@
 #define UTID_FOREST_TROLL 'n00L'
 
 // 4区
+#define UTID_PARASITICAL_ROACH 'ucs1'
+#define SID_PARASITE 'A0BL'
+#define BID_PARASITE 'A0BM'
+
 #define UTID_ZOMBIE 'nzom'
 #define SID_GNAW 'A0BK'
 
@@ -518,6 +522,7 @@
 #define ART_INVULNERABLE "Abilities\\Spells\\Human\\DivineShield\\DivineShieldTarget.mdl"
 #define ART_MANA "Abilities\\Spells\\Items\\AIma\\AImaTarget.mdl"
 #define ART_MANA_DRAIN_TARGET "Abilities\\Spells\\Other\\Drain\\ManaDrainTarget.mdl"
+#define ART_PARASITE_TARGET "Abilities\\Spells\\Other\\Parasite\\ParasiteTarget.mdl"
 #define ART_PLAGUE "units\\undead\\PlagueCloud\\PlagueCloud.mdl"
 #define ART_POISON "Abilities\\Weapons\\PoisonSting\\PoisonStingTarget.mdl"
 #define ART_RED_IMPACT "Abilities\\Spells\\Demon\\DemonBoltImpact\\DemonBoltImpact.mdl"

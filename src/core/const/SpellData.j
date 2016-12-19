@@ -260,6 +260,7 @@ SpellData.create(SID_BLAZING_HASTE,"炽热疾速",75,0,5,852063,1,ORDER_TYPE_TAR
 SpellData.create(SID_FIRE_BALL,"连珠火球",100,3,1,OrderId("sleep"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_FLAME_SHOCK,"烈焰震击",50,0,5,OrderId("slow"),1,ORDER_TYPE_TARGET);
 SpellData.create(SID_DEATH_AND_DECAY,"死亡凋零",0,0,8,OrderId("heal"),1,ORDER_TYPE_TARGET);
+SpellData.create(SID_PARASITE,"寄生",0,0,0,0,1,ORDER_TYPE_TARGET);
 SpellData.create(SID_GNAW,"啃食",0,5,0,OrderId("sleep"),2,ORDER_TYPE_TARGET);
 SpellData.create(SID_MANA_TAP,"法力流失",0,0,13,OrderId("sleep"),1,ORDER_TYPE_POINT);
 SpellData.create(SID_FROST_GRAVE,"冰冻坟墓",0,0,8,OrderId("sleep"),1,ORDER_TYPE_TARGET);
