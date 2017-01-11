@@ -2,7 +2,6 @@
 library ArmageddonScroll requires SpellEvent, DamageSystem {
 #define ART_TARGET "Abilities\\Spells\\Demon\\RainOfFire\\RainOfFireTarget.mdl"
 #define ART_TARGET1 "Units\\Demon\\Infernal\\InfernalBirth.mdl"
-#define ART_CRATER "Objects\\Spawnmodels\\Other\\NeutralBuildingExplosion\\NeutralBuildingExplosion.mdl"
 #define ART_FIRE "Environment\\LargeBuildingFire\\LargeBuildingFire0.mdl"
 
     struct Armageddon {
@@ -75,7 +74,6 @@ library ArmageddonScroll requires SpellEvent, DamageSystem {
         
     }
 #undef ART_FIRE
-#undef ART_CRATER
 #undef ART_TARGET1
 #undef ART_TARGET
 }

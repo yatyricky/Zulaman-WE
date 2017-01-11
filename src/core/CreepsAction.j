@@ -783,6 +783,29 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         }   
     }
 
+    function makeOrderInfernoConstruct(unit source, unit target, real combatTime) {
+        IntegerPool ip;
+        integer res;
+        unit tu;
+        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+            ip = IntegerPool.create();
+            ip.add(0, 10);
+            if (UnitCanUse(source, SID_METEOR) && combatTime > 10.0) {
+                ip.add(SID_METEOR, 30);
+            }
+            res = ip.get();
+            if (res == 0) {
+                IssueTargetOrderById(source, OID_ATTACK, target);
+            } else {
+                tu = PlayerUnits.getRandomHero();
+                print("Random Target = " + GetUnitNameEx(tu));
+                IssuePointOrderById(source, SpellData[res].oid, GetUnitX(tu), GetUnitY(tu));
+                tu = null;
+            }
+            ip.destroy();
+        }   
+    }
+
     public function OrderCreeps(unit s, unit t, real c) {
         integer utid = GetUnitTypeId(s);
         //print(I2S(R2I(c)));
@@ -850,6 +873,8 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         unitCallBack[UTID_FEL_WAR_BRINGER] = makeOrderFelWarBringer; // Fel war bringer
         unitCallBack[UTID_OBSIDIAN_CONSTRUCT] = makeOrderObsidianConstruct;   // 
         unitCallBack[UTID_DEMONIC_WITCH] = makeOrderDemonicWitch;   // 
+
+        unitCallBack[UTID_INFERNO_CONSTRUCT] = makeOrderInfernoConstruct;   // inferno construct
 
         unitCallBack['h000'] = makeOrderh000;   //
         unitCallBack['h002'] = makeOrderh002;   //

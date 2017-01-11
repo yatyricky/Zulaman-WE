@@ -363,6 +363,10 @@
 #define SID_DEATH_AND_DECAY 'A0BF'
 #define SID_FROST_GRAVE 'A0BG'
 
+// Area 5
+#define UTID_INFERNO_CONSTRUCT 'ninf'
+#define SID_METEOR 'A0BN'
+
 // test unit type id
 #define UTID_STATIC_TARGET 'h000'
 #define UTID_TARGET 'h001'
@@ -509,6 +513,7 @@
 #define ART_BLEED "Objects\\Spawnmodels\\Human\\HumanBlood\\HeroBloodElfBlood.mdl"
 #define ART_BLOOD_LUST_LEFT "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustTarget.mdl"
 #define ART_BLOOD_LUST_RIGHT "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustSpecial.mdl"
+#define ART_CRATER "Objects\\Spawnmodels\\Other\\NeutralBuildingExplosion\\NeutralBuildingExplosion.mdl"
 #define ART_DEATH_AND_DECAY "Abilities\\Spells\\Undead\\DeathandDecay\\DeathandDecayTarget.mdl"
 #define ART_DISPEL "Abilities\\Spells\\Human\\DispelMagic\\DispelMagicTarget.mdl"
 #define ART_DOOM "Abilities\\Spells\\Other\\Doom\\DoomDeath.mdl"
@@ -519,6 +524,7 @@
 #define ART_HEAL "Abilities\\Spells\\Items\\AIhe\\AIheTarget.mdl"
 #define ART_HEAL_SALVE "Abilities\\Spells\\Items\\HealingSalve\\HealingSalveTarget.mdl"
 #define ART_IMPACT "Abilities\\Weapons\\Bolt\\BoltImpact.mdl"
+#define ART_INFERNAL_BIRTH "Units\\Demon\\Infernal\\InfernalBirth.mdl"
 #define ART_INVULNERABLE "Abilities\\Spells\\Human\\DivineShield\\DivineShieldTarget.mdl"
 #define ART_MANA "Abilities\\Spells\\Items\\AIma\\AImaTarget.mdl"
 #define ART_MANA_DRAIN_TARGET "Abilities\\Spells\\Other\\Drain\\ManaDrainTarget.mdl"
