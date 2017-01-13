@@ -363,6 +363,22 @@
 #define SID_DEATH_AND_DECAY 'A0BF'
 #define SID_FROST_GRAVE 'A0BG'
 
+// Area 5
+#define SID_BURNING '????'
+#define BID_BURNING '????'
+#define SID_RAGE_STRIKE '????'
+
+// Area 6
+#define SID_CRUSHING_BLOW '????'
+
+#define UTID_CURSED_HUNTER '????'
+#define BID_ZEAL '????'
+#define UTID_TWILIGHT_WITCH_DOCTOR '????'
+#define UTID_GRIM_TOTEM '????'
+#define SID_GRIM_TOTEM '????'
+#define BID_GRIM_TOTEM '????'
+#define SID_POISON_DART '????'
+
 // test unit type id
 #define UTID_STATIC_TARGET 'h000'
 #define UTID_TARGET 'h001'
