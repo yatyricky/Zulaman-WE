@@ -289,7 +289,9 @@
 // God of Death
 #define UTID_GOD_OF_DEATH 'Uear'
 
-// All creeps type id
+// # All creeps
+
+// ## Area 1
 // naga siren
 #define UTID_NAGA_SIREN 'n000'
 #define SID_LIGHTNING_BOLT 'A02W'
@@ -319,6 +321,7 @@
 #define SID_CHARGED_BREATH 'A0AU'
 #define SID_MANA_LEECH 'A0AV'
 
+// ## Area 3
 // fel grunt
 #define UTID_FEL_GRUNT 'n00C'
 #define SID_UNHOLY_FRENZY 'A09H'
@@ -340,32 +343,58 @@
 #define SID_FLAME_SHOCK 'A09M'
 #define BID_FLAME_SHOCK 'A0BE'
 
-#define UTID_VOID_WALKER 'n00I'
-#define UTID_FEL_HOUND 'n00J'
-#define UTID_MAID_OF_AGONY 'n00K'
-// 3区
-#define UTID_FOREST_TROLL 'n00L'
-
-// 4区
+// ## Area 4
+// Noxious Spider
+#define UTID_NOXIOUS_SPIDER '????'
+// Parasitical Roach
 #define UTID_PARASITICAL_ROACH 'ucs1'
 #define SID_PARASITE 'A0BL'
 #define BID_PARASITE 'A0BM'
-
+// Zombie
 #define UTID_ZOMBIE 'nzom'
 #define SID_GNAW 'A0BK'
-
+// Obsdian Statue
 #define UTID_OBSIDIAN_CONSTRUCT 'uobs'
 #define BID_REFLECTION_AURA 'A0BH'
 #define SID_MANA_TAP 'A0BI'
 #define BID_MANA_TAP 'A0BJ'
-
+// Dracolich
 #define UTID_DRACOLICH 'ufro'
 #define SID_DEATH_AND_DECAY 'A0BF'
 #define SID_FROST_GRAVE 'A0BG'
 
-// Area 5
+// ## Area 5
+// Void Walker
+#define UTID_VOID_WALKER 'n00I'
+// Fel Hound
+#define UTID_FEL_HOUND 'n00J'
+// Maid of Agony
+#define UTID_MAID_OF_AGONY 'n00K'
+// Nether Drake
+// Nether Hatchling
+// Inferno Construct
 #define UTID_INFERNO_CONSTRUCT 'ninf'
 #define SID_METEOR 'A0BN'
+#define SID_BURNING '????'
+#define BID_BURNING '????'
+#define SID_RAGE_STRIKE '????'
+
+// ## Area 6
+// Forest Troll
+#define UTID_FOREST_TROLL 'n00L'
+#define SID_CRUSHING_BLOW '????'
+// Cursed Hunter
+#define UTID_CURSED_HUNTER '????'
+#define BID_ZEAL '????'
+// Deranged Priest
+// Gargantuan
+// Twilight Witch Doctor
+#define UTID_TWILIGHT_WITCH_DOCTOR '????'
+#define UTID_GRIM_TOTEM '????'
+#define SID_GRIM_TOTEM '????'
+#define BID_GRIM_TOTEM '????'
+#define SID_POISON_DART '????'
+// Faceless One
 
 // test unit type id
 #define UTID_STATIC_TARGET 'h000'
