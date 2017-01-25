@@ -35,9 +35,10 @@ library Console {
         }
         
         method reset() {
-            if (GetLocalPlayer() == this.p) {
-                ClearTextMessages();
-            }
+            // if (GetLocalPlayer() == this.p) {
+            //     ClearTextMessages();
+            // }
+            ClearTextMessages();
             this.listN = 0;
         }
         

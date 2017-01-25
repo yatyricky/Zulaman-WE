@@ -139,8 +139,9 @@ library DamageSystem requires ZAMCore, UnitProperty, BuffSystem {
         }
         SetWidgetLife(b, GetWidgetLife(b) + amount);
         if (amount >= 0.0) {
-            if (GetLocalPlayer() == GetOwningPlayer(a) || GetLocalPlayer() == GetOwningPlayer(b))
-            {display = I2S(R2I(amount));} else {display = "";}
+            // if (GetLocalPlayer() == GetOwningPlayer(a) || GetLocalPlayer() == GetOwningPlayer(b))
+            // {display = I2S(R2I(amount));} else {display = "";}
+            display = "";
             //BJDebugMsg(GetHeroProperName(a) + " heals " + GetHeroProperName(b));
             HealResult.source = a;
             HealResult.target = b;
@@ -280,9 +281,10 @@ public boolean lifelock = false;
         if (DamageResult.isCritical) {
             display += "!";
         }
-        if (GetLocalPlayer() != GetOwningPlayer(a) && GetLocalPlayer() != GetOwningPlayer(b)) {
-            display = NULL_STR;
-        }
+        // if (GetLocalPlayer() != GetOwningPlayer(a) && GetLocalPlayer() != GetOwningPlayer(b)) {
+        //     display = NULL_STR;
+        // }
+        display = NULL_STR;
         TextTag_Damage(b, display, DamageResult.isCritical);
     }
     

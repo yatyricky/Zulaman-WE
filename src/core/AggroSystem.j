@@ -109,17 +109,17 @@ library AggroSystem requires MobInit, UnitProperty, Clock, DamageSystem, PlayerU
         }*/
         
         private method getColourText() -> string {
-            unit taru = PlayerSelection[GetPlayerId(GetLocalPlayer())];
-            integer i, l;
-            string ret;
-            if (IsUnitDead(taru) || taru == null || GetPlayerId(GetOwningPlayer(taru)) >= NUMBER_OF_MAX_PLAYERS) {
-                ret = ""; 
-            } else {
-                ret = "|cffff0000..........";
-                i = Rounding(this.aps[this.locate(taru)] / this.aps[0] * 10.0);
-                ret = SubString(ret, 0, 10 + i) + "|r" + SubString(ret, 10 + i, 20);
-            }
-            return ret;
+            // unit taru = PlayerSelection[GetPlayerId(GetLocalPlayer())];
+            // integer i, l;
+            // string ret;
+            // if (IsUnitDead(taru) || taru == null || GetPlayerId(GetOwningPlayer(taru)) >= NUMBER_OF_MAX_PLAYERS) {
+            //     ret = ""; 
+            // } else {
+            //     ret = "|cffff0000..........";
+            //     i = Rounding(this.aps[this.locate(taru)] / this.aps[0] * 10.0);
+            //     ret = SubString(ret, 0, 10 + i) + "|r" + SubString(ret, 10 + i, 20);
+            // }
+            return "";
         }
         
         method sort() -> unit {

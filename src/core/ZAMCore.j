@@ -153,7 +153,17 @@ library ZAMCore requires NefUnion {
         // FogMaskEnable(false);
         
         SetPlayerAlliance(Player(11), Player(0), ALLIANCE_SHARED_CONTROL, true);
+        SetPlayerAlliance(Player(11), Player(1), ALLIANCE_SHARED_CONTROL, true);
+        SetPlayerAlliance(Player(11), Player(2), ALLIANCE_SHARED_CONTROL, true);
+        SetPlayerAlliance(Player(11), Player(3), ALLIANCE_SHARED_CONTROL, true);
+        SetPlayerAlliance(Player(11), Player(4), ALLIANCE_SHARED_CONTROL, true);
+        SetPlayerAlliance(Player(11), Player(5), ALLIANCE_SHARED_CONTROL, true);
         SetPlayerAlliance(Player(11), Player(0), ALLIANCE_PASSIVE, true);
+        SetPlayerAlliance(Player(11), Player(1), ALLIANCE_PASSIVE, true);
+        SetPlayerAlliance(Player(11), Player(2), ALLIANCE_PASSIVE, true);
+        SetPlayerAlliance(Player(11), Player(3), ALLIANCE_PASSIVE, true);
+        SetPlayerAlliance(Player(11), Player(4), ALLIANCE_PASSIVE, true);
+        SetPlayerAlliance(Player(11), Player(5), ALLIANCE_PASSIVE, true);
         
         SetPlayerAlliance(Player(10), Player(0), ALLIANCE_SHARED_CONTROL, true);
         //SetPlayerAlliance(Player(10), Player(0), ALLIANCE_PASSIVE, true);
