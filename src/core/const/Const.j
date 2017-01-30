@@ -345,7 +345,7 @@
 
 // ## Area 4
 // Noxious Spider
-#define UTID_NOXIOUS_SPIDER '????'
+#define UTID_NOXIOUS_SPIDER 'u003'
 // Parasitical Roach
 #define UTID_PARASITICAL_ROACH 'ucs1'
 #define SID_PARASITE 'A0BL'

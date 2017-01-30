@@ -99,6 +99,10 @@ library PoisonousCrawler requires DamageSystem, BuffSystem {
 			PoisonousCrawlerPoison.start(LowEfficiencyWrapper(ownerHT[u]).u, Point.new(GetUnitX(u), GetUnitY(u)));
 			ownerHT.flush(u);
 		}
+		if (GetUnitTypeId(u) == UTID_NOXIOUS_SPIDER) {
+			PoisonousCrawlerPoison.start(u, Point.new(GetUnitX(u), GetUnitY(u)));
+			
+		}
 	}
 
 	function onCast() {

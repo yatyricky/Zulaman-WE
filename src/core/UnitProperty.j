@@ -379,7 +379,7 @@ library UnitProperty requires ModelInfo, ZAMCore {
         static method operator[] (unit u) -> thistype {
             if (!thistype.ht.exists(u)) {
                 BJDebugMsg(SCOPE_PREFIX+">Unregistered unit: " + GetUnitName(u));
-                return 0;
+                return 0/0;
             } else {
                 return thistype.ht[u];
             }

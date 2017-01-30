@@ -1,11 +1,11 @@
 //! zinc
 library MobInit requires Table, BuffSystem, Patrol, NefUnion, WarlockGlobal, StunUtils {
-#define MOBINIT_RESPAWN_L 90
-#define MOBINIT_RESPAWN_H 120
+#define MOBINIT_RESPAWN_L 240
+#define MOBINIT_RESPAWN_H 300
 
     private HandleTable idTable;
     private integer numMobs;
-    
+
     function cancelForm(DelayTask dt) {
         IssueImmediateOrderById(dt.u0, OID_UNBEARFORM);
     }

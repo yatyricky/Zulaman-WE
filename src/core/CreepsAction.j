@@ -252,10 +252,10 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
     function makeOrderh000(unit source, unit target, real combatTime) {}
     
     // healing ward
-    function makeOrderh004(unit source, unit target, real combatTime) {}
+    function makeOrderNTPHealingWard(unit source, unit target, real combatTime) {}
     
     // protection ward
-    function makeOrderh005(unit source, unit target, real combatTime) {}
+    function makeOrderNTPProtectionWard(unit source, unit target, real combatTime) {}
     
     // tank tester
     function makeOrderh002(unit source, unit target, real combatTime) {
@@ -265,7 +265,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
     function makeOrderLightningTotem(unit source, unit target, real combatTime) {}
     
     // nage siren
-    function makeOrdern000(unit source, unit target, real combatTime) {
+    function makeOrderNagaSiren(unit source, unit target, real combatTime) {
         IntegerPool ip;
         integer res;
         unit tu;
@@ -343,7 +343,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
     }
     
     // nage myrmidon
-    function makeOrdern00A(unit source, unit target, real combatTime) {
+    function makeOrderNagaMyrmidon(unit source, unit target, real combatTime) {
         IntegerPool ip;
         integer res;
         unit tu;
@@ -370,7 +370,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
     }
     
     // nage tide priest
-    function makeOrdern00B(unit source, unit target, real combatTime) {
+    function makeOrderNagaTidePriest(unit source, unit target, real combatTime) {
         IntegerPool ip;
         integer res;
         unit tu;
@@ -403,7 +403,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
     }
     
     // nage royal guard
-    function makeOrdern00E(unit source, unit target, real combatTime) {
+    function makeOrderNagaRoyalGuard(unit source, unit target, real combatTime) {
         IntegerPool ip;
         integer res;
         unit tu;
@@ -428,15 +428,20 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
     }
     
     // sea lizard
-    function makeOrdern00F(unit source, unit target, real combatTime) {
+    function makeOrderSeaLizard(unit source, unit target, real combatTime) {
         IssueTargetOrderById(source, OID_ATTACK, target);
     }
     
     // murloc slave
-    function makeOrdern00G(unit source, unit target, real combatTime) {
+    function makeOrderMurlocSlave(unit source, unit target, real combatTime) {
         IssueTargetOrderById(source, OID_ATTACK, target);
     }
-    
+
+    // Noxious Spider
+    function makeOrderNoxiousSpider(unit source, unit target, real combatTime) {
+        IssueTargetOrderById(source, OID_ATTACK, target);
+    }
+
     // wind serpent        
     function makeOrderWindSerpent(unit source, unit target, real combatTime) {
         IntegerPool ip;
@@ -854,25 +859,30 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         unitCallBack[UTIDHEXLORD] = makeOrderHexLord;   // 妖术领主
         unitCallBack[UTIDLIGHTNINGTOTEM] = makeOrderLightningTotem;   // 闪电图腾
         
-        unitCallBack['n000'] = makeOrdern000;   // 娜迦女妖
-        unitCallBack['n00B'] = makeOrdern00B;   // 娜迦潮汐祭司
-        unitCallBack['h004'] = makeOrderh004;   // 治疗守卫
-        unitCallBack['h005'] = makeOrderh005;   // 防护守卫
-        unitCallBack['n00A'] = makeOrdern00A;   // Naga Myrmidon
-        unitCallBack['n00E'] = makeOrdern00E;   // Naga Royal Guard
-        unitCallBack['n00F'] = makeOrdern00F;   // Sea Lizard
-        unitCallBack['n00G'] = makeOrdern00G;   // Murloc Slave
-        unitCallBack['n00N'] = makeOrderWindSerpent;   // Wind Serpent
+        // ============= Area 1, 2 ==================
+        unitCallBack[UTID_NAGA_SIREN] = makeOrderNagaSiren;   // Naga Siren
+        unitCallBack[UTID_NAGA_TIDE_PRIEST] = makeOrderNagaTidePriest;   // Naga Tide Priest
+        unitCallBack[UTID_NTR_HEALING_WARD] = makeOrderNTPHealingWard;   // NTP Healing Ward
+        unitCallBack[UTID_NTR_PROTECTION_WARD] = makeOrderNTPProtectionWard;   // NTP Protection Ward
+        unitCallBack[UTID_NAGA_MYRMIDON] = makeOrderNagaMyrmidon;   // Naga Myrmidon
+        unitCallBack[UTID_NAGA_ROYAL_GUARD] = makeOrderNagaRoyalGuard;   // Naga Royal Guard
+        unitCallBack[UTID_SEA_LIZARD] = makeOrderSeaLizard;   // Sea Lizard
+        unitCallBack[UTID_MURLOC_SLAVE] = makeOrderMurlocSlave;   // Murloc Slave
+        unitCallBack[UTID_WIND_SERPENT] = makeOrderWindSerpent;   // Wind Serpent
 
+        // ============= Area 3 ==================
+        unitCallBack[UTID_FEL_GRUNT] = makeOrderFelGrunt;   // Fel Grunt
+        unitCallBack[UTID_FEL_RIDER] = makeOrderFelRider;   // Fel Rider
+        unitCallBack[UTID_FEL_WAR_BRINGER] = makeOrderFelWarBringer; // Fel war bringer
+        unitCallBack[UTID_DEMONIC_WITCH] = makeOrderDemonicWitch;   // 
+
+        // ============= Area 4 ==================
+        unitCallBack[UTID_NOXIOUS_SPIDER] = makeOrderNoxiousSpider;
         unitCallBack[UTID_PARASITICAL_ROACH] = makeOrderParasiticalRoach;    // ParasiticalRoach
         unitCallBack[UTID_ZOMBIE] = makeOrderZombie;    // zombie
         unitCallBack[UTID_DRACOLICH] = makeOrderDracoLich;    // dracolich
 
-        unitCallBack[UTID_FEL_GRUNT] = makeOrderFelGrunt;   // Fel Grunt
-        unitCallBack[UTID_FEL_RIDER] = makeOrderFelRider;   // Fel Rider
-        unitCallBack[UTID_FEL_WAR_BRINGER] = makeOrderFelWarBringer; // Fel war bringer
         unitCallBack[UTID_OBSIDIAN_CONSTRUCT] = makeOrderObsidianConstruct;   // 
-        unitCallBack[UTID_DEMONIC_WITCH] = makeOrderDemonicWitch;   // 
 
         unitCallBack[UTID_INFERNO_CONSTRUCT] = makeOrderInfernoConstruct;   // inferno construct
 
