@@ -135,6 +135,7 @@ ModelInfo.rg(UTID_NTR_HEALING_WARD,ATT_NON,249,0,1,0,0,0,0,1,0,CAREER_TYPE_CREEP
 ModelInfo.rg(UTID_NTR_PROTECTION_WARD,ATT_NON,249,0,1,0,0,0,0,1,0,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNBigBadVoodooSpell.blp");
 ModelInfo.rg(UTID_WIND_SERPENT,ATT_NON,31999,275,125,7,.1,0,0,1,.1,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNWindSerpent.blp");
 ModelInfo.rg(UTID_NAGA_MYRMIDON,ATT_NON,23999,200,200,15,.05,.1,30,1,.05,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNNagaMyrmidon.blp");
+ModelInfo.rg(UTID_CHMP_NAGA_MYRMIDON,ATT_NON,23999,200,200,15,.05,.1,30,1,.05,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNNagaMyrmidon.blp");
 ModelInfo.rg(UTID_NAGA_ROYAL_GUARD,ATT_NON,47999,300,150,15,.05,.1,30,1,.05,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNNagaMyrmidonRoyalGuard.blp");
 ModelInfo.rg(UTID_FEL_GRUNT,ATT_NON,54999,650,300,5,.05,.05,100,.95,.05,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNChaosGrunt.blp");
 ModelInfo.rg(UTID_FEL_RIDER,ATT_NON,49999,600,200,10,.05,0,0,1,.1,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNChaosWolfRider.blp");

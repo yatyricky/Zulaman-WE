@@ -9,12 +9,18 @@ library WELA requires CastingBar, ModelInfo, SpellData, AggroSystem {
     
     public function GenerateCombatLog(string name) {
         integer i;
+        string filePath;
+        if (name == null || name == "") {
+            name = "Auto";
+        }
+        filePath = sessionName + "-" + I2S(welaN) + "-" + name + ".wela";
+        // print("WELA generate, Name = "+name+", size = "+I2S(welaI)+", path = "+filePath);
+        PreloadGenClear();
         PreloadGenStart();
         for (0 <= i < welaI) {
             Preload(wela[i]);
         }
-        PreloadGenEnd("D:\\WExport\\" + sessionName + "-" + I2S(welaN) + "-" + name + ".wela");
-        PreloadGenClear();
+        PreloadGenEnd(filePath);
         welaI = 0;
         welaN += 1;
     }

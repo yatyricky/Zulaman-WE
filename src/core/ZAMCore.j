@@ -28,6 +28,10 @@ library ZAMCore requires NefUnion {
         //return (GetUnitPointValue(u) < 32);
         return (ModuloInteger(GetUnitPointValue(u), 2) == 0);
     }
+
+    public function IsUnitChampion(unit u) -> boolean {
+        return (GetUnitLevel(u) == 4);
+    }
     
     public function CanUnitBlock(unit u) -> boolean {
         return (ModuloInteger(GetUnitPointValue(u), 3) == 0);

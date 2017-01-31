@@ -309,12 +309,24 @@ library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSys
         v3.reset(13216, 14647, 0);
         print(R2S(DistancePointAndLineSegment(v1, v2, v3)));
     }
+
+    function getunitlevel(string str) {
+        unit u; 
+        group g = CreateGroup();
+        GroupEnumUnitsSelected(g, Player(0), null);
+        u = FirstOfGroup(g);
+        
+        print(I2S(GetUnitLevel(u)));
+        
+        DestroyGroup(g);
+    }
     
     private function onInit() {
         //Console[Player(0)].add("stun", testStunUnit);
         Console[Player(0)].add("cls", screenClear);
         //Console[Player(0)].add("countunits", countAllUnitsInMap);
         Console[Player(0)].add("lvlup", levelUp);
+        Console[Player(0)].add("lvl", getunitlevel);
         //Console[Player(0)].add("oid", seeOID);
         Console[Player(0)].add("add", addAbility);
         //Console[Player(0)].add("ra", resetAbility);
@@ -342,7 +354,7 @@ library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSys
         Console[Player(0)].add("dlog", debuglogs);
         // Console[Player(0)].add("prayerofhealing", testprayerofhealing);
         //testlightning = AddLightningEx("SPLK", false, -6786, -1867, 1710, -6342, -1923, 1710);
-        Console[Player(0)].add("ltn", testwarlock);
+        // Console[Player(0)].add("ltn", testwarlock);
         // Console[Player(0)].add("podun", poyicengdun);
         // Console[Player(0)].add("canuse", testifunitcanuse);
         // Console[Player(0)].add("pfb", testPrintFireBomb);

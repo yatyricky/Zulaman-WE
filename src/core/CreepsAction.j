@@ -865,6 +865,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         unitCallBack[UTID_NTR_HEALING_WARD] = makeOrderNTPHealingWard;   // NTP Healing Ward
         unitCallBack[UTID_NTR_PROTECTION_WARD] = makeOrderNTPProtectionWard;   // NTP Protection Ward
         unitCallBack[UTID_NAGA_MYRMIDON] = makeOrderNagaMyrmidon;   // Naga Myrmidon
+        unitCallBack[UTID_CHMP_NAGA_MYRMIDON] = makeOrderNagaMyrmidon;
         unitCallBack[UTID_NAGA_ROYAL_GUARD] = makeOrderNagaRoyalGuard;   // Naga Royal Guard
         unitCallBack[UTID_SEA_LIZARD] = makeOrderSeaLizard;   // Sea Lizard
         unitCallBack[UTID_MURLOC_SLAVE] = makeOrderMurlocSlave;   // Murloc Slave
