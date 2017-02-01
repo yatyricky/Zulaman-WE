@@ -521,12 +521,12 @@
 #define ITID_STRANGE_WAND 'I023'
 #define SID_STRANGE_WAND 'A0AC'
 
-// 普通装备 白装
+// origin common gear
 #define ITID_BOOTS_OF_SLOW 'I000'
 #define ITID_HELM_OF_VALOUR 'hval'
 #define ITID_HOOD_OF_CUNNING 'hcun'
 #define ITID_MEDALION_OF_COURAGE 'mcou'
-// 优秀装备 绿装
+// origin uncommon gear
 #define ITID_CRUEL_COLOSSUS_BLADE_OF_QUICKNESS 'I01Y'
 #define ITID_HEALTH_STONE 'hlst'
 #define SID_HEALTH_STONE 'A06I'
@@ -538,7 +538,7 @@
 #define SID_MOROES_LUCKY_GEAR 'A06L'
 #define ITID_ROMULOS_EXPIRED_POISON 'I00T'
 #define ITID_RUNED_BRACERS 'brac'
-// 稀有装备 紫装
+// origin rare gear
 #define ITID_ARANS_SOOTHING_AGATE 'I019'
 #define ITID_BULWARK_OF_THE_AMANI_EMPIRE 'Iams'
 #define ITID_CORE_HOUND_TOOTH 'I015'
@@ -557,7 +557,7 @@
 #define ITID_TIDAL_LOOP 'I01C'
 #define ITID_TROLL_BANE 'I022'
 #define ITID_VISKAG 'I016'
-// 职业装备
+// class spec gear
 #define ITIDORBOFTHESINDOREI 'Isin'
 #define ITIDREFORGEDBADGEOFTENACITY 'Idru'
 #define SIDREFORGEDBADGEOFTENACITY 'A06B'
@@ -571,7 +571,7 @@
 #define ITIDRAGEWINTERCHILLSPHYLACTERY 'Ifro'
 #define ITIDANATHEMA 'Iana'
 #define ITIDRARESHIMMERWEED 'Ithu'
-// 神器
+// legendary
 #define ITIDBREATHOFTHEDYING 'I001'
 #define ITIDCALLTOARMS 'Icta'
 #define SIDCALLTOARMS 'A069'
@@ -587,7 +587,7 @@
 #define SID_VOODOO_VIAL 'A06N'
 #define ITIDWOESTAVE 'Iwoe'
 #define ITIDWINDFORCE 'Iwf0'
-// 传说套装
+// relic set
 // Athas's Corruption
 #define ITID_DETERMINATION_OF_VENGEANCE 'I01S'
 #define ITID_DETERMINATION_OF_VENGEANCE1 'I01R'
