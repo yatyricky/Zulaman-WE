@@ -637,15 +637,15 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
         } else if (GetHeroLevel(source) == 2) {
             SelectHeroSkill(source, SIDFROSTBOLT);			
             SelectHeroSkill(source, SIDPOLYMORPH);	
-            SelectHeroSkill(source, SIDSPELLTRANSFER);
+            SelectHeroSkill(source, SID_SPELL_TRANSFER);
         } else if (GetHeroLevel(source) == 3) {
             SelectHeroSkill(source, SIDBLIZZARD);		
             SelectHeroSkill(source, SIDPOLYMORPH);	
-            SelectHeroSkill(source, SIDSPELLTRANSFER);
+            SelectHeroSkill(source, SID_SPELL_TRANSFER);
         } else if (GetHeroLevel(source) == 4) {
             SelectHeroSkill(source, SIDFROSTBOLT);	
             SelectHeroSkill(source, SIDBLIZZARD);			
-            SelectHeroSkill(source, SIDSPELLTRANSFER);
+            SelectHeroSkill(source, SID_SPELL_TRANSFER);
         } else if (GetHeroLevel(source) == 5) {
             SelectHeroSkill(source, SIDFROSTNOVA);	
             SelectHeroSkill(source, SIDFROSTNOVA);	
@@ -1255,7 +1255,7 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
                 }
             }
             // spell transfer
-            if (UnitCanUse(source, SIDSPELLTRANSFER) && state == 0) {
+            if (UnitCanUse(source, SID_SPELL_TRANSFER) && state == 0) {
                 i = 0;
                 flag = true;
                 while (i < MobList.n && flag) {
@@ -1277,7 +1277,7 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
                     }
                 }
                 if (!flag) {
-                    IssueTargetOrderById(source, SpellData[SIDSPELLTRANSFER].oid, ot);
+                    IssueTargetOrderById(source, SpellData[SID_SPELL_TRANSFER].oid, ot);
                     state = 1;
                 }
             }

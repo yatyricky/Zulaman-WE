@@ -159,7 +159,7 @@ SpellData.create(SIDBLIZZARD1,"暴风雪",170,0,5,OrderId("blizzard"),1,ORDER_TY
 SpellData.create(SIDFROSTNOVA,"冰冻新星",70,0,15,OrderId("frostnova"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SIDPOLYMORPH,"变形术",25,0,30,OrderId("polymorph"),1,ORDER_TYPE_TARGET).setCCC2(25,0,22).setCCC3(25,0,14);
 SpellData.create(SIDPOLYMORPHDUMMY,"变形术",25,0,5,OrderId("hex"),1,ORDER_TYPE_TARGET);
-SpellData.create(SIDSPELLTRANSFER,"法术转移",70,0,6,OrderId("dispel"),1,ORDER_TYPE_TARGET).setCCC2(210,0,3).setCCC3(350,0,1);
+SpellData.create(SID_SPELL_TRANSFER,"法术转移",70,0,6,OrderId("dispel"),1,ORDER_TYPE_TARGET).setCCC2(210,0,3).setCCC3(350,0,1);
 SpellData.create(SIDINTELLIGENCECHANNEL,"智慧导能",0,0,1,OrderId("channel"),1,ORDER_TYPE_TARGET);
 SpellData.create(SID_STORM_LASH,"风暴鞭笞",10,2,0,OrderId("forkedlightning"),1,ORDER_TYPE_TARGET).setCCC2(13,2,0).setCCC3(16,2,0);
 SpellData.create(SIDSTORMSTRIKE,"风暴打击",0,0,1,OrderId("forkedlightning"),1,ORDER_TYPE_TARGET);

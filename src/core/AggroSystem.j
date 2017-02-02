@@ -67,7 +67,7 @@ library AggroSystem requires MobInit, UnitProperty, Clock, DamageSystem, PlayerU
         method aggroBy(unit s, real amt) {
             integer index = this.locate(s);
             if (index == -1) {
-                BJDebugMsg(SCOPE_PREFIX+">unit " + GetUnitNameEx(s)+" is not in list.");
+                print(SCOPE_PREFIX+".aggroBy unit " + GetUnitNameEx(s)+" is not in list.");
             } else {
                 this.aps[index] += amt;
             }
@@ -76,7 +76,7 @@ library AggroSystem requires MobInit, UnitProperty, Clock, DamageSystem, PlayerU
         method setAggro(unit s, real amt) {
             integer index = this.locate(s);
             if (index == -1) {
-                BJDebugMsg(SCOPE_PREFIX+">unit " + GetUnitNameEx(s)+" is not in list.");
+                print(SCOPE_PREFIX+".setAggro unit " + GetUnitNameEx(s)+" is not in list.");
             } else {
                 this.aps[index] = amt;
             }
@@ -85,7 +85,7 @@ library AggroSystem requires MobInit, UnitProperty, Clock, DamageSystem, PlayerU
         method getAggro(unit s) -> real {
             integer index = this.locate(s);
             if (index == -1) {
-                BJDebugMsg(SCOPE_PREFIX+">unit " + GetUnitNameEx(s)+" is not in list.");
+                print(SCOPE_PREFIX+".getAggro unit " + GetUnitNameEx(s)+" is not in list.");
                 return 0.0;
             } else {
                 return this.aps[index];
@@ -95,9 +95,9 @@ library AggroSystem requires MobInit, UnitProperty, Clock, DamageSystem, PlayerU
         static method print(unit u) {
             integer i = 0;
             thistype this = thistype(thistype.inst[u]);
-            BJDebugMsg(GetUnitName(u) + "'s threat list:");
+            print(GetUnitName(u) + "'s threat list:");
             while (i < this.aggrosN) {
-                BJDebugMsg(I2S(this.aggrosIndex[this.aggros[i]]) + ". " + GetUnitName(this.aggros[i]) + " - " + R2S(this.tp[i]));
+                print(I2S(this.aggrosIndex[this.aggros[i]]) + ". " + GetUnitName(this.aggros[i]) + " - " + R2S(this.tp[i]));
                 i += 1;
             }
         }*/
@@ -127,16 +127,16 @@ library AggroSystem requires MobInit, UnitProperty, Clock, DamageSystem, PlayerU
             unit tmpu;
             real tmpr;
             if (this.aggrosN == 0) {
-                BJDebugMsg(SCOPE_PREFIX+">|cffff0000error|r. sorting, no threat targets in list or N == 0");
+                print(SCOPE_PREFIX+">|cffff0000error|r. sorting, no threat targets in list or N == 0");
             }
             if (!IsInCombat()) {
-                BJDebugMsg(SCOPE_PREFIX+">|cffff0000error|r. sorting, not in combat");
+                print(SCOPE_PREFIX+">|cffff0000error|r. sorting, not in combat");
             }
             /*
             i = 0;
             while (i < this.aggrosN) {
                 if (IsUnitDead(this.aggros[i])) {
-                    BJDebugMsg(SCOPE_PREFIX+">|cffff0000error|r. sorting, death unit detected.");
+                    print(SCOPE_PREFIX+">|cffff0000error|r. sorting, death unit detected.");
                 }
                 this.aggrosN -= 1;
                 this.aggros[i] = this.aggros[this.aggrosN];
@@ -219,7 +219,7 @@ library AggroSystem requires MobInit, UnitProperty, Clock, DamageSystem, PlayerU
     
         static method operator[](unit u) -> thistype {
             if (!thistype.ht.exists(u)) {
-                //BJDebugMsg(SCOPE_PREFIX+">|cffff0000Error:|r " + GetUnitName(u) + " has not been engaged in combat yet.");
+                //print(SCOPE_PREFIX+">|cffff0000Error:|r " + GetUnitName(u) + " has not been engaged in combat yet.");
                 return 0;
             } else {
                 return thistype(thistype.ht[u]);
@@ -377,7 +377,7 @@ library AggroSystem requires MobInit, UnitProperty, Clock, DamageSystem, PlayerU
             thistype.combatTime += TIME_TICK;
             while (i < thistype.n) {
                 target = AggroList[thistype.units[i]].sort();
-                //BJDebugMsg(GetUnitName(thistype.units[i]) + " wants to attack " + GetUnitName(target));
+                //print(GetUnitName(thistype.units[i]) + " wants to attack " + GetUnitName(target));
                 //IssueTargetOrderById( SpellData['A02W'].oid, target);
                 OrderCreeps(thistype.units[i], target, combatTime);
                 i += 1;
@@ -404,7 +404,7 @@ library AggroSystem requires MobInit, UnitProperty, Clock, DamageSystem, PlayerU
                 thistype.units[thistype.n] = u;
                 thistype.n += 1;
             } else {
-                //BJDebugMsg(SCOPE_PREFIX+">|cffff0000Error|r, unit already in mob list");
+                //print(SCOPE_PREFIX+">|cffff0000Error|r, unit already in mob list");
             }
         }
         
@@ -578,16 +578,19 @@ library AggroSystem requires MobInit, UnitProperty, Clock, DamageSystem, PlayerU
     
     public function AggroTarget(unit a, unit b, real amt) {
         if (!IsUnitDead(a) && !IsUnitDead(b)) {
+            if (MobList.locate(b) == -1) {
+                MobList.add(b);
+            }
             AggroList[b].aggroBy(a, amt * UnitProp[a].AggroRate());
         }
-        //BJDebugMsg(GetUnitName(b)+"'s aggro list of " + GetUnitName(a) + " has increased by " + R2S(amt));
+        //print(GetUnitName(b)+"'s aggro list of " + GetUnitName(a) + " has increased by " + R2S(amt));
     }
     
     // any player 10 has acquired
     private function acquired() -> boolean {
         unit u = GetTriggerUnit();
         MobList.add(u);
-        //BJDebugMsg("TriggerUnit is " + GetUnitName(GetTriggerUnit()));
+        //print("TriggerUnit is " + GetUnitName(GetTriggerUnit()));
         if (IsUnitBoss(u)) {
             whichBoss = u;
         }
@@ -630,7 +633,7 @@ library AggroSystem requires MobInit, UnitProperty, Clock, DamageSystem, PlayerU
     // any enermy unit damaged
     function setAggros() {
         if ((GetPlayerId(GetOwningPlayer(DamageResult.target)) == MOB_PID) && (!IsUnitDead(DamageResult.target)) && (!IsUnitDead(DamageResult.source))) {
-            //BJDebugMsg("To aggro target");
+            //print("To aggro target");
             if (!CanUnitAttack(DamageResult.target) && DamageResult.amount < GetUnitState(DamageResult.target, UNIT_STATE_MAX_LIFE)) {
                 MobList.add(DamageResult.target);
             }
@@ -655,9 +658,9 @@ library AggroSystem requires MobInit, UnitProperty, Clock, DamageSystem, PlayerU
             j = 0;
             while (j < al.aggrosN) {
                 if (al.aggros[j] == a) {
-                    //BJDebugMsg("Original AP " + R2S(al.aps[j]));
+                    //print("Original AP " + R2S(al.aps[j]));
                     al.aggroBy(a, 0.0 - al.aps[j] * percentage);
-                    //BJDebugMsg("After AP " + R2S(al.aps[j]));
+                    //print("After AP " + R2S(al.aps[j]));
                 }
                 j += 1;
             }
