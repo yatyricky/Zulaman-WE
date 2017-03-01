@@ -110,9 +110,10 @@
 #define UTIDGHOUL 'ugho'
 #define SIDLIFELEECH 'A03Y'
 #define BID_FREEZING_TRAP 'A041'
-// 剑圣
+// blade master
 #define UTIDBLADEMASTER 'Obla'
-#define SIDHEROICSTRIKE 'A026'
+#define SID_HEROIC_STRIKE 'A0BO'
+#define BID_HEROIC_STRIKE 'A0BP'
 #define SIDREND 'A00B'
 #define SIDOVERPOWER 'A027'
 #define SIDMORTALSTRIKE 'A00E'
@@ -620,6 +621,7 @@
 #define ART_MANA "Abilities\\Spells\\Items\\AIma\\AImaTarget.mdl"
 #define ART_MANA_DRAIN_TARGET "Abilities\\Spells\\Other\\Drain\\ManaDrainTarget.mdl"
 #define ART_PARASITE_TARGET "Abilities\\Spells\\Other\\Parasite\\ParasiteTarget.mdl"
+#define ART_PHOENIX_MISSILE "Abilities\\Weapons\\PhoenixMissile\\Phoenix_Missile.mdl"
 #define ART_PLAGUE "units\\undead\\PlagueCloud\\PlagueCloud.mdl"
 #define ART_POISON "Abilities\\Weapons\\PoisonSting\\PoisonStingTarget.mdl"
 #define ART_RED_IMPACT "Abilities\\Spells\\Demon\\DemonBoltImpact\\DemonBoltImpact.mdl"

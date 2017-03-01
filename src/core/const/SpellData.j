@@ -142,7 +142,7 @@ SpellData.create(SIDPOWEROFABOMINATION,"憎恶之力",0,0,1,OID_IMMOLATIONON,1,O
 SpellData.create(SIDDEATHPACT,"死亡契约",0,0,5,OrderId("stomp"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SIDSUMMONGHOUL,"食尸鬼仆从",50,0,60,852503,1,ORDER_TYPE_IMMEDIATE).setCCC2(0,0,45).setCCC3(0,0,30);
 SpellData.create(SIDLIFELEECH,"生命偷取",0,0,1,0,1,ORDER_TYPE_IMMEDIATE);
-SpellData.create(SIDHEROICSTRIKE,"英勇打击",0,0,1,OID_IMMOLATIONON,1,ORDER_TYPE_IMMEDIATE);
+SpellData.create(SID_HEROIC_STRIKE,"英勇打击",0,0,1,OrderId("roar"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SIDREND,"撕裂",30,0,6,OrderId("whirlwind"),1,ORDER_TYPE_TARGET);
 SpellData.create(SIDOVERPOWER,"压制",0,0,3.5,OrderId("windwalk"),1,ORDER_TYPE_TARGET);
 SpellData.create(SIDMORTALSTRIKE,"致死打击",15,0,9,OrderId("drunkenhaze"),1,ORDER_TYPE_TARGET).setCCC2(25,0,8).setCCC3(35,0,7);

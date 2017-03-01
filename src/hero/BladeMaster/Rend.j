@@ -61,7 +61,7 @@ library Rend requires DamageSystem, SpellEvent, BuffSystem, BladeMasterGlobal {
     }
     
     function ondamageresponse() {
-        if (nextNormalCrit[GetPlayerId(GetOwningPlayer(DamageResult.source))] && (DamageResult.abilityName == DAMAGE_NAME_MELEE || DamageResult.abilityName == SpellData[SIDHEROICSTRIKE].name)) {
+        if (nextNormalCrit[GetPlayerId(GetOwningPlayer(DamageResult.source))] && (DamageResult.abilityName == DAMAGE_NAME_MELEE || DamageResult.abilityName == SpellData[SID_HEROIC_STRIKE].name)) {
             //BJDebugMsg("next must crit");
             DamageResult.extraCrit = 1.0;
             nextNormalCrit[GetPlayerId(GetOwningPlayer(DamageResult.source))] = false;

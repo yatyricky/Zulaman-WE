@@ -606,7 +606,7 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
     // 7
     function learnSkillObla(unit source) {
         if (GetHeroLevel(source) == 1) {
-            SelectHeroSkill(source, SIDHEROICSTRIKE);
+            SelectHeroSkill(source, SID_HEROIC_STRIKE);
             SelectHeroSkill(source, SIDREND);
             SelectHeroSkill(source, SIDOVERPOWER);
         } else if (GetHeroLevel(source) == 2) {
@@ -618,8 +618,8 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
             SelectHeroSkill(source, SIDMORTALSTRIKE);	
             SelectHeroSkill(source, SIDEXECUTELEARN);
         } else if (GetHeroLevel(source) == 4) {
-            SelectHeroSkill(source, SIDHEROICSTRIKE);	
-            SelectHeroSkill(source, SIDHEROICSTRIKE);			
+            SelectHeroSkill(source, SID_HEROIC_STRIKE);	
+            SelectHeroSkill(source, SID_HEROIC_STRIKE);			
             SelectHeroSkill(source, SIDMORTALSTRIKE);
         } else if (GetHeroLevel(source) == 5) {
             SelectHeroSkill(source, SIDREND);	
@@ -1209,13 +1209,13 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
                 }
             }
             // heroic strike: MANA% > BOSS HP% - 10 + Rend Cost
-            if (GetUnitMana(source) > SpellData[SIDREND].Cost(GetUnitAbilityLevel(source, SIDREND))) {
+            if (UnitCanUse(source, SID_HEROIC_STRIKE) && GetUnitMana(source) > SpellData[SIDREND].Cost(GetUnitAbilityLevel(source, SIDREND))) {
                 if (!BladeMasterIsHSOn(source)) {
-                    IssueImmediateOrderById(source, OID_IMMOLATIONON);
+                    IssueImmediateOrderById(source, SpellData[SID_HEROIC_STRIKE].oid);
                 }
             } else {
                 if (BladeMasterIsHSOn(source)) {
-                    IssueImmediateOrderById(source, OID_IMMOLATIONOFF);
+                    IssueImmediateOrderById(source, SpellData[SID_HEROIC_STRIKE].oid);
                 }
             }
             // attack

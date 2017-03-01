@@ -320,7 +320,28 @@ library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSys
         
         DestroyGroup(g);
     }
-    
+
+    function printStats(string str) {
+        unit u; 
+        group g = CreateGroup();
+        GroupEnumUnitsSelected(g, Player(0), null);
+        u = FirstOfGroup(g);
+        
+        print("==== "+GetUnitNameEx(u)+" ====");
+        print("-- 物理 --");
+        print("攻击: "+I2S(UnitProp[u].APMin()) + " - " + I2S(UnitProp[u].APMax())+" 暴击: "+R2S(UnitProp[u].AttackCrit() * 100) + "%"+" 攻速: "+I2S(UnitProp[u].AttackSpeed() + 100) + "%"+" 命中: "+R2S(UnitProp[u].AttackRate() * 100) + "%");
+        print("-- 法术 --");
+        print("法强: "+R2S(UnitProp[u].SpellPower())+" 法暴: "+R2S(UnitProp[u].SpellCrit() * 100) + "%"+" 法速: "+R2S(UnitProp[u].SpellHaste() * 100) + "%");
+        print("-- 防护 --");
+        print("护甲: "+R2S(UnitProp[u].Armor())+" 躲闪: "+R2S(UnitProp[u].Dodge() * 100) + "%"+" 格挡: "+R2S(UnitProp[u].BlockRate() * 100) + "%("+R2S(UnitProp[u].BlockPoint())+")");
+        print("魔抗: "+R2S(UnitProp[u].SpellTaken() * 100) + "%"+" 易伤: "+R2S(UnitProp[u].DamageTaken() * 100) + "%"+" 致死: "+R2S(UnitProp[u].HealTaken() * 100) + "%");
+        print("-- 其它 --");
+        print("反射: "+I2S(UnitProp[u].SpellReflect())+" 仇恨: "+R2S(UnitProp[u].AggroRate() * 100) + "%"+" 禁用: "+B2S(UnitProp[u].Disabled()));
+        print("回复: "+R2S(UnitProp[u].LifeRegen())+"/"+R2S(UnitProp[u].ManaRegen())+" 速度: "+I2S(UnitProp[u].Speed())+" 伤害: "+R2S(UnitProp[u].DamageDealt() * 100) + "%");
+        
+        DestroyGroup(g);
+    }
+
     private function onInit() {
         //Console[Player(0)].add("stun", testStunUnit);
         Console[Player(0)].add("cls", screenClear);
@@ -361,6 +382,7 @@ library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSys
 		// console[Player(0)].add("testwlk", testwarlock);
         // Console[Player(0)].add("angle", testgetangle);
         Console[Player(0)].add("test", testGeneral);
+        Console[Player(0)].add("sta", printStats);
     }
 }
 //! endzinc

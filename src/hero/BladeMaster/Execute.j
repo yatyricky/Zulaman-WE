@@ -21,7 +21,7 @@ library Execute requires BladeMasterGlobal, DamageSystem, AggroSystem {
         if (GetUnitAbilityLevel(DamageResult.source, SIDEXECUTELEARN) > 0) {
             lvl = GetUnitAbilityLevel(DamageResult.source, SIDEXECUTELEARN);
             mana = returnManaRegen(lvl);
-            if (DamageResult.abilityName == DAMAGE_NAME_MELEE || DamageResult.abilityName == SpellData[SIDMORTALSTRIKE].name || DamageResult.abilityName == SpellData[SIDHEROICSTRIKE].name) {
+            if (DamageResult.abilityName == DAMAGE_NAME_MELEE || DamageResult.abilityName == SpellData[SIDMORTALSTRIKE].name || DamageResult.abilityName == SpellData[SID_HEROIC_STRIKE].name) {
                 id = GetPlayerId(GetOwningPlayer(DamageResult.source));
                 if (continuous[id] == 1) {                  
                     if (DamageResult.isCritical) {

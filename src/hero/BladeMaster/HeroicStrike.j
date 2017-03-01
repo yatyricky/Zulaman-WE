@@ -1,68 +1,73 @@
 //! zinc
 library HeroicStrike requires DamageSystem, SpellEvent, OrcCaptureFlag {
-#define STRIKE_COST 10.0
-    boolean isopen[NUMBER_OF_MAX_PLAYERS];
-    integer added[NUMBER_OF_MAX_PLAYERS];
     
     public function BladeMasterIsHSOn(unit u) -> boolean {
-        return isopen[GetPidofu(u)];
+        return GetUnitAbilityLevel(u, BID_HEROIC_STRIKE) > 0;
     }
 
-    function onCast() -> boolean {
-        unit u = GetTriggerUnit();
-        integer pid = GetPlayerId(GetOwningPlayer(u));
-        //print(I2S(GetIssuedOrderId()) + " : " +I2S(OrderId("innerfire")));
-        if (GetUnitTypeId(u) == UTIDBLADEMASTER) {
-            if (GetIssuedOrderId() == OID_IMMOLATIONON) {
-                isopen[pid] = true;
-                added[pid] = 7 + GetUnitAbilityLevel(u, SIDHEROICSTRIKE) * 3;
-                UnitProp[u].ModAttackSpeed(added[pid]);
-            } else if (GetIssuedOrderId() == OID_IMMOLATIONOFF) {
-                isopen[pid] = false;
-                UnitProp[u].ModAttackSpeed(0 - added[pid]);
-            }
-        }
-        u = null;
-        return false;
+    function dispelHeroicStrike(unit u) {
+        BuffSlot bs = BuffSlot[u];
+        Buff buf = bs.getBuffByBid(BID_HEROIC_STRIKE);
+        bs.dispelByBuff(buf);
+        buf.destroy();
     }
 
     function ondamageresponse() {
-        real scost = STRIKE_COST;
-        if (isopen[GetPlayerId(GetOwningPlayer(DamageResult.source))] && DamageResult.abilityName == DAMAGE_NAME_MELEE) {
-            //DamageTarget(DamageResult.source, DamageResult.target, 1000.0, SPELL_NAME, true, true, true, WEAPON_TYPE_WHOKNOWS);
-            DamageResult.amount += 40 + GetUnitAbilityLevel(DamageResult.source, SIDHEROICSTRIKE) * 10;
-            //DamageResult.abilityName = SpellData[SIDHEROICSTRIKE].name;
+        real scost = 10.0;
+        if (BladeMasterIsHSOn(DamageResult.source) && DamageResult.abilityName == DAMAGE_NAME_MELEE) {
+            DamageResult.amount += 40 + GetUnitAbilityLevel(DamageResult.source, SID_HEROIC_STRIKE) * 10;
             if (HasOrcCaptureFlag(DamageResult.source)) {
                 scost -= 5.0;
             }
             ModUnitMana(DamageResult.source, 0.0 - scost);
             if (GetUnitMana(DamageResult.source) < scost) {
-                IssueImmediateOrderById(DamageResult.source, OID_IMMOLATIONOFF); 
+                dispelHeroicStrike(DamageResult.source);
             }
         }
     }
     
     function level() -> boolean {
-        if (GetLearnedSkill() == SIDHEROICSTRIKE) {
-            if (GetUnitAbilityLevel(GetTriggerUnit(), SIDHEROICSTRIKE) > 2) {
+        if (GetLearnedSkill() == SID_HEROIC_STRIKE) {
+            if (GetUnitAbilityLevel(GetTriggerUnit(), SID_HEROIC_STRIKE) > 2) {
                 UnitProp[GetTriggerUnit()].attackCrit += 0.1;
             }
         }
         return false;
     }
+    
+    function onEffect(Buff buf) {
+        UnitProp[buf.bd.target].ModAttackSpeed(buf.bd.i0);
+    }
+    
+    function onRemove(Buff buf) {
+        UnitProp[buf.bd.target].ModAttackSpeed(0 - buf.bd.i0);
+    }
+
+    function onCast() {           
+        Buff buf;
+        if (BladeMasterIsHSOn(SpellEvent.CastingUnit)) {
+            // deacitvate
+            dispelHeroicStrike(SpellEvent.CastingUnit);
+        } else {
+            // activate
+            buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BID_HEROIC_STRIKE);
+            buf.bd.interval = 60.0;
+            buf.bd.tick = -1;
+            UnitProp[buf.bd.target].ModAttackSpeed(0 - buf.bd.i0);
+            buf.bd.i0 = 7 + GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_HEROIC_STRIKE) * 3;
+            if (buf.bd.e0 == 0) {buf.bd.e0 = BuffEffect.create(ART_PHOENIX_MISSILE, buf, "weapon");}
+            buf.bd.boe = onEffect;
+            buf.bd.bor = onRemove;
+            buf.run();
+        }
+    }
 
     function onInit() {
-        integer i = 0;
-        RegisterOnDamageEvent(ondamageresponse);
-        while (i < NUMBER_OF_MAX_PLAYERS) {
-            isopen[i] = false;
-            added[i] = 0;
-            i += 1;
-        }
-        TriggerAnyUnit(EVENT_PLAYER_UNIT_ISSUED_ORDER, function onCast);
-        TriggerAnyUnit(EVENT_PLAYER_HERO_SKILL, function level);
+        RegisterOnDamageEvent(ondamageresponse); // damage
+        TriggerAnyUnit(EVENT_PLAYER_HERO_SKILL, function level); // level 3 + 10% crit
+        RegisterSpellEffectResponse(SID_HEROIC_STRIKE, onCast); // active
+        BuffType.register(BID_HEROIC_STRIKE, BUFF_PHYX, BUFF_POS); // buff registration
     }
-#undef STRIKE_COST
 }
 //! endzinc
 
