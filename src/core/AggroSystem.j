@@ -632,7 +632,7 @@ library AggroSystem requires MobInit, UnitProperty, Clock, DamageSystem, PlayerU
     
     // any enermy unit damaged
     function setAggros() {
-        if ((GetPlayerId(GetOwningPlayer(DamageResult.target)) == MOB_PID) && (!IsUnitDead(DamageResult.target)) && (!IsUnitDead(DamageResult.source))) {
+        if ((GetPlayerId(GetOwningPlayer(DamageResult.target)) == MOB_PID) && (!IsUnitDead(DamageResult.target)) && (!IsUnitDead(DamageResult.source)) && !IsUnit(DamageResult.source, DamageResult.target)) {
             //print("To aggro target");
             if (!CanUnitAttack(DamageResult.target) && DamageResult.amount < GetUnitState(DamageResult.target, UNIT_STATE_MAX_LIFE)) {
                 MobList.add(DamageResult.target);

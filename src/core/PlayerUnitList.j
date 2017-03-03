@@ -129,6 +129,26 @@ library PlayerUnitList requires NefUnion, GroupUtils, ZAMCore {
             }
         }
         
+        static method getHighestHP() -> unit {
+            unit ret;
+            real dis, td;
+            integer i;
+            if (thistype.n == 0) {
+                return null;
+            } else {
+                ret = null;
+                dis = 0.0;
+                for (0 <= i < thistype.n) {
+                    td = GetWidgetLife(thistype.units[i]);
+                    if (td > dis && !IsUnitUseless(thistype.units[i])) {
+                        dis = td;
+                        ret = thistype.units[i];
+                    }
+                }
+                return ret;
+            }
+        }
+        
         static method getLowestHPWithoutBuff(integer abil) -> unit {
             unit ret;
             real dis, td;

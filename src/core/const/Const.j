@@ -369,6 +369,9 @@
 // ## Area 5
 // Void Walker
 #define UTID_VOID_WALKER 'n00I'
+#define SID_NETHER_BOLT 'A09N'
+#define SID_SHADOW_SHIFT '????'
+
 // Fel Hound
 #define UTID_FEL_HOUND 'n00J'
 // Maid of Agony
@@ -606,6 +609,7 @@
 #define ITID_FROSTMOURNE2 'I01M'
 
 #define ART_ANGEL "Abilities\\Spells\\Human\\Resurrect\\ResurrectCaster.mdl"
+#define ART_ANNIHILATION_MISSILE "Abilities\\Spells\\Undead\\OrbOfDeath\\AnnihilationMissile.mdl"
 #define ART_BLEED "Objects\\Spawnmodels\\Human\\HumanBlood\\HeroBloodElfBlood.mdl"
 #define ART_BLOOD_LUST_LEFT "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustTarget.mdl"
 #define ART_BLOOD_LUST_RIGHT "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustSpecial.mdl"

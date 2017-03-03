@@ -803,12 +803,31 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
                 IssueTargetOrderById(source, OID_ATTACK, target);
             } else {
                 tu = PlayerUnits.getRandomHero();
-                print("Random Target = " + GetUnitNameEx(tu));
+                // print("Random Target = " + GetUnitNameEx(tu));
                 IssuePointOrderById(source, SpellData[res].oid, GetUnitX(tu), GetUnitY(tu));
                 tu = null;
             }
             ip.destroy();
         }   
+    }
+
+    function makeOrderVoidWalker(unit source, unit target, real combatTime) {
+        IntegerPool ip;
+        integer res;
+        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+            ip = IntegerPool.create();
+            ip.add(0, 10);
+            if (UnitCanUse(source, SID_NETHER_BOLT) && combatTime > 5.0) {
+                ip.add(SID_NETHER_BOLT, 50);
+            }
+            res = ip.get();
+            if (res == 0) {
+                IssueTargetOrderById(source, OID_ATTACK, target);
+            } else {
+                IssueTargetOrderById(source, SpellData[res].oid, PlayerUnits.getHighestHP());
+            }
+            ip.destroy();
+        }
     }
 
     public function OrderCreeps(unit s, unit t, real c) {
@@ -885,6 +904,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
 
         unitCallBack[UTID_OBSIDIAN_CONSTRUCT] = makeOrderObsidianConstruct;   // 
 
+        unitCallBack[UTID_VOID_WALKER] = makeOrderVoidWalker;
         unitCallBack[UTID_INFERNO_CONSTRUCT] = makeOrderInfernoConstruct;   // inferno construct
 
         unitCallBack['h000'] = makeOrderh000;   //

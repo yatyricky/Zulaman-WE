@@ -146,6 +146,7 @@ ModelInfo.rg(UTID_PARASITICAL_ROACH,ATT_NON,54999,300,100,0,.05,0,0,.95,.05,CARE
 ModelInfo.rg(UTID_ZOMBIE,ATT_NON,94999,400,300,5,0,0,0,1,.05,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNZombie.blp");
 ModelInfo.rg(UTID_OBSIDIAN_CONSTRUCT,ATT_NON,99999,500,0,30,0,0,0,.7,0,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNObsidianStatue.blp");
 ModelInfo.rg(UTID_DRACOLICH,ATT_NON,124999,800,200,10,.05,0,0,.9,.05,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNFrostWyrm.blp");
+ModelInfo.rg(UTID_VOID_WALKER,ATT_NON,99999,950,50,20,0.05,0,0,1,0.01,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNVoidWalker.blp");
 ModelInfo.rg(UTID_INFERNO_CONSTRUCT,ATT_NON,219999,900,300,10,.05,10,150,1,.1,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNInfernal.blp");
 
   });

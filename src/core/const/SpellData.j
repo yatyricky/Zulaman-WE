@@ -264,6 +264,7 @@ SpellData.create(SID_PARASITE,"寄生",0,0,0,0,1,ORDER_TYPE_TARGET);
 SpellData.create(SID_GNAW,"啃食",0,5,0,OrderId("sleep"),2,ORDER_TYPE_TARGET);
 SpellData.create(SID_MANA_TAP,"法力流失",0,0,13,OrderId("sleep"),1,ORDER_TYPE_POINT);
 SpellData.create(SID_FROST_GRAVE,"冰冻坟墓",0,0,8,OrderId("sleep"),1,ORDER_TYPE_TARGET);
+SpellData.create(SID_NETHER_BOLT,"虚空之箭",0,0,7,OrderId("sleep"),1,ORDER_TYPE_TARGET);
 SpellData.create(SID_METEOR,"陨石",0,0,7,OrderId("blizzard"),1,ORDER_TYPE_POINT);
 
 SpellData.create(SIDCALLTOARMS,"战斗召唤",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
