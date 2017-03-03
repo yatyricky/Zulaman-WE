@@ -1,5 +1,17 @@
 //! zinc
 library DamageSystem requires ZAMCore, UnitProperty, BuffSystem {
+// - - - - - - - - - - - - - - - - - - - -
+// public function DamageTarget(
+//     unit source
+//     unit target
+//     real amount
+//     string damageName
+//     boolean isPhyx
+//     boolean criticable
+//     boolean dodgable
+//     weapontype wtype
+// )
+// - - - - - - - - - - - - - - - - - - - -
 #define MISS "|cffffcc00miss|r"
 #define DODGE "|cffffcc00dodge|r"
 #define BLOCK "|cffffcc00parry|r"

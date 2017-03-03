@@ -167,14 +167,15 @@
 #define SIDGARROTE 'A04N'
 #define SIDAMBUSH 'A04O'
 #define BID_EVISCERATE 'A0AT'
-// 异教徒
+// Heretic
 #define UTIDHEATHEN 'Hblm'
 #define SIDPAIN 'A01L'
+#define BID_PAIN 'A01V'
+#define BID_PAIN_WEAKNESS 'A021'
 #define SIDMARROWSQUEEZE 'A01N'
 #define SIDMINDFLAY 'A01O'
 #define SIDDEATH 'A01Q'
 #define SIDTERROR 'A01R'
-#define BID_PAIN 'A01V'
 
 // BOSS
 #define SIDFRENZYCREEP 'A03P'
@@ -397,6 +398,9 @@
 #define BID_GRIM_TOTEM '????'
 #define SID_POISON_DART '????'
 // Faceless One
+#define SID_VICIOUS_STRIKE '????'
+#define BID_VICIOUS_STRIKE '????'
+#define SID_FILTHY_LAND '????'
 
 // test unit type id
 #define UTID_STATIC_TARGET 'h000'

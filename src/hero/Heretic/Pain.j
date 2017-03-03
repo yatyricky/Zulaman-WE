@@ -1,6 +1,5 @@
 //! zinc
 library Pain requires BuffSystem, SpellEvent, UnitProperty {
-#define BUFF_ID1 'A021'
 
     function returnDamage(integer lvl, real sp) -> real {
         return 120 + sp * 1.2;
@@ -39,7 +38,7 @@ library Pain requires BuffSystem, SpellEvent, UnitProperty {
         buf.bd.bor = onRemove;
         buf.run();
         
-        buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BUFF_ID1);
+        buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BID_PAIN_WEAKNESS);
         buf.bd.tick = -1;
         buf.bd.interval = 12;
         UnitProp[buf.bd.target].spellTaken -= buf.bd.r0;
@@ -52,9 +51,8 @@ library Pain requires BuffSystem, SpellEvent, UnitProperty {
 
     function onInit() {
         BuffType.register(BID_PAIN, BUFF_MAGE, BUFF_NEG);
-        BuffType.register(BUFF_ID1, BUFF_MAGE, BUFF_NEG);
+        BuffType.register(BID_PAIN_WEAKNESS, BUFF_MAGE, BUFF_NEG);
         RegisterSpellEffectResponse(SIDPAIN, onCast);
     }
-#undef BUFF_ID1
 }
 //! endzinc
