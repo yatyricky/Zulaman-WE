@@ -378,7 +378,7 @@ library UnitProperty requires ModelInfo, ZAMCore {
         
         static method operator[] (unit u) -> thistype {
             if (!thistype.ht.exists(u)) {
-                BJDebugMsg(SCOPE_PREFIX+">Unregistered unit: " + GetUnitName(u));
+                print(SCOPE_PREFIX+">Unregistered unit: " + GetUnitName(u));
                 return 0/0;
             } else {
                 return thistype.ht[u];
@@ -408,7 +408,7 @@ library UnitProperty requires ModelInfo, ZAMCore {
                     this = thistype.ht[u];
                     this.delayedFlush();
                 } else {
-                    BJDebugMsg(SCOPE_PREFIX+">Unknown unit: " + GetUnitName(u));
+                    print(SCOPE_PREFIX+">Unknown unit: " + GetUnitName(u));
                 }
             }
         } 

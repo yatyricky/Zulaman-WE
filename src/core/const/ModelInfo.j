@@ -23,16 +23,6 @@ library ModelInfo requires Table, Integer {
         real scale; // for casting bar
         integer career; // boss, creep, tank, dps, healer
     
-        /*static method operator[] (integer uid) -> thistype {
-            if (!tab.exists(uid)) {
-                print(SCOPE_PREFIX+">undefined unit type id '" + ID2S(uid) + "'.");
-				return 50/0
-                return 0;
-            } else {
-                return thistype(tab[uid]);
-            }
-        }*/
-		
 		static method get(integer uid, string source) -> thistype {
             if (!tab.exists(uid)) {
                 print(SCOPE_PREFIX+">undefined unit type id '" + ID2S(uid) + "' "+source+".");

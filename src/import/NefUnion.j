@@ -265,6 +265,14 @@ library NefUnion requires TimerUtils {
         }
     }
     
+    public function B2IS(boolean b) -> string {
+        if (b) {
+            return "1";
+        } else {
+            return "0";
+        }
+    }
+    
     /**
 	 * Supported parameters:
 	 *     unit u0

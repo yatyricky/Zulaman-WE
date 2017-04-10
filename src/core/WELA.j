@@ -1,5 +1,5 @@
 //! zinc
-library WELA requires CastingBar, ModelInfo, SpellData, AggroSystem {
+library WELA requires CastingBar, SpellData, AggroSystem {
     private string sessionName;
     private boolean combatState = false;
 
@@ -27,48 +27,40 @@ library WELA requires CastingBar, ModelInfo, SpellData, AggroSystem {
 
     function damageRecord() {
         wela[welaI] = "damage," /*
-        */ + R2S(GetGameTime()) + "," /*
-        */ + GetUnitNameEx(DamageResult.source) + "," /*
-        */ + GetUnitNameEx(DamageResult.target) + "," /*
-        */ + DamageResult.abilityName + "," /*
-        */ + R2S(DamageResult.amount) + "," /*
-        */ + B2S(DamageResult.isHit) + "," /*
-        */ + B2S(DamageResult.isBlocked) + "," /*
-        */ + B2S(DamageResult.isDodged) + "," /*
-        */ + B2S(DamageResult.isCritical) + "," /*
-        */ + B2S(DamageResult.isImmune) + "," /*
-        */ + B2S(DamageResult.isPhyx) + "," /*
-        */ + B2S(DamageResult.wasDodgable) + "," /*
-        */ + ModelInfo.get(GetUnitTypeId(DamageResult.source), "WELA: 101").Career() + "," /*
-        */ + ModelInfo.get(GetUnitTypeId(DamageResult.target), "WELA: 102").Career();
+        2  */ + R2S(GetGameTime()) + "," /*
+        3  */ + GetUnitNameEx(DamageResult.source) + "," /*
+        4  */ + GetUnitNameEx(DamageResult.target) + "," /*
+        5  */ + DamageResult.abilityName + "," /*
+        6  */ + R2S(DamageResult.amount) + "," /*
+        7  */ + B2IS(DamageResult.isHit) + "," /*
+        8  */ + B2IS(DamageResult.isBlocked) + "," /*
+        9  */ + B2IS(DamageResult.isDodged) + "," /*
+        10 */ + B2IS(DamageResult.isCritical) + "," /*
+        11 */ + B2IS(DamageResult.isImmune) + "," /*
+        12 */ + B2IS(DamageResult.isPhyx) + "," /*
+        13 */ + B2IS(DamageResult.wasDodgable);
         welaI += 1; if (welaI >= 8100) {GenerateCombatLog("AutoGen");}
     }
 
     function healedRecord() {
         wela[welaI] = "heal," /*
-        */ + R2S(GetGameTime()) + "," /*
-        */ + GetUnitNameEx(HealResult.source) + "," /*
-        */ + GetUnitNameEx(HealResult.target) + "," /*
-        */ + HealResult.abilityName + "," /*
-        */ + R2S(HealResult.effective) + "," /*
-        */ + R2S(HealResult.amount - HealResult.effective) + "," /*
-        */ + B2S(HealResult.isCritical) + "," /*
-        */ + ModelInfo.get(GetUnitTypeId(HealResult.source), "InfoBoards: 606").Career() + "," /*
-        */ + ModelInfo.get(GetUnitTypeId(HealResult.target), "InfoBoards: 607").Career();
+        2  */ + R2S(GetGameTime()) + "," /*
+        3  */ + GetUnitNameEx(HealResult.source) + "," /*
+        4  */ + GetUnitNameEx(HealResult.target) + "," /*
+        5  */ + HealResult.abilityName + "," /*
+        6  */ + R2S(HealResult.effective) + "," /*
+        7  */ + R2S(HealResult.amount - HealResult.effective) + "," /*
+        8  */ + B2IS(HealResult.isCritical);
         welaI += 1; if (welaI >= 8100) {GenerateCombatLog("AutoGen");}
     }
 
     function absorbRecord() {
         wela[welaI] = "heal," /*
-        */ + R2S(GetGameTime()) + "," /*
-        */ + GetUnitNameEx(AbsorbResult.source) + "," /*
-        */ + GetUnitNameEx(AbsorbResult.target) + "," /*
-        */ + AbsorbResult.abilityName + "," /*
-        */ + R2S(AbsorbResult.amount) + "," /*
-        */ + R2S(0.0) + "," /*
-        */ + B2S(false) + "," /*
-        */ + ModelInfo.get(GetUnitTypeId(AbsorbResult.source), "InfoBoards: 606").Career() + "," /*
-        */ + ModelInfo.get(GetUnitTypeId(AbsorbResult.target), "InfoBoards: 607").Career();
+        2     */ + R2S(GetGameTime()) + "," /*
+        3     */ + GetUnitNameEx(AbsorbResult.source) + "," /*
+        4     */ + GetUnitNameEx(AbsorbResult.target) + "," /*
+        5     */ + AbsorbResult.abilityName + "," /*
+        6,7,8 */ + R2S(AbsorbResult.amount) + ",0.0,0";
         welaI += 1; if (welaI >= 8100) {GenerateCombatLog("AutoGen");}
     }
 

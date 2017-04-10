@@ -36,7 +36,7 @@ library PowerOfAbomination requires DarkRangerGlobal, SpellEvent, DamageSystem {
         
         static method operator[] (unit u) -> thistype {
             if (!thistype.ht.exists(u)) {
-                BJDebugMsg(SCOPE_PREFIX+">Unregistered unit: " + GetUnitNameEx(u));
+                print(SCOPE_PREFIX+">Unregistered unit: " + GetUnitNameEx(u));
                 return 0;
             } else {
                 return thistype.ht[u];

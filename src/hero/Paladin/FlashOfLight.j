@@ -20,7 +20,7 @@ library FlashOfLight requires PaladinGlobal, SpellEvent, UnitProperty, BeaconOfL
             ilvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SIDFLASHLIGHT1);
         } else {
             ilvl = 0;
-            BJDebugMsg(SCOPE_PREFIX+">|cffff0000error|r.flash of light level = 0 and triggered");
+            print(SCOPE_PREFIX+">|cffff0000error|r.flash of light level = 0 and triggered");
         }
 		// get the amount and heal
         amt = returnHeal(ilvl) + UnitProp[SpellEvent.CastingUnit].SpellPower() * 1.4;

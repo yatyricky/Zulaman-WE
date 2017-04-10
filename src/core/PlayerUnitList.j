@@ -262,7 +262,7 @@ library PlayerUnitList requires NefUnion, GroupUtils, ZAMCore {
                 thistype.n -= 1;
                 thistype.units[i] = thistype.units[thistype.n];
             } else {
-                BJDebugMsg(SCOPE_PREFIX+">|cffff0000Error|r: about to delete element with index -1");
+                print(SCOPE_PREFIX+">|cffff0000Error|r: about to delete element with index -1");
             }
         }
         

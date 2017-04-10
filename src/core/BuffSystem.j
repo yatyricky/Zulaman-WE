@@ -437,7 +437,7 @@ library BuffSystem requires TimerUtils, Table, Integer, ZAMCore {
         
         static method operator[] (integer bid) -> thistype {
             if (!thistype.ht.exists(bid)) {
-                BJDebugMsg(SCOPE_PREFIX+">Unknown: " + ID2S(bid));
+                print(SCOPE_PREFIX+">Unknown: " + ID2S(bid));
                 return 0;
             } else {
                 return thistype.ht[bid];
@@ -447,7 +447,7 @@ library BuffSystem requires TimerUtils, Table, Integer, ZAMCore {
         static method register(integer bid, integer buffCate, integer buffPoly) {
             thistype this;
             if (thistype.ht.exists(bid)) {
-                BJDebugMsg(SCOPE_PREFIX+">Double registering: " + ID2S(bid));
+                print(SCOPE_PREFIX+">Double registering: " + ID2S(bid));
             } else {
                 this = thistype.allocate();
                 thistype.ht[bid] = this;
