@@ -253,8 +253,10 @@
 
 #define SID_LIFE_SIPHON 'A0B3'
 
-// 恶魔守卫
+// 恶魔守卫 The Felguards
 #define UTID_FEL_GUARD 'Nplh'
+#define UTID_VOID_LORD '????'
+#define SID_FEL_EXECUTION '????'
 
 // 妖术领主
 #define UTIDHEXLORD 'Oshd'
@@ -611,6 +613,7 @@
 #define ART_ANGEL "Abilities\\Spells\\Human\\Resurrect\\ResurrectCaster.mdl"
 #define ART_ANNIHILATION_MISSILE "Abilities\\Spells\\Undead\\OrbOfDeath\\AnnihilationMissile.mdl"
 #define ART_BLEED "Objects\\Spawnmodels\\Human\\HumanBlood\\HeroBloodElfBlood.mdl"
+#define ART_BLINK "????"
 #define ART_BLOOD_LUST_LEFT "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustTarget.mdl"
 #define ART_BLOOD_LUST_RIGHT "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustSpecial.mdl"
 #define ART_CRATER "Objects\\Spawnmodels\\Other\\NeutralBuildingExplosion\\NeutralBuildingExplosion.mdl"

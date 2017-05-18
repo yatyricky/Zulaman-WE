@@ -235,6 +235,28 @@ library PlayerUnitList requires NefUnion, GroupUtils, ZAMCore {
             }
         }
         
+        static method getNearestWithinExclude(unit from, real range, unit excl) -> unit {
+            unit ret;
+            real dis, td;
+            integer i;
+            if (thistype.n == 0) {
+                return null;
+            } else {
+                ret = null;
+                dis = range;
+                i = 0;
+                while (i < thistype.n) {
+                    td = GetDistance.units2d(from, thistype.units[i]);
+                    if (td < dis && !IsUnit(from, thistype.units[i]) && !IsUnit(excl, thistype.units[i]) && !IsUnitUseless(thistype.units[i])) {
+                        dis = td;
+                        ret = thistype.units[i];
+                    }
+                    i += 1;
+                }
+                return ret;
+            }
+        }
+        
         static method getNearestAngular(unit from, unit centre) -> unit {
             unit ret;
             real dis, td;
