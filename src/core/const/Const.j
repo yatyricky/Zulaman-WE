@@ -257,6 +257,7 @@
 #define UTID_FEL_GUARD 'Nplh'
 #define UTID_VOID_LORD '????'
 #define SID_FEL_EXECUTION '????'
+#define SID_STOMP '????'
 
 // 妖术领主
 #define UTIDHEXLORD 'Oshd'
@@ -639,4 +640,5 @@
 #define ART_SHIELD "Abilities\\Spells\\Items\\StaffOfSanctuary\\Staff_Sanctuary_Target.mdl"
 #define ART_SLOW "Abilities\\Spells\\Human\\slow\\slowtarget.mdl"
 #define ART_SPELLSTEAL "Abilities\\Spells\\Human\\SpellSteal\\SpellStealTarget.mdl"
+#define ART_STOMP "Abilities\\Spells\\Orc\\WarStomp\\WarStompCaster.mdl"
 #define ART_WATER "Objects\\Spawnmodels\\Naga\\NagaDeath\\NagaDeath.mdl"
