@@ -258,6 +258,8 @@
 #define UTID_VOID_LORD '????'
 #define SID_FEL_EXECUTION '????'
 #define SID_STOMP '????'
+#define SID_FEL_FRENZY '????'
+#define BID_FEL_FRENZY '????'
 
 // 妖术领主
 #define UTIDHEXLORD 'Oshd'
