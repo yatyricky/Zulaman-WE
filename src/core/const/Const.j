@@ -255,11 +255,12 @@
 
 // 恶魔守卫 The Felguards
 #define UTID_FEL_GUARD 'Nplh'
-#define UTID_VOID_LORD '????'
 #define SID_FEL_EXECUTION '????'
 #define SID_STOMP '????'
 #define SID_FEL_FRENZY '????'
 #define BID_FEL_FRENZY '????'
+#define UTID_VOID_LORD '????'
+#define SID_POWER_SHADOW_SHIFT '????'
 
 // 妖术领主
 #define UTIDHEXLORD 'Oshd'
