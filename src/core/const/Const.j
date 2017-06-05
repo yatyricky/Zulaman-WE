@@ -395,6 +395,9 @@
 // Forest Troll
 #define UTID_FOREST_TROLL 'n00L'
 #define SID_CRUSHING_BLOW '????'
+#define SID_FOREST_STOMP '????'
+#define BID_FOREST_STOMP '????'
+
 // Cursed Hunter
 #define UTID_CURSED_HUNTER '????'
 #define BID_ZEAL '????'
