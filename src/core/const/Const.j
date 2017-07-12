@@ -1,12 +1,12 @@
 #define NUMBER_OF_MAX_PLAYERS 6
 #define MOB_PID 10
-#define FORCE_NPCS "Adventurers"
-#define FORCE_ENEMY "The Dark Below"
+#define FORCE_NPCS "冒险者"
+#define FORCE_ENEMY "黑暗势力"
 
 #define INIT_X 5822.0
 #define INIT_Y -11907.0
 
-#define DAMAGE_NAME_MELEE "Normal Attack"
+#define DAMAGE_NAME_MELEE "普通攻击"
 
 #define ATT_STR 1
 #define ATT_AGI 2
