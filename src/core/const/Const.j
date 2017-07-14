@@ -404,6 +404,8 @@
 // Deranged Priest
 #define UTID_DERANGED_PRIEST '????'
 #define SID_CORPSE_RAIN '????'
+#define SID_VOODOO_DOLL '????'
+#define SID_VOODOO_DOLL_ILLUSION '????'
 // Gargantuan
 // Twilight Witch Doctor
 #define UTID_TWILIGHT_WITCH_DOCTOR '????'
@@ -621,6 +623,7 @@
 
 #define ART_ANGEL "Abilities\\Spells\\Human\\Resurrect\\ResurrectCaster.mdl"
 #define ART_ANNIHILATION_MISSILE "Abilities\\Spells\\Undead\\OrbOfDeath\\AnnihilationMissile.mdl"
+#define ART_ARCANE_TOWER_ATTACK "Abilities\\Spells\\Human\\Feedback\\ArcaneTowerAttack.mdl"
 #define ART_BLEED "Objects\\Spawnmodels\\Human\\HumanBlood\\HeroBloodElfBlood.mdl"
 #define ART_BLINK "????"
 #define ART_BLIZZARD_TARGET "Abilities\\Spells\\Human\\Blizzard\\BlizzardTarget.mdl"

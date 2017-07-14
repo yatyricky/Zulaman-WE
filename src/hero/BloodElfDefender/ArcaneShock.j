@@ -6,7 +6,6 @@ library ArcaneShock requires DamageSystem, BuffSystem, UnitProperty, AggroSystem
 #define ART_TARGET "Abilities\\Spells\\Human\\ManaFlare\\ManaFlareBoltImpact.mdl"
 #define ART_CURSE "Abilities\\Spells\\Undead\\Curse\\CurseTarget.mdl"
 //#define ART_IMPROVED "Abilities\\Spells\\Human\\MagicSentry\\MagicSentryCaster.mdl"
-#define ART_FEED_BACK "Abilities\\Spells\\Human\\Feedback\\ArcaneTowerAttack.mdl"
 
     //timer arcaneShockExTm[NUMBER_OF_MAX_PLAYERS];
     //boolean arcaneShockHasEx[NUMBER_OF_MAX_PLAYERS];
@@ -74,7 +73,7 @@ library ArcaneShock requires DamageSystem, BuffSystem, UnitProperty, AggroSystem
                     amt *= 2.0;
                 }
                 ModUnitMana(DamageResult.target, amt);
-                AddTimedEffect.atUnit(ART_FEED_BACK, DamageResult.target, "origin", 0.1);
+                AddTimedEffect.atUnit(ART_ARCANE_TOWER_ATTACK, DamageResult.target, "origin", 0.1);
             }
         }
     }
@@ -133,7 +132,6 @@ library ArcaneShock requires DamageSystem, BuffSystem, UnitProperty, AggroSystem
         RegisterDamagedEvent(paladinDamaged);
     }
     
-#undef ART_FEED_BACK
 //#undef ART_IMPROVED
 #undef ART_CURSE
 #undef ART_TARGET
