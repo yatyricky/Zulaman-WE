@@ -11,6 +11,14 @@ library DamageSystem requires ZAMCore, UnitProperty, BuffSystem {
 //     boolean dodgable
 //     weapontype wtype
 // )
+//
+// public function HealTarget(
+//     unit a
+//     unit b
+//     real amount
+//     string hName
+//     real exCrit
+// )
 // - - - - - - - - - - - - - - - - - - - -
 #define MISS "|cffffcc00miss|r"
 #define DODGE "|cffffcc00dodge|r"
@@ -56,47 +64,6 @@ library DamageSystem requires ZAMCore, UnitProperty, BuffSystem {
         static real extraCrit = 0.0;
         static boolean isPhyx = false;
         static boolean wasDodgable = false;
-        
-        /*unit Dsource, Dtarget;
-        string DabilityName;
-        real Damount;
-        boolean DisHit;
-        boolean DisBlocked;
-        boolean DisDodged;
-        boolean DisCritical;
-        boolean DisImmune;
-        real DextraCrit;
-        boolean DisPhyx;
-        boolean DwasDodgable;*/
-        /*
-        method destroy() {
-            this.source = null;
-            this.target = null;
-            this.deallocate();
-        }*/
-        
-        /*static method save() -> thistype {
-            thistype this = thistype.allocate();
-            this.Dsource = thistype.source;
-            this.Dtarget = thistype.target;
-            this.DabilityName = thistype.abilityName;
-            this.Damount = thistype.amount;
-            this.DisHit = thistype.isHit;
-            this.DisBlocked = thistype.isBlocked;
-            this.DisDodged = thistype.isDodged;
-            this.DisCritical = thistype.isCritical;
-            this.DisImmune = thistype.isImmune;
-            this.DextraCrit = thistype.extraCrit;
-            this.DisPhyx = thistype.isPhyx;
-            this.DwasDodgable = thistype.wasDodgable;
-            return this;
-        }*/
-        /*
-        static method display() {
-            BJDebugMsg("= = = = = Damage Result = = = = =");
-            BJDebugMsg("Amount: " + R2S(thistype.amount));
-            BJDebugMsg("= = = = = Damage Result = = = = =");
-        }*/
     }
     
     public struct HealResult {
@@ -105,31 +72,7 @@ library DamageSystem requires ZAMCore, UnitProperty, BuffSystem {
         static string abilityName = null;
         static real amount = 0.0;
         static real effective = 0.0;
-        static boolean isCritical = false;
-        /*
-        unit Dsource, Dtarget;
-        string DabilityName;
-        real Damount;
-        real Deffective;
-        boolean DisCritical;
-        
-        method destroy() {
-            this.source = null;
-            this.target = null;
-            this.deallocate();
-        }
-        
-        static method save() -> thistype {
-            thistype this = thistype.allocate();
-            this.Dsource = thistype.source;
-            this.Dtarget = thistype.target;
-            this.DabilityName = thistype.abilityName;
-            this.Damount = thistype.amount;
-            this.Deffective = thistype.effective;
-            this.DisCritical = thistype.isCritical;
-            return this;
-        }  */      
-        
+        static boolean isCritical = false;  
     }
     
     public function HealTarget(unit a, unit b, real amount, string hName, real exCrit) {
@@ -140,21 +83,14 @@ library DamageSystem requires ZAMCore, UnitProperty, BuffSystem {
         if (HealResult.isCritical) {
             amount *= 1.5;
         }
-        //Recount[a].cheal += amount;
-        //BJDebugMsg("Recieved Heal = " + R2S(amount));
         if (amount + GetWidgetLife(b) > GetUnitState(b, UNIT_STATE_MAX_LIFE)) {
             HealResult.effective = GetUnitState(b, UNIT_STATE_MAX_LIFE) - GetWidgetLife(b);
-            //Recount[a].ceffheal += GetUnitState(b, UNIT_STATE_MAX_LIFE) - GetWidgetLife(b);
         } else {
             HealResult.effective = amount;
-            //Recount[a].ceffheal += amount;
         }
         SetWidgetLife(b, GetWidgetLife(b) + amount);
         if (amount >= 0.0) {
-            // if (GetLocalPlayer() == GetOwningPlayer(a) || GetLocalPlayer() == GetOwningPlayer(b))
-            // {display = I2S(R2I(amount));} else {display = "";}
             display = "";
-            //BJDebugMsg(GetHeroProperName(a) + " heals " + GetHeroProperName(b));
             HealResult.source = a;
             HealResult.target = b;
             HealResult.abilityName = hName;
@@ -169,14 +105,7 @@ library DamageSystem requires ZAMCore, UnitProperty, BuffSystem {
     }
     
 public boolean lifelock = false;
-    // source
-	// target
-	// amount
-	// from ability by name
-    // is physics
-    // is criticable
-    // is dodgable
-    // damage sound
+
     public function DamageTarget(unit a, unit b, real amount, string dmgName, boolean isPhyx, boolean criticable, boolean dodgable, weapontype wtype) {
         integer i;
         string display;
@@ -188,9 +117,7 @@ public boolean lifelock = false;
         DamageResult.target = b;
         DamageResult.isPhyx = isPhyx;
         DamageResult.wasDodgable = dodgable;
-//BJDebugMsg("factor = " + R2S(factor));
         desk = 1.0 - UnitProp[a].AttackRate();
-//BJDebugMsg("desk 1 = " + R2S(desk));
         DamageResult.amount = amount;   
         DamageResult.extraCrit = 0.0;
         i = 0;
@@ -198,7 +125,6 @@ public boolean lifelock = false;
             responseOnDamageCallList[i].evaluate();
             i += 1;
         }
-        //BJDebugMsg("Extra critical: " + R2S(DamageResult.extraCrit));
         if (factor < desk && DamageResult.wasDodgable) {
             display = MISS;
             DamageResult.amount = 0.0;
@@ -207,10 +133,8 @@ public boolean lifelock = false;
             DamageResult.isDodged = false;
             DamageResult.isCritical = false;
             DamageResult.isImmune = false;
-            //BJDebugMsg("miss");
         } else {
             desk += UnitProp[b].Dodge();
-//BJDebugMsg("desk 2 = " + R2S(desk));
             if (factor < desk && DamageResult.wasDodgable) {
                 display = DODGE;
                 DamageResult.amount = 0.0;
@@ -225,10 +149,8 @@ public boolean lifelock = false;
                 DamageResult.isDodged = false;
                 if (DamageResult.isPhyx) {
                     DamageResult.amount *= (100.0 - UnitProp[b].Armor()) / 100.0;
-                    //BJDebugMsg("phyx dmg");
                 } else {
                     DamageResult.amount *= UnitProp[b].SpellTaken();
-                    //BJDebugMsg("magic dmg");
                 }
                 DamageResult.amount *= UnitProp[b].DamageTaken();
                 if (DamageResult.amount < 2.0) {
@@ -242,11 +164,9 @@ public boolean lifelock = false;
                         DamageResult.isImmune = false;
                         display = NULL_STR;
                     }
-                    //BJDebugMsg("immune");
                 } else {
                     DamageResult.isImmune = false;   
                     desk += UnitProp[b].BlockRate();
-//BJDebugMsg("desk 3 = " + R2S(desk));
                     if (factor < desk && DamageResult.wasDodgable) {
                         DamageResult.amount -= UnitProp[b].BlockPoint();
                         DamageResult.isCritical = false;
@@ -255,31 +175,24 @@ public boolean lifelock = false;
                             DamageResult.amount = 0.0;
                             display = BLOCK;
                         }
-                        //BJDebugMsg("blocked");
                     } else {
                         DamageResult.isBlocked = false;
                         desk += UnitProp[a].AttackCrit();
-//BJDebugMsg("desk 4 = " + R2S(desk));
                         if ((factor < desk + DamageResult.extraCrit && DamageResult.isPhyx) || (factor < UnitProp[a].SpellCrit() + DamageResult.extraCrit && !DamageResult.isPhyx) && criticable) {
                             DamageResult.amount *= 2.0;
                             DamageResult.isCritical = true;
-                            //BJDebugMsg("crittical");
                         } else {
                             DamageResult.isCritical = false;
-                            //BJDebugMsg("not crit");
                         }
                     }
                     if (DamageResult.amount > 0.0) {
                         DamageResult.amount = BuffSlot[b].absorb(DamageResult.amount);
                         if (DamageResult.amount == 0.0) {
                             display = ABSORB;
-                            //BJDebugMsg("absorb");
                         } else {
                             display = I2S(R2I(DamageResult.amount));
-                            //BJDebugMsg("set dmg amt -> " + display);
                             UnitDamageTarget(a, b, DamageResult.amount, true, true, ATTACK_TYPE_CHAOS, DAMAGE_TYPE_DIVINE, wtype);
-    if (GetWidgetLife(b) < GetUnitState(b, UNIT_STATE_MAX_LIFE) * 0.5 && lifelock) {SetWidgetLife(b, GetUnitState(b, UNIT_STATE_MAX_LIFE));}
-                            //BJDebugMsg("dmged");
+if (GetWidgetLife(b) < GetUnitState(b, UNIT_STATE_MAX_LIFE) * 0.5 && lifelock) {SetWidgetLife(b, GetUnitState(b, UNIT_STATE_MAX_LIFE));}
                         }
                     }
                 }
@@ -293,9 +206,6 @@ public boolean lifelock = false;
         if (DamageResult.isCritical) {
             display += "!";
         }
-        // if (GetLocalPlayer() != GetOwningPlayer(a) && GetLocalPlayer() != GetOwningPlayer(b)) {
-        //     display = NULL_STR;
-        // }
         display = NULL_STR;
         TextTag_Damage(b, display, DamageResult.isCritical);
     }
@@ -342,18 +252,13 @@ public boolean lifelock = false;
     private function damaged() -> boolean {
         real dmg = GetEventDamage();
         unit a = GetEventDamageSource(), b = GetTriggerUnit();
-        //print("我书读的少, 你别骗我.");
         if (dmg == 0.0) {
-            //BJDebugMsg(SCOPE_PREFIX+">0 damage detected");
             a = null; b = null; return false;
         } else if (a == b) {
-            //BJDebugMsg(SCOPE_PREFIX+">|cffff0000self damaging!|r");
             a = null; b = null; return false;
         } else if (dmg > 1.0) {
-            //BJDebugMsg(SCOPE_PREFIX+">filtered");
             a = null; b = null; return false;
         } else {
-            //BJDebugMsg(SCOPE_PREFIX+">Normal attacking");
             DamageTarget(a, b, UnitProp[a].AttackPower(), DAMAGE_NAME_MELEE, true, true, true, null);
         }
         a = null; b = null; return false;

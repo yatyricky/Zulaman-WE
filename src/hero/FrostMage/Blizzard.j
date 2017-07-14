@@ -1,6 +1,5 @@
 //! zinc
 library Blizzard requires CastingBar, GroupUtils, FrostMageGlobal, DamageSystem, Sounds {
-#define ART "Abilities\\Spells\\Human\\Blizzard\\BlizzardTarget.mdl"
 
     function returnDamage(integer lvl, real sp) -> real {
         real app = sp * 0.4;
@@ -15,16 +14,15 @@ library Blizzard requires CastingBar, GroupUtils, FrostMageGlobal, DamageSystem,
         integer lvl;
         real dmg;
         unit tu;
-        integer falls;
-        real length, rad;
+        real length, rad, aoe;
         if (GetUnitAbilityLevel(caster, SIDBLIZZARD1) == 1) {
             lvl = 3;
         } else {
             lvl = GetUnitAbilityLevel(caster, SIDBLIZZARD);
         }
         dmg = returnDamage(lvl, UnitProp[caster].SpellPower()) * returnFrostDamage(caster);
-        //BJDebugMsg("Run !");       
-        GroupUnitsInArea(ENUM_GROUP, x, y, 150.0 + 100.0 * lvl);
+        aoe = 150.0 + 100.0 * lvl;
+        GroupUnitsInArea(ENUM_GROUP, x, y, aoe);
         tu = FirstOfGroup(ENUM_GROUP);
         while (tu != null) {
             GroupRemoveUnit(ENUM_GROUP, tu);
@@ -34,13 +32,7 @@ library Blizzard requires CastingBar, GroupUtils, FrostMageGlobal, DamageSystem,
             tu = FirstOfGroup(ENUM_GROUP);
         }
         tu = null;
-        falls = lvl * 10;
-        while (falls > 1) {
-            length = GetRandomReal(1.0, 150.0 + 100.0 * lvl);
-            rad = GetRandomReal(0.01, 6.28);
-            AddTimedEffect.atCoord(ART, x + Cos(rad) * length, y + Sin(rad) * length, 0.5);
-            falls -= 1;
-        }
+        SpamEffectsInCircle(ART_BLIZZARD_TARGET, x, y, aoe, lvl * 10, 0.5);
         RunSoundAtPoint2d(SND_BLIZZARD, x, y);
     }
 
@@ -115,6 +107,5 @@ library Blizzard requires CastingBar, GroupUtils, FrostMageGlobal, DamageSystem,
         RegisterSpellEffectResponse(SIDBLIZZARD1, onCast);
         TriggerAnyUnit(EVENT_PLAYER_HERO_SKILL, function lvlup);
     }
-#undef ART
 }
 //! endzinc
