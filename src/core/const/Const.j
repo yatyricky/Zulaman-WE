@@ -407,6 +407,8 @@
 #define SID_VOODOO_DOLL '????'
 #define SID_VOODOO_DOLL_ILLUSION '????'
 // Gargantuan
+#define UTID_GARGANTUAN '????'
+#define SID_SLAM_STRIKE '????'
 // Twilight Witch Doctor
 #define UTID_TWILIGHT_WITCH_DOCTOR '????'
 #define UTID_GRIM_TOTEM '????'
