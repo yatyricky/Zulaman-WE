@@ -830,6 +830,27 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         }
     }
 
+    function makeOrderGrimTotem(unit source, unit target, real combatTime) {}
+
+    function makeOrderTwilightWitchDoctor(unit source, unit target, real combatTime) {
+        IntegerPool ip;
+        integer res;
+        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+            ip = IntegerPool.create();
+            ip.add(0, 10);
+            if (UnitCanUse(source, SID_GRIM_TOTEM) && combatTime > 5.0) {
+                ip.add(SID_GRIM_TOTEM, 50);
+            }
+            res = ip.get();
+            if (res == 0) {
+                IssueTargetOrderById(source, OID_ATTACK, target);
+            } else {
+                IssueImmediateOrderById(source, SpellData[res].oid);
+            }
+            ip.destroy();
+        }
+    }
+
     public function OrderCreeps(unit s, unit t, real c) {
         integer utid = GetUnitTypeId(s);
         //print(I2S(R2I(c)));
@@ -906,6 +927,10 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
 
         unitCallBack[UTID_VOID_WALKER] = makeOrderVoidWalker;
         unitCallBack[UTID_INFERNO_CONSTRUCT] = makeOrderInfernoConstruct;   // inferno construct
+
+        // ============= Area 5 ==================
+        unitCallBack[UTID_TWILIGHT_WITCH_DOCTOR] = makeOrderTwilightWitchDoctor;
+        unitCallBack[UTID_GRIM_TOTEM] = makeOrderGrimTotem;
 
         unitCallBack['h000'] = makeOrderh000;   //
         unitCallBack['h002'] = makeOrderh002;   //

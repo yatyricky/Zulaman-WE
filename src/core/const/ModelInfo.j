@@ -137,6 +137,8 @@ ModelInfo.rg(UTID_OBSIDIAN_CONSTRUCT,ATT_NON,99999,500,0,30,0,0,0,0.7,0,CAREER_T
 ModelInfo.rg(UTID_DRACOLICH,ATT_NON,124999,800,200,10,0.05,0,0,0.9,0.05,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNFrostWyrm.blp");
 ModelInfo.rg(UTID_VOID_WALKER,ATT_NON,99999,950,50,20,0.05,0,0,1,0.01,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNVoidWalker.blp");
 ModelInfo.rg(UTID_INFERNO_CONSTRUCT,ATT_NON,219999,900,300,10,0.05,10,150,1,0.1,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNInfernal.blp");
+ModelInfo.rg(UTID_TWILIGHT_WITCH_DOCTOR,ATT_NON,139999,1100,300,5,0.05,0,0,1,0.05,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNDarkTrollShadowPriest.blp");
+ModelInfo.rg(UTID_GRIM_TOTEM,ATT_NON,199999,1,0,0,0,0,0,1,0,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNHealingWard.blp");
 
   });
     }

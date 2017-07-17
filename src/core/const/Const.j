@@ -255,12 +255,12 @@
 
 // 恶魔守卫 The Felguards
 #define UTID_FEL_GUARD 'Nplh'
-#define SID_FEL_EXECUTION '????'
-#define SID_STOMP '????'
-#define SID_FEL_FRENZY '????'
-#define BID_FEL_FRENZY '????'
-#define UTID_VOID_LORD '????'
-#define SID_POWER_SHADOW_SHIFT '????'
+#define SID_FEL_EXECUTION 'A0XX'
+#define SID_STOMP 'A0XX'
+#define SID_FEL_FRENZY 'A0XX'
+#define BID_FEL_FRENZY 'A0XX'
+#define UTID_VOID_LORD 'A0XX'
+#define SID_POWER_SHADOW_SHIFT 'A0XX'
 
 // 妖术领主
 #define UTIDHEXLORD 'Oshd'
@@ -376,49 +376,57 @@
 // Void Walker
 #define UTID_VOID_WALKER 'n00I'
 #define SID_NETHER_BOLT 'A09N'
-#define SID_SHADOW_SHIFT '????'
+#define SID_SHADOW_SHIFT 'A0XX'
 
 // Fel Hound
 #define UTID_FEL_HOUND 'n00J'
+#define SID_MANA_BURN 'A0XX'
 // Maid of Agony
 #define UTID_MAID_OF_AGONY 'n00K'
+#define SID_SHADOW_SPIKE 'A0XX'
+#define SID_MARK_OF_AGONY 'A0XX'
 // Nether Drake
+#define SID_PHASE_SHIFT 'A0XX'
+#define SID_NETHER_IMPLOSION 'A0XX'
+#define SID_NETHER_BREATH 'A0XX'
 // Nether Hatchling
+#define SID_NETHER_SLOW 'A0XX'
 // Inferno Construct
 #define UTID_INFERNO_CONSTRUCT 'ninf'
 #define SID_METEOR 'A0BN'
-#define SID_BURNING '????'
-#define BID_BURNING '????'
-#define SID_RAGE_STRIKE '????'
+#define SID_BURNING 'A0XX'
+#define BID_BURNING 'A0XX'
+#define SID_RAGE_STRIKE 'A0XX'
 
 // ## Area 6
 // Forest Troll
 #define UTID_FOREST_TROLL 'n00L'
-#define SID_CRUSHING_BLOW '????'
-#define SID_FOREST_STOMP '????'
-#define BID_FOREST_STOMP '????'
+#define SID_CRUSHING_BLOW 'A0XX'
+#define SID_FOREST_STOMP 'A0XX'
+#define BID_FOREST_STOMP 'A0XX'
 
 // Cursed Hunter
-#define UTID_CURSED_HUNTER '????'
-#define BID_ZEAL '????'
+#define UTID_CURSED_HUNTER 'A0XX'
+#define BID_ZEAL 'A0XX'
 // Deranged Priest
-#define UTID_DERANGED_PRIEST '????'
-#define SID_CORPSE_RAIN '????'
-#define SID_VOODOO_DOLL '????'
-#define SID_VOODOO_DOLL_ILLUSION '????'
+#define UTID_DERANGED_PRIEST 'A0XX'
+#define SID_CORPSE_RAIN 'A0XX'
+#define SID_VOODOO_DOLL 'A0XX'
+#define SID_VOODOO_DOLL_ILLUSION 'A0XX'
 // Gargantuan
-#define UTID_GARGANTUAN '????'
-#define SID_SLAM_STRIKE '????'
+#define UTID_GARGANTUAN 'A0XX'
+#define SID_SLAM_STRIKE 'A0XX'
+#define SID_VOMIT 'A0XX'
 // Twilight Witch Doctor
-#define UTID_TWILIGHT_WITCH_DOCTOR '????'
-#define UTID_GRIM_TOTEM '????'
-#define SID_GRIM_TOTEM '????'
-#define BID_GRIM_TOTEM '????'
-#define SID_POISON_DART '????'
+#define UTID_TWILIGHT_WITCH_DOCTOR 'ndtp'
+#define UTID_GRIM_TOTEM 'h007'
+#define SID_GRIM_TOTEM 'A0BQ'
+#define BID_GRIM_TOTEM 'A0BR'
+#define SID_POISON_DART 'A0XX'
 // Faceless One
-#define SID_VICIOUS_STRIKE '????'
-#define BID_VICIOUS_STRIKE '????'
-#define SID_FILTHY_LAND '????'
+#define SID_VICIOUS_STRIKE 'A0XX'
+#define BID_VICIOUS_STRIKE 'A0XX'
+#define SID_FILTHY_LAND 'A0XX'
 
 // test unit type id
 #define UTID_STATIC_TARGET 'h000'
@@ -627,7 +635,7 @@
 #define ART_ANNIHILATION_MISSILE "Abilities\\Spells\\Undead\\OrbOfDeath\\AnnihilationMissile.mdl"
 #define ART_ARCANE_TOWER_ATTACK "Abilities\\Spells\\Human\\Feedback\\ArcaneTowerAttack.mdl"
 #define ART_BLEED "Objects\\Spawnmodels\\Human\\HumanBlood\\HeroBloodElfBlood.mdl"
-#define ART_BLINK "????"
+#define ART_BLINK "A0XX"
 #define ART_BLIZZARD_TARGET "Abilities\\Spells\\Human\\Blizzard\\BlizzardTarget.mdl"
 #define ART_BLOOD_LUST_LEFT "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustTarget.mdl"
 #define ART_BLOOD_LUST_RIGHT "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustSpecial.mdl"

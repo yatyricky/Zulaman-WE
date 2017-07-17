@@ -4,7 +4,7 @@ library GrimTotem requires SpellEvent, BuffSystem {
     function onEffect(Buff buf) {}
 
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].damageDealt += 0.65;
+        UnitProp[buf.bd.target].damageDealt += 0.15;
     }
 
     struct GrimTotem {
@@ -30,7 +30,7 @@ library GrimTotem requires SpellEvent, BuffSystem {
                         buf.bd.tick = -1;
                         buf.bd.interval = 1.5;
                         if (buf.bd.i0 != 6) {
-                            UnitProp[buf.bd.target].damageDealt -= 0.65;
+                            UnitProp[buf.bd.target].damageDealt -= 0.15;
                             buf.bd.i0 = 6;
                         }
                         buf.bd.boe = onEffect;
@@ -59,7 +59,7 @@ library GrimTotem requires SpellEvent, BuffSystem {
     }
 
     function onCast() {
-        GrimTotem.start(SpellEvent.CastingUnit);        
+        GrimTotem.start(SpellEvent.CastingUnit);
     }
 
     function onInit() {
