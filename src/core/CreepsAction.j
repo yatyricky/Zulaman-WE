@@ -841,11 +841,16 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
             if (UnitCanUse(source, SID_GRIM_TOTEM) && combatTime > 5.0) {
                 ip.add(SID_GRIM_TOTEM, 50);
             }
+            if (UnitCanUse(source, SID_POISON_DART) && combatTime > 5.0) {
+                ip.add(SID_POISON_DART, 50);
+            }
             res = ip.get();
             if (res == 0) {
                 IssueTargetOrderById(source, OID_ATTACK, target);
-            } else {
+            } else if (res == SID_GRIM_TOTEM) {
                 IssueImmediateOrderById(source, SpellData[res].oid);
+            } else {
+                IssueTargetOrderById(source, SpellData[res].oid, target);
             }
             ip.destroy();
         }

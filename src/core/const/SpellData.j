@@ -281,7 +281,7 @@ SpellData.create(SID_CORPSE_RAIN,"尸雨",0,0,0,OrderId("w"),1,ORDER_TYPE_POINT)
 SpellData.create(SID_VOODOO_DOLL,"巫毒娃娃",0,0,0,OrderId("w"),1,ORDER_TYPE_TARGET);
 SpellData.create(SID_SLAM_STRIKE,"分裂攻击（被动）",0,0,0,OrderId("w"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_VOMIT,"呕吐",0,0,0,OrderId("X"),1,ORDER_TYPE_IMMEDIATE);
-SpellData.create(SID_POISON_DART,"毒液箭",0,0,0,OrderId("w"),1,ORDER_TYPE_POINT);
+SpellData.create(SID_POISON_DART,"毒液箭",0,0,4,OrderId("sleep"),1,ORDER_TYPE_TARGET);
 SpellData.create(SID_GRIM_TOTEM,"恐怖图腾",0,0,8,OrderId("healingward"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_VICIOUS_STRIKE,"险恶打击",0,0,12,OrderId("w"),1,ORDER_TYPE_TARGET);
 SpellData.create(SID_FILTHY_LAND,"污秽之地",0,0,15,OrderId("w"),1,ORDER_TYPE_POINT);

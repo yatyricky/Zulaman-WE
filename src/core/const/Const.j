@@ -422,7 +422,7 @@
 #define UTID_GRIM_TOTEM 'h007'
 #define SID_GRIM_TOTEM 'A0BQ'
 #define BID_GRIM_TOTEM 'A0BR'
-#define SID_POISON_DART 'A0XX'
+#define SID_POISON_DART 'A0BS'
 // Faceless One
 #define SID_VICIOUS_STRIKE 'A0XX'
 #define BID_VICIOUS_STRIKE 'A0XX'
@@ -637,12 +637,14 @@
 #define ART_BLEED "Objects\\Spawnmodels\\Human\\HumanBlood\\HeroBloodElfBlood.mdl"
 #define ART_BLINK "A0XX"
 #define ART_BLIZZARD_TARGET "Abilities\\Spells\\Human\\Blizzard\\BlizzardTarget.mdl"
+#define ART_BLOOD_IMPACT "Abilities\\Weapons\\Blood\\BloodImpact.mdl"
 #define ART_BLOOD_LUST_LEFT "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustTarget.mdl"
 #define ART_BLOOD_LUST_RIGHT "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustSpecial.mdl"
 #define ART_CRATER "Objects\\Spawnmodels\\Other\\NeutralBuildingExplosion\\NeutralBuildingExplosion.mdl"
 #define ART_DEATH_AND_DECAY "Abilities\\Spells\\Undead\\DeathandDecay\\DeathandDecayTarget.mdl"
 #define ART_DISPEL "Abilities\\Spells\\Human\\DispelMagic\\DispelMagicTarget.mdl"
 #define ART_DOOM "Abilities\\Spells\\Other\\Doom\\DoomDeath.mdl"
+#define ART_DRYAD_MISSILE "Abilities\\Weapons\\Dryadmissile\\Dryadmissile.mdl"
 #define ART_DUST "Objects\\Spawnmodels\\Undead\\ImpaleTargetDust\\ImpaleTargetDust.mdl"
 #define ART_FREEZING_BREATH "Abilities\\Spells\\Undead\\FreezingBreath\\FreezingBreathTargetArt.mdl"
 #define ART_FROST_NOVA "Abilities\\Spells\\Undead\\FrostNova\\FrostNovaTarget.mdl"
@@ -663,5 +665,6 @@
 #define ART_SHIELD "Abilities\\Spells\\Items\\StaffOfSanctuary\\Staff_Sanctuary_Target.mdl"
 #define ART_SLOW "Abilities\\Spells\\Human\\slow\\slowtarget.mdl"
 #define ART_SPELLSTEAL "Abilities\\Spells\\Human\\SpellSteal\\SpellStealTarget.mdl"
+#define ART_STAMPEDE_MISSILE_DEATH "Abilities\\Spells\\Other\\Stampede\\StampedeMissileDeath.mdl"
 #define ART_STOMP "Abilities\\Spells\\Orc\\WarStomp\\WarStompCaster.mdl"
 #define ART_WATER "Objects\\Spawnmodels\\Naga\\NagaDeath\\NagaDeath.mdl"

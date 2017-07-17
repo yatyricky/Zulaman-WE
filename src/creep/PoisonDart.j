@@ -1,5 +1,5 @@
 //! zinc
-library PoisonDart {
+library PoisonDart requires DamageSystem, Sounds {
 
     struct PoisonDart {
         private timer tm;
@@ -37,7 +37,7 @@ library PoisonDart {
                 for (0 <= i < PlayerUnits.n) {
                     if (GetDistance.units2d(PlayerUnits.units[i], this.mis) < 150.0 && !IsUnitDead(PlayerUnits.units[i]) && !IsUnitInGroup(PlayerUnits.units[i], this.damaged)) {
                         DamageTarget(this.caster, PlayerUnits.units[i], 300.0, SpellData[SID_POISON_DART].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
-                        AddTimedEffect.atUnit(IMPACT, PlayerUnits.units[i], "origin", 0.0);
+                        AddTimedEffect.atUnit(ART_STAMPEDE_MISSILE_DEATH, PlayerUnits.units[i], "origin", 0.0);
                         GroupAddUnit(this.damaged, PlayerUnits.units[i]);
                     }
                 }
@@ -61,7 +61,7 @@ library PoisonDart {
             SetUnitFlyable(this.mis);
             SetUnitFlyHeight(this.mis, 50.0, 0.0);
             //SetUnitScale(this.mis, 2.0, 2.0, 2.0);
-            this.eff = AddSpecialEffectTarget(MISSILE, this.mis, "origin");
+            this.eff = AddSpecialEffectTarget(ART_DRYAD_MISSILE, this.mis, "origin");
             TimerStart(this.tm, 0.04, true, function thistype.run);
         }
     }
@@ -77,6 +77,7 @@ library PoisonDart {
                 }
             }
         }
+        RunSoundAtPoint2d(SND_ARCHER, GetUnitX(SpellEvent.CastingUnit), GetUnitY(SpellEvent.CastingUnit));
     }
 
     function onInit() {
