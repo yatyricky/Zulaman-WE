@@ -181,7 +181,7 @@
 #define SIDFRENZYCREEP 'A03P'
 #define SIDRAGECREEP 'A03Q'
 
-// 大修补匠
+// Arch Tinker
 #define UTID_ARCH_TINKER 'Ntin'
 #define UTID_ARCH_TINKER_MORPH 'Nrob'
 #define SID_GRIP_OF_STATIC_ELECTRICITY 'A0AF'
@@ -200,8 +200,8 @@
 #define SID_CLUSTER_ROCKETS 'A0AM'
 #define SID_SELF_DESTRUCT 'A0AN'
 
-// 娜迦女巫
-#define UTIDNAGASEAWITCH 'Hvsh'
+// Naga Sea Witch
+#define UTID_NAGA_SEA_WITCH 'Hvsh'
 #define SID_FUCKED_LIGHTNING 'A03L'
 #define BID_FUCKED_LIGHTNING 'A03R'
 #define UTID_FLYING_SERPENT 'n003'

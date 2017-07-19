@@ -143,7 +143,7 @@ library Loot requires IntegerPool, ZAMCore {
         boss7 = IntegerPool.create();
         bossPools[UTID_ARCH_TINKER] = boss1;
         bossPools[UTID_ARCH_TINKER_MORPH] = boss1;
-        bossPools[UTIDNAGASEAWITCH] = boss2;
+        bossPools[UTID_NAGA_SEA_WITCH] = boss2;
         bossPools[UTIDTIDEBARON] = boss3;
         bossPools[UTIDTIDEBARONWATER] = boss3;
         bossPools[UTIDWARLOCK] = boss4;

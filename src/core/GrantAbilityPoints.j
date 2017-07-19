@@ -5,7 +5,7 @@ library GrantAbilityPoints requires NefUnion, ZAMCore {
         integer utid = GetUnitTypeId(u);
         integer i;
         if (utid == UTID_ARCH_TINKER || utid == UTID_ARCH_TINKER_MORPH || /*
-                */ utid == UTIDNAGASEAWITCH || /*
+                */ utid == UTID_NAGA_SEA_WITCH || /*
                 */ utid == UTIDTIDEBARON || utid == UTIDTIDEBARONWATER || /*
                 */ utid == UTIDWARLOCK) {
             CURRENT_HERO_LEVEL += 1;

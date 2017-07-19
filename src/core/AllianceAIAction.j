@@ -413,7 +413,7 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
         integer bossutid = GetUnitTypeId(whichBoss);
         if (bossutid == UTID_ARCH_TINKER || bossutid == UTID_ARCH_TINKER_MORPH) {           
             return PositioningArchTinker(source);
-        } else if (GetUnitTypeId(whichBoss) == UTIDNAGASEAWITCH) {
+        } else if (GetUnitTypeId(whichBoss) == UTID_NAGA_SEA_WITCH) {
             return PositioningNagaSeaWitch(source);
         } else if (bossutid == UTIDTIDEBARON || bossutid == UTIDTIDEBARONWATER) {
             return PositioningTideBaron(source);

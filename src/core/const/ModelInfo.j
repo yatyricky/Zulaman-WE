@@ -103,7 +103,7 @@ ModelInfo.rg(UTID_ARCH_TINKER,ATT_INT,74799,255,75,5,0.05,0,0,1,0.03,CAREER_TYPE
 ModelInfo.rg(UTID_ARCH_TINKER_MORPH,ATT_INT,74799,255,75,5,0.05,0,0,1,0.03,CAREER_TYPE_BOSS,"ReplaceableTextures\\CommandButtons\\BTNHeroTinker.blp").setScale(1.7);
 ModelInfo.rg(UTID_POCKET_FACTORY,ATT_NON,1999,1,0,0,0,0,0,1,0,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNPocketFactory.blp");
 ModelInfo.rg(UTID_CLOCKWORK_GOBLIN,ATT_NON,9999,10,40,0,0,0,0,1,0.1,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNClockWerkGoblin.blp");
-ModelInfo.rg(UTIDNAGASEAWITCH,ATT_AGI,154899,490,300,5,0.05,0,0,1,0.03,CAREER_TYPE_BOSS,"ReplaceableTextures\\CommandButtons\\BTNNagaSeaWitch.blp").setScale(1.7);
+ModelInfo.rg(UTID_NAGA_SEA_WITCH,ATT_AGI,154899,490,300,5,0.05,0,0,1,0.03,CAREER_TYPE_BOSS,"ReplaceableTextures\\CommandButtons\\BTNNagaSeaWitch.blp").setScale(1.7);
 ModelInfo.rg(UTID_FLYING_SERPENT,ATT_NON,1499,21,59,5,0.05,0,0,1,0.1,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNWindSerpent.blp");
 ModelInfo.rg(UTIDTIDEBARON,ATT_STR,209599,660,400,5,0.05,0,0,1,0.03,CAREER_TYPE_BOSS,"ReplaceableTextures\\CommandButtons\\BTNNagaMyrmidonRoyalGuard.blp");
 ModelInfo.rg(UTIDTIDEBARONWATER,ATT_STR,209599,310,150,40,0.1,0,0,1,0.03,CAREER_TYPE_BOSS,"ReplaceableTextures\\CommandButtons\\BTNSeaElemental.blp");
