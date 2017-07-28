@@ -380,7 +380,7 @@
 
 // Fel Hound
 #define UTID_FEL_HOUND 'n00J'
-#define SID_MANA_BURN 'A0XX'
+#define SID_MANA_BURN 'A09Q'
 // Maid of Agony
 #define UTID_MAID_OF_AGONY 'n00K'
 #define SID_SHADOW_SPIKE 'A0XX'

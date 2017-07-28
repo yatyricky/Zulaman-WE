@@ -785,7 +785,26 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
                 IssueTargetOrderById(source, SpellData[res].oid, target);
             }
             ip.destroy();
-        }   
+        }
+    }
+
+    function makeOrderFelHound(unit source, unit target, real combatTime) {
+        IntegerPool ip;
+        integer res;
+        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+            ip = IntegerPool.create();
+            ip.add(0, 10);
+            if (UnitCanUse(source, SID_MANA_BURN) && combatTime > 5.0) {
+                ip.add(SID_MANA_BURN, 30);
+            }
+            res = ip.get();
+            if (res == 0) {
+                IssueTargetOrderById(source, OID_ATTACK, target);
+            } else {
+                IssueTargetOrderById(source, SpellData[res].oid, PlayerUnits.getHighestMP());
+            }
+            ip.destroy();
+        }
     }
 
     function makeOrderInfernoConstruct(unit source, unit target, real combatTime) {
@@ -935,10 +954,12 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
 
         unitCallBack[UTID_OBSIDIAN_CONSTRUCT] = makeOrderObsidianConstruct;   // 
 
+        // ============= Area 5 ==================
         unitCallBack[UTID_VOID_WALKER] = makeOrderVoidWalker;
+        unitCallBack[UTID_FEL_HOUND] = makeOrderFelHound;
         unitCallBack[UTID_INFERNO_CONSTRUCT] = makeOrderInfernoConstruct;   // inferno construct
 
-        // ============= Area 5 ==================
+        // ============= Area 6 ==================
         unitCallBack[UTID_TWILIGHT_WITCH_DOCTOR] = makeOrderTwilightWitchDoctor;
         unitCallBack[UTID_GRIM_TOTEM] = makeOrderGrimTotem;
 
