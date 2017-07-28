@@ -417,6 +417,8 @@
 #define UTID_GARGANTUAN 'A0XX'
 #define SID_SLAM_STRIKE 'A0XX'
 #define SID_VOMIT 'A0XX'
+#define UTID_VOMIT_MAGGOT 'A0XX'
+#define BID_VOMIT_MAGGOT_BITE 'A0XX'
 // Twilight Witch Doctor
 #define UTID_TWILIGHT_WITCH_DOCTOR 'ndtp'
 #define UTID_GRIM_TOTEM 'h007'
