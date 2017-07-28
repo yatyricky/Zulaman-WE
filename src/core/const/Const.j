@@ -377,13 +377,13 @@
 #define UTID_VOID_WALKER 'n00I'
 #define SID_NETHER_BOLT 'A09N'
 #define SID_SHADOW_SHIFT 'A09O'
-
 // Fel Hound
 #define UTID_FEL_HOUND 'n00J'
 #define SID_MANA_BURN 'A09Q'
 // Maid of Agony
 #define UTID_MAID_OF_AGONY 'n00K'
-#define SID_SHADOW_SPIKE 'A0XX'
+#define SID_SHADOW_SPIKE 'A09R'
+#define BID_SHADOW_SPIKE 'A0BT'
 #define SID_MARK_OF_AGONY 'A0XX'
 // Nether Drake
 #define SID_PHASE_SHIFT 'A0XX'
@@ -665,6 +665,8 @@
 #define ART_PLAGUE "units\\undead\\PlagueCloud\\PlagueCloud.mdl"
 #define ART_POISON "Abilities\\Weapons\\PoisonSting\\PoisonStingTarget.mdl"
 #define ART_RED_IMPACT "Abilities\\Spells\\Demon\\DemonBoltImpact\\DemonBoltImpact.mdl"
+#define ART_SHADOW_STRIKE_MISSILE "Abilities\\Spells\\NightElf\\shadowstrike\\ShadowStrikeMissile.mdl"
+#define ART_SHADOW_STRIKE_TARGET "Abilities\\Spells\\NightElf\\shadowstrike\\shadowstrike.mdl"
 #define ART_SHIELD "Abilities\\Spells\\Items\\StaffOfSanctuary\\Staff_Sanctuary_Target.mdl"
 #define ART_SLOW "Abilities\\Spells\\Human\\slow\\slowtarget.mdl"
 #define ART_SPELLSTEAL "Abilities\\Spells\\Human\\SpellSteal\\SpellStealTarget.mdl"

@@ -1,32 +1,47 @@
 //! zinc
-library ShadowSpike {
-/*
-deals 400 magical damage to target.
-then deals 200 + x magical damage to target where x equals to target HP lost times 0.33 per second.
-duration 10 seconds
-magical negative effect
-*/
+library ShadowSpike requires DamageSystem {
+
     function onEffect(Buff buf) {
-    	real amt = 200 + GetUnitLifeLost(buf.bd.target) * 0.33;
-        DamageTarget(buf.bd.caster, buf.bd.target, amt, SpellData[SID].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+        real amt = 150.0 + GetUnitLifeLost(buf.bd.target) * 0.5;
+        DamageTarget(buf.bd.caster, buf.bd.target, amt, SpellData[SID_SHADOW_SPIKE].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
         AddTimedEffect.atUnit(ART_PLAGUE, buf.bd.target, "origin", 0.2);
     }
 
     function onRemove(Buff buf) {}
 
-	function onCast() {
-        Buff buf = Buff.cast(SpellEvent.CastingUnipt, SpellEvent.TargetUnit, BID);
-        buf.bd.tick = 10;
-        buf.bd.interval = 1;
-        buf.bd.boe = onEffect;
-        buf.bd.bor = onRemove;
-        buf.run();
-	}
+    function onhit(Projectile p) -> boolean {
+        Buff buf;
+        if (TryReflect(p.target)) {
+            p.reverse();
+            return false;
+        } else {
+            DamageTarget(p.caster, p.target, 500.0, SpellData[SID_SHADOW_SPIKE].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
+            AddTimedEffect.atUnit(ART_SHADOW_STRIKE_TARGET, p.target, "origin", 0.2);
 
-	function onInit() {
-		RegisterSpellEffectResponse(SID, onCast);
-		BuffType.register(BID, BUFF_MAGE, BUFF_NEG);
-	}
+            buf = Buff.cast(p.caster, p.target, BID_SHADOW_SPIKE);
+            buf.bd.tick = 6;
+            buf.bd.interval = 2;
+            buf.bd.boe = onEffect;
+            buf.bd.bor = onRemove;
+            buf.run();
+            return true;
+        }
+    }
+
+    function onCast() {
+        Projectile p = Projectile.create();
+        real amt;
+        p.caster = SpellEvent.CastingUnit;
+        p.target = SpellEvent.TargetUnit;
+        p.path = ART_SHADOW_STRIKE_MISSILE;
+        p.pr = onhit;
+        p.speed = 900;
+        p.launch();
+    }
+
+    function onInit() {
+        RegisterSpellEffectResponse(SID_SHADOW_SPIKE, onCast);
+        BuffType.register(BID_SHADOW_SPIKE, BUFF_MAGE, BUFF_NEG);
+    }
 }
 //! endzinc
- 

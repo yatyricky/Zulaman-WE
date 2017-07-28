@@ -266,7 +266,7 @@ SpellData.create(SID_DEATH_AND_DECAY,"死亡凋零",0,0,8,OrderId("heal"),1,ORDE
 SpellData.create(SID_NETHER_BOLT,"虚空之箭",0,0,7,OrderId("sleep"),1,ORDER_TYPE_TARGET);
 SpellData.create(SID_SHADOW_SHIFT,"暗影转换",0,0,5,OrderId("slow"),1,ORDER_TYPE_TARGET);
 SpellData.create(SID_MANA_BURN,"法力燃烧",0,0,7,OrderId("sleep"),1,ORDER_TYPE_TARGET);
-SpellData.create(SID_SHADOW_SPIKE,"暗影之刺",0,0,0,OrderId("w"),1,ORDER_TYPE_TARGET);
+SpellData.create(SID_SHADOW_SPIKE,"暗影之刺",0,0,5,OrderId("sleep"),1,ORDER_TYPE_TARGET);
 SpellData.create(SID_MARK_OF_AGONY,"痛苦标记",0,0,0,OrderId("w"),1,ORDER_TYPE_TARGET);
 SpellData.create(SID_PHASE_SHIFT,"相位变换",0,0,0,OrderId("w"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_NETHER_IMPLOSION,"虚空爆裂",0,0,0,OrderId("w"),1,ORDER_TYPE_IMMEDIATE);

@@ -827,7 +827,26 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
                 tu = null;
             }
             ip.destroy();
-        }   
+        }
+    }
+
+    function makeOrderMaidOfAgony(unit source, unit target, real combatTime) {
+        IntegerPool ip;
+        integer res;
+        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+            ip = IntegerPool.create();
+            ip.add(0, 10);
+            if (UnitCanUse(source, SID_SHADOW_SPIKE) && combatTime > 5.0) {
+                ip.add(SID_SHADOW_SPIKE, 30);
+            }
+            res = ip.get();
+            if (res == 0) {
+                IssueTargetOrderById(source, OID_ATTACK, target);
+            } else {
+                IssueTargetOrderById(source, SpellData[res].oid, PlayerUnits.getRandomHero());
+            }
+            ip.destroy();
+        }
     }
 
     function makeOrderVoidWalker(unit source, unit target, real combatTime) {
@@ -957,6 +976,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         // ============= Area 5 ==================
         unitCallBack[UTID_VOID_WALKER] = makeOrderVoidWalker;
         unitCallBack[UTID_FEL_HOUND] = makeOrderFelHound;
+        unitCallBack[UTID_MAID_OF_AGONY] = makeOrderMaidOfAgony;
         unitCallBack[UTID_INFERNO_CONSTRUCT] = makeOrderInfernoConstruct;   // inferno construct
 
         // ============= Area 6 ==================
