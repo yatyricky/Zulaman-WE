@@ -384,7 +384,8 @@
 #define UTID_MAID_OF_AGONY 'n00K'
 #define SID_SHADOW_SPIKE 'A09R'
 #define BID_SHADOW_SPIKE 'A0BT'
-#define SID_MARK_OF_AGONY 'A0XX'
+#define SID_MARK_OF_AGONY 'A0BU'
+#define BID_MARK_OF_AGONY 'A0BV'
 // Nether Drake
 #define SID_PHASE_SHIFT 'A0XX'
 #define SID_NETHER_IMPLOSION 'A0XX'
@@ -636,6 +637,7 @@
 #define ART_ANGEL "Abilities\\Spells\\Human\\Resurrect\\ResurrectCaster.mdl"
 #define ART_ANNIHILATION_MISSILE "Abilities\\Spells\\Undead\\OrbOfDeath\\AnnihilationMissile.mdl"
 #define ART_ARCANE_TOWER_ATTACK "Abilities\\Spells\\Human\\Feedback\\ArcaneTowerAttack.mdl"
+#define ART_BANISH_TARGET "Abilities\\Spells\\Human\\Banish\\BanishTarget.mdl"
 #define ART_BLEED "Objects\\Spawnmodels\\Human\\HumanBlood\\HeroBloodElfBlood.mdl"
 #define ART_BLINK "A0XX"
 #define ART_BLIZZARD_TARGET "Abilities\\Spells\\Human\\Blizzard\\BlizzardTarget.mdl"
