@@ -376,7 +376,7 @@
 // Void Walker
 #define UTID_VOID_WALKER 'n00I'
 #define SID_NETHER_BOLT 'A09N'
-#define SID_SHADOW_SHIFT 'A0XX'
+#define SID_SHADOW_SHIFT 'A09O'
 
 // Fel Hound
 #define UTID_FEL_HOUND 'n00J'
@@ -653,6 +653,7 @@
 #define ART_GORE "Objects\\Spawnmodels\\Orc\\OrcLargeDeathExplode\\OrcLargeDeathExplode.mdl"
 #define ART_HEAL "Abilities\\Spells\\Items\\AIhe\\AIheTarget.mdl"
 #define ART_HEAL_SALVE "Abilities\\Spells\\Items\\HealingSalve\\HealingSalveTarget.mdl"
+#define ART_ILLUSION_TARGET "Abilities\\Spells\\Items\\AIil\\AIilTarget.mdl"
 #define ART_IMPACT "Abilities\\Weapons\\Bolt\\BoltImpact.mdl"
 #define ART_INFERNAL_BIRTH "Units\\Demon\\Infernal\\InfernalBirth.mdl"
 #define ART_INVULNERABLE "Abilities\\Spells\\Human\\DivineShield\\DivineShieldTarget.mdl"

@@ -1,18 +1,15 @@
 //! zinc
-library ShadowShift {
-/*
-deals 20% damage of target's max life to target.
-heal the caster equals 5 times of damage dealt
-*/
+library ShadowShift requires DamageSystem {
 
 	function onCast() {
-        real amt = GetUnitState(SpellEvent.TargetUnit, UNIT_STATE_MAX_lIFE) * 0.2;
-        DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, amt, SpellData[SID].name, false, false, false, WEAPON_TYPE_WHOKNOWS);   
-    	HealTarget(SpellEvent.CastingUnit, SpellEvent.CastingUnit, amt * 5.0, SpellData[SID].name, 0.0);
+        real amt = GetUnitState(SpellEvent.TargetUnit, UNIT_STATE_MAX_LIFE) * 0.2;
+        DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, amt, SpellData[SID_SHADOW_SHIFT].name, false, false, false, WEAPON_TYPE_WHOKNOWS);   
+    	HealTarget(SpellEvent.CastingUnit, SpellEvent.CastingUnit, GetUnitState(SpellEvent.CastingUnit, UNIT_STATE_MAX_LIFE) * 0.2, SpellData[SID_SHADOW_SHIFT].name, 0.0);
+        AddTimedEffect.atUnit(ART_ILLUSION_TARGET, SpellEvent.TargetUnit, "origin", 0.0);
 	}
 
 	function onInit() {
-		RegisterSpellEffectResponse(SID, onCast);
+		RegisterSpellEffectResponse(SID_SHADOW_SHIFT, onCast);
 	}
 }
 //! endzinc

@@ -817,14 +817,19 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
             ip = IntegerPool.create();
             ip.add(0, 10);
-            if (UnitCanUse(source, SID_NETHER_BOLT) && combatTime > 5.0) {
+            if (UnitCanUse(source, SID_NETHER_BOLT) && combatTime > 5.0 && GetUnitStatePercent(source, UNIT_STATE_LIFE, UNIT_STATE_MAX_LIFE) > 30) {
                 ip.add(SID_NETHER_BOLT, 50);
+            }
+            if (UnitCanUse(source, SID_SHADOW_SHIFT) && combatTime > 7.0 && GetUnitStatePercent(source, UNIT_STATE_LIFE, UNIT_STATE_MAX_LIFE) < 90) {
+                ip.add(SID_SHADOW_SHIFT, 50);
             }
             res = ip.get();
             if (res == 0) {
                 IssueTargetOrderById(source, OID_ATTACK, target);
-            } else {
+            } else if (res == SID_NETHER_BOLT) {
                 IssueTargetOrderById(source, SpellData[res].oid, PlayerUnits.getHighestHP());
+            } else {
+                IssueTargetOrderById(source, SpellData[res].oid, target);
             }
             ip.destroy();
         }
