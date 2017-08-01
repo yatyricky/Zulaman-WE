@@ -404,7 +404,7 @@
 // ## Area 6
 // Forest Troll
 #define UTID_FOREST_TROLL 'n00L'
-#define SID_CRUSHING_BLOW 'A0XX'
+#define SID_CRUSHING_BLOW 'A0C3'
 #define SID_FOREST_STOMP 'A0XX'
 #define BID_FOREST_STOMP 'A0XX'
 

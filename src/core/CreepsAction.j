@@ -850,6 +850,25 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         }
     }
 
+    function makeOrderForestTroll(unit source, unit target, real combatTime) {
+        IntegerPool ip;
+        integer res;
+        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+            ip = IntegerPool.create();
+            ip.add(0, 10);
+            if (UnitCanUse(source, SID_CRUSHING_BLOW) && combatTime > 5.0) {
+                ip.add(SID_CRUSHING_BLOW, 100);
+            }
+            res = ip.get();
+            if (res == 0) {
+                IssueTargetOrderById(source, OID_ATTACK, target);
+            } else {
+                IssueTargetOrderById(source, SpellData[res].oid, target);
+            }
+            ip.destroy();
+        }
+    }
+
     function makeOrderInfernoConstruct(unit source, unit target, real combatTime) {
         IntegerPool ip;
         integer res;
@@ -1033,6 +1052,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         unitCallBack[UTID_INFERNO_CONSTRUCT] = makeOrderInfernoConstruct;   // inferno construct
 
         // ============= Area 6 ==================
+        unitCallBack[UTID_FOREST_TROLL] = makeOrderForestTroll;
         unitCallBack[UTID_TWILIGHT_WITCH_DOCTOR] = makeOrderTwilightWitchDoctor;
         unitCallBack[UTID_GRIM_TOTEM] = makeOrderGrimTotem;
 
