@@ -1,5 +1,5 @@
 //! zinc
-library Burning {
+library Burning requires DamageSystem {
 
 	function onEffect(Buff buf) {
 		integer i;
@@ -16,6 +16,9 @@ library Burning {
         Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BID_BURNING);
         buf.bd.interval = 1.0;
         buf.bd.tick = 10;
+        if (buf.bd.e0 == 0) {
+            buf.bd.e0 = BuffEffect.create(ART_GREEN_LARGE_FIRE, buf, "origin");
+        }
         buf.bd.boe = onEffect;
         buf.bd.bor = onRemove;
         buf.run();

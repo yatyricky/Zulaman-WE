@@ -860,14 +860,19 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
             if (UnitCanUse(source, SID_METEOR) && combatTime > 10.0) {
                 ip.add(SID_METEOR, 30);
             }
+            if (UnitCanUse(source, SID_BURNING) && combatTime > 5.0) {
+                ip.add(SID_BURNING, 90);
+            }
             res = ip.get();
             if (res == 0) {
                 IssueTargetOrderById(source, OID_ATTACK, target);
-            } else {
+            } else if (res == SID_METEOR) {
                 tu = PlayerUnits.getRandomHero();
                 // print("Random Target = " + GetUnitNameEx(tu));
                 IssuePointOrderById(source, SpellData[res].oid, GetUnitX(tu), GetUnitY(tu));
                 tu = null;
+            } else {
+                IssueImmediateOrderById(source, SpellData[res].oid);
             }
             ip.destroy();
         }

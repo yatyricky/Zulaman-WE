@@ -398,9 +398,8 @@
 // Inferno Construct
 #define UTID_INFERNO_CONSTRUCT 'ninf'
 #define SID_METEOR 'A0BN'
-#define SID_BURNING 'A0XX'
-#define BID_BURNING 'A0XX'
-#define SID_RAGE_STRIKE 'A0XX'
+#define SID_BURNING 'A0C2'
+#define BID_BURNING 'A0C1'
 
 // ## Area 6
 // Forest Troll
@@ -657,6 +656,7 @@
 #define ART_FREEZING_BREATH "Abilities\\Spells\\Undead\\FreezingBreath\\FreezingBreathTargetArt.mdl"
 #define ART_FROST_NOVA "Abilities\\Spells\\Undead\\FrostNova\\FrostNovaTarget.mdl"
 #define ART_GORE "Objects\\Spawnmodels\\Orc\\OrcLargeDeathExplode\\OrcLargeDeathExplode.mdl"
+#define ART_GREEN_LARGE_FIRE "Environment\\UndeadBuildingFire\\UndeadLargeBuildingFire0.mdl"
 #define ART_HEAL "Abilities\\Spells\\Items\\AIhe\\AIheTarget.mdl"
 #define ART_HEAL_SALVE "Abilities\\Spells\\Items\\HealingSalve\\HealingSalveTarget.mdl"
 #define ART_ILLUSION_TARGET "Abilities\\Spells\\Items\\AIil\\AIilTarget.mdl"

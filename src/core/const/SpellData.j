@@ -272,7 +272,7 @@ SpellData.create(SID_NETHER_IMPLOSION,"虚空爆裂",0,4,12,OrderId("roar"),1,OR
 SpellData.create(SID_NETHER_BREATH,"虚空吐息",0,0,9,OrderId("howlofterror"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_NETHER_SLOW,"迟缓",0,0,7,OrderId("slow"),1,ORDER_TYPE_TARGET);
 SpellData.create(SID_METEOR,"陨石",0,0,7,OrderId("blizzard"),1,ORDER_TYPE_POINT);
-SpellData.create(SID_BURNING,"燃烧（被动）",0,0,0,OrderId("w"),1,ORDER_TYPE_IMMEDIATE);
+SpellData.create(SID_BURNING,"燃烧",0,0,20,OrderId("roar"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_CRUSHING_BLOW,"重拳",0,0,0,OrderId("w"),1,ORDER_TYPE_TARGET);
 SpellData.create(SID_FOREST_STOMP,"震地",0,0,12,OrderId("w"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_CORPSE_RAIN,"尸雨",0,0,0,OrderId("w"),1,ORDER_TYPE_POINT);
