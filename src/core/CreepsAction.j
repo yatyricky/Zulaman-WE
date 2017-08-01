@@ -715,6 +715,25 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         tu = null;
     }
 
+    function makeOrderNetherDrake(unit source, unit target, real combatTime) {
+        IntegerPool ip;
+        integer res;
+        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+            ip = IntegerPool.create();
+            ip.add(0, 10);
+            if (UnitCanUse(source, SID_NETHER_IMPLOSION) && combatTime > 10.0) {
+                ip.add(SID_NETHER_IMPLOSION, 70);
+            }
+            res = ip.get();
+            if (res == 0) {
+                IssueTargetOrderById(source, OID_ATTACK, target);
+            } else {
+                IssueImmediateOrderById(source, SpellData[res].oid);
+            }
+            ip.destroy();
+        }
+    }
+
     function makeOrderDracoLich(unit source, unit target, real combatTime) {
         IntegerPool ip;
         integer res;
@@ -980,6 +999,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         unitCallBack[UTID_VOID_WALKER] = makeOrderVoidWalker;
         unitCallBack[UTID_FEL_HOUND] = makeOrderFelHound;
         unitCallBack[UTID_MAID_OF_AGONY] = makeOrderMaidOfAgony;
+        unitCallBack[UTID_NETHER_DRAKE] = makeOrderNetherDrake;
         unitCallBack[UTID_INFERNO_CONSTRUCT] = makeOrderInfernoConstruct;   // inferno construct
 
         // ============= Area 6 ==================

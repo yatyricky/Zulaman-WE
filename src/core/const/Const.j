@@ -387,8 +387,8 @@
 #define SID_MARK_OF_AGONY 'A0BU'
 #define BID_MARK_OF_AGONY 'A0BV'
 // Nether Drake
-#define SID_PHASE_SHIFT 'A0XX'
-#define SID_NETHER_IMPLOSION 'A0XX'
+#define UTID_NETHER_DRAKE 'nndr'
+#define SID_NETHER_IMPLOSION 'A0BW'
 #define SID_NETHER_BREATH 'A0XX'
 // Nether Hatchling
 #define SID_NETHER_SLOW 'A0XX'
@@ -675,3 +675,6 @@
 #define ART_STAMPEDE_MISSILE_DEATH "Abilities\\Spells\\Other\\Stampede\\StampedeMissileDeath.mdl"
 #define ART_STOMP "Abilities\\Spells\\Orc\\WarStomp\\WarStompCaster.mdl"
 #define ART_WATER "Objects\\Spawnmodels\\Naga\\NagaDeath\\NagaDeath.mdl"
+#define ART_WISP_EXPLODE "Units\\NightElf\\Wisp\\WispExplode.mdl"
+
+#define ART_MASS_TELEPORT_TARGET "Abilities\\Spells\\Human\\MassTeleport\\MassTeleportTarget.mdl"
