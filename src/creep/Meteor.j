@@ -19,13 +19,13 @@ library Meteor requires DamageSystem {
             integer count = 0;
             real damage = 6000.0;
             for (0 <= i < PlayerUnits.n) {
-                if (GetDistance.unitCoord(PlayerUnits.units[i], this.x, this.y) < 350.0) {
+                if (GetDistance.unitCoord(PlayerUnits.units[i], this.x, this.y) < 450.0) {
                     count += 1;
                 }
             }
             damage /= count;
             for (0 <= i < PlayerUnits.n) {
-                if (GetDistance.unitCoord(PlayerUnits.units[i], this.x, this.y) < 350.0) {
+                if (GetDistance.unitCoord(PlayerUnits.units[i], this.x, this.y) < 450.0) {
                     DamageTarget(this.caster, PlayerUnits.units[i], damage, SpellData[SID_METEOR].name, true, false, false, WEAPON_TYPE_WHOKNOWS);
                 }
             }

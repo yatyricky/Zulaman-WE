@@ -392,7 +392,9 @@
 #define SID_NETHER_BREATH 'A0BX'
 #define BID_NETHER_BREATH 'A0BY'
 // Nether Hatchling
-#define SID_NETHER_SLOW 'A0XX'
+#define UTID_NETHER_HATCHLING 'nnht'
+#define SID_NETHER_SLOW 'A0BZ'
+#define BID_NETHER_SLOW 'A0C0'
 // Inferno Construct
 #define UTID_INFERNO_CONSTRUCT 'ninf'
 #define SID_METEOR 'A0BN'

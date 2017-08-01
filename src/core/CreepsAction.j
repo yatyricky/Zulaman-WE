@@ -663,6 +663,27 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         tu = null;
     }
 
+    function makeOrderNetherHatchling(unit source, unit target, real combatTime) {
+        IntegerPool ip;
+        integer res;
+        unit tu;
+        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+            ip = IntegerPool.create();
+            ip.add(0, 20);
+            if (UnitCanUse(source, SID_NETHER_SLOW) && combatTime > 10.0) {
+                ip.add(SID_NETHER_SLOW, 50);
+            }
+            res = ip.get();
+            if (res == 0) {
+                IssueTargetOrderById(source, OID_ATTACK, target);
+            } else {
+                IssueTargetOrderById(source, SpellData[res].oid, PlayerUnits.getRandomHero());
+            }
+            ip.destroy();
+        }
+        tu = null;
+    }
+
     function makeOrderFelRider(unit source, unit target, real combatTime) {
         IntegerPool ip;
         integer res;
@@ -1003,6 +1024,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         unitCallBack[UTID_FEL_HOUND] = makeOrderFelHound;
         unitCallBack[UTID_MAID_OF_AGONY] = makeOrderMaidOfAgony;
         unitCallBack[UTID_NETHER_DRAKE] = makeOrderNetherDrake;
+        unitCallBack[UTID_NETHER_HATCHLING] = makeOrderNetherHatchling;
         unitCallBack[UTID_INFERNO_CONSTRUCT] = makeOrderInfernoConstruct;   // inferno construct
 
         // ============= Area 6 ==================

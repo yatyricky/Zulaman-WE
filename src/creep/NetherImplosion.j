@@ -2,12 +2,17 @@
 library NetherImplosion requires DamageSystem {
 
     function response(CastingBar cd) {
-        integer i;
-        for (0 <= i < PlayerUnits.n) {
-            if (GetDistance.units2d(cd.caster, PlayerUnits.units[i]) < 300.0) {
-                DamageTarget(cd.caster, PlayerUnits.units[i], 1500, SpellData[SID_NETHER_IMPLOSION].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
+        unit tu;
+        GroupUnitsInArea(ENUM_GROUP, GetUnitX(cd.caster), GetUnitY(cd.caster), 300.0);
+        tu = FirstOfGroup(ENUM_GROUP);
+        while (tu != null) {
+            GroupRemoveUnit(ENUM_GROUP, tu);
+            if (!IsUnitDummy(tu) && !IsUnitDead(tu) && !IsUnitUseless(tu) && GetPidofu(tu) < NUMBER_OF_MAX_PLAYERS) {
+                DamageTarget(cd.caster, tu, 1500, SpellData[SID_NETHER_IMPLOSION].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
             }
+            tu = FirstOfGroup(ENUM_GROUP);
         }
+        tu = null;
 
         AddTimedEffect.atCoord(ART_WISP_EXPLODE, GetUnitX(cd.caster), GetUnitY(cd.caster), 1.0);
     }
