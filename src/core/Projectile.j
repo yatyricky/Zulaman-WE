@@ -14,6 +14,9 @@ library Projectile requires TimerUtils, Table, ZAMCore {
         real r0;
         integer i0;
         unit u0;
+
+        real angle, distance, dx, dy;
+        integer count;
         
         method destroy() {
             ReleaseTimer(this.tm);
@@ -59,6 +62,16 @@ library Projectile requires TimerUtils, Table, ZAMCore {
                 this.destroy();
             }
         }
+
+        static method runPierce() {
+            thistype this = GetTimerData(GetExpiredTimer());
+            SetUnitX(this.pro, GetUnitX(this.pro) + this.dx);
+            SetUnitY(this.pro, GetUnitY(this.pro) + this.dy);
+            this.count -= 1;
+            if (this.count < 0) {
+                this.destroy();
+            }
+        }
         
         method launch() {
             this.tm = NewTimer();
@@ -69,6 +82,21 @@ library Projectile requires TimerUtils, Table, ZAMCore {
             this.eff = AddSpecialEffectTarget(this.path, this.pro, "origin");
             this.speed = this.speed / 25.0;
             TimerStart(this.tm, 0.04, true, function thistype.run);
+        }
+
+        method pierce() {
+            this.tm = NewTimer();
+            SetTimerData(this.tm, this);
+
+            this.pro = CreateUnit(GetOwningPlayer(this.caster), DUMMY_ID, GetUnitX(this.caster), GetUnitY(this.caster) + 30, this.angle * bj_RADTODEG);
+            SetUnitFlyable(this.pro);
+            SetUnitFlyHeight(this.pro, 25, 0);
+            this.eff = AddSpecialEffectTarget(this.path, this.pro, "origin");
+
+            this.count = Rounding(25.0 * this.distance / this.speed);
+            this.dx = Cos(this.angle) * this.speed * 0.04;
+            this.dy = Sin(this.angle) * this.speed * 0.04;
+            TimerStart(this.tm, 0.04, true, function thistype.runPierce);
         }
     }
     

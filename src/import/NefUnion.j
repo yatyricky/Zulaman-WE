@@ -41,6 +41,14 @@ library NefUnion requires TimerUtils {
         static method byDummy(integer id, real x, real y) {
             KillUnit(CreateUnit(Player(0), id, x + 16.0, y + 24.0, 0.0));
         }
+
+        static method atCoordAngle(string se, real x, real y, real r) {
+            thistype this = thistype.allocate();
+            this.t = NewTimer();
+            this.e = AddSpecialEffectTarget(se, CreateUnit(Player(0), 'e00I', x, y, r), "origin");
+            SetTimerData(this.t, this);
+            TimerStart(this.t, 1.0, false, function thistype.execute);
+        }
     }
 
     public struct DelayedAddTimedEffect {

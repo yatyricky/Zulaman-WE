@@ -389,7 +389,8 @@
 // Nether Drake
 #define UTID_NETHER_DRAKE 'nndr'
 #define SID_NETHER_IMPLOSION 'A0BW'
-#define SID_NETHER_BREATH 'A0XX'
+#define SID_NETHER_BREATH 'A0BX'
+#define BID_NETHER_BREATH 'A0BY'
 // Nether Hatchling
 #define SID_NETHER_SLOW 'A0XX'
 // Inferno Construct
@@ -644,6 +645,7 @@
 #define ART_BLOOD_IMPACT "Abilities\\Weapons\\Blood\\BloodImpact.mdl"
 #define ART_BLOOD_LUST_LEFT "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustTarget.mdl"
 #define ART_BLOOD_LUST_RIGHT "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustSpecial.mdl"
+#define ART_BREATH_OF_FROST_MISSILE "Abilities\\Spells\\Other\\BreathOfFrost\\BreathOfFrostMissile.mdl"
 #define ART_CRATER "Objects\\Spawnmodels\\Other\\NeutralBuildingExplosion\\NeutralBuildingExplosion.mdl"
 #define ART_DEATH_AND_DECAY "Abilities\\Spells\\Undead\\DeathandDecay\\DeathandDecayTarget.mdl"
 #define ART_DISPEL "Abilities\\Spells\\Human\\DispelMagic\\DispelMagicTarget.mdl"
@@ -661,6 +663,7 @@
 #define ART_INVULNERABLE "Abilities\\Spells\\Human\\DivineShield\\DivineShieldTarget.mdl"
 #define ART_MANA "Abilities\\Spells\\Items\\AIma\\AImaTarget.mdl"
 #define ART_MANA_DRAIN_TARGET "Abilities\\Spells\\Other\\Drain\\ManaDrainTarget.mdl"
+#define ART_MASS_TELEPORT_TARGET "Abilities\\Spells\\Human\\MassTeleport\\MassTeleportTarget.mdl"
 #define ART_MEATWAGON_MISSILE "Abilities\\Weapons\\MeatwagonMissile\\MeatwagonMissile.mdl"
 #define ART_PARASITE_TARGET "Abilities\\Spells\\Other\\Parasite\\ParasiteTarget.mdl"
 #define ART_PHOENIX_MISSILE "Abilities\\Weapons\\PhoenixMissile\\Phoenix_Missile.mdl"
@@ -676,5 +679,3 @@
 #define ART_STOMP "Abilities\\Spells\\Orc\\WarStomp\\WarStompCaster.mdl"
 #define ART_WATER "Objects\\Spawnmodels\\Naga\\NagaDeath\\NagaDeath.mdl"
 #define ART_WISP_EXPLODE "Units\\NightElf\\Wisp\\WispExplode.mdl"
-
-#define ART_MASS_TELEPORT_TARGET "Abilities\\Spells\\Human\\MassTeleport\\MassTeleportTarget.mdl"
