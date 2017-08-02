@@ -431,7 +431,7 @@
 #define UTID_FACELESS_ONE 'nfod'
 #define SID_VICIOUS_STRIKE 'A0CD'
 #define BID_VICIOUS_STRIKE 'A0CE'
-#define SID_FILTHY_LAND 'A0XX'
+#define SID_FILTHY_LAND 'A0CF'
 
 // test unit type id
 #define UTID_STATIC_TARGET 'h000'
@@ -668,6 +668,7 @@
 #define ART_MANA_DRAIN_TARGET "Abilities\\Spells\\Other\\Drain\\ManaDrainTarget.mdl"
 #define ART_MASS_TELEPORT_TARGET "Abilities\\Spells\\Human\\MassTeleport\\MassTeleportTarget.mdl"
 #define ART_MEATWAGON_MISSILE "Abilities\\Weapons\\MeatwagonMissile\\MeatwagonMissile.mdl"
+#define ART_OBSIDIAN_REGEN_AURA "Abilities\\Spells\\Undead\\UnholyAura\\UnholyAura.mdl"
 #define ART_PARASITE_TARGET "Abilities\\Spells\\Other\\Parasite\\ParasiteTarget.mdl"
 #define ART_PHOENIX_MISSILE "Abilities\\Weapons\\PhoenixMissile\\Phoenix_Missile.mdl"
 #define ART_PLAGUE "units\\undead\\PlagueCloud\\PlagueCloud.mdl"

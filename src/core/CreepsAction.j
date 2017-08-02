@@ -867,11 +867,16 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
             if (UnitCanUse(source, SID_VICIOUS_STRIKE) && combatTime > 5.0) {
                 ip.add(SID_VICIOUS_STRIKE, 30);
             }
+            if (UnitCanUse(source, SID_FILTHY_LAND) && combatTime > 10.0) {
+                ip.add(SID_FILTHY_LAND, 300);
+            }
             res = ip.get();
             if (res == 0) {
                 IssueTargetOrderById(source, OID_ATTACK, target);
-            } else {
+            } else if (res == SID_VICIOUS_STRIKE) {
                 IssueTargetOrderById(source, SpellData[res].oid, PlayerUnits.getRandomHero());
+            } else {
+                IssueImmediateOrderById(source, SpellData[res].oid);
             }
             ip.destroy();
         }

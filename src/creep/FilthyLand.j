@@ -1,45 +1,48 @@
 //! zinc
-library FilthyLand {
-// 污秽之地
-
-// 对目标区域内的所有玩家每秒造成伤害，范围会逐渐扩大。
-
-// |cff99ccff施法距离:|r 1200码
-// |cff99ccff影响范围:|r 300码
-// |cff99ccff持续时间:|r 15秒
-// |cff99ccff冷却时间:|r 15秒
-
-    function displayEffects(real x, real y, real r) {
-        // AddTimedEffects
-    }
+library FilthyLand requires DamageSystem {
 
     struct FilthyLand {
         real x, y, r;
         timer tm;
         unit caster;
+        unit art;
+        effect eff;
+        integer count;
 
         method destroy() {
             ReleaseTimer(this.tm);
+            DestroyEffect(this.eff);
+            KillUnit(this.art);
+            this.eff = null;
+            this.art = null;
             this.caster = null;
             this.tm = null;
             this.deallocate();
         }
 
+        method resizeEffect() {
+            real size = (this.r - 270) / 80.0 + 3;
+            SetUnitScale(this.art, size, size, size);
+        }
+
         static method run() {
             thistype this = GetTimerData(GetExpiredTimer());
             integer i;
-            this.r += 30.0;
+            this.r += 1.2;
+            this.count += 1;
 
-            for (0 <= i < PlayerUnits.n) {
-                if (GetDistance.unitCoord(PlayerUnits.units[i], this.x, this.y) < this.r) {
-                    DamageTarget(this.caster, PlayerUnits.units[i], 200.0, SpellData[SID_FILTHY_LAND].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+            if (ModuloInteger(this.count, 25) == 0) {
+                for (0 <= i < PlayerUnits.n) {
+                    if (GetDistance.unitCoord(PlayerUnits.units[i], this.x, this.y) < this.r) {
+                        DamageTarget(this.caster, PlayerUnits.units[i], 200.0, SpellData[SID_FILTHY_LAND].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+                    }
                 }
             }
 
             if (this.r >= 750.0) {
                 this.destroy();
             } else {
-                displayEffects(this.x, this.y, this.r + 30.0);
+                this.resizeEffect();
             }
         }
 
@@ -52,10 +55,14 @@ library FilthyLand {
             this.x = x;
             this.y = y;
             this.r = 270.0;
+            this.count = 0;
 
-            displayEffects(this.x, this.y, this.r + 30.0);
+            this.art = CreateUnit(Player(MOB_PID), DUMMY_ID, x - 20, y + 50, 0.0);
+            this.eff = AddSpecialEffectTarget(ART_OBSIDIAN_REGEN_AURA, this.art, "origin");
 
-            TimerStart(this.tm, 1.0, true, function thistype.run);
+            this.resizeEffect();
+
+            TimerStart(this.tm, 0.04, true, function thistype.run);
         }
     }
 
@@ -67,4 +74,4 @@ library FilthyLand {
         RegisterSpellEffectResponse(SID_FILTHY_LAND, onCast);
     }
 }
-//! enzinc
+//! endzinc
