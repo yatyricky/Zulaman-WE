@@ -411,8 +411,8 @@
 #define UTID_CURSED_HUNTER 'ohun'
 #define BID_ZEAL 'A0C6'
 // Deranged Priest
-#define UTID_DERANGED_PRIEST 'A0XX'
-#define SID_CORPSE_RAIN 'A0XX'
+#define UTID_DERANGED_PRIEST 'odoc'
+#define SID_CORPSE_RAIN 'A0C7'
 #define SID_VOODOO_DOLL 'A0XX'
 #define SID_VOODOO_DOLL_ILLUSION 'A0XX'
 // Gargantuan

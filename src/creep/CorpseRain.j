@@ -1,5 +1,5 @@
 //! zinc
-library CorpseRain {
+library CorpseRain requires DamageSystem {
     private struct CorpseFall {
         unit mis;
         timer tm;
@@ -106,7 +106,7 @@ library CorpseRain {
     }
 
     function onInit() {
-        RegisterSpellEventResponse(SID_CORPSE_RAIN, onCast);
+        RegisterSpellEffectResponse(SID_CORPSE_RAIN, onCast);
     }
 }
 //! endzinc
