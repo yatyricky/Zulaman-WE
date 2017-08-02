@@ -428,8 +428,9 @@
 #define BID_GRIM_TOTEM 'A0BR'
 #define SID_POISON_DART 'A0BS'
 // Faceless One
-#define SID_VICIOUS_STRIKE 'A0XX'
-#define BID_VICIOUS_STRIKE 'A0XX'
+#define UTID_FACELESS_ONE 'nfod'
+#define SID_VICIOUS_STRIKE 'A0CD'
+#define BID_VICIOUS_STRIKE 'A0CE'
 #define SID_FILTHY_LAND 'A0XX'
 
 // test unit type id
@@ -640,7 +641,7 @@
 #define ART_ARCANE_TOWER_ATTACK "Abilities\\Spells\\Human\\Feedback\\ArcaneTowerAttack.mdl"
 #define ART_BANISH_TARGET "Abilities\\Spells\\Human\\Banish\\BanishTarget.mdl"
 #define ART_BLEED "Objects\\Spawnmodels\\Human\\HumanBlood\\HeroBloodElfBlood.mdl"
-#define ART_BLINK "A0XX"
+#define ART_BLINK "Abilities\\Spells\\NightElf\\Blink\\BlinkTarget.mdl"
 #define ART_BLIZZARD_TARGET "Abilities\\Spells\\Human\\Blizzard\\BlizzardTarget.mdl"
 #define ART_BLOOD_IMPACT "Abilities\\Weapons\\Blood\\BloodImpact.mdl"
 #define ART_BLOOD_LUST_LEFT "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustTarget.mdl"

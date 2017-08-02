@@ -442,6 +442,10 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         IssueTargetOrderById(source, OID_ATTACK, target);
     }
 
+    function makeOrderJustAttack(unit source, unit target, real combatTime) {
+        IssueTargetOrderById(source, OID_ATTACK, target);
+    }
+
     // wind serpent        
     function makeOrderWindSerpent(unit source, unit target, real combatTime) {
         IntegerPool ip;
@@ -854,6 +858,25 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         }
     }
 
+    function makeOrderFacelessOne(unit source, unit target, real combatTime) {
+        IntegerPool ip;
+        integer res;
+        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+            ip = IntegerPool.create();
+            ip.add(0, 10);
+            if (UnitCanUse(source, SID_VICIOUS_STRIKE) && combatTime > 5.0) {
+                ip.add(SID_VICIOUS_STRIKE, 30);
+            }
+            res = ip.get();
+            if (res == 0) {
+                IssueTargetOrderById(source, OID_ATTACK, target);
+            } else {
+                IssueTargetOrderById(source, SpellData[res].oid, PlayerUnits.getRandomHero());
+            }
+            ip.destroy();
+        }
+    }
+
     function makeOrderFelHound(unit source, unit target, real combatTime) {
         IntegerPool ip;
         integer res;
@@ -1106,8 +1129,10 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         unitCallBack[UTID_CURSED_HUNTER] = makeOrderCursedHunter;
         unitCallBack[UTID_DERANGED_PRIEST] = makeOrderDerangedPriest;
         unitCallBack[UTID_GARGANTUAN] = makeOrderGargantuan;
+        unitCallBack[UTID_VOMIT_MAGGOT] = makeOrderJustAttack;
         unitCallBack[UTID_TWILIGHT_WITCH_DOCTOR] = makeOrderTwilightWitchDoctor;
         unitCallBack[UTID_GRIM_TOTEM] = makeOrderGrimTotem;
+        unitCallBack[UTID_FACELESS_ONE] = makeOrderFacelessOne;
 
         unitCallBack['h000'] = makeOrderh000;   //
         unitCallBack['h002'] = makeOrderh002;   //

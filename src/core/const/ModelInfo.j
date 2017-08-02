@@ -148,6 +148,7 @@ ModelInfo.rg(UTID_GARGANTUAN,ATT_NON,219999,1200,300,10,0.05,0,0,0.9,0.05,CAREER
 ModelInfo.rg(UTID_VOMIT_MAGGOT,ATT_NON,1999,100,100,0,0,0,0,1,0,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNDuneWorm.blp");
 ModelInfo.rg(UTID_TWILIGHT_WITCH_DOCTOR,ATT_NON,139999,1100,300,5,0.05,0,0,1,0.05,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNDarkTrollShadowPriest.blp");
 ModelInfo.rg(UTID_GRIM_TOTEM,ATT_NON,199999,1,0,0,0,0,0,1,0,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNHealingWard.blp");
+ModelInfo.rg(UTID_FACELESS_ONE,ATT_NON,219999,1300,300,5,0,0,0,1,0.05,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNFacelessOne.blp");
 
         });
     }

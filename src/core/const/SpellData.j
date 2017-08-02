@@ -282,7 +282,7 @@ SpellData.create(SID_SLAM_STRIKE,"分裂攻击（被动）",0,0,0,OrderId("roar"
 SpellData.create(SID_VOMIT,"呕吐",0,4,20,OrderId("howlofterror"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_POISON_DART,"毒液箭",0,0,4,OrderId("sleep"),1,ORDER_TYPE_TARGET);
 SpellData.create(SID_GRIM_TOTEM,"恐怖图腾",0,0,8,OrderId("healingward"),1,ORDER_TYPE_IMMEDIATE);
-SpellData.create(SID_VICIOUS_STRIKE,"险恶打击",0,0,12,OrderId("w"),1,ORDER_TYPE_TARGET);
+SpellData.create(SID_VICIOUS_STRIKE,"险恶打击",0,0,12,OrderId("sleep"),1,ORDER_TYPE_TARGET);
 SpellData.create(SID_FILTHY_LAND,"污秽之地",0,0,15,OrderId("w"),1,ORDER_TYPE_POINT);
 SpellData.create(SIDCALLTOARMS,"战斗召唤",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_CTHUNS_DERANGEMENT,"上古狂乱",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
