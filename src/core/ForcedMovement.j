@@ -1,5 +1,5 @@
 //! zinc
-library ForcedMovement {
+library ForcedMovement requires TimerUtils, ZAMCore {
     
     private struct ForcedMovement {
         private static HandleTable ht;
@@ -22,7 +22,7 @@ library ForcedMovement {
             if (IsUnitDead(this.u)) {
                 this.destroy();
             } else {
-                factor = (this.frame - this.count) / this.frames * this.accr;
+                factor = (this.frames - this.count) / this.frames * this.accr;
                 SetUnitPosition(this.u, GetUnitX(this.u) + this.dx + this.dx * factor, GetUnitY(this.u) + this.dy + this.dy * factor);
                 this.count -= 1;
                 if (this.count <= 0) {

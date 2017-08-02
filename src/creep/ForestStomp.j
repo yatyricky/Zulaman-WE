@@ -12,11 +12,12 @@ library ForestStomp requires DamageSystem, ForcedMovement {
     function onCast() {
         integer i;
         real dis, dx, dy;
+        Buff buf;
         for (0 <= i < PlayerUnits.n) {
             dis = GetDistance.units(SpellEvent.CastingUnit, PlayerUnits.units[i]);
             if (dis <= 350.0) {
                 // damage
-                DamageTarget(SpellEvent.CastingUnit, PlayerUnits.units[i], 1250.0, SpellData[SID_STOMP].name, true, false, false, WEAPON_TYPE_WHOKNOWS);
+                DamageTarget(SpellEvent.CastingUnit, PlayerUnits.units[i], 900.0, SpellData[SID_FOREST_STOMP].name, true, false, false, WEAPON_TYPE_WHOKNOWS);
 
                 // move
                 dx = (GetUnitX(PlayerUnits.units[i]) - GetUnitX(SpellEvent.CastingUnit)) * 36.0 / dis;

@@ -859,11 +859,16 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
             if (UnitCanUse(source, SID_CRUSHING_BLOW) && combatTime > 5.0) {
                 ip.add(SID_CRUSHING_BLOW, 100);
             }
+            if (UnitCanUse(source, SID_FOREST_STOMP) && combatTime > 10.0) {
+                ip.add(SID_FOREST_STOMP, 40);
+            }
             res = ip.get();
             if (res == 0) {
                 IssueTargetOrderById(source, OID_ATTACK, target);
-            } else {
+            } else if (res == SID_CRUSHING_BLOW) {
                 IssueTargetOrderById(source, SpellData[res].oid, target);
+            } else {
+                IssueImmediateOrderById(source, SpellData[res].oid);
             }
             ip.destroy();
         }

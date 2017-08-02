@@ -405,8 +405,8 @@
 // Forest Troll
 #define UTID_FOREST_TROLL 'n00L'
 #define SID_CRUSHING_BLOW 'A0C3'
-#define SID_FOREST_STOMP 'A0XX'
-#define BID_FOREST_STOMP 'A0XX'
+#define SID_FOREST_STOMP 'A0C4'
+#define BID_FOREST_STOMP 'A0C5'
 
 // Cursed Hunter
 #define UTID_CURSED_HUNTER 'A0XX'
@@ -679,5 +679,6 @@
 #define ART_SPELLSTEAL "Abilities\\Spells\\Human\\SpellSteal\\SpellStealTarget.mdl"
 #define ART_STAMPEDE_MISSILE_DEATH "Abilities\\Spells\\Other\\Stampede\\StampedeMissileDeath.mdl"
 #define ART_STOMP "Abilities\\Spells\\Orc\\WarStomp\\WarStompCaster.mdl"
+#define ART_THUNDER_CLAPCASTER "Abilities\\Spells\\Human\\Thunderclap\\ThunderClapCaster.mdl"
 #define ART_WATER "Objects\\Spawnmodels\\Naga\\NagaDeath\\NagaDeath.mdl"
 #define ART_WISP_EXPLODE "Units\\NightElf\\Wisp\\WispExplode.mdl"
