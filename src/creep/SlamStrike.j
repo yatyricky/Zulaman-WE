@@ -1,14 +1,15 @@
 //! zinc
-library SlamStrike {
+library SlamStrike requires DamageSystem {
 
-    function gargantuanDamaged(unit u) {
+    function gargantuanDamaged() {
         integer i;
         if (GetUnitTypeId(DamageResult.source) == UTID_GARGANTUAN && DamageResult.abilityName == DAMAGE_NAME_MELEE) {
             for (0 <= i < PlayerUnits.n) {
-                if (GetDistance.unitCoord(PlayerUnits.units[i], GetUnitX(u), GetUnitX(y)) < 250.0) {
+                if (GetDistance.units2d(PlayerUnits.units[i], DamageResult.target) < 250.0 && !IsUnit(PlayerUnits.units[i], DamageResult.target)) {
                     DamageTarget(DamageResult.source, PlayerUnits.units[i], DamageResult.amount, SpellData[SID_SLAM_STRIKE].name, true, false, false, WEAPON_TYPE_WHOKNOWS);
                 }
             }
+
         }
     }
 

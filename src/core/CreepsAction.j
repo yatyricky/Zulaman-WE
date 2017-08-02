@@ -816,6 +816,25 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         }   
     }
 
+    function makeOrderGargantuan(unit source, unit target, real combatTime) {
+        IntegerPool ip;
+        integer res;
+        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+            ip = IntegerPool.create();
+            ip.add(0, 10);
+            if (UnitCanUse(source, SID_VOMIT) && combatTime > 15.0) {
+                ip.add(SID_VOMIT, 30);
+            }
+            res = ip.get();
+            if (res == 0) {
+                IssueTargetOrderById(source, OID_ATTACK, target);
+            } else {
+                IssueImmediateOrderById(source, SpellData[res].oid);
+            }
+            ip.destroy();
+        }
+    }
+
     function makeOrderZombie(unit source, unit target, real combatTime) {
         IntegerPool ip;
         integer res;
@@ -1086,6 +1105,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         unitCallBack[UTID_FOREST_TROLL] = makeOrderForestTroll;
         unitCallBack[UTID_CURSED_HUNTER] = makeOrderCursedHunter;
         unitCallBack[UTID_DERANGED_PRIEST] = makeOrderDerangedPriest;
+        unitCallBack[UTID_GARGANTUAN] = makeOrderGargantuan;
         unitCallBack[UTID_TWILIGHT_WITCH_DOCTOR] = makeOrderTwilightWitchDoctor;
         unitCallBack[UTID_GRIM_TOTEM] = makeOrderGrimTotem;
 

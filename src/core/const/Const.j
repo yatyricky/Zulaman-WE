@@ -416,11 +416,11 @@
 #define SID_VOODOO_DOLL 'A0C8'
 #define SID_VOODOO_DOLL_ILLUSION 'A0C9'
 // Gargantuan
-#define UTID_GARGANTUAN 'A0XX'
-#define SID_SLAM_STRIKE 'A0XX'
-#define SID_VOMIT 'A0XX'
-#define UTID_VOMIT_MAGGOT 'A0XX'
-#define BID_VOMIT_MAGGOT_BITE 'A0XX'
+#define UTID_GARGANTUAN 'u004'
+#define SID_SLAM_STRIKE 'A0CA'
+#define SID_VOMIT 'A0CB'
+#define UTID_VOMIT_MAGGOT 'n00R'
+#define BID_VOMIT_MAGGOT_BITE 'A0CC'
 // Twilight Witch Doctor
 #define UTID_TWILIGHT_WITCH_DOCTOR 'ndtp'
 #define UTID_GRIM_TOTEM 'h007'
@@ -647,6 +647,7 @@
 #define ART_BLOOD_LUST_RIGHT "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustSpecial.mdl"
 #define ART_BREATH_OF_FROST_MISSILE "Abilities\\Spells\\Other\\BreathOfFrost\\BreathOfFrostMissile.mdl"
 #define ART_CRATER "Objects\\Spawnmodels\\Other\\NeutralBuildingExplosion\\NeutralBuildingExplosion.mdl"
+#define ART_CURSE "Abilities\\Spells\\Undead\\Curse\\CurseTarget.mdl"
 #define ART_DEATH_AND_DECAY "Abilities\\Spells\\Undead\\DeathandDecay\\DeathandDecayTarget.mdl"
 #define ART_DISPEL "Abilities\\Spells\\Human\\DispelMagic\\DispelMagicTarget.mdl"
 #define ART_DOOM "Abilities\\Spells\\Other\\Doom\\DoomDeath.mdl"
@@ -670,6 +671,7 @@
 #define ART_PHOENIX_MISSILE "Abilities\\Weapons\\PhoenixMissile\\Phoenix_Missile.mdl"
 #define ART_PLAGUE "units\\undead\\PlagueCloud\\PlagueCloud.mdl"
 #define ART_POISON "Abilities\\Weapons\\PoisonSting\\PoisonStingTarget.mdl"
+#define ART_POISON_SLIME "Abilities\\Weapons\\ChimaeraAcidMissile\\ChimaeraAcidMissile.mdl"
 #define ART_RED_IMPACT "Abilities\\Spells\\Demon\\DemonBoltImpact\\DemonBoltImpact.mdl"
 #define ART_SHADOW_STRIKE_MISSILE "Abilities\\Spells\\NightElf\\shadowstrike\\ShadowStrikeMissile.mdl"
 #define ART_SHADOW_STRIKE_TARGET "Abilities\\Spells\\NightElf\\shadowstrike\\shadowstrike.mdl"

@@ -144,6 +144,8 @@ ModelInfo.rg(UTID_INFERNO_CONSTRUCT,ATT_NON,219999,900,300,10,0.05,10,150,1,0.1,
 ModelInfo.rg(UTID_FOREST_TROLL,ATT_NON,149999,1200,300,5,0.01,0,0,1,0.01,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNFurbolgTracker.blp");
 ModelInfo.rg(UTID_CURSED_HUNTER,ATT_NON,149999,1200,200,5,0.01,0,0,1,0.05,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNHeadhunter.blp");
 ModelInfo.rg(UTID_DERANGED_PRIEST,ATT_NON,119999,1000,200,5,0.01,0,0,0.9,0.01,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNWitchDoctor.blp");
+ModelInfo.rg(UTID_GARGANTUAN,ATT_NON,219999,1200,300,10,0.05,0,0,0.9,0.05,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNAbomination.blp");
+ModelInfo.rg(UTID_VOMIT_MAGGOT,ATT_NON,1999,100,100,0,0,0,0,1,0,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNDuneWorm.blp");
 ModelInfo.rg(UTID_TWILIGHT_WITCH_DOCTOR,ATT_NON,139999,1100,300,5,0.05,0,0,1,0.05,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNDarkTrollShadowPriest.blp");
 ModelInfo.rg(UTID_GRIM_TOTEM,ATT_NON,199999,1,0,0,0,0,0,1,0,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNHealingWard.blp");
 

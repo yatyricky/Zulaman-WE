@@ -1,7 +1,6 @@
 //! zinc
 library BansheeScroll requires SpellEvent, CastingBar, Projectile, Sounds {
 #define MISSILE "Abilities\\Weapons\\BansheeMissile\\BansheeMissile.mdl"
-#define ART_CURSE "Abilities\\Spells\\Undead\\Curse\\CurseTarget.mdl"
 #define BUFF_ID 'A07L'
 
     function onhit(Projectile p) -> boolean {
@@ -51,7 +50,6 @@ library BansheeScroll requires SpellEvent, CastingBar, Projectile, Sounds {
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_NEG);
     }
 #undef BUFF_ID
-#undef ART_CURSE
 #undef MISSILE
 }
 //! endzinc

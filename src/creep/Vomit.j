@@ -1,5 +1,5 @@
 //! zinc
-library Vomit {
+library Vomit requires AggroSystem {
 
     function onEffect(Buff buf) {
         UnitProp[buf.bd.target].attackRate -= buf.bd.r0;
@@ -33,6 +33,7 @@ library Vomit {
         unit caster, mis;
         effect eff;
         real tx, ty, dx, dy;
+        integer count;
 
         private method destroy() {
             ReleaseTimer(this.tm);
@@ -52,7 +53,8 @@ library Vomit {
             if (IsInCombat()) {
                 SetUnitX(this.mis, GetUnitX(this.mis) + this.dx);
                 SetUnitY(this.mis, GetUnitY(this.mis) + this.dy);
-                if (GetDistance.unitCoord(this.mis, this.tx, this.ty) < 25.0) {
+                this.count -= 1;
+                if (this.count <= 0) {
                     CreateUnit(Player(MOB_PID), UTID_VOMIT_MAGGOT, GetUnitX(this.mis), GetUnitY(this.mis), GetRandomReal(0.0, 359.00));
 
                     for (0 <= i < PlayerUnits.n) {
@@ -82,6 +84,7 @@ library Vomit {
             dis = GetDistance.unitCoord(caster, tx, ty);
             this.dx = 25.0 * (tx - GetUnitX(caster)) / dis;
             this.dy = 25.0 * (ty - GetUnitY(caster)) / dis;
+            this.count = Rounding(dis / 25.0);
 
             TimerStart(this.tm, 0.04, true, function thistype.run);
         }

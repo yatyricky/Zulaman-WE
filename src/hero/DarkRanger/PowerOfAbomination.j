@@ -1,7 +1,6 @@
 //! zinc
 library PowerOfAbomination requires DarkRangerGlobal, SpellEvent, DamageSystem {
 #define ART "Abilities\\Weapons\\AvengerMissile\\AvengerMissile.mdl"
-#define ART_CURSE "Abilities\\Spells\\Undead\\Curse\\CurseTarget.mdl"
 #define BUFF_ID 'A042'
 #define BUFF_ID1 'A043'
 #define BUFF_ID2 'A044'
@@ -182,7 +181,6 @@ library PowerOfAbomination requires DarkRangerGlobal, SpellEvent, DamageSystem {
 #undef BUFF_ID2
 #undef BUFF_ID1
 #undef BUFF_ID
-#undef ART_CURSE
 #undef ART
 }
 //! endzinc

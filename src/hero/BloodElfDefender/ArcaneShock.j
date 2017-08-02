@@ -4,7 +4,6 @@ library ArcaneShock requires DamageSystem, BuffSystem, UnitProperty, AggroSystem
 //#define BUFF_ID1 'A02D'
 //#define BUFF_ID2 'A02H'
 #define ART_TARGET "Abilities\\Spells\\Human\\ManaFlare\\ManaFlareBoltImpact.mdl"
-#define ART_CURSE "Abilities\\Spells\\Undead\\Curse\\CurseTarget.mdl"
 //#define ART_IMPROVED "Abilities\\Spells\\Human\\MagicSentry\\MagicSentryCaster.mdl"
 
     //timer arcaneShockExTm[NUMBER_OF_MAX_PLAYERS];
@@ -133,7 +132,6 @@ library ArcaneShock requires DamageSystem, BuffSystem, UnitProperty, AggroSystem
     }
     
 //#undef ART_IMPROVED
-#undef ART_CURSE
 #undef ART_TARGET
 //#undef BUFF_ID2
 //#undef BUFF_ID1
