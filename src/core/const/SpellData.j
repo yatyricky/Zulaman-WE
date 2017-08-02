@@ -276,7 +276,8 @@ SpellData.create(SID_BURNING,"燃烧",0,0,20,OrderId("roar"),1,ORDER_TYPE_IMMEDI
 SpellData.create(SID_CRUSHING_BLOW,"重拳",0,2,6,OrderId("sleep"),1,ORDER_TYPE_TARGET);
 SpellData.create(SID_FOREST_STOMP,"震地",0,0,12,OrderId("roar"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_CORPSE_RAIN,"尸雨",0,0,12,OrderId("slow"),1,ORDER_TYPE_TARGET);
-SpellData.create(SID_VOODOO_DOLL,"巫毒娃娃",0,0,0,OrderId("w"),1,ORDER_TYPE_TARGET);
+SpellData.create(SID_VOODOO_DOLL,"巫毒娃娃",0,0,20,OrderId("sleep"),1,ORDER_TYPE_TARGET);
+SpellData.create(SID_VOODOO_DOLL_ILLUSION,"DUMMY",0,0,0,852274,1,ORDER_TYPE_TARGET);
 SpellData.create(SID_SLAM_STRIKE,"分裂攻击（被动）",0,0,0,OrderId("w"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_VOMIT,"呕吐",0,0,0,OrderId("X"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_POISON_DART,"毒液箭",0,0,4,OrderId("sleep"),1,ORDER_TYPE_TARGET);

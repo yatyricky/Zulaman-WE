@@ -863,6 +863,9 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
             if (UnitCanUse(source, SID_CORPSE_RAIN) && combatTime > 10.0) {
                 ip.add(SID_CORPSE_RAIN, 70);
             }
+            if (UnitCanUse(source, SID_VOODOO_DOLL) && combatTime > 15.0) {
+                ip.add(SID_VOODOO_DOLL, 200);
+            }
             res = ip.get();
             if (res == 0) {
                 IssueTargetOrderById(source, OID_ATTACK, target);

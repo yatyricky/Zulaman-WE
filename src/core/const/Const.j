@@ -413,8 +413,8 @@
 // Deranged Priest
 #define UTID_DERANGED_PRIEST 'odoc'
 #define SID_CORPSE_RAIN 'A0C7'
-#define SID_VOODOO_DOLL 'A0XX'
-#define SID_VOODOO_DOLL_ILLUSION 'A0XX'
+#define SID_VOODOO_DOLL 'A0C8'
+#define SID_VOODOO_DOLL_ILLUSION 'A0C9'
 // Gargantuan
 #define UTID_GARGANTUAN 'A0XX'
 #define SID_SLAM_STRIKE 'A0XX'

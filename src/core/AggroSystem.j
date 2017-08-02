@@ -602,7 +602,7 @@ library AggroSystem requires MobInit, UnitProperty, Clock, DamageSystem, PlayerU
     
     // any unit enter map
     function register(unit u) {
-        if (!IsUnitDummy(u)) {
+        if (!IsUnitDummy(u) && !IsUnitIllusion(u)) {
             if (GetPlayerId(GetOwningPlayer(u)) == MOB_PID) {
                 if (IsInCombat()) {
                     if (GetDistance.units2d(PlayerUnits.units[0], u) < 1500) {

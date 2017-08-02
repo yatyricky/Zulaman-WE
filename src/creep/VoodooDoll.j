@@ -1,5 +1,5 @@
 //! zinc
-library VoodooDoll requires CastingBar, Core {
+library VoodooDoll requires DamageSystem {
     
     struct VoodooDoll {
         static thistype lastCast;
@@ -21,8 +21,8 @@ library VoodooDoll requires CastingBar, Core {
         static method run() {
             thistype this = GetTimerData(GetExpiredTimer());
             if (this.illusion != null) {
-                DamageTarget(this.caster, this.illusion, GetUnitState(this.illusion, UNIT_STATE_MAX_LIFE) * 0.2, SpellData[SID_VOODOO_DOLL].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
-                HealTarget(this.caster, this.illusion, GetUnitState(this.illusion, UNIT_STATE_MAX_LIFE) * 0.15, SpellData[SID_VOODOO_DOLL].name, 0.0);
+                DamageTarget(this.target, this.illusion, GetUnitState(this.illusion, UNIT_STATE_MAX_LIFE) * 0.1, SpellData[SID_VOODOO_DOLL].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+                // HealTarget(this.caster, this.illusion, GetUnitState(this.illusion, UNIT_STATE_MAX_LIFE) * 0.15, SpellData[SID_VOODOO_DOLL].name, 0.0);
             }
         }
     
@@ -32,7 +32,7 @@ library VoodooDoll requires CastingBar, Core {
             this.caster = caster;
             this.target = target;
             this.illusion = null;
-            DummyCast(caster, SID_VOODOO_DOLL_ILLUSION, "illusion", target);
+            DummyCastByOrderId(caster, SID_VOODOO_DOLL_ILLUSION, 852274, target); // magic number
             this.tm = NewTimer();
             SetTimerData(this.tm, this);
             TimerStart(this.tm, 1.0, true, function thistype.run);
@@ -72,25 +72,24 @@ library VoodooDoll requires CastingBar, Core {
         }
     }
 
-    function illusionDamaged(unit u) {
+    function illusionDamaged() {
         VoodooDoll data;
         real damage;
-        if (VoodooDoll.ht.exists(u)) {
-            data = VoodooDoll.ht[u];
-            if (!IsUnitDead(data.target)) {
-                damage = GetEventDamage() / GetUnitState(u, UNIT_STATE_MAX_LIFE) * GetUnitState(data.target, UNIT_STATE_MAX_LIFE);
-                DamageTarget(data.caster, data.target, damage, SpellData[SID_VOODOO_DOLL].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
-                AddTimedEffect.atUnit(ART_ARCANE_TOWER_ATTACK, data.target, "chest", 2.5);
+        if (IsUnitIllusion(DamageResult.target)) {
+            if (VoodooDoll.ht.exists(DamageResult.target)) {
+                data = VoodooDoll.ht[DamageResult.target];
+                if (!IsUnitDead(data.target)) {
+                    DamageTarget(data.caster, data.target, DamageResult.amount, SpellData[SID_VOODOO_DOLL].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+                    AddTimedEffect.atUnit(ART_ARCANE_TOWER_ATTACK, data.target, "chest", 2.5);
+                }
             }
-        } else {
-            print("|cffff0000Voodoo Doll|r: unable to find instance!");
         }
     }
 
     function onInit() {
-        RegisterSpellEventResponse(SID_VOODOO_DOLL, onCast);
+        RegisterSpellEffectResponse(SID_VOODOO_DOLL, onCast);
         RegisterUnitEnterMap(newIllusion);
-        RegisterDamagedEvent(illusionDamaged)
+        RegisterDamagedEvent(illusionDamaged);
         RegisterUnitDeath(illusionDeath);
     }
 }

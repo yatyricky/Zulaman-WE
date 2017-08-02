@@ -324,11 +324,18 @@ library NefUnion requires TimerUtils {
         }
     }
 	
-    public constant integer DUMMY_ID = 'e01B';    
+    public constant integer DUMMY_ID = 'e01B';
     public function DummyCast(unit a, integer aid, string oid, unit tar) {
         unit dc = CreateUnit(GetOwningPlayer(a), DUMMY_ID, GetUnitX(tar), GetUnitY(tar), 0.0);
         UnitAddAbility(dc, aid);
         IssueTargetOrderById(dc, OrderId(oid), tar);
+        UnitApplyTimedLife(dc, 'BHwe', 2.0);
+        dc = null;
+    }
+    public function DummyCastByOrderId(unit a, integer aid, integer oid, unit tar) {
+        unit dc = CreateUnit(GetOwningPlayer(a), DUMMY_ID, GetUnitX(tar), GetUnitY(tar), 0.0);
+        UnitAddAbility(dc, aid);
+        IssueTargetOrderById(dc, oid, tar);
         UnitApplyTimedLife(dc, 'BHwe', 2.0);
         dc = null;
     }
