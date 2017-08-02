@@ -1,5 +1,5 @@
 //! zinc
-library Zeal {
+library Zeal requires BuffSystem {
 
     function onEffect(Buff buf) {
         UnitProp[buf.bd.caster].ModAP(50);

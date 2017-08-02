@@ -407,10 +407,9 @@
 #define SID_CRUSHING_BLOW 'A0C3'
 #define SID_FOREST_STOMP 'A0C4'
 #define BID_FOREST_STOMP 'A0C5'
-
 // Cursed Hunter
-#define UTID_CURSED_HUNTER 'A0XX'
-#define BID_ZEAL 'A0XX'
+#define UTID_CURSED_HUNTER 'ohun'
+#define BID_ZEAL 'A0C6'
 // Deranged Priest
 #define UTID_DERANGED_PRIEST 'A0XX'
 #define SID_CORPSE_RAIN 'A0XX'

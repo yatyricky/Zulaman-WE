@@ -663,6 +663,10 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         tu = null;
     }
 
+    function makeOrderCursedHunter(unit source, unit target, real combatTime) {
+        IssueTargetOrderById(source, OID_ATTACK, target);   
+    }
+
     function makeOrderNetherHatchling(unit source, unit target, real combatTime) {
         IntegerPool ip;
         integer res;
@@ -1058,6 +1062,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
 
         // ============= Area 6 ==================
         unitCallBack[UTID_FOREST_TROLL] = makeOrderForestTroll;
+        unitCallBack[UTID_CURSED_HUNTER] = makeOrderCursedHunter;
         unitCallBack[UTID_TWILIGHT_WITCH_DOCTOR] = makeOrderTwilightWitchDoctor;
         unitCallBack[UTID_GRIM_TOTEM] = makeOrderGrimTotem;
 
