@@ -13,15 +13,15 @@ library ForceSight {
     
     private function onInit() {
         SetSkyModel("Environment\\Sky\\LordaeronSummerSky\\LordaeronSummerSky.mdl");
-        TimerStart(CreateTimer(), PERIOD, true, function() {
-            SetCameraField(CAMERA_FIELD_ANGLE_OF_ATTACK, value_CAMERA_FIELD_ANGLE_OF_ATTACK, DELAY);
-            SetCameraField(CAMERA_FIELD_FARZ, value_CAMERA_FIELD_FARZ, DELAY);
-            SetCameraField(CAMERA_FIELD_FIELD_OF_VIEW, value_CAMERA_FIELD_FIELD_OF_VIEW, DELAY);
-            SetCameraField(CAMERA_FIELD_ROLL, value_CAMERA_FIELD_ROLL, DELAY);
-            SetCameraField(CAMERA_FIELD_ROTATION, value_CAMERA_FIELD_ROTATION, DELAY);
-            SetCameraField(CAMERA_FIELD_TARGET_DISTANCE, value_CAMERA_FIELD_TARGET_DISTANCE, DELAY);
-            SetCameraField(CAMERA_FIELD_ZOFFSET, value_CAMERA_FIELD_ZOFFSET, DELAY);
-        });
+        // TimerStart(CreateTimer(), PERIOD, true, function() {
+        //     SetCameraField(CAMERA_FIELD_ANGLE_OF_ATTACK, value_CAMERA_FIELD_ANGLE_OF_ATTACK, DELAY);
+        //     SetCameraField(CAMERA_FIELD_FARZ, value_CAMERA_FIELD_FARZ, DELAY);
+        //     SetCameraField(CAMERA_FIELD_FIELD_OF_VIEW, value_CAMERA_FIELD_FIELD_OF_VIEW, DELAY);
+        //     SetCameraField(CAMERA_FIELD_ROLL, value_CAMERA_FIELD_ROLL, DELAY);
+        //     SetCameraField(CAMERA_FIELD_ROTATION, value_CAMERA_FIELD_ROTATION, DELAY);
+        //     SetCameraField(CAMERA_FIELD_TARGET_DISTANCE, value_CAMERA_FIELD_TARGET_DISTANCE, DELAY);
+        //     SetCameraField(CAMERA_FIELD_ZOFFSET, value_CAMERA_FIELD_ZOFFSET, DELAY);
+        // });
         // FogMaskEnable(false);
         FogEnable(false);
         /*
