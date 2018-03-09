@@ -404,11 +404,12 @@ const files = [
 if (process.env.TESH_HOME == undefined) {
     console.log('TESH_HOME is not defined');
 } else {
-    concat(files, path.join(process.env.TESH_HOME, 'templates', 'standard.txt'), function(err) {
+    const output = path.join(process.env.TESH_HOME, 'templates', 'standard.txt');
+    concat(files, output, function(err) {
         if (err) {
             console.log('Build failed: ' + err);
         } else {
-            console.log('Build finished');
+            console.log('Build finished: ' + output);
         }
     });
 }
