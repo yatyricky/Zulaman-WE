@@ -1,7 +1,7 @@
 //! zinc
 library SanctuaryScroll requires SpellEvent, StunUtils {
-#define ART_CASTER "Abilities\\Spells\\Items\\AIda\\AIdaCaster.mdl"
-#define BUFF_ID 'A075'
+constant string  ART_CASTER  = "Abilities\\Spells\\Items\\AIda\\AIdaCaster.mdl";
+constant integer BUFF_ID = 'A075';
     
     function onEffect(Buff buf) {
         UnitProp[buf.bd.target].damageTaken -= buf.bd.r0;
@@ -43,7 +43,7 @@ library SanctuaryScroll requires SpellEvent, StunUtils {
         BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_POS);
         
     }
-#undef BUFF_ID
-#undef ART_CASTER
+
+
 }
 //! endzinc

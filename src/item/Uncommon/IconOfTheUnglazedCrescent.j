@@ -1,6 +1,6 @@
 //! zinc
 library IconOfTheUnglazedCrescent requires ItemAttributes {
-#define BUFF_ID 'A06F'
+constant integer BUFF_ID = 'A06F';
     //HandleTable ht;
 
     function oneffect(Buff buf) {
@@ -35,6 +35,6 @@ library IconOfTheUnglazedCrescent requires ItemAttributes {
         RegisterSpellEffectResponse(SID_ICON_OF_THE_UNGLAZED_CRESCENT, onCast);
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
     }
-#undef BUFF_ID
+
 }
 //! endzinc

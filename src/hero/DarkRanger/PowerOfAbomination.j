@@ -1,11 +1,11 @@
 //! zinc
 library PowerOfAbomination requires DarkRangerGlobal, SpellEvent, DamageSystem {
-#define ART "Abilities\\Weapons\\AvengerMissile\\AvengerMissile.mdl"
-#define BUFF_ID 'A042'
-#define BUFF_ID1 'A043'
-#define BUFF_ID2 'A044'
-#define ART_LEFT "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustTarget.mdl"
-#define ART_RIGHT "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustSpecial.mdl"
+constant string  ART  = "Abilities\\Weapons\\AvengerMissile\\AvengerMissile.mdl";
+constant integer BUFF_ID = 'A042';
+constant integer BUFF_ID1 = 'A043';
+constant integer BUFF_ID2 = 'A044';
+constant string  ART_LEFT  = "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustTarget.mdl";
+constant string  ART_RIGHT  = "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustSpecial.mdl";
 
     function onEffect(Buff buf) {
         UnitProp[buf.bd.target].attackRate -= buf.bd.r0;
@@ -160,7 +160,7 @@ library PowerOfAbomination requires DarkRangerGlobal, SpellEvent, DamageSystem {
         if (GetUnitTypeId(u) == UTIDDARKRANGER) {
             if (GetUnitAbilityLevel(u, SIDPOWEROFABOMINATION) > 0) {
                 if (!PowerOfAbomination[u].isBanshee) {
-                    BJDebugMsg("Bug ÐÎÌ¬ËÀÍö");
+                    BJDebugMsg("Bug ï¿½ï¿½Ì¬ï¿½ï¿½ï¿½ï¿½");
                     PowerOfAbomination[u].banshee();
                 }
             }
@@ -176,11 +176,11 @@ library PowerOfAbomination requires DarkRangerGlobal, SpellEvent, DamageSystem {
         RegisterDamagedEvent(damaged);
         //RegisterUnitDeath(drDeath);
     }
-#undef ART_RIGHT
-#undef ART_LEFT
-#undef BUFF_ID2
-#undef BUFF_ID1
-#undef BUFF_ID
-#undef ART
+
+
+
+
+
+
 }
 //! endzinc

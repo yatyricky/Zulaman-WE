@@ -1,6 +1,6 @@
 //! zinc
 library FrostBoltHex requires CastingBar, Projectile, SpellReflection {
-#define ART_MISSILE "Abilities\\Weapons\\LichMissile\\LichMissile.mdl"
+constant string  ART_MISSILE  = "Abilities\\Weapons\\LichMissile\\LichMissile.mdl";
 
     function onhit(Projectile p) -> boolean {
         if (TryReflect(p.target)) {
@@ -29,6 +29,6 @@ library FrostBoltHex requires CastingBar, Projectile, SpellReflection {
     function onInit() {
         RegisterSpellChannelResponse(SIDFROSTBOLTHEX, onChannel);
     }
-#undef ART_MISSILE
+
 }
 //! endzinc

@@ -1,6 +1,6 @@
 //! zinc
 library PrayerOfHealing requires CastingBar, UnitProperty, PlayerUnitList {
-#define ART "Abilities\\Spells\\Orc\\EtherealForm\\SpiritWalkerChange.mdl"
+constant string  ART  = "Abilities\\Spells\\Orc\\EtherealForm\\SpiritWalkerChange.mdl";
 
     function response(CastingBar cd) {
         integer i = 0;
@@ -32,6 +32,6 @@ library PrayerOfHealing requires CastingBar, UnitProperty, PlayerUnitList {
     function onInit() {
         RegisterSpellChannelResponse(SIDPRAYEROFHEALING, onChannel);
     }
-#undef ART
+
 }
 //! endzinc

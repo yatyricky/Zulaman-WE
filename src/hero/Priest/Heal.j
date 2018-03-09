@@ -1,8 +1,8 @@
 //! zinc
 library Heal requires BuffSystem, SpellEvent, UnitProperty, Benediction {
-#define BUFF_ID 'A03X'
-#define BUFF_ID1 'A00U'
-#define ART "Abilities\\Spells\\Orc\\EtherealForm\\SpiritWalkerChange.mdl"
+constant integer BUFF_ID = 'A03X';
+constant integer BUFF_ID1 = 'A00U';
+constant string  ART  = "Abilities\\Spells\\Orc\\EtherealForm\\SpiritWalkerChange.mdl";
 
     function returnHealHOT(integer lvl, real sp) -> real {
         return 100.0 + 50.0 * lvl + sp * 0.8;
@@ -65,8 +65,8 @@ library Heal requires BuffSystem, SpellEvent, UnitProperty, Benediction {
         BuffType.register(BUFF_ID1, BUFF_MAGE, BUFF_POS);
         RegisterSpellEffectResponse(SIDHEAL, onCast);
     }
-#undef ART
-#undef BUFF_ID1
-#undef BUFF_ID
+
+
+
 }
 //! endzinc

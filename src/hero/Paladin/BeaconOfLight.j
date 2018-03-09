@@ -1,6 +1,6 @@
 //! zinc
 library BeaconOfLight requires BuffSystem, GroupUtils, DamageSystem {
-#define BUFF_ID 'A03D'
+constant integer BUFF_ID = 'A03D';
     public struct BeaconOfLight {
         private static HandleTable ht;
         private static thistype current;
@@ -82,7 +82,7 @@ library BeaconOfLight requires BuffSystem, GroupUtils, DamageSystem {
             thistype this;
             if (!thistype.ht.exists(u)) {
                 this = thistype.allocate();
-                //BJDebugMsg("New ÁË");
+                //BJDebugMsg("New ï¿½ï¿½");
                 thistype.ht[u] = this;
                 this.primary = null;
                 this.extras = NewGroup();
@@ -100,7 +100,7 @@ library BeaconOfLight requires BuffSystem, GroupUtils, DamageSystem {
     }
 
     function onEffect(Buff buf) {
-        //BJDebugMsg("ÒªÖ´ÐÐ°É,ÐÂµÄÄ¿±êÊÇ"+GetUnitNameEx(buf.bd.target));
+        //BJDebugMsg("ÒªÖ´ï¿½Ð°ï¿½,ï¿½Âµï¿½Ä¿ï¿½ï¿½ï¿½ï¿½"+GetUnitNameEx(buf.bd.target));
         BeaconOfLight[buf.bd.caster].newPrimary(buf.bd.target);
     }
     
@@ -136,6 +136,6 @@ library BeaconOfLight requires BuffSystem, GroupUtils, DamageSystem {
         RegisterOnDamageEvent(ondamageresponse);
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
     }
-#undef BUFF_ID
+
 }
 //! endzinc

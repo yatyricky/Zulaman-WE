@@ -1,7 +1,7 @@
 //! zinc
 library AransCounterSpellScroll requires SpellEvent, CastingBar {
-#define ART_CASTER "Abilities\\Spells\\Other\\Silence\\SilenceAreaBirth.mdl"
-#define ART_TARGET "Abilities\\Spells\\Other\\Silence\\SilenceTarget.mdl"
+constant string  ART_CASTER  = "Abilities\\Spells\\Other\\Silence\\SilenceAreaBirth.mdl";
+constant string  ART_TARGET  = "Abilities\\Spells\\Other\\Silence\\SilenceTarget.mdl";
 
     function onCast() {
         integer i = 0;
@@ -18,7 +18,7 @@ library AransCounterSpellScroll requires SpellEvent, CastingBar {
     function onInit() {
         RegisterSpellEffectResponse(SID_ARANS_COUNTER_SPELL_SCROLL, onCast);
     }
-#undef ART_TARGET
-#undef ART_CASTER
+
+
 }
 //! endzinc

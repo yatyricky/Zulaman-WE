@@ -1,7 +1,7 @@
 //! zinc
 library StrongBreeze requires SpellEvent, DamageSystem {
-#define SPELL_ID 'A03M'
-#define ART "Abilities\\Spells\\NightElf\\Cyclone\\CycloneTarget.mdl"
+constant integer SPELL_ID = 'A03M';
+constant string  ART  = "Abilities\\Spells\\NightElf\\Cyclone\\CycloneTarget.mdl";
 
     struct ThrowDamage {
         private timer tm;
@@ -49,7 +49,7 @@ library StrongBreeze requires SpellEvent, DamageSystem {
     function onInit() {
         RegisterSpellEffectResponse(SPELL_ID, onCast);
     }
-#undef ART
-#undef SPELL_ID 
+
+
 }
 //! endzinc

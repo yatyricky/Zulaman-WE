@@ -1,6 +1,6 @@
 //! zinc
 library ArmorCrushing requires SpellEvent, BuffSystem {
-#define BUFF_ID 'A09W'
+constant integer BUFF_ID = 'A09W';
 
     function onEffect(Buff buf) {
         UnitProp[buf.bd.target].ModArmor(0 - buf.bd.i0);
@@ -26,6 +26,6 @@ library ArmorCrushing requires SpellEvent, BuffSystem {
         BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_NEG);
     }
     
-#undef BUFF_ID
+
 }
 //! endzinc

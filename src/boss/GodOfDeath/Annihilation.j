@@ -1,6 +1,6 @@
 //! zinc
 library Annihilation {
-#define ART "zxczxc"
+constant string  ART  = "zxczxc";
 
     function onCast() {
     	integer i;
@@ -13,6 +13,6 @@ library Annihilation {
     function onInit() {
         RegisterSpellEffectResponse(SID, onCast);
     }
-#undef ART
+
 }
 //! endzinc

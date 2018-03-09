@@ -1,11 +1,11 @@
 //! zinc
 library FreezingTrap requires SpellEvent, StunUtils, AggroSystem {
-#define ART "Doodads\\Cinematic\\FrostTrapUp\\FrostTrapUp.mdl"
-#define ART1 "Abilities\\Spells\\Undead\\FrostNova\\FrostNovaTarget.mdl"
-#define PATH "Doodads\\Cinematic\\GlowingRunes\\GlowingRunes4.mdl"
-#define PATH1 "Abilities\\Spells\\NightElf\\TrueshotAura\\TrueshotAura.mdl"
-#define SFX "Abilities\\Spells\\Undead\\FreezingBreath\\FreezingBreathTargetArt.mdl"
-#define SFX1 "Abilities\\Spells\\Other\\FrostDamage\\FrostDamage.mdl"
+constant string  ART  = "Doodads\\Cinematic\\FrostTrapUp\\FrostTrapUp.mdl";
+constant string  ART1  = "Abilities\\Spells\\Undead\\FrostNova\\FrostNovaTarget.mdl";
+constant string  PATH  = "Doodads\\Cinematic\\GlowingRunes\\GlowingRunes4.mdl";
+constant string  PATH1  = "Abilities\\Spells\\NightElf\\TrueshotAura\\TrueshotAura.mdl";
+constant string  SFX  = "Abilities\\Spells\\Undead\\FreezingBreath\\FreezingBreathTargetArt.mdl";
+constant string  SFX1  = "Abilities\\Spells\\Other\\FrostDamage\\FrostDamage.mdl";
 
     hashtable terrainRecord = InitHashtable();
     hashtable readyModify = InitHashtable();
@@ -298,11 +298,11 @@ library FreezingTrap requires SpellEvent, StunUtils, AggroSystem {
         RegisterSpellEffectResponse(SIDFREEZINGTRAP, onCast);
         BuffType.register(BID_FREEZING_TRAP, BUFF_PHYX, BUFF_NEG);
     }
-#undef SFX1
-#undef SFX
-#undef PATH1
-#undef PATH
-#undef ART1
-#undef ART
+
+
+
+
+
+
 }
 //! endzinc

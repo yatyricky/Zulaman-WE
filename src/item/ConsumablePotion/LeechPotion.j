@@ -1,6 +1,6 @@
 //! zinc
 library LeechPotion requires SpellEvent, BuffSystem {
-#define BUFF_ID 'A07S'
+constant integer BUFF_ID = 'A07S';
     
     function onEffect(Buff buf) {
         UnitProp[buf.bd.target].ll += buf.bd.r0;
@@ -28,6 +28,6 @@ library LeechPotion requires SpellEvent, BuffSystem {
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
         
     }
-#undef BUFF_ID
+
 }
 //! endzinc

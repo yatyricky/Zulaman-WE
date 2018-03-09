@@ -4,10 +4,10 @@ library WarStomp requires DamageSystem {
 deals 300 physical damage to all player units within range.
 stun 3 seconds.
 */
-#define ART_CASTER "Abilities\\Spells\\Orc\\WarStomp\\WarStompCaster.mdl"
-#define AOE 697.0
-#define DAMAGE 300.0
-#define DURATION 3.0
+constant string  ART_CASTER  = "Abilities\\Spells\\Orc\\WarStomp\\WarStompCaster.mdl";
+constant real AOE = 697.0;
+constant real DAMAGE = 300.0;
+constant real DURATION = 3.0;
 
     function response(CastingBar cd) {
         integer i;
@@ -29,9 +29,9 @@ stun 3 seconds.
 	function onInit() {
 		RegisterSpellChannelResponse(SID_WAR_STOMP, onChannel);
 	}
-#undef ART_CASTER
-#undef AOE
-#undef DAMAGE
-#undef DURATION
+
+
+
+
 }
 //! endzinc

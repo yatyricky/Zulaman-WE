@@ -1,7 +1,7 @@
 //! zinc
 library SavageRoar requires BuffSystem, SpellEvent, UnitProperty, AggroSystem, Lacerate {
-#define ART_DEBUFF "Abilities\\Spells\\Other\\HowlOfTerror\\HowlTarget.mdl"
-#define ART_CASTER "Abilities\\Spells\\NightElf\\BattleRoar\\RoarCaster.mdl"
+constant string  ART_DEBUFF  = "Abilities\\Spells\\Other\\HowlOfTerror\\HowlTarget.mdl";
+constant string  ART_CASTER  = "Abilities\\Spells\\NightElf\\BattleRoar\\RoarCaster.mdl";
 
     function returnAPDec(integer lvl) -> real {
         return 0.05 * lvl;
@@ -60,7 +60,7 @@ library SavageRoar requires BuffSystem, SpellEvent, UnitProperty, AggroSystem, L
         BuffType.register(SAVAGE_ROAR_BUFF_ID, BUFF_PHYX, BUFF_NEG);
         RegisterSpellEffectResponse(SID_SAVAGE_ROAR, onCast);
     }
-#undef ART_CASTER
-#undef ART_DEBUFF
+
+
 }
 //! endzinc

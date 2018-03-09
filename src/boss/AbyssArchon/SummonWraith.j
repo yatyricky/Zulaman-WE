@@ -1,6 +1,6 @@
 //! zinc
 library Wraith requires UnitProperty {
-#define WRAITH_CHECK_INTERVAL 0.34
+constant real WRAITH_CHECK_INTERVAL = 0.34;
 
 	timer wraithCheck;
 
@@ -63,6 +63,6 @@ library Wraith requires UnitProperty {
         RegisterUnitDeath(wraithDeath);
         wraithCheck = CreateTimer();
     }
-#undef WRAITH_CHECK_INTERVAL
+
 }
 //! endzinc

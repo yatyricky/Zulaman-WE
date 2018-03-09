@@ -1,10 +1,10 @@
 //! zinc
 library ArcaneShock requires DamageSystem, BuffSystem, UnitProperty, AggroSystem {
-#define BUFF_ID 'A025'
-//#define BUFF_ID1 'A02D'
-//#define BUFF_ID2 'A02H'
-#define ART_TARGET "Abilities\\Spells\\Human\\ManaFlare\\ManaFlareBoltImpact.mdl"
-//#define ART_IMPROVED "Abilities\\Spells\\Human\\MagicSentry\\MagicSentryCaster.mdl"
+constant integer BUFF_ID = 'A025';
+//constant integer BUFF_ID1 = 'A02D';
+//constant integer BUFF_ID2 = 'A02H';
+constant string  ART_TARGET  = "Abilities\\Spells\\Human\\ManaFlare\\ManaFlareBoltImpact.mdl";
+//constant string  ART_IMPROVED  = "Abilities\\Spells\\Human\\MagicSentry\\MagicSentryCaster.mdl";
 
     //timer arcaneShockExTm[NUMBER_OF_MAX_PLAYERS];
     //boolean arcaneShockHasEx[NUMBER_OF_MAX_PLAYERS];
@@ -131,10 +131,10 @@ library ArcaneShock requires DamageSystem, BuffSystem, UnitProperty, AggroSystem
         RegisterDamagedEvent(paladinDamaged);
     }
     
-//#undef ART_IMPROVED
-#undef ART_TARGET
-//#undef BUFF_ID2
-//#undef BUFF_ID1
-#undef BUFF_ID
+//
+
+//
+//
+
 }
 //! endzinc

@@ -1,8 +1,8 @@
 //! zinc
 library BreathOfTheDying requires ItemAttributes, DamageSystem, SpellData, AggroSystem {
-#define MISSILE "Abilities\\Weapons\\ChimaeraAcidMissile\\ChimaeraAcidMissile.mdl"
-#define BUFF_ID 'A063'
-#define NOMIS 32
+constant string  MISSILE  = "Abilities\\Weapons\\ChimaeraAcidMissile\\ChimaeraAcidMissile.mdl";
+constant integer BUFF_ID = 'A063';
+constant integer NOMIS = 32;
     HandleTable ht;
     
     function onEffect(Buff buf) {
@@ -128,8 +128,8 @@ library BreathOfTheDying requires ItemAttributes, DamageSystem, SpellData, Aggro
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_NEG);
         RegisterDamagedEvent(damaged);
     }
-#undef NOMIS
-#undef BUFF_ID
-#undef MISSILE
+
+
+
 }
 //! endzinc

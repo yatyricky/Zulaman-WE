@@ -1,6 +1,6 @@
 //! zinc
 library FortressPotion requires SpellEvent, BuffSystem {
-#define BUFF_ID 'A082'
+constant integer BUFF_ID = 'A082';
     
     function onEffect(Buff buf) {
         UnitProp[buf.bd.target].blockRate += buf.bd.r0;
@@ -28,6 +28,6 @@ library FortressPotion requires SpellEvent, BuffSystem {
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
         
     }
-#undef BUFF_ID
+
 }
 //! endzinc

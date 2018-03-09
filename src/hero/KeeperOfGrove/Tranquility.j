@@ -1,7 +1,7 @@
 //! zinc
 library Tranquility requires CastingBar, KeeperOfGroveGlobal, ZAMCore {
-#define ART "Abilities\\Spells\\NightElf\\Tranquility\\Tranquility.mdl"
-#define BUFF_ID 'A04K'
+constant string  ART  = "Abilities\\Spells\\NightElf\\Tranquility\\Tranquility.mdl";
+constant integer BUFF_ID = 'A04K';
 
     function returnHeal(integer lvl, real sp) -> real {
         return 100 + lvl * 100 + sp * 2.0;
@@ -99,7 +99,7 @@ library Tranquility requires CastingBar, KeeperOfGroveGlobal, ZAMCore {
         RegisterUnitEnterMap(registered);
         TriggerAnyUnit(EVENT_PLAYER_HERO_SKILL, function lvlup);
     }
-#undef BUFF_ID
-#undef ART
+
+
 }
 //! endzinc

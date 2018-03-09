@@ -1,6 +1,6 @@
 //! zinc
 library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinGlobal, FrostNova, WarlockGlobal {
-#define AIACTION_INTERVAL 0.33
+constant real AIACTION_INTERVAL = 0.33;
     
     Table unitCallBack, unitLearSkill;
     type UnitActionType extends function(unit);
@@ -1631,29 +1631,29 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
     }
     
     function register() {
-        unitCallBack['Hmkg'] = makeOrderHmkg;   // Ñª¾«Áé·ÀÓùÕß
-        unitCallBack['Hlgr'] = makeOrderHlgr;   // Àû×¦µÂÂ³ÒÀ 
-        unitCallBack['Emfr'] = makeOrderEmfr;   // ´ÔÁÖÊØ»¤Õß
-        unitCallBack['Hart'] = makeOrderHart;   // Ê¥ÆïÊ¿
-        unitCallBack['Ofar'] = makeOrderOfar;   // ÄÁÊ¦
-        unitCallBack['Obla'] = makeOrderObla;   // ½£Ê¥
-        unitCallBack['Nbrn'] = makeOrderNbrn;   // ºÚ°µÁÔÊÖ
-        unitCallBack['Hjai'] = makeOrderHjai;   // º®±ù·¨Ê¦
-        unitCallBack['Hapm'] = makeOrderHapm;   // µØ¸¿Õß
-        unitCallBack['H006'] = makeOrderHapm;   // µØ¸¿Õß
-        unitCallBack['Edem'] = makeOrderEdem;   // Á÷ÀË½£¿Í
-        unitCallBack['Hblm'] = makeOrderHblm;   // Òì½ÌÍ½
+        unitCallBack['Hmkg'] = makeOrderHmkg;   // Ñªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        unitCallBack['Hlgr'] = makeOrderHlgr;   // ï¿½ï¿½×¦ï¿½ï¿½Â³ï¿½ï¿½ 
+        unitCallBack['Emfr'] = makeOrderEmfr;   // ï¿½ï¿½ï¿½ï¿½ï¿½Ø»ï¿½ï¿½ï¿½
+        unitCallBack['Hart'] = makeOrderHart;   // Ê¥ï¿½ï¿½Ê¿
+        unitCallBack['Ofar'] = makeOrderOfar;   // ï¿½ï¿½Ê¦
+        unitCallBack['Obla'] = makeOrderObla;   // ï¿½ï¿½Ê¥
+        unitCallBack['Nbrn'] = makeOrderNbrn;   // ï¿½Ú°ï¿½ï¿½ï¿½ï¿½ï¿½
+        unitCallBack['Hjai'] = makeOrderHjai;   // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¦
+        unitCallBack['Hapm'] = makeOrderHapm;   // ï¿½Ø¸ï¿½ï¿½ï¿½
+        unitCallBack['H006'] = makeOrderHapm;   // ï¿½Ø¸ï¿½ï¿½ï¿½
+        unitCallBack['Edem'] = makeOrderEdem;   // ï¿½ï¿½ï¿½Ë½ï¿½ï¿½ï¿½
+        unitCallBack['Hblm'] = makeOrderHblm;   // ï¿½ï¿½ï¿½Í½
         unitLearSkill['Hmkg'] = learnSkillHmkg;   // 
-        unitLearSkill['Hlgr'] = learnSkillHlgr;   // Àû×¦µÂÂ³ÒÀ 
-        unitLearSkill['Emfr'] = learnSkillEmfr;   // ´ÔÁÖÊØ»¤Õß
-        unitLearSkill['Hart'] = learnSkillHart;   // Ê¥ÆïÊ¿
-        unitLearSkill['Ofar'] = learnSkillOfar;   // ÄÁÊ¦
-        unitLearSkill['Obla'] = learnSkillObla;   // ½£Ê¥
-        unitLearSkill['Nbrn'] = learnSkillNbrn;   // ºÚ°µÁÔÊÖ
-        unitLearSkill['Hjai'] = learnSkillHjai;   // º®±ù·¨Ê¦
-        unitLearSkill['Hapm'] = learnSkillHapm;   // µØ¸¿Õß
-        unitLearSkill['Edem'] = learnSkillEdem;   // Á÷ÀË½£¿Í
-        unitLearSkill['Hblm'] = learnSkillHblm;   // Òì½ÌÍ½
+        unitLearSkill['Hlgr'] = learnSkillHlgr;   // ï¿½ï¿½×¦ï¿½ï¿½Â³ï¿½ï¿½ 
+        unitLearSkill['Emfr'] = learnSkillEmfr;   // ï¿½ï¿½ï¿½ï¿½ï¿½Ø»ï¿½ï¿½ï¿½
+        unitLearSkill['Hart'] = learnSkillHart;   // Ê¥ï¿½ï¿½Ê¿
+        unitLearSkill['Ofar'] = learnSkillOfar;   // ï¿½ï¿½Ê¦
+        unitLearSkill['Obla'] = learnSkillObla;   // ï¿½ï¿½Ê¥
+        unitLearSkill['Nbrn'] = learnSkillNbrn;   // ï¿½Ú°ï¿½ï¿½ï¿½ï¿½ï¿½
+        unitLearSkill['Hjai'] = learnSkillHjai;   // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¦
+        unitLearSkill['Hapm'] = learnSkillHapm;   // ï¿½Ø¸ï¿½ï¿½ï¿½
+        unitLearSkill['Edem'] = learnSkillEdem;   // ï¿½ï¿½ï¿½Ë½ï¿½ï¿½ï¿½
+        unitLearSkill['Hblm'] = learnSkillHblm;   // ï¿½ï¿½ï¿½Í½
     }
     
     // learn skills once

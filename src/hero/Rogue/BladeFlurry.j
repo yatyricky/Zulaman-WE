@@ -1,9 +1,9 @@
 //! zinc
 library BladeFlurry requires DamageSystem, SpellEvent, RogueGlobal {
-#define ART "Abilities\\Spells\\NightElf\\BattleRoar\\RoarTarget.mdl"
-#define ART_OPEN "Abilities\\Spells\\Other\\Silence\\SilenceAreaBirth.mdl"
-#define ART_CLEAVE "Abilities\\Spells\\Other\\Cleave\\CleaveDamageTarget.mdl"
-#define BUFF_ID 'A048'
+constant string  ART  = "Abilities\\Spells\\NightElf\\BattleRoar\\RoarTarget.mdl";
+constant string  ART_OPEN  = "Abilities\\Spells\\Other\\Silence\\SilenceAreaBirth.mdl";
+constant string  ART_CLEAVE  = "Abilities\\Spells\\Other\\Cleave\\CleaveDamageTarget.mdl";
+constant integer BUFF_ID = 'A048';
 
     function onEffect(Buff buf) {
         UnitProp[buf.bd.target].ModAttackSpeed(buf.bd.i0);
@@ -73,9 +73,9 @@ library BladeFlurry requires DamageSystem, SpellEvent, RogueGlobal {
         BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_POS);
         RegisterDamagedEvent(damaged);
     }
-#undef BUFF_ID
-#undef ART_CLEAVE
-#undef ART_OPEN
-#undef ART
+
+
+
+
 }
 //! endzinc

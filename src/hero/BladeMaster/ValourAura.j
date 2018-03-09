@@ -6,9 +6,9 @@ library ValourAura requires TimerUtils, ZAMCore, UnitProperty, OrcCaptureFlag {
 //* Overpower cannot trigger life rep due to judging by 
 //* "DamageResult.wasDodgable"
 //*****************************************************************************
-#define INTERVAL 1.0
-#define AOE 900.0
-#define BUFF_ID 'A04M'
+constant real INTERVAL = 1.0;
+constant real AOE = 900.0;
+constant integer BUFF_ID = 'A04M';
 
     function onEffect(Buff buf) {
         UnitProp[buf.bd.target].attackCrit += buf.bd.r0;
@@ -79,7 +79,7 @@ library ValourAura requires TimerUtils, ZAMCore, UnitProperty, OrcCaptureFlag {
         BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_POS);
     }
 }
-#undef BUFF_ID
-#undef AOE
-#undef INTERVAL
+
+
+
 //! endzinc

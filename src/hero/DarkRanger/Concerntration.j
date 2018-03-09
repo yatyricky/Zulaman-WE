@@ -1,8 +1,8 @@
 //! zinc
 library Concerntration requires SpellEvent, DamageSystem, StunUtils, DarkRangerGlobal {
-#define ART "Abilities\\Weapons\\DragonHawkMissile\\DragonHawkMissile.mdl"
-#define BUFF_ID 'A03Z'
-#define BUFF_ID1 'A040'
+constant string  ART  = "Abilities\\Weapons\\DragonHawkMissile\\DragonHawkMissile.mdl";
+constant integer BUFF_ID = 'A03Z';
+constant integer BUFF_ID1 = 'A040';
 
     struct NextStun {
         static HandleTable ht;
@@ -90,8 +90,8 @@ library Concerntration requires SpellEvent, DamageSystem, StunUtils, DarkRangerG
         BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_NEG);
         BuffType.register(BUFF_ID1, BUFF_PHYX, BUFF_NEG);
     }
-#undef BUFF_ID1
-#undef BUFF_ID
-#undef ART
+
+
+
 }
 //! endzinc

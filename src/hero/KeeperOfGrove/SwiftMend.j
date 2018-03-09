@@ -1,9 +1,9 @@
 //! zinc
 library SwiftMend requires KeeperOfGroveGlobal, SpellEvent, DamageSystem {
-#define ART_TARGET "Objects\\Spawnmodels\\NightElf\\EntBirthTarget\\EntBirthTarget.mdl"
-#define ART_TARGET1 "Abilities\\Spells\\Undead\\ReplenishHealth\\ReplenishHealthCasterOverhead.mdl"
-#define BUFF_ID 'A02N'
-#define ART_ATTACH "Abilities\\Spells\\Items\\ClarityPotion\\ClarityTarget.mdl"
+constant string  ART_TARGET  = "Objects\\Spawnmodels\\NightElf\\EntBirthTarget\\EntBirthTarget.mdl";
+constant string  ART_TARGET1  = "Abilities\\Spells\\Undead\\ReplenishHealth\\ReplenishHealthCasterOverhead.mdl";
+constant integer BUFF_ID = 'A02N';
+constant string  ART_ATTACH  = "Abilities\\Spells\\Items\\ClarityPotion\\ClarityTarget.mdl";
 
 	function returnArmor(integer lvl) -> integer {
 		return 5 * lvl - 5;
@@ -57,9 +57,9 @@ library SwiftMend requires KeeperOfGroveGlobal, SpellEvent, DamageSystem {
         RegisterSpellEffectResponse(SIDSWIFTMEND, onCast);
     }
    
-#undef ART_ATTACH
-#undef BUFF_ID
-#undef ART_TARGET1
-#undef ART_TARGET
+
+
+
+
 }
 //! endzinc

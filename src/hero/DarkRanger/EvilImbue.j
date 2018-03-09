@@ -1,7 +1,7 @@
 //! zinc
 library EvilImbue requires SpellEvent, DamageSystem, DarkRangerGlobal {
-#define ART "Abilities\\Spells\\Undead\\DarkRitual\\DarkRitualTarget.mdl"
-#define BUFF_ID 'A045'
+constant string  ART  = "Abilities\\Spells\\Undead\\DarkRitual\\DarkRitualTarget.mdl";
+constant integer BUFF_ID = 'A045';
 
     function onEffect(Buff buf) {
         UnitProp[buf.bd.target].ModAttackSpeed(buf.bd.i0);
@@ -40,7 +40,7 @@ library EvilImbue requires SpellEvent, DamageSystem, DarkRangerGlobal {
         RegisterUnitDeath(response);
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
     }
-#undef BUFF_ID
-#undef ART
+
+
 }
 //! endzinc

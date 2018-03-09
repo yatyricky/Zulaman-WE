@@ -1,6 +1,6 @@
 //! zinc
 library ShieldHex requires BuffSystem, SpellEvent {
-#define BUFF_ID 'A01I'
+constant integer BUFF_ID = 'A01I';
 
     function onEffect(Buff buf) {}
     function onRemove(Buff buf) {}
@@ -23,6 +23,6 @@ library ShieldHex requires BuffSystem, SpellEvent {
         //BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
         RegisterSpellEffectResponse(SIDSHIELDHEX, onCast);
     }
-#undef BUFF_ID
+
 }
 //! endzinc

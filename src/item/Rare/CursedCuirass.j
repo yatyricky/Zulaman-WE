@@ -1,7 +1,7 @@
 //! zinc
 library CursedCuirass requires ItemAttributes {
-#define BUFF_ID 'A06M'
-#define ART_TARGET "Abilities\\Spells\\Undead\\OrbOfDeath\\AnnihilationMissile.mdl"
+constant integer BUFF_ID = 'A06M';
+constant string  ART_TARGET  = "Abilities\\Spells\\Undead\\OrbOfDeath\\AnnihilationMissile.mdl";
     HandleTable ht;
     
     function onEffect(Buff buf) {}
@@ -48,7 +48,7 @@ library CursedCuirass requires ItemAttributes {
         RegisterDamagedEvent(damaged);
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_NEG);
     }
-#undef ART_TARGET
-#undef BUFF_ID
+
+
 }
 //! endzinc

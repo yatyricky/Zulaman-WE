@@ -1,6 +1,6 @@
 //! zinc
 library Eviscerate requires DamageSystem, SpellEvent, RogueGlobal {
-#define BUFF_ID 'A047' 
+constant integer BUFF_ID = 'A047'; 
     
     /*struct delayedDosth1 {
         private timer tm;
@@ -105,6 +105,6 @@ library Eviscerate requires DamageSystem, SpellEvent, RogueGlobal {
         BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_NEG);
         BuffType.register(BID_EVISCERATE, BUFF_PHYX, BUFF_NEG);
     }
-#undef BUFF_ID
+
 }
 //! endzinc

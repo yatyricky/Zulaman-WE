@@ -1,7 +1,7 @@
 //! zinc
 library HeroSelection requires NefUnion, Table, MultipleAbility, ZAMCore, Loot, AllianceAIAction {
-#define HERO_SLCT_LOW 'IHS0'
-#define HERO_SLCT_HIGH 'IHS;'
+constant integer HERO_SLCT_LOW = 'IHS0';
+constant integer HERO_SLCT_HIGH = 'IHS;';
 
     Table heroRefTab;
     force playerForce, pf, aiForce;
@@ -166,7 +166,7 @@ library HeroSelection requires NefUnion, Table, MultipleAbility, ZAMCore, Loot, 
         //SetPlayerAlliance(Player(2), Player(0), ALLIANCE_SHARED_CONTROL, true);
         //SetPlayerAlliance(Player(1), Player(0), ALLIANCE_SHARED_CONTROL, true);
     }
-#undef HERO_SLCT_LOW 
-#undef HERO_SLCT_HIGH 
+
+
 }
 //! endzinc

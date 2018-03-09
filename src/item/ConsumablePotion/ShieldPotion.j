@@ -1,6 +1,6 @@
 //! zinc
 library ShieldPotion requires SpellEvent, BuffSystem {
-#define BUFF_ID 'A081'
+constant integer BUFF_ID = 'A081';
     
     function onEffect(Buff buf) {
     }
@@ -25,6 +25,6 @@ library ShieldPotion requires SpellEvent, BuffSystem {
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
         
     }
-#undef BUFF_ID
+
 }
 //! endzinc

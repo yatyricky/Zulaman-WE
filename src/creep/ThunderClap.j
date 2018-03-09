@@ -1,8 +1,8 @@
 //! zinc
 library ThunderClap requires SpellEvent, DamageSystem {
-#define ART_CASTER "Abilities\\Spells\\Human\\Thunderclap\\ThunderClapCaster.mdl"
-#define ART_TARGET "Abilities\\Spells\\Orc\\Purge\\PurgeBuffTarget.mdl"
-#define BUFF_ID 'A09Y'
+constant string  ART_CASTER  = "Abilities\\Spells\\Human\\Thunderclap\\ThunderClapCaster.mdl";
+constant string  ART_TARGET  = "Abilities\\Spells\\Orc\\Purge\\PurgeBuffTarget.mdl";
+constant integer BUFF_ID = 'A09Y';
     
     function onEffect(Buff buf) {
         DamageTarget(buf.bd.caster, buf.bd.target, buf.bd.r0, SpellData[SID_THUNDER_CLAP].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
@@ -38,8 +38,8 @@ library ThunderClap requires SpellEvent, DamageSystem {
         RegisterSpellEffectResponse(SID_THUNDER_CLAP, onCast);
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_NEG);
     }
-#undef BUFF_ID
-#undef ART_TARGET
-#undef ART_CASTER
+
+
+
 }
 //! endzinc

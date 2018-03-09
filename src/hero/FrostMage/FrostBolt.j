@@ -1,9 +1,9 @@
 //! zinc
 library FrostBolt requires CastingBar, Projectile, SpellReflection, FrostMageGlobal {
-#define BUFF_ID 'A022'
-#define ART_MISSILE "Abilities\\Weapons\\LichMissile\\LichMissile.mdl"
-#define ART_TARGET "Abilities\\Spells\\Other\\FrostDamage\\FrostDamage.mdl"
-#define ART_FROZEN "Abilities\\Spells\\Undead\\FreezingBreath\\FreezingBreathTargetArt.mdl"
+constant integer BUFF_ID = 'A022';
+constant string  ART_MISSILE  = "Abilities\\Weapons\\LichMissile\\LichMissile.mdl";
+constant string  ART_TARGET  = "Abilities\\Spells\\Other\\FrostDamage\\FrostDamage.mdl";
+constant string  ART_FROZEN  = "Abilities\\Spells\\Undead\\FreezingBreath\\FreezingBreathTargetArt.mdl";
 
     function returnDamage(integer lvl, real sp) -> real {
         return (0 + 175 * lvl + sp * 1.2);
@@ -70,9 +70,9 @@ library FrostBolt requires CastingBar, Projectile, SpellReflection, FrostMageGlo
         RegisterSpellChannelResponse(SIDFROSTBOLT, onChannel);
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_NEG);
     }
-#undef ART_FROZEN
-#undef ART_TARGET
-#undef ART_MISSILE
-#undef BUFF_ID
+
+
+
+
 }
 //! endzinc

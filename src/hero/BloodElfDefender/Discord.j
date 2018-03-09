@@ -1,7 +1,7 @@
 //! zinc
 library Discord requires SpellEvent, AggroSystem, BuffSystem {
-#define ART "Abilities\\Spells\\NightElf\\Taunt\\TauntCaster.mdl"
-#define BUFF_ID 'A030'
+constant string  ART  = "Abilities\\Spells\\NightElf\\Taunt\\TauntCaster.mdl";
+constant integer BUFF_ID = 'A030';
 
     function returnApDecPer(integer lvl) -> real {
         return 0.4 + 0.1 * lvl;
@@ -49,7 +49,7 @@ library Discord requires SpellEvent, AggroSystem, BuffSystem {
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_NEG);
     }
 
-#undef BUFF_ID
-#undef ART
+
+
 }
 //! endzinc

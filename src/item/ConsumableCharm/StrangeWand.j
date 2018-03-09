@@ -1,6 +1,6 @@
 //! zinc
 library StrangeWand requires NefUnion, SpellEvent, BuffSystem {
-#define ART_TARGET "Doodads\\Cinematic\\EnergyField\\EnergyField.mdl"
+constant string  ART_TARGET  = "Doodads\\Cinematic\\EnergyField\\EnergyField.mdl";
 //"Abilities\\Spells\\Items\\TomeOfRetraining\\TomeOfRetrainingCaster.mdl"
 
     struct StrangeWand {
@@ -75,7 +75,7 @@ library StrangeWand requires NefUnion, SpellEvent, BuffSystem {
     function onInit() {
         RegisterSpellEffectResponse(SID_STRANGE_WAND, onCast);
     }
-#undef ART_TARGET
+
 }
 //! endzinc
 

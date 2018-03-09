@@ -1,6 +1,6 @@
 //! zinc
 library DarkArrow requires SpellEvent, DamageSystem, Projectile, RhokDelar {
-#define PATH "Abilities\\Spells\\Other\\BlackArrow\\BlackArrowMissile.mdl"
+constant string  PATH  = "Abilities\\Spells\\Other\\BlackArrow\\BlackArrowMissile.mdl";
 
     function returnDamage(integer lvl, real ap) -> real {
         return ap * (0.8 + 0.4 * lvl);
@@ -86,6 +86,6 @@ library DarkArrow requires SpellEvent, DamageSystem, Projectile, RhokDelar {
         RegisterSpellEffectResponse(SIDDARKARROW, onCast);
     }
    
-#undef PATH
+
 }
 //! endzinc

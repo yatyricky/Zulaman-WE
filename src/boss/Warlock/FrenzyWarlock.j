@@ -1,7 +1,7 @@
 //! zinc
 library FrenzyWarlock requires SpellEvent, BuffSystem {
-#define ART_LEFT "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustTarget.mdl"
-#define ART_RIGHT "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustSpecial.mdl"
+constant string  ART_LEFT  = "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustTarget.mdl";
+constant string  ART_RIGHT  = "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustSpecial.mdl";
 	private struct FrenzyWarlock {
 		private timer tm;
 		
@@ -64,7 +64,7 @@ library FrenzyWarlock requires SpellEvent, BuffSystem {
         RegisterSpellEffectResponse(SIDFRENZYWARLOCK, onCast);
         BuffType.register(BID_FRENZY_WARLOCK, BUFF_PHYX, BUFF_POS);
     }
-#undef ART_RIGHT
-#undef ART_LEFT
+
+
 }
 //! endzinc

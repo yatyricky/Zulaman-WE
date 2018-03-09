@@ -1,7 +1,7 @@
 //! zinc
 library HolyLight requires CastingBar, MultipleAbility, PaladinGlobal, BeaconOfLight {
-#define ART "Abilities\\Spells\\Human\\DivineShield\\DivineShieldTarget.mdl"
-#define BUFF_ID1 'A029'
+constant string  ART  = "Abilities\\Spells\\Human\\DivineShield\\DivineShieldTarget.mdl";
+constant integer BUFF_ID1 = 'A029';
 
     integer castSound;
 
@@ -94,7 +94,7 @@ library HolyLight requires CastingBar, MultipleAbility, PaladinGlobal, BeaconOfL
         BuffType.register(BUFF_ID1, BUFF_MAGE, BUFF_POS);
         RegisterUnitEnterMap(registerentered);
     }
-#undef BUFF_ID1
-#undef ART
+
+
 }
 //! endzinc

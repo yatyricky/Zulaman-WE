@@ -1,6 +1,6 @@
 //! zinc
 library EyeBeam {
-#define STEP 0.3696
+constant real STEP = 0.3696;
 
     struct EyeBeamData {
         lightning l;
@@ -61,6 +61,6 @@ library EyeBeam {
     function onInit() {
         RegisterSpellChannelResponse(SID, onChannel);
     }
-#undef STEP
+
 }
 //! endzinc

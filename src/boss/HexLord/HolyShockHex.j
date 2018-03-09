@@ -1,6 +1,6 @@
 //! zinc
 library HolyShockHex requires SpellEvent, DamageSystem {
-#define ART_ID 'e00J'
+constant integer ART_ID = 'e00J';
 
     function onCast() {
 		if (GetPidofu(SpellEvent.TargetUnit) == MOB_PID) {
@@ -15,6 +15,6 @@ library HolyShockHex requires SpellEvent, DamageSystem {
     function onInit() {
         RegisterSpellEffectResponse(SIDHOLYSHOCKHEX, onCast);
     }
-#undef ART_ID
+
 }
 //! endzinc

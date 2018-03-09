@@ -1,6 +1,6 @@
 //! zinc
 library Assault requires DamageSystem, SpellEvent, RogueGlobal, StunUtils {
-#define ART "Abilities\\Weapons\\BallistaMissile\\BallistaMissileTarget.mdl"
+constant string  ART  = "Abilities\\Weapons\\BallistaMissile\\BallistaMissileTarget.mdl";
     function onCast() {
         integer cp = GetUnitAbilityLevel(SpellEvent.CastingUnit, SIDASSAULT);
         if (ComboPoints[SpellEvent.CastingUnit].isTarget(SpellEvent.TargetUnit) && ComboPoints[SpellEvent.CastingUnit].n > 0) {
@@ -16,6 +16,6 @@ library Assault requires DamageSystem, SpellEvent, RogueGlobal, StunUtils {
     function onInit() {
         RegisterSpellEffectResponse(SIDASSAULT, onCast);
     }
-#undef ART
+
 }
 //! endzinc

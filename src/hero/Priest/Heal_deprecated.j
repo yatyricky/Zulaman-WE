@@ -1,6 +1,6 @@
 //! zinc
 library Heal requires CastingBar, UnitProperty, PlayerUnitList {
-#define ART "Abilities\\Spells\\Demon\\DarkPortal\\DarkPortalTarget.mdl"
+constant string  ART  = "Abilities\\Spells\\Demon\\DarkPortal\\DarkPortalTarget.mdl";
 
     public function PriestCastHeal(unit caster, unit target, real portion) {
         integer i = 0;
@@ -41,6 +41,6 @@ library Heal requires CastingBar, UnitProperty, PlayerUnitList {
     function onInit() {
         RegisterSpellChannelResponse(SIDHEAL, onChannel);
     }
-#undef ART
+
 }
 //! endzinc

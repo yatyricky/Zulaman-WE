@@ -1,8 +1,8 @@
 //! zinc
 library FrenzyScroll requires SpellEvent, ZAMCore {
-#define ART_LEFT "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustTarget.mdl"
-#define ART_RIGHT "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustSpecial.mdl"
-#define BUFF_ID 'A06U'
+constant string  ART_LEFT  = "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustTarget.mdl";
+constant string  ART_RIGHT  = "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustSpecial.mdl";
+constant integer BUFF_ID = 'A06U';
     
     function onEffect(Buff buf) {
         UnitProp[buf.bd.target].ModAttackSpeed(buf.bd.i0);
@@ -37,8 +37,8 @@ library FrenzyScroll requires SpellEvent, ZAMCore {
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
         
     }
-#undef BUFF_ID
-#undef ART_RIGHT
-#undef ART_LEFT
+
+
+
 }
 //! endzinc

@@ -1,8 +1,8 @@
 //! zinc
 library DefendScroll requires SpellEvent, ZAMCore {
-#define ART_CASTER "Abilities\\Spells\\Items\\AIda\\AIdaCaster.mdl"
-#define ART_TARGET "Abilities\\Spells\\Items\\AIda\\AIdaTarget.mdl"
-#define BUFF_ID 'A06W'
+constant string  ART_CASTER  = "Abilities\\Spells\\Items\\AIda\\AIdaCaster.mdl";
+constant string  ART_TARGET  = "Abilities\\Spells\\Items\\AIda\\AIdaTarget.mdl";
+constant integer BUFF_ID = 'A06W';
     
     function onEffect(Buff buf) {
         UnitProp[buf.bd.target].ModArmor(buf.bd.i0);
@@ -37,8 +37,8 @@ library DefendScroll requires SpellEvent, ZAMCore {
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
         
     }
-#undef BUFF_ID
-#undef ART_TARGET
-#undef ART_CASTER
+
+
+
 }
 //! endzinc

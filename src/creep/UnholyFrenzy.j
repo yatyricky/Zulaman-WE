@@ -5,8 +5,8 @@ Increase attack speed by 100%.
 Duration 6 seconds
 Magical positive effect
 */
-#define ART "Abilities\\Spells\\Undead\\UnholyFrenzy\\UnholyFrenzyTarget.mdl"
-#define DURATION 8.0
+constant string  ART  = "Abilities\\Spells\\Undead\\UnholyFrenzy\\UnholyFrenzyTarget.mdl";
+constant real DURATION = 8.0;
 
     function onEffect(Buff buf) {
         UnitProp[buf.bd.target].ModAttackSpeed(buf.bd.i0);
@@ -32,7 +32,7 @@ Magical positive effect
 		RegisterSpellEffectResponse(SID_UNHOLY_FRENZY, onCast);
 		BuffType.register(BID_UNHOLY_FRENZY, BUFF_MAGE, BUFF_POS);
 	}
-#undef DURATION
-#undef ART
+
+
 }
 //! endzinc

@@ -1,9 +1,9 @@
 //! zinc
 library Stealth requires AggroSystem, SpellEvent, UnitProperty, DamageSystem {
-#define ART "Abilities\\Spells\\Human\\CloudOfFog\\CloudOfFog.mdl"
-#define ART_WEAPON "Abilities\\Weapons\\AvengerMissile\\AvengerMissile.mdl"
-#define BUFF_ID 'A049'
-#define PREMISE_ID 'e003'
+constant string  ART  = "Abilities\\Spells\\Human\\CloudOfFog\\CloudOfFog.mdl";
+constant string  ART_WEAPON  = "Abilities\\Weapons\\AvengerMissile\\AvengerMissile.mdl";
+constant integer BUFF_ID = 'A049';
+constant integer PREMISE_ID = 'e003';
 // rogue damaged
 // rogue use spell
 // rogue attack/attacked
@@ -114,9 +114,9 @@ library Stealth requires AggroSystem, SpellEvent, UnitProperty, DamageSystem {
             i += 1;
         }
     }
-#undef PREMISE_ID
-#undef BUFF_ID
-#undef ART_WEAPON
-#undef ART
+
+
+
+
 }
 //! endzinc

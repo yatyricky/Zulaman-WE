@@ -1,8 +1,8 @@
 //! zinc
 library Purge requires BuffSystem, SpellEvent, UnitProperty {
-#define BUFF_ID 'A034'
-#define BUFF_ID1 'A035'
-#define ART "units\\human\\WaterElemental\\WaterElemental.mdl"
+constant integer BUFF_ID = 'A034';
+constant integer BUFF_ID1 = 'A035';
+constant string  ART  = "units\\human\\WaterElemental\\WaterElemental.mdl";
 
     struct internalCD {
         private static HandleTable ht;
@@ -111,8 +111,8 @@ library Purge requires BuffSystem, SpellEvent, UnitProperty {
         BuffType.register(BUFF_ID1, BUFF_MAGE, BUFF_NEG);
         RegisterSpellEffectResponse(SIDPURGE, onCast);
     }
-#undef ART
-#undef BUFF_ID1
-#undef BUFF_ID
+
+
+
 }
 //! endzinc

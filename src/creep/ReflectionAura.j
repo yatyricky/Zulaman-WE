@@ -1,6 +1,6 @@
 //! zinc
 library ReflectionAura requires SpellEvent, SpellReflection, AggroSystem {
-#define INTERVAL 1.0
+constant real INTERVAL = 1.0;
     
     function onEffect(Buff buf) {
         UnitProp[buf.bd.target].ModSpellReflect(buf.bd.i0);
@@ -63,6 +63,6 @@ library ReflectionAura requires SpellEvent, SpellReflection, AggroSystem {
         BuffType.register(BID_REFLECTION_AURA, BUFF_PHYX, BUFF_POS);
     }
 
-#undef INTERVAL
+
 }
 //! endzinc

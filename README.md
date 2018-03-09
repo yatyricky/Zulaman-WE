@@ -4,7 +4,21 @@ Zul'Aman - Reinvented with World Editor
 
 > 地图最早立项于2009年夏，第一个版本于2010年夏发布在wow8，在当时取得一些好评，但是在我看来仍然是一张很烂的图。后来经历一些修修补补，最终，在2011年末，决定和Soma对整个地图进行重新设计，并且在2012年底对War3地图设计有了一些新的看法（[对于传统PVE型RPG地图设计的一些看法](http://yatyricky.github.io/war3/game/design/2012/12/23/insights-on-wc3-pve-rpg-maps/)）。
 
-## 地图基本信息
+## 系统要求
+
+Warcraft III TFT 1.28.2+  
+SharpCraft World Editor Extended Bundle v0.1.3.0  
+Nodejs
+
+## 构建
+
+1. 配置系统环境变量 TESH_HOME: ```.\SharpCraft World Editor Extended Bundle\SharpCraft WEX Bundle (0.1.3.0-FIX)\profiles\Warcraft III - World Editor (WEX)\plugins\War3EditorTriggerEditorSyntaxHighlight\tesh```
+2. npm install
+3. node build.js
+4. 在触发编辑器中，点击TESH的Load Templates
+5. 保存，测试
+
+## 地图信息
 
 **类型**：RPG  
 **人数**：1-6

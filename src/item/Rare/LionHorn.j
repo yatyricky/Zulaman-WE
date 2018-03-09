@@ -1,7 +1,7 @@
 //! zinc
 library LionHorn requires ItemAttributes {
-#define BUFF_ID 'A07D'
-#define ART_TARGET "Abilities\\Spells\\Other\\Tornado\\Tornado_Target.mdl"
+constant integer BUFF_ID = 'A07D';
+constant string  ART_TARGET  = "Abilities\\Spells\\Other\\Tornado\\Tornado_Target.mdl";
     HandleTable ht;
 
     function oneffect(Buff buf) {
@@ -60,7 +60,7 @@ library LionHorn requires ItemAttributes {
         RegisterDamagedEvent(damaged);
         BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_POS);
     }
-#undef ART_TARGET
-#undef BUFF_ID
+
+
 }
 //! endzinc

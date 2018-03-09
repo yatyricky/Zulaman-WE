@@ -1,7 +1,7 @@
 //! zinc
 library Rejuvenation requires BuffSystem, SpellEvent, UnitProperty {
-#define BUFF_ID1 'A02I'
-#define ART_TARGET "Abilities\\Spells\\NightElf\\Rejuvenation\\RejuvenationTarget.mdl"
+constant integer BUFF_ID1 = 'A02I';
+constant string  ART_TARGET  = "Abilities\\Spells\\NightElf\\Rejuvenation\\RejuvenationTarget.mdl";
 
 	function returnHeal(integer lvl) -> real {
 		return 50.0 + 100.0 * lvl;
@@ -72,7 +72,7 @@ library Rejuvenation requires BuffSystem, SpellEvent, UnitProperty {
         RegisterSpellEffectResponse(SIDREJUVENATION, onCast);
         TriggerAnyUnit(EVENT_PLAYER_HERO_SKILL, function lvlup);
     }
-#undef ART_TARGET
-#undef BUFF_ID1 
+
+
 }
 //! endzinc

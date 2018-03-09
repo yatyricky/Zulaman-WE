@@ -1,6 +1,6 @@
 //! zinc
 library Terror requires SpellEvent, StunUtils {
-#define ART "Abilities\\Spells\\Other\\HowlOfTerror\\HowlCaster.mdl"
+constant string  ART  = "Abilities\\Spells\\Other\\HowlOfTerror\\HowlCaster.mdl";
 
     public function HereticGetTerrorAOE(integer lvl) -> real {
         return 800.0;
@@ -36,6 +36,6 @@ library Terror requires SpellEvent, StunUtils {
     function onInit() {
         RegisterSpellEffectResponse(SIDTERROR, onCast);
     }
-#undef ART
+
 }
 //! endzinc

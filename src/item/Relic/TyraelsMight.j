@@ -1,6 +1,6 @@
 //! zinc
 library TyraelsMight requires ItemAttributes, DamageSystem {
-#define ART_TARGET "Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpecialArt.mdl"
+constant string  ART_TARGET  = "Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpecialArt.mdl";
     HandleTable ht;
     
     function healed() {
@@ -66,6 +66,6 @@ library TyraelsMight requires ItemAttributes, DamageSystem {
         //RegisterSpellEffectResponse(SID_TYRAELS_MIGHT, onCast);
         TriggerAnyUnit(EVENT_PLAYER_UNIT_USE_ITEM, function onCast);
     }
-#undef ART_TARGET
+
 }
 //! endzinc

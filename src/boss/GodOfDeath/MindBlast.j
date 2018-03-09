@@ -1,8 +1,8 @@
 //! zinc
 library MindBlast {
-#define MISSILE "Abilities\\Weapons\\PhoenixMissile\\Phoenix_Missile.mdl"
-#define EXPLOSION_ART "Abilities\\Weapons\\Mortar\\MortarMissile.mdl"
-#define H_OVER_D 0.45
+constant string  MISSILE  = "Abilities\\Weapons\\PhoenixMissile\\Phoenix_Missile.mdl";
+constant string  EXPLOSION_ART  = "Abilities\\Weapons\\Mortar\\MortarMissile.mdl";
+constant real H_OVER_D = 0.45;
 
     struct Parabola {
         private timer tm;
@@ -80,8 +80,8 @@ library MindBlast {
     function onInit() {
         RegisterSpellEffectResponse(SID, onCast);
     }
-#undef H_OVER_D
-#undef EXPLOSION_ART
-#undef MISSILE
+
+
+
 }
 //! endzinc

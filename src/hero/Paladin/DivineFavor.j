@@ -1,6 +1,6 @@
 //! zinc
 library DivineFavor requires PaladinGlobal, SpellEvent, UnitProperty, AggroSystem {
-#define BUFF_ID 'A02A'
+constant integer BUFF_ID = 'A02A';
     function onCast() {
         healCrit[GetPlayerId(GetOwningPlayer(SpellEvent.CastingUnit))] = 2.0;
         if (GetUnitAbilityLevel(SpellEvent.CastingUnit, SIDDIVINEFAVOR) > 1) {
@@ -22,6 +22,6 @@ library DivineFavor requires PaladinGlobal, SpellEvent, UnitProperty, AggroSyste
         RegisterSpellEffectResponse(SIDDIVINEFAVOR, onCast);
         TriggerAnyUnit(EVENT_PLAYER_HERO_SKILL, function lvlup);
     }
-#undef BUFF_ID
+
 }
 //! endzinc

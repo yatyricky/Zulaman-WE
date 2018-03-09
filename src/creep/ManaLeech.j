@@ -1,8 +1,8 @@
 //! zinc
 library ManaLeech requires SpellEvent, DamageSystem {
-#define ART_CASTER "Abilities\\Spells\\Undead\\ReplenishMana\\ReplenishManaCasterOverhead.mdl"
-#define ART_TARGET "Abilities\\Spells\\Items\\AIil\\AIilTarget.mdl"
-#define ART_TARGET1 "Abilities\\Spells\\Other\\Drain\\ManaDrainTarget.mdl"
+constant string  ART_CASTER  = "Abilities\\Spells\\Undead\\ReplenishMana\\ReplenishManaCasterOverhead.mdl";
+constant string  ART_TARGET  = "Abilities\\Spells\\Items\\AIil\\AIilTarget.mdl";
+constant string  ART_TARGET1  = "Abilities\\Spells\\Other\\Drain\\ManaDrainTarget.mdl";
 
 	function returnFactor() -> real {
 		return 25.0;
@@ -24,8 +24,8 @@ library ManaLeech requires SpellEvent, DamageSystem {
     function onInit() {
         RegisterSpellEffectResponse(SID_MANA_LEECH, onCast);
     }
-#undef ART_TARGET1
-#undef ART_TARGET
-#undef ART_CASTER
+
+
+
 }
 //! endzinc

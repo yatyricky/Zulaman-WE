@@ -1,6 +1,6 @@
 //! zinc
 library PoisonousCrawler requires DamageSystem, BuffSystem {
-#define ART "units\\undead\\PlagueCloud\\PlagueCloud.mdl"
+constant string  ART  = "units\\undead\\PlagueCloud\\PlagueCloud.mdl";
 
 	HandleTable ownerHT;
 
@@ -120,6 +120,6 @@ library PoisonousCrawler requires DamageSystem, BuffSystem {
         RegisterUnitDeath(poisonousCrawlerDeath);
         ownerHT = HandleTable.create();
     }
-#undef ART
+
 }
 //! endzinc

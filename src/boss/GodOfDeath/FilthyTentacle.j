@@ -1,8 +1,8 @@
 //! zinc
 library FilthyTentacle {
-#define INTERVAL 0.04
-#define SPEED 72
-#define SLOW 0.5
+constant real INTERVAL = 0.04;
+constant integer SPEED = 72;
+constant real SLOW = 0.5;
     
     function onEffect(Buff buf) {
         UnitProp[buf.bd.target].ModSpeed(0 - buf.bd.i0);
@@ -84,8 +84,8 @@ library FilthyTentacle {
 		RegisterSpellEffectResponse(SID, onCast);
 		BuffType.register(BID, BUFF_MAGE, BUFF_NEG);
 	}
-#undef SLOW
-#undef SPEED
-#undef INTERVAL
+
+
+
 }
 //! endzinc

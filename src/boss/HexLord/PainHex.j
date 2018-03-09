@@ -1,7 +1,7 @@
 //! zinc
 library PainHex requires BuffSystem, SpellEvent, UnitProperty, SpellReflection {
-#define BUFF_ID 'A01V'
-#define BUFF_ID1 'A021'
+constant integer BUFF_ID = 'A01V';
+constant integer BUFF_ID1 = 'A021';
 
     function onEffect1(Buff buf) { 
         UnitProp[buf.bd.target].spellTaken += buf.bd.r0;
@@ -49,7 +49,7 @@ library PainHex requires BuffSystem, SpellEvent, UnitProperty, SpellReflection {
         //BuffType.register(BUFF_ID1, BUFF_MAGE, BUFF_NEG);
         RegisterSpellEffectResponse(SIDPAINHEX, onCast);
     }
-#undef BUFF_ID1
-#undef BUFF_ID 
+
+
 }
 //! endzinc

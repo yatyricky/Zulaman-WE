@@ -1,7 +1,7 @@
 //! zinc
 library SinisterStrike requires DamageSystem, SpellEvent, RogueGlobal {
-#define BUFF_ID 'A046'
-#define ART "Abilities\\Weapons\\KeeperGroveMissile\\KeeperGroveMissile.mdl"    
+constant integer BUFF_ID = 'A046';
+constant string  ART  = "Abilities\\Weapons\\KeeperGroveMissile\\KeeperGroveMissile.mdl";    
 
     function returnDamage(integer lvl, real ap) -> real {
         return (100 * lvl + ap * (0.4 + 0.6 * lvl));
@@ -56,7 +56,7 @@ library SinisterStrike requires DamageSystem, SpellEvent, RogueGlobal {
         RegisterSpellEffectResponse(SIDSINISTERSTRIKE, onCast);
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
     }
-#undef ART
-#undef BUFF_ID
+
+
 }
 //! endzinc

@@ -1,7 +1,7 @@
 //! zinc
 library SunfireStorm requires SpellEvent, TimerUtils, AggroSystem, HexLordGlobal {
-#define ART_CASTER "Abilities\\Weapons\\DemolisherFireMissile\\DemolisherFireMissile.mdl"
-#define ART_EFFECT "Abilities\\Spells\\Orc\\LiquidFire\\Liquidfire.mdl"
+constant string  ART_CASTER  = "Abilities\\Weapons\\DemolisherFireMissile\\DemolisherFireMissile.mdl";
+constant string  ART_EFFECT  = "Abilities\\Spells\\Orc\\LiquidFire\\Liquidfire.mdl";
 
     struct SunFieldHex {
         real dmg;
@@ -69,7 +69,7 @@ library SunfireStorm requires SpellEvent, TimerUtils, AggroSystem, HexLordGlobal
     function onInit() {
         RegisterSpellEffectResponse(SIDSUNFIRESTORMHEX, onCast);
     }
-#undef ART_EFFECT
-#undef ART_CASTER
+
+
 }
 //! endzinc

@@ -1,8 +1,8 @@
 //! zinc
 library Rage requires SpellEvent, BuffSystem {
-#define SPELL_ID 'A03Q'
-#define BUFF_ID 'A03T'
-#define ART "Abilities\\Spells\\Undead\\UnholyFrenzy\\UnholyFrenzyTarget.mdl"
+constant integer SPELL_ID = 'A03Q';
+constant integer BUFF_ID = 'A03T';
+constant string  ART  = "Abilities\\Spells\\Undead\\UnholyFrenzy\\UnholyFrenzyTarget.mdl";
     function onEffect(Buff buf) {
         UnitProp[buf.bd.target].damageDealt += buf.bd.r0;
         UnitProp[buf.bd.target].ModAttackSpeed(buf.bd.i0);
@@ -31,8 +31,8 @@ library Rage requires SpellEvent, BuffSystem {
         RegisterSpellEffectResponse(SPELL_ID, onCast);
         BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_POS);
     }
-#undef ART
-#undef BUFF_ID
-#undef SPELL_ID
+
+
+
 }
 //! endzinc

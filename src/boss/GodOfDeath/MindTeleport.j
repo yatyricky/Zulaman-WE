@@ -1,6 +1,6 @@
 //! zinc
 library MindTeleport {
-#define ART "tp effect"
+constant string  ART  = "tp effect";
 
 	function dpsGoFirst(unit u1, unit u2) {
 		return IsUnitDPS(u2);
@@ -28,6 +28,6 @@ library MindTeleport {
     function onInit() {
         RegisterSpellEffectResponse(SID, onCast);
     }
-#undef ART
+
 }
 //! endzinc

@@ -1,7 +1,7 @@
 //! zinc
 library MarrowSqueeze requires CastingBar, UnitProperty, Anathema, HeathenGlobal {
-#define ART "Abilities\\Spells\\Undead\\DeathandDecay\\DeathandDecayTarget.mdl"
-#define BUFF_ID 'A04Q'
+constant string  ART  = "Abilities\\Spells\\Undead\\DeathandDecay\\DeathandDecayTarget.mdl";
+constant integer BUFF_ID = 'A04Q';
 
     function returnDamage(integer lvl, real sp) -> real {
         return 180 + sp * 0.92;
@@ -78,7 +78,7 @@ library MarrowSqueeze requires CastingBar, UnitProperty, Anathema, HeathenGlobal
         RegisterSpellChannelResponse(SIDMARROWSQUEEZE, onChannel);
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
     }
-#undef BUFF_ID
-#undef ART
+
+
 }
 //! endzinc

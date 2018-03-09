@@ -1,9 +1,9 @@
 //! zinc
 library MortalStrike requires BladeMasterGlobal, Rend, BuffSystem, DamageSystem, UnitProperty, GroupUtils {
-#define BUFF_ID 'A02O'
-#define BUFF_ID1 'A02P'
-#define ART_TARGET "Abilities\\Spells\\Orc\\Disenchant\\DisenchantSpecialArt.mdl"
-#define ART_CASTER "Abilities\\Spells\\Other\\Andt\\Andt.mdl"
+constant integer BUFF_ID = 'A02O';
+constant integer BUFF_ID1 = 'A02P';
+constant string  ART_TARGET  = "Abilities\\Spells\\Orc\\Disenchant\\DisenchantSpecialArt.mdl";
+constant string  ART_CASTER  = "Abilities\\Spells\\Other\\Andt\\Andt.mdl";
     
     function returnDamage(integer lvl, real ap) -> real {
         return 50 + 50 * lvl + ap * (1.5 + 0.5 * lvl);
@@ -86,9 +86,9 @@ library MortalStrike requires BladeMasterGlobal, Rend, BuffSystem, DamageSystem,
         RegisterSpellEffectResponse(SIDMORTALSTRIKE, onCast);
     }
     
-#undef ART_CASTER
-#undef ART_TARGET
-#undef BUFF_ID1
-#undef BUFF_ID
+
+
+
+
 }
 //! endzinc

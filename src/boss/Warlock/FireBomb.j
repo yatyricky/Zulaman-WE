@@ -1,10 +1,10 @@
 //! zinc
 library FireBomb requires SpellEvent, ZAMCore, DamageSystem, WarlockGlobal {
-#define MISSILE "Abilities\\Weapons\\PhoenixMissile\\Phoenix_Missile.mdl"
-#define EXPLOSION_ART "Abilities\\Weapons\\Mortar\\MortarMissile.mdl"
-#define MISSILE_SPEED 35
-#define NUM_MISSILES 40
-#define H_OVER_D 0.45
+constant string  MISSILE  = "Abilities\\Weapons\\PhoenixMissile\\Phoenix_Missile.mdl";
+constant string  EXPLOSION_ART  = "Abilities\\Weapons\\Mortar\\MortarMissile.mdl";
+constant integer MISSILE_SPEED = 35;
+constant integer NUM_MISSILES = 40;
+constant real H_OVER_D = 0.45;
 
     struct Parabola {
         private timer tm;
@@ -109,10 +109,10 @@ library FireBomb requires SpellEvent, ZAMCore, DamageSystem, WarlockGlobal {
     function onInit() {
         RegisterSpellChannelResponse(SIDFLAMEBOMB, onChannel);
     }
-#undef H_OVER_D
-#undef NUM_MISSILES
-#undef MISSILE_SPEED
-#undef EXPLOSION_ART
-#undef MISSILE
+
+
+
+
+
 }
 //! endzinc

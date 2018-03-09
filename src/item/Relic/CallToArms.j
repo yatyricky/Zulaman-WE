@@ -1,7 +1,7 @@
 //! zinc
 library CallToArms requires ItemAttributes, DamageSystem {
-#define ART_CASTER "Abilities\\Spells\\NightElf\\BattleRoar\\RoarCaster.mdl"
-#define BUFF_ID 'A068'
+constant string  ART_CASTER  = "Abilities\\Spells\\NightElf\\BattleRoar\\RoarCaster.mdl";
+constant integer BUFF_ID = 'A068';
     HandleTable ht;
     
     function onEffect(Buff buf) {}
@@ -64,7 +64,7 @@ library CallToArms requires ItemAttributes, DamageSystem {
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
         RegisterOnDamageEvent(ondamaging);
     }
-#undef BUFF_ID
-#undef ART_CASTER
+
+
 }
 //! endzinc

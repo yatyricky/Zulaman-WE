@@ -1,7 +1,7 @@
 //! zinc
 library HolyShock requires PaladinGlobal, SpellEvent, UnitProperty, BeaconOfLight, LightsJustice {
-#define ART_ID 'e00J'
-#define BUFF_ID 'A02E'
+constant integer ART_ID = 'e00J';
+constant integer BUFF_ID = 'A02E';
     struct delayedDosth1 {
         private timer tm;
         private unit sor, tar;
@@ -81,7 +81,7 @@ library HolyShock requires PaladinGlobal, SpellEvent, UnitProperty, BeaconOfLigh
         RegisterSpellEffectResponse(SIDHOLYSHOCK, onCast);
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
     }
-#undef BUFF_ID
-#undef ART_ID
+
+
 }
 //! endzinc

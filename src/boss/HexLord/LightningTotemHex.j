@@ -1,6 +1,6 @@
 //! zinc
 library LightningTotemHex requires EarthBinderGlobal, GroupUtils, UnitProperty, BuffSystem {
-#define TOTEM_ID_STORM 'u000'
+constant integer TOTEM_ID_STORM = 'u000';
 
     struct StormTotem {
         private unit u;
@@ -70,6 +70,6 @@ library LightningTotemHex requires EarthBinderGlobal, GroupUtils, UnitProperty, 
     function onInit() {
         RegisterSpellEffectResponse(SIDLIGHTNINGTOTEMHEX, onCastStorm);
     }
-#undef TOTEM_ID_STORM
+
 }
 //! endzinc

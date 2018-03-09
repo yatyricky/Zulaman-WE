@@ -1,6 +1,6 @@
 //! zinc
 library Enigma requires ItemAttributes, DamageSystem {
-#define ART "Abilities\\Spells\\Items\\AIil\\AIilTarget.mdl"
+constant string  ART  = "Abilities\\Spells\\Items\\AIil\\AIilTarget.mdl";
     HandleTable ht;
 
     struct EnigmaData {
@@ -77,6 +77,6 @@ library Enigma requires ItemAttributes, DamageSystem {
         RegisterSpellEffectResponse(SIDENIGMA, onCast);    
         TriggerAnyUnit(EVENT_PLAYER_HERO_LEVEL, function lvledup);
     }
-#undef ART
+
 }
 //! endzinc

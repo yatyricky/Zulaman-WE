@@ -1,8 +1,8 @@
 //! zinc
 library Drum requires ItemAttributes {
-#define BUFF_ID 'A07C'
-#define DEBUFF_ID 'A07B'
-#define ART_DEBUFF "Abilities\\Spells\\Other\\Aneu\\AneuTarget.mdl"
+constant integer BUFF_ID = 'A07C';
+constant integer DEBUFF_ID = 'A07B';
+constant string  ART_DEBUFF  = "Abilities\\Spells\\Other\\Aneu\\AneuTarget.mdl";
     HandleTable ht;
 
     function oneffect(Buff buf) {
@@ -120,8 +120,8 @@ library Drum requires ItemAttributes {
         BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_POS);
         BuffType.register(DEBUFF_ID, BUFF_PHYX, BUFF_NEG);
     }
-#undef ART_DEBUFF
-#undef DEBUFF_ID
-#undef BUFF_ID
+
+
+
 }
 //! endzinc

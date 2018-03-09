@@ -1,6 +1,6 @@
 //! zinc
 library Ambush requires DamageSystem, SpellEvent, RogueGlobal {
-#define ART "Abilities\\Spells\\Other\\TalkToMe\\TalkToMe.mdl"
+constant string  ART  = "Abilities\\Spells\\Other\\TalkToMe\\TalkToMe.mdl";
     
     function onCast() { 
         DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, 300.0 + UnitProp[SpellEvent.CastingUnit].AttackPower(), SpellData[SIDAMBUSH].name, true, true, false, WEAPON_TYPE_METAL_HEAVY_SLICE);
@@ -12,6 +12,6 @@ library Ambush requires DamageSystem, SpellEvent, RogueGlobal {
     function onInit() {
         RegisterSpellEffectResponse(SIDAMBUSH, onCast);
     }
-#undef ART
+
 }
 //! endzinc

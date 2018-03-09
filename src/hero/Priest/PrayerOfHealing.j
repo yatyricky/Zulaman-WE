@@ -1,6 +1,6 @@
 //! zinc
 library PrayerOfHealing requires CastingBar, UnitProperty, PlayerUnitList, Sounds {
-#define ART "Abilities\\Spells\\Demon\\DarkPortal\\DarkPortalTarget.mdl"
+constant string  ART  = "Abilities\\Spells\\Demon\\DarkPortal\\DarkPortalTarget.mdl";
 
     integer castSound;
 
@@ -61,6 +61,6 @@ library PrayerOfHealing requires CastingBar, UnitProperty, PlayerUnitList, Sound
         castSound = DefineSound("Sound\\Ambient\\DoodadEffects\\RunesGlow.wav", 5000, true, false);
         RegisterSpellChannelResponse(SIDPRAYEROFHEALING, onChannel);
     }
-#undef ART
+
 }
 //! endzinc

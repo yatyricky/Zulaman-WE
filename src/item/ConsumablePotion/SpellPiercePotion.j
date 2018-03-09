@@ -1,7 +1,7 @@
 //! zinc
 library SpellPiercePotion requires SpellEvent, BuffSystem {
-#define BUFF_ID 'A08B'
-#define DEBUFF_ID 'A095'
+constant integer BUFF_ID = 'A08B';
+constant integer DEBUFF_ID = 'A095';
     
     function onEffect1(Buff buf) {
         UnitProp[buf.bd.target].spellTaken += buf.bd.r0;
@@ -49,7 +49,7 @@ library SpellPiercePotion requires SpellEvent, BuffSystem {
         BuffType.register(DEBUFF_ID, BUFF_MAGE, BUFF_NEG);
         RegisterDamagedEvent(damaged);                
     }
-#undef DEBUFF_ID
-#undef BUFF_ID
+
+
 }
 //! endzinc

@@ -1,7 +1,7 @@
 //! zinc
 library PrayerOfMending requires BuffSystem, SpellEvent, UnitProperty, Projectile, DamageSystem {
-#define BUFF_ID 'A01K'
-#define PATH "Abilities\\Weapons\\FaerieDragonMissile\\FaerieDragonMissile.mdl"
+constant integer BUFF_ID = 'A01K';
+constant string  PATH  = "Abilities\\Weapons\\FaerieDragonMissile\\FaerieDragonMissile.mdl";
 
     function findNearestOf(unit u) -> unit {
         unit tu;
@@ -115,7 +115,7 @@ library PrayerOfMending requires BuffSystem, SpellEvent, UnitProperty, Projectil
         RegisterSpellEffectResponse(SIDPRAYEROFMENDING, onCast);
         RegisterDamagedEvent(damaged);
     }
-#undef PATH
-#undef BUFF_ID
+
+
 }
 //! endzinc

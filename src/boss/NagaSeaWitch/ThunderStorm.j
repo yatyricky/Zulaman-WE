@@ -1,8 +1,8 @@
 //! zinc
 library ThunderStorm requires SpellEvent, DamageSystem, PlayerUnitList, CombatFacts {
-#define SPELL_ID 'A03O'
-#define ART "Abilities\\Spells\\NightElf\\Cyclone\\CycloneTarget.mdl"
-#define INDICATOR "Doodads\\Cinematic\\GlowingRunes\\GlowingRunes2.mdl"
+constant integer SPELL_ID = 'A03O';
+constant string  ART  = "Abilities\\Spells\\NightElf\\Cyclone\\CycloneTarget.mdl";
+constant string  INDICATOR  = "Doodads\\Cinematic\\GlowingRunes\\GlowingRunes2.mdl";
 
     weathereffect rain;
 
@@ -110,8 +110,8 @@ library ThunderStorm requires SpellEvent, DamageSystem, PlayerUnitList, CombatFa
     function onInit() {
         RegisterSpellChannelResponse(SPELL_ID, onChannel);
     }
-#undef INDICATOR
-#undef ART
-#undef SPELL_ID 
+
+
+
 }
 //! endzinc

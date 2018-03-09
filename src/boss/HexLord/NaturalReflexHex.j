@@ -1,6 +1,6 @@
 //! zinc
 library NaturalReflexHex requires BuffSystem, SpellEvent, UnitProperty {
-// #define ART "Abilities\\Spells\\Human\\Invisibility\\InvisibilityTarget.mdl"
+// constant string  ART  = "Abilities\\Spells\\Human\\Invisibility\\InvisibilityTarget.mdl";
 
     // i0 = current increment; i1 = final decrement
     function onEffect(Buff buf) {
@@ -43,6 +43,6 @@ library NaturalReflexHex requires BuffSystem, SpellEvent, UnitProperty {
         RegisterSpellEffectResponse(SID_NATURAL_REFLEX_HEX, onCast);
         RegisterDamagedEvent(hexLordHitted);
     }
-// #undef ART
+// 
 }
 //! endzinc

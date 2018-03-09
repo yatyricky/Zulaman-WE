@@ -1,8 +1,8 @@
 //! zinc
 library ShieldBlock requires BuffSystem, DamageSystem, SpellEvent, UnitProperty, AggroSystem {
-#define BUFF_ID 'A023'
-#define ART_CASTER "Abilities\\Spells\\Items\\SpellShieldAmulet\\SpellShieldCaster.mdl"
-#define ART_REFLECTION "Abilities\\Spells\\NightElf\\ThornsAura\\ThornsAuraDamage.mdl"
+constant integer BUFF_ID = 'A023';
+constant string  ART_CASTER  = "Abilities\\Spells\\Items\\SpellShieldAmulet\\SpellShieldCaster.mdl";
+constant string  ART_REFLECTION  = "Abilities\\Spells\\NightElf\\ThornsAura\\ThornsAuraDamage.mdl";
 
     // 0.0~1.0
     function returnBlockRate(integer lvl) -> real {
@@ -62,8 +62,8 @@ library ShieldBlock requires BuffSystem, DamageSystem, SpellEvent, UnitProperty,
         RegisterDamagedEvent(paladinHitted);
     }
     
-#undef ART_REFLECTION
-#undef ART_CASTER
-#undef BUFF_ID
+
+
+
 }
 //! endzinc

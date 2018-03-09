@@ -1,7 +1,7 @@
 //! zinc
 library Ascendance requires SpellEvent, BuffSystem, DamageSystem {
-#define BUFF_ID 'A03C'
-#define ART "Abilities\\Spells\\Orc\\Purge\\PurgeBuffTarget.mdl"
+constant integer BUFF_ID = 'A03C';
+constant string  ART  = "Abilities\\Spells\\Orc\\Purge\\PurgeBuffTarget.mdl";
     function onEffect(Buff buf) {
         UnitProp[buf.bd.target].damageDealt += buf.bd.r0;
         UnitProp[buf.bd.target].ModArmor(buf.bd.i0);
@@ -70,7 +70,7 @@ library Ascendance requires SpellEvent, BuffSystem, DamageSystem {
         BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_POS);
         RegisterOnDamageEvent(ondamaging);
     }
-#undef ART
-#undef BUFF_ID
+
+
 }
 //! endzinc

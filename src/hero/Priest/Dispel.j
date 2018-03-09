@@ -1,6 +1,6 @@
 //! zinc
 library Dispel requires BuffSystem, SpellEvent, UnitProperty {
-#define BUFF_ID1 'A03U'
+constant integer BUFF_ID1 = 'A03U';
 
     function onEffect1(Buff buf) {
         UnitProp[buf.bd.target].spellHaste += buf.bd.r0;
@@ -40,6 +40,6 @@ library Dispel requires BuffSystem, SpellEvent, UnitProperty {
         RegisterSpellEffectResponse(SIDDISPEL, onCast);
         BuffType.register(BUFF_ID1, BUFF_MAGE, BUFF_POS);
     }
-#undef BUFF_ID1
+
 }
 //! endzinc

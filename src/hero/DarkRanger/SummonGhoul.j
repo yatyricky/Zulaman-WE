@@ -1,6 +1,6 @@
 //! zinc
 library SummonGhoul requires SpellEvent, DarkRangerGlobal {
-#define ART "Abilities\\Spells\\Undead\\RaiseSkeletonWarrior\\RaiseSkeleton.mdl"
+constant string  ART  = "Abilities\\Spells\\Undead\\RaiseSkeletonWarrior\\RaiseSkeleton.mdl";
 
     function delayAddLife(DelayTask dt) {
         UnitProp[dt.u0].ModLife((GetHeroLevel(darkranger[GetPidofu(dt.u0)]) - 1) * 350);
@@ -23,6 +23,6 @@ library SummonGhoul requires SpellEvent, DarkRangerGlobal {
     function onInit() {
         RegisterSpellEffectResponse(SIDSUMMONGHOUL, onCast);
     }
-#undef ART
+
 }
 //! endzinc

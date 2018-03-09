@@ -1,7 +1,7 @@
 //! zinc
 library FlameThrow requires SpellEvent, DamageSystem, GroupUtils {
-#define MISSILE "Abilities\\Weapons\\RedDragonBreath\\RedDragonMissile.mdl"
-#define IMPACT "Abilities\\Weapons\\FireBallMissile\\FireBallMissile.mdl"
+constant string  MISSILE  = "Abilities\\Weapons\\RedDragonBreath\\RedDragonMissile.mdl";
+constant string  IMPACT  = "Abilities\\Weapons\\FireBallMissile\\FireBallMissile.mdl";
 
     struct FlameThrow {
         private timer tm;
@@ -78,7 +78,7 @@ library FlameThrow requires SpellEvent, DamageSystem, GroupUtils {
     function onInit() {
         RegisterSpellEffectResponse(SIDFLAMETHROW, onCast);
     }
-#undef IMPACT
-#undef MISSILE
+
+
 }
 //! endzinc

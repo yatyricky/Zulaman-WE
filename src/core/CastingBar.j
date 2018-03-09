@@ -11,15 +11,15 @@ library CastingBar requires SpellEvent, TimerUtils, SpellData, UnitAbilityCD, ZA
 //
 //  CastingBar.create(response).channel([nodes]);
 //==============================================================================
-#define PROGRESS_BAR_ID 'e009'
-#define PROGRESS_BAR_X -10
-#define PROGRESS_BAR_Y (-100)
-#define PROGRESS_BAR_Z 30
-#define PROGRESS_BAR_SX 1.0
-#define PROGRESS_BAR_SY 0.45
-#define PROGRESS_BAR_SZ 0.45
-#define CAST_MODE_CAST 0x23459214
-#define CAST_MODE_CHANNEL 0x32148520
+constant integer PROGRESS_BAR_ID = 'e009';
+constant integer PROGRESS_BAR_X = -10;
+constant integer PROGRESS_BAR_Y = (-100);
+constant integer PROGRESS_BAR_Z = 30;
+constant real PROGRESS_BAR_SX = 1.0;
+constant real PROGRESS_BAR_SY = 0.45;
+constant real PROGRESS_BAR_SZ = 0.45;
+constant integer CAST_MODE_CAST = 0x23459214;
+constant integer CAST_MODE_CHANNEL = 0x32148520;
     
     public type CastBarFinishCast extends function(CastingBar);
     
@@ -334,14 +334,14 @@ library CastingBar requires SpellEvent, TimerUtils, SpellData, UnitAbilityCD, ZA
         //responseTable = Table.create();
         lastChannelSuccess = HandleTable.create();
     }
-#undef CAST_MODE_CHANNEL
-#undef CAST_MODE_CAST
-#undef PROGRESS_BAR_SZ
-#undef PROGRESS_BAR_SY
-#undef PROGRESS_BAR_SX
-#undef PROGRESS_BAR_Z
-#undef PROGRESS_BAR_Y
-#undef PROGRESS_BAR_X
-#undef PROGRESS_BAR_ID
+
+
+
+
+
+
+
+
+
 }
 //! endzinc

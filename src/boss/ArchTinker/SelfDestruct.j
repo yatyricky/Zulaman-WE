@@ -1,6 +1,6 @@
 //! zinc
 library SelfDestruct requires SpellEvent, DamageSystem {
-#define ART_EXPLOSION "Objects\\Spawnmodels\\Other\\NeutralBuildingExplosion\\NeutralBuildingExplosion.mdl"
+constant string  ART_EXPLOSION  = "Objects\\Spawnmodels\\Other\\NeutralBuildingExplosion\\NeutralBuildingExplosion.mdl";
 
     function response(CastingBar cd) {
         integer i = 0;
@@ -21,6 +21,6 @@ library SelfDestruct requires SpellEvent, DamageSystem {
     function onInit() {
         RegisterSpellChannelResponse(SID_SELF_DESTRUCT, onChannel);
     }
-#undef ART_EXPLOSION
+
 }
 //! endzinc

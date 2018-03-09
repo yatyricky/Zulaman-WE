@@ -1,8 +1,8 @@
 //! zinc
 library SpiritBolt requires CastingBar, Projectile, CombatFacts {
-#define ART_MISSILE "Abilities\\Weapons\\ZigguratMissile\\ZigguratMissile.mdl"
-#define BUFF_ID 'A05T'
-#define ART_ABSORB "Objects\\Spawnmodels\\Undead\\UndeadDissipate\\UndeadDissipate.mdl"
+constant string  ART_MISSILE  = "Abilities\\Weapons\\ZigguratMissile\\ZigguratMissile.mdl";
+constant integer BUFF_ID = 'A05T';
+constant string  ART_ABSORB  = "Objects\\Spawnmodels\\Undead\\UndeadDissipate\\UndeadDissipate.mdl";
 
     Table spell1Tab, spell2Tab;
 
@@ -93,8 +93,8 @@ library SpiritBolt requires CastingBar, Projectile, CombatFacts {
         spell1Tab[UTIDHEATHEN] = SIDPAINHEX;
         spell2Tab[UTIDHEATHEN] = SIDTERRORHEX;        
     }
-#undef ART_ABSORB
-#undef BUFF_ID
-#undef ART_MISSILE
+
+
+
 }
 //! endzinc

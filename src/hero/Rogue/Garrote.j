@@ -1,7 +1,7 @@
 //! zinc
 library Garrote requires DamageSystem, SpellEvent, RogueGlobal {
-#define BUFF_ID 'A04P'
-#define ART "Abilities\\Spells\\NightElf\\shadowstrike\\shadowstrike.mdl"    
+constant integer BUFF_ID = 'A04P';
+constant string  ART  = "Abilities\\Spells\\NightElf\\shadowstrike\\shadowstrike.mdl";    
 
     function onEffect(Buff buf) {
         DamageTarget(buf.bd.caster, buf.bd.target, buf.bd.r0, SpellData[SIDGARROTE].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
@@ -27,7 +27,7 @@ library Garrote requires DamageSystem, SpellEvent, RogueGlobal {
         RegisterSpellEffectResponse(SIDGARROTE, onCast);
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_NEG);
     }
-#undef ART
-#undef BUFF_ID
+
+
 }
 //! endzinc

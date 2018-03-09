@@ -1,11 +1,11 @@
 //! zinc
 library EnchantingTotem requires EarthBinderGlobal, GroupUtils, UnitProperty, BuffSystem {
-#define TOTEM_ID_STORM 'u000'
-#define TOTEM_ID_WATER 'u002'
-#define TOTEM_ID_EARTH 'u001'
-#define BUFF_STORM 'A039'
-#define BUFF_EARTH 'A03A'
-#define DURATION 20
+constant integer TOTEM_ID_STORM = 'u000';
+constant integer TOTEM_ID_WATER = 'u002';
+constant integer TOTEM_ID_EARTH = 'u001';
+constant integer BUFF_STORM = 'A039';
+constant integer BUFF_EARTH = 'A03A';
+constant integer DURATION = 20;
     
     // torrent totem
     
@@ -341,11 +341,11 @@ library EnchantingTotem requires EarthBinderGlobal, GroupUtils, UnitProperty, Bu
             i += 1;
         }
     }
-#undef DURATION
-#undef BUFF_EARTH
-#undef BUFF_STORM
-#undef TOTEM_ID_EARTH
-#undef TOTEM_ID_WATER
-#undef TOTEM_ID_STORM
+
+
+
+
+
+
 }
 //! endzinc

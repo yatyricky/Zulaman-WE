@@ -1,8 +1,8 @@
 //! zinc
 library Death requires SpellEvent, UnitProperty {
-#define ART_CASTER "Abilities\\Spells\\Human\\MarkOfChaos\\MarkOfChaosDone.mdl"
+constant string  ART_CASTER  = "Abilities\\Spells\\Human\\MarkOfChaos\\MarkOfChaosDone.mdl";
 //define ART_TARGET "Abilities\\Spells\\Human\\MarkOfChaos\\MarkOfChaosTarget.mdl"
-#define ART_TARGET "Abilities\\Spells\\Undead\\AnimateDead\\AnimateDeadTarget.mdl"
+constant string  ART_TARGET  = "Abilities\\Spells\\Undead\\AnimateDead\\AnimateDeadTarget.mdl";
 
     function returnSacrifice(integer lvl, real life) -> real {
         return life * 0.2;
@@ -25,7 +25,7 @@ library Death requires SpellEvent, UnitProperty {
     function onInit() {
         RegisterSpellEffectResponse(SIDDEATH, onCast);
     }
-#undef ART_TARGET
-#undef ART_CASTER
+
+
 }
 //! endzinc

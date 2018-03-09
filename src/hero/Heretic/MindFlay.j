@@ -1,7 +1,7 @@
 //! zinc
 library MindFlay requires CastingBar, GroupUtils {
-#define ART_CASTER "Abilities\\Spells\\Other\\Drain\\ManaDrainCaster.mdl"
-#define ART_TARGET "Abilities\\Spells\\Other\\Drain\\ManaDrainTarget.mdl"
+constant string  ART_CASTER  = "Abilities\\Spells\\Other\\Drain\\ManaDrainCaster.mdl";
+constant string  ART_TARGET  = "Abilities\\Spells\\Other\\Drain\\ManaDrainTarget.mdl";
 
     function returnDamage(integer lvl, real sp) -> real {
         return 50.0 + 50.0 * lvl + sp * 0.1;
@@ -58,7 +58,7 @@ library MindFlay requires CastingBar, GroupUtils {
         castSound = DefineSound("Abilities\\Spells\\Undead\\UndeadMine\\AcolyteMining.wav", 4233, false, false);
         RegisterSpellChannelResponse(SIDMINDFLAY, onChannel);
     }
-#undef ART_TARGET
-#undef ART_CASTER
+
+
 }
 //! endzinc

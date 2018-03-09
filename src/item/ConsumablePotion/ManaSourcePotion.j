@@ -1,6 +1,6 @@
 //! zinc
 library ManaSourcePotion requires SpellEvent, BuffSystem {
-#define BUFF_ID 'A07V'
+constant integer BUFF_ID = 'A07V';
     
     function onEffect(Buff buf) {
         //UnitProp[buf.bd.target].manaRegen += buf.bd.r0;
@@ -30,6 +30,6 @@ library ManaSourcePotion requires SpellEvent, BuffSystem {
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
         
     }
-#undef BUFF_ID
+
 }
 //! endzinc

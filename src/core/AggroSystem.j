@@ -21,8 +21,8 @@ library AggroSystem requires MobInit, UnitProperty, Clock, DamageSystem, PlayerU
 //*     static method operator[](unit u) -> thistype        
 //*     static method create(unit u) -> thistype
 //*****************************************************************************
-#define TIME_TICK 0.15
-#define MAX_PLAYER_UNITS 50
+constant real TIME_TICK = 0.15;
+constant integer MAX_PLAYER_UNITS = 50;
     
     public type CombatStateNotify extends function();
     private CombatStateNotify combatStateNotifyCallList[];
@@ -688,7 +688,7 @@ library AggroSystem requires MobInit, UnitProperty, Clock, DamageSystem, PlayerU
         RegisterHealedEvent(setAggrosHealed);
     }
     
-#undef MAX_PLAYER_UNITS 
-#undef TIME_TICK
+
+
 }
 //! endzinc

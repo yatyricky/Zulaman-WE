@@ -12,7 +12,7 @@ library InfoBoards requires Board, ModelInfo, NefUnion, ZAMCore, BuffSystem, Agg
     private Board perspective[NUMBER_OF_MAX_PLAYERS];
     private trigger selectionTrigger, deselectionTrigger, escTrigger, nextPerspectiveTrigger;
     
-#define MAX_DAMAGE_HEAL_TYPES 32
+constant integer MAX_DAMAGE_HEAL_TYPES = 32;
 
     struct UnitDps {
         private static HandleTable ht;
@@ -98,7 +98,7 @@ library InfoBoards requires Board, ModelInfo, NefUnion, ZAMCore, BuffSystem, Agg
         }
     }
     
-#undef MAX_DAMAGE_HEAL_TYPES
+
     
     private boolean combatState = false;
     private real timeStamp = 0.0;
@@ -517,7 +517,7 @@ library InfoBoards requires Board, ModelInfo, NefUnion, ZAMCore, BuffSystem, Agg
         //staboards[id].visible[p] = true;
     }
     
-#define COMBAT_LOG_MAX 20
+constant integer COMBAT_LOG_MAX = 20;
     struct CombatLogRecord[21] {
         unit source, target;
         string message;
@@ -870,7 +870,7 @@ library InfoBoards requires Board, ModelInfo, NefUnion, ZAMCore, BuffSystem, Agg
         TriggerAddAction(escTrigger, function PlayerEsced);
     }
 }
-#undef COMBAT_LOG_MAX
+
 //! endzinc
 
 /*    

@@ -1,11 +1,11 @@
 //! zinc
 library Loot requires IntegerPool, ZAMCore {
-#define RP_FACTOR 200000
-#define TABLE_SIZE 50
-#define RP_RELIC 1.0
-#define RP_RARE 10.0
-#define RP_UNCOMMON 0.0
-#define RP_COMMON 0.0
+constant integer RP_FACTOR = 200000;
+constant integer TABLE_SIZE = 50;
+constant real RP_RELIC = 1.0;
+constant real RP_RARE = 10.0;
+constant real RP_UNCOMMON = 0.0;
+constant real RP_COMMON = 0.0;
     public IntegerPool classSpec;
     IntegerPool relic;
     IntegerPool rare;
@@ -251,11 +251,11 @@ library Loot requires IntegerPool, ZAMCore {
         boss7.add(ITID_TIDAL_LOOP, 6);
 
     }
-#undef RP_COMMON
-#undef RP_UNCOMMON
-#undef RP_RARE
-#undef RP_RELIC
-#undef TABLE_SIZE
-#undef RP_FACTOR
+
+
+
+
+
+
 }
 //! endzinc

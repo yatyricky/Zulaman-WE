@@ -1,6 +1,6 @@
 //! zinc
 library TerrorHex requires SpellEvent, StunUtils {
-#define ART "Abilities\\Spells\\Other\\HowlOfTerror\\HowlCaster.mdl"
+constant string  ART  = "Abilities\\Spells\\Other\\HowlOfTerror\\HowlCaster.mdl";
 
     function onCast() {
         integer i = 0;
@@ -16,6 +16,6 @@ library TerrorHex requires SpellEvent, StunUtils {
     function onInit() {
         RegisterSpellEffectResponse(SIDTERRORHEX, onCast);
     }
-#undef ART
+
 }
 //! endzinc

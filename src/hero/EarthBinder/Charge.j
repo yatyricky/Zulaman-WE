@@ -1,7 +1,7 @@
 //! zinc
 library Charge requires SpellEvent, BuffSystem {
-#define BUFF_ID 'A03C'
-#define ART "Abilities\\Spells\\Orc\\Purge\\PurgeBuffTarget.mdl"
+constant integer BUFF_ID = 'A03C';
+constant string  ART  = "Abilities\\Spells\\Orc\\Purge\\PurgeBuffTarget.mdl";
     function onEffect(Buff buf) {
         UnitProp[buf.bd.target].damageDealt += buf.bd.r0;
         //SetUnitVertexColor(buf.bd.target, 100, 255, 100, 100);
@@ -30,7 +30,7 @@ library Charge requires SpellEvent, BuffSystem {
         RegisterSpellEffectResponse(SIDCHARGE, onCast);
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
     }
-#undef ART
-#undef BUFF_ID
+
+
 }
 //! endzinc

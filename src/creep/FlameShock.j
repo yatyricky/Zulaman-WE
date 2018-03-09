@@ -5,8 +5,8 @@ deals 400 magical damage to target
 then deals 400 magical damage to target every 2 seconds.
 Magical negative effect
 */
-#define ART "Doodads\\Cinematic\\TownBurningFireEmitter\\TownBurningFireEmitter.mdl"
-#define IMPACT "Doodads\\Cinematic\\FireTrapUp\\FireTrapUp.mdl"
+constant string  ART  = "Doodads\\Cinematic\\TownBurningFireEmitter\\TownBurningFireEmitter.mdl";
+constant string  IMPACT  = "Doodads\\Cinematic\\FireTrapUp\\FireTrapUp.mdl";
 
     function onEffect(Buff buf) {
         DamageTarget(buf.bd.caster, buf.bd.target, buf.bd.r0, SpellData[SID_FLAME_SHOCK].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
@@ -39,7 +39,7 @@ Magical negative effect
         BuffType.register(BID_FLAME_SHOCK, BUFF_MAGE, BUFF_NEG);
         RegisterSpellEffectResponse(SID_FLAME_SHOCK, onCast);
     }
-#undef ART
-#undef IMPACT
+
+
 }
 //! endzinc

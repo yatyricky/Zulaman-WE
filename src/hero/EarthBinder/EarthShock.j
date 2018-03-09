@@ -1,6 +1,6 @@
 //! zinc
 library EarthShock requires DamageSystem, SpellData, BuffSystem, EarthBinderGlobal, MultipleAbility {
-#define ART "Abilities\\Spells\\Orc\\Disenchant\\DisenchantSpecialArt.mdl"
+constant string  ART  = "Abilities\\Spells\\Orc\\Disenchant\\DisenchantSpecialArt.mdl";
 
     function returnDamage(integer lvl, real sp) -> real {
         return 300 + 100 * lvl + sp * 3.6;
@@ -72,6 +72,6 @@ library EarthShock requires DamageSystem, SpellData, BuffSystem, EarthBinderGlob
         MultipleAbility.register(SIDEARTHSHOCK, SIDEARTHSHOCK1);
         RegisterUnitEnterMap(initMultipleAbil);
     }
-#undef ART
+
 }
 //! endzinc

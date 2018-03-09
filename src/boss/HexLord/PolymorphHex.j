@@ -1,6 +1,6 @@
 //! zinc
 library PolymorphHex requires CastingBar, SpellReflection {
-#define BUFF_ID 'A03E'
+constant integer BUFF_ID = 'A03E';
 
     struct periodicallyDosth1 {
         private timer tm;
@@ -83,6 +83,6 @@ library PolymorphHex requires CastingBar, SpellReflection {
         //BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_NEG);
         //RegisterDamagedEvent(damagedres);
     }
-#undef BUFF_ID
+
 }
 //! endzinc

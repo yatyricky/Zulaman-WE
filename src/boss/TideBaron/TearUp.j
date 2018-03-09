@@ -1,6 +1,6 @@
 //! zinc
 library TearUp requires BuffSystem, SpellEvent, UnitProperty, DamageSystem, TideBaronGlobal {
-#define BUFF_ID 'A04Z'
+constant integer BUFF_ID = 'A04Z';
     function onEffect(Buff buf) {
         real amt = 180.0 + GetRandomReal(0.0, 40.0);
         if (GetUnitAbilityLevel(buf.bd.target, BUFF_ID_ALKALINE_WATER) > 0) {
@@ -30,6 +30,6 @@ library TearUp requires BuffSystem, SpellEvent, UnitProperty, DamageSystem, Tide
         RegisterSpellEffectResponse(SIDTEARUP, onCast);
         BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_NEG);
     }
-#undef BUFF_ID
+
 }
 //! endzinc

@@ -1,6 +1,6 @@
 //! zinc
 library SpellPowerPotion requires SpellEvent, BuffSystem {
-#define BUFF_ID 'A087'
+constant integer BUFF_ID = 'A087';
     
     function onEffect(Buff buf) {
         UnitProp[buf.bd.target].spellPower += buf.bd.r0;
@@ -28,6 +28,6 @@ library SpellPowerPotion requires SpellEvent, BuffSystem {
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
         
     }
-#undef BUFF_ID
+
 }
 //! endzinc

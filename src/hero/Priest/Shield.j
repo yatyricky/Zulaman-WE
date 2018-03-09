@@ -1,7 +1,7 @@
 //! zinc
 library Shield requires BuffSystem, UnitProperty, SpellEvent, UnitAbilityCD, Heal, Benediction {
-#define BUFF_ID 'A01I'
-#define BUFF_ID1 'A01J'
+constant integer BUFF_ID = 'A01I';
+constant integer BUFF_ID1 = 'A01J';
 
     function returnAbsorb(integer lvl, real sp) -> real {
         return 750.0 * lvl + sp * 4.0;
@@ -79,7 +79,7 @@ library Shield requires BuffSystem, UnitProperty, SpellEvent, UnitAbilityCD, Hea
         BuffType.register(BUFF_ID1, BUFF_PHYX, BUFF_NEG);
         RegisterSpellEffectResponse(SIDSHIELD, onCast);
     }
-#undef BUFF_ID1
-#undef BUFF_ID
+
+
 }
 //! endzinc

@@ -1,7 +1,7 @@
 //! zinc
 library LightsJustice requires ItemAttributes, DamageSystem {
-#define BUFF_ID 'A06D'
-#define DEBUFF_ID 'A06E'
+constant integer BUFF_ID = 'A06D';
+constant integer DEBUFF_ID = 'A06E';
     HandleTable ht;
     
     public function HasLightsJustice(unit u) -> boolean {
@@ -55,7 +55,7 @@ library LightsJustice requires ItemAttributes, DamageSystem {
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
         BuffType.register(DEBUFF_ID, BUFF_MAGE, BUFF_NEG);
     }
-#undef DEBUFF_ID
-#undef BUFF_ID
+
+
 }
 //! endzinc

@@ -1,6 +1,6 @@
 //! zinc
 library RaspyRoar requires BuffSystem, SpellEvent {
-#define BUFF_ID 'A052'
+constant integer BUFF_ID = 'A052';
     function onEffect(Buff buf) {}
     
     function onRemove(Buff buf) {
@@ -28,6 +28,6 @@ library RaspyRoar requires BuffSystem, SpellEvent {
         RegisterSpellEffectResponse(SIDRASPYROAR, onCast);
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_NEG);
     }
-#undef BUFF_ID
+
 }
 //! endzinc

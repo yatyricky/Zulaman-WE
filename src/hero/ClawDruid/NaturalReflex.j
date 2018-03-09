@@ -1,7 +1,7 @@
 //! zinc
 library NaturalReflex requires BuffSystem, SpellEvent, UnitProperty {
-#define BUFF_ID 'A02M'
-#define ART "Abilities\\Spells\\Human\\Invisibility\\InvisibilityTarget.mdl"
+constant integer BUFF_ID = 'A02M';
+constant string  ART  = "Abilities\\Spells\\Human\\Invisibility\\InvisibilityTarget.mdl";
 
     function returnHealPercent(integer lvl) -> real {
         return 0.02 * lvl;
@@ -61,7 +61,7 @@ library NaturalReflex requires BuffSystem, SpellEvent, UnitProperty {
         RegisterSpellEffectResponse(SID_NATURAL_REFLEX, onCast);
         RegisterDamagedEvent(clawDruidHitted);
     }
-#undef ART
-#undef BUFF_ID 
+
+
 }
 //! endzinc

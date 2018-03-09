@@ -1,6 +1,6 @@
 //! zinc
 library BladeMasterGlobal requires ZAMCore, MultipleAbility {
-#define PREMISE 'e00B'
+constant integer PREMISE = 'e00B';
     public constant integer BUFF_ID_REND = 'A008';
     public constant integer BUFF_ID_REND1 = 'A00J';   
     public constant integer BM_VALOUR_MAX = 17;
@@ -81,5 +81,5 @@ library BladeMasterGlobal requires ZAMCore, MultipleAbility {
         }   
     }
 }
-#undef PREMISE
+
 //! endzinc

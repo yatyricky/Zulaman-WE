@@ -1,7 +1,7 @@
 //! zinc
 library Regrowth requires CastingBar, KeeperOfGroveGlobal, HornOfCenarius {
-#define ART "Objects\\Spawnmodels\\NightElf\\EntBirthTarget\\EntBirthTarget.mdl"
-#define BUFF_ID 'A04I'
+constant string  ART  = "Objects\\Spawnmodels\\NightElf\\EntBirthTarget\\EntBirthTarget.mdl";
+constant integer BUFF_ID = 'A04I';
 
     function returnDH(integer lvl, real sp) -> real {
         return 100.0 + 100.0 * lvl + sp * 1.2;
@@ -83,7 +83,7 @@ library Regrowth requires CastingBar, KeeperOfGroveGlobal, HornOfCenarius {
         BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_NEG);
         TriggerAnyUnit(EVENT_PLAYER_HERO_SKILL, function lvlup);
     }
-#undef BUFF_ID
-#undef ART
+
+
 }
 //! endzinc

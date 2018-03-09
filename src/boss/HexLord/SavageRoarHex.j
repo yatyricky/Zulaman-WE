@@ -1,7 +1,7 @@
 //! zinc
 library SavageRoarHex requires BuffSystem, SpellEvent, UnitProperty {
-#define ART_DEBUFF "Abilities\\Spells\\Other\\HowlOfTerror\\HowlTarget.mdl"
-// #define ART_CASTER "Abilities\\Spells\\NightElf\\BattleRoar\\RoarCaster.mdl"
+constant string  ART_DEBUFF  = "Abilities\\Spells\\Other\\HowlOfTerror\\HowlTarget.mdl";
+// constant string  ART_CASTER  = "Abilities\\Spells\\NightElf\\BattleRoar\\RoarCaster.mdl";
 
     function onEffect(Buff buf) {
         UnitProp[buf.bd.target].ModAP(0 - buf.bd.i0);
@@ -38,7 +38,7 @@ library SavageRoarHex requires BuffSystem, SpellEvent, UnitProperty {
         BuffType.register(BID_SAVAGE_ROAR_HEX, BUFF_PHYX, BUFF_NEG);
         RegisterSpellEffectResponse(SID_SAVAGE_ROAR_HEX, onCast);
     }
-// #undef ART_CASTER
-#undef ART_DEBUFF
+// 
+
 }
 //! endzinc

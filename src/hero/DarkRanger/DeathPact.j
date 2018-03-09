@@ -1,6 +1,6 @@
 //! zinc
 library DeathPact requires SpellEvent, DamageSystem, DarkRangerGlobal {
-#define ART "Abilities\\Spells\\Undead\\DeathPact\\DeathPactTarget.mdl"
+constant string  ART  = "Abilities\\Spells\\Undead\\DeathPact\\DeathPactTarget.mdl";
 
     function onCast() {
         integer id = GetPlayerId(GetOwningPlayer(SpellEvent.CastingUnit));
@@ -24,6 +24,6 @@ library DeathPact requires SpellEvent, DamageSystem, DarkRangerGlobal {
         RegisterSpellEffectResponse(SIDDEATHPACT, onCast);
         TriggerAnyUnit(EVENT_PLAYER_HERO_SKILL, function learnt);
     }
-#undef ART
+
 }
 //! endzinc

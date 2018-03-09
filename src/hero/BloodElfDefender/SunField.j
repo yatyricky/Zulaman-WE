@@ -1,8 +1,8 @@
 //! zinc
 library SunField requires SpellEvent, TimerUtils, AggroSystem {
-#define ART_CASTER "Abilities\\Weapons\\DemolisherFireMissile\\DemolisherFireMissile.mdl"
-#define ART_EFFECT "Abilities\\Spells\\Orc\\LiquidFire\\Liquidfire.mdl"
-//#define BUFF_ID 'A04F'
+constant string  ART_CASTER  = "Abilities\\Weapons\\DemolisherFireMissile\\DemolisherFireMissile.mdl";
+constant string  ART_EFFECT  = "Abilities\\Spells\\Orc\\LiquidFire\\Liquidfire.mdl";
+//constant integer BUFF_ID = 'A04F';
 
     function returnDamage(integer lvl) -> real {
         return 50.0 * lvl;
@@ -108,8 +108,8 @@ library SunField requires SpellEvent, TimerUtils, AggroSystem {
         RegisterSpellEffectResponse(SIDSUNFIRESTORM, onCast);
         //BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_POS);
     }
-//#undef BUFF_ID
-#undef ART_EFFECT
-#undef ART_CASTER
+//
+
+
 }
 //! endzinc

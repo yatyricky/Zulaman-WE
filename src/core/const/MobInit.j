@@ -1,7 +1,7 @@
 //! zinc
 library MobInit requires Table, BuffSystem, Patrol, NefUnion, WarlockGlobal, StunUtils {
-#define MOBINIT_RESPAWN_L 510
-#define MOBINIT_RESPAWN_H 600
+constant integer MOBINIT_RESPAWN_L = 510;
+constant integer MOBINIT_RESPAWN_H = 600;
 
     private HandleTable idTable;
     private integer numMobs;
@@ -123,7 +123,7 @@ library MobInit requires Table, BuffSystem, Patrol, NefUnion, WarlockGlobal, Stu
             u = null;
         });
     }
-#undef MOBINIT_RESPAWN_H
-#undef MOBINIT_RESPAWN_L
+
+
 }
 //! endzinc

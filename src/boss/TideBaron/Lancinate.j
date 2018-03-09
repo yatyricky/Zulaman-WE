@@ -1,6 +1,6 @@
 //! zinc
 library Lancinate requires BuffSystem, SpellEvent, UnitProperty, DamageSystem, TideBaronGlobal {
-#define BUFF_ID 'A050'
+constant integer BUFF_ID = 'A050';
     function onEffect(Buff buf) {
         real amt = 225.0 + GetRandomReal(0.0, 50.0);
         if (GetUnitAbilityLevel(buf.bd.target, BUFF_ID_ALKALINE_WATER) > 0) {
@@ -30,6 +30,6 @@ library Lancinate requires BuffSystem, SpellEvent, UnitProperty, DamageSystem, T
         RegisterSpellEffectResponse(SIDLANCINATE, onCast);
         BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_NEG);
     }
-#undef BUFF_ID
+
 }
 //! endzinc

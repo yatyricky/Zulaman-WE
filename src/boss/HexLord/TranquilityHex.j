@@ -1,6 +1,6 @@
 //! zinc
 library TranquilityHex requires CastingBar, KeeperOfGroveGlobal, ZAMCore {
-#define ART "Abilities\\Spells\\NightElf\\Tranquility\\Tranquility.mdl"
+constant string  ART  = "Abilities\\Spells\\NightElf\\Tranquility\\Tranquility.mdl";
 
     function response(CastingBar cd) {
         integer i = 0;
@@ -23,7 +23,7 @@ library TranquilityHex requires CastingBar, KeeperOfGroveGlobal, ZAMCore {
     function onInit() {
         RegisterSpellChannelResponse(SIDTRANQUILITYHEX, onChannel);
     }
-#undef BUFF_ID
-#undef ART
+
+
 }
 //! endzinc

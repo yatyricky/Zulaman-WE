@@ -1,10 +1,10 @@
 //! zinc
 library CharmOfChainLightning requires SpellEvent, DamageSystem {
-#define ART_CH_LIGHT "CLPB"
-#define ART_CH_LESS "CLSB"
-#define JUMP_FACTOR 0.5
-#define MAX_TARGETS 3
-#define INIT_AMT 1000
+constant string  ART_CH_LIGHT  = "CLPB";
+constant string  ART_CH_LESS  = "CLSB";
+constant real JUMP_FACTOR = 0.5;
+constant integer MAX_TARGETS = 3;
+constant integer INIT_AMT = 1000;
 
     struct ChainLightning {
         private timer tm;
@@ -88,10 +88,10 @@ library CharmOfChainLightning requires SpellEvent, DamageSystem {
         RegisterSpellChannelResponse(SID_CHARM_OF_CHAIN_LIGHTNING, onCast);
     }
     
-#undef INIT_AMT
-#undef MAX_TARGETS
-#undef JUMP_FACTOR
-#undef ART_CH_LESS
-#undef ART_CH_LIGHT
+
+
+
+
+
 }
 //! endzinc

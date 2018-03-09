@@ -1,6 +1,6 @@
 //! zinc
 library DemonicRune requires SpellEvent, DamageSystem {
-#define ART_TARGET "Abilities\\Spells\\Other\\Doom\\DoomDeath.mdl"
+constant string  ART_TARGET  = "Abilities\\Spells\\Other\\Doom\\DoomDeath.mdl";
 
     function onCast() {
         real amount = GetUnitState(SpellEvent.CastingUnit, UNIT_STATE_MAX_LIFE) * 0.2;
@@ -15,6 +15,6 @@ library DemonicRune requires SpellEvent, DamageSystem {
     function onInit() {
         RegisterSpellEffectResponse(SID_DEMONIC_RUNE, onCast);
     }
-#undef ART_TARGET
+
 }
 //! endzinc

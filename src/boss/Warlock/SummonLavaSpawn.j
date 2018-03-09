@@ -1,6 +1,6 @@
 //! zinc
 library SummonLavaSpawn requires SpellEvent, ZAMCore, WarlockGlobal {
-#define PATH "Abilities\\Spells\\Other\\Doom\\DoomDeath.mdl"
+constant string  PATH  = "Abilities\\Spells\\Other\\Doom\\DoomDeath.mdl";
     unit lastFireRune;
     integer count;
 
@@ -41,6 +41,6 @@ library SummonLavaSpawn requires SpellEvent, ZAMCore, WarlockGlobal {
     function onInit() {
         RegisterSpellChannelResponse(SIDSUMMONLAVASPAWN, onChannel);
     }
-#undef PATH
+
 }
 //! endzinc

@@ -1,7 +1,7 @@
 //! zinc
 library Abomination requires DamageSystem {
-#define ART "Units\\Undead\\Abomination\\AbominationExplosion.mdl"
-#define ART_DEBUFF "Abilities\\Spells\\Undead\\Cripple\\CrippleTarget.mdl"
+constant string  ART  = "Units\\Undead\\Abomination\\AbominationExplosion.mdl";
+constant string  ART_DEBUFF  = "Abilities\\Spells\\Undead\\Cripple\\CrippleTarget.mdl";
 
     function onEffect(Buff buf) {
         UnitProp[buf.bd.target].damageTaken += buf.bd.r0;
@@ -64,7 +64,7 @@ library Abomination requires DamageSystem {
         BuffType.register(BID_SUMMON_ABOMINATION, BUFF_PHYX, BUFF_NEG);
         RegisterUnitDeath(abominationDeath);
     }
-#undef ART_DEBUFF
-#undef ART
+
+
 }
 //! endzinc

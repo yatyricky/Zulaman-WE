@@ -1,6 +1,6 @@
 //! zinc
 library LifeBloomHex requires BuffSystem, SpellEvent, UnitProperty, KeeperOfGroveGlobal {
-#define BUFF_ID 'A011'
+constant integer BUFF_ID = 'A011';
 
     function onEffect(Buff buf) {
         if (buf.bd.tick != 1) {
@@ -12,7 +12,7 @@ library LifeBloomHex requires BuffSystem, SpellEvent, UnitProperty, KeeperOfGrov
     function onRemove(Buff buf) {
         HealTarget(buf.bd.caster, buf.bd.target, 2000.0, SpellData[SIDLIFEBLOOMHEX].name, 0.0);
         AddTimedEffect.atUnit(ART_HEAL, buf.bd.target, "origin", 0.2);
-        //BJDebugMsg("ую╥е");
+        //BJDebugMsg("О©╫О©╫О©╫О©╫");
     }
 
     function onCast() {
@@ -28,6 +28,6 @@ library LifeBloomHex requires BuffSystem, SpellEvent, UnitProperty, KeeperOfGrov
         //BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
         RegisterSpellEffectResponse(SIDLIFEBLOOMHEX, onCast);
     }
-#undef BUFF_ID 
+
 }
 //! endzinc

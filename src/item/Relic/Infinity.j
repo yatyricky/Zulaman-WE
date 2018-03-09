@@ -1,6 +1,6 @@
 //! zinc
 library Infinity requires ItemAttributes, DamageSystem, Sounds {
-#define BUFF_ID 'A065'
+constant integer BUFF_ID = 'A065';
     HandleTable ht;
 
     function onEffect(Buff buf) {
@@ -54,7 +54,7 @@ library Infinity requires ItemAttributes, DamageSystem, Sounds {
             if (next != null) {
                 AddTimedLight.atUnits("CLSB", this.target, next, 0.75);
                 this.dmg *= 0.5;
-                DamageTarget(this.caster, next, this.dmg, "ÎÞÏÞ-ÉÁµçÁ´", false, true, false, WEAPON_TYPE_WHOKNOWS);
+                DamageTarget(this.caster, next, this.dmg, "ï¿½ï¿½ï¿½ï¿½-ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", false, true, false, WEAPON_TYPE_WHOKNOWS);
                 GroupAddUnit(this.damaged, next);
                 AddTimedEffect.atUnit(ART_IMPACT, next, "origin", 0.2);
             } else {
@@ -79,7 +79,7 @@ library Infinity requires ItemAttributes, DamageSystem, Sounds {
             this.tick = 3;
             AddTimedLight.atUnits("CLPB", this.caster, this.target, 0.75);
             this.dmg = 300.0;
-            DamageTarget(this.caster, this.target, this.dmg, "ÎÞÏÞ-ÉÁµçÁ´", false, true, false, WEAPON_TYPE_WHOKNOWS);
+            DamageTarget(this.caster, this.target, this.dmg, "ï¿½ï¿½ï¿½ï¿½-ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½", false, true, false, WEAPON_TYPE_WHOKNOWS);
             GroupAddUnit(this.damaged, this.target);
             AddTimedEffect.atUnit(ART_IMPACT, this.target, "origin", 0.2);
             TimerStart(this.tm, 0.5, true, function thistype.run);
@@ -230,6 +230,6 @@ library Infinity requires ItemAttributes, DamageSystem, Sounds {
         TriggerAnyUnit(EVENT_PLAYER_HERO_LEVEL, function lvledup);
         RegisterDamagedEvent(damaged);
     }
-#undef BUFF_ID
+
 }
 //! endzinc

@@ -1,10 +1,10 @@
 //! zinc
 library LaserBeam requires CastingBar {
-#define ART_GROUND "Abilities\\Spells\\Human\\FlameStrike\\FlameStrikeEmbers.mdl"
-#define ART_SCORCH "Abilities\\Weapons\\FireBallMissile\\FireBallMissile.mdl"
-#define ART_TARGET "Abilities\\Spells\\Other\\BreathOfFire\\BreathOfFireDamage.mdl"
-#define AOE 30
-#define VELOCITY 4.0
+constant string  ART_GROUND  = "Abilities\\Spells\\Human\\FlameStrike\\FlameStrikeEmbers.mdl";
+constant string  ART_SCORCH  = "Abilities\\Weapons\\FireBallMissile\\FireBallMissile.mdl";
+constant string  ART_TARGET  = "Abilities\\Spells\\Other\\BreathOfFire\\BreathOfFireDamage.mdl";
+constant integer AOE = 30;
+constant real VELOCITY = 4.0;
 
     public struct LaserFireDamage {
         static LaserFireDamage instances[];
@@ -168,10 +168,10 @@ library LaserBeam requires CastingBar {
     function onInit() {
         RegisterSpellChannelResponse(SID_LASER_BEAM, onChannel);
     }
-#undef VELOCITY
-#undef AOE
-#undef ART_TARGET
-#undef ART_SCORCH
-#undef ART_GROUND
+
+
+
+
+
 }
 //! endzinc

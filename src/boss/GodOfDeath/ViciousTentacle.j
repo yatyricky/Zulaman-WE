@@ -1,7 +1,7 @@
 //! zinc
 library ViciousTentacle {
-#define ART_MISSILE "Abilities\\Weapons\\LichMissile\\LichMissile.mdl"
-#define ART_EFFECT "zxzccx"
+constant string  ART_MISSILE  = "Abilities\\Weapons\\LichMissile\\LichMissile.mdl";
+constant string  ART_EFFECT  = "zxzccx";
 
     function onEffect(Buff buf) {
         StunUnit(buf.bd.caster, buf.bd.target, 2.0);
@@ -40,7 +40,7 @@ library ViciousTentacle {
         BuffType.register(BID, BUFF_MAGE, BUFF_NEG);
         RegisterSpellEffectResponse(SID, onCast);
 	}
-#undef ART_EFFECT
-#undef ART_MISSILE
+
+
 }
 //! endzinc

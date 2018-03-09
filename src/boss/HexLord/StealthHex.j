@@ -1,6 +1,6 @@
 //! zinc
 library StealthHex requires AggroSystem, SpellEvent, UnitProperty, DamageSystem {
-#define ART "Abilities\\Spells\\Human\\CloudOfFog\\CloudOfFog.mdl"
+constant string  ART  = "Abilities\\Spells\\Human\\CloudOfFog\\CloudOfFog.mdl";
 
     struct DanceInShadow {
         private timer tm;
@@ -69,6 +69,6 @@ library StealthHex requires AggroSystem, SpellEvent, UnitProperty, DamageSystem 
         RegisterSpellEffectResponse(SIDSTEALTHHEX, onCast);
         RegisterSpellEffectResponse(SIDSTEALTHAMBUSH, gotodamage);
     }
-#undef ART
+
 }
 //! endzinc

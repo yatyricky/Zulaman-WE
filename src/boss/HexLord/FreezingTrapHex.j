@@ -1,10 +1,10 @@
 //! zinc
 library FreezingTrapHex requires SpellEvent, StunUtils, AggroSystem {
-#define ART "Doodads\\Cinematic\\FrostTrapUp\\FrostTrapUp.mdl"
-#define ART1 "Abilities\\Spells\\Undead\\FrostNova\\FrostNovaTarget.mdl"
-#define PATH "Doodads\\Cinematic\\GlowingRunes\\GlowingRunes4.mdl"
-#define PATH1 "Abilities\\Spells\\NightElf\\TrueshotAura\\TrueshotAura.mdl"
-#define SFX "Abilities\\Spells\\Undead\\FreezingBreath\\FreezingBreathTargetArt.mdl"
+constant string  ART  = "Doodads\\Cinematic\\FrostTrapUp\\FrostTrapUp.mdl";
+constant string  ART1  = "Abilities\\Spells\\Undead\\FrostNova\\FrostNovaTarget.mdl";
+constant string  PATH  = "Doodads\\Cinematic\\GlowingRunes\\GlowingRunes4.mdl";
+constant string  PATH1  = "Abilities\\Spells\\NightElf\\TrueshotAura\\TrueshotAura.mdl";
+constant string  SFX  = "Abilities\\Spells\\Undead\\FreezingBreath\\FreezingBreathTargetArt.mdl";
     
     struct FreezngTrap {
         private timer tm;
@@ -82,10 +82,10 @@ library FreezingTrapHex requires SpellEvent, StunUtils, AggroSystem {
     function onInit() {
         RegisterSpellEffectResponse(SIDFREEZINGTRAPHEX, onCast);
     }
-#undef SFX
-#undef PATH1
-#undef PATH
-#undef ART1
-#undef ART
+
+
+
+
+
 }
 //! endzinc

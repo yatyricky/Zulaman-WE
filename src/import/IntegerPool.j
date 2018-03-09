@@ -10,7 +10,7 @@ library IntegerPool {
 //      method get() -> integer
 //  }
 //==============================================================================
-#define MAX_INT_POOL_SIZE 64
+constant integer MAX_INT_POOL_SIZE = 64;
     public struct IntegerPool {
         private integer sum;
         private integer nums[MAX_INT_POOL_SIZE];
@@ -84,6 +84,6 @@ library IntegerPool {
             return this;
         }
     }
-#undef MAX_INT_POOL_SIZE
+
 }
 //! endzinc

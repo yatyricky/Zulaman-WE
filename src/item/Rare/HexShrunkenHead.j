@@ -1,7 +1,7 @@
 //! zinc
 library HexShrunkenHead requires ItemAttributes {
-#define BUFF_ID 'A07E'
-#define ART_CASTER "Abilities\\Spells\\Items\\AIim\\AIimTarget.mdl"
+constant integer BUFF_ID = 'A07E';
+constant string  ART_CASTER  = "Abilities\\Spells\\Items\\AIim\\AIimTarget.mdl";
     //HandleTable ht;
 
     function oneffect(Buff buf) {
@@ -39,7 +39,7 @@ library HexShrunkenHead requires ItemAttributes {
         RegisterSpellEffectResponse(SID_HEX_SHRUNKEN_HEAD, onCast);
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
     }
-#undef ART_CASTER
-#undef BUFF_ID
+
+
 }
 //! endzinc

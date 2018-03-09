@@ -1,7 +1,7 @@
 //! zinc
 library MortalStrikeHex requires BuffSystem, DamageSystem, UnitProperty {
-#define BUFF_ID 'A02O'
-#define ART_TARGET "Abilities\\Spells\\Orc\\Disenchant\\DisenchantSpecialArt.mdl"
+constant integer BUFF_ID = 'A02O';
+constant string  ART_TARGET  = "Abilities\\Spells\\Orc\\Disenchant\\DisenchantSpecialArt.mdl";
 
     function onEffect(Buff buf) {
         UnitProp[buf.bd.target].healTaken -= buf.bd.r0;
@@ -34,7 +34,7 @@ library MortalStrikeHex requires BuffSystem, DamageSystem, UnitProperty {
         RegisterSpellEffectResponse(SIDMORTALSTRIKEHEX, onCast);
     }
     
-#undef ART_TARGET
-#undef BUFF_ID
+
+
 }
 //! endzinc

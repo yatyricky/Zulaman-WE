@@ -1,7 +1,7 @@
 //! zinc
 library ShieldOfSindorei requires SpellEvent, BuffSystem, OrbOfTheSindorei {
-#define SPELL_ID 'A006'
-#define BUFF_ID 'A031'
+constant integer SPELL_ID = 'A006';
+constant integer BUFF_ID = 'A031';
     function onEffect(Buff buf) {
         UnitProp[buf.bd.target].damageTaken -= buf.bd.r0;
     }
@@ -47,7 +47,7 @@ library ShieldOfSindorei requires SpellEvent, BuffSystem, OrbOfTheSindorei {
         RegisterSpellEffectResponse(SPELL_ID, onCast);
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
     }
-#undef BUFF_ID
-#undef SPELL_ID
+
+
 }
 //! endzinc

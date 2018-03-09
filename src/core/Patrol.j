@@ -1,6 +1,6 @@
 //! zinc
 library Patrol requires NefUnion, ZAMCore {    
-#define RADIUS 200
+constant integer RADIUS = 200;
 
     Patroller pats[];
     integer nump;
@@ -85,6 +85,6 @@ library Patrol requires NefUnion, ZAMCore {
         nump = 0;
         TimerStart(CreateTimer(), 1.0, true, function patrolRun);
     }
-#undef RADIUS
+
 }
 //! endzinc

@@ -1,6 +1,6 @@
 //! zinc
 library CharmOfHealingWard requires SpellEvent, DamageSystem {
-#define DURATION 10
+constant integer DURATION = 10;
 
     struct HealingWard {
         private timer tm;
@@ -53,6 +53,6 @@ library CharmOfHealingWard requires SpellEvent, DamageSystem {
     function onInit() {
         RegisterSpellEffectResponse(SID_CHARM_OF_HEALING_WARD, onCast);
     }
-#undef DURATION
+
 }
 //! endzinc

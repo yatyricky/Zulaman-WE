@@ -1,7 +1,7 @@
 //! zinc
 library CorruptionScroll requires SpellEvent, CastingBar, Projectile {
-#define MISSILE "Abilities\\Spells\\Items\\OrbCorruption\\OrbCorruptionMissile.mdl"
-#define BUFF_ID 'A07J'
+constant string  MISSILE  = "Abilities\\Spells\\Items\\OrbCorruption\\OrbCorruptionMissile.mdl";
+constant integer BUFF_ID = 'A07J';
 
     function onhit(Projectile p) -> boolean {
         return true;
@@ -48,7 +48,7 @@ library CorruptionScroll requires SpellEvent, CastingBar, Projectile {
         RegisterSpellEffectResponse(SID_CORRUPTION_SCROLL, onCast);
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_NEG);
     }
-#undef BUFF_ID
-#undef MISSILE
+
+
 }
 //! endzinc

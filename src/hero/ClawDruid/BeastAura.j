@@ -1,8 +1,8 @@
 //! zinc
 library BeastAura requires TimerUtils, ZAMCore, UnitProperty {
-#define INTERVAL 1.0
-#define AOE 900.0
-#define BUFF_ID 'A04C'
+constant real INTERVAL = 1.0;
+constant real AOE = 900.0;
+constant integer BUFF_ID = 'A04C';
 
     function onEffect(Buff buf) {}
 
@@ -57,7 +57,7 @@ library BeastAura requires TimerUtils, ZAMCore, UnitProperty {
         BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_POS);
     }
 }
-#undef BUFF_ID
-#undef AOE
-#undef INTERVAL
+
+
+
 //! endzinc

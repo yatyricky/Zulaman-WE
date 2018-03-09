@@ -1,6 +1,6 @@
 //! zinc
 library LifeRegenPotion requires SpellEvent, BuffSystem {
-#define BUFF_ID 'A07T'
+constant integer BUFF_ID = 'A07T';
     
     function onEffect(Buff buf) {
         UnitProp[buf.bd.target].lifeRegen += buf.bd.r0;
@@ -28,6 +28,6 @@ library LifeRegenPotion requires SpellEvent, BuffSystem {
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
         
     }
-#undef BUFF_ID
+
 }
 //! endzinc

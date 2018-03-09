@@ -1,6 +1,6 @@
 //! zinc
 library FoulTentacle {
-#define WRAITH_CHECK_INTERVAL 0.34
+constant real WRAITH_CHECK_INTERVAL = 0.34;
 
 	timer wraithCheck;
 
@@ -53,6 +53,6 @@ library FoulTentacle {
         RegisterUnitDeath(wraithDeath);
         wraithCheck = CreateTimer();
     }
-#undef WRAITH_CHECK_INTERVAL
+
 }
 //! endzinc
