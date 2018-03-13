@@ -47,7 +47,7 @@ constant integer BUFF_ID = 'A04B';
     }
     
     function registerDA(unit u) {
-        if (GetUnitTypeId(u) == UTIDBLOODELFDEFENDER) {
+        if (GetUnitTypeId(u) == UTID_BLOOD_ELF_DEFENDER) {
             DefensiveAura.register(u);
         }
     }

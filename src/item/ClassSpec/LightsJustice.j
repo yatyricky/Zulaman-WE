@@ -50,8 +50,8 @@ constant integer DEBUFF_ID = 'A06E';
 
     function onInit() {
         ht = HandleTable.create();
-        RegisterItemPropMod(ITIDLIGHTSJUSTICE, action);
-        RegisterSpellEffectResponse(SIDLIGHTSJUSTICE, onCast);
+        RegisterItemPropMod(ITID_LIGHTS_JUSTICE, action);
+        RegisterSpellEffectResponse(SID_LIGHTS_JUSTICE, onCast);
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
         BuffType.register(DEBUFF_ID, BUFF_MAGE, BUFF_NEG);
     }

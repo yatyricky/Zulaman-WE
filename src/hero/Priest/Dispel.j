@@ -17,12 +17,12 @@ constant integer BUFF_ID1 = 'A03U';
             if (buf != 0) {
                 buf.destroy();
             }
-            if (GetUnitAbilityLevel(SpellEvent.CastingUnit, SIDDISPEL) > 1) {
+            if (GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_DISPEL) > 1) {
                 buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BUFF_ID1);
                 buf.bd.tick = -1;
                 buf.bd.interval = 3.0;
                 UnitProp[buf.bd.target].spellHaste -= buf.bd.r0;
-                buf.bd.r0 = 0.15 * (GetUnitAbilityLevel(SpellEvent.CastingUnit, SIDDISPEL) - 1);
+                buf.bd.r0 = 0.15 * (GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_DISPEL) - 1);
                 buf.bd.boe = onEffect1;
                 buf.bd.bor = onRemove1;
                 buf.run();
@@ -37,7 +37,7 @@ constant integer BUFF_ID1 = 'A03U';
     }
 
     function onInit() {
-        RegisterSpellEffectResponse(SIDDISPEL, onCast);
+        RegisterSpellEffectResponse(SID_DISPEL, onCast);
         BuffType.register(BUFF_ID1, BUFF_MAGE, BUFF_POS);
     }
 

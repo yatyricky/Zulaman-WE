@@ -117,23 +117,23 @@ library NefUnion requires TimerUtils {
         private unit b;
         private integer c;
         private timer t;
-		private location la;
-		private location lb;
+        private location la;
+        private location lb;
         private real za;
         private real zb;
         
         private method destroy() {
             ReleaseTimer(this.t);
             DestroyLightning(this.l);
-			RemoveLocation(this.la);
-			RemoveLocation(this.lb);
-			this.la = null;
-			this.lb = null;
+            RemoveLocation(this.la);
+            RemoveLocation(this.lb);
+            this.la = null;
+            this.lb = null;
             this.t = null;
             this.l = null;
             this.a = null;
             this.b = null;
-			this.deallocate();
+            this.deallocate();
         }
 
         private static method executeNormal() {
@@ -175,7 +175,7 @@ library NefUnion requires TimerUtils {
         }
 
         private static method execute_coords() {
-			thistype(GetTimerData(GetExpiredTimer())).destroy();
+            thistype(GetTimerData(GetExpiredTimer())).destroy();
         }
 
         static method atUnits(string se, unit a, unit b, real et) -> thistype {
@@ -233,8 +233,8 @@ library NefUnion requires TimerUtils {
             TimerStart(this.t, 0.04, true, function thistype.execute_unitCoord);
             return this;
         }*/
-		
-		static method atCoords(string se, real xa, real ya, real xb, real yb, real et) -> thistype {
+        
+        static method atCoords(string se, real xa, real ya, real xb, real yb, real et) -> thistype {
             thistype this = thistype.allocate();
             this.la = Location(xa, ya);
             this.lb = Location(xb, yb);
@@ -243,16 +243,16 @@ library NefUnion requires TimerUtils {
             SetTimerData(this.t, this);
             TimerStart(this.t, et, false, function thistype.execute_coords);
             return this;
-		}
-		
-		static method atCoords3D(string se, real xa, real ya, real za, real xb, real yb, real zb, real et) -> thistype {
+        }
+        
+        static method atCoords3D(string se, real xa, real ya, real za, real xb, real yb, real zb, real et) -> thistype {
             thistype this = thistype.allocate();
             this.l = AddLightningEx(se, false, xa, ya, za, xb, yb, zb);
             this.t = NewTimer();
             SetTimerData(this.t, this);
             TimerStart(this.t, et, false, function thistype.execute_coords);
             return this;
-		}
+        }
         
         // 0-1.0
         method setColour(real r, real g, real b, real a) -> boolean {
@@ -282,18 +282,18 @@ library NefUnion requires TimerUtils {
     }
     
     /**
-	 * Supported parameters:
-	 *     unit u0
-	 * Usage:
-	 *     function delayedCallBack(DelayTask dt) {
-	 *         // do something
-	 *     }
-	 *
-	 *     DelayedTaskExecute callback = delayedCallBack;
-	 *     DelayTask dt = DelayTask.create(callback, 3.0);
-	 *     dt.u0 = SpellEvent.CastingUnit;
-	 */
-	public type DelayedTaskExecute extends function(DelayTask);
+     * Supported parameters:
+     *     unit u0
+     * Usage:
+     *     function delayedCallBack(DelayTask dt) {
+     *         // do something
+     *     }
+     *
+     *     DelayedTaskExecute callback = delayedCallBack;
+     *     DelayTask dt = DelayTask.create(callback, 3.0);
+     *     dt.u0 = SpellEvent.CastingUnit;
+     */
+    public type DelayedTaskExecute extends function(DelayTask);
     public struct DelayTask {
         private timer tm;
         private DelayedTaskExecute response;
@@ -323,7 +323,7 @@ library NefUnion requires TimerUtils {
             return this;
         }
     }
-	
+    
     public constant integer DUMMY_ID = 'e01B';
     public function DummyCast(unit a, integer aid, string oid, unit tar) {
         unit dc = CreateUnit(GetOwningPlayer(a), DUMMY_ID, GetUnitX(tar), GetUnitY(tar), 0.0);
@@ -410,16 +410,16 @@ library NefUnion requires TimerUtils {
         }
         
         static method units2dAngular(unit o, unit t, unit c) -> real {
-			real td;
+            real td;
             if (IsUnit(o, t)) {
-				return 0.0;
-			} else {
-				td = RAbsBJ(GetAngleDeg(GetUnitX(o), GetUnitY(o), GetUnitX(c), GetUnitY(c)) - GetAngleDeg(GetUnitX(t), GetUnitY(t), GetUnitX(c), GetUnitY(c)));
-				if (td > 180) {
-					td = RAbsBJ(td - 360);
-				}
-				return td;
-			}
+                return 0.0;
+            } else {
+                td = RAbsBJ(GetAngleDeg(GetUnitX(o), GetUnitY(o), GetUnitX(c), GetUnitY(c)) - GetAngleDeg(GetUnitX(t), GetUnitY(t), GetUnitX(c), GetUnitY(c)));
+                if (td > 180) {
+                    td = RAbsBJ(td - 360);
+                }
+                return td;
+            }
         }
 
         static method coords2d(real xo, real yo, real xt, real yt) -> real {

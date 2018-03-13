@@ -272,22 +272,22 @@ library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSys
         
         DestroyGroup(g);
     }
-	
-	function testwarlock(string str) {
+    
+    function testwarlock(string str) {
         real testx = 7221;
         real testy = 9027;
-		integer i = 0;
-		while (i < PlayerUnits.n) {
-			SetUnitPosition(PlayerUnits.units[i], testx, testy);
+        integer i = 0;
+        while (i < PlayerUnits.n) {
+            SetUnitPosition(PlayerUnits.units[i], testx, testy);
             UnitAddItem(PlayerUnits.units[i], CreateItemEx('Ieng', testx, testy));
             UnitAddItem(PlayerUnits.units[i], CreateItemEx('Ieng', testx, testy));
             UnitAddItem(PlayerUnits.units[i], CreateItemEx('Ieng', testx, testy));
             UnitAddItem(PlayerUnits.units[i], CreateItemEx('Ieng', testx, testy));
             UnitAddItem(PlayerUnits.units[i], CreateItemEx('Ieng', testx, testy));
             UnitAddItem(PlayerUnits.units[i], CreateItemEx('Ieng', testx, testy));
-			i += 1;
-		}
-	}
+            i += 1;
+        }
+    }
 
     function testPrintFireBomb(string str) {
         //printMarkMap();
@@ -379,7 +379,7 @@ library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSys
         // Console[Player(0)].add("podun", poyicengdun);
         // Console[Player(0)].add("canuse", testifunitcanuse);
         // Console[Player(0)].add("pfb", testPrintFireBomb);
-		// console[Player(0)].add("testwlk", testwarlock);
+        // console[Player(0)].add("testwlk", testwarlock);
         // Console[Player(0)].add("angle", testgetangle);
         Console[Player(0)].add("test", testGeneral);
         Console[Player(0)].add("sta", printStats);

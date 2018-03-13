@@ -14,7 +14,7 @@ constant string  ART_TARGET  = "Abilities\\Spells\\Orc\\Disenchant\\DisenchantSp
     function onCast() {
         Buff buf; 
         real dmg = UnitProp[SpellEvent.CastingUnit].AttackPower() + 300.0;
-        DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, dmg, SpellData[SIDMORTALSTRIKEHEX].name, true, true, true, WEAPON_TYPE_METAL_HEAVY_SLICE);
+        DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, dmg, SpellData[SID_MORTAL_STRIKE_HEX].name, true, true, true, WEAPON_TYPE_METAL_HEAVY_SLICE);
         if (DamageResult.isHit) {            
             AddTimedEffect.atUnit(ART_TARGET, SpellEvent.TargetUnit, "origin", 0.2);
             
@@ -31,7 +31,7 @@ constant string  ART_TARGET  = "Abilities\\Spells\\Orc\\Disenchant\\DisenchantSp
 
     function onInit() {
         //BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_NEG);
-        RegisterSpellEffectResponse(SIDMORTALSTRIKEHEX, onCast);
+        RegisterSpellEffectResponse(SID_MORTAL_STRIKE_HEX, onCast);
     }
     
 

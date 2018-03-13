@@ -16,7 +16,7 @@ constant real DURATION = 8.0;
         UnitProp[buf.bd.target].ModAttackSpeed(0 - buf.bd.i0);
     }
 
-	function onCast() {
+    function onCast() {
         Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BID_UNHOLY_FRENZY);
         buf.bd.tick = -1;
         buf.bd.interval = DURATION;
@@ -26,12 +26,12 @@ constant real DURATION = 8.0;
         buf.bd.boe = onEffect;
         buf.bd.bor = onRemove;
         buf.run();
-	}
+    }
 
-	function onInit() {
-		RegisterSpellEffectResponse(SID_UNHOLY_FRENZY, onCast);
-		BuffType.register(BID_UNHOLY_FRENZY, BUFF_MAGE, BUFF_POS);
-	}
+    function onInit() {
+        RegisterSpellEffectResponse(SID_UNHOLY_FRENZY, onCast);
+        BuffType.register(BID_UNHOLY_FRENZY, BUFF_MAGE, BUFF_POS);
+    }
 
 
 }

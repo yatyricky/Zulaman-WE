@@ -18,10 +18,10 @@ library Execute requires BladeMasterGlobal, DamageSystem, AggroSystem {
         integer id;
         integer lvl;
         real mana;
-        if (GetUnitAbilityLevel(DamageResult.source, SIDEXECUTELEARN) > 0) {
-            lvl = GetUnitAbilityLevel(DamageResult.source, SIDEXECUTELEARN);
+        if (GetUnitAbilityLevel(DamageResult.source, SID_EXECUTE_LEARN) > 0) {
+            lvl = GetUnitAbilityLevel(DamageResult.source, SID_EXECUTE_LEARN);
             mana = returnManaRegen(lvl);
-            if (DamageResult.abilityName == DAMAGE_NAME_MELEE || DamageResult.abilityName == SpellData[SIDMORTALSTRIKE].name || DamageResult.abilityName == SpellData[SID_HEROIC_STRIKE].name) {
+            if (DamageResult.abilityName == DAMAGE_NAME_MELEE || DamageResult.abilityName == SpellData[SID_MORTAL_STRIKE].name || DamageResult.abilityName == SpellData[SID_HEROIC_STRIKE].name) {
                 id = GetPlayerId(GetOwningPlayer(DamageResult.source));
                 if (continuous[id] == 1) {                  
                     if (DamageResult.isCritical) {
@@ -44,8 +44,8 @@ library Execute requires BladeMasterGlobal, DamageSystem, AggroSystem {
     
     function onCast() {
         integer v = GetAllVlour(SpellEvent.CastingUnit);
-        real dmg = v * returnDamagePerPoint(GetUnitAbilityLevel(SpellEvent.CastingUnit, SIDEXECUTELEARN)) + (UnitProp[SpellEvent.CastingUnit].AttackPower() * v * 0.1);
-        DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, dmg, SpellData[SIDEXECUTELEARN].name, true, true, true, WEAPON_TYPE_METAL_HEAVY_SLICE);
+        real dmg = v * returnDamagePerPoint(GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_EXECUTE_LEARN)) + (UnitProp[SpellEvent.CastingUnit].AttackPower() * v * 0.1);
+        DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, dmg, SpellData[SID_EXECUTE_LEARN].name, true, true, true, WEAPON_TYPE_METAL_HEAVY_SLICE);
         AddTimedEffect.atUnit(ART_GORE, SpellEvent.TargetUnit, "origin", 0.3);
     }
     
@@ -55,7 +55,7 @@ library Execute requires BladeMasterGlobal, DamageSystem, AggroSystem {
     
         private static method increaseValourExe() {
             thistype this = GetTimerData(GetExpiredTimer());
-            real timeout = returnTimerInterval(GetUnitAbilityLevel(this.u, SIDEXECUTELEARN));
+            real timeout = returnTimerInterval(GetUnitAbilityLevel(this.u, SID_EXECUTE_LEARN));
             if (IsInCombat()) {
                 IncreaseValour(this.u, 1);
             }
@@ -69,7 +69,7 @@ library Execute requires BladeMasterGlobal, DamageSystem, AggroSystem {
             this.tm = NewTimer();
             SetTimerData(this.tm, this);
             this.u = u;
-            TimerStart(this.tm, returnTimerInterval(GetUnitAbilityLevel(u, SIDEXECUTELEARN)), true, function thistype.increaseValourExe);
+            TimerStart(this.tm, returnTimerInterval(GetUnitAbilityLevel(u, SID_EXECUTE_LEARN)), true, function thistype.increaseValourExe);
         }
     
     }
@@ -78,18 +78,18 @@ library Execute requires BladeMasterGlobal, DamageSystem, AggroSystem {
         player p;
         unit u;
         integer i, j;
-        if (GetLearnedSkill() == SIDEXECUTELEARN) {
+        if (GetLearnedSkill() == SID_EXECUTE_LEARN) {
             u = GetTriggerUnit();
-            i = GetUnitAbilityLevel(u, SIDEXECUTELEARN);
+            i = GetUnitAbilityLevel(u, SID_EXECUTE_LEARN);
             if (i == 1) {
                 p = GetOwningPlayer(u);
-                SetPlayerAbilityAvailable(p, SIDEXECUTESTART, true);
+                SetPlayerAbilityAvailable(p, SID_EXECUTE_START, true);
                 
                 AutoIncreaseValour.start(u);
                 //GroupAddUnit(increaseValour, u);
             } else {
-                j = SIDEXECUTESTART;
-                while (j <= SIDEXECUTEEND) {
+                j = SID_EXECUTE_START;
+                while (j <= SID_EXECUTE_END) {
                     SetUnitAbilityLevel(u, j, i);
                     j += 1;
                 }
@@ -102,11 +102,11 @@ library Execute requires BladeMasterGlobal, DamageSystem, AggroSystem {
     
     function registerentered(unit u) {       
         player p = null;
-		integer i;
-        if (GetUnitTypeId(u) == UTIDBLADEMASTER) {
+        integer i;
+        if (GetUnitTypeId(u) == UTID_BLADE_MASTER) {
             p = GetOwningPlayer(u);
-            i = SIDEXECUTESTART;
-            while (i <= SIDEXECUTEEND) {
+            i = SID_EXECUTE_START;
+            while (i <= SID_EXECUTE_END) {
                 SetPlayerAbilityAvailable(p, i, false);
                 i += 1;
             }
@@ -123,8 +123,8 @@ library Execute requires BladeMasterGlobal, DamageSystem, AggroSystem {
         RegisterDamagedEvent(damaged);            // detect critical
         RegisterUnitEnterMap(registerentered);    // initial register
         
-        j = SIDEXECUTESTART;
-        while (j <= SIDEXECUTEEND) {
+        j = SID_EXECUTE_START;
+        while (j <= SID_EXECUTE_END) {
             RegisterSpellEffectResponse(j, onCast);
             j += 1;
         }        

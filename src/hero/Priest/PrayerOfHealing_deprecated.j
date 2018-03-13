@@ -4,7 +4,7 @@ constant string  ART  = "Abilities\\Spells\\Orc\\EtherealForm\\SpiritWalkerChang
 
     function response(CastingBar cd) {
         integer i = 0;
-        integer lvl = GetUnitAbilityLevel(cd.caster, SIDPRAYEROFHEALING);
+        integer lvl = GetUnitAbilityLevel(cd.caster, SID_PRAYER_OF_HEALING);
         real excrit;
         real percent;
         AddTimedEffect.atCoord(ART, GetUnitX(cd.caster), GetUnitY(cd.caster), 0.3);
@@ -17,7 +17,7 @@ constant string  ART  = "Abilities\\Spells\\Orc\\EtherealForm\\SpiritWalkerChang
             } else {
                 excrit = (25 + 15 * lvl - percent) / 30.0 * (0.2 + lvl * 0.1);
             }
-            HealTarget(cd.caster, PlayerUnits.units[i], 300.0 + UnitProp[cd.caster].SpellPower(), SpellData[SIDPRAYEROFHEALING].name, excrit);
+            HealTarget(cd.caster, PlayerUnits.units[i], 300.0 + UnitProp[cd.caster].SpellPower(), SpellData[SID_PRAYER_OF_HEALING].name, excrit);
             AddTimedLight.atUnits("HWSB", cd.caster, PlayerUnits.units[i], 0.25);
             i += 1;
         }
@@ -25,12 +25,12 @@ constant string  ART  = "Abilities\\Spells\\Orc\\EtherealForm\\SpiritWalkerChang
     
     function onChannel() {
         CastingBar cb = CastingBar.create(response);
-        cb.haste = -0.25 + GetUnitAbilityLevel(SpellEvent.CastingUnit, SIDPRAYEROFHEALING) * 0.25;
+        cb.haste = -0.25 + GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_PRAYER_OF_HEALING) * 0.25;
         cb.launch();
     }
 
     function onInit() {
-        RegisterSpellChannelResponse(SIDPRAYEROFHEALING, onChannel);
+        RegisterSpellChannelResponse(SID_PRAYER_OF_HEALING, onChannel);
     }
 
 }

@@ -16,7 +16,7 @@ constant integer BUFF_ID = 'A048';
     function onCast() {
         Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BUFF_ID);
         buf.bd.tick = -1;
-        buf.bd.i1 = GetUnitAbilityLevel(SpellEvent.CastingUnit, SIDBLADEFLURRY);
+        buf.bd.i1 = GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_BLADE_FLURRY);
         buf.bd.interval = 9.0 + buf.bd.i1;
         UnitProp[buf.bd.target].ModAttackSpeed(0 - buf.bd.i0);
         buf.bd.i0 = 40;
@@ -37,7 +37,7 @@ constant integer BUFF_ID = 'A048';
             integer i = 0;
             while (i < MobList.n) {  
                 if (GetDistance.units2d(MobList.units[i], this.tar) < 200 && !IsUnit(this.tar, MobList.units[i])) {
-                    DamageTarget(this.sor, MobList.units[i], this.amt, SpellData[SIDBLADEFLURRY].name, true, false, false, WEAPON_TYPE_WHOKNOWS);
+                    DamageTarget(this.sor, MobList.units[i], this.amt, SpellData[SID_BLADE_FLURRY].name, true, false, false, WEAPON_TYPE_WHOKNOWS);
                     AddTimedEffect.atUnit(ART_CLEAVE, MobList.units[i], "origin", 0.2);                    
                 }
                 i += 1;
@@ -63,13 +63,13 @@ constant integer BUFF_ID = 'A048';
     
     function damaged() {
         Buff buf = BuffSlot[DamageResult.source].getBuffByBid(BUFF_ID);
-        if (buf != 0 && DamageResult.isHit && DamageResult.abilityName != SpellData[SIDBLADEFLURRY].name) {
+        if (buf != 0 && DamageResult.isHit && DamageResult.abilityName != SpellData[SID_BLADE_FLURRY].name) {
             delayedDosth1.start(DamageResult.source, DamageResult.target, (0.55 + 0.15 * buf.bd.i1) * DamageResult.amount);
         }
     }
 
     function onInit() {
-        RegisterSpellEffectResponse(SIDBLADEFLURRY, onCast);
+        RegisterSpellEffectResponse(SID_BLADE_FLURRY, onCast);
         BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_POS);
         RegisterDamagedEvent(damaged);
     }

@@ -39,7 +39,7 @@ constant string  IMPACT  = "Abilities\\Weapons\\FireBallMissile\\FireBallMissile
                 
                 while (i < PlayerUnits.n) {
                     if (GetDistance.units2d(PlayerUnits.units[i], this.mis) < FlameThrowAux.radius && !IsUnitDead(PlayerUnits.units[i]) && !IsUnitInGroup(PlayerUnits.units[i], this.damaged)) {
-                        DamageTarget(this.a, PlayerUnits.units[i], 750.0, SpellData[SIDFLAMETHROW].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+                        DamageTarget(this.a, PlayerUnits.units[i], 750.0, SpellData[SID_FLAME_THROW].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
                         AddTimedEffect.atUnit(IMPACT, PlayerUnits.units[i], "origin", 0.0);
                         GroupAddUnit(this.damaged, PlayerUnits.units[i]);
                     }
@@ -76,7 +76,7 @@ constant string  IMPACT  = "Abilities\\Weapons\\FireBallMissile\\FireBallMissile
     }
 
     function onInit() {
-        RegisterSpellEffectResponse(SIDFLAMETHROW, onCast);
+        RegisterSpellEffectResponse(SID_FLAME_THROW, onCast);
     }
 
 

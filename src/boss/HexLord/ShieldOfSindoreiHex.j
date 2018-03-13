@@ -24,7 +24,7 @@ constant integer BUFF_ID = 'A031';
     }
 
     function onInit() {
-        RegisterSpellEffectResponse(SIDSHIELDOFSINDOREIHEX, onCast);
+        RegisterSpellEffectResponse(SID_SHIELD_OF_SINDOREIHEX, onCast);
         //BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS); Already registered in original ability
     }
 

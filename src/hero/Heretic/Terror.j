@@ -8,7 +8,7 @@ constant string  ART  = "Abilities\\Spells\\Other\\HowlOfTerror\\HowlCaster.mdl"
 
     function onCast() {
         //AddTimedEffect.atUnit("Abilities\\Spells\\Undead\\FreezingBreath\\FreezingBreathMissile.mdl", SpellEvent.CastingUnit, "origin", 0.0);
-        integer lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SIDTERROR);
+        integer lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_TERROR);
         real margin = 100 + 150.0 * lvl;
         unit tu;
         real time;
@@ -34,7 +34,7 @@ constant string  ART  = "Abilities\\Spells\\Other\\HowlOfTerror\\HowlCaster.mdl"
     }
 
     function onInit() {
-        RegisterSpellEffectResponse(SIDTERROR, onCast);
+        RegisterSpellEffectResponse(SID_TERROR, onCast);
     }
 
 }

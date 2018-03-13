@@ -27,7 +27,7 @@ constant string  ART_EFFECT  = "Abilities\\Spells\\Orc\\LiquidFire\\Liquidfire.m
             if (IsInCombat()) {
                 while (i < PlayerUnits.n) {
                     if (GetDistance.unitCoord(PlayerUnits.units[i], this.p.x, this.p.y) < HexLordGlobalConst.sunFireAOE && !IsUnitDead(PlayerUnits.units[i])) {
-                        DamageTarget(this.caster, PlayerUnits.units[i], this.dmg, SpellData[SIDSUNFIRESTORMHEX].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+                        DamageTarget(this.caster, PlayerUnits.units[i], this.dmg, SpellData[SID_SUN_FIRE_STORMHEX].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
                     }
                     i += 1;
                 }
@@ -67,7 +67,7 @@ constant string  ART_EFFECT  = "Abilities\\Spells\\Orc\\LiquidFire\\Liquidfire.m
     }
 
     function onInit() {
-        RegisterSpellEffectResponse(SIDSUNFIRESTORMHEX, onCast);
+        RegisterSpellEffectResponse(SID_SUN_FIRE_STORMHEX, onCast);
     }
 
 

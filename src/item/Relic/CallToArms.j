@@ -15,7 +15,7 @@ constant integer BUFF_ID = 'A068';
         up.ModAP(20 * fac);
         up.spellPower += 15.0 * fac;
         up.lifeRegen += 12.0 * fac;
-	    up.ll += 0.07 * fac;
+        up.ll += 0.07 * fac;
         if (!ht.exists(u)) {ht[u] = 0;}
         ht[u] = ht[u] + fac;
     }
@@ -59,8 +59,8 @@ constant integer BUFF_ID = 'A068';
 
     function onInit() {
         ht = HandleTable.create();
-        RegisterItemPropMod(ITIDCALLTOARMS, action);
-        RegisterSpellEffectResponse(SIDCALLTOARMS, onCast);
+        RegisterItemPropMod(ITID_CALL_TO_ARMS, action);
+        RegisterSpellEffectResponse(SID_CALL_TO_ARMS, onCast);
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
         RegisterOnDamageEvent(ondamaging);
     }

@@ -206,7 +206,7 @@ constant string  SFX1  = "Abilities\\Spells\\Other\\FrostDamage\\FrostDamage.mdl
         private method frostSlowAreaOfEffect() {
             Buff buf;
             integer i = 0;
-            integer lvl = GetUnitAbilityLevel(this.u, SIDFREEZINGTRAP);
+            integer lvl = GetUnitAbilityLevel(this.u, SID_FREEZING_TRAP);
             while (i < MobList.n) {
                 if (GetDistance.unitCoord2d(MobList.units[i], this.x, this.y) <= returnAOE(lvl)) {
                     buf = Buff.cast(this.u, MobList.units[i], BID_FREEZING_TRAP);
@@ -235,7 +235,7 @@ constant string  SFX1  = "Abilities\\Spells\\Other\\FrostDamage\\FrostDamage.mdl
         private static method frostEffect() {
             thistype this = GetTimerData(GetExpiredTimer());
             this.frostSlowAreaOfEffect();            
-            TerrainChange.start(this.x, this.y, GetUnitAbilityLevel(this.u, SIDFREEZINGTRAP));
+            TerrainChange.start(this.x, this.y, GetUnitAbilityLevel(this.u, SID_FREEZING_TRAP));
             this.count = 5;
             TimerStart(this.tm, 1.0, true, function thistype.frostThem);
         }
@@ -290,12 +290,12 @@ constant string  SFX1  = "Abilities\\Spells\\Other\\FrostDamage\\FrostDamage.mdl
     }
 
     function onCast() {
-        FreezngTrap.start(SpellEvent.CastingUnit, SpellEvent.TargetX, SpellEvent.TargetY, returnDelay(GetUnitAbilityLevel(SpellEvent.CastingUnit, SIDFREEZINGTRAP)));
+        FreezngTrap.start(SpellEvent.CastingUnit, SpellEvent.TargetX, SpellEvent.TargetY, returnDelay(GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_FREEZING_TRAP)));
         //TerrainChange.start(SpellEvent.TargetX, SpellEvent.TargetY);
     }
 
     function onInit() {
-        RegisterSpellEffectResponse(SIDFREEZINGTRAP, onCast);
+        RegisterSpellEffectResponse(SID_FREEZING_TRAP, onCast);
         BuffType.register(BID_FREEZING_TRAP, BUFF_PHYX, BUFF_NEG);
     }
 

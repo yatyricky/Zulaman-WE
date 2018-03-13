@@ -6,7 +6,7 @@ library HealTester requires SpellEvent {
     }
 
     function onInit() {
-        RegisterSpellEffectResponse(SIDHEALTESTER, onCast);
+        RegisterSpellEffectResponse(SID_HEAL_TESTER, onCast);
     }
 }
 //! endzinc

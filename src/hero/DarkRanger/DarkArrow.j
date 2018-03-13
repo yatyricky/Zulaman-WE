@@ -7,7 +7,7 @@ constant string  PATH  = "Abilities\\Spells\\Other\\BlackArrow\\BlackArrowMissil
     }
 
     function onhit(Projectile p) -> boolean {
-        DamageTarget(p.caster, p.target, p.r0, SpellData[SIDDARKARROW].name, true, true, false, WEAPON_TYPE_WHOKNOWS);
+        DamageTarget(p.caster, p.target, p.r0, SpellData[SID_DARK_ARROW].name, true, true, false, WEAPON_TYPE_WHOKNOWS);
         return true;
     }
     
@@ -18,7 +18,7 @@ constant string  PATH  = "Abilities\\Spells\\Other\\BlackArrow\\BlackArrowMissil
         p.path = PATH;
         p.pr = onhit;
         p.speed = 900;
-        p.r0 = returnDamage(GetUnitAbilityLevel(p.caster, SIDDARKARROW), UnitProp[p.caster].AttackPower());
+        p.r0 = returnDamage(GetUnitAbilityLevel(p.caster, SID_DARK_ARROW), UnitProp[p.caster].AttackPower());
         p.launch();
     }
     
@@ -58,7 +58,7 @@ constant string  PATH  = "Abilities\\Spells\\Other\\BlackArrow\\BlackArrowMissil
     }
 
     function onCast() {
-        integer lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SIDDARKARROW);
+        integer lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_DARK_ARROW);
         integer arrows = 1;    
         integer rnd;
             
@@ -83,7 +83,7 @@ constant string  PATH  = "Abilities\\Spells\\Other\\BlackArrow\\BlackArrowMissil
     }
 
     function onInit() {
-        RegisterSpellEffectResponse(SIDDARKARROW, onCast);
+        RegisterSpellEffectResponse(SID_DARK_ARROW, onCast);
     }
    
 

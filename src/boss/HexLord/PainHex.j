@@ -12,7 +12,7 @@ constant integer BUFF_ID1 = 'A021';
     }
 
     function onEffect(Buff buf) {
-        DamageTarget(buf.bd.caster, buf.bd.target, 200.0, SpellData[SIDPAINHEX].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
+        DamageTarget(buf.bd.caster, buf.bd.target, 200.0, SpellData[SID_PAIN_HEX].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
         AddTimedEffect.atUnit(ART_PLAGUE, buf.bd.target, "origin", 0.2);
     }
 
@@ -47,7 +47,7 @@ constant integer BUFF_ID1 = 'A021';
     function onInit() {
         //BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_NEG);
         //BuffType.register(BUFF_ID1, BUFF_MAGE, BUFF_NEG);
-        RegisterSpellEffectResponse(SIDPAINHEX, onCast);
+        RegisterSpellEffectResponse(SID_PAIN_HEX, onCast);
     }
 
 

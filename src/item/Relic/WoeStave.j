@@ -53,7 +53,7 @@ constant string  ART  = "Abilities\\Spells\\Undead\\Cripple\\CrippleTarget.mdl";
 
     function onInit() {
         ht = HandleTable.create();
-        RegisterItemPropMod(ITIDWOESTAVE, action);
+        RegisterItemPropMod(ITID_WOE_STAVE, action);
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_NEG);
         RegisterDamagedEvent(damaged);
     }

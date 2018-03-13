@@ -16,7 +16,7 @@ constant integer BUFF_ID = 'A045';
     function response(unit u) {
         integer id;
         Buff buf;
-        if (GetUnitTypeId(u) == UTIDGHOUL) {
+        if (GetUnitTypeId(u) == UTID_GHOUL) {
             id = GetPlayerId(GetOwningPlayer(u));
             ghoul[id] = null;
             if (!IsUnitDead(darkranger[id])) {

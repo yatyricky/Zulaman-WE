@@ -22,7 +22,7 @@ constant real DAMAGE = 300.0;
         UnitProp[buf.bd.target].aggroRate -= buf.bd.r0;
     }
 
-	struct Leap {
+    struct Leap {
         private timer tm;
         private unit caster;
         private effect eff;
@@ -55,23 +55,23 @@ constant real DAMAGE = 300.0;
             }
             SetUnitFlyHeight(this.caster, height, 0.0);
             if (this.ctr >= this.count) {
-            	AddTimedEffect.atCoord(IMPACT, GetUnitX(this.caster), GetUnitY(this.caster), 0.1);
-            	for (0 <= i < PlayerUnits.n) {
-            		if (GetDistance.units(this.caster, PlayerUnits.units[i]) < AOE) {
-            			DamageTarget(this.caster, PlayerUnits.units[i], DAMAGE, SpellData[SID_CHAOS_LEAP].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
+                AddTimedEffect.atCoord(IMPACT, GetUnitX(this.caster), GetUnitY(this.caster), 0.1);
+                for (0 <= i < PlayerUnits.n) {
+                    if (GetDistance.units(this.caster, PlayerUnits.units[i]) < AOE) {
+                        DamageTarget(this.caster, PlayerUnits.units[i], DAMAGE, SpellData[SID_CHAOS_LEAP].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
 
-            			buf = Buff.cast(this.caster, PlayerUnits.units[i], BID_CHAOS_LEAP);
-				        buf.bd.tick = -1;
-				        buf.bd.interval = 10;
-				        UnitProp[buf.bd.target].aggroRate -= buf.bd.r0;
-				        buf.bd.r0 = 3.0;
+                        buf = Buff.cast(this.caster, PlayerUnits.units[i], BID_CHAOS_LEAP);
+                        buf.bd.tick = -1;
+                        buf.bd.interval = 10;
+                        UnitProp[buf.bd.target].aggroRate -= buf.bd.r0;
+                        buf.bd.r0 = 3.0;
                         if (buf.bd.e0 == 0) {buf.bd.e0 = BuffEffect.create(ART, buf, "overhead");}
-				        buf.bd.boe = onEffect;
-				        buf.bd.bor = onRemove;
-				        buf.run();
-            		}
-            	}
-            	this.destroy();
+                        buf.bd.boe = onEffect;
+                        buf.bd.bor = onRemove;
+                        buf.run();
+                    }
+                }
+                this.destroy();
             }
         }
         
@@ -100,8 +100,8 @@ constant real DAMAGE = 300.0;
     }
 
     function onInit() {
-    	BuffType.register(BID_CHAOS_LEAP, BUFF_PHYX, BUFF_NEG);
-    	RegisterSpellEffectResponse(SID_CHAOS_LEAP, onCast);
+        BuffType.register(BID_CHAOS_LEAP, BUFF_PHYX, BUFF_NEG);
+        RegisterSpellEffectResponse(SID_CHAOS_LEAP, onCast);
     }
 
 

@@ -25,7 +25,7 @@ constant integer BUFF_ID1 = 'A01J';
             thistype this = thistype.allocate();
             this.u = u;
             this.tm = NewTimer();
-            this.amt = 75 + 25 * GetUnitAbilityLevel(this.u, SIDSHIELD);
+            this.amt = 75 + 25 * GetUnitAbilityLevel(this.u, SID_SHIELD);
             SetTimerData(this.tm, this);
             TimerStart(this.tm, 0.01, false, function thistype.run);
         }
@@ -45,7 +45,7 @@ constant integer BUFF_ID1 = 'A01J';
             buf.bd.tick = -1;
             buf.bd.interval = 20.0;
             buf.bd.isShield = true;
-            buf.bd.r0 = returnAbsorb(GetUnitAbilityLevel(SpellEvent.CastingUnit, SIDSHIELD), UnitProp[SpellEvent.CastingUnit].SpellPower());
+            buf.bd.r0 = returnAbsorb(GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_SHIELD), UnitProp[SpellEvent.CastingUnit].SpellPower());
             if (buf.bd.e0 == 0) {
                 buf.bd.e0 = BuffEffect.create(ART_SHIELD, buf, "overhead");
             }
@@ -63,21 +63,21 @@ constant integer BUFF_ID1 = 'A01J';
                 buf.run();
             }
             
-            if (GetUnitAbilityLevel(SpellEvent.CastingUnit, SIDSHIELD) > 1) {
-                if (GetRandomInt(0, 99) < 35 && GetUnitAbilityLevel(SpellEvent.CastingUnit, SIDHEAL) > 0) {
-                    PriestCastHeal(SpellEvent.CastingUnit, SpellEvent.TargetUnit, 2 * GetUnitAbilityLevel(SpellEvent.CastingUnit, SIDSHIELD) - 1);
+            if (GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_SHIELD) > 1) {
+                if (GetRandomInt(0, 99) < 35 && GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_HEAL) > 0) {
+                    PriestCastHeal(SpellEvent.CastingUnit, SpellEvent.TargetUnit, 2 * GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_SHIELD) - 1);
                 }
             }
         } else {
             delayedDosth1.start(SpellEvent.CastingUnit);
-            CoolDown(SpellEvent.CastingUnit, SIDSHIELD);
+            CoolDown(SpellEvent.CastingUnit, SID_SHIELD);
         }
     }
 
     function onInit() {
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
         BuffType.register(BUFF_ID1, BUFF_PHYX, BUFF_NEG);
-        RegisterSpellEffectResponse(SIDSHIELD, onCast);
+        RegisterSpellEffectResponse(SID_SHIELD, onCast);
     }
 
 

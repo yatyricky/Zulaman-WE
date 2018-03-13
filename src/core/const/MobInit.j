@@ -12,7 +12,7 @@ constant integer MOBINIT_RESPAWN_H = 600;
     
     function cancelStun(DelayTask dt) {
         RemoveStun(dt.u0);
-    }	
+    }    
 
     public function ResetMob(unit u) {
         integer id = idTable[u];
@@ -22,13 +22,13 @@ constant integer MOBINIT_RESPAWN_H = 600;
             DelayTask.create(cancelStun, 0.5).u0 = u;
         }     
 
-        if (GetUnitTypeId(u) == UTID_ARCH_TINKER_MORPH || GetUnitTypeId(u) == UTIDTIDEBARONWATER) {
+        if (GetUnitTypeId(u) == UTID_ARCH_TINKER_MORPH || GetUnitTypeId(u) == UTID_TIDE_BARON_WATER) {
             DelayTask.create(cancelForm, 1.0).u0 = u;
         }
-		
-		if (GetUnitTypeId(u) == UTIDWARLOCK) {
-			ResetFireRunes();
-		}
+        
+        if (GetUnitTypeId(u) == UTID_WARLOCK) {
+            ResetFireRunes();
+        }
         
         IssueImmediateOrderById(u, OID_STOP);
         PauseUnit(u, true);

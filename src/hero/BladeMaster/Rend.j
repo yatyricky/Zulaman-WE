@@ -7,14 +7,14 @@ library Rend requires DamageSystem, SpellEvent, BuffSystem, BladeMasterGlobal {
     boolean nextNormalCrit[NUMBER_OF_MAX_PLAYERS];
     
     function onEffect(Buff buf) {
-        DamageTarget(buf.bd.caster, buf.bd.target, buf.bd.r0, SpellData[SIDREND].name, true, true, false, WEAPON_TYPE_WHOKNOWS);
+        DamageTarget(buf.bd.caster, buf.bd.target, buf.bd.r0, SpellData[SID_REND].name, true, true, false, WEAPON_TYPE_WHOKNOWS);
         AddTimedEffect.atUnit(ART_BLEED, buf.bd.target, "origin", 0.2);
         // condition to enable next critical
         if (DamageResult.isCritical) {
             nextNormalCrit[GetPlayerId(GetOwningPlayer(buf.bd.caster))] = true;
         }
         // condition to enable overpower
-        if (GetUnitAbilityLevel(buf.bd.caster, SIDOVERPOWER) > 0) {
+        if (GetUnitAbilityLevel(buf.bd.caster, SID_OVER_POWER) > 0) {
             EnableOverpower(GetPlayerId(GetOwningPlayer(buf.bd.caster)));
         }
     }
@@ -34,9 +34,9 @@ library Rend requires DamageSystem, SpellEvent, BuffSystem, BladeMasterGlobal {
         Buff buf = Buff.cast(a, b, BUFF_ID_REND);
         buf.bd.interval = 2.5 / (1.0 + UnitProp[a].AttackSpeed() / 100.0);          // interval
         buf.bd.tick = Rounding(10.0 / buf.bd.interval) + 1;
-        buf.bd.i0 = GetUnitAbilityLevel(a, SIDREND);
+        buf.bd.i0 = GetUnitAbilityLevel(a, SID_REND);
         buf.bd.i1 = buf.bd.tick;
-        buf.bd.r0 = returnDamage(GetUnitAbilityLevel(a, SIDREND), UnitProp[a].AttackPower());
+        buf.bd.r0 = returnDamage(GetUnitAbilityLevel(a, SID_REND), UnitProp[a].AttackPower());
         buf.bd.boe = onEffect;
         buf.bd.bor = onRemove;
         buf.run();
@@ -54,7 +54,7 @@ library Rend requires DamageSystem, SpellEvent, BuffSystem, BladeMasterGlobal {
     }
     
     function onCast() {
-        DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, 20.0, SpellData[SIDREND].name, true, false, true, WEAPON_TYPE_METAL_LIGHT_SLICE);
+        DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, 20.0, SpellData[SID_REND].name, true, false, true, WEAPON_TYPE_METAL_LIGHT_SLICE);
         if (DamageResult.isHit && !DamageResult.isBlocked) {
             CastRend(SpellEvent.CastingUnit, SpellEvent.TargetUnit);
         }
@@ -77,7 +77,7 @@ library Rend requires DamageSystem, SpellEvent, BuffSystem, BladeMasterGlobal {
         }
         BuffType.register(BUFF_ID_REND, BUFF_PHYX, BUFF_NEG);
         BuffType.register(BUFF_ID_REND1, BUFF_PHYX, BUFF_NEG);
-        RegisterSpellEffectResponse(SIDREND, onCast);
+        RegisterSpellEffectResponse(SID_REND, onCast);
         RegisterOnDamageEvent(ondamageresponse);
     }
 }

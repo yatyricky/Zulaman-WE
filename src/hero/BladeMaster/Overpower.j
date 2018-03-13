@@ -5,7 +5,7 @@ library Overpower requires DamageSystem, BladeMasterGlobal, Rend {
     }
 
     public function BladeMasterGetOverpowerManaRep(unit u) -> real {
-        return returnManaRegen(GetUnitAbilityLevel(u, SIDOVERPOWER));
+        return returnManaRegen(GetUnitAbilityLevel(u, SID_OVER_POWER));
     }
 
     function returnExtraCriticalChance(integer lvl) -> real {
@@ -13,19 +13,19 @@ library Overpower requires DamageSystem, BladeMasterGlobal, Rend {
     }
 
     function dodged() {
-        if (DamageResult.isDodged && GetUnitAbilityLevel(DamageResult.source, SIDOVERPOWER) > 0) {
+        if (DamageResult.isDodged && GetUnitAbilityLevel(DamageResult.source, SID_OVER_POWER) > 0) {
             EnableOverpower(GetPlayerId(GetOwningPlayer(DamageResult.source)));
         }
     }
     
     function onCast() {
-        real exct = returnExtraCriticalChance(GetUnitAbilityLevel(SpellEvent.CastingUnit, SIDOVERPOWER));
+        real exct = returnExtraCriticalChance(GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_OVER_POWER));
         KillUnit(premises[GetPlayerId(GetOwningPlayer(SpellEvent.CastingUnit))]);
         UnitProp[SpellEvent.CastingUnit].attackCrit += exct;
-        DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, UnitProp[SpellEvent.CastingUnit].AttackPower() * 1.5, SpellData[SIDOVERPOWER].name, true, true, false, WEAPON_TYPE_METAL_HEAVY_CHOP);
+        DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, UnitProp[SpellEvent.CastingUnit].AttackPower() * 1.5, SpellData[SID_OVER_POWER].name, true, true, false, WEAPON_TYPE_METAL_HEAVY_CHOP);
         UnitProp[SpellEvent.CastingUnit].attackCrit -= exct;
         if (DamageResult.isHit) {
-            ModUnitMana(DamageResult.source, returnManaRegen(GetUnitAbilityLevel(SpellEvent.CastingUnit, SIDOVERPOWER)));
+            ModUnitMana(DamageResult.source, returnManaRegen(GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_OVER_POWER)));
             //if (GetUnitAbilityLevel(DamageResult.source, SPELL_ID_REND) > 0) {
             //    CastRend(DamageResult.source, DamageResult.target);
             //}
@@ -34,7 +34,7 @@ library Overpower requires DamageSystem, BladeMasterGlobal, Rend {
 
     function onInit() {
         RegisterDamagedEvent(dodged);
-        RegisterSpellEffectResponse(SIDOVERPOWER, onCast);
+        RegisterSpellEffectResponse(SID_OVER_POWER, onCast);
     }
 }
 //! endzinc

@@ -47,7 +47,7 @@ constant integer BUFF_ID = 'A05Y';
     }
     
     function registerDLRA(unit u) {
-        if (GetUnitTypeId(u) == UTIDFROSTMAGE) {
+        if (GetUnitTypeId(u) == UTID_FROST_MAGE) {
             DalaranAura.register(u);
         }
     }

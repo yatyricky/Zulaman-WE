@@ -212,7 +212,7 @@ constant integer BUFF_ID = 'A065';
                 i = 0;
                 while (i < 6) {
                     tmpi = UnitItemInSlot(u, i);
-                    if (GetItemTypeId(tmpi) == ITIDINFINITY) {
+                    if (GetItemTypeId(tmpi) == ITID_INFINITY) {
                         ipmt.evaluate(u, tmpi, -1);
                         ipmt.evaluate(u, tmpi, 1);
                     }
@@ -225,7 +225,7 @@ constant integer BUFF_ID = 'A065';
 
     function onInit() {
         ht = HandleTable.create();
-        RegisterItemPropMod(ITIDINFINITY, action);
+        RegisterItemPropMod(ITID_INFINITY, action);
         BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_NEG);
         TriggerAnyUnit(EVENT_PLAYER_HERO_LEVEL, function lvledup);
         RegisterDamagedEvent(damaged);

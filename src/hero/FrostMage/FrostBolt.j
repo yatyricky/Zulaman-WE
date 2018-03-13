@@ -23,7 +23,7 @@ constant string  ART_FROZEN  = "Abilities\\Spells\\Undead\\FreezingBreath\\Freez
             p.reverse();
             return false;
         } else {
-            DamageTarget(p.caster, p.target, p.r0, SpellData[SIDFROSTBOLT].name, false, true, false, WEAPON_TYPE_WHOKNOWS);   
+            DamageTarget(p.caster, p.target, p.r0, SpellData[SID_FROST_BOLT].name, false, true, false, WEAPON_TYPE_WHOKNOWS);   
             
             // equiped Rage Winterchill's Phylactery
             if (HasRageWinterchillsPhylactery(p.caster)) {
@@ -48,7 +48,7 @@ constant string  ART_FROZEN  = "Abilities\\Spells\\Undead\\FreezingBreath\\Freez
 
     function response(CastingBar cd) {
         Projectile p = Projectile.create();
-        integer lvl = GetUnitAbilityLevel(cd.caster, SIDFROSTBOLT);
+        integer lvl = GetUnitAbilityLevel(cd.caster, SID_FROST_BOLT);
         p.caster = cd.caster;
         p.target = cd.target;
         p.path = ART_MISSILE;
@@ -67,7 +67,7 @@ constant string  ART_FROZEN  = "Abilities\\Spells\\Undead\\FreezingBreath\\Freez
     
     function onInit() {
         castSound = DefineSound("Sound\\Ambient\\DoodadEffects\\CityScapeMagicRunesLoop1.wav", 1149, true, false);
-        RegisterSpellChannelResponse(SIDFROSTBOLT, onChannel);
+        RegisterSpellChannelResponse(SID_FROST_BOLT, onChannel);
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_NEG);
     }
 

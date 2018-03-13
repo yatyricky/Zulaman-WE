@@ -56,7 +56,7 @@ constant integer DURATION = 20;
             thistype this = thistype.allocate();
             this.u = totem;
             this.c = caster;
-            this.regen = returnRegen(GetUnitAbilityLevel(caster, SIDENCHANTEDTOTEM));
+            this.regen = returnRegen(GetUnitAbilityLevel(caster, SID_ENCHANTED_TOTEM));
             this.count = DURATION;
             this.tm = NewTimer();
             SetTimerData(this.tm, this);
@@ -134,7 +134,7 @@ constant integer DURATION = 20;
     
         static method start(unit caster, unit totem) {
             thistype this = thistype.allocate();
-            integer lvl = GetUnitAbilityLevel(caster, SIDENCHANTEDTOTEM);
+            integer lvl = GetUnitAbilityLevel(caster, SID_ENCHANTED_TOTEM);
             this.u = totem;
             this.c = caster;
             this.aoe = returnRange(lvl);
@@ -213,7 +213,7 @@ constant integer DURATION = 20;
                     if (efx > 0.75) {efx = 0.75;}
                     AddTimedLight.atUnitsZ("AFOD", this.u, 80.0, tu, 0.0, efx);
                     AddTimedEffect.atUnit(ART_RED_IMPACT, tu, "origin", 0.3);
-                    DamageTarget(this.c, tu, dmg, SpellData[SIDLIGHTNINGTOTEM].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
+                    DamageTarget(this.c, tu, dmg, SpellData[SID_LIGHTNING_TOTEM].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
                 }
                 this.count -= 1;
             } else {
@@ -229,7 +229,7 @@ constant integer DURATION = 20;
     
         static method start(unit caster, unit totem) {
             thistype this = thistype.allocate();
-            this.lvl = GetUnitAbilityLevel(caster, SIDENCHANTEDTOTEM);
+            this.lvl = GetUnitAbilityLevel(caster, SID_ENCHANTED_TOTEM);
             this.u = totem;
             this.c = caster;
             this.aoe = returnLightAOE(lvl);
@@ -298,10 +298,10 @@ constant integer DURATION = 20;
     
     function disableAll(unit u) {
         player p = GetOwningPlayer(u);
-        if (GetUnitTypeId(u) == UTIDEARTHBINDER) {
-            SetPlayerAbilityAvailable(p, SIDLIGHTNINGTOTEM, false);
-            SetPlayerAbilityAvailable(p, SIDEARTHBINDTOTEM, false);
-            SetPlayerAbilityAvailable(p, SIDTORRENTTOTEM, false);
+        if (GetUnitTypeId(u) == UTID_EARTH_BINDER) {
+            SetPlayerAbilityAvailable(p, SID_LIGHTNING_TOTEM, false);
+            SetPlayerAbilityAvailable(p, SID_EARTH_BIND_TOTEM, false);
+            SetPlayerAbilityAvailable(p, SID_TORRENT_TOTEM, false);
         }
         p = null;
     }
@@ -309,16 +309,16 @@ constant integer DURATION = 20;
     function level() -> boolean {
         unit u;
         integer i;
-        if (GetLearnedSkill() == SIDENCHANTEDTOTEM) {
+        if (GetLearnedSkill() == SID_ENCHANTED_TOTEM) {
             u = GetTriggerUnit();
-            i = GetUnitAbilityLevel(u, SIDENCHANTEDTOTEM);
+            i = GetUnitAbilityLevel(u, SID_ENCHANTED_TOTEM);
             if (i == 1) {
-                SetPlayerAbilityAvailable(GetOwningPlayer(u), SIDLIGHTNINGTOTEM, true);
-                currentTotemId[GetPidofu(u)] = SIDLIGHTNINGTOTEM;
+                SetPlayerAbilityAvailable(GetOwningPlayer(u), SID_LIGHTNING_TOTEM, true);
+                currentTotemId[GetPidofu(u)] = SID_LIGHTNING_TOTEM;
             } else {
-                SetUnitAbilityLevel(u, SIDLIGHTNINGTOTEM, i);
-                SetUnitAbilityLevel(u, SIDEARTHBINDTOTEM, i);
-                SetUnitAbilityLevel(u, SIDTORRENTTOTEM, i);
+                SetUnitAbilityLevel(u, SID_LIGHTNING_TOTEM, i);
+                SetUnitAbilityLevel(u, SID_EARTH_BIND_TOTEM, i);
+                SetUnitAbilityLevel(u, SID_TORRENT_TOTEM, i);
             } 
         }
         u = null;
@@ -330,9 +330,9 @@ constant integer DURATION = 20;
         castSound = DefineSound("Units\\Orc\\HealingWard\\PlaceAncestralGuardian.wav", 3063, false, false);
         TriggerAnyUnit(EVENT_PLAYER_HERO_SKILL, function level);
         RegisterUnitEnterMap(disableAll);
-        RegisterSpellEffectResponse(SIDLIGHTNINGTOTEM, onCastStorm);
-        RegisterSpellEffectResponse(SIDTORRENTTOTEM, onCastWater);
-        RegisterSpellEffectResponse(SIDEARTHBINDTOTEM, onCastEarth);
+        RegisterSpellEffectResponse(SID_LIGHTNING_TOTEM, onCastStorm);
+        RegisterSpellEffectResponse(SID_TORRENT_TOTEM, onCastWater);
+        RegisterSpellEffectResponse(SID_EARTH_BIND_TOTEM, onCastEarth);
         BuffType.register(BUFF_STORM, BUFF_MAGE, BUFF_NEG);
         BuffType.register(BUFF_EARTH, BUFF_MAGE, BUFF_NEG);
         i = 0;

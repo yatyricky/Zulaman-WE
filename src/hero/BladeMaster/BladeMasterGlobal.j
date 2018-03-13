@@ -30,9 +30,9 @@ constant integer PREMISE = 'e00B';
         }
         //BJDebugMsg("Valour + "+I2S(n)+" = " + I2S(valour[id]));
         show = (valour[id] + 3) / 4;
-        j = SIDEXECUTESTART;
-        while (j <= SIDEXECUTEEND) {
-            SetPlayerAbilityAvailable(p, j, (j - SIDEXECUTESTART) == show);
+        j = SID_EXECUTE_START;
+        while (j <= SID_EXECUTE_END) {
+            SetPlayerAbilityAvailable(p, j, (j - SID_EXECUTE_START) == show);
             j += 1;
         }
         if (show == 5) {
@@ -46,9 +46,9 @@ constant integer PREMISE = 'e00B';
         integer i = GetPlayerId(p);
         integer ret = valour[i];
         valour[i] = 0;
-        SetPlayerAbilityAvailable(p, SIDEXECUTESTART, true);
-        i = SIDEXECUTESTART + 1;
-        while (i <= SIDEXECUTEEND) {
+        SetPlayerAbilityAvailable(p, SID_EXECUTE_START, true);
+        i = SID_EXECUTE_START + 1;
+        while (i <= SID_EXECUTE_END) {
             SetPlayerAbilityAvailable(p, i, false);
             i += 1;
         }

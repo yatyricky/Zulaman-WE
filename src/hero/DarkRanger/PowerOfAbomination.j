@@ -46,7 +46,7 @@ constant string  ART_RIGHT  = "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustSpeci
             thistype this = GetTimerData(GetExpiredTimer());
             // mana regen amount
             if (!IsUnitDead(this.u)) {
-                ModUnitMana(this.u, GetUnitAbilityLevel(this.u, SIDPOWEROFABOMINATION) * 2);
+                ModUnitMana(this.u, GetUnitAbilityLevel(this.u, SID_POWER_OF_ABOMINATION) * 2);
             }
         }
         
@@ -64,7 +64,7 @@ constant string  ART_RIGHT  = "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustSpeci
             Buff buf;
             integer id;
             this.isBanshee = false;
-            this.savedAP = GetUnitAbilityLevel(this.u, SIDPOWEROFABOMINATION) * 5 + 5;
+            this.savedAP = GetUnitAbilityLevel(this.u, SID_POWER_OF_ABOMINATION) * 5 + 5;
             UnitProp[this.u].ModAP(this.savedAP);
             //BJDebugMsg("Switched to Abomination!");
             PauseTimer(this.tm);
@@ -109,7 +109,7 @@ constant string  ART_RIGHT  = "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustSpeci
     function onCast() -> boolean {        
         unit u = GetTriggerUnit();
         integer pid = GetPlayerId(GetOwningPlayer(u));
-        if (GetUnitTypeId(u) == UTIDDARKRANGER) {
+        if (GetUnitTypeId(u) == UTID_DARK_RANGER) {
             if (GetIssuedOrderId() == OID_IMMOLATIONON) {
                 PowerOfAbomination[u].abomination();
             } else if (GetIssuedOrderId() == OID_IMMOLATIONOFF) {
@@ -122,8 +122,8 @@ constant string  ART_RIGHT  = "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustSpeci
     }
     
     function learnt() -> boolean {
-        if (GetLearnedSkill() == SIDPOWEROFABOMINATION) {
-            if (GetUnitAbilityLevel(GetTriggerUnit(), SIDPOWEROFABOMINATION) == 1) {
+        if (GetLearnedSkill() == SID_POWER_OF_ABOMINATION) {
+            if (GetUnitAbilityLevel(GetTriggerUnit(), SID_POWER_OF_ABOMINATION) == 1) {
                 PowerOfAbomination.start(GetTriggerUnit());
             }
         }
@@ -136,16 +136,16 @@ constant string  ART_RIGHT  = "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustSpeci
     
     function damaged() {
         Buff buf;
-        if (DamageResult.isHit && GetUnitTypeId(DamageResult.source) == UTIDDARKRANGER) {
-            if (GetUnitAbilityLevel(DamageResult.source, SIDPOWEROFABOMINATION) > 0 && !PowerOfAbomination[DamageResult.source].isBanshee) {
+        if (DamageResult.isHit && GetUnitTypeId(DamageResult.source) == UTID_DARK_RANGER) {
+            if (GetUnitAbilityLevel(DamageResult.source, SID_POWER_OF_ABOMINATION) > 0 && !PowerOfAbomination[DamageResult.source].isBanshee) {
                 DestroyEffect(AddSpecialEffectTarget(ART, DamageResult.target, "origin"));
             }
-            if (GetUnitAbilityLevel(DamageResult.source, SIDPOWEROFABOMINATION) > 1 && PowerOfAbomination[DamageResult.source].isBanshee) {
+            if (GetUnitAbilityLevel(DamageResult.source, SID_POWER_OF_ABOMINATION) > 1 && PowerOfAbomination[DamageResult.source].isBanshee) {
                 buf = Buff.cast(DamageResult.source, DamageResult.target, BUFF_ID);
                 buf.bd.tick = -1;
                 buf.bd.interval = 10.0;
                 UnitProp[buf.bd.target].attackRate += buf.bd.r0;
-                buf.bd.r0 = 0.05 * GetUnitAbilityLevel(DamageResult.source, SIDPOWEROFABOMINATION) - 0.05;
+                buf.bd.r0 = 0.05 * GetUnitAbilityLevel(DamageResult.source, SID_POWER_OF_ABOMINATION) - 0.05;
                 if (buf.bd.e0 == 0) {
                     buf.bd.e0 = BuffEffect.create(ART_CURSE, buf, "overhead");
                 }
@@ -157,8 +157,8 @@ constant string  ART_RIGHT  = "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustSpeci
     }
     /*
     function drDeath(unit u) {
-        if (GetUnitTypeId(u) == UTIDDARKRANGER) {
-            if (GetUnitAbilityLevel(u, SIDPOWEROFABOMINATION) > 0) {
+        if (GetUnitTypeId(u) == UTID_DARK_RANGER) {
+            if (GetUnitAbilityLevel(u, SID_POWER_OF_ABOMINATION) > 0) {
                 if (!PowerOfAbomination[u].isBanshee) {
                     BJDebugMsg("Bug ��̬����");
                     PowerOfAbomination[u].banshee();

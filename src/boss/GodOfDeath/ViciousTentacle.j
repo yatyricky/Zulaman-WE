@@ -16,17 +16,17 @@ constant string  ART_EFFECT  = "zxzccx";
             p.reverse();
             return false;
         } else {
-	        buf = Buff.cast(p.caster, p.target, BID);
-	        buf.bd.interval = 3.0;
-	        buf.bd.tick = 3;
-	        buf.bd.boe = onEffect;
-	        buf.bd.bor = onRemove;
-	        buf.run();
+            buf = Buff.cast(p.caster, p.target, BID);
+            buf.bd.interval = 3.0;
+            buf.bd.tick = 3;
+            buf.bd.boe = onEffect;
+            buf.bd.bor = onRemove;
+            buf.run();
             return true;
         }
     }
 
-	function onCast() {
+    function onCast() {
         Projectile p = Projectile.create();
         p.caster = SpellEvent.CastingUnit;
         p.target = SpellEvent.TargetUnit;
@@ -34,12 +34,12 @@ constant string  ART_EFFECT  = "zxzccx";
         p.pr = onhit;
         p.speed = 500;
         p.launch();
-	}
+    }
 
-	function onInit() {
+    function onInit() {
         BuffType.register(BID, BUFF_MAGE, BUFF_NEG);
         RegisterSpellEffectResponse(SID, onCast);
-	}
+    }
 
 
 }

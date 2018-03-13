@@ -1,16 +1,16 @@
 //! zinc
 library Burning requires DamageSystem {
 
-	function onEffect(Buff buf) {
-		integer i;
-		for (0 <= i < PlayerUnits.n) {
-			if (GetDistance.units2d(buf.bd.caster, PlayerUnits.units[i]) <= 256) {
-				DamageTarget(buf.bd.caster, PlayerUnits.units[i], 200.0, SpellData[SID_BURNING].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
-			}
-		}
-	}
+    function onEffect(Buff buf) {
+        integer i;
+        for (0 <= i < PlayerUnits.n) {
+            if (GetDistance.units2d(buf.bd.caster, PlayerUnits.units[i]) <= 256) {
+                DamageTarget(buf.bd.caster, PlayerUnits.units[i], 200.0, SpellData[SID_BURNING].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+            }
+        }
+    }
 
-	function onRemove(Buff buf) {}
+    function onRemove(Buff buf) {}
 
     function onCast() {
         Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BID_BURNING);

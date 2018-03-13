@@ -22,7 +22,7 @@ library RhokDelar requires ItemAttributes, DamageSystem {
 
     function onInit() {
         ht = HandleTable.create();
-        RegisterItemPropMod(ITIDRHOKDELAR, action);
+        RegisterItemPropMod(ITID_RHOKDELAR, action);
     }
 }
 //! endzinc

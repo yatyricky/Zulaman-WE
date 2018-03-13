@@ -21,7 +21,7 @@ constant integer BUFF_ID = 'A030';
         AggroList al = AggroList[SpellEvent.TargetUnit];
         unit target = al.sort();
         real aggro = al.getAggro(target);
-        integer lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SIDDISCORD);
+        integer lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_DISCORD);
         Buff buf;
         if (!IsUnit(target, SpellEvent.CastingUnit)) {
             al.setAggro(SpellEvent.CastingUnit, aggro * 1.1);
@@ -45,7 +45,7 @@ constant integer BUFF_ID = 'A030';
     }
 
     function onInit() {
-        RegisterSpellEffectResponse(SIDDISCORD, onCast);
+        RegisterSpellEffectResponse(SID_DISCORD, onCast);
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_NEG);
     }
 

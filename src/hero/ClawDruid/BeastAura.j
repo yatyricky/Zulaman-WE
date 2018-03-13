@@ -47,7 +47,7 @@ constant integer BUFF_ID = 'A04C';
     }
     
     function registerBA(unit u) {
-        if (GetUnitTypeId(u) == UTIDCLAWDRUID) {
+        if (GetUnitTypeId(u) == UTID_CLAW_DRUID) {
             BeastAura.register(u);
         }
     }

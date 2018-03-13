@@ -124,7 +124,7 @@ constant integer NOMIS = 32;
 
     function onInit() {
         ht = HandleTable.create();
-        RegisterItemPropMod(ITIDBREATHOFTHEDYING, action);
+        RegisterItemPropMod(ITID_BREATH_OF_THE_DYING, action);
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_NEG);
         RegisterDamagedEvent(damaged);
     }

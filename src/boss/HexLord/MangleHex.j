@@ -15,13 +15,13 @@ library MangleHex requires BuffSystem, SpellEvent, UnitProperty {
         buf.run();
         
         dmg = 200 + UnitProp[SpellEvent.CastingUnit].AttackPower();        
-        DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, dmg, SpellData[SIDMANGLEHEX].name, true, true, true, WEAPON_TYPE_METAL_HEAVY_BASH);
+        DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, dmg, SpellData[SID_MANGLEHEX].name, true, true, true, WEAPON_TYPE_METAL_HEAVY_BASH);
         
         AddTimedEffect.atUnit(ART_BLEED, SpellEvent.TargetUnit, "origin", 0.2);
     }
 
     function onInit() {
-        RegisterSpellEffectResponse(SIDMANGLEHEX, onCast);
+        RegisterSpellEffectResponse(SID_MANGLEHEX, onCast);
         BuffType.register(MANGLEHEX_BUFF_ID, BUFF_PHYX, BUFF_NEG);
     }
 }

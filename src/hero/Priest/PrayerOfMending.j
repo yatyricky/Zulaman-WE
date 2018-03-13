@@ -63,11 +63,11 @@ constant string  PATH  = "Abilities\\Weapons\\FaerieDragonMissile\\FaerieDragonM
                     amt = buf.bd.r0 * 80;
                 }
                 amt += UnitProp[buf.bd.u0].SpellPower() / 9.0;
-                HealTarget(buf.bd.u0, buf.bd.target, amt, SpellData[SIDPRAYEROFMENDING].name, 0.0);
+                HealTarget(buf.bd.u0, buf.bd.target, amt, SpellData[SID_PRAYER_OF_MENDING].name, 0.0);
                 AddTimedEffect.atUnit(ART_HEAL, buf.bd.target, "origin", 0.3);
                 // deduction
                 buf.bd.i0 -= 1;
-                if (buf.bd.i0 < 1 || GetUnitAbilityLevel(buf.bd.u0, SIDPRAYEROFMENDING) < 3 || GetUnitStatePercent(buf.bd.target, UNIT_STATE_LIFE, UNIT_STATE_MAX_LIFE) > 50) {
+                if (buf.bd.i0 < 1 || GetUnitAbilityLevel(buf.bd.u0, SID_PRAYER_OF_MENDING) < 3 || GetUnitStatePercent(buf.bd.target, UNIT_STATE_LIFE, UNIT_STATE_MAX_LIFE) > 50) {
                     // remove
                     BuffSlot[DamageResult.target].dispelByBuff(buf);
                     if (buf.bd.i0 > 0) {
@@ -97,7 +97,7 @@ constant string  PATH  = "Abilities\\Weapons\\FaerieDragonMissile\\FaerieDragonM
 
     function onCast() {
         Projectile p = Projectile.create();
-        integer lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SIDPRAYEROFMENDING);
+        integer lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_PRAYER_OF_MENDING);
         p.caster = SpellEvent.CastingUnit;
         p.target = SpellEvent.TargetUnit;
         p.path = PATH;
@@ -112,7 +112,7 @@ constant string  PATH  = "Abilities\\Weapons\\FaerieDragonMissile\\FaerieDragonM
 
     function onInit() {
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
-        RegisterSpellEffectResponse(SIDPRAYEROFMENDING, onCast);
+        RegisterSpellEffectResponse(SID_PRAYER_OF_MENDING, onCast);
         RegisterDamagedEvent(damaged);
     }
 

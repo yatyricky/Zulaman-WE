@@ -68,7 +68,7 @@ constant integer DEBUFF_ID = 'A05R';
     }
 
     function onInit() {
-        RegisterSpellEffectResponse(SIDSPIRITHARVEST, onCast);
+        RegisterSpellEffectResponse(SID_SPIRIT_HARVEST, onCast);
         BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_POS);
         BuffType.register(DEBUFF_ID, BUFF_PHYX, BUFF_NEG);
     }

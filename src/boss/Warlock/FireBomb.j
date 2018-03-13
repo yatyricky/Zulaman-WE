@@ -65,7 +65,7 @@ constant real H_OVER_D = 0.45;
             i = 0;
             while (i < PlayerUnits.n) {
                 if (GetDistance.units2d(PlayerUnits.units[i], FireBombGroup.bombs[j]) < DBMWarlock.fireBombRadius && !IsUnitDead(PlayerUnits.units[i])) {
-                    DamageTarget(dt.u0, PlayerUnits.units[i], 350.0 + GetRandomReal(0.0, 200.0), SpellData[SIDFLAMEBOMB].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+                    DamageTarget(dt.u0, PlayerUnits.units[i], 350.0 + GetRandomReal(0.0, 200.0), SpellData[SID_FLAME_BOMB].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
                     AddTimedEffect.atUnit(MISSILE, PlayerUnits.units[i], "origin", 0.0);
                 }
                 i += 1;
@@ -89,25 +89,25 @@ constant real H_OVER_D = 0.45;
         integer i = 0;
         real portion;
         location loc;
-        SetUnitX(SpellEvent.CastingUnit, WLKSQRCENTREX);
-        SetUnitY(SpellEvent.CastingUnit, WLKSQRCENTREY);
+        SetUnitX(SpellEvent.CastingUnit, WLK_SQR_CENTRE_X);
+        SetUnitY(SpellEvent.CastingUnit, WLK_SQR_CENTRE_Y);
         if (PlayerUnits.n > 0) {
             portion = 6.283 / PlayerUnits.n;
         }
         while (i < PlayerUnits.n) {
-            SetUnitX(PlayerUnits.units[i], WLKSQRCENTREX + 200 * Cos(portion * i));
-            SetUnitY(PlayerUnits.units[i], WLKSQRCENTREY + 200 * Sin(portion * i));
+            SetUnitX(PlayerUnits.units[i], WLK_SQR_CENTRE_X + 200 * Cos(portion * i));
+            SetUnitY(PlayerUnits.units[i], WLK_SQR_CENTRE_Y + 200 * Sin(portion * i));
             i += 1;
         }
-        loc = Location(WLKSQRCENTREX, WLKSQRCENTREY);
-        AddTimedLight.atCoords3D("CLPB", WLKSQRCENTREX, WLKSQRCENTREY, GetLocationZ(loc) + 900.0, WLKSQRCENTREX, WLKSQRCENTREY, GetLocationZ(loc), 1.0).setColour(1.0, 0.0, 0.0, 1.0);
+        loc = Location(WLK_SQR_CENTRE_X, WLK_SQR_CENTRE_Y);
+        AddTimedLight.atCoords3D("CLPB", WLK_SQR_CENTRE_X, WLK_SQR_CENTRE_Y, GetLocationZ(loc) + 900.0, WLK_SQR_CENTRE_X, WLK_SQR_CENTRE_Y, GetLocationZ(loc), 1.0).setColour(1.0, 0.0, 0.0, 1.0);
         CastingBar.create(response).channel(NUM_MISSILES);
         DelayTask.create(explosion, 13.0).u0 = SpellEvent.CastingUnit;
         DBMWarlock.isFireBomb = true;
     }
 
     function onInit() {
-        RegisterSpellChannelResponse(SIDFLAMEBOMB, onChannel);
+        RegisterSpellChannelResponse(SID_FLAME_BOMB, onChannel);
     }
 
 

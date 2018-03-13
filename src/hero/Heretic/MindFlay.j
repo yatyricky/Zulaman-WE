@@ -16,12 +16,12 @@ constant string  ART_TARGET  = "Abilities\\Spells\\Other\\Drain\\ManaDrainTarget
     }
 
     function response(CastingBar cd) {
-        integer lvl = GetUnitAbilityLevel(cd.caster, SIDMINDFLAY);
+        integer lvl = GetUnitAbilityLevel(cd.caster, SID_MIND_FLAY);
         real dmg = returnDamage(lvl, UnitProp[cd.caster].SpellPower());
         real rate;
         unit tu;
         //BJDebugMsg("Run !");
-        DamageTarget(cd.caster, cd.target, dmg, SpellData[SIDMINDFLAY].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
+        DamageTarget(cd.caster, cd.target, dmg, SpellData[SID_MIND_FLAY].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
         ModUnitMana(cd.caster, dmg * returnManaConvertRateSelf(lvl));
         rate = returnManaConvertRateAlly(lvl);
         if (lvl > 1) {
@@ -56,7 +56,7 @@ constant string  ART_TARGET  = "Abilities\\Spells\\Other\\Drain\\ManaDrainTarget
 
     function onInit() {
         castSound = DefineSound("Abilities\\Spells\\Undead\\UndeadMine\\AcolyteMining.wav", 4233, false, false);
-        RegisterSpellChannelResponse(SIDMINDFLAY, onChannel);
+        RegisterSpellChannelResponse(SID_MIND_FLAY, onChannel);
     }
 
 

@@ -22,7 +22,7 @@ library Anathema requires ItemAttributes, DamageSystem {
 
     function onInit() {
         ht = HandleTable.create();
-        RegisterItemPropMod(ITIDANATHEMA, action);
+        RegisterItemPropMod(ITID_ANATHEMA, action);
     }
 }
 //! endzinc

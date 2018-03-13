@@ -8,7 +8,7 @@ constant string  ART_TARGET  = "Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpec
         item tmpi;
         if (ht.exists(HealResult.target)) {
             if (ht[HealResult.target] > 0) {
-                if (HealResult.abilityName != SpellData[SIDATTACKLL].name && HealResult.abilityName != SpellData[SID_TYRAELS_MIGHT].name) {
+                if (HealResult.abilityName != SpellData[SID_ATTACK_LL].name && HealResult.abilityName != SpellData[SID_TYRAELS_MIGHT].name) {
                     i = 0;
                     while (i < 6) {
                         tmpi = UnitItemInSlot(HealResult.target, i);

@@ -34,7 +34,7 @@ constant integer BUFF_ID = 'A03E';
     
     function onEffect(Buff buf) {            
         if (!IsUnitBoss(buf.bd.target)) {
-            DummyCast(buf.bd.caster, SIDPOLYMORPHDUMMY, "hex", buf.bd.target);        
+            DummyCast(buf.bd.caster, SID_POLYMORPH_DUMMY, "hex", buf.bd.target);        
             UnitProp[buf.bd.target].disabled += 1;
         }
     }
@@ -50,23 +50,23 @@ constant integer BUFF_ID = 'A03E';
     
     function onCasst() {
         Buff buf;
-		unit tmp;
+        unit tmp;
         boolean canSheep = true; // TODO
         if (canSheep) {
-			if (TryReflect(SpellEvent.TargetUnit)) {
-				tmp = SpellEvent.CastingUnit;
-				SpellEvent.CastingUnit = SpellEvent.TargetUnit;
-				SpellEvent.TargetUnit = tmp;
-			}
-			if (canSheep) {
-				buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BUFF_ID);
-				buf.bd.tick = -1;
-				buf.bd.interval = 10.0;
-				buf.bd.boe = onEffect;
-				buf.bd.bor = onRemove;
-				buf.run();
-			}
-			tmp = null;
+            if (TryReflect(SpellEvent.TargetUnit)) {
+                tmp = SpellEvent.CastingUnit;
+                SpellEvent.CastingUnit = SpellEvent.TargetUnit;
+                SpellEvent.TargetUnit = tmp;
+            }
+            if (canSheep) {
+                buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BUFF_ID);
+                buf.bd.tick = -1;
+                buf.bd.interval = 10.0;
+                buf.bd.boe = onEffect;
+                buf.bd.bor = onRemove;
+                buf.run();
+            }
+            tmp = null;
         }
     }
     
@@ -79,7 +79,7 @@ constant integer BUFF_ID = 'A03E';
     //}
 
     function onInit() {
-        RegisterSpellEffectResponse(SIDPOLYMORPHHEX, onCasst);
+        RegisterSpellEffectResponse(SID_POLYMORPH_HEX, onCasst);
         //BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_NEG);
         //RegisterDamagedEvent(damagedres);
     }

@@ -35,7 +35,7 @@ constant integer BUFF_ID = 'A047';
     }
 
     function onEffectDot(Buff buf) {
-        DamageTarget(buf.bd.caster, buf.bd.target, buf.bd.r0, SpellData[SIDEVISCERATE].name, true, true, false, WEAPON_TYPE_WHOKNOWS);
+        DamageTarget(buf.bd.caster, buf.bd.target, buf.bd.r0, SpellData[SID_EVISCERATE].name, true, true, false, WEAPON_TYPE_WHOKNOWS);
         AddTimedEffect.atUnit(ART_BLEED, buf.bd.target, "origin", 0.2);
     }
 
@@ -68,11 +68,11 @@ constant integer BUFF_ID = 'A047';
                 ModUnitMana(SpellEvent.CastingUnit, 0 - cost);
             
             //print("Mana used percent:" + R2S(costp));
-                lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SIDEVISCERATE);
+                lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_EVISCERATE);
                 ap = UnitProp[SpellEvent.CastingUnit].AttackPower();
                 cp = ComboPoints[SpellEvent.CastingUnit].get();
                 amt = returnDD(lvl, ap, cp) * costp;
-                DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, amt, SpellData[SIDEVISCERATE].name, true, true, true, WEAPON_TYPE_METAL_HEAVY_SLICE);
+                DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, amt, SpellData[SID_EVISCERATE].name, true, true, true, WEAPON_TYPE_METAL_HEAVY_SLICE);
                 if (DamageResult.isHit) {
                     DestroyEffect(AddSpecialEffectTarget(ART_GORE, DamageResult.target, "origin"));
                     
@@ -101,7 +101,7 @@ constant integer BUFF_ID = 'A047';
     }
 
     function onInit() {
-        RegisterSpellEffectResponse(SIDEVISCERATE, onCast);
+        RegisterSpellEffectResponse(SID_EVISCERATE, onCast);
         BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_NEG);
         BuffType.register(BID_EVISCERATE, BUFF_PHYX, BUFF_NEG);
     }

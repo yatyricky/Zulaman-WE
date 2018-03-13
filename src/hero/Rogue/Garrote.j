@@ -4,7 +4,7 @@ constant integer BUFF_ID = 'A04P';
 constant string  ART  = "Abilities\\Spells\\NightElf\\shadowstrike\\shadowstrike.mdl";    
 
     function onEffect(Buff buf) {
-        DamageTarget(buf.bd.caster, buf.bd.target, buf.bd.r0, SpellData[SIDGARROTE].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
+        DamageTarget(buf.bd.caster, buf.bd.target, buf.bd.r0, SpellData[SID_GARROTE].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
         CounterSpell(buf.bd.target);
     }
 
@@ -24,7 +24,7 @@ constant string  ART  = "Abilities\\Spells\\NightElf\\shadowstrike\\shadowstrike
     }
 
     function onInit() {
-        RegisterSpellEffectResponse(SIDGARROTE, onCast);
+        RegisterSpellEffectResponse(SID_GARROTE, onCast);
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_NEG);
     }
 

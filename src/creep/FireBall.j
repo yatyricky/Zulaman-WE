@@ -21,14 +21,14 @@ constant real DAMAGE = 600.0;
         Projectile p;
         integer i;
         for (0 <= i < PlayerUnits.n) {
-	        p = Projectile.create();
-	        p.caster = cd.caster;
-	        p.target = PlayerUnits.units[i];
-	        p.path = PATH;
-	        p.pr = onhit;
-	        p.speed = 700;
-	        p.r0 = DAMAGE;
-	        p.launch();
+            p = Projectile.create();
+            p.caster = cd.caster;
+            p.target = PlayerUnits.units[i];
+            p.path = PATH;
+            p.pr = onhit;
+            p.speed = 700;
+            p.r0 = DAMAGE;
+            p.launch();
         }
     }
     

@@ -615,7 +615,7 @@ constant integer MAX_PLAYER_UNITS = 50;
             } else if (GetPlayerId(GetOwningPlayer(u)) < NUMBER_OF_MAX_PLAYERS) {
                 PlayerUnits.add(u);
                 if (IsInCombat()) {
-					RegisterUnitProperty(u);
+                    RegisterUnitProperty(u);
                     MobList.addToAll(u);
                 }
             }

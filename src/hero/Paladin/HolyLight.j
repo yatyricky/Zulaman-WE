@@ -5,9 +5,9 @@ constant integer BUFF_ID1 = 'A029';
 
     integer castSound;
 
-	function returnHeal(integer lvl) -> real {
-		return 275.0 + 75.0 * lvl;
-	}
+    function returnHeal(integer lvl) -> real {
+        return 275.0 + 75.0 * lvl;
+    }
     
     function returnExholy(integer lvl) -> real {
         return 0.05 * lvl;
@@ -19,14 +19,14 @@ constant integer BUFF_ID1 = 'A029';
     function casted(unit a, unit b) {
         Buff buf;
         integer id = GetPlayerId(GetOwningPlayer(a));
-        integer ilvl = GetUnitAbilityLevel(a, SIDHOLYLIGHT);
+        integer ilvl = GetUnitAbilityLevel(a, SID_HOLY_LIGHT);
         real amt = returnHeal(ilvl) + UnitProp[a].SpellPower() * 1.05;
         real exct = healCrit[id];
         Buff baf = BuffSlot[b].getBuffByBid(BUFF_ID_HOLY_LIGHT);
         if (baf != 0) {
             exct += baf.bd.r0;
         }
-        HealTarget(a, b, amt, SpellData[SIDHOLYLIGHT].name, exct);
+        HealTarget(a, b, amt, SpellData[SID_HOLY_LIGHT].name, exct);
         if (healCrit[id] > 0) {
             healCrit[id] = 0.0;
         }
@@ -68,28 +68,28 @@ constant integer BUFF_ID1 = 'A029';
     
     function onCast() {
         casted(SpellEvent.CastingUnit, SpellEvent.TargetUnit);
-		MultipleAbility[SIDHOLYLIGHT].showPrimary(GetOwningPlayer(SpellEvent.CastingUnit));
+        MultipleAbility[SID_HOLY_LIGHT].showPrimary(GetOwningPlayer(SpellEvent.CastingUnit));
     }
     
     function onChannel() {
         CastingBar cb = CastingBar.create(response).setSound(castSound);
-        if (GetUnitAbilityLevel(SpellEvent.CastingUnit, SIDDIVINEFAVOR) == 3) {
+        if (GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_DIVINE_FAVOR) == 3) {
             cb.haste = 0.4;
         }
         cb.launch();
     }
     
     function registerentered(unit u) {           
-        if (GetUnitTypeId(u) == UTIDPALADIN) {
-            MultipleAbility[SIDHOLYLIGHT].showPrimary(GetOwningPlayer(u));
+        if (GetUnitTypeId(u) == UTID_PALADIN) {
+            MultipleAbility[SID_HOLY_LIGHT].showPrimary(GetOwningPlayer(u));
         }                
     }
 
     function onInit() {
         castSound = DefineSound("Sound\\Ambient\\DoodadEffects\\RunesGlow.wav", 5000, true, false);
-        RegisterSpellChannelResponse(SIDHOLYLIGHT, onChannel);
-        MultipleAbility.register(SIDHOLYLIGHT, SIDHOLYLIGHT1);
-        RegisterSpellEffectResponse(SIDHOLYLIGHT1, onCast);
+        RegisterSpellChannelResponse(SID_HOLY_LIGHT, onChannel);
+        MultipleAbility.register(SID_HOLY_LIGHT, SID_HOLY_LIGHT_1);
+        RegisterSpellEffectResponse(SID_HOLY_LIGHT_1, onCast);
         BuffType.register(BUFF_ID_HOLY_LIGHT, BUFF_MAGE, BUFF_POS);
         BuffType.register(BUFF_ID1, BUFF_MAGE, BUFF_POS);
         RegisterUnitEnterMap(registerentered);

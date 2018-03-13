@@ -53,7 +53,7 @@ constant integer BUFF_ID = 'A06A';
 
     function onInit() {
         ht = HandleTable.create();
-        RegisterItemPropMod(ITIDDAGGEROFASSASSINATION, action);
+        RegisterItemPropMod(ITID_DAGGER_OF_ASSASSINATION, action);
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_NEG);
         RegisterOnDamageEvent(ondamaging);
     }

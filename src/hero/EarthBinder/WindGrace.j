@@ -26,8 +26,8 @@ constant integer BUFF_ID = 'A04R';
                         buf.bd.tick = -1;
                         buf.bd.interval = INTERVAL * 2.0;
                         if (buf.bd.i0 != 6) {
-							UnitProp[buf.bd.target].ModAttackSpeed(5);
-							UnitProp[buf.bd.target].spellHaste += 0.07;
+                            UnitProp[buf.bd.target].ModAttackSpeed(5);
+                            UnitProp[buf.bd.target].spellHaste += 0.07;
                             buf.bd.i0 = 6;
                         }
                         buf.bd.boe = onEffect;
@@ -49,7 +49,7 @@ constant integer BUFF_ID = 'A04R';
     }
     
     function registerWGA(unit u) {
-        if (GetUnitTypeId(u) == UTIDEARTHBINDER) {
+        if (GetUnitTypeId(u) == UTID_EARTH_BINDER) {
             WindGraceAura.register(u);
         }
     }

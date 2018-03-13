@@ -47,7 +47,7 @@ constant integer BUFF_ID = 'A04L';
     }
     
     function registerFA(unit u) {
-        if (GetUnitTypeId(u) == UTIDPRIEST) {
+        if (GetUnitTypeId(u) == UTID_PRIEST) {
             FortitudeAura.register(u);
         }
     }

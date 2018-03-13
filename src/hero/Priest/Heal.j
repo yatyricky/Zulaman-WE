@@ -9,13 +9,13 @@ constant string  ART  = "Abilities\\Spells\\Orc\\EtherealForm\\SpiritWalkerChang
     }
 
     public function PriestCastHeal(unit caster, unit target, integer times) {
-        real amt = returnHealHOT(GetUnitAbilityLevel(caster, SIDHEAL), UnitProp[caster].SpellPower()) * times;
-        HealTarget(caster, target, amt, SpellData[SIDHEAL].name, 0.0);
+        real amt = returnHealHOT(GetUnitAbilityLevel(caster, SID_HEAL), UnitProp[caster].SpellPower()) * times;
+        HealTarget(caster, target, amt, SpellData[SID_HEAL].name, 0.0);
         AddTimedEffect.atUnit(ART, target, "origin", 0.3);
     }
 
     function onEffect(Buff buf) {
-        HealTarget(buf.bd.caster, buf.bd.target, buf.bd.r0, SpellData[SIDHEAL].name, 0.0);
+        HealTarget(buf.bd.caster, buf.bd.target, buf.bd.r0, SpellData[SID_HEAL].name, 0.0);
         AddTimedEffect.atUnit(ART, buf.bd.target, "origin", 0.3);
     }
 
@@ -30,7 +30,7 @@ constant string  ART  = "Abilities\\Spells\\Orc\\EtherealForm\\SpiritWalkerChang
     }
     
     public function CastHeal(unit caster, unit target) {
-        integer lvl = GetUnitAbilityLevel(caster, SIDHEAL);
+        integer lvl = GetUnitAbilityLevel(caster, SID_HEAL);
         real mult = 1.0;
         Buff buf = Buff.cast(caster, target, BUFF_ID);
         buf.bd.interval = 2.0 / (1.0 + UnitProp[caster].SpellHaste());
@@ -63,7 +63,7 @@ constant string  ART  = "Abilities\\Spells\\Orc\\EtherealForm\\SpiritWalkerChang
     function onInit() {
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
         BuffType.register(BUFF_ID1, BUFF_MAGE, BUFF_POS);
-        RegisterSpellEffectResponse(SIDHEAL, onCast);
+        RegisterSpellEffectResponse(SID_HEAL, onCast);
     }
 
 

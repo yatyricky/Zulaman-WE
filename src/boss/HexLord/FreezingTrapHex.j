@@ -80,7 +80,7 @@ constant string  SFX  = "Abilities\\Spells\\Undead\\FreezingBreath\\FreezingBrea
     }
 
     function onInit() {
-        RegisterSpellEffectResponse(SIDFREEZINGTRAPHEX, onCast);
+        RegisterSpellEffectResponse(SID_FREEZING_TRAP_HEX, onCast);
     }
 
 

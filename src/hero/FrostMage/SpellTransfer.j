@@ -96,7 +96,7 @@ library SpellTransfer requires BuffSystem, SpellEvent, UnitProperty {
 
     function onInit() {
         RegisterSpellEffectResponse(SID_SPELL_TRANSFER, onCast);
-        RegisterSpellEffectResponse(SIDINTELLIGENCECHANNEL, onCast1);
+        RegisterSpellEffectResponse(SID_INTELLIGENCE_CHANNEL, onCast1);
     }
 }
 //! endzinc

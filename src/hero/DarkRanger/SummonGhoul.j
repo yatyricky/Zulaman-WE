@@ -14,14 +14,14 @@ constant string  ART  = "Abilities\\Spells\\Undead\\RaiseSkeletonWarrior\\RaiseS
         if (ghoul[id] != null) {
             KillUnit(ghoul[id]);
         }
-        ghoul[id] = CreateUnit(Player(id), UTIDGHOUL, x, y, ang);
+        ghoul[id] = CreateUnit(Player(id), UTID_GHOUL, x, y, ang);
         SetUnitPositionEx(ghoul[id], x, y);
         AddTimedEffect.atUnit(ART, ghoul[id], "origin", 0.4);
         DelayTask.create(delayAddLife, 0.15).u0 = ghoul[id];        
     }
 
     function onInit() {
-        RegisterSpellEffectResponse(SIDSUMMONGHOUL, onCast);
+        RegisterSpellEffectResponse(SID_SUMMON_GHOUL, onCast);
     }
 
 }

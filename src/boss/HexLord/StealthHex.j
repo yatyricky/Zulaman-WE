@@ -16,11 +16,11 @@ constant string  ART  = "Abilities\\Spells\\Human\\CloudOfFog\\CloudOfFog.mdl";
         
         private static method run() {
             thistype this = GetTimerData(GetExpiredTimer());
-            if (GetUnitAbilityLevel(this.a, SIDAPIV) > 0 && !IsUnitDead(this.a) && !IsUnitDead(this.b)) {
-                IssueTargetOrderById(this.a, SpellData[SIDSTEALTHAMBUSH].oid, this.b);
+            if (GetUnitAbilityLevel(this.a, SID_APIV) > 0 && !IsUnitDead(this.a) && !IsUnitDead(this.b)) {
+                IssueTargetOrderById(this.a, SpellData[SID_STEALTH_AMBUSH].oid, this.b);
             } else {
-                UnitRemoveAbility(this.a, SIDAPIV);
-                UnitRemoveAbility(this.a, SIDSTEALTHAMBUSH);
+                UnitRemoveAbility(this.a, SID_APIV);
+                UnitRemoveAbility(this.a, SID_STEALTH_AMBUSH);
                 IssueTargetOrderById(this.a, OID_ATTACK, AggroList[this.a].getFirst());
                 this.destroy();
             }
@@ -29,7 +29,7 @@ constant string  ART  = "Abilities\\Spells\\Human\\CloudOfFog\\CloudOfFog.mdl";
         private static method ready() {
             thistype this = GetTimerData(GetExpiredTimer());
             if (!IsUnitDead(this.a)) {
-                IssueTargetOrderById(this.a, SpellData[SIDSTEALTHAMBUSH].oid, this.b);
+                IssueTargetOrderById(this.a, SpellData[SID_STEALTH_AMBUSH].oid, this.b);
                 TimerStart(this.tm, 0.75, true, function thistype.run);
             } else {
                 this.destroy();
@@ -49,25 +49,25 @@ constant string  ART  = "Abilities\\Spells\\Human\\CloudOfFog\\CloudOfFog.mdl";
 
     function onCast() {
         AddTimedEffect.atCoord(ART, GetUnitX(SpellEvent.CastingUnit), GetUnitY(SpellEvent.CastingUnit), 1.0);
-        UnitAddAbility(SpellEvent.CastingUnit, SIDAPIV);
-        UnitAddAbility(SpellEvent.CastingUnit, SIDSTEALTHAMBUSH);
-        //IssueTargetOrderById(SpellEvent.CastingUnit, SpellData[SIDSTEALTHAMBUSH].oid, SpellEvent.TargetUnit);
+        UnitAddAbility(SpellEvent.CastingUnit, SID_APIV);
+        UnitAddAbility(SpellEvent.CastingUnit, SID_STEALTH_AMBUSH);
+        //IssueTargetOrderById(SpellEvent.CastingUnit, SpellData[SID_STEALTH_AMBUSH].oid, SpellEvent.TargetUnit);
         
         DanceInShadow.start(SpellEvent.CastingUnit, SpellEvent.TargetUnit);
     }
     
     function gotodamage() {
-        DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, 800.0, SpellData[SIDSTEALTHAMBUSH].name, true, false, false, WEAPON_TYPE_METAL_LIGHT_SLICE);
+        DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, 800.0, SpellData[SID_STEALTH_AMBUSH].name, true, false, false, WEAPON_TYPE_METAL_LIGHT_SLICE);
         AddTimedEffect.atUnit(ART_BLEED, SpellEvent.TargetUnit, "origin", 1.0);
         
-        UnitRemoveAbility(SpellEvent.CastingUnit, SIDAPIV);
-        UnitRemoveAbility(SpellEvent.CastingUnit, SIDSTEALTHAMBUSH);
+        UnitRemoveAbility(SpellEvent.CastingUnit, SID_APIV);
+        UnitRemoveAbility(SpellEvent.CastingUnit, SID_STEALTH_AMBUSH);
         IssueTargetOrderById(SpellEvent.CastingUnit, OID_ATTACK, AggroList[SpellEvent.CastingUnit].getFirst());
     }
 
     function onInit() {
-        RegisterSpellEffectResponse(SIDSTEALTHHEX, onCast);
-        RegisterSpellEffectResponse(SIDSTEALTHAMBUSH, gotodamage);
+        RegisterSpellEffectResponse(SID_STEALTH_HEX, onCast);
+        RegisterSpellEffectResponse(SID_STEALTH_AMBUSH, gotodamage);
     }
 
 }

@@ -43,9 +43,9 @@ constant string  ART_CASTER  = "Abilities\\Spells\\Other\\Andt\\Andt.mdl";
         buf.bd.bor = onRemove;
         buf.run();
         
-        ilvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SIDMORTALSTRIKE);
+        ilvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_MORTAL_STRIKE);
         dmg = returnDamage(ilvl, UnitProp[SpellEvent.CastingUnit].AttackPower());
-        DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, dmg, SpellData[SIDMORTALSTRIKE].name, true, true, true, WEAPON_TYPE_METAL_HEAVY_SLICE);
+        DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, dmg, SpellData[SID_MORTAL_STRIKE].name, true, true, true, WEAPON_TYPE_METAL_HEAVY_SLICE);
         if (DamageResult.isHit) {            
             AddTimedEffect.atUnit(ART_TARGET, SpellEvent.TargetUnit, "origin", 0.2);
             // refresh Rend
@@ -83,7 +83,7 @@ constant string  ART_CASTER  = "Abilities\\Spells\\Other\\Andt\\Andt.mdl";
     function onInit() {
         BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_NEG);
         BuffType.register(BUFF_ID1, BUFF_PHYX, BUFF_POS);
-        RegisterSpellEffectResponse(SIDMORTALSTRIKE, onCast);
+        RegisterSpellEffectResponse(SID_MORTAL_STRIKE, onCast);
     }
     
 

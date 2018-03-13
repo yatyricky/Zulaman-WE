@@ -3,7 +3,7 @@ library DarkArrowHex requires SpellEvent, DamageSystem, Projectile {
 constant string  PATH  = "Abilities\\Spells\\Other\\BlackArrow\\BlackArrowMissile.mdl";
 
     function onhit(Projectile p) -> boolean {
-        DamageTarget(p.caster, p.target, 200.0, SpellData[SIDDARKARROWHEX].name, true, true, false, WEAPON_TYPE_WHOKNOWS);
+        DamageTarget(p.caster, p.target, 200.0, SpellData[SID_DARK_ARROW_HEX].name, true, true, false, WEAPON_TYPE_WHOKNOWS);
         return true;
     }
 
@@ -18,7 +18,7 @@ constant string  PATH  = "Abilities\\Spells\\Other\\BlackArrow\\BlackArrowMissil
     }
 
     function onInit() {
-        RegisterSpellEffectResponse(SIDDARKARROWHEX, onCast);
+        RegisterSpellEffectResponse(SID_DARK_ARROW_HEX, onCast);
     }
    
 

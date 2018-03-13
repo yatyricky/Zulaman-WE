@@ -25,8 +25,8 @@ library ReforgedBadgeOfTenacity requires ItemAttributes, DamageSystem {
 
     function onInit() {
         ht = HandleTable.create();
-        RegisterItemPropMod(ITIDREFORGEDBADGEOFTENACITY, action);
-        RegisterSpellEffectResponse(SIDREFORGEDBADGEOFTENACITY, onCast);
+        RegisterItemPropMod(ITID_REFORGED_BADGE_OF_TENACITY, action);
+        RegisterSpellEffectResponse(SID_REFORGED_BADGE_OF_TENACITY, onCast);
     }
 }
 //! endzinc

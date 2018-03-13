@@ -57,7 +57,7 @@ constant string  ART  = "Abilities\\Spells\\Undead\\UnholyFrenzy\\UnholyFrenzyTa
         up.ModStr(20 * fac);
         up.attackCrit += 0.04 * fac;
         up.lifeRegen -= 40.0 * fac;
-	    up.ll += 0.14 * fac;
+        up.ll += 0.14 * fac;
         
         if (fac == 1) {
             cd.ap = 5 * GetHeroLevel(u);

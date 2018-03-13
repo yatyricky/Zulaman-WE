@@ -31,7 +31,7 @@ constant string  ART  = "Abilities\\Spells\\Orc\\Purge\\PurgeBuffTarget.mdl";
         integer iid = GetIssuedOrderId();
         real x, y, z;
         location loc;
-        if ((GetUnitTypeId(u) == UTIDEARTHBINDER || GetUnitTypeId(u) == UTID_EARTH_BINDER_ASC) && (iid == SpellData[SID_ASCENDANCE].oid)) {
+        if ((GetUnitTypeId(u) == UTID_EARTH_BINDER || GetUnitTypeId(u) == UTID_EARTH_BINDER_ASC) && (iid == SpellData[SID_ASCENDANCE].oid)) {
             //BJDebugMsg("Ascendance!");
             x = GetUnitX(u);
             y = GetUnitY(u);

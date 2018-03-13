@@ -22,13 +22,13 @@ constant integer BUFF_ID = 'A04Q';
     }
 
     function response(CastingBar cd) {
-        integer lvl = GetUnitAbilityLevel(cd.caster, SIDMARROWSQUEEZE);
+        integer lvl = GetUnitAbilityLevel(cd.caster, SID_MARROW_SQUEEZE);
         real dmg = returnDamage(lvl, UnitProp[cd.caster].SpellPower());
         integer incre;
         real heal;
         Buff buf, swpain;
         AddTimedEffect.atUnit(ART, cd.target, "origin", 0.3);
-        DamageTarget(cd.caster, cd.target, dmg, SpellData[SIDMARROWSQUEEZE].name, false, true, false, WEAPON_TYPE_WHOKNOWS);  
+        DamageTarget(cd.caster, cd.target, dmg, SpellData[SID_MARROW_SQUEEZE].name, false, true, false, WEAPON_TYPE_WHOKNOWS);  
         
         // equiped Anathema
         if (HasAnathema(cd.caster)) {
@@ -64,7 +64,7 @@ constant integer BUFF_ID = 'A04Q';
         buf.bd.bor = onRemove;
         buf.run();
         
-        HealTarget(cd.caster, cd.caster, heal, SpellData[SIDMARROWSQUEEZE].name, 0.0);
+        HealTarget(cd.caster, cd.caster, heal, SpellData[SID_MARROW_SQUEEZE].name, 0.0);
     }
     
     function onChannel() {
@@ -75,7 +75,7 @@ constant integer BUFF_ID = 'A04Q';
 
     function onInit() {
         castSound = DefineSound("Abilities\\Spells\\Undead\\UndeadMine\\MineDomeLoop1.wav", 1869, true, false);
-        RegisterSpellChannelResponse(SIDMARROWSQUEEZE, onChannel);
+        RegisterSpellChannelResponse(SID_MARROW_SQUEEZE, onChannel);
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
     }
 

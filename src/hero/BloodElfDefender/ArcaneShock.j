@@ -10,13 +10,13 @@ constant string  ART_TARGET  = "Abilities\\Spells\\Human\\ManaFlare\\ManaFlareBo
     //boolean arcaneShockHasEx[NUMBER_OF_MAX_PLAYERS];
     
     //function timesup() {        
-    //    MultipleAbility[SIDARCANESHOCK].showPrimary(Player(GetTimerData(GetExpiredTimer())));
+    //    MultipleAbility[SID_ARCANE_SHOCK].showPrimary(Player(GetTimerData(GetExpiredTimer())));
     //}
     
     //function GrantArcaneShockEx(unit u) {
     //    player p = GetOwningPlayer(u);
     //    //arcaneShockHasEx[id] = true;
-    //    MultipleAbility[SIDARCANESHOCK].showSecondary(p);
+    //    MultipleAbility[SID_ARCANE_SHOCK].showSecondary(p);
     //    IssueImmediateOrderById(u, 852458);
     //    TimerStart(arcaneShockExTm[GetPlayerId(p)], 5.0, false, function timesup);
     //}
@@ -49,7 +49,7 @@ constant string  ART_TARGET  = "Abilities\\Spells\\Human\\ManaFlare\\ManaFlareBo
     //function paladinHitted() {
     //    Buff buf;
     //    if (DamageResult.isBlocked || DamageResult.isDodged) {
-    //        if (GetUnitAbilityLevel(DamageResult.target, SIDARCANESHOCK) > 0) {
+    //        if (GetUnitAbilityLevel(DamageResult.target, SID_ARCANE_SHOCK) > 0) {
     //            buf = Buff.cast(DamageResult.target, DamageResult.target, BUFF_ID1);
     //            buf.bd.tick = -1;
     //            buf.bd.interval = 5.0;
@@ -78,9 +78,9 @@ constant string  ART_TARGET  = "Abilities\\Spells\\Human\\ManaFlare\\ManaFlareBo
     }
 
     function onCast() {
-        integer il = GetUnitAbilityLevel(SpellEvent.CastingUnit, SIDARCANESHOCK);        
+        integer il = GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_ARCANE_SHOCK);        
         Buff buf;
-		//BuffSlot bs;
+        //BuffSlot bs;
         unit tmp;
         real dmg;        
         if (TryReflect(SpellEvent.TargetUnit)) {
@@ -103,12 +103,12 @@ constant string  ART_TARGET  = "Abilities\\Spells\\Human\\ManaFlare\\ManaFlareBo
         buf.run();              // level > 1, curse on cast
         
         dmg = returnDamage(il) + UnitProp[SpellEvent.CastingUnit].SpellPower() + UnitProp[SpellEvent.CastingUnit].AttackPower() * 0.31;
-		//bs = BuffSlot[SpellEvent.CastingUnit];
-		//buf = bs.getBuffByBid(BUFF_ID1);
+        //bs = BuffSlot[SpellEvent.CastingUnit];
+        //buf = bs.getBuffByBid(BUFF_ID1);
         //if (buf != 0) {
         //    dmg *= 1.75;
-		//	bs.dispelByBuff(buf);
-		//	buf.destroy();            
+        //    bs.dispelByBuff(buf);
+        //    buf.destroy();            
 
         //    buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BUFF_ID2);
         //    buf.bd.tick = 5;
@@ -118,7 +118,7 @@ constant string  ART_TARGET  = "Abilities\\Spells\\Human\\ManaFlare\\ManaFlareBo
         //    buf.run();
         //}
         AddTimedEffect.atUnit(ART_TARGET, SpellEvent.TargetUnit, "origin", 0.1);
-        DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, dmg, SpellData[SIDARCANESHOCK].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
+        DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, dmg, SpellData[SID_ARCANE_SHOCK].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
         AggroTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, dmg * 3.0);
         tmp = null;
     }
@@ -127,7 +127,7 @@ constant string  ART_TARGET  = "Abilities\\Spells\\Human\\ManaFlare\\ManaFlareBo
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_NEG);
         //BuffType.register(BUFF_ID1, BUFF_PHYX, BUFF_POS);
         //BuffType.register(BUFF_ID2, BUFF_MAGE, BUFF_POS);
-        RegisterSpellEffectResponse(SIDARCANESHOCK, onCast);
+        RegisterSpellEffectResponse(SID_ARCANE_SHOCK, onCast);
         RegisterDamagedEvent(paladinDamaged);
     }
     

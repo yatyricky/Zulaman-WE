@@ -15,8 +15,8 @@ constant real H_OVER_D = 0.45;
         private Point p;
         
         private method destroy() {
-        	MindBlastSpots.remove(this.p);
-        	this.p.destroy();
+            MindBlastSpots.remove(this.p);
+            this.p.destroy();
             DestroyEffect(this.eff);
             KillUnit(this.missile);
             ReleaseTimer(this.tm);
@@ -38,10 +38,10 @@ constant real H_OVER_D = 0.45;
                 height = 0.0;
                 // explosion
                 for (0 <= i < PlayerUnits.n) {
-                	if (GetDistance.unitCoord(PlayerUnits.units[i], GetUnitX(this.missile), GetUnitY(this.missile)) <= GodOfDeathGlobalConst.mindBlastAOE) {
-                		DamageTarget(this.caster, PlayerUnits.units[i], 1200.0, SpellData[SID].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
-                		ModUnitMana(this.caster, 1);
-                	}
+                    if (GetDistance.unitCoord(PlayerUnits.units[i], GetUnitX(this.missile), GetUnitY(this.missile)) <= GodOfDeathGlobalConst.mindBlastAOE) {
+                        DamageTarget(this.caster, PlayerUnits.units[i], 1200.0, SpellData[SID].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+                        ModUnitMana(this.caster, 1);
+                    }
                 }
 
                 AddTimedEffect.atCoord(EXPLOSION_ART, GetUnitX(this.missile), GetUnitY(this.missile), 0.5);
@@ -74,7 +74,7 @@ constant real H_OVER_D = 0.45;
     }
 
     function onCast() {
-    	Parabola.start(SpellEvent.CastingUnit, Point.new(SpellEvent.TargetX, SpellEvent.TargetY));
+        Parabola.start(SpellEvent.CastingUnit, Point.new(SpellEvent.TargetX, SpellEvent.TargetY));
     }
 
     function onInit() {

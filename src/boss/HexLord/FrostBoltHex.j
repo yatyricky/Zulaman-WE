@@ -7,7 +7,7 @@ constant string  ART_MISSILE  = "Abilities\\Weapons\\LichMissile\\LichMissile.md
             p.reverse();
             return false;
         } else {
-            DamageTarget(p.caster, p.target, 400.0, SpellData[SIDFROSTBOLTHEX].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
+            DamageTarget(p.caster, p.target, 400.0, SpellData[SID_FROST_BOLT_HEX].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
             return true;
         }
     }
@@ -27,7 +27,7 @@ constant string  ART_MISSILE  = "Abilities\\Weapons\\LichMissile\\LichMissile.md
     }
 
     function onInit() {
-        RegisterSpellChannelResponse(SIDFROSTBOLTHEX, onChannel);
+        RegisterSpellChannelResponse(SID_FROST_BOLT_HEX, onChannel);
     }
 
 }

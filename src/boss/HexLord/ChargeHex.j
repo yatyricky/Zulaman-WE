@@ -25,7 +25,7 @@ constant string  ART  = "Abilities\\Spells\\Orc\\Purge\\PurgeBuffTarget.mdl";
     }
 
     function onInit() {
-        RegisterSpellEffectResponse(SIDCHARGEHEX, onCast);
+        RegisterSpellEffectResponse(SID_CHARGE_HEX, onCast);
         //BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
     }
 

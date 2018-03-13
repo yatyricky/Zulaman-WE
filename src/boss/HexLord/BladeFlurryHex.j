@@ -26,7 +26,7 @@ constant integer BUFF_ID = 'A05X';
     }
 
     function onInit() {
-        RegisterSpellEffectResponse(SIDBLADEFLURRYHEX, onCast);
+        RegisterSpellEffectResponse(SID_BLADE_FLURRY_HEX, onCast);
         BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_POS);
     }
 

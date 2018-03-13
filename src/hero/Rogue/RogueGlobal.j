@@ -54,10 +54,10 @@ library RogueGlobal requires Table, ZAMCore {
     
     function responseenteredmap(unit u) {
         player p = null;
-        if (GetUnitTypeId(u) == UTIDROGUE) {
+        if (GetUnitTypeId(u) == UTID_ROGUE) {
             p = GetOwningPlayer(u);
-            SetPlayerAbilityAvailable(p, SIDGARROTE, false);
-            SetPlayerAbilityAvailable(p, SIDAMBUSH, false);
+            SetPlayerAbilityAvailable(p, SID_GARROTE, false);
+            SetPlayerAbilityAvailable(p, SID_AMBUSH, false);
             p  = null;
         }
     }

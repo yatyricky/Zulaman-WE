@@ -16,7 +16,7 @@ library StormLash requires DamageSystem, CastingBar, SpellEvent, RareShimmerWeed
     
         private static method run() {
             thistype this = GetTimerData(GetExpiredTimer());
-            MultipleAbility[SIDEARTHSHOCK].showSecondary(GetOwningPlayer(this.u));
+            MultipleAbility[SID_EARTH_SHOCK].showSecondary(GetOwningPlayer(this.u));
             ReleaseTimer(this.tm);
             this.tm = null;
             this.u = null;
@@ -65,12 +65,12 @@ library StormLash requires DamageSystem, CastingBar, SpellEvent, RareShimmerWeed
         AddTimedLight.atUnits("CLSB", cd.caster, cd.target, fxdur);
         
         // cool down Earth Shock
-        if (GetUnitAbilityLevel(cd.caster, SIDEARTHSHOCK) > 0) {
+        if (GetUnitAbilityLevel(cd.caster, SID_EARTH_SHOCK) > 0) {
             if (GetRandomInt(0, 100) < returnCDChance(lvl) || HasRareShimmerWeed(cd.caster)) {
-                CoolDown(cd.caster, SIDEARTHSHOCK);
-                CoolDown(cd.caster, SIDEARTHSHOCK1);
+                CoolDown(cd.caster, SID_EARTH_SHOCK);
+                CoolDown(cd.caster, SID_EARTH_SHOCK_1);
                 delayedDosth1.start(cd.caster);
-                //BJDebugMsg("³æõôCDÁË??");
+                //BJDebugMsg("ï¿½ï¿½ï¿½ï¿½CDï¿½ï¿½??");
                 delayedDosth.start(cd.caster);
                 RecoverOriginalEarthShock.start(cd.caster, 3.0);
                 //BJDebugMsg("6");
@@ -81,12 +81,12 @@ library StormLash requires DamageSystem, CastingBar, SpellEvent, RareShimmerWeed
         }        
         
         // change totem
-        if (GetUnitAbilityLevel(cd.caster, SIDENCHANTEDTOTEM) > 0) {
+        if (GetUnitAbilityLevel(cd.caster, SID_ENCHANTED_TOTEM) > 0) {
             p = GetOwningPlayer(cd.caster);
-            SetPlayerAbilityAvailable(p, SIDEARTHBINDTOTEM, false);
-            SetPlayerAbilityAvailable(p, SIDTORRENTTOTEM, false);
-            SetPlayerAbilityAvailable(p, SIDLIGHTNINGTOTEM, true);
-            currentTotemId[GetPlayerId(p)] = SIDLIGHTNINGTOTEM;
+            SetPlayerAbilityAvailable(p, SID_EARTH_BIND_TOTEM, false);
+            SetPlayerAbilityAvailable(p, SID_TORRENT_TOTEM, false);
+            SetPlayerAbilityAvailable(p, SID_LIGHTNING_TOTEM, true);
+            currentTotemId[GetPlayerId(p)] = SID_LIGHTNING_TOTEM;
             p = null;
         }
     }
@@ -94,7 +94,7 @@ library StormLash requires DamageSystem, CastingBar, SpellEvent, RareShimmerWeed
     function onChannel() {
         CastingBar cb = CastingBar.create(response).setSound(castSound);
         real hst = 2.0 - 2.0 / (1.0 + UnitProp[SpellEvent.CastingUnit].AttackSpeed() / 100.0);
-        if (GetUnitTypeId(SpellEvent.CastingUnit) == UTIDEARTHBINDER) {
+        if (GetUnitTypeId(SpellEvent.CastingUnit) == UTID_EARTH_BINDER) {
             cb.haste = hst;
         } else {
             cb.haste = hst / 2.0 + 1;

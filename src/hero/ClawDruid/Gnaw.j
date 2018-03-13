@@ -13,7 +13,7 @@ library Gnaw requires SpellEvent, GroupUtils, Rabies {
         real manaregen;
         integer lvl;
         if (buf != 0) {
-            lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SIDGNAW);
+            lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_FERAL_GNAW);
             manaregen = 0.0;
             GroupEnumUnitsInArea(ENUM_GROUP, GetUnitX(SpellEvent.TargetUnit), GetUnitY(SpellEvent.TargetUnit), aoe, BOOLEXPR_TRUE);
             tu = FirstOfGroup(ENUM_GROUP);
@@ -42,7 +42,7 @@ library Gnaw requires SpellEvent, GroupUtils, Rabies {
                 GroupRemoveUnit(ENUM_GROUP, tu);
                 tu = FirstOfGroup(ENUM_GROUP);
             }
-            HealTarget(SpellEvent.CastingUnit, SpellEvent.CastingUnit, regen, SpellData[SIDGNAW].name, -3.0);
+            HealTarget(SpellEvent.CastingUnit, SpellEvent.CastingUnit, regen, SpellData[SID_FERAL_GNAW].name, -3.0);
             ModUnitMana(SpellEvent.CastingUnit, manaregen);
             AddTimedEffect.atUnit(ART_HEAL, SpellEvent.CastingUnit, "origin", 0.2);
             AddTimedEffect.atUnit(ART_MANA, SpellEvent.CastingUnit, "origin", 0.2);
@@ -51,7 +51,7 @@ library Gnaw requires SpellEvent, GroupUtils, Rabies {
     }
 
     function onInit() {
-        RegisterSpellEffectResponse(SIDGNAW, onCast);
+        RegisterSpellEffectResponse(SID_FERAL_GNAW, onCast);
     }
 }
 //! endzinc
