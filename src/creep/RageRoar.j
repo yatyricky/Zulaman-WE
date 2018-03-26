@@ -1,8 +1,8 @@
 //! zinc
 library RageRoar requires SpellEvent, BuffSystem {
-#define ART_CASTER "Abilities\\Spells\\Other\\HowlOfTerror\\HowlCaster.mdl"
-#define ART_TARGET "Abilities\\Spells\\NightElf\\FaerieFire\\FaerieFireTarget.mdl"
-#define BUFF_ID 'A09X'
+constant string  ART_CASTER  = "Abilities\\Spells\\Other\\HowlOfTerror\\HowlCaster.mdl";
+constant string  ART_TARGET  = "Abilities\\Spells\\NightElf\\FaerieFire\\FaerieFireTarget.mdl";
+constant integer BUFF_ID = 'A09X';
     
     function onEffect(Buff buf) {
         UnitProp[buf.bd.target].damageTaken += buf.bd.r0;
@@ -37,8 +37,8 @@ library RageRoar requires SpellEvent, BuffSystem {
         RegisterSpellEffectResponse(SID_RAGE_ROAR, onCast);
         BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_NEG);
     }
-#undef BUFF_ID
-#undef ART_TARGET
-#undef ART_CASTER
+
+
+
 }
 //! endzinc

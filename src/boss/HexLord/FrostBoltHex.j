@@ -1,13 +1,13 @@
 //! zinc
 library FrostBoltHex requires CastingBar, Projectile, SpellReflection {
-#define ART_MISSILE "Abilities\\Weapons\\LichMissile\\LichMissile.mdl"
+constant string  ART_MISSILE  = "Abilities\\Weapons\\LichMissile\\LichMissile.mdl";
 
     function onhit(Projectile p) -> boolean {
         if (TryReflect(p.target)) {
             p.reverse();
             return false;
         } else {
-            DamageTarget(p.caster, p.target, 400.0, SpellData[SIDFROSTBOLTHEX].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
+            DamageTarget(p.caster, p.target, 400.0, SpellData[SID_FROST_BOLT_HEX].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
             return true;
         }
     }
@@ -27,8 +27,8 @@ library FrostBoltHex requires CastingBar, Projectile, SpellReflection {
     }
 
     function onInit() {
-        RegisterSpellChannelResponse(SIDFROSTBOLTHEX, onChannel);
+        RegisterSpellChannelResponse(SID_FROST_BOLT_HEX, onChannel);
     }
-#undef ART_MISSILE
+
 }
 //! endzinc

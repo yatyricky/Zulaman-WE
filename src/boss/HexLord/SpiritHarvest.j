@@ -1,9 +1,9 @@
 //! zinc
 library SpiritHarvest requires Projectile {
-#define ART_MISSILE "Abilities\\Spells\\Items\\OrbCorruption\\OrbCorruptionMissile.mdl"
-#define ART_TARGET "Abilities\\Spells\\Orc\\LightningShield\\LightningShieldTarget.mdl"
-#define BUFF_ID 'A05S'
-#define DEBUFF_ID 'A05R'
+constant string  ART_MISSILE  = "Abilities\\Spells\\Items\\OrbCorruption\\OrbCorruptionMissile.mdl";
+constant string  ART_TARGET  = "Abilities\\Spells\\Orc\\LightningShield\\LightningShieldTarget.mdl";
+constant integer BUFF_ID = 'A05S';
+constant integer DEBUFF_ID = 'A05R';
 
     function onEffect1(Buff buf) {
         UnitProp[buf.bd.target].damageDealt += buf.bd.r0;
@@ -68,14 +68,14 @@ library SpiritHarvest requires Projectile {
     }
 
     function onInit() {
-        RegisterSpellEffectResponse(SIDSPIRITHARVEST, onCast);
+        RegisterSpellEffectResponse(SID_SPIRIT_HARVEST, onCast);
         BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_POS);
         BuffType.register(DEBUFF_ID, BUFF_PHYX, BUFF_NEG);
     }
     
-#undef DEBUFF_ID
-#undef BUFF_ID
-#undef ART_TARGET
-#undef ART_MISSILE
+
+
+
+
 }
 //! endzinc

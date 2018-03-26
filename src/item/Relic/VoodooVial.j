@@ -1,7 +1,7 @@
 //! zinc
 library VoodooVial requires ItemAttributes, DamageSystem {
-#define BUFF_ID 'A06O'
-#define MISSILE "Abilities\\Spells\\Other\\AcidBomb\\BottleMissile.mdl"
+constant integer BUFF_ID = 'A06O';
+constant string  MISSILE  = "Abilities\\Spells\\Other\\AcidBomb\\BottleMissile.mdl";
     HandleTable ht;
     integer bugs[];
     integer bugsn;
@@ -92,7 +92,7 @@ library VoodooVial requires ItemAttributes, DamageSystem {
         ht[u] = ht[u] + fac;
     }
     
-#define MAX_BUGS 10
+constant integer MAX_BUGS = 10;
     struct VoodooVial {
         private timer tm;
         private unit bug[MAX_BUGS];
@@ -169,7 +169,7 @@ library VoodooVial requires ItemAttributes, DamageSystem {
             TimerStart(this.tm, 0.1, true, function thistype.run);
         }
     }
-#undef MAX_BUGS
+
 
     struct Parabola_sin {
         private real stepx, stepy;
@@ -243,7 +243,7 @@ library VoodooVial requires ItemAttributes, DamageSystem {
         bugs[3] = 'e008';
         bugs[4] = 'e00A';
     }
-#undef MISSILE
-#undef BUFF_ID
+
+
 }
 //! endzinc

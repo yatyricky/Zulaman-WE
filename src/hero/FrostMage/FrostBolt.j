@@ -1,9 +1,9 @@
 //! zinc
 library FrostBolt requires CastingBar, Projectile, SpellReflection, FrostMageGlobal {
-#define BUFF_ID 'A022'
-#define ART_MISSILE "Abilities\\Weapons\\LichMissile\\LichMissile.mdl"
-#define ART_TARGET "Abilities\\Spells\\Other\\FrostDamage\\FrostDamage.mdl"
-#define ART_FROZEN "Abilities\\Spells\\Undead\\FreezingBreath\\FreezingBreathTargetArt.mdl"
+constant integer BUFF_ID = 'A022';
+constant string  ART_MISSILE  = "Abilities\\Weapons\\LichMissile\\LichMissile.mdl";
+constant string  ART_TARGET  = "Abilities\\Spells\\Other\\FrostDamage\\FrostDamage.mdl";
+constant string  ART_FROZEN  = "Abilities\\Spells\\Undead\\FreezingBreath\\FreezingBreathTargetArt.mdl";
 
     function returnDamage(integer lvl, real sp) -> real {
         return (0 + 175 * lvl + sp * 1.2);
@@ -23,7 +23,7 @@ library FrostBolt requires CastingBar, Projectile, SpellReflection, FrostMageGlo
             p.reverse();
             return false;
         } else {
-            DamageTarget(p.caster, p.target, p.r0, SpellData[SIDFROSTBOLT].name, false, true, false, WEAPON_TYPE_WHOKNOWS);   
+            DamageTarget(p.caster, p.target, p.r0, SpellData[SID_FROST_BOLT].name, false, true, false, WEAPON_TYPE_WHOKNOWS);   
             
             // equiped Rage Winterchill's Phylactery
             if (HasRageWinterchillsPhylactery(p.caster)) {
@@ -48,7 +48,7 @@ library FrostBolt requires CastingBar, Projectile, SpellReflection, FrostMageGlo
 
     function response(CastingBar cd) {
         Projectile p = Projectile.create();
-        integer lvl = GetUnitAbilityLevel(cd.caster, SIDFROSTBOLT);
+        integer lvl = GetUnitAbilityLevel(cd.caster, SID_FROST_BOLT);
         p.caster = cd.caster;
         p.target = cd.target;
         p.path = ART_MISSILE;
@@ -67,12 +67,12 @@ library FrostBolt requires CastingBar, Projectile, SpellReflection, FrostMageGlo
     
     function onInit() {
         castSound = DefineSound("Sound\\Ambient\\DoodadEffects\\CityScapeMagicRunesLoop1.wav", 1149, true, false);
-        RegisterSpellChannelResponse(SIDFROSTBOLT, onChannel);
+        RegisterSpellChannelResponse(SID_FROST_BOLT, onChannel);
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_NEG);
     }
-#undef ART_FROZEN
-#undef ART_TARGET
-#undef ART_MISSILE
-#undef BUFF_ID
+
+
+
+
 }
 //! endzinc

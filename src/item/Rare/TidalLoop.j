@@ -18,7 +18,7 @@ library TidalLoop requires ItemAttributes {
     function healed() {
         if (ht.exists(HealResult.source)) {
             if (ht[HealResult.source] > 0) {
-                if (HealResult.abilityName != SpellData[SIDATTACKLL].name) {
+                if (HealResult.abilityName != SpellData[SID_ATTACK_LL].name) {
                     if (GetRandomInt(0, 99) < 1) {
                         ModUnitMana(HealResult.source, 100.0);
                         AddTimedEffect.atUnit(ART_MANA, HealResult.source, "origin", 1.0);

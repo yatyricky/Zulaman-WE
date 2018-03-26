@@ -1,0 +1,22 @@
+{
+  "name": "zulaman-we",
+  "version": "1.0.0",
+  "description": "Zul'Aman - Reinvented with World Editor\r ===\r *My old Warcraft III World Editor project that pains in my ass.*",
+  "main": "build.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yatyricky/Zulaman-WE.git"
+  },
+  "author": "Nef.",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yatyricky/Zulaman-WE/issues"
+  },
+  "homepage": "https://github.com/yatyricky/Zulaman-WE#readme",
+  "dependencies": {
+    "concat-files": "^0.1.1"
+  }
+}

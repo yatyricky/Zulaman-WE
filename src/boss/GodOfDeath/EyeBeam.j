@@ -1,6 +1,6 @@
 //! zinc
 library EyeBeam {
-#define STEP 0.3696
+constant real STEP = 0.3696;
 
     struct EyeBeamData {
         lightning l;
@@ -23,18 +23,18 @@ library EyeBeam {
         integer i;
         // visual effect beam
         if (cd.nodes < 425) {
-        	data.direction.rotate(data.normal, STEP);
-        	data.v1.copy(data.origin);
-        	data.v1.add(data.direction);
+            data.direction.rotate(data.normal, STEP);
+            data.v1.copy(data.origin);
+            data.v1.add(data.direction);
             MoveLightningEx(data.l, false, data.origin.x, data.origin.y, data.origin.z, data.v1.x, data.v1.y, data.v1.z);
             
             if (ModuloInteger(cd.nodes, 5) == 0) {
                 for (0 <= i < PlayerUnits.n) {
-                	data.v2.x = GetUnitX(PlayerUnits.units[i]);
-                	data.v2.y = GetUnitY(PlayerUnits.units[i]);
-                	if (DistancePointAndLineSegment(data.origin, data.v1, data.v2) < 100.0) {
-                		DamageTarget(cd.caster, PlayerUnits.units[i], GetWidgetLife(PlayerUnits.units[i]) * 1.3, SpellData[SID].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
-                	}
+                    data.v2.x = GetUnitX(PlayerUnits.units[i]);
+                    data.v2.y = GetUnitY(PlayerUnits.units[i]);
+                    if (DistancePointAndLineSegment(data.origin, data.v1, data.v2) < 100.0) {
+                        DamageTarget(cd.caster, PlayerUnits.units[i], GetWidgetLife(PlayerUnits.units[i]) * 1.3, SpellData[SID].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
+                    }
                 }
             }
             
@@ -61,6 +61,6 @@ library EyeBeam {
     function onInit() {
         RegisterSpellChannelResponse(SID, onChannel);
     }
-#undef STEP
+
 }
 //! endzinc

@@ -1,11 +1,11 @@
 //! zinc
 library FreezingTrap requires SpellEvent, StunUtils, AggroSystem {
-#define ART "Doodads\\Cinematic\\FrostTrapUp\\FrostTrapUp.mdl"
-#define ART1 "Abilities\\Spells\\Undead\\FrostNova\\FrostNovaTarget.mdl"
-#define PATH "Doodads\\Cinematic\\GlowingRunes\\GlowingRunes4.mdl"
-#define PATH1 "Abilities\\Spells\\NightElf\\TrueshotAura\\TrueshotAura.mdl"
-#define SFX "Abilities\\Spells\\Undead\\FreezingBreath\\FreezingBreathTargetArt.mdl"
-#define SFX1 "Abilities\\Spells\\Other\\FrostDamage\\FrostDamage.mdl"
+constant string  ART  = "Doodads\\Cinematic\\FrostTrapUp\\FrostTrapUp.mdl";
+constant string  ART1  = "Abilities\\Spells\\Undead\\FrostNova\\FrostNovaTarget.mdl";
+constant string  PATH  = "Doodads\\Cinematic\\GlowingRunes\\GlowingRunes4.mdl";
+constant string  PATH1  = "Abilities\\Spells\\NightElf\\TrueshotAura\\TrueshotAura.mdl";
+constant string  SFX  = "Abilities\\Spells\\Undead\\FreezingBreath\\FreezingBreathTargetArt.mdl";
+constant string  SFX1  = "Abilities\\Spells\\Other\\FrostDamage\\FrostDamage.mdl";
 
     hashtable terrainRecord = InitHashtable();
     hashtable readyModify = InitHashtable();
@@ -206,7 +206,7 @@ library FreezingTrap requires SpellEvent, StunUtils, AggroSystem {
         private method frostSlowAreaOfEffect() {
             Buff buf;
             integer i = 0;
-            integer lvl = GetUnitAbilityLevel(this.u, SIDFREEZINGTRAP);
+            integer lvl = GetUnitAbilityLevel(this.u, SID_FREEZING_TRAP);
             while (i < MobList.n) {
                 if (GetDistance.unitCoord2d(MobList.units[i], this.x, this.y) <= returnAOE(lvl)) {
                     buf = Buff.cast(this.u, MobList.units[i], BID_FREEZING_TRAP);
@@ -235,7 +235,7 @@ library FreezingTrap requires SpellEvent, StunUtils, AggroSystem {
         private static method frostEffect() {
             thistype this = GetTimerData(GetExpiredTimer());
             this.frostSlowAreaOfEffect();            
-            TerrainChange.start(this.x, this.y, GetUnitAbilityLevel(this.u, SIDFREEZINGTRAP));
+            TerrainChange.start(this.x, this.y, GetUnitAbilityLevel(this.u, SID_FREEZING_TRAP));
             this.count = 5;
             TimerStart(this.tm, 1.0, true, function thistype.frostThem);
         }
@@ -290,19 +290,19 @@ library FreezingTrap requires SpellEvent, StunUtils, AggroSystem {
     }
 
     function onCast() {
-        FreezngTrap.start(SpellEvent.CastingUnit, SpellEvent.TargetX, SpellEvent.TargetY, returnDelay(GetUnitAbilityLevel(SpellEvent.CastingUnit, SIDFREEZINGTRAP)));
+        FreezngTrap.start(SpellEvent.CastingUnit, SpellEvent.TargetX, SpellEvent.TargetY, returnDelay(GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_FREEZING_TRAP)));
         //TerrainChange.start(SpellEvent.TargetX, SpellEvent.TargetY);
     }
 
     function onInit() {
-        RegisterSpellEffectResponse(SIDFREEZINGTRAP, onCast);
+        RegisterSpellEffectResponse(SID_FREEZING_TRAP, onCast);
         BuffType.register(BID_FREEZING_TRAP, BUFF_PHYX, BUFF_NEG);
     }
-#undef SFX1
-#undef SFX
-#undef PATH1
-#undef PATH
-#undef ART1
-#undef ART
+
+
+
+
+
+
 }
 //! endzinc

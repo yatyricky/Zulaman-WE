@@ -1,6 +1,6 @@
 //! zinc
 library MoroesLuckyGear requires ItemAttributes {
-#define BUFF_ID 'A06K'
+constant integer BUFF_ID = 'A06K';
     //HandleTable ht;
 
     function oneffect(Buff buf) {
@@ -35,6 +35,6 @@ library MoroesLuckyGear requires ItemAttributes {
         RegisterSpellEffectResponse(SID_MOROES_LUCKY_GEAR, onCast);
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
     }
-#undef BUFF_ID
+
 }
 //! endzinc

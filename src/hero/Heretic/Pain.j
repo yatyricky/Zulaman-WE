@@ -22,14 +22,14 @@ library Pain requires BuffSystem, SpellEvent, UnitProperty {
     }
 
     function onEffect(Buff buf) {
-        DamageTarget(buf.bd.caster, buf.bd.target, buf.bd.r0, SpellData[SIDPAIN].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
+        DamageTarget(buf.bd.caster, buf.bd.target, buf.bd.r0, SpellData[SID_PAIN].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
         AddTimedEffect.atUnit(ART_PLAGUE, buf.bd.target, "origin", 0.2);
     }
 
     function onRemove(Buff buf) {}
 
     function onCast() {
-        integer lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SIDPAIN);
+        integer lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_PAIN);
         Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BID_PAIN);
         buf.bd.interval = returnInterval(lvl) / (1.0 + UnitProp[SpellEvent.CastingUnit].SpellHaste());
         buf.bd.tick = Rounding(12.0 / buf.bd.interval);
@@ -52,7 +52,7 @@ library Pain requires BuffSystem, SpellEvent, UnitProperty {
     function onInit() {
         BuffType.register(BID_PAIN, BUFF_MAGE, BUFF_NEG);
         BuffType.register(BID_PAIN_WEAKNESS, BUFF_MAGE, BUFF_NEG);
-        RegisterSpellEffectResponse(SIDPAIN, onCast);
+        RegisterSpellEffectResponse(SID_PAIN, onCast);
     }
 }
 //! endzinc

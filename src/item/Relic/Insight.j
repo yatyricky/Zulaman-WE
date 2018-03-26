@@ -1,6 +1,6 @@
 //! zinc
 library Insight requires ItemAttributes, DamageSystem {
-#define BUFF_ID 'A066'
+constant integer BUFF_ID = 'A066';
     HandleTable ht;
 
     function onEffect(Buff buf) {
@@ -101,10 +101,10 @@ library Insight requires ItemAttributes, DamageSystem {
 
     function onInit() {
         ht = HandleTable.create();
-        RegisterItemPropMod(ITIDINSIGHT, action);
+        RegisterItemPropMod(ITID_INSIGHT, action);
         BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_POS);
         RegisterOnDamageEvent(ondamaging);
     }
-#undef BUFF_ID
+
 }
 //! endzinc

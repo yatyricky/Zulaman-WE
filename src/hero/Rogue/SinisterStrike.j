@@ -1,7 +1,7 @@
 //! zinc
 library SinisterStrike requires DamageSystem, SpellEvent, RogueGlobal {
-#define BUFF_ID 'A046'
-#define ART "Abilities\\Weapons\\KeeperGroveMissile\\KeeperGroveMissile.mdl"    
+constant integer BUFF_ID = 'A046';
+constant string  ART  = "Abilities\\Weapons\\KeeperGroveMissile\\KeeperGroveMissile.mdl";    
 
     function returnDamage(integer lvl, real ap) -> real {
         return (100 * lvl + ap * (0.4 + 0.6 * lvl));
@@ -26,8 +26,8 @@ library SinisterStrike requires DamageSystem, SpellEvent, RogueGlobal {
                 cost = threshold;
             }
             //print("Mana used percent:" + R2S(cost / threshold));
-            amt = returnDamage(GetUnitAbilityLevel(SpellEvent.CastingUnit, SIDSINISTERSTRIKE), UnitProp[SpellEvent.CastingUnit].AttackPower()) * cost / threshold;
-            DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, amt, SpellData[SIDSINISTERSTRIKE].name, true, true, true, WEAPON_TYPE_METAL_LIGHT_SLICE);
+            amt = returnDamage(GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_SINISTER_STRIKE), UnitProp[SpellEvent.CastingUnit].AttackPower()) * cost / threshold;
+            DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, amt, SpellData[SID_SINISTER_STRIKE].name, true, true, true, WEAPON_TYPE_METAL_LIGHT_SLICE);
             ModUnitMana(SpellEvent.CastingUnit, 0 - cost);
             
             buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BUFF_ID);
@@ -53,10 +53,10 @@ library SinisterStrike requires DamageSystem, SpellEvent, RogueGlobal {
     }
 
     function onInit() {
-        RegisterSpellEffectResponse(SIDSINISTERSTRIKE, onCast);
+        RegisterSpellEffectResponse(SID_SINISTER_STRIKE, onCast);
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
     }
-#undef ART
-#undef BUFF_ID
+
+
 }
 //! endzinc

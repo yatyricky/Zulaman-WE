@@ -1,9 +1,9 @@
 //! zinc
 library DarkArrowHex requires SpellEvent, DamageSystem, Projectile {
-#define PATH "Abilities\\Spells\\Other\\BlackArrow\\BlackArrowMissile.mdl"
+constant string  PATH  = "Abilities\\Spells\\Other\\BlackArrow\\BlackArrowMissile.mdl";
 
     function onhit(Projectile p) -> boolean {
-        DamageTarget(p.caster, p.target, 200.0, SpellData[SIDDARKARROWHEX].name, true, true, false, WEAPON_TYPE_WHOKNOWS);
+        DamageTarget(p.caster, p.target, 200.0, SpellData[SID_DARK_ARROW_HEX].name, true, true, false, WEAPON_TYPE_WHOKNOWS);
         return true;
     }
 
@@ -18,9 +18,9 @@ library DarkArrowHex requires SpellEvent, DamageSystem, Projectile {
     }
 
     function onInit() {
-        RegisterSpellEffectResponse(SIDDARKARROWHEX, onCast);
+        RegisterSpellEffectResponse(SID_DARK_ARROW_HEX, onCast);
     }
    
-#undef PATH
+
 }
 //! endzinc

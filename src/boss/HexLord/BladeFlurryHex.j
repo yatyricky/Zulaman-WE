@@ -1,8 +1,8 @@
 //! zinc
 library BladeFlurryHex requires DamageSystem, SpellEvent, RogueGlobal {
-#define ART "Abilities\\Spells\\NightElf\\BattleRoar\\RoarTarget.mdl"
-#define ART_OPEN "Abilities\\Spells\\Other\\Silence\\SilenceAreaBirth.mdl"
-#define BUFF_ID 'A05X'
+constant string  ART  = "Abilities\\Spells\\NightElf\\BattleRoar\\RoarTarget.mdl";
+constant string  ART_OPEN  = "Abilities\\Spells\\Other\\Silence\\SilenceAreaBirth.mdl";
+constant integer BUFF_ID = 'A05X';
 
     function onEffect(Buff buf) {
         UnitProp[buf.bd.target].ModAttackSpeed(buf.bd.i0);
@@ -26,11 +26,11 @@ library BladeFlurryHex requires DamageSystem, SpellEvent, RogueGlobal {
     }
 
     function onInit() {
-        RegisterSpellEffectResponse(SIDBLADEFLURRYHEX, onCast);
+        RegisterSpellEffectResponse(SID_BLADE_FLURRY_HEX, onCast);
         BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_POS);
     }
-#undef BUFF_ID
-#undef ART_OPEN
-#undef ART
+
+
+
 }
 //! endzinc

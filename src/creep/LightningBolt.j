@@ -1,6 +1,6 @@
 //! zinc
 library LightningBolt requires CastingBar, Projectile, SpellReflection {
-#define PATH "Abilities\\Weapons\\FarseerMissile\\FarseerMissile.mdl"
+constant string  PATH  = "Abilities\\Weapons\\FarseerMissile\\FarseerMissile.mdl";
 
     function onhit(Projectile p) -> boolean {
         if (TryReflect(p.target)) {
@@ -31,6 +31,6 @@ library LightningBolt requires CastingBar, Projectile, SpellReflection {
     function onInit() {
         RegisterSpellChannelResponse(SID_LIGHTNING_BOLT, onChannel);
     }
-#undef PATH
+
 }
 //! endzinc

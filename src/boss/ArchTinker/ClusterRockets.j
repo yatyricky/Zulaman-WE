@@ -1,6 +1,6 @@
 //! zinc
 library ClusterRockets requires CastingBar, Projectile {
-#define ART_MISSILE "Abilities\\Spells\\Other\\TinkerRocket\\TinkerRocketMissile.mdl"
+constant string  ART_MISSILE  = "Abilities\\Spells\\Other\\TinkerRocket\\TinkerRocketMissile.mdl";
 
     function onhit(Projectile p) -> boolean {
         DamageTarget(p.caster, p.target, 450, SpellData[SID_CLUSTER_ROCKETS].name, false, true, false, WEAPON_TYPE_WHOKNOWS);   
@@ -31,6 +31,6 @@ library ClusterRockets requires CastingBar, Projectile {
     function onInit() {
         RegisterSpellChannelResponse(SID_CLUSTER_ROCKETS, onChannel);
     }
-#undef ART_MISSILE
+
 }
 //! endzinc

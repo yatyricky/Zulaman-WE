@@ -1,6 +1,6 @@
 //! zinc
 library GoblinRocketBootsLimitedEdition requires ItemAttributes {
-#define BUFF_ID 'A07A'
+constant integer BUFF_ID = 'A07A';
     //HandleTable ht;
 
     function oneffect(Buff buf) {
@@ -38,6 +38,6 @@ library GoblinRocketBootsLimitedEdition requires ItemAttributes {
         RegisterSpellEffectResponse(SID_GOBLIN_ROCKET_BOOTS_LIMITED_EDITION, onCast);
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
     }
-#undef BUFF_ID
+
 }
 //! endzinc

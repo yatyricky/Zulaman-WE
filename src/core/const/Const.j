@@ -1,687 +1,691 @@
-#define NUMBER_OF_MAX_PLAYERS 6
-#define MOB_PID 10
-#define FORCE_NPCS "冒险者"
-#define FORCE_ENEMY "黑暗势力"
+//! zinc
+library Constants {
+public constant integer NUMBER_OF_MAX_PLAYERS = 6;
+public constant integer MOB_PID = 10;
+public constant string  FORCE_NPCS  = "冒险者";
+public constant string  FORCE_ENEMY  = "黑暗势力";
 
-#define INIT_X 5822.0
-#define INIT_Y -11907.0
+public constant real INIT_X = 5822.0;
+public constant real INIT_Y = -11907.0;
 
-#define DAMAGE_NAME_MELEE "普通攻击"
+public constant string  DAMAGE_NAME_MELEE  = "普通攻击";
 
-#define ATT_STR 1
-#define ATT_AGI 2
-#define ATT_INT 3
-#define ATT_NON 4
+public constant integer ATT_STR = 1;
+public constant integer ATT_AGI = 2;
+public constant integer ATT_INT = 3;
+public constant integer ATT_NON = 4;
 
-#define CAREER_TYPE_TANK 32
-#define CAREER_TYPE_HEALER 2
-#define CAREER_TYPE_DPS 4
-#define CAREER_TYPE_MINION 64
-#define CAREER_TYPE_BOSS 8
-#define CAREER_TYPE_CREEP 16
+public constant integer CAREER_TYPE_TANK = 32;
+public constant integer CAREER_TYPE_HEALER = 2;
+public constant integer CAREER_TYPE_DPS = 4;
+public constant integer CAREER_TYPE_MINION = 64;
+public constant integer CAREER_TYPE_BOSS = 8;
+public constant integer CAREER_TYPE_CREEP = 16;
 
-#define BUFF_CATE_ALL 2
-#define BUFF_PHYX 4
-#define BUFF_MAGE 5
-#define BUFF_POS 10
-#define BUFF_NEG 20
+public constant integer BUFF_CATE_ALL = 2;
+public constant integer BUFF_PHYX = 4;
+public constant integer BUFF_MAGE = 5;
+public constant integer BUFF_POS = 10;
+public constant integer BUFF_NEG = 20;
 
-#define DUMMY_X -8500
-#define DUMMY_Y -11000
+public constant integer DUMMY_X = -8500;
+public constant integer DUMMY_Y = -11000;
 
-#define OID_ATTACK 851983
-#define OID_MOVE 851986
-#define OID_SMART 851971
-#define OID_STOP 851972
-#define OID_HOLD 851993
-#define OID_FROSTARMORON 852458
-#define OID_FROSTARMOROFF 852459
-#define OID_IMMOLATIONON 852177
-#define OID_IMMOLATIONOFF 852178
-#define OID_BEARFORM 852138
-#define OID_UNBEARFORM 852139
+public constant integer OID_ATTACK = 851983;
+public constant integer OID_MOVE = 851986;
+public constant integer OID_SMART = 851971;
+public constant integer OID_STOP = 851972;
+public constant integer OID_HOLD = 851993;
+public constant integer OID_FROSTARMORON = 852458;
+public constant integer OID_FROSTARMOROFF = 852459;
+public constant integer OID_IMMOLATIONON = 852177;
+public constant integer OID_IMMOLATIONOFF = 852178;
+public constant integer OID_BEARFORM = 852138;
+public constant integer OID_UNBEARFORM = 852139;
 
-#define ORDER_TYPE_IMMEDIATE 1
-#define ORDER_TYPE_TARGET 4
-#define ORDER_TYPE_POINT 2
+public constant integer ORDER_TYPE_IMMEDIATE = 1;
+public constant integer ORDER_TYPE_TARGET = 4;
+public constant integer ORDER_TYPE_POINT = 2;
 
 // dummy ability
-#define SIDATTACKLL 1
-#define SID_GENERAL_STUN 'A001'
-#define SID_HAUNT 'A04A'
-#define SIDHEALTESTER 'A04H'
+public constant integer SID_ATTACK_LL = 1;
+public constant integer SID_GENERAL_STUN = 'A001';
+public constant integer SID_HAUNT = 'A04A';
+public constant integer SID_HEAL_TESTER = 'A04H';
 
 // 血精灵防御者
-#define UTIDBLOODELFDEFENDER 'Hmkg'
-#define SIDSHIELDBLOCK 'A002'
-#define SIDSUNFIRESTORM 'A003'
-#define SIDARCANESHOCK 'A004'
-#define SIDDISCORD 'A005'
-#define SIDSHIELDOFSINDOREI 'A006'
+public constant integer UTID_BLOOD_ELF_DEFENDER = 'Hmkg';
+public constant integer SID_SHIELD_BLOCK = 'A002';
+public constant integer SID_SUN_FIRE_STORM = 'A003';
+public constant integer SID_ARCANE_SHOCK = 'A004';
+public constant integer SID_DISCORD = 'A005';
+public constant integer SID_SHIELD_OF_SINDOREI = 'A006';
 // 利爪德鲁依
-#define UTIDCLAWDRUID 'Hlgr'
-#define SID_LACERATE 'A01F'
-#define BID_LACERATE 'A02K'
-#define SID_SAVAGE_ROAR 'A010'
-#define SID_FOREST_CURE 'A0A1'
-#define SID_NATURAL_REFLEX 'A016'
-#define SID_SURVIVAL_INSTINCTS 'A0A2'
-#define SIDMANGLE 'A014'
-#define SIDGNAW 'A015'
+public constant integer UTID_CLAW_DRUID = 'Hlgr';
+public constant integer SID_LACERATE = 'A01F';
+public constant integer BID_LACERATE = 'A02K';
+public constant integer SID_SAVAGE_ROAR = 'A010';
+public constant integer SID_FOREST_CURE = 'A0A1';
+public constant integer SID_NATURAL_REFLEX = 'A016';
+public constant integer SID_SURVIVAL_INSTINCTS = 'A0A2';
+public constant integer SID_MANGLE = 'A014';
+public constant integer SID_FERAL_GNAW = 'A015';
 // 丛林守护者
-#define UTIDKEEPEROFGROVE 'Emfr'
-#define SIDLIFEBLOOM 'A00D'
-#define BID_LIFE_BLOOM 'A011'
-#define SIDREJUVENATION 'A01X'
-#define BID_REJUVENATION 'A02G'
-#define SIDREGROWTH 'A01Y'
-#define BID_REGROWTH 'A02J'
-#define SIDSWIFTMEND 'A020'
-#define SIDTRANQUILITY 'A01Z'
-#define SIDTRANQUILITY1 'A04J'
+public constant integer UTID_KEEPER_OF_GROVE = 'Emfr';
+public constant integer SID_LIFE_BLOOM = 'A00D';
+public constant integer BID_LIFE_BLOOM = 'A011';
+public constant integer SID_REJUVENATION = 'A01X';
+public constant integer BID_REJUVENATION = 'A02G';
+public constant integer SID_REGROWTH = 'A01Y';
+public constant integer BID_REGROWTH = 'A02J';
+public constant integer SID_SWIFT_MEND = 'A020';
+public constant integer SID_TRANQUILITY = 'A01Z';
+public constant integer SID_TRANQUILITY_1 = 'A04J';
 // 圣骑士
-#define UTIDPALADIN 'Hart'
-#define SIDFLASHLIGHT 'A00K'
-#define SIDFLASHLIGHT1 'A02C'
-#define SIDHOLYLIGHT 'A00L'
-#define SIDHOLYLIGHT1 'A028'
-#define SIDHOLYSHOCK 'A00M'
-#define SIDDIVINEFAVOR 'A00N'
-#define SIDBEACONOFLIGHT 'A00O'
-#define SIDIMPROVEFLASHLIGHT 'A02B'
+public constant integer UTID_PALADIN = 'Hart';
+public constant integer SID_FLASH_LIGHT = 'A00K';
+public constant integer SID_FLASH_LIGHT_1 = 'A02C';
+public constant integer SID_HOLY_LIGHT = 'A00L';
+public constant integer SID_HOLY_LIGHT_1 = 'A028';
+public constant integer SID_HOLY_SHOCK = 'A00M';
+public constant integer SID_DIVINE_FAVOR = 'A00N';
+public constant integer SID_BEACON_OF_LIGHT = 'A00O';
+public constant integer SID_IMPROVE_FLASH_LIGHT = 'A02B';
 // 牧师
-#define UTIDPRIEST 'Ofar'
-#define SIDHEAL 'A03V'
-#define BID_HEAL 'A03X'
-#define SIDDISPEL 'A00R'
-#define SIDSHIELD 'A01C'
-#define BID_SHIELD 'A01I'
-#define BID_SHIELD_SOUL_WEAK 'A01J'
-#define SIDPRAYEROFMENDING 'A01D'
-#define SIDPRAYEROFHEALING 'A03W'
+public constant integer UTID_PRIEST = 'Ofar';
+public constant integer SID_HEAL = 'A03V';
+public constant integer BID_HEAL = 'A03X';
+public constant integer SID_DISPEL = 'A00R';
+public constant integer SID_SHIELD = 'A01C';
+public constant integer BID_SHIELD = 'A01I';
+public constant integer BID_SHIELD_SOUL_WEAK = 'A01J';
+public constant integer SID_PRAYER_OF_MENDING = 'A01D';
+public constant integer SID_PRAYER_OF_HEALING = 'A03W';
 // 黑暗猎手
-#define UTIDDARKRANGER 'Nbrn'
-#define SIDDARKARROW 'A009'
-#define SIDCONCERNTRATION 'A00A'
-#define SIDFREEZINGTRAP 'A00C'
-#define SIDPOWEROFABOMINATION 'A00F'
-#define SIDDEATHPACT 'A00G'
-#define SIDSUMMONGHOUL 'A02X'
-#define UTIDGHOUL 'ugho'
-#define SIDLIFELEECH 'A03Y'
-#define BID_FREEZING_TRAP 'A041'
+public constant integer UTID_DARK_RANGER = 'Nbrn';
+public constant integer SID_DARK_ARROW = 'A009';
+public constant integer SID_CONCERNTRATION = 'A00A';
+public constant integer SID_FREEZING_TRAP = 'A00C';
+public constant integer SID_POWER_OF_ABOMINATION = 'A00F';
+public constant integer SID_DEATH_PACT = 'A00G';
+public constant integer SID_SUMMON_GHOUL = 'A02X';
+public constant integer UTID_GHOUL = 'ugho';
+public constant integer SID_LIFE_LEECH = 'A03Y';
+public constant integer BID_FREEZING_TRAP = 'A041';
 // blade master
-#define UTIDBLADEMASTER 'Obla'
-#define SID_HEROIC_STRIKE 'A0BO'
-#define BID_HEROIC_STRIKE 'A0BP'
-#define SIDREND 'A00B'
-#define SIDOVERPOWER 'A027'
-#define SIDMORTALSTRIKE 'A00E'
-#define SIDEXECUTELEARN 'A00I'
-#define SIDEXECUTESTART 'A02Q'
-#define SIDEXECUTE1 'A02R'
-#define SIDEXECUTE2 'A02S'
-#define SIDEXECUTE3 'A02T'
-#define SIDEXECUTE4 'A02U'
-#define SIDEXECUTEEND 'A02V'
-#define SIDVALOURAURA 'A007'
-#define BID_REND 'A008'
+public constant integer UTID_BLADE_MASTER = 'Obla';
+public constant integer SID_HEROIC_STRIKE = 'A0BO';
+public constant integer BID_HEROIC_STRIKE = 'A0BP';
+public constant integer SID_REND = 'A00B';
+public constant integer BID_REND = 'A008';
+public constant integer SID_OVER_POWER = 'A027';
+public constant integer SID_MORTAL_STRIKE = 'A00E';
+public constant integer SID_EXECUTE_LEARN = 'A00I';
+public constant integer SID_EXECUTE_START = 'A02Q';
+public constant integer SID_EXECUTE_1 = 'A02R';
+public constant integer SID_EXECUTE_2 = 'A02S';
+public constant integer SID_EXECUTE_3 = 'A02T';
+public constant integer SID_EXECUTE_4 = 'A02U';
+public constant integer SID_EXECUTE_END = 'A02V';
+public constant integer SID_VALOUR_AURA = 'A007';
 // 寒冰法师
-#define UTIDFROSTMAGE 'Hjai'
-#define SIDFROSTBOLT 'A01S'
-#define SIDBLIZZARD 'A01T'
-#define SIDBLIZZARD1 'A03H'
-#define SIDFROSTNOVA 'A01U'
-#define SIDPOLYMORPH 'A01W'
-#define SIDPOLYMORPH1 'A03F'
-#define SIDPOLYMORPHDUMMY 'A02F'
-#define SID_SPELL_TRANSFER 'A00V'
-#define SIDINTELLIGENCECHANNEL 'A00Q'
-#define BID_POLYMORPH 'A03E'
+public constant integer UTID_FROST_MAGE = 'Hjai';
+public constant integer SID_FROST_BOLT = 'A01S';
+public constant integer SID_BLIZZARD = 'A01T';
+public constant integer SID_BLIZZARD_1 = 'A03H';
+public constant integer SID_FROST_NOVA = 'A01U';
+public constant integer SID_POLYMORPH = 'A01W';
+public constant integer SID_POLYMORPH_1 = 'A03F';
+public constant integer BID_POLYMORPH = 'A03E';
+public constant integer SID_POLYMORPH_DUMMY = 'A02F';
+public constant integer SID_SPELL_TRANSFER = 'A00V';
+public constant integer SID_INTELLIGENCE_CHANNEL = 'A00Q';
 // 地缚者
-#define UTIDEARTHBINDER 'Hapm'
-#define UTID_EARTH_BINDER_ASC 'H006'
-#define UTIDLIGHTNINGTOTEM 'u000'
-#define UTID_EARTH_BIND_TOTEM 'u001'
-#define UTID_TORRENT_TOTEM 'u002'
-#define SIDSTORMSTRIKE 'A01B'
-#define SID_STORM_LASH 'A0AG'
-#define SIDEARTHSHOCK 'A01G'
-#define SIDEARTHSHOCK1 'A033'
-#define SIDPURGE 'A01H'
-#define SIDENCHANTEDTOTEM 'A01M'
-#define SIDLIGHTNINGTOTEM 'A036'
-#define SIDEARTHBINDTOTEM 'A038'
-#define SIDTORRENTTOTEM 'A037'
-#define SIDCHARGE 'A01P'
-#define SID_ASCENDANCE 'A0A0'
-#define BID_EARTH_BIND_TOTEM 'A03A'
+public constant integer UTID_EARTH_BINDER = 'Hapm';
+public constant integer UTID_EARTH_BINDER_ASC = 'H006';
+public constant integer UTID_LIGHTNING_TOTEM = 'u000';
+public constant integer UTID_EARTH_BIND_TOTEM = 'u001';
+public constant integer UTID_TORRENT_TOTEM = 'u002';
+public constant integer SID_STORM_STRIKE = 'A01B';
+public constant integer SID_STORM_LASH = 'A0AG';
+public constant integer SID_EARTH_SHOCK = 'A01G';
+public constant integer SID_EARTH_SHOCK_1 = 'A033';
+public constant integer SID_PURGE = 'A01H';
+public constant integer SID_ENCHANTED_TOTEM = 'A01M';
+public constant integer SID_LIGHTNING_TOTEM = 'A036';
+public constant integer SID_EARTH_BIND_TOTEM = 'A038';
+public constant integer SID_TORRENT_TOTEM = 'A037';
+public constant integer SID_CHARGE = 'A01P';
+public constant integer SID_ASCENDANCE = 'A0A0';
+public constant integer BID_EARTH_BIND_TOTEM = 'A03A';
 // 流浪剑客
-#define UTIDROGUE 'Edem'
-#define SIDAPIV 'Apiv'
-#define SIDSINISTERSTRIKE 'A00W'
-#define SIDEVISCERATE 'A00X'
-#define SIDASSAULT 'A00Z'
-#define SIDBLADEFLURRY 'A013'
-#define SIDSTEALTH 'A017'
-#define SIDGARROTE 'A04N'
-#define SIDAMBUSH 'A04O'
-#define BID_EVISCERATE 'A0AT'
+public constant integer UTID_ROGUE = 'Edem';
+public constant integer SID_APIV = 'Apiv';
+public constant integer SID_SINISTER_STRIKE = 'A00W';
+public constant integer SID_EVISCERATE = 'A00X';
+public constant integer BID_EVISCERATE = 'A0AT';
+public constant integer SID_ASSAULT = 'A00Z';
+public constant integer SID_BLADE_FLURRY = 'A013';
+public constant integer SID_STEALTH = 'A017';
+public constant integer SID_GARROTE = 'A04N';
+public constant integer SID_AMBUSH = 'A04O';
 // Heretic
-#define UTIDHEATHEN 'Hblm'
-#define SIDPAIN 'A01L'
-#define BID_PAIN 'A01V'
-#define BID_PAIN_WEAKNESS 'A021'
-#define SIDMARROWSQUEEZE 'A01N'
-#define SIDMINDFLAY 'A01O'
-#define SIDDEATH 'A01Q'
-#define SIDTERROR 'A01R'
+public constant integer UTID_HEATHEN = 'Hblm';
+public constant integer SID_PAIN = 'A01L';
+public constant integer BID_PAIN = 'A01V';
+public constant integer BID_PAIN_WEAKNESS = 'A021';
+public constant integer SID_MARROW_SQUEEZE = 'A01N';
+public constant integer SID_MIND_FLAY = 'A01O';
+public constant integer SID_DEATH = 'A01Q';
+public constant integer SID_TERROR = 'A01R';
 
 // BOSS
-#define SIDFRENZYCREEP 'A03P'
-#define SIDRAGECREEP 'A03Q'
+public constant integer SID_FRENZY_CREEP = 'A03P';
+public constant integer SID_RAGE_CREEP = 'A03Q';
 
 // Arch Tinker
-#define UTID_ARCH_TINKER 'Ntin'
-#define UTID_ARCH_TINKER_MORPH 'Nrob'
-#define SID_GRIP_OF_STATIC_ELECTRICITY 'A0AF'
-#define SID_PULSE_BOMB 'A0AH'
-#define BID_PULSE_BOMB 'A0AO'
-#define SID_LASER_BEAM 'A0AI'
-#define SID_TINKER_MORPH 'A0AJ'
-#define SID_LIGHTNING_SHIELD 'A0AK'
-#define BID_LIGHTNING_SHIELD 'A0AP'
-#define BID_LIGHTNING_SHIELD_NEG 'A0AQ'
-#define UTID_LIGHTNING_SHIELD_FX 'e00H'
-#define SID_POCKET_FACTORY 'A0AL'
-#define UTID_POCKET_FACTORY 'nfac'
-#define SID_SUMMON_CLOCKWORK_GOBLIN 'A0AR'
-#define UTID_CLOCKWORK_GOBLIN 'ncgb'
-#define SID_CLUSTER_ROCKETS 'A0AM'
-#define SID_SELF_DESTRUCT 'A0AN'
+public constant integer UTID_ARCH_TINKER = 'Ntin';
+public constant integer UTID_ARCH_TINKER_MORPH = 'Nrob';
+public constant integer SID_GRIP_OF_STATIC_ELECTRICITY = 'A0AF';
+public constant integer SID_PULSE_BOMB = 'A0AH';
+public constant integer BID_PULSE_BOMB = 'A0AO';
+public constant integer SID_LASER_BEAM = 'A0AI';
+public constant integer SID_TINKER_MORPH = 'A0AJ';
+public constant integer SID_LIGHTNING_SHIELD = 'A0AK';
+public constant integer BID_LIGHTNING_SHIELD = 'A0AP';
+public constant integer BID_LIGHTNING_SHIELD_NEG = 'A0AQ';
+public constant integer UTID_LIGHTNING_SHIELD_FX = 'e00H';
+public constant integer SID_POCKET_FACTORY = 'A0AL';
+public constant integer UTID_POCKET_FACTORY = 'nfac';
+public constant integer SID_SUMMON_CLOCKWORK_GOBLIN = 'A0AR';
+public constant integer UTID_CLOCKWORK_GOBLIN = 'ncgb';
+public constant integer SID_CLUSTER_ROCKETS = 'A0AM';
+public constant integer SID_SELF_DESTRUCT = 'A0AN';
 
 // Naga Sea Witch
-#define UTID_NAGA_SEA_WITCH 'Hvsh'
-#define SID_FUCKED_LIGHTNING 'A03L'
-#define BID_FUCKED_LIGHTNING 'A03R'
-#define UTID_FLYING_SERPENT 'n003'
-#define SID_STRONG_BREEZE 'A03M'
-#define SID_SUMMON_SERPENTS 'A03N'
-#define SID_THUNDER_STORM 'A03O'
+public constant integer UTID_NAGA_SEA_WITCH = 'Hvsh';
+public constant integer SID_FUCKED_LIGHTNING = 'A03L';
+public constant integer BID_FUCKED_LIGHTNING = 'A03R';
+public constant integer UTID_FLYING_SERPENT = 'n003';
+public constant integer SID_STRONG_BREEZE = 'A03M';
+public constant integer SID_SUMMON_SERPENTS = 'A03N';
+public constant integer SID_THUNDER_STORM = 'A03O';
 
 // 潮汐男爵
-#define UTIDTIDEBARON 'Udea'
-#define UTIDTIDEBARONWATER 'Udre'
-#define SIDALKALINEWATER 'A04U'
-#define SIDTIDE 'A04V'
-#define SIDTIDEBARONMORPH 'A04S'
-#define SIDTEARUP 'A04W'
-#define SIDLANCINATE 'A04X'
-#define SIDRASPYROAR 'A04Y'
-#define SIDRASPYROARDUMMY 'A051'
+public constant integer UTID_TIDE_BARON = 'Udea';
+public constant integer UTID_TIDE_BARON_WATER = 'Udre';
+public constant integer SID_ALKALINE_WATER = 'A04U';
+public constant integer SID_TIDE = 'A04V';
+public constant integer SID_TIDE_BARON_MORPH = 'A04S';
+public constant integer SID_TEAR_UP = 'A04W';
+public constant integer SID_LANCINATE = 'A04X';
+public constant integer SID_RASPY_ROAR = 'A04Y';
+public constant integer SID_RASPY_ROAR_DUMMY = 'A051';
 
 // 术士
-#define WLKSQRCENTREX 4608.00
-#define WLKSQRCENTREY 768.00
-#define UTIDWARLOCK 'Ulic'
-#define UTIDFIRERUNE 'e004'
-#define UTID_FIRE_BOMB 'e00G'
-#define UTID_LAVA_SPAWN 'n009'
-#define SIDFLAMETHROW 'A05Z'
-#define SIDFLAMEBOMB 'A060'
-#define SIDSUMMONLAVASPAWN 'A061'
-#define SIDFRENZYWARLOCK 'A062'
-#define BID_FRENZY_WARLOCK 'A0AW'
+public constant real WLK_SQR_CENTRE_X = 4608.00;
+public constant real WLK_SQR_CENTRE_Y = 768.00;
+public constant integer UTID_WARLOCK = 'Ulic';
+public constant integer UTID_FIRE_RUNE = 'e004';
+public constant integer UTID_FIRE_BOMB = 'e00G';
+public constant integer UTID_LAVA_SPAWN = 'n009';
+public constant integer SID_FLAME_THROW = 'A05Z';
+public constant integer SID_FLAME_BOMB = 'A060';
+public constant integer SID_SUMMON_LAVA_SPAWN = 'A061';
+public constant integer SID_FRENZY_WARLOCK = 'A062';
+public constant integer BID_FRENZY_WARLOCK = 'A0AW';
 
 // Abyss Archon
-#define UTID_PIT_ARCHON 'Ucrl'
+public constant integer UTID_PIT_ARCHON = 'Ucrl';
 
-#define SID_IMPALE 'A0B1'
-#define UTID_SPIKE 'n00O'
+public constant integer SID_IMPALE = 'A0B1';
+public constant integer UTID_SPIKE = 'n00O';
 
-#define SID_SUMMON_POISONOUS_CRAWLER 'A0B2'
-#define UTID_POISONOUS_CRAWLER 'ucry'
-#define BID_SUMMON_POISONOUS_CRAWLER 'A0B6'
+public constant integer SID_SUMMON_POISONOUS_CRAWLER = 'A0B2';
+public constant integer UTID_POISONOUS_CRAWLER = 'ucry';
+public constant integer BID_SUMMON_POISONOUS_CRAWLER = 'A0B6';
 
-#define SID_SUMMON_ABOMINATION 'A0B4'
-#define UTID_ABOMINATION 'uabo'
-#define BID_SUMMON_ABOMINATION 'A0B7'
+public constant integer SID_SUMMON_ABOMINATION = 'A0B4';
+public constant integer UTID_ABOMINATION = 'uabo';
+public constant integer BID_SUMMON_ABOMINATION = 'A0B7';
 
-#define SID_SUMMON_WRAITH 'A0B5'
-#define UTID_WRAITH 'ushd'
-#define BID_SUMMON_WRAITH 'A0B8'
+public constant integer SID_SUMMON_WRAITH = 'A0B5';
+public constant integer UTID_WRAITH = 'ushd';
+public constant integer BID_SUMMON_WRAITH = 'A0B8';
 
-#define SID_LIFE_SIPHON 'A0B3'
+public constant integer SID_LIFE_SIPHON = 'A0B3';
 
 // 恶魔守卫 The Felguards
-#define UTID_FEL_GUARD 'Nplh'
-#define SID_FEL_EXECUTION 'A0XX'
-#define SID_STOMP 'A0XX'
-#define SID_FEL_FRENZY 'A0XX'
-#define BID_FEL_FRENZY 'A0XX'
-#define UTID_VOID_LORD 'A0XX'
-#define SID_POWER_SHADOW_SHIFT 'A0XX'
+public constant integer UTID_FEL_GUARD = 'Nplh';
+public constant integer SID_FEL_EXECUTION = 'A0XX';
+public constant integer SID_STOMP = 'A0XX';
+public constant integer SID_FEL_FRENZY = 'A0XX';
+public constant integer BID_FEL_FRENZY = 'A0XX';
+public constant integer UTID_VOID_LORD = 'A0XX';
+public constant integer SID_POWER_SHADOW_SHIFT = 'A0XX';
 
 // 妖术领主
-#define UTIDHEXLORD 'Oshd'
-#define SIDSPIRITBOLT 'A053'
-#define SIDSPIRITHARVEST 'A05Q'
-#define SIDSUNFIRESTORMHEX 'A054'
-#define SIDSHIELDOFSINDOREIHEX 'A055'
-// #define SIDMANGLEHEX 'A056'
-// #define SIDRABIESHEX 'A057'
-#define SID_SAVAGE_ROAR_HEX 'A0AX'
-#define BID_SAVAGE_ROAR_HEX 'A0AZ'
-#define SID_NATURAL_REFLEX_HEX 'A0AY'
-#define BID_NATURAL_REFLEX_HEX 'A0B0'
-#define SIDTRANQUILITYHEX 'A058'
-#define SIDLIFEBLOOMHEX 'A059'
-#define SIDHOLYBOLTHEX 'A05A'
-#define SIDHOLYSHOCKHEX 'A05B'
-#define SIDHEALHEX 'A05C'
-#define SIDSHIELDHEX 'A05D'
-#define SIDMORTALSTRIKEHEX 'A05E'
-#define SIDOVERPOWERHEX 'A05F'
-#define SIDDARKARROWHEX 'A05G'
-#define SIDFREEZINGTRAPHEX 'A05H'
-#define SIDFROSTBOLTHEX 'A05I'
-#define SIDPOLYMORPHHEX 'A05J'
-#define SIDLIGHTNINGTOTEMHEX 'A05K'
-#define SIDCHARGEHEX 'A05L'
-#define SIDSTEALTHHEX 'A05M'
-#define SIDSTEALTHAMBUSH 'A05W'
-#define SIDBLADEFLURRYHEX 'A05N'
-#define SIDPAINHEX 'A05O'
-#define SIDTERRORHEX 'A05P'
+public constant integer UTID_HEX_LORD = 'Oshd';
+public constant integer SID_SPIRIT_BOLT = 'A053';
+public constant integer SID_SPIRIT_HARVEST = 'A05Q';
+public constant integer SID_SUN_FIRE_STORMHEX = 'A054';
+public constant integer SID_SHIELD_OF_SINDOREIHEX = 'A055';
+// public constant integer SID_MANGLEHEX = 'A056';
+// public constant integer SIDRABIESHEX = 'A057';
+public constant integer SID_SAVAGE_ROAR_HEX = 'A0AX';
+public constant integer BID_SAVAGE_ROAR_HEX = 'A0AZ';
+public constant integer SID_NATURAL_REFLEX_HEX = 'A0AY';
+public constant integer BID_NATURAL_REFLEX_HEX = 'A0B0';
+public constant integer SID_TRANQUILITY_HEX = 'A058';
+public constant integer SID_LIFE_BLOOMHEX = 'A059';
+public constant integer SID_HOLY_BOLT_HEX = 'A05A';
+public constant integer SID_HOLY_SHOCK_HEX = 'A05B';
+public constant integer SID_HEAL_HEX = 'A05C';
+public constant integer SID_SHIELD_HEX = 'A05D';
+public constant integer SID_MORTAL_STRIKE_HEX = 'A05E';
+public constant integer SID_OVER_POWER_HEX = 'A05F';
+public constant integer SID_DARK_ARROW_HEX = 'A05G';
+public constant integer SID_FREEZING_TRAP_HEX = 'A05H';
+public constant integer SID_FROST_BOLT_HEX = 'A05I';
+public constant integer SID_POLYMORPH_HEX = 'A05J';
+public constant integer SID_LIGHTNING_TOTEM_HEX = 'A05K';
+public constant integer SID_CHARGE_HEX = 'A05L';
+public constant integer SID_STEALTH_HEX = 'A05M';
+public constant integer SID_STEALTH_AMBUSH = 'A05W';
+public constant integer SID_BLADE_FLURRY_HEX = 'A05N';
+public constant integer SID_PAIN_HEX = 'A05O';
+public constant integer SID_TERROR_HEX = 'A05P';
 
 // God of Death
-#define UTID_GOD_OF_DEATH 'Uear'
+public constant integer UTID_GOD_OF_DEATH = 'Uear';
 
 // # All creeps
 
 // ## Area 1
 // naga siren
-#define UTID_NAGA_SIREN 'n000'
-#define SID_LIGHTNING_BOLT 'A02W'
-#define SID_FROST_SHOCK 'A097'
+public constant integer UTID_NAGA_SIREN = 'n000';
+public constant integer SID_LIGHTNING_BOLT = 'A02W';
+public constant integer SID_FROST_SHOCK = 'A097';
 // naga tide priest
-#define UTID_NAGA_TIDE_PRIEST 'n00B'
-#define SID_CHAIN_HEALING 'A098'
-#define SID_HEALING_WARD 'A099'
-#define SID_PROTECTION_WARD 'A09A'
-#define UTID_NTR_HEALING_WARD 'h004'
-#define UTID_NTR_PROTECTION_WARD 'h005'
+public constant integer UTID_NAGA_TIDE_PRIEST = 'n00B';
+public constant integer SID_CHAIN_HEALING = 'A098';
+public constant integer SID_HEALING_WARD = 'A099';
+public constant integer SID_PROTECTION_WARD = 'A09A';
+public constant integer UTID_NTR_HEALING_WARD = 'h004';
+public constant integer UTID_NTR_PROTECTION_WARD = 'h005';
 // naga myrmidon
-#define UTID_NAGA_MYRMIDON 'n00A'
-#define UTID_CHMP_NAGA_MYRMIDON 'n00Q'
-#define SID_NAGA_FRENZY 'A09C'
-#define SID_ARMOR_CRUSHING 'A09D'
+public constant integer UTID_NAGA_MYRMIDON = 'n00A';
+public constant integer UTID_CHMP_NAGA_MYRMIDON = 'n00Q';
+public constant integer SID_NAGA_FRENZY = 'A09C';
+public constant integer SID_ARMOR_CRUSHING = 'A09D';
 // naga royal guard
-#define UTID_NAGA_ROYAL_GUARD 'n00E'
-#define SID_THUNDER_CLAP 'A09E'
-#define SID_RAGE_ROAR 'A09F'
+public constant integer UTID_NAGA_ROYAL_GUARD = 'n00E';
+public constant integer SID_THUNDER_CLAP = 'A09E';
+public constant integer SID_RAGE_ROAR = 'A09F';
 // sea lizard
-#define UTID_SEA_LIZARD 'n00F'
-#define SID_STING 'A09G'
+public constant integer UTID_SEA_LIZARD = 'n00F';
+public constant integer SID_STING = 'A09G';
 // murloc slave
-#define UTID_MURLOC_SLAVE 'n00G'
+public constant integer UTID_MURLOC_SLAVE = 'n00G';
 // wind serpent
-#define UTID_WIND_SERPENT 'n00N'
-#define SID_CHARGED_BREATH 'A0AU'
-#define SID_MANA_LEECH 'A0AV'
+public constant integer UTID_WIND_SERPENT = 'n00N';
+public constant integer SID_CHARGED_BREATH = 'A0AU';
+public constant integer SID_MANA_LEECH = 'A0AV';
 
 // ## Area 3
 // fel grunt
-#define UTID_FEL_GRUNT 'n00C'
-#define SID_UNHOLY_FRENZY 'A09H'
-#define BID_UNHOLY_FRENZY 'A0B9'
+public constant integer UTID_FEL_GRUNT = 'n00C';
+public constant integer SID_UNHOLY_FRENZY = 'A09H';
+public constant integer BID_UNHOLY_FRENZY = 'A0B9';
 // fel rider
-#define UTID_FEL_RIDER 'n00H'
-#define SID_CHAOS_LEAP 'A09I'
-#define BID_CHAOS_LEAP 'A0BA'
+public constant integer UTID_FEL_RIDER = 'n00H';
+public constant integer SID_CHAOS_LEAP = 'A09I';
+public constant integer BID_CHAOS_LEAP = 'A0BA';
 // fel war bringer
-#define UTID_FEL_WAR_BRINGER 'n00D'
-#define SID_WAR_STOMP 'A0BB'
-#define SID_BATTLE_COMMAND 'A0BC'
-#define BID_BATTLE_COMMAND 'A0BD'
+public constant integer UTID_FEL_WAR_BRINGER = 'n00D';
+public constant integer SID_WAR_STOMP = 'A0BB';
+public constant integer SID_BATTLE_COMMAND = 'A0BC';
+public constant integer BID_BATTLE_COMMAND = 'A0BD';
 // demonic witch
-#define UTID_DEMONIC_WITCH 'n001'
-#define SID_BLAZING_HASTE 'A02Y'
-#define BID_BLAZING_HASTE 'A02Z'
-#define SID_FIRE_BALL 'A09L'
-#define SID_FLAME_SHOCK 'A09M'
-#define BID_FLAME_SHOCK 'A0BE'
+public constant integer UTID_DEMONIC_WITCH = 'n001';
+public constant integer SID_BLAZING_HASTE = 'A02Y';
+public constant integer BID_BLAZING_HASTE = 'A02Z';
+public constant integer SID_FIRE_BALL = 'A09L';
+public constant integer SID_FLAME_SHOCK = 'A09M';
+public constant integer BID_FLAME_SHOCK = 'A0BE';
 
 // ## Area 4
 // Noxious Spider
-#define UTID_NOXIOUS_SPIDER 'u003'
+public constant integer UTID_NOXIOUS_SPIDER = 'u003';
 // Parasitical Roach
-#define UTID_PARASITICAL_ROACH 'ucs1'
-#define SID_PARASITE 'A0BL'
-#define BID_PARASITE 'A0BM'
+public constant integer UTID_PARASITICAL_ROACH = 'ucs1';
+public constant integer SID_PARASITE = 'A0BL';
+public constant integer BID_PARASITE = 'A0BM';
 // Zombie
-#define UTID_ZOMBIE 'nzom'
-#define SID_GNAW 'A0BK'
+public constant integer UTID_ZOMBIE = 'nzom';
+public constant integer SID_GNAW = 'A0BK';
 // Obsdian Statue
-#define UTID_OBSIDIAN_CONSTRUCT 'uobs'
-#define BID_REFLECTION_AURA 'A0BH'
-#define SID_MANA_TAP 'A0BI'
-#define BID_MANA_TAP 'A0BJ'
+public constant integer UTID_OBSIDIAN_CONSTRUCT = 'uobs';
+public constant integer BID_REFLECTION_AURA = 'A0BH';
+public constant integer SID_MANA_TAP = 'A0BI';
+public constant integer BID_MANA_TAP = 'A0BJ';
 // Dracolich
-#define UTID_DRACOLICH 'ufro'
-#define SID_DEATH_AND_DECAY 'A0BF'
-#define SID_FROST_GRAVE 'A0BG'
+public constant integer UTID_DRACOLICH = 'ufro';
+public constant integer SID_DEATH_AND_DECAY = 'A0BF';
+public constant integer SID_FROST_GRAVE = 'A0BG';
 
 // ## Area 5
 // Void Walker
-#define UTID_VOID_WALKER 'n00I'
-#define SID_NETHER_BOLT 'A09N'
-#define SID_SHADOW_SHIFT 'A09O'
+public constant integer UTID_VOID_WALKER = 'n00I';
+public constant integer SID_NETHER_BOLT = 'A09N';
+public constant integer SID_SHADOW_SHIFT = 'A09O';
 // Fel Hound
-#define UTID_FEL_HOUND 'n00J'
-#define SID_MANA_BURN 'A09Q'
+public constant integer UTID_FEL_HOUND = 'n00J';
+public constant integer SID_MANA_BURN = 'A09Q';
 // Maid of Agony
-#define UTID_MAID_OF_AGONY 'n00K'
-#define SID_SHADOW_SPIKE 'A09R'
-#define BID_SHADOW_SPIKE 'A0BT'
-#define SID_MARK_OF_AGONY 'A0BU'
-#define BID_MARK_OF_AGONY 'A0BV'
+public constant integer UTID_MAID_OF_AGONY = 'n00K';
+public constant integer SID_SHADOW_SPIKE = 'A09R';
+public constant integer BID_SHADOW_SPIKE = 'A0BT';
+public constant integer SID_MARK_OF_AGONY = 'A0BU';
+public constant integer BID_MARK_OF_AGONY = 'A0BV';
 // Nether Drake
-#define UTID_NETHER_DRAKE 'nndr'
-#define SID_NETHER_IMPLOSION 'A0BW'
-#define SID_NETHER_BREATH 'A0BX'
-#define BID_NETHER_BREATH 'A0BY'
+public constant integer UTID_NETHER_DRAKE = 'nndr';
+public constant integer SID_NETHER_IMPLOSION = 'A0BW';
+public constant integer SID_NETHER_BREATH = 'A0BX';
+public constant integer BID_NETHER_BREATH = 'A0BY';
 // Nether Hatchling
-#define UTID_NETHER_HATCHLING 'nnht'
-#define SID_NETHER_SLOW 'A0BZ'
-#define BID_NETHER_SLOW 'A0C0'
+public constant integer UTID_NETHER_HATCHLING = 'nnht';
+public constant integer SID_NETHER_SLOW = 'A0BZ';
+public constant integer BID_NETHER_SLOW = 'A0C0';
 // Inferno Construct
-#define UTID_INFERNO_CONSTRUCT 'ninf'
-#define SID_METEOR 'A0BN'
-#define SID_BURNING 'A0C2'
-#define BID_BURNING 'A0C1'
+public constant integer UTID_INFERNO_CONSTRUCT = 'ninf';
+public constant integer SID_METEOR = 'A0BN';
+public constant integer SID_BURNING = 'A0C2';
+public constant integer BID_BURNING = 'A0C1';
 
 // ## Area 6
 // Forest Troll
-#define UTID_FOREST_TROLL 'n00L'
-#define SID_CRUSHING_BLOW 'A0C3'
-#define SID_FOREST_STOMP 'A0C4'
-#define BID_FOREST_STOMP 'A0C5'
+public constant integer UTID_FOREST_TROLL = 'n00L';
+public constant integer SID_CRUSHING_BLOW = 'A0C3';
+public constant integer SID_FOREST_STOMP = 'A0C4';
+public constant integer BID_FOREST_STOMP = 'A0C5';
 // Cursed Hunter
-#define UTID_CURSED_HUNTER 'ohun'
-#define BID_ZEAL 'A0C6'
+public constant integer UTID_CURSED_HUNTER = 'ohun';
+public constant integer BID_ZEAL = 'A0C6';
 // Deranged Priest
-#define UTID_DERANGED_PRIEST 'odoc'
-#define SID_CORPSE_RAIN 'A0C7'
-#define SID_VOODOO_DOLL 'A0C8'
-#define SID_VOODOO_DOLL_ILLUSION 'A0C9'
+public constant integer UTID_DERANGED_PRIEST = 'odoc';
+public constant integer SID_CORPSE_RAIN = 'A0C7';
+public constant integer SID_VOODOO_DOLL = 'A0C8';
+public constant integer SID_VOODOO_DOLL_ILLUSION = 'A0C9';
 // Gargantuan
-#define UTID_GARGANTUAN 'u004'
-#define SID_SLAM_STRIKE 'A0CA'
-#define SID_VOMIT 'A0CB'
-#define UTID_VOMIT_MAGGOT 'n00R'
-#define BID_VOMIT_MAGGOT_BITE 'A0CC'
+public constant integer UTID_GARGANTUAN = 'u004';
+public constant integer SID_SLAM_STRIKE = 'A0CA';
+public constant integer SID_VOMIT = 'A0CB';
+public constant integer UTID_VOMIT_MAGGOT = 'n00R';
+public constant integer BID_VOMIT_MAGGOT_BITE = 'A0CC';
 // Twilight Witch Doctor
-#define UTID_TWILIGHT_WITCH_DOCTOR 'ndtp'
-#define UTID_GRIM_TOTEM 'h007'
-#define SID_GRIM_TOTEM 'A0BQ'
-#define BID_GRIM_TOTEM 'A0BR'
-#define SID_POISON_DART 'A0BS'
+public constant integer UTID_TWILIGHT_WITCH_DOCTOR = 'ndtp';
+public constant integer UTID_GRIM_TOTEM = 'h007';
+public constant integer SID_GRIM_TOTEM = 'A0BQ';
+public constant integer BID_GRIM_TOTEM = 'A0BR';
+public constant integer SID_POISON_DART = 'A0BS';
 // Faceless One
-#define UTID_FACELESS_ONE 'nfod'
-#define SID_VICIOUS_STRIKE 'A0CD'
-#define BID_VICIOUS_STRIKE 'A0CE'
-#define SID_FILTHY_LAND 'A0CF'
+public constant integer UTID_FACELESS_ONE = 'nfod';
+public constant integer SID_VICIOUS_STRIKE = 'A0CD';
+public constant integer BID_VICIOUS_STRIKE = 'A0CE';
+public constant integer SID_FILTHY_LAND = 'A0CF';
 
 // test unit type id
-#define UTID_STATIC_TARGET 'h000'
-#define UTID_TARGET 'h001'
-#define UTID_TANK_TESTER 'h002'
-#define UTID_HEALER_TESTER 'h003'
+public constant integer UTID_STATIC_TARGET = 'h000';
+public constant integer UTID_TARGET = 'h001';
+public constant integer UTID_TANK_TESTER = 'h002';
+public constant integer UTID_HEALER_TESTER = 'h003';
 
 // Items
 // Consumable
 // Scrolls
-#define ITID_ARMAGEDDON_SCROLL 'I003'
-#define SID_ARMAGEDDON_SCROLL 'A070'
-#define ITID_WEAKEN_CURSE_SCROLL 'I00D'
-#define SID_WEAKEN_CURSE_SCROLL 'A07O'
+public constant integer ITID_ARMAGEDDON_SCROLL = 'I003';
+public constant integer SID_ARMAGEDDON_SCROLL = 'A070';
+public constant integer ITID_WEAKEN_CURSE_SCROLL = 'I00D';
+public constant integer SID_WEAKEN_CURSE_SCROLL = 'A07O';
 
-#define ITID_HEAL_SCROLL 'shea'
-#define SID_HEAL_SCROLL 'A06Z'
-#define ITID_SLAYER_SCROLL 'srrc'
-#define SID_SLAYER_SCROLL 'A074'
-#define ITID_SANCTUARY_SCROLL 'I006'
-#define SID_SANCTUARY_SCROLL 'A076'
-#define ITID_BANSHEE_SCROLL 'I00C'
-#define SID_BANSHEE_SCROLL 'A07M'
+public constant integer ITID_HEAL_SCROLL = 'shea';
+public constant integer SID_HEAL_SCROLL = 'A06Z';
+public constant integer ITID_SLAYER_SCROLL = 'srrc';
+public constant integer SID_SLAYER_SCROLL = 'A074';
+public constant integer ITID_SANCTUARY_SCROLL = 'I006';
+public constant integer SID_SANCTUARY_SCROLL = 'A076';
+public constant integer ITID_BANSHEE_SCROLL = 'I00C';
+public constant integer SID_BANSHEE_SCROLL = 'A07M';
 
-#define ITID_ARANS_COUNTER_SPELL_SCROLL 'Ial0'
-#define SID_ARANS_COUNTER_SPELL_SCROLL 'A06H'
-#define ITID_SPEED_SCROLL 'shas'
-#define SID_SPEED_SCROLL 'A06T'
-#define ITID_FRENZY_SCROLL 'Ifz0'
-#define SID_FRENZY_SCROLL 'A06V'
-#define ITID_DEFEND_SCROLL 'spro'
-#define SID_DEFEND_SCROLL 'A06X'
-#define ITID_MANA_SCROLL 'sman'
-#define SID_MANA_SCROLL 'A06Y'
-#define ITID_ROAR_SCROLL 'sror'
-#define SID_ROAR_SCROLL 'A072'
-#define ITID_SPELL_REFLECTION_SCROLL 'I00M'
-#define SID_SPELL_REFLECTION_SCROLL 'A078'
-#define ITID_MASS_DISPEL_SCROLL 'I017'
-#define SID_MASS_DISPEL_SCROLL 'A07G'
-#define ITID_MASS_TELEPORT_SCROLL 'I002'
-#define SID_MASS_TELEPORT_SCROLL 'A07H'
-#define ITID_CORRUPTION_SCROLL 'I004'
-#define SID_CORRUPTION_SCROLL 'A07I'
+public constant integer ITID_ARANS_COUNTER_SPELL_SCROLL = 'Ial0';
+public constant integer SID_ARANS_COUNTER_SPELL_SCROLL = 'A06H';
+public constant integer ITID_SPEED_SCROLL = 'shas';
+public constant integer SID_SPEED_SCROLL = 'A06T';
+public constant integer ITID_FRENZY_SCROLL = 'Ifz0';
+public constant integer SID_FRENZY_SCROLL = 'A06V';
+public constant integer ITID_DEFEND_SCROLL = 'spro';
+public constant integer SID_DEFEND_SCROLL = 'A06X';
+public constant integer ITID_MANA_SCROLL = 'sman';
+public constant integer SID_MANA_SCROLL = 'A06Y';
+public constant integer ITID_ROAR_SCROLL = 'sror';
+public constant integer SID_ROAR_SCROLL = 'A072';
+public constant integer ITID_SPELL_REFLECTION_SCROLL = 'I00M';
+public constant integer SID_SPELL_REFLECTION_SCROLL = 'A078';
+public constant integer ITID_MASS_DISPEL_SCROLL = 'I017';
+public constant integer SID_MASS_DISPEL_SCROLL = 'A07G';
+public constant integer ITID_MASS_TELEPORT_SCROLL = 'I002';
+public constant integer SID_MASS_TELEPORT_SCROLL = 'A07H';
+public constant integer ITID_CORRUPTION_SCROLL = 'I004';
+public constant integer SID_CORRUPTION_SCROLL = 'A07I';
 
 // potions
-#define ITID_MANA_SOURCE_POTION 'I00E'
-#define SID_MANA_SOURCE_POTION 'A08J'
+public constant integer ITID_MANA_SOURCE_POTION = 'I00E';
+public constant integer SID_MANA_SOURCE_POTION = 'A08J';
 
-#define ITID_ARCH_MAGE_POTION 'I00J'
-#define SID_ARCH_MAGE_POTION 'A08L'
-#define ITID_COMBAT_MASTER_POTION 'I00N'
-#define SID_COMBAT_MASTER_POTION 'A08M'
-#define ITID_SHIELD_POTION 'I00S'
-#define SID_SHIELD_POTION 'A08P'
-#define ITID_FORTRESS_POTION 'I00V'
-#define SID_FORTRESS_POTION 'A08Q'
-#define ITID_INVUL_POTION 'pnvu'
-#define SID_INVUL_POTION 'A08T'
-#define ITID_UNSTABLE_POTION 'I010'
-#define SID_UNSTABLE_POTION 'A090'
+public constant integer ITID_ARCH_MAGE_POTION = 'I00J';
+public constant integer SID_ARCH_MAGE_POTION = 'A08L';
+public constant integer ITID_COMBAT_MASTER_POTION = 'I00N';
+public constant integer SID_COMBAT_MASTER_POTION = 'A08M';
+public constant integer ITID_SHIELD_POTION = 'I00S';
+public constant integer SID_SHIELD_POTION = 'A08P';
+public constant integer ITID_FORTRESS_POTION = 'I00V';
+public constant integer SID_FORTRESS_POTION = 'A08Q';
+public constant integer ITID_INVUL_POTION = 'pnvu';
+public constant integer SID_INVUL_POTION = 'A08T';
+public constant integer ITID_UNSTABLE_POTION = 'I010';
+public constant integer SID_UNSTABLE_POTION = 'A090';
 
-#define ITID_LEECH_POTION 'I00A'
-#define SID_LEECH_POTION 'A08G'
-#define ITID_LIFE_REGEN_POTION 'I00Q'
-#define SID_LIFE_REGEN_POTION 'A08H'
-#define ITID_MANA_REGEN_POTION 'I00R'
-#define SID_MANA_REGEN_POTION 'A08I'
-#define ITID_TRANQUILITY_POTION 'I00F'
-#define SID_TRANQUILITY_POTION 'A08K'
-#define ITID_BIG_LIFE_POTION 'I00I'
-#define SID_BIG_LIFE_POTION 'A094'
-#define ITID_EMPERORS_NEW_POTION 'I00O'
-#define SID_EMPERORS_NEW_POTION 'A08N'
-#define ITID_TRANSFER_POTION 'I01J'
-#define SID_TRANSFER_POTION 'A08O'
-#define ITID_DODGE_POTION 'I00W'
-#define SID_DODGE_POTION 'A08R'
-#define ITID_SMALL_INVUL_POTION 'pnvl'
-#define SID_SMALL_INVUL_POTION 'A08S'
-#define ITID_STONE_SKIN_POTION 'I008'
-#define SID_STONE_SKIN_POTION 'A08U'
-#define ITID_SPELL_POWER_POTION 'I00B'
-#define SID_SPELL_POWER_POTION 'A08V'
-#define ITID_SPELL_MASTER_POTION 'I00X'
-#define SID_SPELL_MASTER_POTION 'A08W'
-#define ITID_ARCANE_POTION 'I01Q'
-#define SID_ARCANE_POTION 'A08X'
-#define ITID_ANGRY_CAST_POTION 'I007'
-#define SID_ANGRY_CAST_POTION 'A08Y'
-#define ITID_SPELL_PIERCE_POTION 'I00Z'
-#define SID_SPELL_PIERCE_POTION 'A08Z'
-#define ITID_AGILITY_POTION 'I009'
-#define SID_AGILITY_POTION 'A091'
-#define ITID_ACUTE_POTION 'I011'
-#define SID_ACUTE_POTION 'A092'
-#define ITID_DEXTERITY_POTION 'I00Y'
-#define SID_DEXTERITY_POTION 'A093'
+public constant integer ITID_LEECH_POTION = 'I00A';
+public constant integer SID_LEECH_POTION = 'A08G';
+public constant integer ITID_LIFE_REGEN_POTION = 'I00Q';
+public constant integer SID_LIFE_REGEN_POTION = 'A08H';
+public constant integer ITID_MANA_REGEN_POTION = 'I00R';
+public constant integer SID_MANA_REGEN_POTION = 'A08I';
+public constant integer ITID_TRANQUILITY_POTION = 'I00F';
+public constant integer SID_TRANQUILITY_POTION = 'A08K';
+public constant integer ITID_BIG_LIFE_POTION = 'I00I';
+public constant integer SID_BIG_LIFE_POTION = 'A094';
+public constant integer ITID_EMPERORS_NEW_POTION = 'I00O';
+public constant integer SID_EMPERORS_NEW_POTION = 'A08N';
+public constant integer ITID_TRANSFER_POTION = 'I01J';
+public constant integer SID_TRANSFER_POTION = 'A08O';
+public constant integer ITID_DODGE_POTION = 'I00W';
+public constant integer SID_DODGE_POTION = 'A08R';
+public constant integer ITID_SMALL_INVUL_POTION = 'pnvl';
+public constant integer SID_SMALL_INVUL_POTION = 'A08S';
+public constant integer ITID_STONE_SKIN_POTION = 'I008';
+public constant integer SID_STONE_SKIN_POTION = 'A08U';
+public constant integer ITID_SPELL_POWER_POTION = 'I00B';
+public constant integer SID_SPELL_POWER_POTION = 'A08V';
+public constant integer ITID_SPELL_MASTER_POTION = 'I00X';
+public constant integer SID_SPELL_MASTER_POTION = 'A08W';
+public constant integer ITID_ARCANE_POTION = 'I01Q';
+public constant integer SID_ARCANE_POTION = 'A08X';
+public constant integer ITID_ANGRY_CAST_POTION = 'I007';
+public constant integer SID_ANGRY_CAST_POTION = 'A08Y';
+public constant integer ITID_SPELL_PIERCE_POTION = 'I00Z';
+public constant integer SID_SPELL_PIERCE_POTION = 'A08Z';
+public constant integer ITID_AGILITY_POTION = 'I009';
+public constant integer SID_AGILITY_POTION = 'A091';
+public constant integer ITID_ACUTE_POTION = 'I011';
+public constant integer SID_ACUTE_POTION = 'A092';
+public constant integer ITID_DEXTERITY_POTION = 'I00Y';
+public constant integer SID_DEXTERITY_POTION = 'A093';
 
-#define ITID_LIFE_POTION 'phea'
-#define SID_LIFE_POTION 'A07P'
-#define ITID_MANA_POTION 'pman'
-#define SID_MANA_POTION 'A07Q'
+public constant integer ITID_LIFE_POTION = 'phea';
+public constant integer SID_LIFE_POTION = 'A07P';
+public constant integer ITID_MANA_POTION = 'pman';
+public constant integer SID_MANA_POTION = 'A07Q';
 
 // Charms
-#define ITID_CHARM_OF_CHAIN_LIGHTNING 'I005'
-#define SID_CHARM_OF_CHAIN_LIGHTNING 'A0A8'
-#define ITID_CHARM_OF_DEATH_FINGER 'I00G'
-#define SID_CHARM_OF_DEATH_FINGER 'A0A9'
+public constant integer ITID_CHARM_OF_CHAIN_LIGHTNING = 'I005';
+public constant integer SID_CHARM_OF_CHAIN_LIGHTNING = 'A0A8';
+public constant integer ITID_CHARM_OF_DEATH_FINGER = 'I00G';
+public constant integer SID_CHARM_OF_DEATH_FINGER = 'A0A9';
 
-#define ITID_CHARM_OF_SIMPLE_HEAL 'I01I'
-#define SID_CHARM_OF_SIMPLE_HEAL 'A0A4'
-#define ITID_CHARM_OF_DISPEL 'I01G'
-#define SID_CHARM_OF_DISPEL 'A0A5'
-#define ITID_CHARM_OF_HEALING_WARD 'I01F'
-#define SID_CHARM_OF_HEALING_WARD 'A0A6'
-#define ITID_CHARM_OF_INNER_FIRE 'I01E'
-#define SID_CHARM_OF_INNER_FIRE 'A0A7'
-#define ITID_CHARM_OF_SIPHON_LIFE 'I020'
-#define SID_CHARM_OF_SIPHON_LIFE 'A0AA'
-#define ITID_DEMONIC_RUNE 'I012'
-#define SID_DEMONIC_RUNE 'A0AB'
-#define ITID_STRANGE_WAND 'I023'
-#define SID_STRANGE_WAND 'A0AC'
+public constant integer ITID_CHARM_OF_SIMPLE_HEAL = 'I01I';
+public constant integer SID_CHARM_OF_SIMPLE_HEAL = 'A0A4';
+public constant integer ITID_CHARM_OF_DISPEL = 'I01G';
+public constant integer SID_CHARM_OF_DISPEL = 'A0A5';
+public constant integer ITID_CHARM_OF_HEALING_WARD = 'I01F';
+public constant integer SID_CHARM_OF_HEALING_WARD = 'A0A6';
+public constant integer ITID_CHARM_OF_INNER_FIRE = 'I01E';
+public constant integer SID_CHARM_OF_INNER_FIRE = 'A0A7';
+public constant integer ITID_CHARM_OF_SIPHON_LIFE = 'I020';
+public constant integer SID_CHARM_OF_SIPHON_LIFE = 'A0AA';
+public constant integer ITID_DEMONIC_RUNE = 'I012';
+public constant integer SID_DEMONIC_RUNE = 'A0AB';
+public constant integer ITID_STRANGE_WAND = 'I023';
+public constant integer SID_STRANGE_WAND = 'A0AC';
 
 // origin common gear
-#define ITID_BOOTS_OF_SLOW 'I000'
-#define ITID_HELM_OF_VALOUR 'hval'
-#define ITID_HOOD_OF_CUNNING 'hcun'
-#define ITID_MEDALION_OF_COURAGE 'mcou'
+public constant integer ITID_BOOTS_OF_SLOW = 'I000';
+public constant integer ITID_HELM_OF_VALOUR = 'hval';
+public constant integer ITID_HOOD_OF_CUNNING = 'hcun';
+public constant integer ITID_MEDALION_OF_COURAGE = 'mcou';
 // origin uncommon gear
-#define ITID_CRUEL_COLOSSUS_BLADE_OF_QUICKNESS 'I01Y'
-#define ITID_HEALTH_STONE 'hlst'
-#define SID_HEALTH_STONE 'A06I'
-#define ITID_ICON_OF_THE_UNGLAZED_CRESCENT 'I01K'
-#define SID_ICON_OF_THE_UNGLAZED_CRESCENT 'A06G'
-#define ITID_MANA_STONE 'mnst'
-#define SID_MANA_STONE 'A06J'
-#define ITID_MOROES_LUCKY_GEAR 'I01H'
-#define SID_MOROES_LUCKY_GEAR 'A06L'
-#define ITID_ROMULOS_EXPIRED_POISON 'I00T'
-#define ITID_RUNED_BRACERS 'brac'
+public constant integer ITID_CRUEL_COLOSSUS_BLADE_OF_QUICKNESS = 'I01Y';
+public constant integer ITID_HEALTH_STONE = 'hlst';
+public constant integer SID_HEALTH_STONE = 'A06I';
+public constant integer ITID_ICON_OF_THE_UNGLAZED_CRESCENT = 'I01K';
+public constant integer SID_ICON_OF_THE_UNGLAZED_CRESCENT = 'A06G';
+public constant integer ITID_MANA_STONE = 'mnst';
+public constant integer SID_MANA_STONE = 'A06J';
+public constant integer ITID_MOROES_LUCKY_GEAR = 'I01H';
+public constant integer SID_MOROES_LUCKY_GEAR = 'A06L';
+public constant integer ITID_ROMULOS_EXPIRED_POISON = 'I00T';
+public constant integer ITID_RUNED_BRACERS = 'brac';
 // origin rare gear
-#define ITID_ARANS_SOOTHING_AGATE 'I019'
-#define ITID_BULWARK_OF_THE_AMANI_EMPIRE 'Iams'
-#define ITID_CORE_HOUND_TOOTH 'I015'
-#define ITID_CURSED_CUIRASS 'I00K'
-#define ITID_DRUM 'I014'
-#define ITID_GOBLIN_ROCKET_BOOTS_LIMITED_EDITION 'I013'
-#define SID_GOBLIN_ROCKET_BOOTS_LIMITED_EDITION 'A079'
-#define ITID_GORE_HOWL 'I01N'
-#define ITID_HEX_SHRUNKEN_HEAD 'I02I'
-#define SID_HEX_SHRUNKEN_HEAD 'A07F'
-#define ITID_LION_HORN 'I018'
-#define ITID_PURE_ARCANE 'I00H'
-#define ITID_SIGNET_OF_THE_LAST_DEFENDER 'I01A'
-#define ITID_STAFF_OF_THE_SHADOW_FLAME 'I01B'
-#define ITID_THE_21_RING 'I012'
-#define ITID_TIDAL_LOOP 'I01C'
-#define ITID_TROLL_BANE 'I022'
-#define ITID_VISKAG 'I016'
+public constant integer ITID_ARANS_SOOTHING_AGATE = 'I019';
+public constant integer ITID_BULWARK_OF_THE_AMANI_EMPIRE = 'Iams';
+public constant integer ITID_CORE_HOUND_TOOTH = 'I015';
+public constant integer ITID_CURSED_CUIRASS = 'I00K';
+public constant integer ITID_DRUM = 'I014';
+public constant integer ITID_GOBLIN_ROCKET_BOOTS_LIMITED_EDITION = 'I013';
+public constant integer SID_GOBLIN_ROCKET_BOOTS_LIMITED_EDITION = 'A079';
+public constant integer ITID_GORE_HOWL = 'I01N';
+public constant integer ITID_HEX_SHRUNKEN_HEAD = 'I02I';
+public constant integer SID_HEX_SHRUNKEN_HEAD = 'A07F';
+public constant integer ITID_LION_HORN = 'I018';
+public constant integer ITID_PURE_ARCANE = 'I00H';
+public constant integer ITID_SIGNET_OF_THE_LAST_DEFENDER = 'I01A';
+public constant integer ITID_STAFF_OF_THE_SHADOW_FLAME = 'I01B';
+public constant integer ITID_THE_21_RING = 'I012';
+public constant integer ITID_TIDAL_LOOP = 'I01C';
+public constant integer ITID_TROLL_BANE = 'I022';
+public constant integer ITID_VISKAG = 'I016';
 // class spec gear
-#define ITIDORBOFTHESINDOREI 'Isin'
-#define ITIDREFORGEDBADGEOFTENACITY 'Idru'
-#define SIDREFORGEDBADGEOFTENACITY 'A06B'
-#define ITIDLIGHTSJUSTICE 'I00U'
-#define SIDLIGHTSJUSTICE 'A06C'
-#define ITIDBENEDICTION 'Iben'
-#define ITIDHORNOFCENARIUS 'Ihor'
-#define ITIDORCCAPTUREFLAG 'Ifla'
-#define ITIDDAGGEROFASSASSINATION 'Iass'
-#define ITIDRHOKDELAR 'Ihun'
-#define ITIDRAGEWINTERCHILLSPHYLACTERY 'Ifro'
-#define ITIDANATHEMA 'Iana'
-#define ITIDRARESHIMMERWEED 'Ithu'
+public constant integer ITID_ORB_OF_THE_SINDOREI = 'Isin';
+public constant integer ITID_REFORGED_BADGE_OF_TENACITY = 'Idru';
+public constant integer SID_REFORGED_BADGE_OF_TENACITY = 'A06B';
+public constant integer ITID_LIGHTS_JUSTICE = 'I00U';
+public constant integer SID_LIGHTS_JUSTICE = 'A06C';
+public constant integer ITID_BENEDICTION = 'Iben';
+public constant integer ITID_HORN_OF_CENARIUS = 'Ihor';
+public constant integer ITID_ORC_CAPTURE_FLAG = 'Ifla';
+public constant integer ITID_DAGGER_OF_ASSASSINATION = 'Iass';
+public constant integer ITID_RHOKDELAR = 'Ihun';
+public constant integer ITID_RAGE_WINTER_CHILLS_PHYLACTERY = 'Ifro';
+public constant integer ITID_ANATHEMA = 'Iana';
+public constant integer ITID_RARE_SHIMMER_WEED = 'Ithu';
 // legendary
-#define ITIDBREATHOFTHEDYING 'I001'
-#define ITIDCALLTOARMS 'Icta'
-#define SIDCALLTOARMS 'A069'
-#define ITID_CTHUNS_DERANGEMENT 'I00L'
-#define SID_CTHUNS_DERANGEMENT 'A06Q'
-#define ITIDENIGMA 'Ieng'
-#define SIDENIGMA 'A064'
-#define ITIDINFINITY 'I01P'
-#define ITIDINSIGHT 'Iins'
-#define ITID_TYRAELS_MIGHT 'I01D'
-#define SID_TYRAELS_MIGHT 'A07K'
-#define ITID_VOODOO_VIAL 'I00P'
-#define SID_VOODOO_VIAL 'A06N'
-#define ITIDWOESTAVE 'Iwoe'
-#define ITIDWINDFORCE 'Iwf0'
+public constant integer ITID_BREATH_OF_THE_DYING = 'I001';
+public constant integer ITID_CALL_TO_ARMS = 'Icta';
+public constant integer SID_CALL_TO_ARMS = 'A069';
+public constant integer ITID_CTHUNS_DERANGEMENT = 'I00L';
+public constant integer SID_CTHUNS_DERANGEMENT = 'A06Q';
+public constant integer ITID_ENIGMA = 'Ieng';
+public constant integer SID_ENIGMA = 'A064';
+public constant integer ITID_INFINITY = 'I01P';
+public constant integer ITID_INSIGHT = 'Iins';
+public constant integer ITID_TYRAELS_MIGHT = 'I01D';
+public constant integer SID_TYRAELS_MIGHT = 'A07K';
+public constant integer ITID_VOODOO_VIAL = 'I00P';
+public constant integer SID_VOODOO_VIAL = 'A06N';
+public constant integer ITID_WOE_STAVE = 'Iwoe';
+public constant integer ITID_WIND_FORCE = 'Iwf0';
 // relic set
 // Athas's Corruption
-#define ITID_DETERMINATION_OF_VENGEANCE 'I01S'
-#define ITID_DETERMINATION_OF_VENGEANCE1 'I01R'
-#define ITID_STRATHOLME_TRAGEDY 'I01T'
-#define ITID_STRATHOLME_TRAGEDY1 'I01U'
-#define ITID_PATRICIDE 'I01X'
-#define ITID_PATRICIDE1 'I01W'
-#define ITID_PATRICIDE2 'I01V'
-#define ITID_FROSTMOURNE 'I01O'
-#define ITID_FROSTMOURNE1 'I01L'
-#define ITID_FROSTMOURNE2 'I01M'
+public constant integer ITID_DETERMINATION_OF_VENGEANCE = 'I01S';
+public constant integer ITID_DETERMINATION_OF_VENGEANCE1 = 'I01R';
+public constant integer ITID_STRATHOLME_TRAGEDY = 'I01T';
+public constant integer ITID_STRATHOLME_TRAGEDY1 = 'I01U';
+public constant integer ITID_PATRICIDE = 'I01X';
+public constant integer ITID_PATRICIDE1 = 'I01W';
+public constant integer ITID_PATRICIDE2 = 'I01V';
+public constant integer ITID_FROSTMOURNE = 'I01O';
+public constant integer ITID_FROSTMOURNE1 = 'I01L';
+public constant integer ITID_FROSTMOURNE2 = 'I01M';
 
-#define ART_ANGEL "Abilities\\Spells\\Human\\Resurrect\\ResurrectCaster.mdl"
-#define ART_ANNIHILATION_MISSILE "Abilities\\Spells\\Undead\\OrbOfDeath\\AnnihilationMissile.mdl"
-#define ART_ARCANE_TOWER_ATTACK "Abilities\\Spells\\Human\\Feedback\\ArcaneTowerAttack.mdl"
-#define ART_BANISH_TARGET "Abilities\\Spells\\Human\\Banish\\BanishTarget.mdl"
-#define ART_BLEED "Objects\\Spawnmodels\\Human\\HumanBlood\\HeroBloodElfBlood.mdl"
-#define ART_BLINK "Abilities\\Spells\\NightElf\\Blink\\BlinkTarget.mdl"
-#define ART_BLIZZARD_TARGET "Abilities\\Spells\\Human\\Blizzard\\BlizzardTarget.mdl"
-#define ART_BLOOD_IMPACT "Abilities\\Weapons\\Blood\\BloodImpact.mdl"
-#define ART_BLOOD_LUST_LEFT "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustTarget.mdl"
-#define ART_BLOOD_LUST_RIGHT "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustSpecial.mdl"
-#define ART_BREATH_OF_FROST_MISSILE "Abilities\\Spells\\Other\\BreathOfFrost\\BreathOfFrostMissile.mdl"
-#define ART_CRATER "Objects\\Spawnmodels\\Other\\NeutralBuildingExplosion\\NeutralBuildingExplosion.mdl"
-#define ART_CURSE "Abilities\\Spells\\Undead\\Curse\\CurseTarget.mdl"
-#define ART_DEATH_AND_DECAY "Abilities\\Spells\\Undead\\DeathandDecay\\DeathandDecayTarget.mdl"
-#define ART_DISPEL "Abilities\\Spells\\Human\\DispelMagic\\DispelMagicTarget.mdl"
-#define ART_DOOM "Abilities\\Spells\\Other\\Doom\\DoomDeath.mdl"
-#define ART_DRYAD_MISSILE "Abilities\\Weapons\\Dryadmissile\\Dryadmissile.mdl"
-#define ART_DUST "Objects\\Spawnmodels\\Undead\\ImpaleTargetDust\\ImpaleTargetDust.mdl"
-#define ART_FREEZING_BREATH "Abilities\\Spells\\Undead\\FreezingBreath\\FreezingBreathTargetArt.mdl"
-#define ART_FROST_NOVA "Abilities\\Spells\\Undead\\FrostNova\\FrostNovaTarget.mdl"
-#define ART_GORE "Objects\\Spawnmodels\\Orc\\OrcLargeDeathExplode\\OrcLargeDeathExplode.mdl"
-#define ART_GREEN_LARGE_FIRE "Environment\\UndeadBuildingFire\\UndeadLargeBuildingFire0.mdl"
-#define ART_HEAL "Abilities\\Spells\\Items\\AIhe\\AIheTarget.mdl"
-#define ART_HEAL_SALVE "Abilities\\Spells\\Items\\HealingSalve\\HealingSalveTarget.mdl"
-#define ART_ILLUSION_TARGET "Abilities\\Spells\\Items\\AIil\\AIilTarget.mdl"
-#define ART_IMPACT "Abilities\\Weapons\\Bolt\\BoltImpact.mdl"
-#define ART_INFERNAL_BIRTH "Units\\Demon\\Infernal\\InfernalBirth.mdl"
-#define ART_INVULNERABLE "Abilities\\Spells\\Human\\DivineShield\\DivineShieldTarget.mdl"
-#define ART_MANA "Abilities\\Spells\\Items\\AIma\\AImaTarget.mdl"
-#define ART_MANA_DRAIN_TARGET "Abilities\\Spells\\Other\\Drain\\ManaDrainTarget.mdl"
-#define ART_MASS_TELEPORT_TARGET "Abilities\\Spells\\Human\\MassTeleport\\MassTeleportTarget.mdl"
-#define ART_MEATWAGON_MISSILE "Abilities\\Weapons\\MeatwagonMissile\\MeatwagonMissile.mdl"
-#define ART_OBSIDIAN_REGEN_AURA "Abilities\\Spells\\Undead\\UnholyAura\\UnholyAura.mdl"
-#define ART_PARASITE_TARGET "Abilities\\Spells\\Other\\Parasite\\ParasiteTarget.mdl"
-#define ART_PHOENIX_MISSILE "Abilities\\Weapons\\PhoenixMissile\\Phoenix_Missile.mdl"
-#define ART_PLAGUE "units\\undead\\PlagueCloud\\PlagueCloud.mdl"
-#define ART_POISON "Abilities\\Weapons\\PoisonSting\\PoisonStingTarget.mdl"
-#define ART_POISON_SLIME "Abilities\\Weapons\\ChimaeraAcidMissile\\ChimaeraAcidMissile.mdl"
-#define ART_RED_IMPACT "Abilities\\Spells\\Demon\\DemonBoltImpact\\DemonBoltImpact.mdl"
-#define ART_SHADOW_STRIKE_MISSILE "Abilities\\Spells\\NightElf\\shadowstrike\\ShadowStrikeMissile.mdl"
-#define ART_SHADOW_STRIKE_TARGET "Abilities\\Spells\\NightElf\\shadowstrike\\shadowstrike.mdl"
-#define ART_SHIELD "Abilities\\Spells\\Items\\StaffOfSanctuary\\Staff_Sanctuary_Target.mdl"
-#define ART_SLOW "Abilities\\Spells\\Human\\slow\\slowtarget.mdl"
-#define ART_SPELLSTEAL "Abilities\\Spells\\Human\\SpellSteal\\SpellStealTarget.mdl"
-#define ART_STAMPEDE_MISSILE_DEATH "Abilities\\Spells\\Other\\Stampede\\StampedeMissileDeath.mdl"
-#define ART_STOMP "Abilities\\Spells\\Orc\\WarStomp\\WarStompCaster.mdl"
-#define ART_THUNDER_CLAPCASTER "Abilities\\Spells\\Human\\Thunderclap\\ThunderClapCaster.mdl"
-#define ART_WATER "Objects\\Spawnmodels\\Naga\\NagaDeath\\NagaDeath.mdl"
-#define ART_WISP_EXPLODE "Units\\NightElf\\Wisp\\WispExplode.mdl"
+public constant string  ART_ANGEL  = "Abilities\\Spells\\Human\\Resurrect\\ResurrectCaster.mdl";
+public constant string  ART_ANNIHILATION_MISSILE  = "Abilities\\Spells\\Undead\\OrbOfDeath\\AnnihilationMissile.mdl";
+public constant string  ART_ARCANE_TOWER_ATTACK  = "Abilities\\Spells\\Human\\Feedback\\ArcaneTowerAttack.mdl";
+public constant string  ART_BANISH_TARGET  = "Abilities\\Spells\\Human\\Banish\\BanishTarget.mdl";
+public constant string  ART_BLEED  = "Objects\\Spawnmodels\\Human\\HumanBlood\\HeroBloodElfBlood.mdl";
+public constant string  ART_BLINK  = "Abilities\\Spells\\NightElf\\Blink\\BlinkTarget.mdl";
+public constant string  ART_BLIZZARD_TARGET  = "Abilities\\Spells\\Human\\Blizzard\\BlizzardTarget.mdl";
+public constant string  ART_BLOOD_IMPACT  = "Abilities\\Weapons\\Blood\\BloodImpact.mdl";
+public constant string  ART_BLOOD_LUST_LEFT  = "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustTarget.mdl";
+public constant string  ART_BLOOD_LUST_RIGHT  = "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustSpecial.mdl";
+public constant string  ART_BREATH_OF_FROST_MISSILE  = "Abilities\\Spells\\Other\\BreathOfFrost\\BreathOfFrostMissile.mdl";
+public constant string  ART_CRATER  = "Objects\\Spawnmodels\\Other\\NeutralBuildingExplosion\\NeutralBuildingExplosion.mdl";
+public constant string  ART_CURSE  = "Abilities\\Spells\\Undead\\Curse\\CurseTarget.mdl";
+public constant string  ART_DEATH_AND_DECAY  = "Abilities\\Spells\\Undead\\DeathandDecay\\DeathandDecayTarget.mdl";
+public constant string  ART_DISPEL  = "Abilities\\Spells\\Human\\DispelMagic\\DispelMagicTarget.mdl";
+public constant string  ART_DOOM  = "Abilities\\Spells\\Other\\Doom\\DoomDeath.mdl";
+public constant string  ART_DRYAD_MISSILE  = "Abilities\\Weapons\\Dryadmissile\\Dryadmissile.mdl";
+public constant string  ART_DUST  = "Objects\\Spawnmodels\\Undead\\ImpaleTargetDust\\ImpaleTargetDust.mdl";
+public constant string  ART_FREEZING_BREATH  = "Abilities\\Spells\\Undead\\FreezingBreath\\FreezingBreathTargetArt.mdl";
+public constant string  ART_FROST_NOVA  = "Abilities\\Spells\\Undead\\FrostNova\\FrostNovaTarget.mdl";
+public constant string  ART_GORE  = "Objects\\Spawnmodels\\Orc\\OrcLargeDeathExplode\\OrcLargeDeathExplode.mdl";
+public constant string  ART_GREEN_LARGE_FIRE  = "Environment\\UndeadBuildingFire\\UndeadLargeBuildingFire0.mdl";
+public constant string  ART_HEAL  = "Abilities\\Spells\\Items\\AIhe\\AIheTarget.mdl";
+public constant string  ART_HEAL_SALVE  = "Abilities\\Spells\\Items\\HealingSalve\\HealingSalveTarget.mdl";
+public constant string  ART_ILLUSION_TARGET  = "Abilities\\Spells\\Items\\AIil\\AIilTarget.mdl";
+public constant string  ART_IMPACT  = "Abilities\\Weapons\\Bolt\\BoltImpact.mdl";
+public constant string  ART_INFERNAL_BIRTH  = "Units\\Demon\\Infernal\\InfernalBirth.mdl";
+public constant string  ART_INVULNERABLE  = "Abilities\\Spells\\Human\\DivineShield\\DivineShieldTarget.mdl";
+public constant string  ART_MANA  = "Abilities\\Spells\\Items\\AIma\\AImaTarget.mdl";
+public constant string  ART_MANA_DRAIN_TARGET  = "Abilities\\Spells\\Other\\Drain\\ManaDrainTarget.mdl";
+public constant string  ART_MASS_TELEPORT_TARGET  = "Abilities\\Spells\\Human\\MassTeleport\\MassTeleportTarget.mdl";
+public constant string  ART_MEATWAGON_MISSILE  = "Abilities\\Weapons\\MeatwagonMissile\\MeatwagonMissile.mdl";
+public constant string  ART_OBSIDIAN_REGEN_AURA  = "Abilities\\Spells\\Undead\\UnholyAura\\UnholyAura.mdl";
+public constant string  ART_PARASITE_TARGET  = "Abilities\\Spells\\Other\\Parasite\\ParasiteTarget.mdl";
+public constant string  ART_PHOENIX_MISSILE  = "Abilities\\Weapons\\PhoenixMissile\\Phoenix_Missile.mdl";
+public constant string  ART_PLAGUE  = "units\\undead\\PlagueCloud\\PlagueCloud.mdl";
+public constant string  ART_POISON  = "Abilities\\Weapons\\PoisonSting\\PoisonStingTarget.mdl";
+public constant string  ART_POISON_SLIME  = "Abilities\\Weapons\\ChimaeraAcidMissile\\ChimaeraAcidMissile.mdl";
+public constant string  ART_RED_IMPACT  = "Abilities\\Spells\\Demon\\DemonBoltImpact\\DemonBoltImpact.mdl";
+public constant string  ART_SHADOW_STRIKE_MISSILE  = "Abilities\\Spells\\NightElf\\shadowstrike\\ShadowStrikeMissile.mdl";
+public constant string  ART_SHADOW_STRIKE_TARGET  = "Abilities\\Spells\\NightElf\\shadowstrike\\shadowstrike.mdl";
+public constant string  ART_SHIELD  = "Abilities\\Spells\\Items\\StaffOfSanctuary\\Staff_Sanctuary_Target.mdl";
+public constant string  ART_SLOW  = "Abilities\\Spells\\Human\\slow\\slowtarget.mdl";
+public constant string  ART_SPELLSTEAL  = "Abilities\\Spells\\Human\\SpellSteal\\SpellStealTarget.mdl";
+public constant string  ART_STAMPEDE_MISSILE_DEATH  = "Abilities\\Spells\\Other\\Stampede\\StampedeMissileDeath.mdl";
+public constant string  ART_STOMP  = "Abilities\\Spells\\Orc\\WarStomp\\WarStompCaster.mdl";
+public constant string  ART_THUNDER_CLAPCASTER  = "Abilities\\Spells\\Human\\Thunderclap\\ThunderClapCaster.mdl";
+public constant string  ART_WATER  = "Objects\\Spawnmodels\\Naga\\NagaDeath\\NagaDeath.mdl";
+public constant string  ART_WISP_EXPLODE  = "Units\\NightElf\\Wisp\\WispExplode.mdl";
+}
+//! endzinc

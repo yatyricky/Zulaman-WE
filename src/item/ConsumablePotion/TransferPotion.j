@@ -1,6 +1,6 @@
 //! zinc
 library TransferPotion requires SpellEvent, BuffSystem {
-#define BUFF_ID 'A080'
+constant integer BUFF_ID = 'A080';
     
     function onEffect(Buff buf) {
         UnitProp[buf.bd.target].damageGoesMana += buf.bd.r0;
@@ -32,6 +32,6 @@ library TransferPotion requires SpellEvent, BuffSystem {
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
         
     }
-#undef BUFF_ID
+
 }
 //! endzinc

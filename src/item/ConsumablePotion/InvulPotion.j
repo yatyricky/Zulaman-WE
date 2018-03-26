@@ -1,6 +1,6 @@
 //! zinc
 library InvulPotion requires SpellEvent, BuffSystem {
-#define BUFF_ID 'A085'
+constant integer BUFF_ID = 'A085';
     
     function onEffect(Buff buf) {
         UnitProp[buf.bd.target].damageTaken += buf.bd.r0;
@@ -28,6 +28,6 @@ library InvulPotion requires SpellEvent, BuffSystem {
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
         
     }
-#undef BUFF_ID
+
 }
 //! endzinc

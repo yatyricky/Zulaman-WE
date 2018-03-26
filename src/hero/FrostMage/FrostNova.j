@@ -1,8 +1,8 @@
 //! zinc
 library FrostNova requires SpellEvent, StunUtils, UnitProperty, DamageSystem, FrostMageGlobal {
-#define BUFF_ID 'A03I'
-#define MISSILE 'e000'
-#define ART "Abilities\\Spells\\Undead\\FreezingBreath\\FreezingBreathTargetArt.mdl"
+constant integer BUFF_ID = 'A03I';
+constant integer MISSILE = 'e000';
+constant string  ART  = "Abilities\\Spells\\Undead\\FreezingBreath\\FreezingBreathTargetArt.mdl";
 
     public function FrostMageGetFrostNovaAOE(integer lvl) -> real {
         return 200.0 + 100 * lvl;
@@ -66,7 +66,7 @@ library FrostNova requires SpellEvent, StunUtils, UnitProperty, DamageSystem, Fr
 
     function onCast() {
         //AddTimedEffect.atUnit("Abilities\\Spells\\Undead\\FreezingBreath\\FreezingBreathMissile.mdl", SpellEvent.CastingUnit, "origin", 0.0);
-        integer lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SIDFROSTNOVA);
+        integer lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_FROST_NOVA);
         unit tu;
         real dmg = (25 + 25 * lvl + UnitProp[SpellEvent.CastingUnit].SpellPower() * 1.5) * returnFrostDamage(SpellEvent.CastingUnit);
         Buff buf;
@@ -76,7 +76,7 @@ library FrostNova requires SpellEvent, StunUtils, UnitProperty, DamageSystem, Fr
             GroupRemoveUnit(ENUM_GROUP, tu);
             if (!IsUnitDummy(tu) && !IsUnitDead(tu) && IsUnitEnemy(tu, GetOwningPlayer(SpellEvent.CastingUnit))) {
                 // damage
-                DamageTarget(SpellEvent.CastingUnit, tu, dmg, SpellData[SIDFROSTNOVA].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
+                DamageTarget(SpellEvent.CastingUnit, tu, dmg, SpellData[SID_FROST_NOVA].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
                 // stun
                 StunUnit(SpellEvent.CastingUnit, tu, 3 + lvl);
                 AddTimedEffect.atUnit(ART, tu, "origin", 3 + lvl);
@@ -97,11 +97,11 @@ library FrostNova requires SpellEvent, StunUtils, UnitProperty, DamageSystem, Fr
     }
 
     function onInit() {
-        RegisterSpellEffectResponse(SIDFROSTNOVA, onCast);
+        RegisterSpellEffectResponse(SID_FROST_NOVA, onCast);
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_NEG);
     }
-#undef ART
-#undef MISSILE
-#undef BUFF_ID
+
+
+
 }
 //! endzinc

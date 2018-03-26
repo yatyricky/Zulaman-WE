@@ -15,10 +15,10 @@ library Blizzard requires CastingBar, GroupUtils, FrostMageGlobal, DamageSystem,
         real dmg;
         unit tu;
         real length, rad, aoe;
-        if (GetUnitAbilityLevel(caster, SIDBLIZZARD1) == 1) {
+        if (GetUnitAbilityLevel(caster, SID_BLIZZARD_1) == 1) {
             lvl = 3;
         } else {
-            lvl = GetUnitAbilityLevel(caster, SIDBLIZZARD);
+            lvl = GetUnitAbilityLevel(caster, SID_BLIZZARD);
         }
         dmg = returnDamage(lvl, UnitProp[caster].SpellPower()) * returnFrostDamage(caster);
         aoe = 150.0 + 100.0 * lvl;
@@ -27,7 +27,7 @@ library Blizzard requires CastingBar, GroupUtils, FrostMageGlobal, DamageSystem,
         while (tu != null) {
             GroupRemoveUnit(ENUM_GROUP, tu);
             if (!IsUnitDummy(tu) && !IsUnitDead(tu) && IsUnitEnemy(tu, GetOwningPlayer(caster))) {
-                DamageTarget(caster, tu, dmg, SpellData[SIDBLIZZARD].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+                DamageTarget(caster, tu, dmg, SpellData[SID_BLIZZARD].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
             }
             tu = FirstOfGroup(ENUM_GROUP);
         }
@@ -43,10 +43,10 @@ library Blizzard requires CastingBar, GroupUtils, FrostMageGlobal, DamageSystem,
     function onChannel() {
         CastingBar cb = CastingBar.create(response);
         integer lvl;
-        if (GetUnitAbilityLevel(SpellEvent.CastingUnit, SIDBLIZZARD1) == 1) {
+        if (GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_BLIZZARD_1) == 1) {
             lvl = 3;
         } else {
-            lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SIDBLIZZARD);
+            lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_BLIZZARD);
         }
         cb.cost = 65 + lvl * 35;
         cb.channel(Rounding(5.0 * (1.0 + UnitProp[SpellEvent.CastingUnit].SpellHaste())));
@@ -93,18 +93,18 @@ library Blizzard requires CastingBar, GroupUtils, FrostMageGlobal, DamageSystem,
     }
     
     function lvlup() -> boolean {
-        if (GetLearnedSkill() == SIDBLIZZARD) {
-            if (GetUnitAbilityLevel(GetTriggerUnit(), SIDBLIZZARD) == 3) {
-                TimedUnitRemoveAbility.start(GetTriggerUnit(), SIDBLIZZARD);
-                UnitAddAbility(GetTriggerUnit(), SIDBLIZZARD1);
+        if (GetLearnedSkill() == SID_BLIZZARD) {
+            if (GetUnitAbilityLevel(GetTriggerUnit(), SID_BLIZZARD) == 3) {
+                TimedUnitRemoveAbility.start(GetTriggerUnit(), SID_BLIZZARD);
+                UnitAddAbility(GetTriggerUnit(), SID_BLIZZARD_1);
             }
         }
         return false;
     }
 
     function onInit() {
-        RegisterSpellChannelResponse(SIDBLIZZARD, onChannel);
-        RegisterSpellEffectResponse(SIDBLIZZARD1, onCast);
+        RegisterSpellChannelResponse(SID_BLIZZARD, onChannel);
+        RegisterSpellEffectResponse(SID_BLIZZARD_1, onCast);
         TriggerAnyUnit(EVENT_PLAYER_HERO_SKILL, function lvlup);
     }
 }

@@ -1,7 +1,7 @@
 //! zinc
 library SurvivalInstincts requires BuffSystem, SpellEvent, UnitProperty, ReforgedBadgeOfTenacity {
-#define BUFF_ID 'A0A3'
-#define ART "Abilities\\Spells\\NightElf\\BattleRoar\\RoarTarget.mdl"
+constant integer BUFF_ID = 'A0A3';
+constant string  ART  = "Abilities\\Spells\\NightElf\\BattleRoar\\RoarTarget.mdl";
 
     function returnPercent(integer lvl) -> real {
         return 0.2 + 0.1 * lvl;
@@ -55,7 +55,7 @@ library SurvivalInstincts requires BuffSystem, SpellEvent, UnitProperty, Reforge
         BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_POS);
         RegisterSpellEffectResponse(SID_SURVIVAL_INSTINCTS, onCast);
     }
-#undef ART
-#undef BUFF_ID 
+
+
 }
 //! endzinc

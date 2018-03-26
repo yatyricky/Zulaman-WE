@@ -4,8 +4,8 @@ library FireBall requires DamageSystem {
 AOE fire balls, deals 600 damage to all targets
 
 */
-#define PATH "Abilities\\Weapons\\FireBallMissile\\FireBallMissile.mdl"
-#define DAMAGE 600.0
+constant string  PATH  = "Abilities\\Weapons\\FireBallMissile\\FireBallMissile.mdl";
+constant real DAMAGE = 600.0;
 
     function onhit(Projectile p) -> boolean {
         if (TryReflect(p.target)) {
@@ -21,14 +21,14 @@ AOE fire balls, deals 600 damage to all targets
         Projectile p;
         integer i;
         for (0 <= i < PlayerUnits.n) {
-	        p = Projectile.create();
-	        p.caster = cd.caster;
-	        p.target = PlayerUnits.units[i];
-	        p.path = PATH;
-	        p.pr = onhit;
-	        p.speed = 700;
-	        p.r0 = DAMAGE;
-	        p.launch();
+            p = Projectile.create();
+            p.caster = cd.caster;
+            p.target = PlayerUnits.units[i];
+            p.path = PATH;
+            p.pr = onhit;
+            p.speed = 700;
+            p.r0 = DAMAGE;
+            p.launch();
         }
     }
     
@@ -39,7 +39,7 @@ AOE fire balls, deals 600 damage to all targets
     function onInit() {
         RegisterSpellChannelResponse(SID_FIRE_BALL, onChannel);
     }
-#undef DAMAGE
-#undef PATH
+
+
 }
 //! endzinc

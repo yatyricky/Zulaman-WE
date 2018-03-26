@@ -1,8 +1,8 @@
 //! zinc
 library Purge requires BuffSystem, SpellEvent, UnitProperty {
-#define BUFF_ID 'A034'
-#define BUFF_ID1 'A035'
-#define ART "units\\human\\WaterElemental\\WaterElemental.mdl"
+constant integer BUFF_ID = 'A034';
+constant integer BUFF_ID1 = 'A035';
+constant string  ART  = "units\\human\\WaterElemental\\WaterElemental.mdl";
 
     struct internalCD {
         private static HandleTable ht;
@@ -74,7 +74,7 @@ library Purge requires BuffSystem, SpellEvent, UnitProperty {
                 buf.bd.boe = onEffect;
                 buf.bd.bor = onRemove;
                 buf.run();
-                internalCD.start(SpellEvent.CastingUnit, 30 - 5 * GetUnitAbilityLevel(SpellEvent.CastingUnit, SIDPURGE));
+                internalCD.start(SpellEvent.CastingUnit, 30 - 5 * GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_PURGE));
                 AddTimedEffect.atUnit(ART, SpellEvent.TargetUnit, "origin", 0.0);
             }
         } else {
@@ -91,17 +91,17 @@ library Purge requires BuffSystem, SpellEvent, UnitProperty {
                 buf.bd.boe = onEffect1;
                 buf.bd.bor = onRemove1;
                 buf.run();
-                internalCD.start(SpellEvent.CastingUnit, 30 - 5 * GetUnitAbilityLevel(SpellEvent.CastingUnit, SIDPURGE));
+                internalCD.start(SpellEvent.CastingUnit, 30 - 5 * GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_PURGE));
                 AddTimedEffect.atUnit(ART, SpellEvent.TargetUnit, "origin", 0.0);
             }
         }
         AddTimedEffect.atUnit(ART_WATER, SpellEvent.TargetUnit, "origin", 0.2);
-        if (GetUnitAbilityLevel(SpellEvent.CastingUnit, SIDENCHANTEDTOTEM) > 0) {
+        if (GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_ENCHANTED_TOTEM) > 0) {
             p = GetOwningPlayer(SpellEvent.CastingUnit);
-            SetPlayerAbilityAvailable(p, SIDLIGHTNINGTOTEM, false);
-            SetPlayerAbilityAvailable(p, SIDEARTHBINDTOTEM, false);
-            SetPlayerAbilityAvailable(p, SIDTORRENTTOTEM, true);
-            currentTotemId[GetPlayerId(p)] = SIDTORRENTTOTEM;
+            SetPlayerAbilityAvailable(p, SID_LIGHTNING_TOTEM, false);
+            SetPlayerAbilityAvailable(p, SID_EARTH_BIND_TOTEM, false);
+            SetPlayerAbilityAvailable(p, SID_TORRENT_TOTEM, true);
+            currentTotemId[GetPlayerId(p)] = SID_TORRENT_TOTEM;
             p = null;
         }
     }
@@ -109,10 +109,10 @@ library Purge requires BuffSystem, SpellEvent, UnitProperty {
     function onInit() {
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
         BuffType.register(BUFF_ID1, BUFF_MAGE, BUFF_NEG);
-        RegisterSpellEffectResponse(SIDPURGE, onCast);
+        RegisterSpellEffectResponse(SID_PURGE, onCast);
     }
-#undef ART
-#undef BUFF_ID1
-#undef BUFF_ID
+
+
+
 }
 //! endzinc

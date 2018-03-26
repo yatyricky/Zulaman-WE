@@ -1,8 +1,8 @@
 //! zinc
 library DefensiveAura requires TimerUtils, ZAMCore, UnitProperty {
-#define INTERVAL 1.0
-#define AOE 900.0
-#define BUFF_ID 'A04B'
+constant real INTERVAL = 1.0;
+constant real AOE = 900.0;
+constant integer BUFF_ID = 'A04B';
 
     function onEffect(Buff buf) {}
 
@@ -47,7 +47,7 @@ library DefensiveAura requires TimerUtils, ZAMCore, UnitProperty {
     }
     
     function registerDA(unit u) {
-        if (GetUnitTypeId(u) == UTIDBLOODELFDEFENDER) {
+        if (GetUnitTypeId(u) == UTID_BLOOD_ELF_DEFENDER) {
             DefensiveAura.register(u);
         }
     }
@@ -57,7 +57,7 @@ library DefensiveAura requires TimerUtils, ZAMCore, UnitProperty {
         BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_POS);
     }
 }
-#undef BUFF_ID
-#undef AOE
-#undef INTERVAL
+
+
+
 //! endzinc

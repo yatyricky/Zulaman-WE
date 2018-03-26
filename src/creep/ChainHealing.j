@@ -1,10 +1,10 @@
 //! zinc
 library ChainHealing requires SpellEvent, DamageSystem {
-#define ART_CH_LIGHT "HWPB"
-#define ART_TARGET "Abilities\\Spells\\Orc\\HealingWave\\HealingWaveTarget.mdl"
-#define JUMP_FACTOR 1.5
-#define MAX_TARGETS 3
-#define INIT_AMT 1000
+constant string  ART_CH_LIGHT  = "HWPB";
+constant string  ART_TARGET  = "Abilities\\Spells\\Orc\\HealingWave\\HealingWaveTarget.mdl";
+constant real JUMP_FACTOR = 1.5;
+constant integer MAX_TARGETS = 3;
+constant integer INIT_AMT = 1000;
 
     unit mobs[];
     integer num;
@@ -71,10 +71,10 @@ library ChainHealing requires SpellEvent, DamageSystem {
         RegisterSpellChannelResponse(SID_CHAIN_HEALING, onChannel);
     }
     
-#undef INIT_AMT
-#undef MAX_TARGETS
-#undef JUMP_FACTOR
-#undef ART_TARGET
-#undef ART_CH_LIGHT
+
+
+
+
+
 }
 //! endzinc

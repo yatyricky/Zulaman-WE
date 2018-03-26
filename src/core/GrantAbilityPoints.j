@@ -6,8 +6,8 @@ library GrantAbilityPoints requires NefUnion, ZAMCore {
         integer i;
         if (utid == UTID_ARCH_TINKER || utid == UTID_ARCH_TINKER_MORPH || /*
                 */ utid == UTID_NAGA_SEA_WITCH || /*
-                */ utid == UTIDTIDEBARON || utid == UTIDTIDEBARONWATER || /*
-                */ utid == UTIDWARLOCK) {
+                */ utid == UTID_TIDE_BARON || utid == UTID_TIDE_BARON_WATER || /*
+                */ utid == UTID_WARLOCK) {
             CURRENT_HERO_LEVEL += 1;
         }
     }

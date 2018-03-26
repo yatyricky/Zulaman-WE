@@ -1,6 +1,6 @@
 //! zinc
 library DaggerOfAssassination requires ItemAttributes, DamageSystem {
-#define BUFF_ID 'A06A'
+constant integer BUFF_ID = 'A06A';
     HandleTable ht;
     
     function onEffect(Buff buf) {
@@ -53,10 +53,10 @@ library DaggerOfAssassination requires ItemAttributes, DamageSystem {
 
     function onInit() {
         ht = HandleTable.create();
-        RegisterItemPropMod(ITIDDAGGEROFASSASSINATION, action);
+        RegisterItemPropMod(ITID_DAGGER_OF_ASSASSINATION, action);
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_NEG);
         RegisterOnDamageEvent(ondamaging);
     }
-#undef BUFF_ID
+
 }
 //! endzinc

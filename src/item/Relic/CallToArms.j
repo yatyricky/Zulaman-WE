@@ -1,7 +1,7 @@
 //! zinc
 library CallToArms requires ItemAttributes, DamageSystem {
-#define ART_CASTER "Abilities\\Spells\\NightElf\\BattleRoar\\RoarCaster.mdl"
-#define BUFF_ID 'A068'
+constant string  ART_CASTER  = "Abilities\\Spells\\NightElf\\BattleRoar\\RoarCaster.mdl";
+constant integer BUFF_ID = 'A068';
     HandleTable ht;
     
     function onEffect(Buff buf) {}
@@ -15,7 +15,7 @@ library CallToArms requires ItemAttributes, DamageSystem {
         up.ModAP(20 * fac);
         up.spellPower += 15.0 * fac;
         up.lifeRegen += 12.0 * fac;
-	    up.ll += 0.07 * fac;
+        up.ll += 0.07 * fac;
         if (!ht.exists(u)) {ht[u] = 0;}
         ht[u] = ht[u] + fac;
     }
@@ -59,12 +59,12 @@ library CallToArms requires ItemAttributes, DamageSystem {
 
     function onInit() {
         ht = HandleTable.create();
-        RegisterItemPropMod(ITIDCALLTOARMS, action);
-        RegisterSpellEffectResponse(SIDCALLTOARMS, onCast);
+        RegisterItemPropMod(ITID_CALL_TO_ARMS, action);
+        RegisterSpellEffectResponse(SID_CALL_TO_ARMS, onCast);
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
         RegisterOnDamageEvent(ondamaging);
     }
-#undef BUFF_ID
-#undef ART_CASTER
+
+
 }
 //! endzinc

@@ -1,7 +1,7 @@
 //! zinc
 library MarrowSqueeze requires CastingBar, UnitProperty, Anathema, HeathenGlobal {
-#define ART "Abilities\\Spells\\Undead\\DeathandDecay\\DeathandDecayTarget.mdl"
-#define BUFF_ID 'A04Q'
+constant string  ART  = "Abilities\\Spells\\Undead\\DeathandDecay\\DeathandDecayTarget.mdl";
+constant integer BUFF_ID = 'A04Q';
 
     function returnDamage(integer lvl, real sp) -> real {
         return 180 + sp * 0.92;
@@ -22,13 +22,13 @@ library MarrowSqueeze requires CastingBar, UnitProperty, Anathema, HeathenGlobal
     }
 
     function response(CastingBar cd) {
-        integer lvl = GetUnitAbilityLevel(cd.caster, SIDMARROWSQUEEZE);
+        integer lvl = GetUnitAbilityLevel(cd.caster, SID_MARROW_SQUEEZE);
         real dmg = returnDamage(lvl, UnitProp[cd.caster].SpellPower());
         integer incre;
         real heal;
         Buff buf, swpain;
         AddTimedEffect.atUnit(ART, cd.target, "origin", 0.3);
-        DamageTarget(cd.caster, cd.target, dmg, SpellData[SIDMARROWSQUEEZE].name, false, true, false, WEAPON_TYPE_WHOKNOWS);  
+        DamageTarget(cd.caster, cd.target, dmg, SpellData[SID_MARROW_SQUEEZE].name, false, true, false, WEAPON_TYPE_WHOKNOWS);  
         
         // equiped Anathema
         if (HasAnathema(cd.caster)) {
@@ -64,7 +64,7 @@ library MarrowSqueeze requires CastingBar, UnitProperty, Anathema, HeathenGlobal
         buf.bd.bor = onRemove;
         buf.run();
         
-        HealTarget(cd.caster, cd.caster, heal, SpellData[SIDMARROWSQUEEZE].name, 0.0);
+        HealTarget(cd.caster, cd.caster, heal, SpellData[SID_MARROW_SQUEEZE].name, 0.0);
     }
     
     function onChannel() {
@@ -75,10 +75,10 @@ library MarrowSqueeze requires CastingBar, UnitProperty, Anathema, HeathenGlobal
 
     function onInit() {
         castSound = DefineSound("Abilities\\Spells\\Undead\\UndeadMine\\MineDomeLoop1.wav", 1869, true, false);
-        RegisterSpellChannelResponse(SIDMARROWSQUEEZE, onChannel);
+        RegisterSpellChannelResponse(SID_MARROW_SQUEEZE, onChannel);
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
     }
-#undef BUFF_ID
-#undef ART
+
+
 }
 //! endzinc

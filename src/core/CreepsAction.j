@@ -37,13 +37,13 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         integer res;
         real x, y, l, a;
         unit tar = null;
-        if (!IsUnitChanneling(source) && GetUnitAbilityLevel(source, SIDAPIV) == 0) {
+        if (!IsUnitChanneling(source) && GetUnitAbilityLevel(source, SID_APIV) == 0) {
             ip = IntegerPool.create();
-            if (UnitCanUse(source, SIDSPIRITBOLT) && combatTime > 30) {
-                ip.add(SIDSPIRITBOLT, 30);
+            if (UnitCanUse(source, SID_SPIRIT_BOLT) && combatTime > 30) {
+                ip.add(SID_SPIRIT_BOLT, 30);
             } else {
-                if (UnitCanUse(source, SIDSPIRITHARVEST) && GetUnitStatePercent(source, UNIT_STATE_LIFE, UNIT_STATE_MAX_LIFE) < 80) {
-                    ip.add(SIDSPIRITHARVEST, 30);
+                if (UnitCanUse(source, SID_SPIRIT_HARVEST) && GetUnitStatePercent(source, UNIT_STATE_LIFE, UNIT_STATE_MAX_LIFE) < 80) {
+                    ip.add(SID_SPIRIT_HARVEST, 30);
                 } else {                    
                     if (UnitCanUse(source, DBMHexLord.spell1)) {
                         ip.add(DBMHexLord.spell1, 30);
@@ -59,13 +59,13 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
             if (res == 0) {
                 IssueTargetOrderById(source, OID_ATTACK, target);
             } else if (SpellData[res].otp == ORDER_TYPE_TARGET) {
-                if (res == SIDDARKARROWHEX || res == SIDSTEALTHHEX || res == SIDPAINHEX) {
+                if (res == SID_DARK_ARROW_HEX || res == SID_STEALTH_HEX || res == SID_PAIN_HEX) {
                     tar = PlayerUnits.getRandomHero();                    
-                } else if (res == SIDPOLYMORPHHEX) {
+                } else if (res == SID_POLYMORPH_HEX) {
                     tar = PlayerUnits.getRandomExclude(target);
-                } else if (res == SIDLIFEBLOOMHEX || res == SIDHOLYBOLTHEX || res == SIDHEALHEX || res == SIDSHIELDHEX) {
+                } else if (res == SID_LIFE_BLOOMHEX || res == SID_HOLY_BOLT_HEX || res == SID_HEAL_HEX || res == SID_SHIELD_HEX) {
                     tar = MobList.getLowestHPPercent();
-                } else if (res == SIDHOLYSHOCKHEX) {
+                } else if (res == SID_HOLY_SHOCK_HEX) {
                     if (GetRandomInt(0, 1) == 1) {
                         tar = PlayerUnits.getRandomHero();
                     } else {
@@ -79,16 +79,16 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
                 IssueImmediateOrderById(source, SpellData[res].oid);
 //            } else if (SpellData[res].otp == ORDER_TYPE_POINT) {
 //                x = GetUnitX(target); y = GetUnitY(target);
-//                if (res == SIDSUNFIRESTORMHEX) {
+//                if (res == SID_SUN_FIRE_STORMHEX) {
 //                    tar = PlayerUnits.getRandomInRange(source, 3600.0);
 //print("Sunfire storm on " + GetUnitNameEx(tar));
 //                    if (tar != null) {
 //                        x = GetUnitX(tar); y = GetUnitY(tar);
 //                    }
-                //} else if (res == SIDFREEZINGTRAPHEX) {
+                //} else if (res == SID_FREEZING_TRAP_HEX) {
 //print("lightning totem casting point: " + R2S(GetUnitX(target)) + " - " + R2S(GetUnitY(target)));
                 //    IssuePointOrderById(source, SpellData[res].oid, GetUnitX(target), GetUnitY(target));
-//                } else if (res == SIDLIGHTNINGTOTEMHEX) {
+//                } else if (res == SID_LIGHTNING_TOTEM_HEX) {
 //                    RandomPoint.aroundUnit(source, 100.0, 200.0);
 //print("lightning totem casting point: " + R2S(RandomPoint.x) + " - " + R2S(RandomPoint.y));
 //                    x = RandomPoint.x; y = RandomPoint.y;
@@ -512,18 +512,18 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         /*        print("-- - - - - - - - - - - -  -");*/
         if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
             ip = IntegerPool.create();
-            if (UnitCanUse(source, SIDTIDEBARONMORPH) && combatTime > 34) {
-                ip.add(SIDTIDEBARONMORPH, 50);
+            if (UnitCanUse(source, SID_TIDE_BARON_MORPH) && combatTime > 34) {
+                ip.add(SID_TIDE_BARON_MORPH, 50);
             } else {
-                if (UnitCanUse(source, SIDTEARUP) && GetUnitAbilityLevel(target, 'A04Z') == 0) {
-                    ip.add(SIDTEARUP, 15);
+                if (UnitCanUse(source, SID_TEAR_UP) && GetUnitAbilityLevel(target, 'A04Z') == 0) {
+                    ip.add(SID_TEAR_UP, 15);
                 }
-                if (UnitCanUse(source, SIDLANCINATE) && GetUnitAbilityLevel(target, 'A050') == 0) {
+                if (UnitCanUse(source, SID_LANCINATE) && GetUnitAbilityLevel(target, 'A050') == 0) {
                     //print("1");
-                    ip.add(SIDLANCINATE, 30);
+                    ip.add(SID_LANCINATE, 30);
                 }
-                if (UnitCanUse(source, SIDRASPYROAR) && combatTime > 5) {
-                    ip.add(SIDRASPYROAR, 30);
+                if (UnitCanUse(source, SID_RASPY_ROAR) && combatTime > 5) {
+                    ip.add(SID_RASPY_ROAR, 30);
                 }
                 ip.add(0, 20);
             }
@@ -545,15 +545,15 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         /*        print("-- - - - - - - - - - - -  -");*/
         if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
             ip = IntegerPool.create();
-            if (UnitCanUse(source, SIDTIDEBARONMORPH) && combatTime > 34) {
-                ip.add(SIDTIDEBARONMORPH, 50);
+            if (UnitCanUse(source, SID_TIDE_BARON_MORPH) && combatTime > 34) {
+                ip.add(SID_TIDE_BARON_MORPH, 50);
             } else {
-                if (UnitCanUse(source, SIDALKALINEWATER)) {
-                    ip.add(SIDALKALINEWATER, 30);
+                if (UnitCanUse(source, SID_ALKALINE_WATER)) {
+                    ip.add(SID_ALKALINE_WATER, 30);
                 }
-                if (UnitCanUse(source, SIDTIDE) && combatTime > 20) {
+                if (UnitCanUse(source, SID_TIDE) && combatTime > 20) {
                     //print("1");
-                    ip.add(SIDTIDE, 15);
+                    ip.add(SID_TIDE, 15);
                 }
                 ip.add(0, 30);
             }
@@ -562,13 +562,13 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
                 IssueTargetOrderById(source, OID_ATTACK, target);
             } else if (SpellData[res].otp == ORDER_TYPE_TARGET) {
                 //NotAttacking(source);
-                if (res == SIDALKALINEWATER) {
+                if (res == SID_ALKALINE_WATER) {
                     IssueTargetOrderById(source, SpellData[res].oid, AggroList[source].getFirst());
                 } else {
                     IssueTargetOrderById(source, SpellData[res].oid, PlayerUnits.getRandomHero());
                 }
             } else if (SpellData[res].otp == ORDER_TYPE_IMMEDIATE) {
-                if (res == SIDTIDEBARONMORPH) {
+                if (res == SID_TIDE_BARON_MORPH) {
 //print("wanna be slardar");
                     IssueImmediateOrderById(source, OID_UNBEARFORM);
                 }
@@ -577,54 +577,54 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         }    
     }
     
-	/*
-					#0	RAGE
-		P1:	@10s 100%-25%
-			@20s	#2	SIDFLAMEBOMB
-			@35s	#3	SIDSUMMONLAVASPAWN
-					#4	SIDFLAMETHROW
-		P2:	25%-0%
-					#1	SIDFRENZYWARLOCK
-	*/
+    /*
+                    #0    RAGE
+        P1:    @10s 100%-25%
+            @20s    #2    SID_FLAME_BOMB
+            @35s    #3    SID_SUMMON_LAVA_SPAWN
+                    #4    SID_FLAME_THROW
+        P2:    25%-0%
+                    #1    SID_FRENZY_WARLOCK
+    */
     function makeOrderWarlock(unit source, unit target, real combatTime) {
         IntegerPool ip;
         integer res;
         if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
             ip = IntegerPool.create();
-			if (UnitCanUse(source, SIDRAGECREEP) && combatTime > 300) {
-			// print("makeOrderWarlock: Time > 300 add " + ID2S(SIDRAGECREEP));
-				ip.add(SIDRAGECREEP, 30);
-			} else if (UnitCanUse(source, SIDFRENZYWARLOCK) && GetUnitStatePercent(source, UNIT_STATE_LIFE, UNIT_STATE_MAX_LIFE) < 26) {
-			// print("makeOrderWarlock: HP < 25 add " + ID2S(SIDFRENZYWARLOCK));
-				ip.add(SIDFRENZYWARLOCK, 30);
-			} else if (UnitCanUse(source, SIDFLAMEBOMB) && combatTime > 20) {
-			// print("makeOrderWarlock: Time > 20 add " + ID2S(SIDFLAMEBOMB));
-                ip.add(SIDFLAMEBOMB, 30);
-            } else if (UnitCanUse(source, SIDSUMMONLAVASPAWN) && combatTime > 35 && GetUnitStatePercent(source, UNIT_STATE_LIFE, UNIT_STATE_MAX_LIFE) > 25) {
-			// print("makeOrderWarlock: Time > 35 add " + ID2S(SIDSUMMONLAVASPAWN));
-				ip.add(SIDSUMMONLAVASPAWN, 30);
-			} else {
-				if (UnitCanUse(source, SIDFLAMETHROW) && combatTime > 10) {
-			// print("makeOrderWarlock: Time > 10 add " + ID2S(SIDFLAMETHROW));
-					ip.add(SIDFLAMETHROW, 50);
-				}
-				ip.add(0, 20);
+            if (UnitCanUse(source, SID_RAGE_CREEP) && combatTime > 300) {
+            // print("makeOrderWarlock: Time > 300 add " + ID2S(SID_RAGE_CREEP));
+                ip.add(SID_RAGE_CREEP, 30);
+            } else if (UnitCanUse(source, SID_FRENZY_WARLOCK) && GetUnitStatePercent(source, UNIT_STATE_LIFE, UNIT_STATE_MAX_LIFE) < 26) {
+            // print("makeOrderWarlock: HP < 25 add " + ID2S(SID_FRENZY_WARLOCK));
+                ip.add(SID_FRENZY_WARLOCK, 30);
+            } else if (UnitCanUse(source, SID_FLAME_BOMB) && combatTime > 20) {
+            // print("makeOrderWarlock: Time > 20 add " + ID2S(SID_FLAME_BOMB));
+                ip.add(SID_FLAME_BOMB, 30);
+            } else if (UnitCanUse(source, SID_SUMMON_LAVA_SPAWN) && combatTime > 35 && GetUnitStatePercent(source, UNIT_STATE_LIFE, UNIT_STATE_MAX_LIFE) > 25) {
+            // print("makeOrderWarlock: Time > 35 add " + ID2S(SID_SUMMON_LAVA_SPAWN));
+                ip.add(SID_SUMMON_LAVA_SPAWN, 30);
+            } else {
+                if (UnitCanUse(source, SID_FLAME_THROW) && combatTime > 10) {
+            // print("makeOrderWarlock: Time > 10 add " + ID2S(SID_FLAME_THROW));
+                    ip.add(SID_FLAME_THROW, 50);
+                }
+                ip.add(0, 20);
             }
             res = ip.get();
             if (res == 0) {
                 IssueTargetOrderById(source, OID_ATTACK, target);
             } else if (SpellData[res].otp == ORDER_TYPE_TARGET) {
-				IssueTargetOrderById(source, SpellData[res].oid, PlayerUnits.getRandomHero());
+                IssueTargetOrderById(source, SpellData[res].oid, PlayerUnits.getRandomHero());
             } else if (SpellData[res].otp == ORDER_TYPE_IMMEDIATE) {
                 IssueImmediateOrderById(source, SpellData[res].oid);
             }
             ip.destroy();
         }    
     }
-	
-	function makeOrderLavaSpawn(unit source, unit target, real combatTime) {
-		IssueTargetOrderById(source, OID_ATTACK, target);
-	}
+    
+    function makeOrderLavaSpawn(unit source, unit target, real combatTime) {
+        IssueTargetOrderById(source, OID_ATTACK, target);
+    }
 
     function makeOrderAbyssArchon(unit source, unit target, real combatTime) {
         if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
@@ -1081,9 +1081,9 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         unitCallBack['Hvsh'] = makeOrderHvsh;   // 娜迦女巫
         unitCallBack['n003'] = makeOrdern003;   // 飞蛇,劣质的
         
-        unitCallBack[UTIDTIDEBARONWATER] = makeOrderTideBaronWater;   // 潮汐男爵 海元素形态
-        unitCallBack[UTIDTIDEBARON] = makeOrderTideBaron;   // 潮汐男爵 海元素形态
-        unitCallBack[UTIDWARLOCK] = makeOrderWarlock;   // 术士
+        unitCallBack[UTID_TIDE_BARON_WATER] = makeOrderTideBaronWater;   // 潮汐男爵 海元素形态
+        unitCallBack[UTID_TIDE_BARON] = makeOrderTideBaron;   // 潮汐男爵 海元素形态
+        unitCallBack[UTID_WARLOCK] = makeOrderWarlock;   // 术士
         unitCallBack[UTID_LAVA_SPAWN] = makeOrderLavaSpawn;   // Lava Spawn
 
         unitCallBack[UTID_PIT_ARCHON] = makeOrderAbyssArchon;
@@ -1092,8 +1092,8 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         unitCallBack[UTID_ABOMINATION] = makeOrderAbomination;
         unitCallBack[UTID_WRAITH] = makeOrderWraith;
 
-        unitCallBack[UTIDHEXLORD] = makeOrderHexLord;   // 妖术领主
-        unitCallBack[UTIDLIGHTNINGTOTEM] = makeOrderLightningTotem;   // 闪电图腾
+        unitCallBack[UTID_HEX_LORD] = makeOrderHexLord;   // 妖术领主
+        unitCallBack[UTID_LIGHTNING_TOTEM] = makeOrderLightningTotem;   // 闪电图腾
         
         // ============= Area 1, 2 ==================
         unitCallBack[UTID_NAGA_SIREN] = makeOrderNagaSiren;   // Naga Siren

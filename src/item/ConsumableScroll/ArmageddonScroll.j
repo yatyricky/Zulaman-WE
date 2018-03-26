@@ -1,8 +1,8 @@
 //! zinc
 library ArmageddonScroll requires SpellEvent, DamageSystem {
-#define ART_TARGET "Abilities\\Spells\\Demon\\RainOfFire\\RainOfFireTarget.mdl"
-#define ART_TARGET1 "Units\\Demon\\Infernal\\InfernalBirth.mdl"
-#define ART_FIRE "Environment\\LargeBuildingFire\\LargeBuildingFire0.mdl"
+constant string  ART_TARGET  = "Abilities\\Spells\\Demon\\RainOfFire\\RainOfFireTarget.mdl";
+constant string  ART_TARGET1  = "Units\\Demon\\Infernal\\InfernalBirth.mdl";
+constant string  ART_FIRE  = "Environment\\LargeBuildingFire\\LargeBuildingFire0.mdl";
 
     struct Armageddon {
         private timer tm;
@@ -73,8 +73,8 @@ library ArmageddonScroll requires SpellEvent, DamageSystem {
         RegisterSpellEffectResponse(SID_ARMAGEDDON_SCROLL, onCast);
         
     }
-#undef ART_FIRE
-#undef ART_TARGET1
-#undef ART_TARGET
+
+
+
 }
 //! endzinc

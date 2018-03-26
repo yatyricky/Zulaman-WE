@@ -22,7 +22,7 @@ library OrcCaptureFlag requires ItemAttributes, DamageSystem {
 
     function onInit() {
         ht = HandleTable.create();
-        RegisterItemPropMod(ITIDORCCAPTUREFLAG, action);
+        RegisterItemPropMod(ITID_ORC_CAPTURE_FLAG, action);
     }
 }
 //! endzinc

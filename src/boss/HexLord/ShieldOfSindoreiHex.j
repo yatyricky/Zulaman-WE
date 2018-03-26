@@ -1,6 +1,6 @@
 //! zinc
 library ShieldOfSindoreiHex requires SpellEvent, BuffSystem {
-#define BUFF_ID 'A031'
+constant integer BUFF_ID = 'A031';
     function onEffect(Buff buf) {
         UnitProp[buf.bd.target].damageTaken -= buf.bd.r0;
     }
@@ -24,9 +24,9 @@ library ShieldOfSindoreiHex requires SpellEvent, BuffSystem {
     }
 
     function onInit() {
-        RegisterSpellEffectResponse(SIDSHIELDOFSINDOREIHEX, onCast);
+        RegisterSpellEffectResponse(SID_SHIELD_OF_SINDOREIHEX, onCast);
         //BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS); Already registered in original ability
     }
-#undef BUFF_ID
+
 }
 //! endzinc

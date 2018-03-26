@@ -1,7 +1,7 @@
 //! zinc
 library SunfireStorm requires SpellEvent, TimerUtils, AggroSystem, HexLordGlobal {
-#define ART_CASTER "Abilities\\Weapons\\DemolisherFireMissile\\DemolisherFireMissile.mdl"
-#define ART_EFFECT "Abilities\\Spells\\Orc\\LiquidFire\\Liquidfire.mdl"
+constant string  ART_CASTER  = "Abilities\\Weapons\\DemolisherFireMissile\\DemolisherFireMissile.mdl";
+constant string  ART_EFFECT  = "Abilities\\Spells\\Orc\\LiquidFire\\Liquidfire.mdl";
 
     struct SunFieldHex {
         real dmg;
@@ -27,7 +27,7 @@ library SunfireStorm requires SpellEvent, TimerUtils, AggroSystem, HexLordGlobal
             if (IsInCombat()) {
                 while (i < PlayerUnits.n) {
                     if (GetDistance.unitCoord(PlayerUnits.units[i], this.p.x, this.p.y) < HexLordGlobalConst.sunFireAOE && !IsUnitDead(PlayerUnits.units[i])) {
-                        DamageTarget(this.caster, PlayerUnits.units[i], this.dmg, SpellData[SIDSUNFIRESTORMHEX].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+                        DamageTarget(this.caster, PlayerUnits.units[i], this.dmg, SpellData[SID_SUN_FIRE_STORMHEX].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
                     }
                     i += 1;
                 }
@@ -67,9 +67,9 @@ library SunfireStorm requires SpellEvent, TimerUtils, AggroSystem, HexLordGlobal
     }
 
     function onInit() {
-        RegisterSpellEffectResponse(SIDSUNFIRESTORMHEX, onCast);
+        RegisterSpellEffectResponse(SID_SUN_FIRE_STORMHEX, onCast);
     }
-#undef ART_EFFECT
-#undef ART_CASTER
+
+
 }
 //! endzinc

@@ -61,17 +61,17 @@ library ZAMCore requires NefUnion {
     }
 
     public function IsUnitStealth(unit u) -> boolean {
-        return (GetUnitAbilityLevel(u, SIDAPIV) > 0);
+        return (GetUnitAbilityLevel(u, SID_APIV) > 0);
     }
     
     public function IsUnitTank(unit u) -> boolean {
         integer id = GetUnitTypeId(u);
-        return (id == UTIDBLOODELFDEFENDER || id == UTIDCLAWDRUID);
+        return (id == UTID_BLOOD_ELF_DEFENDER || id == UTID_CLAW_DRUID);
     }
 
     public function IsUnitDPS(unit u) -> boolean {
         integer id = GetUnitTypeId(u);
-        return (id == UTIDDARKRANGER || id == UTIDBLADEMASTER || id == UTIDFROSTMAGE || id == UTIDEARTHBINDER || id == UTID_EARTH_BINDER_ASC || id == UTIDROGUE || id == UTIDHEATHEN);
+        return (id == UTID_DARK_RANGER || id == UTID_BLADE_MASTER || id == UTID_FROST_MAGE || id == UTID_EARTH_BINDER || id == UTID_EARTH_BINDER_ASC || id == UTID_ROGUE || id == UTID_HEATHEN);
     }
     
     /*

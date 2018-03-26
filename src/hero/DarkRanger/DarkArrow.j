@@ -1,13 +1,13 @@
 //! zinc
 library DarkArrow requires SpellEvent, DamageSystem, Projectile, RhokDelar {
-#define PATH "Abilities\\Spells\\Other\\BlackArrow\\BlackArrowMissile.mdl"
+constant string  PATH  = "Abilities\\Spells\\Other\\BlackArrow\\BlackArrowMissile.mdl";
 
     function returnDamage(integer lvl, real ap) -> real {
         return ap * (0.8 + 0.4 * lvl);
     }
 
     function onhit(Projectile p) -> boolean {
-        DamageTarget(p.caster, p.target, p.r0, SpellData[SIDDARKARROW].name, true, true, false, WEAPON_TYPE_WHOKNOWS);
+        DamageTarget(p.caster, p.target, p.r0, SpellData[SID_DARK_ARROW].name, true, true, false, WEAPON_TYPE_WHOKNOWS);
         return true;
     }
     
@@ -18,7 +18,7 @@ library DarkArrow requires SpellEvent, DamageSystem, Projectile, RhokDelar {
         p.path = PATH;
         p.pr = onhit;
         p.speed = 900;
-        p.r0 = returnDamage(GetUnitAbilityLevel(p.caster, SIDDARKARROW), UnitProp[p.caster].AttackPower());
+        p.r0 = returnDamage(GetUnitAbilityLevel(p.caster, SID_DARK_ARROW), UnitProp[p.caster].AttackPower());
         p.launch();
     }
     
@@ -58,7 +58,7 @@ library DarkArrow requires SpellEvent, DamageSystem, Projectile, RhokDelar {
     }
 
     function onCast() {
-        integer lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SIDDARKARROW);
+        integer lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_DARK_ARROW);
         integer arrows = 1;    
         integer rnd;
             
@@ -83,9 +83,9 @@ library DarkArrow requires SpellEvent, DamageSystem, Projectile, RhokDelar {
     }
 
     function onInit() {
-        RegisterSpellEffectResponse(SIDDARKARROW, onCast);
+        RegisterSpellEffectResponse(SID_DARK_ARROW, onCast);
     }
    
-#undef PATH
+
 }
 //! endzinc

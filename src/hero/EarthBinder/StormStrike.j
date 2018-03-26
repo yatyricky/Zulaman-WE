@@ -14,7 +14,7 @@ library StormStrike requires DamageSystem, SpellData, BuffSystem, EarthBinderGlo
     
         private static method run() {
             thistype this = GetTimerData(GetExpiredTimer());
-            MultipleAbility[SIDEARTHSHOCK].showSecondary(GetOwningPlayer(this.u));
+            MultipleAbility[SID_EARTH_SHOCK].showSecondary(GetOwningPlayer(this.u));
             ReleaseTimer(this.tm);
             this.tm = null;
             this.u = null;
@@ -55,12 +55,12 @@ library StormStrike requires DamageSystem, SpellData, BuffSystem, EarthBinderGlo
     function onRemove(Buff buf) {}
     
     function onCast() {
-        integer lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SIDSTORMSTRIKE);
+        integer lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_STORM_STRIKE);
         real dmg = UnitProp[SpellEvent.CastingUnit].AttackPower() * returnDamageMultiplier(lvl);
         Buff buf;
         player p;
         //BJDebugMsg("SpellEvent: CastingUnit is " + GetUnitNameEx(SpellEvent.CastingUnit));
-        DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, dmg, SpellData[SIDSTORMSTRIKE].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
+        DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, dmg, SpellData[SID_STORM_STRIKE].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
         AddTimedEffect.atUnit(ART_IMPACT, SpellEvent.TargetUnit, "origin", 0.3);
         buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BUFF_ID_STORM_STRIKE);
         buf.bd.tick = -1;
@@ -69,28 +69,28 @@ library StormStrike requires DamageSystem, SpellData, BuffSystem, EarthBinderGlo
         buf.bd.boe = onEffect;
         buf.bd.bor = onRemove;
         buf.run();
-        if (lvl > 1 && GetUnitAbilityLevel(SpellEvent.CastingUnit, SIDEARTHSHOCK) > 0) {
+        if (lvl > 1 && GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_EARTH_SHOCK) > 0) {
             if (GetRandomInt(0, 100) < lvl * 10 - 5 || HasRareShimmerWeed(SpellEvent.CastingUnit)) {
-                CoolDown(SpellEvent.CastingUnit, SIDEARTHSHOCK);
-                CoolDown(SpellEvent.CastingUnit, SIDEARTHSHOCK1);
+                CoolDown(SpellEvent.CastingUnit, SID_EARTH_SHOCK);
+                CoolDown(SpellEvent.CastingUnit, SID_EARTH_SHOCK_1);
                 delayedDosth1.start(SpellEvent.CastingUnit);
-                //BJDebugMsg("³æõôCDÁË??");
+                //BJDebugMsg("ï¿½ï¿½ï¿½ï¿½CDï¿½ï¿½??");
                 delayedDosth.start(SpellEvent.CastingUnit);
                 RecoverOriginalEarthShock.start(SpellEvent.CastingUnit, 3.0);
                 //BJDebugMsg("6");
             }
         }
-        if (GetUnitAbilityLevel(SpellEvent.CastingUnit, SIDENCHANTEDTOTEM) > 0) {
+        if (GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_ENCHANTED_TOTEM) > 0) {
             p = GetOwningPlayer(SpellEvent.CastingUnit);
-            SetPlayerAbilityAvailable(p, SIDEARTHBINDTOTEM, false);
-            SetPlayerAbilityAvailable(p, SIDTORRENTTOTEM, false);
-            SetPlayerAbilityAvailable(p, SIDLIGHTNINGTOTEM, true);
+            SetPlayerAbilityAvailable(p, SID_EARTH_BIND_TOTEM, false);
+            SetPlayerAbilityAvailable(p, SID_TORRENT_TOTEM, false);
+            SetPlayerAbilityAvailable(p, SID_LIGHTNING_TOTEM, true);
             p = null;
         }
     }
 
     function onInit() {
-        RegisterSpellEffectResponse(SIDSTORMSTRIKE, onCast);
+        RegisterSpellEffectResponse(SID_STORM_STRIKE, onCast);
         BuffType.register(BUFF_ID_STORM_STRIKE, BUFF_MAGE, BUFF_NEG);
     }
 }

@@ -1,8 +1,8 @@
 //! zinc
 library WeakenCurseScroll requires SpellEvent, CastingBar {
-#define ART_CASTER "Abilities\\Spells\\Other\\HowlOfTerror\\HowlCaster.mdl"
-#define ART_TARGET "Abilities\\Spells\\Human\\slow\\slowtarget.mdl"
-#define BUFF_ID 'A07N'
+constant string  ART_CASTER  = "Abilities\\Spells\\Other\\HowlOfTerror\\HowlCaster.mdl";
+constant string  ART_TARGET  = "Abilities\\Spells\\Human\\slow\\slowtarget.mdl";
+constant integer BUFF_ID = 'A07N';
     
     function onEffect(Buff buf) {
         UnitProp[buf.bd.target].damageDealt -= buf.bd.r0;
@@ -37,8 +37,8 @@ library WeakenCurseScroll requires SpellEvent, CastingBar {
         RegisterSpellEffectResponse(SID_WEAKEN_CURSE_SCROLL, onCast);
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_NEG);
     }
-#undef BUFF_ID
-#undef ART_TARGET
-#undef ART_CASTER
+
+
+
 }
 //! endzinc

@@ -1,8 +1,8 @@
 //! zinc
 library CthunsDerangement requires ItemAttributes, DamageSystem {
-#define BUFF_ID 'A06P'
-#define BUFF_ID1 'A06R'
-#define ART "Abilities\\Spells\\Undead\\UnholyFrenzy\\UnholyFrenzyTarget.mdl"
+constant integer BUFF_ID = 'A06P';
+constant integer BUFF_ID1 = 'A06R';
+constant string  ART  = "Abilities\\Spells\\Undead\\UnholyFrenzy\\UnholyFrenzyTarget.mdl";
     HandleTable ht;
     
     function onEffect(Buff buf) {
@@ -57,7 +57,7 @@ library CthunsDerangement requires ItemAttributes, DamageSystem {
         up.ModStr(20 * fac);
         up.attackCrit += 0.04 * fac;
         up.lifeRegen -= 40.0 * fac;
-	    up.ll += 0.14 * fac;
+        up.ll += 0.14 * fac;
         
         if (fac == 1) {
             cd.ap = 5 * GetHeroLevel(u);
@@ -130,8 +130,8 @@ library CthunsDerangement requires ItemAttributes, DamageSystem {
         RegisterDamagedEvent(damaged);
         TriggerAnyUnit(EVENT_PLAYER_HERO_LEVEL, function lvledup);
     }
-#undef ART
-#undef BUFF_ID1
-#undef BUFF_ID
+
+
+
 }
 //! endzinc

@@ -1,7 +1,7 @@
 //! zinc
 library WoeStave requires ItemAttributes, DamageSystem {
-#define BUFF_ID 'A067'
-#define ART "Abilities\\Spells\\Undead\\Cripple\\CrippleTarget.mdl"
+constant integer BUFF_ID = 'A067';
+constant string  ART  = "Abilities\\Spells\\Undead\\Cripple\\CrippleTarget.mdl";
     HandleTable ht;
     
     function onEffect(Buff buf) {}
@@ -53,11 +53,11 @@ library WoeStave requires ItemAttributes, DamageSystem {
 
     function onInit() {
         ht = HandleTable.create();
-        RegisterItemPropMod(ITIDWOESTAVE, action);
+        RegisterItemPropMod(ITID_WOE_STAVE, action);
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_NEG);
         RegisterDamagedEvent(damaged);
     }
-#undef ART
-#undef BUFF_ID
+
+
 }
 //! endzinc

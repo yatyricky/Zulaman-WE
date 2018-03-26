@@ -1,8 +1,8 @@
 //! zinc
 library SpiritBolt requires CastingBar, Projectile, CombatFacts {
-#define ART_MISSILE "Abilities\\Weapons\\ZigguratMissile\\ZigguratMissile.mdl"
-#define BUFF_ID 'A05T'
-#define ART_ABSORB "Objects\\Spawnmodels\\Undead\\UndeadDissipate\\UndeadDissipate.mdl"
+constant string  ART_MISSILE  = "Abilities\\Weapons\\ZigguratMissile\\ZigguratMissile.mdl";
+constant integer BUFF_ID = 'A05T';
+constant string  ART_ABSORB  = "Objects\\Spawnmodels\\Undead\\UndeadDissipate\\UndeadDissipate.mdl";
 
     Table spell1Tab, spell2Tab;
 
@@ -17,7 +17,7 @@ library SpiritBolt requires CastingBar, Projectile, CombatFacts {
             p.reverse();
             return false;
         } else {
-            DamageTarget(p.caster, p.target, 30.0, SpellData[SIDSPIRITBOLT].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+            DamageTarget(p.caster, p.target, 30.0, SpellData[SID_SPIRIT_BOLT].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
             return true;
         }
     }
@@ -65,36 +65,36 @@ library SpiritBolt requires CastingBar, Projectile, CombatFacts {
     }
 
     function onInit() {
-        RegisterSpellChannelResponse(SIDSPIRITBOLT, onChannel);
+        RegisterSpellChannelResponse(SID_SPIRIT_BOLT, onChannel);
         BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_NEG);
         
         spell1Tab = Table.create();
         spell2Tab = Table.create();
-        spell1Tab[UTIDBLOODELFDEFENDER] = SIDSUNFIRESTORMHEX;
-        spell2Tab[UTIDBLOODELFDEFENDER] = SIDSHIELDOFSINDOREIHEX;
-        spell1Tab[UTIDCLAWDRUID] = SID_SAVAGE_ROAR_HEX;
-        spell2Tab[UTIDCLAWDRUID] = SID_NATURAL_REFLEX_HEX;
-        spell1Tab[UTIDKEEPEROFGROVE] = SIDTRANQUILITYHEX;
-        spell2Tab[UTIDKEEPEROFGROVE] = SIDLIFEBLOOMHEX;
-        spell1Tab[UTIDPALADIN] = SIDHOLYBOLTHEX;
-        spell2Tab[UTIDPALADIN] = SIDHOLYSHOCKHEX;
-        spell1Tab[UTIDPRIEST] = SIDHEALHEX;
-        spell2Tab[UTIDPRIEST] = SIDSHIELDHEX;
-        spell1Tab[UTIDBLADEMASTER] = SIDMORTALSTRIKEHEX;
-        spell2Tab[UTIDBLADEMASTER] = SIDOVERPOWERHEX;
-        spell1Tab[UTIDDARKRANGER] = SIDDARKARROWHEX;
-        spell2Tab[UTIDDARKRANGER] = SIDFREEZINGTRAPHEX;
-        spell1Tab[UTIDFROSTMAGE] = SIDFROSTBOLTHEX;
-        spell2Tab[UTIDFROSTMAGE] = SIDPOLYMORPHHEX;
-        spell1Tab[UTIDEARTHBINDER] = SIDLIGHTNINGTOTEMHEX;
-        spell2Tab[UTIDEARTHBINDER] = SIDCHARGEHEX;
-        spell1Tab[UTIDROGUE] = SIDSTEALTHHEX;
-        spell2Tab[UTIDROGUE] = SIDBLADEFLURRYHEX;
-        spell1Tab[UTIDHEATHEN] = SIDPAINHEX;
-        spell2Tab[UTIDHEATHEN] = SIDTERRORHEX;        
+        spell1Tab[UTID_BLOOD_ELF_DEFENDER] = SID_SUN_FIRE_STORMHEX;
+        spell2Tab[UTID_BLOOD_ELF_DEFENDER] = SID_SHIELD_OF_SINDOREIHEX;
+        spell1Tab[UTID_CLAW_DRUID] = SID_SAVAGE_ROAR_HEX;
+        spell2Tab[UTID_CLAW_DRUID] = SID_NATURAL_REFLEX_HEX;
+        spell1Tab[UTID_KEEPER_OF_GROVE] = SID_TRANQUILITY_HEX;
+        spell2Tab[UTID_KEEPER_OF_GROVE] = SID_LIFE_BLOOMHEX;
+        spell1Tab[UTID_PALADIN] = SID_HOLY_BOLT_HEX;
+        spell2Tab[UTID_PALADIN] = SID_HOLY_SHOCK_HEX;
+        spell1Tab[UTID_PRIEST] = SID_HEAL_HEX;
+        spell2Tab[UTID_PRIEST] = SID_SHIELD_HEX;
+        spell1Tab[UTID_BLADE_MASTER] = SID_MORTAL_STRIKE_HEX;
+        spell2Tab[UTID_BLADE_MASTER] = SID_OVER_POWER_HEX;
+        spell1Tab[UTID_DARK_RANGER] = SID_DARK_ARROW_HEX;
+        spell2Tab[UTID_DARK_RANGER] = SID_FREEZING_TRAP_HEX;
+        spell1Tab[UTID_FROST_MAGE] = SID_FROST_BOLT_HEX;
+        spell2Tab[UTID_FROST_MAGE] = SID_POLYMORPH_HEX;
+        spell1Tab[UTID_EARTH_BINDER] = SID_LIGHTNING_TOTEM_HEX;
+        spell2Tab[UTID_EARTH_BINDER] = SID_CHARGE_HEX;
+        spell1Tab[UTID_ROGUE] = SID_STEALTH_HEX;
+        spell2Tab[UTID_ROGUE] = SID_BLADE_FLURRY_HEX;
+        spell1Tab[UTID_HEATHEN] = SID_PAIN_HEX;
+        spell2Tab[UTID_HEATHEN] = SID_TERROR_HEX;        
     }
-#undef ART_ABSORB
-#undef BUFF_ID
-#undef ART_MISSILE
+
+
+
 }
 //! endzinc

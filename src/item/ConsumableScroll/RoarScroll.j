@@ -1,7 +1,7 @@
 //! zinc
 library RoarScroll requires SpellEvent, ZAMCore {
-#define ART_CASTER "Abilities\\Spells\\NightElf\\BattleRoar\\RoarCaster.mdl"
-#define BUFF_ID 'A071'
+constant string  ART_CASTER  = "Abilities\\Spells\\NightElf\\BattleRoar\\RoarCaster.mdl";
+constant integer BUFF_ID = 'A071';
     
     function onEffect(Buff buf) {
         UnitProp[buf.bd.target].ModAP(buf.bd.i0);
@@ -35,7 +35,7 @@ library RoarScroll requires SpellEvent, ZAMCore {
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
         
     }
-#undef BUFF_ID
-#undef ART_CASTER
+
+
 }
 //! endzinc

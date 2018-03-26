@@ -1,6 +1,6 @@
 //! zinc
 library Regeneration requires UnitProperty, PlayerUnitList, AggroSystem {
-#define INTERVAL 0.33
+constant real INTERVAL = 0.33;
     //unit playerUnits[];
     //integer playerUnitsIndex;
     //unit[] mobs;
@@ -67,5 +67,5 @@ library Regeneration requires UnitProperty, PlayerUnitList, AggroSystem {
         //mn = 0;        
     }
 }
-#undef INTERVAL
+
 //! endzinc

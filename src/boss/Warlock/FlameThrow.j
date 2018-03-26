@@ -1,7 +1,7 @@
 //! zinc
 library FlameThrow requires SpellEvent, DamageSystem, GroupUtils {
-#define MISSILE "Abilities\\Weapons\\RedDragonBreath\\RedDragonMissile.mdl"
-#define IMPACT "Abilities\\Weapons\\FireBallMissile\\FireBallMissile.mdl"
+constant string  MISSILE  = "Abilities\\Weapons\\RedDragonBreath\\RedDragonMissile.mdl";
+constant string  IMPACT  = "Abilities\\Weapons\\FireBallMissile\\FireBallMissile.mdl";
 
     struct FlameThrow {
         private timer tm;
@@ -39,7 +39,7 @@ library FlameThrow requires SpellEvent, DamageSystem, GroupUtils {
                 
                 while (i < PlayerUnits.n) {
                     if (GetDistance.units2d(PlayerUnits.units[i], this.mis) < FlameThrowAux.radius && !IsUnitDead(PlayerUnits.units[i]) && !IsUnitInGroup(PlayerUnits.units[i], this.damaged)) {
-                        DamageTarget(this.a, PlayerUnits.units[i], 750.0, SpellData[SIDFLAMETHROW].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+                        DamageTarget(this.a, PlayerUnits.units[i], 750.0, SpellData[SID_FLAME_THROW].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
                         AddTimedEffect.atUnit(IMPACT, PlayerUnits.units[i], "origin", 0.0);
                         GroupAddUnit(this.damaged, PlayerUnits.units[i]);
                     }
@@ -76,9 +76,9 @@ library FlameThrow requires SpellEvent, DamageSystem, GroupUtils {
     }
 
     function onInit() {
-        RegisterSpellEffectResponse(SIDFLAMETHROW, onCast);
+        RegisterSpellEffectResponse(SID_FLAME_THROW, onCast);
     }
-#undef IMPACT
-#undef MISSILE
+
+
 }
 //! endzinc

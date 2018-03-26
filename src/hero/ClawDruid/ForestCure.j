@@ -1,6 +1,6 @@
 //! zinc
 library ForestCure requires SpellEvent, UnitProperty, DamageSystem {
-#define ART_CASTER "Units\\NightElf\\Owl\\Owl.mdl"
+constant string  ART_CASTER  = "Units\\NightElf\\Owl\\Owl.mdl";
 
     function returnPercent(integer lvl) -> real {
         return 0.03 * lvl;
@@ -25,7 +25,7 @@ library ForestCure requires SpellEvent, UnitProperty, DamageSystem {
         }
         ModUnitMana(SpellEvent.CastingUnit, 0.0 - GetUnitState(SpellEvent.CastingUnit, UNIT_STATE_MAX_MANA) * cost);
         amt = (returnPercent(lvl) * GetUnitState(SpellEvent.CastingUnit, UNIT_STATE_MAX_LIFE) + returnPoints(lvl)) * (cost / 0.5);
-        // ²»ÊÜÇ¿¶È¼Ó³É£¬²»»á±©»÷        
+        // ï¿½ï¿½ï¿½ï¿½Ç¿ï¿½È¼Ó³É£ï¿½ï¿½ï¿½ï¿½á±©ï¿½ï¿½        
         UnitProp[SpellEvent.CastingUnit].aggroRate += 3.0;
         HealTarget(SpellEvent.CastingUnit, SpellEvent.CastingUnit, amt, SpellData[SID_FOREST_CURE].name, -3.0);
         UnitProp[SpellEvent.CastingUnit].aggroRate -= 3.0;
@@ -35,6 +35,6 @@ library ForestCure requires SpellEvent, UnitProperty, DamageSystem {
     function onInit() {
         RegisterSpellEffectResponse(SID_FOREST_CURE, onCast);
     }
-#undef ART_CASTER
+
 }
 //! endzinc

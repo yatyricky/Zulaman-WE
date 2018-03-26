@@ -1,7 +1,7 @@
 //! zinc
 library BansheeScroll requires SpellEvent, CastingBar, Projectile, Sounds {
-#define MISSILE "Abilities\\Weapons\\BansheeMissile\\BansheeMissile.mdl"
-#define BUFF_ID 'A07L'
+constant string  MISSILE  = "Abilities\\Weapons\\BansheeMissile\\BansheeMissile.mdl";
+constant integer BUFF_ID = 'A07L';
 
     function onhit(Projectile p) -> boolean {
         return true;
@@ -49,7 +49,7 @@ library BansheeScroll requires SpellEvent, CastingBar, Projectile, Sounds {
         RegisterSpellEffectResponse(SID_BANSHEE_SCROLL, onCast);
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_NEG);
     }
-#undef BUFF_ID
-#undef MISSILE
+
+
 }
 //! endzinc

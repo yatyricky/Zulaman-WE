@@ -1,7 +1,7 @@
 //! zinc
 library ArcanePotion requires SpellEvent, BuffSystem, DamageSystem, Projectile {
-#define BUFF_ID 'A089'
-#define PATH "Abilities\\Spells\\Items\\OrbCorruption\\OrbCorruptionMissile.mdl"
+constant integer BUFF_ID = 'A089';
+constant string  PATH  = "Abilities\\Spells\\Items\\OrbCorruption\\OrbCorruptionMissile.mdl";
 
     function onhit(Projectile p) -> boolean {
         DamageTarget(p.caster, p.target, 100.0, SpellData[SID_ARCANE_POTION].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
@@ -44,7 +44,7 @@ library ArcanePotion requires SpellEvent, BuffSystem, DamageSystem, Projectile {
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
         RegisterDamagedEvent(damaged);        
     }
-#undef PATH
-#undef BUFF_ID
+
+
 }
 //! endzinc

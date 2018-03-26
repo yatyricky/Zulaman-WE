@@ -1,7 +1,7 @@
 //! zinc
 library CharmOfInnerFire requires SpellEvent, BuffSystem, UnitProperty {
-#define BUFF_ID 'A0AD'
-#define ART_TARGET "Abilities\\Spells\\Human\\InnerFire\\InnerFireTarget.mdl"
+constant integer BUFF_ID = 'A0AD';
+constant string  ART_TARGET  = "Abilities\\Spells\\Human\\InnerFire\\InnerFireTarget.mdl";
     
     function onEffect(Buff buf) {
         UnitProp[buf.bd.target].ModArmor(buf.bd.i0);
@@ -33,7 +33,7 @@ library CharmOfInnerFire requires SpellEvent, BuffSystem, UnitProperty {
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
         
     }
-#undef ART_TARGET
-#undef BUFF_ID
+
+
 }
 //! endzinc

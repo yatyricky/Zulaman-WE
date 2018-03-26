@@ -1,8 +1,8 @@
 //! zinc
 library WindGraceAura requires TimerUtils, ZAMCore, UnitProperty {
-#define INTERVAL 1.0
-#define AOE 900.0
-#define BUFF_ID 'A04R'
+constant real INTERVAL = 1.0;
+constant real AOE = 900.0;
+constant integer BUFF_ID = 'A04R';
 
     function onEffect(Buff buf) {}
 
@@ -26,8 +26,8 @@ library WindGraceAura requires TimerUtils, ZAMCore, UnitProperty {
                         buf.bd.tick = -1;
                         buf.bd.interval = INTERVAL * 2.0;
                         if (buf.bd.i0 != 6) {
-							UnitProp[buf.bd.target].ModAttackSpeed(5);
-							UnitProp[buf.bd.target].spellHaste += 0.07;
+                            UnitProp[buf.bd.target].ModAttackSpeed(5);
+                            UnitProp[buf.bd.target].spellHaste += 0.07;
                             buf.bd.i0 = 6;
                         }
                         buf.bd.boe = onEffect;
@@ -49,7 +49,7 @@ library WindGraceAura requires TimerUtils, ZAMCore, UnitProperty {
     }
     
     function registerWGA(unit u) {
-        if (GetUnitTypeId(u) == UTIDEARTHBINDER) {
+        if (GetUnitTypeId(u) == UTID_EARTH_BINDER) {
             WindGraceAura.register(u);
         }
     }
@@ -59,7 +59,7 @@ library WindGraceAura requires TimerUtils, ZAMCore, UnitProperty {
         BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_POS);
     }
 }
-#undef BUFF_ID
-#undef AOE
-#undef INTERVAL
+
+
+
 //! endzinc

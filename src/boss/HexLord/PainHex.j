@@ -1,7 +1,7 @@
 //! zinc
 library PainHex requires BuffSystem, SpellEvent, UnitProperty, SpellReflection {
-#define BUFF_ID 'A01V'
-#define BUFF_ID1 'A021'
+constant integer BUFF_ID = 'A01V';
+constant integer BUFF_ID1 = 'A021';
 
     function onEffect1(Buff buf) { 
         UnitProp[buf.bd.target].spellTaken += buf.bd.r0;
@@ -12,7 +12,7 @@ library PainHex requires BuffSystem, SpellEvent, UnitProperty, SpellReflection {
     }
 
     function onEffect(Buff buf) {
-        DamageTarget(buf.bd.caster, buf.bd.target, 200.0, SpellData[SIDPAINHEX].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
+        DamageTarget(buf.bd.caster, buf.bd.target, 200.0, SpellData[SID_PAIN_HEX].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
         AddTimedEffect.atUnit(ART_PLAGUE, buf.bd.target, "origin", 0.2);
     }
 
@@ -47,9 +47,9 @@ library PainHex requires BuffSystem, SpellEvent, UnitProperty, SpellReflection {
     function onInit() {
         //BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_NEG);
         //BuffType.register(BUFF_ID1, BUFF_MAGE, BUFF_NEG);
-        RegisterSpellEffectResponse(SIDPAINHEX, onCast);
+        RegisterSpellEffectResponse(SID_PAIN_HEX, onCast);
     }
-#undef BUFF_ID1
-#undef BUFF_ID 
+
+
 }
 //! endzinc

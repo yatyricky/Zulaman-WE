@@ -11,7 +11,7 @@ library EarthBinderGlobal requires MultipleAbility {
         
         private static method run() {
             thistype this = GetTimerData(GetExpiredTimer());
-            MultipleAbility[SIDEARTHSHOCK].showPrimary(GetOwningPlayer(this.u));
+            MultipleAbility[SID_EARTH_SHOCK].showPrimary(GetOwningPlayer(this.u));
             
             freeESAvailability.flush(this.u);
             //print("Free earth shock used!");

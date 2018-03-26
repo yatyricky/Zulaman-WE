@@ -24,7 +24,7 @@ library RareShimmerWeed requires ItemAttributes, DamageSystem {
 
     function onInit() {
         ht = HandleTable.create();
-        RegisterItemPropMod(ITIDRARESHIMMERWEED, action);
+        RegisterItemPropMod(ITID_RARE_SHIMMER_WEED, action);
     }
 }
 //! endzinc

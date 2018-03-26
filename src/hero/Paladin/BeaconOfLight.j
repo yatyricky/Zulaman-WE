@@ -1,6 +1,6 @@
 //! zinc
 library BeaconOfLight requires BuffSystem, GroupUtils, DamageSystem {
-#define BUFF_ID 'A03D'
+constant integer BUFF_ID = 'A03D';
     public struct BeaconOfLight {
         private static HandleTable ht;
         private static thistype current;
@@ -36,7 +36,7 @@ library BeaconOfLight requires BuffSystem, GroupUtils, DamageSystem {
         
         private static method healExtras() {
             unit e = GetEnumUnit();
-            HealTarget(thistype.current.u, e, thistype.current.amount, SpellData[SIDBEACONOFLIGHT].name, -3.0);
+            HealTarget(thistype.current.u, e, thistype.current.amount, SpellData[SID_BEACON_OF_LIGHT].name, -3.0);
             AddTimedLight.atUnitsZ("HWPB", thistype.current.from, 10.0, e, 10.0, 0.5);
             if (thistype.current.art != "") {
                 AddTimedEffect.atUnit(thistype.current.art, e, "origin", 0.2);
@@ -48,11 +48,11 @@ library BeaconOfLight requires BuffSystem, GroupUtils, DamageSystem {
         
         method healBeacons(unit from, real amt, string art) {
             //BJDebugMsg("Heal target = " + GetUnitNameEx(from) + ", primary = " + GetUnitNameEx(this.primary));
-            this.amount = (GetUnitAbilityLevel(this.u, SIDBEACONOFLIGHT) * 0.15 + 0.35) * amt;
+            this.amount = (GetUnitAbilityLevel(this.u, SID_BEACON_OF_LIGHT) * 0.15 + 0.35) * amt;
             this.from = from;
             this.art = art;
             if (!IsUnit(from, this.primary) && this.primary != null) {
-                HealTarget(this.u, this.primary, this.amount, SpellData[SIDBEACONOFLIGHT].name, -3.0);
+                HealTarget(this.u, this.primary, this.amount, SpellData[SID_BEACON_OF_LIGHT].name, -3.0);
                 AddTimedLight.atUnitsZ("HWPB", from, 10.0, this.primary, 10.0, 0.5);
                 if (art != "") {
                     AddTimedEffect.atUnit(art, this.primary, "origin", 0.2);
@@ -82,7 +82,7 @@ library BeaconOfLight requires BuffSystem, GroupUtils, DamageSystem {
             thistype this;
             if (!thistype.ht.exists(u)) {
                 this = thistype.allocate();
-                //BJDebugMsg("New ÁË");
+                //BJDebugMsg("New ï¿½ï¿½");
                 thistype.ht[u] = this;
                 this.primary = null;
                 this.extras = NewGroup();
@@ -100,7 +100,7 @@ library BeaconOfLight requires BuffSystem, GroupUtils, DamageSystem {
     }
 
     function onEffect(Buff buf) {
-        //BJDebugMsg("ÒªÖ´ÐÐ°É,ÐÂµÄÄ¿±êÊÇ"+GetUnitNameEx(buf.bd.target));
+        //BJDebugMsg("ÒªÖ´ï¿½Ð°ï¿½,ï¿½Âµï¿½Ä¿ï¿½ï¿½ï¿½ï¿½"+GetUnitNameEx(buf.bd.target));
         BeaconOfLight[buf.bd.caster].newPrimary(buf.bd.target);
     }
     
@@ -123,7 +123,7 @@ library BeaconOfLight requires BuffSystem, GroupUtils, DamageSystem {
 
     function onCast() {        
         Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BUFF_ID);
-        buf.bd.interval = 10 + 5 * GetUnitAbilityLevel(SpellEvent.CastingUnit, SIDBEACONOFLIGHT);
+        buf.bd.interval = 10 + 5 * GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_BEACON_OF_LIGHT);
         buf.bd.tick = -1;
         buf.bd.boe = onEffect;
         buf.bd.bor = onRemove;
@@ -132,10 +132,10 @@ library BeaconOfLight requires BuffSystem, GroupUtils, DamageSystem {
     }
 
     function onInit() {
-        RegisterSpellEffectResponse(SIDBEACONOFLIGHT, onCast);
+        RegisterSpellEffectResponse(SID_BEACON_OF_LIGHT, onCast);
         RegisterOnDamageEvent(ondamageresponse);
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
     }
-#undef BUFF_ID
+
 }
 //! endzinc

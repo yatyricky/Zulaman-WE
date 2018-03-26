@@ -1,7 +1,7 @@
 //! zinc
 library Discord requires SpellEvent, AggroSystem, BuffSystem {
-#define ART "Abilities\\Spells\\NightElf\\Taunt\\TauntCaster.mdl"
-#define BUFF_ID 'A030'
+constant string  ART  = "Abilities\\Spells\\NightElf\\Taunt\\TauntCaster.mdl";
+constant integer BUFF_ID = 'A030';
 
     function returnApDecPer(integer lvl) -> real {
         return 0.4 + 0.1 * lvl;
@@ -21,7 +21,7 @@ library Discord requires SpellEvent, AggroSystem, BuffSystem {
         AggroList al = AggroList[SpellEvent.TargetUnit];
         unit target = al.sort();
         real aggro = al.getAggro(target);
-        integer lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SIDDISCORD);
+        integer lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_DISCORD);
         Buff buf;
         if (!IsUnit(target, SpellEvent.CastingUnit)) {
             al.setAggro(SpellEvent.CastingUnit, aggro * 1.1);
@@ -45,11 +45,11 @@ library Discord requires SpellEvent, AggroSystem, BuffSystem {
     }
 
     function onInit() {
-        RegisterSpellEffectResponse(SIDDISCORD, onCast);
+        RegisterSpellEffectResponse(SID_DISCORD, onCast);
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_NEG);
     }
 
-#undef BUFF_ID
-#undef ART
+
+
 }
 //! endzinc

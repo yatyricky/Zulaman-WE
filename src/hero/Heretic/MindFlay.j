@@ -1,7 +1,7 @@
 //! zinc
 library MindFlay requires CastingBar, GroupUtils {
-#define ART_CASTER "Abilities\\Spells\\Other\\Drain\\ManaDrainCaster.mdl"
-#define ART_TARGET "Abilities\\Spells\\Other\\Drain\\ManaDrainTarget.mdl"
+constant string  ART_CASTER  = "Abilities\\Spells\\Other\\Drain\\ManaDrainCaster.mdl";
+constant string  ART_TARGET  = "Abilities\\Spells\\Other\\Drain\\ManaDrainTarget.mdl";
 
     function returnDamage(integer lvl, real sp) -> real {
         return 50.0 + 50.0 * lvl + sp * 0.1;
@@ -16,12 +16,12 @@ library MindFlay requires CastingBar, GroupUtils {
     }
 
     function response(CastingBar cd) {
-        integer lvl = GetUnitAbilityLevel(cd.caster, SIDMINDFLAY);
+        integer lvl = GetUnitAbilityLevel(cd.caster, SID_MIND_FLAY);
         real dmg = returnDamage(lvl, UnitProp[cd.caster].SpellPower());
         real rate;
         unit tu;
         //BJDebugMsg("Run !");
-        DamageTarget(cd.caster, cd.target, dmg, SpellData[SIDMINDFLAY].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
+        DamageTarget(cd.caster, cd.target, dmg, SpellData[SID_MIND_FLAY].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
         ModUnitMana(cd.caster, dmg * returnManaConvertRateSelf(lvl));
         rate = returnManaConvertRateAlly(lvl);
         if (lvl > 1) {
@@ -56,9 +56,9 @@ library MindFlay requires CastingBar, GroupUtils {
 
     function onInit() {
         castSound = DefineSound("Abilities\\Spells\\Undead\\UndeadMine\\AcolyteMining.wav", 4233, false, false);
-        RegisterSpellChannelResponse(SIDMINDFLAY, onChannel);
+        RegisterSpellChannelResponse(SID_MIND_FLAY, onChannel);
     }
-#undef ART_TARGET
-#undef ART_CASTER
+
+
 }
 //! endzinc

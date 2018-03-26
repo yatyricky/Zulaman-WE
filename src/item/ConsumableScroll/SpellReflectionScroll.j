@@ -1,10 +1,10 @@
 //! zinc
 library SpellReflectionScroll requires SpellEvent, SpellReflection {
-#define FIELD_DUMMY_ID 'e00F'
-#define BUFF_ID 'A077'
-#define ART_EXPLOSION "Objects\\Spawnmodels\\NightElf\\NEDeathSmall\\NEDeathSmall.mdl"
-#define DURATION 10
-#define MAX_REFL 8
+constant integer FIELD_DUMMY_ID = 'e00F';
+constant integer BUFF_ID = 'A077';
+constant string  ART_EXPLOSION  = "Objects\\Spawnmodels\\NightElf\\NEDeathSmall\\NEDeathSmall.mdl";
+constant integer DURATION = 10;
+constant integer MAX_REFL = 8;
     
     function onEffect(Buff buf) {
         UnitProp[buf.bd.target].ModSpellReflect(buf.bd.i0);
@@ -127,10 +127,10 @@ library SpellReflectionScroll requires SpellEvent, SpellReflection {
         BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_POS);
         RegisterSpellReflectionEvent(reflected);
     }
-#undef MAX_REFL
-#undef DURATION
-#undef ART_EXPLOSION
-#undef BUFF_ID
-#undef FIELD_DUMMY_ID
+
+
+
+
+
 }
 //! endzinc

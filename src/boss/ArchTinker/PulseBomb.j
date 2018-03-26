@@ -1,7 +1,7 @@
 //! zinc
 library PulseBomb requires DamageSystem, PlayerUnitList {
-#define ART_TARGET "Abilities\\Spells\\Other\\SoulBurn\\SoulBurnbuff.mdl"
-#define ART_DAMAGE "Abilities\\Weapons\\LordofFlameMissile\\LordofFlameMissile.mdl"
+constant string  ART_TARGET  = "Abilities\\Spells\\Other\\SoulBurn\\SoulBurnbuff.mdl";
+constant string  ART_DAMAGE  = "Abilities\\Weapons\\LordofFlameMissile\\LordofFlameMissile.mdl";
 
     function onEffect(Buff buf) {
         integer i = 0;
@@ -35,7 +35,7 @@ library PulseBomb requires DamageSystem, PlayerUnitList {
         RegisterSpellEffectResponse(SID_PULSE_BOMB, onCast);
         BuffType.register(BID_PULSE_BOMB, BUFF_PHYX, BUFF_NEG);
     }
-#undef ART_DAMAGE
-#undef ART_TARGET
+
+
 }
 //! endzinc

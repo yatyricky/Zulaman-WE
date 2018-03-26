@@ -25,26 +25,26 @@ Should be deprecated, all constants go [Boss]Global library
         static real safeRange = 450.0;
         static boolean isStorm = false;
     }
-	
-	public struct DBMTideBaron {
-		static real safeAngle = 30.0;
-		static real alkalineWaterAOE = 200.0;
-		static real safeAggroPercent = 0.75;
-	}
-	
-	public struct DBMWarlock {
-		static unit theBolt = null;
+    
+    public struct DBMTideBaron {
+        static real safeAngle = 30.0;
+        static real alkalineWaterAOE = 200.0;
+        static real safeAggroPercent = 0.75;
+    }
+    
+    public struct DBMWarlock {
+        static unit theBolt = null;
         static boolean isFireBomb = false;
         static real fireBombRadius = 150.0;
-	}
-	
-	public struct DBMAbyssArchon {
-	
-	}
-	
-	public struct DBMTheFelguards {
-	
-	}
+    }
+    
+    public struct DBMAbyssArchon {
+    
+    }
+    
+    public struct DBMTheFelguards {
+    
+    }
     
     public struct DBMHexLord {
         static integer absorb = 0;
@@ -52,9 +52,9 @@ Should be deprecated, all constants go [Boss]Global library
         static integer spell2 = 0;
         static boolean canOverpower = false;
     }
-	
-	public struct DBMHighWarlord {
-	
-	}
+    
+    public struct DBMHighWarlord {
+    
+    }
 }
 //! endzinc

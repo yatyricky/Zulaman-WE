@@ -1,8 +1,8 @@
 //! zinc
 library MassTeleportScroll requires SpellEvent, ZAMCore {
-#define ART_READY "Abilities\\Spells\\Human\\MassTeleport\\MassTeleportTo.mdl"
-#define ART_ORIGIN "Abilities\\Spells\\Human\\MassTeleport\\MassTeleportCaster.mdl"
-#define ART_TARGET "Abilities\\Spells\\Human\\MassTeleport\\MassTeleportTarget.mdl"
+constant string  ART_READY  = "Abilities\\Spells\\Human\\MassTeleport\\MassTeleportTo.mdl";
+constant string  ART_ORIGIN  = "Abilities\\Spells\\Human\\MassTeleport\\MassTeleportCaster.mdl";
+constant string  ART_TARGET  = "Abilities\\Spells\\Human\\MassTeleport\\MassTeleportTarget.mdl";
     
     struct delayedDosth1 {
         private timer tm;
@@ -53,8 +53,8 @@ library MassTeleportScroll requires SpellEvent, ZAMCore {
     function onInit() {
         RegisterSpellEffectResponse(SID_MASS_TELEPORT_SCROLL, onCast);        
     }
-#undef ART_TARGET
-#undef ART_ORIGIN
-#undef ART_READY
+
+
+
 }
 //! endzinc

@@ -1,9 +1,9 @@
 //! zinc
 library Frenzy requires SpellEvent, BuffSystem {
-#define SPELL_ID 'A03P'
-#define BUFF_ID 'A03S'
-#define ART_LEFT "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustTarget.mdl"
-#define ART_RIGHT "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustSpecial.mdl"
+constant integer SPELL_ID = 'A03P';
+constant integer BUFF_ID = 'A03S';
+constant string  ART_LEFT  = "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustTarget.mdl";
+constant string  ART_RIGHT  = "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustSpecial.mdl";
     function onEffect(Buff buf) {
         UnitProp[buf.bd.target].damageDealt += buf.bd.r0;
         UnitProp[buf.bd.target].ModAttackSpeed(buf.bd.i0);
@@ -33,9 +33,9 @@ library Frenzy requires SpellEvent, BuffSystem {
         RegisterSpellEffectResponse(SPELL_ID, onCast);
         BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_POS);
     }
-#undef ART_RIGHT
-#undef ART_LEFT
-#undef BUFF_ID
-#undef SPELL_ID
+
+
+
+
 }
 //! endzinc

@@ -1,6 +1,6 @@
 //! zinc
 library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinGlobal, FrostNova, WarlockGlobal {
-#define AIACTION_INTERVAL 0.33
+constant real AIACTION_INTERVAL = 0.33;
     
     Table unitCallBack, unitLearSkill;
     type UnitActionType extends function(unit);
@@ -193,60 +193,60 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
     
     function PositioningTideBaron(unit source) -> boolean {
         unit tar;
-		ModelInfo ms;
-		AggroList al;
-		//vector vo, vm, vc;
-		real t1, t2;
-        if (GetUnitTypeId(whichBoss) == UTIDTIDEBARON) {
+        ModelInfo ms;
+        AggroList al;
+        //vector vo, vm, vc;
+        real t1, t2;
+        if (GetUnitTypeId(whichBoss) == UTID_TIDE_BARON) {
             // Naga form, nothing painful
             return true;
         } else {
             // Water form
-			//	- keep away from allies
-			tar = PlayerUnits.getNearest(source);
-			if (tar != null && GetDistance.units2d(tar, source) <= DBMTideBaron.alkalineWaterAOE) {
-				// too close, separate
-				IssuePointOrderById(source, OID_MOVE, 2 * GetUnitX(source) - GetUnitX(tar), 2 * GetUnitY(source) - GetUnitY(tar));
-				return false;
-			} else {
-				//	- tank should not aggro
-				ms = ModelInfo.get(GetUnitTypeId(source), "AllianceAIAction: 194");
-				if (ms.career == CAREER_TYPE_TANK) {
-					al = AggroList[whichBoss];
-					t1 = al.getAggro(source) + 500;
-					t2 = al.getAggro(al.getFirst());
-					if (t1 / t2 > DBMTideBaron.safeAggroPercent) {
-						IssueImmediateOrderById(source, OID_HOLD);
-						return false;
-					} else {
-						return true;
-					}
-				} else {
-					// normal
-					return true;
-				}
-			}
-			/*else {
+            //    - keep away from allies
+            tar = PlayerUnits.getNearest(source);
+            if (tar != null && GetDistance.units2d(tar, source) <= DBMTideBaron.alkalineWaterAOE) {
+                // too close, separate
+                IssuePointOrderById(source, OID_MOVE, 2 * GetUnitX(source) - GetUnitX(tar), 2 * GetUnitY(source) - GetUnitY(tar));
+                return false;
+            } else {
+                //    - tank should not aggro
+                ms = ModelInfo.get(GetUnitTypeId(source), "AllianceAIAction: 194");
+                if (ms.career == CAREER_TYPE_TANK) {
+                    al = AggroList[whichBoss];
+                    t1 = al.getAggro(source) + 500;
+                    t2 = al.getAggro(al.getFirst());
+                    if (t1 / t2 > DBMTideBaron.safeAggroPercent) {
+                        IssueImmediateOrderById(source, OID_HOLD);
+                        return false;
+                    } else {
+                        return true;
+                    }
+                } else {
+                    // normal
+                    return true;
+                }
+            }
+            /*else {
             // separate allies in angular way
-				tar = PlayerUnits.getNearestAngular(source, whichBoss);
-				if (tar != null && GetDistance.units2dAngular(tar, source, whichBoss) <= DBMTideBaron.safeAngle && ShouldIGiveWay(source, tar)) {
-					// 	- don't line up
-					vm = vector.create(0,0,0);
-					vo = vector.create(0,0,0);
-					vc = vector.create(0,0,0);
-					vm.pointToUnit(source);
-					vo.pointToUnit(tar);
-					vc.pointToUnit(whichBoss);
-					vm.subtract(vc);
-					vo.subtract(vc);
-					vo.setLength(vm.getLength());
-					vm.subtract(vo);
-					IssuePointOrderById(source, OID_MOVE, GetUnitX(source) + vm.x, GetUnitY(source) + vm.y);
-					return false;
-				} else {
+                tar = PlayerUnits.getNearestAngular(source, whichBoss);
+                if (tar != null && GetDistance.units2dAngular(tar, source, whichBoss) <= DBMTideBaron.safeAngle && ShouldIGiveWay(source, tar)) {
+                    //     - don't line up
+                    vm = vector.create(0,0,0);
+                    vo = vector.create(0,0,0);
+                    vc = vector.create(0,0,0);
+                    vm.pointToUnit(source);
+                    vo.pointToUnit(tar);
+                    vc.pointToUnit(whichBoss);
+                    vm.subtract(vc);
+                    vo.subtract(vc);
+                    vo.setLength(vm.getLength());
+                    vm.subtract(vo);
+                    IssuePointOrderById(source, OID_MOVE, GetUnitX(source) + vm.x, GetUnitY(source) + vm.y);
+                    return false;
+                } else {
 
-				}
-			}*/
+                }
+            }*/
         }
     }
 
@@ -318,7 +318,7 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
         vector v1, v2;
         unit tar;
         Point p1;
-        if (DBMHexLord.absorb == UTIDBLOODELFDEFENDER) {
+        if (DBMHexLord.absorb == UTID_BLOOD_ELF_DEFENDER) {
             safe = true;
             for (0 <= i < SunFireStormHexSpots.size()) {
                 dis = GetDistance.unitCoord(source, SunFireStormHexSpots.get(i).x, SunFireStormHexSpots.get(i).y);
@@ -344,14 +344,14 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
             } else {
                 return true;
             }
-        } else if (DBMHexLord.absorb == UTIDCLAWDRUID) {
+        } else if (DBMHexLord.absorb == UTID_CLAW_DRUID) {
             if (GetUnitAbilityLevel(whichBoss, BID_NATURAL_REFLEX_HEX) > 0) {
                 HexLordGlobalConst.normalAttackForbid = true;
             } else {
                 HexLordGlobalConst.normalAttackForbid = false;
             }
             return true;
-        } else if (DBMHexLord.absorb == UTIDDARKRANGER) {
+        } else if (DBMHexLord.absorb == UTID_DARK_RANGER) {
             goFreeze = false;
             if (!IsUnitTank(source)) {
                 tar = AggroList[whichBoss].getFirst();
@@ -415,11 +415,11 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
             return PositioningArchTinker(source);
         } else if (GetUnitTypeId(whichBoss) == UTID_NAGA_SEA_WITCH) {
             return PositioningNagaSeaWitch(source);
-        } else if (bossutid == UTIDTIDEBARON || bossutid == UTIDTIDEBARONWATER) {
+        } else if (bossutid == UTID_TIDE_BARON || bossutid == UTID_TIDE_BARON_WATER) {
             return PositioningTideBaron(source);
-        } else if (bossutid == UTIDWARLOCK) {
+        } else if (bossutid == UTID_WARLOCK) {
             return PositioningWarlock(source);
-		} else if (bossutid == UTIDHEXLORD) {
+        } else if (bossutid == UTID_HEX_LORD) {
             return PositioningHexLord(source);
         } else {
             return true;
@@ -430,33 +430,33 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
     function learnSkillHmkg(unit source) {
         if (GetHeroLevel(source) == 1) {
             // 11100
-            SelectHeroSkill(source, SIDSHIELDBLOCK);
-            SelectHeroSkill(source, SIDSUNFIRESTORM);
-            SelectHeroSkill(source, SIDARCANESHOCK);
+            SelectHeroSkill(source, SID_SHIELD_BLOCK);
+            SelectHeroSkill(source, SID_SUN_FIRE_STORM);
+            SelectHeroSkill(source, SID_ARCANE_SHOCK);
         } else if (GetHeroLevel(source) == 2) {
             // 00111 -> 
             // 11211
-            SelectHeroSkill(source, SIDARCANESHOCK);
-            SelectHeroSkill(source, SIDDISCORD);
-            SelectHeroSkill(source, SIDSHIELDOFSINDOREI);
+            SelectHeroSkill(source, SID_ARCANE_SHOCK);
+            SelectHeroSkill(source, SID_DISCORD);
+            SelectHeroSkill(source, SID_SHIELD_OF_SINDOREI);
         } else if (GetHeroLevel(source) == 3) {
             // 10101
             // 21312
-            SelectHeroSkill(source, SIDSHIELDBLOCK);
-            SelectHeroSkill(source, SIDARCANESHOCK);
-            SelectHeroSkill(source, SIDSHIELDOFSINDOREI);
+            SelectHeroSkill(source, SID_SHIELD_BLOCK);
+            SelectHeroSkill(source, SID_ARCANE_SHOCK);
+            SelectHeroSkill(source, SID_SHIELD_OF_SINDOREI);
         } else if (GetHeroLevel(source) == 4) {
             // 02001
             // 23313
-            SelectHeroSkill(source, SIDSUNFIRESTORM);
-            SelectHeroSkill(source, SIDSUNFIRESTORM);
-            SelectHeroSkill(source, SIDSHIELDOFSINDOREI);
+            SelectHeroSkill(source, SID_SUN_FIRE_STORM);
+            SelectHeroSkill(source, SID_SUN_FIRE_STORM);
+            SelectHeroSkill(source, SID_SHIELD_OF_SINDOREI);
         } else if (GetHeroLevel(source) == 5) {
             // 10020
             // 33333
-            SelectHeroSkill(source, SIDSHIELDBLOCK);
-            SelectHeroSkill(source, SIDDISCORD);
-            SelectHeroSkill(source, SIDDISCORD);
+            SelectHeroSkill(source, SID_SHIELD_BLOCK);
+            SelectHeroSkill(source, SID_DISCORD);
+            SelectHeroSkill(source, SID_DISCORD);
         }
     }
     
@@ -498,32 +498,32 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
     function learnSkillEmfr(unit source) {
         if (GetHeroLevel(source) == 1) {
             // 11100
-            SelectHeroSkill(source, SIDLIFEBLOOM);
-            SelectHeroSkill(source, SIDREJUVENATION);
-            SelectHeroSkill(source, SIDREGROWTH);
+            SelectHeroSkill(source, SID_LIFE_BLOOM);
+            SelectHeroSkill(source, SID_REJUVENATION);
+            SelectHeroSkill(source, SID_REGROWTH);
         } else if (GetHeroLevel(source) == 2) {
             // 01011
             // 12111
-            SelectHeroSkill(source, SIDREJUVENATION);
-            SelectHeroSkill(source, SIDSWIFTMEND);
-            SelectHeroSkill(source, SIDTRANQUILITY);
+            SelectHeroSkill(source, SID_REJUVENATION);
+            SelectHeroSkill(source, SID_SWIFT_MEND);
+            SelectHeroSkill(source, SID_TRANQUILITY);
         } else if (GetHeroLevel(source) == 3) {
             // 01110
             // 13221
-            SelectHeroSkill(source, SIDLIFEBLOOM);
-            SelectHeroSkill(source, SIDREJUVENATION);
-            SelectHeroSkill(source, SIDREGROWTH);
+            SelectHeroSkill(source, SID_LIFE_BLOOM);
+            SelectHeroSkill(source, SID_REJUVENATION);
+            SelectHeroSkill(source, SID_REGROWTH);
         } else if (GetHeroLevel(source) == 4) {
             // 20010
             // 33231
-            SelectHeroSkill(source, SIDLIFEBLOOM);
-            SelectHeroSkill(source, SIDREGROWTH);
-            SelectHeroSkill(source, SIDSWIFTMEND);
+            SelectHeroSkill(source, SID_LIFE_BLOOM);
+            SelectHeroSkill(source, SID_REGROWTH);
+            SelectHeroSkill(source, SID_SWIFT_MEND);
         } else if (GetHeroLevel(source) == 5) {
             // 00102
-            SelectHeroSkill(source, SIDSWIFTMEND);
-            SelectHeroSkill(source, SIDTRANQUILITY);
-            SelectHeroSkill(source, SIDTRANQUILITY);
+            SelectHeroSkill(source, SID_SWIFT_MEND);
+            SelectHeroSkill(source, SID_TRANQUILITY);
+            SelectHeroSkill(source, SID_TRANQUILITY);
         }
     }
     
@@ -532,74 +532,74 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
         integer fleshLight = GetFlashLightAID(source);
         if (GetHeroLevel(source) == 1) {
             SelectHeroSkill(source, fleshLight);
-            SelectHeroSkill(source, SIDHOLYLIGHT);
-            SelectHeroSkill(source, SIDHOLYSHOCK);
+            SelectHeroSkill(source, SID_HOLY_LIGHT);
+            SelectHeroSkill(source, SID_HOLY_SHOCK);
         } else if (GetHeroLevel(source) == 2) {
-            SelectHeroSkill(source, SIDDIVINEFAVOR);
-            SelectHeroSkill(source, SIDDIVINEFAVOR);
-            SelectHeroSkill(source, SIDBEACONOFLIGHT);
+            SelectHeroSkill(source, SID_DIVINE_FAVOR);
+            SelectHeroSkill(source, SID_DIVINE_FAVOR);
+            SelectHeroSkill(source, SID_BEACON_OF_LIGHT);
         } else if (GetHeroLevel(source) == 3) {
             SelectHeroSkill(source, fleshLight);
-            SelectHeroSkill(source, SIDHOLYLIGHT);
-            SelectHeroSkill(source, SIDDIVINEFAVOR);
+            SelectHeroSkill(source, SID_HOLY_LIGHT);
+            SelectHeroSkill(source, SID_DIVINE_FAVOR);
         } else if (GetHeroLevel(source) == 4) {
             SelectHeroSkill(source, fleshLight);
-            SelectHeroSkill(source, SIDHOLYLIGHT);
-            SelectHeroSkill(source, SIDHOLYSHOCK);
+            SelectHeroSkill(source, SID_HOLY_LIGHT);
+            SelectHeroSkill(source, SID_HOLY_SHOCK);
         } else if (GetHeroLevel(source) == 5) {
-            SelectHeroSkill(source, SIDHOLYSHOCK);
-            SelectHeroSkill(source, SIDBEACONOFLIGHT);
-            SelectHeroSkill(source, SIDBEACONOFLIGHT);
+            SelectHeroSkill(source, SID_HOLY_SHOCK);
+            SelectHeroSkill(source, SID_BEACON_OF_LIGHT);
+            SelectHeroSkill(source, SID_BEACON_OF_LIGHT);
         }
     }
     
     // 5
     function learnSkillOfar(unit source) {
         if (GetHeroLevel(source) == 1) {
-            SelectHeroSkill(source, SIDHEAL);
-            SelectHeroSkill(source, SIDPRAYEROFHEALING);
-            SelectHeroSkill(source, SIDSHIELD);
+            SelectHeroSkill(source, SID_HEAL);
+            SelectHeroSkill(source, SID_PRAYER_OF_HEALING);
+            SelectHeroSkill(source, SID_SHIELD);
         } else if (GetHeroLevel(source) == 2) {
-            SelectHeroSkill(source, SIDSHIELD);
-            SelectHeroSkill(source, SIDPRAYEROFMENDING);
-            SelectHeroSkill(source, SIDDISPEL);
+            SelectHeroSkill(source, SID_SHIELD);
+            SelectHeroSkill(source, SID_PRAYER_OF_MENDING);
+            SelectHeroSkill(source, SID_DISPEL);
         } else if (GetHeroLevel(source) == 3) {
-            SelectHeroSkill(source, SIDHEAL);
-            SelectHeroSkill(source, SIDSHIELD);
-            SelectHeroSkill(source, SIDPRAYEROFMENDING);
+            SelectHeroSkill(source, SID_HEAL);
+            SelectHeroSkill(source, SID_SHIELD);
+            SelectHeroSkill(source, SID_PRAYER_OF_MENDING);
         } else if (GetHeroLevel(source) == 4) {
-            SelectHeroSkill(source, SIDHEAL);
-            SelectHeroSkill(source, SIDPRAYEROFHEALING);
-            SelectHeroSkill(source, SIDPRAYEROFMENDING);
+            SelectHeroSkill(source, SID_HEAL);
+            SelectHeroSkill(source, SID_PRAYER_OF_HEALING);
+            SelectHeroSkill(source, SID_PRAYER_OF_MENDING);
         } else if (GetHeroLevel(source) == 5) {
-            SelectHeroSkill(source, SIDPRAYEROFHEALING);
-            SelectHeroSkill(source, SIDDISPEL);
-            SelectHeroSkill(source, SIDDISPEL);
+            SelectHeroSkill(source, SID_PRAYER_OF_HEALING);
+            SelectHeroSkill(source, SID_DISPEL);
+            SelectHeroSkill(source, SID_DISPEL);
         }
     }
     
     // 6
     function learnSkillNbrn(unit source) {
         if (GetHeroLevel(source) == 1) {
-            SelectHeroSkill(source, SIDDARKARROW);
-            SelectHeroSkill(source, SIDCONCERNTRATION);
-            SelectHeroSkill(source, SIDFREEZINGTRAP);
+            SelectHeroSkill(source, SID_DARK_ARROW);
+            SelectHeroSkill(source, SID_CONCERNTRATION);
+            SelectHeroSkill(source, SID_FREEZING_TRAP);
         } else if (GetHeroLevel(source) == 2) {
-            SelectHeroSkill(source, SIDDARKARROW);
-            SelectHeroSkill(source, SIDPOWEROFABOMINATION);
-            SelectHeroSkill(source, SIDDEATHPACT);
+            SelectHeroSkill(source, SID_DARK_ARROW);
+            SelectHeroSkill(source, SID_POWER_OF_ABOMINATION);
+            SelectHeroSkill(source, SID_DEATH_PACT);
         } else if (GetHeroLevel(source) == 3) {
-            SelectHeroSkill(source, SIDDARKARROW);
-            SelectHeroSkill(source, SIDFREEZINGTRAP);
-            SelectHeroSkill(source, SIDPOWEROFABOMINATION);
+            SelectHeroSkill(source, SID_DARK_ARROW);
+            SelectHeroSkill(source, SID_FREEZING_TRAP);
+            SelectHeroSkill(source, SID_POWER_OF_ABOMINATION);
         } else if (GetHeroLevel(source) == 4) {
-            SelectHeroSkill(source, SIDCONCERNTRATION);
-            SelectHeroSkill(source, SIDFREEZINGTRAP);
-            SelectHeroSkill(source, SIDDEATHPACT);
+            SelectHeroSkill(source, SID_CONCERNTRATION);
+            SelectHeroSkill(source, SID_FREEZING_TRAP);
+            SelectHeroSkill(source, SID_DEATH_PACT);
         } else if (GetHeroLevel(source) == 5) {
-            SelectHeroSkill(source, SIDCONCERNTRATION);
-            SelectHeroSkill(source, SIDPOWEROFABOMINATION);
-            SelectHeroSkill(source, SIDDEATHPACT);
+            SelectHeroSkill(source, SID_CONCERNTRATION);
+            SelectHeroSkill(source, SID_POWER_OF_ABOMINATION);
+            SelectHeroSkill(source, SID_DEATH_PACT);
         }
     }
     
@@ -607,49 +607,49 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
     function learnSkillObla(unit source) {
         if (GetHeroLevel(source) == 1) {
             SelectHeroSkill(source, SID_HEROIC_STRIKE);
-            SelectHeroSkill(source, SIDREND);
-            SelectHeroSkill(source, SIDOVERPOWER);
+            SelectHeroSkill(source, SID_REND);
+            SelectHeroSkill(source, SID_OVER_POWER);
         } else if (GetHeroLevel(source) == 2) {
-            SelectHeroSkill(source, SIDOVERPOWER);	
-            SelectHeroSkill(source, SIDMORTALSTRIKE);	
-            SelectHeroSkill(source, SIDEXECUTELEARN);
+            SelectHeroSkill(source, SID_OVER_POWER);    
+            SelectHeroSkill(source, SID_MORTAL_STRIKE);    
+            SelectHeroSkill(source, SID_EXECUTE_LEARN);
         } else if (GetHeroLevel(source) == 3) {
-            SelectHeroSkill(source, SIDOVERPOWER);	
-            SelectHeroSkill(source, SIDMORTALSTRIKE);	
-            SelectHeroSkill(source, SIDEXECUTELEARN);
+            SelectHeroSkill(source, SID_OVER_POWER);    
+            SelectHeroSkill(source, SID_MORTAL_STRIKE);    
+            SelectHeroSkill(source, SID_EXECUTE_LEARN);
         } else if (GetHeroLevel(source) == 4) {
-            SelectHeroSkill(source, SID_HEROIC_STRIKE);	
-            SelectHeroSkill(source, SID_HEROIC_STRIKE);			
-            SelectHeroSkill(source, SIDMORTALSTRIKE);
+            SelectHeroSkill(source, SID_HEROIC_STRIKE);    
+            SelectHeroSkill(source, SID_HEROIC_STRIKE);            
+            SelectHeroSkill(source, SID_MORTAL_STRIKE);
         } else if (GetHeroLevel(source) == 5) {
-            SelectHeroSkill(source, SIDREND);	
-            SelectHeroSkill(source, SIDREND);			
-            SelectHeroSkill(source, SIDEXECUTELEARN);
+            SelectHeroSkill(source, SID_REND);    
+            SelectHeroSkill(source, SID_REND);            
+            SelectHeroSkill(source, SID_EXECUTE_LEARN);
         }
     }
     
     // 8
     function learnSkillHjai(unit source) {
         if (GetHeroLevel(source) == 1) {
-            SelectHeroSkill(source, SIDFROSTBOLT);
-            SelectHeroSkill(source, SIDBLIZZARD);
-            SelectHeroSkill(source, SIDFROSTNOVA);
+            SelectHeroSkill(source, SID_FROST_BOLT);
+            SelectHeroSkill(source, SID_BLIZZARD);
+            SelectHeroSkill(source, SID_FROST_NOVA);
         } else if (GetHeroLevel(source) == 2) {
-            SelectHeroSkill(source, SIDFROSTBOLT);			
-            SelectHeroSkill(source, SIDPOLYMORPH);	
+            SelectHeroSkill(source, SID_FROST_BOLT);            
+            SelectHeroSkill(source, SID_POLYMORPH);    
             SelectHeroSkill(source, SID_SPELL_TRANSFER);
         } else if (GetHeroLevel(source) == 3) {
-            SelectHeroSkill(source, SIDBLIZZARD);		
-            SelectHeroSkill(source, SIDPOLYMORPH);	
+            SelectHeroSkill(source, SID_BLIZZARD);        
+            SelectHeroSkill(source, SID_POLYMORPH);    
             SelectHeroSkill(source, SID_SPELL_TRANSFER);
         } else if (GetHeroLevel(source) == 4) {
-            SelectHeroSkill(source, SIDFROSTBOLT);	
-            SelectHeroSkill(source, SIDBLIZZARD);			
+            SelectHeroSkill(source, SID_FROST_BOLT);    
+            SelectHeroSkill(source, SID_BLIZZARD);            
             SelectHeroSkill(source, SID_SPELL_TRANSFER);
         } else if (GetHeroLevel(source) == 5) {
-            SelectHeroSkill(source, SIDFROSTNOVA);	
-            SelectHeroSkill(source, SIDFROSTNOVA);	
-            SelectHeroSkill(source, SIDPOLYMORPH);
+            SelectHeroSkill(source, SID_FROST_NOVA);    
+            SelectHeroSkill(source, SID_FROST_NOVA);    
+            SelectHeroSkill(source, SID_POLYMORPH);
         }
     }
     
@@ -657,74 +657,74 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
     function learnSkillHapm(unit source) {
         if (GetHeroLevel(source) == 1) {
             SelectHeroSkill(source, SID_STORM_LASH);
-            SelectHeroSkill(source, SIDEARTHSHOCK);
-            SelectHeroSkill(source, SIDENCHANTEDTOTEM);
+            SelectHeroSkill(source, SID_EARTH_SHOCK);
+            SelectHeroSkill(source, SID_ENCHANTED_TOTEM);
         } else if (GetHeroLevel(source) == 2) {
-            SelectHeroSkill(source, SIDPURGE);	
-            SelectHeroSkill(source, SIDENCHANTEDTOTEM);	
+            SelectHeroSkill(source, SID_PURGE);    
+            SelectHeroSkill(source, SID_ENCHANTED_TOTEM);    
             SelectHeroSkill(source, SID_ASCENDANCE);
         } else if (GetHeroLevel(source) == 3) {
-            SelectHeroSkill(source, SIDENCHANTEDTOTEM);	
+            SelectHeroSkill(source, SID_ENCHANTED_TOTEM);    
             SelectHeroSkill(source, SID_ASCENDANCE);
             SelectHeroSkill(source, SID_ASCENDANCE);
         } else if (GetHeroLevel(source) == 4) {
-            SelectHeroSkill(source, SID_STORM_LASH);	
-            SelectHeroSkill(source, SIDEARTHSHOCK);
-            SelectHeroSkill(source, SIDEARTHSHOCK);
+            SelectHeroSkill(source, SID_STORM_LASH);    
+            SelectHeroSkill(source, SID_EARTH_SHOCK);
+            SelectHeroSkill(source, SID_EARTH_SHOCK);
         } else if (GetHeroLevel(source) == 5) {
-            SelectHeroSkill(source, SID_STORM_LASH);		
-            SelectHeroSkill(source, SIDPURGE);
-            SelectHeroSkill(source, SIDPURGE);
+            SelectHeroSkill(source, SID_STORM_LASH);        
+            SelectHeroSkill(source, SID_PURGE);
+            SelectHeroSkill(source, SID_PURGE);
         }
     }
     
     // 10
     function learnSkillEdem(unit source) {
         if (GetHeroLevel(source) == 1) {
-            SelectHeroSkill(source, SIDSINISTERSTRIKE);
-            SelectHeroSkill(source, SIDEVISCERATE);
-            SelectHeroSkill(source, SIDASSAULT);
+            SelectHeroSkill(source, SID_SINISTER_STRIKE);
+            SelectHeroSkill(source, SID_EVISCERATE);
+            SelectHeroSkill(source, SID_ASSAULT);
         } else if (GetHeroLevel(source) == 2) {
-            SelectHeroSkill(source, SIDSINISTERSTRIKE);			
-            SelectHeroSkill(source, SIDBLADEFLURRY);	
-            SelectHeroSkill(source, SIDSTEALTH);
+            SelectHeroSkill(source, SID_SINISTER_STRIKE);            
+            SelectHeroSkill(source, SID_BLADE_FLURRY);    
+            SelectHeroSkill(source, SID_STEALTH);
         } else if (GetHeroLevel(source) == 3) {
-            SelectHeroSkill(source, SIDSINISTERSTRIKE);
-            SelectHeroSkill(source, SIDEVISCERATE);
-            SelectHeroSkill(source, SIDASSAULT);
+            SelectHeroSkill(source, SID_SINISTER_STRIKE);
+            SelectHeroSkill(source, SID_EVISCERATE);
+            SelectHeroSkill(source, SID_ASSAULT);
         } else if (GetHeroLevel(source) == 4) {
-            SelectHeroSkill(source, SIDEVISCERATE);	
-            SelectHeroSkill(source, SIDASSAULT);	
-            SelectHeroSkill(source, SIDBLADEFLURRY);
+            SelectHeroSkill(source, SID_EVISCERATE);    
+            SelectHeroSkill(source, SID_ASSAULT);    
+            SelectHeroSkill(source, SID_BLADE_FLURRY);
         } else if (GetHeroLevel(source) == 5) {
-            SelectHeroSkill(source, SIDBLADEFLURRY);	
-            SelectHeroSkill(source, SIDSTEALTH);
-            SelectHeroSkill(source, SIDSTEALTH);
+            SelectHeroSkill(source, SID_BLADE_FLURRY);    
+            SelectHeroSkill(source, SID_STEALTH);
+            SelectHeroSkill(source, SID_STEALTH);
         }
     }
     
     // 11
     function learnSkillHblm(unit source) {
         if (GetHeroLevel(source) == 1) {
-            SelectHeroSkill(source, SIDPAIN);
-            SelectHeroSkill(source, SIDMARROWSQUEEZE);
-            SelectHeroSkill(source, SIDMINDFLAY);
+            SelectHeroSkill(source, SID_PAIN);
+            SelectHeroSkill(source, SID_MARROW_SQUEEZE);
+            SelectHeroSkill(source, SID_MIND_FLAY);
         } else if (GetHeroLevel(source) == 2) {
-            SelectHeroSkill(source, SIDPAIN);			
-            SelectHeroSkill(source, SIDDEATH);	
-            SelectHeroSkill(source, SIDTERROR);
+            SelectHeroSkill(source, SID_PAIN);            
+            SelectHeroSkill(source, SID_DEATH);    
+            SelectHeroSkill(source, SID_TERROR);
         } else if (GetHeroLevel(source) == 3) {
-            SelectHeroSkill(source, SIDPAIN);		
-            SelectHeroSkill(source, SIDMINDFLAY);	
-            SelectHeroSkill(source, SIDDEATH);
+            SelectHeroSkill(source, SID_PAIN);        
+            SelectHeroSkill(source, SID_MIND_FLAY);    
+            SelectHeroSkill(source, SID_DEATH);
         } else if (GetHeroLevel(source) == 4) {
-            SelectHeroSkill(source, SIDMARROWSQUEEZE);	
-            SelectHeroSkill(source, SIDMINDFLAY);		
-            SelectHeroSkill(source, SIDTERROR);
+            SelectHeroSkill(source, SID_MARROW_SQUEEZE);    
+            SelectHeroSkill(source, SID_MIND_FLAY);        
+            SelectHeroSkill(source, SID_TERROR);
         } else if (GetHeroLevel(source) == 5) {
-            SelectHeroSkill(source, SIDMARROWSQUEEZE);		
-            SelectHeroSkill(source, SIDDEATH);	
-            SelectHeroSkill(source, SIDTERROR);
+            SelectHeroSkill(source, SID_MARROW_SQUEEZE);        
+            SelectHeroSkill(source, SID_DEATH);    
+            SelectHeroSkill(source, SID_TERROR);
         }
     }
     
@@ -735,15 +735,15 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
         integer state = 0; // 0 - normal; 1 - OT;
         // low health
         if (GetWidgetLife(source) / GetUnitState(source, UNIT_STATE_MAX_LIFE) < 0.35) {
-            if (UnitCanUse(source, SIDSHIELDOFSINDOREI)) {
+            if (UnitCanUse(source, SID_SHIELD_OF_SINDOREI)) {
                 // shield
-                IssueImmediateOrderById(source, SpellData[SIDSHIELDOFSINDOREI].oid);
-            } else if (UnitCanUse(source, SIDDISCORD)) {
+                IssueImmediateOrderById(source, SpellData[SID_SHIELD_OF_SINDOREI].oid);
+            } else if (UnitCanUse(source, SID_DISCORD)) {
                 // discord nearest
-                IssueTargetOrderById(source, SpellData[SIDDISCORD].oid, MobList.getNearestFrom(source));
-            } else if (UnitCanUse(source, SIDSHIELDBLOCK)) {
+                IssueTargetOrderById(source, SpellData[SID_DISCORD].oid, MobList.getNearestFrom(source));
+            } else if (UnitCanUse(source, SID_SHIELD_BLOCK)) {
                 // block
-                IssueImmediateOrderById(source, SpellData[SIDSHIELDBLOCK].oid);
+                IssueImmediateOrderById(source, SpellData[SID_SHIELD_BLOCK].oid);
             }
         }
         // ot
@@ -752,12 +752,12 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
             ot = AggroList[MobList.units[i]].getFirst();
             if (!IsUnit(ot, source)) {
                 state = 1;
-                if (UnitCanUse(source, SIDDISCORD)) {
+                if (UnitCanUse(source, SID_DISCORD)) {
                     // discord
-                    IssueTargetOrderById(source, SpellData[SIDDISCORD].oid, MobList.units[i]);
-                } else if (UnitCanUse(source, SIDARCANESHOCK)) {
+                    IssueTargetOrderById(source, SpellData[SID_DISCORD].oid, MobList.units[i]);
+                } else if (UnitCanUse(source, SID_ARCANE_SHOCK)) {
                     // shock
-                    IssueTargetOrderById(source, SpellData[SIDARCANESHOCK].oid, MobList.units[i]);
+                    IssueTargetOrderById(source, SpellData[SID_ARCANE_SHOCK].oid, MobList.units[i]);
                 } else {
                     // attack
                     IssueNormalAttackOrder(source, MobList.units[i]);
@@ -769,16 +769,16 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
         
         // normal rotation
         if (state == 0) {
-            if (UnitCanUse(source, SIDARCANESHOCK) && !IsUnitICD(source, SIDARCANESHOCK)) {
+            if (UnitCanUse(source, SID_ARCANE_SHOCK) && !IsUnitICD(source, SID_ARCANE_SHOCK)) {
                 // shock if not internal cd
-                IssueTargetOrderById(source, SpellData[SIDARCANESHOCK].oid, MobList.getLowestHPPercent());
-                SetUnitICD(source, SIDARCANESHOCK, 5.0);
-            } else if (UnitCanUse(source, SIDSHIELDBLOCK) && GetUnitState(source, UNIT_STATE_MANA) > SpellData[SIDSHIELDBLOCK].cost + SpellData[SIDSUNFIRESTORM].cost) {
+                IssueTargetOrderById(source, SpellData[SID_ARCANE_SHOCK].oid, MobList.getLowestHPPercent());
+                SetUnitICD(source, SID_ARCANE_SHOCK, 5.0);
+            } else if (UnitCanUse(source, SID_SHIELD_BLOCK) && GetUnitState(source, UNIT_STATE_MANA) > SpellData[SID_SHIELD_BLOCK].cost + SpellData[SID_SUN_FIRE_STORM].cost) {
                 // block if can cast shield + sunfire
-                IssueImmediateOrderById(source, SpellData[SIDSHIELDBLOCK].oid);
-            } else if (UnitCanUse(source, SIDSUNFIRESTORM) && GetUnitState(source, UNIT_STATE_MANA) > SpellData[SIDSHIELDBLOCK].cost + SpellData[SIDSUNFIRESTORM].cost) {
+                IssueImmediateOrderById(source, SpellData[SID_SHIELD_BLOCK].oid);
+            } else if (UnitCanUse(source, SID_SUN_FIRE_STORM) && GetUnitState(source, UNIT_STATE_MANA) > SpellData[SID_SHIELD_BLOCK].cost + SpellData[SID_SUN_FIRE_STORM].cost) {
                 // sunfire if can cast shield + sunfire
-                IssueImmediateOrderById(source, SpellData[SIDSUNFIRESTORM].oid);
+                IssueImmediateOrderById(source, SpellData[SID_SUN_FIRE_STORM].oid);
             } else {
                 // attack lowest hp
                 IssueNormalAttackOrder(source, MobList.getLowestHPPercent());
@@ -790,7 +790,7 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
         unit ot;
         integer i;
         integer state = 0; // 0 - normal; 1 - OT;
-		integer findAny;
+        integer findAny;
         if (GetUnitLifePercent(source) < 20) {
             // low health danger
             if (UnitCanUse(source, SID_SURVIVAL_INSTINCTS)) {
@@ -825,7 +825,7 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
             ot = AggroList[MobList.units[i]].getFirst();
             if (!IsUnit(ot, source)) {
                 state = 1;
-                if (UnitCanUse(source, SID_LACERATE) && GetUnitTypeId(MobList.units[i]) != UTIDTIDEBARONWATER && !HexLordGlobalConst.normalAttackForbid) {
+                if (UnitCanUse(source, SID_LACERATE) && GetUnitTypeId(MobList.units[i]) != UTID_TIDE_BARON_WATER && !HexLordGlobalConst.normalAttackForbid) {
                     // lacerate
                     IssueTargetOrderById(source, SpellData[SID_LACERATE].oid, MobList.units[i]);
                 } else {
@@ -848,18 +848,18 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
             } else if (UnitCanUse(source, SID_LACERATE) && !HexLordGlobalConst.normalAttackForbid) {
                 // lacerate 1 by 1
                 i = 0;
-				findAny = 0;
+                findAny = 0;
                 while (i < MobList.n) {
-                    if (GetUnitAbilityLevel(MobList.units[i], BID_LACERATE) == 0 && GetUnitTypeId(MobList.units[i]) != UTIDTIDEBARONWATER) {
-						IssueTargetOrderById(source, SpellData[SID_LACERATE].oid, MobList.units[i]);
-						findAny += 1;
+                    if (GetUnitAbilityLevel(MobList.units[i], BID_LACERATE) == 0 && GetUnitTypeId(MobList.units[i]) != UTID_TIDE_BARON_WATER) {
+                        IssueTargetOrderById(source, SpellData[SID_LACERATE].oid, MobList.units[i]);
+                        findAny += 1;
                         i += MobList.n;
                     }
                     i += 1;
                 }
-				if (findAny == 0) {
-					IssueNormalAttackOrder(source, MobList.getLowestHP());
-				}
+                if (findAny == 0) {
+                    IssueNormalAttackOrder(source, MobList.getLowestHP());
+                }
             } else {
                 // attack lowest hp
                 IssueNormalAttackOrder(source, MobList.getLowestHP());
@@ -894,18 +894,18 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
             ot = PlayerUnits.getLowestHPAbove(0.0);
             if (GetUnitLifePercent(ot) < 35) {
                 // emergent
-                if (UnitCanUse(source, SIDSWIFTMEND) && (GetUnitAbilityLevel(ot, BID_REJUVENATION) > 0 || GetUnitAbilityLevel(ot, BID_REGROWTH) > 0)) {
+                if (UnitCanUse(source, SID_SWIFT_MEND) && (GetUnitAbilityLevel(ot, BID_REJUVENATION) > 0 || GetUnitAbilityLevel(ot, BID_REGROWTH) > 0)) {
                     // swift if target rejuv or regrowth
-                    IssueTargetOrderById(source, SpellData[SIDSWIFTMEND].oid, ot);
-                } else if (UnitCanUse(source, SIDREJUVENATION)) {
+                    IssueTargetOrderById(source, SpellData[SID_SWIFT_MEND].oid, ot);
+                } else if (UnitCanUse(source, SID_REJUVENATION)) {
                     // rejuv for next swift
-                    IssueTargetOrderById(source, SpellData[SIDREJUVENATION].oid, ot);
-                } else if (UnitCanUse(source, SIDREGROWTH)) {
+                    IssueTargetOrderById(source, SpellData[SID_REJUVENATION].oid, ot);
+                } else if (UnitCanUse(source, SID_REGROWTH)) {
                     // regrowth
-                    IssueTargetOrderById(source, SpellData[SIDREGROWTH].oid, ot);   
-                } else if (UnitCanUse(source, SIDLIFEBLOOM)) {
+                    IssueTargetOrderById(source, SpellData[SID_REGROWTH].oid, ot);   
+                } else if (UnitCanUse(source, SID_LIFE_BLOOM)) {
                     // lifebloom
-                    IssueTargetOrderById(source, SpellData[SIDLIFEBLOOM].oid, ot);   
+                    IssueTargetOrderById(source, SpellData[SID_LIFE_BLOOM].oid, ot);   
                 }
             } else {
                 // normal rotation
@@ -920,13 +920,13 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
                 
                 i = 0;
                 while (i < PlayerUnits.n && GetUnitLifePercent(PlayerUnits.sorted[i]) < 90) {
-                    if (UnitCanUse(source, SIDLIFEBLOOM) && GetUnitAbilityLevel(PlayerUnits.sorted[i], BID_LIFE_BLOOM) == 0) {
+                    if (UnitCanUse(source, SID_LIFE_BLOOM) && GetUnitAbilityLevel(PlayerUnits.sorted[i], BID_LIFE_BLOOM) == 0) {
                         // lifebloom if not applied yet
-                        IssueTargetOrderById(source, SpellData[SIDLIFEBLOOM].oid, PlayerUnits.sorted[i]);
+                        IssueTargetOrderById(source, SpellData[SID_LIFE_BLOOM].oid, PlayerUnits.sorted[i]);
                         state = 1;
-                    } else if (UnitCanUse(source, SIDREJUVENATION) && GetUnitAbilityLevel(PlayerUnits.sorted[i], BID_REJUVENATION) == 0) {
+                    } else if (UnitCanUse(source, SID_REJUVENATION) && GetUnitAbilityLevel(PlayerUnits.sorted[i], BID_REJUVENATION) == 0) {
                         // rejuv if not applied yet
-                        IssueTargetOrderById(source, SpellData[SIDREJUVENATION].oid, PlayerUnits.sorted[i]);
+                        IssueTargetOrderById(source, SpellData[SID_REJUVENATION].oid, PlayerUnits.sorted[i]);
                         state = 1;
                     }
                     i += 1;
@@ -953,23 +953,23 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
             ot = PlayerUnits.getLowestHPAbove(0.0);
             if (GetUnitLifePercent(ot) < 35) {
                 // emergent
-                if (UnitCanUse(source, SIDHOLYSHOCK)) {
+                if (UnitCanUse(source, SID_HOLY_SHOCK)) {
                     // holy shock
-                    IssueTargetOrderById(source, SpellData[SIDHOLYSHOCK].oid, ot);
+                    IssueTargetOrderById(source, SpellData[SID_HOLY_SHOCK].oid, ot);
                 } else {
                     if (IsPaladinInstant(source)) {
                         // instant cast holy light
-                        IssueTargetOrderById(source, SpellData[SIDHOLYLIGHT1].oid, ot);
+                        IssueTargetOrderById(source, SpellData[SID_HOLY_LIGHT_1].oid, ot);
                     } else {
-                        if (UnitCanUse(source, SIDDIVINEFAVOR)) {
+                        if (UnitCanUse(source, SID_DIVINE_FAVOR)) {
                             // make sure next healing spell must have crit effect
-                            IssueImmediateOrderById(source, SpellData[SIDDIVINEFAVOR].oid);
+                            IssueImmediateOrderById(source, SpellData[SID_DIVINE_FAVOR].oid);
                         } else if (UnitCanUse(source, fleshLight)) {
                             // flash light
-                            IssueTargetOrderById(source, SpellData[SIDFLASHLIGHT].oid, ot); 
-                        } else if (UnitCanUse(source, SIDHOLYLIGHT)) {
+                            IssueTargetOrderById(source, SpellData[SID_FLASH_LIGHT].oid, ot); 
+                        } else if (UnitCanUse(source, SID_HOLY_LIGHT)) {
                             // normal holy light
-                            IssueTargetOrderById(source, SpellData[SIDHOLYLIGHT].oid, ot);   
+                            IssueTargetOrderById(source, SpellData[SID_HOLY_LIGHT].oid, ot);   
                         }
                     }
                 }
@@ -985,21 +985,21 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
                 }*/
                 
                 if (PlayerUnits.n > 1 && GetUnitLifePercent(PlayerUnits.sorted[1]) < 75) {
-                    if (UnitCanUse(source, SIDBEACONOFLIGHT)) {
-                        IssueTargetOrderById(source, SpellData[SIDBEACONOFLIGHT].oid, PlayerUnits.sorted[1]);
+                    if (UnitCanUse(source, SID_BEACON_OF_LIGHT)) {
+                        IssueTargetOrderById(source, SpellData[SID_BEACON_OF_LIGHT].oid, PlayerUnits.sorted[1]);
                     }
                 }
                 i = 0;
                 while (i < PlayerUnits.n && GetUnitLifePercent(PlayerUnits.sorted[i]) < 85) {
                     if (UnitCanUse(source, fleshLight)) {
-                        IssueTargetOrderById(source, SpellData[SIDFLASHLIGHT].oid, PlayerUnits.sorted[i]);
+                        IssueTargetOrderById(source, SpellData[SID_FLASH_LIGHT].oid, PlayerUnits.sorted[i]);
                         state = 1;
                     } else if (GetUnitLifePercent(PlayerUnits.sorted[i]) < 75) {
                         if (IsPaladinInstant(source)) {
-                            IssueTargetOrderById(source, SpellData[SIDHOLYLIGHT1].oid, PlayerUnits.sorted[i]);
+                            IssueTargetOrderById(source, SpellData[SID_HOLY_LIGHT_1].oid, PlayerUnits.sorted[i]);
                             state = 1;
-                        } else if (UnitCanUse(source, SIDHOLYLIGHT)) {
-                            IssueTargetOrderById(source, SpellData[SIDHOLYLIGHT].oid, PlayerUnits.sorted[i]);
+                        } else if (UnitCanUse(source, SID_HOLY_LIGHT)) {
+                            IssueTargetOrderById(source, SpellData[SID_HOLY_LIGHT].oid, PlayerUnits.sorted[i]);
                             state = 1;
                         }
                     }
@@ -1033,18 +1033,18 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
             ot = PlayerUnits.getLowestHPAbove(0.0);
             if (GetUnitLifePercent(ot) < 40) {
                 // danger
-                if (UnitCanUse(source, SIDSHIELD) && (GetUnitAbilityLevel(ot, BID_SHIELD) == 0) && (GetUnitAbilityLevel(ot, BID_SHIELD_SOUL_WEAK) == 0)) {
+                if (UnitCanUse(source, SID_SHIELD) && (GetUnitAbilityLevel(ot, BID_SHIELD) == 0) && (GetUnitAbilityLevel(ot, BID_SHIELD_SOUL_WEAK) == 0)) {
                     // sheld if target no shield and no soul weak
-                    IssueTargetOrderById(source, SpellData[SIDSHIELD].oid, ot);
-                } else if (UnitCanUse(source, SIDPRAYEROFMENDING)) {
+                    IssueTargetOrderById(source, SpellData[SID_SHIELD].oid, ot);
+                } else if (UnitCanUse(source, SID_PRAYER_OF_MENDING)) {
                     // mending
-                    IssueTargetOrderById(source, SpellData[SIDPRAYEROFMENDING].oid, ot);
-                } else if (UnitCanUse(source, SIDHEAL) && (GetUnitAbilityLevel(ot, BID_HEAL) == 0)) {
+                    IssueTargetOrderById(source, SpellData[SID_PRAYER_OF_MENDING].oid, ot);
+                } else if (UnitCanUse(source, SID_HEAL) && (GetUnitAbilityLevel(ot, BID_HEAL) == 0)) {
                     // heal
-                    IssueTargetOrderById(source, SpellData[SIDHEAL].oid, ot);   
-                } else if (UnitCanUse(source, SIDPRAYEROFHEALING)) {
+                    IssueTargetOrderById(source, SpellData[SID_HEAL].oid, ot);   
+                } else if (UnitCanUse(source, SID_PRAYER_OF_HEALING)) {
                     // healing
-                    IssuePointOrderById(source, SpellData[SIDPRAYEROFHEALING].oid, GetUnitX(ot), GetUnitY(ot));   
+                    IssuePointOrderById(source, SpellData[SID_PRAYER_OF_HEALING].oid, GetUnitX(ot), GetUnitY(ot));   
                 }
             } else {
                 ulsr = ruleOfarHeal;
@@ -1056,14 +1056,14 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
                     i += 1;
                 }*/
                 
-                if (GetUnitLifePercent(PlayerUnits.sorted[1]) < 75 && (GetDistance.units2d(PlayerUnits.sorted[0], PlayerUnits.sorted[1]) < 500.0) && UnitCanUse(source, SIDPRAYEROFHEALING)) {
-                    IssuePointOrderById(source, SpellData[SIDPRAYEROFHEALING].oid, (GetUnitX(PlayerUnits.sorted[0]) + GetUnitX(PlayerUnits.sorted[1])) / 2.0, (GetUnitY(PlayerUnits.sorted[0]) + GetUnitY(PlayerUnits.sorted[1])) / 2.0);   
+                if (GetUnitLifePercent(PlayerUnits.sorted[1]) < 75 && (GetDistance.units2d(PlayerUnits.sorted[0], PlayerUnits.sorted[1]) < 500.0) && UnitCanUse(source, SID_PRAYER_OF_HEALING)) {
+                    IssuePointOrderById(source, SpellData[SID_PRAYER_OF_HEALING].oid, (GetUnitX(PlayerUnits.sorted[0]) + GetUnitX(PlayerUnits.sorted[1])) / 2.0, (GetUnitY(PlayerUnits.sorted[0]) + GetUnitY(PlayerUnits.sorted[1])) / 2.0);   
                     state = 1;
                 } else {
                     i = 0;
                     while (i < PlayerUnits.n && GetUnitLifePercent(PlayerUnits.sorted[i]) < 90) {
-                        if (UnitCanUse(source, SIDHEAL) && GetUnitAbilityLevel(PlayerUnits.sorted[i], BID_HEAL) == 0) {
-                            IssueTargetOrderById(source, SpellData[SIDHEAL].oid, PlayerUnits.sorted[i]);
+                        if (UnitCanUse(source, SID_HEAL) && GetUnitAbilityLevel(PlayerUnits.sorted[i], BID_HEAL) == 0) {
+                            IssueTargetOrderById(source, SpellData[SID_HEAL].oid, PlayerUnits.sorted[i]);
                             state = 1;
                         }
                         i += 1;
@@ -1087,15 +1087,15 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
         if (!IsUnitChanneling(source)) {
             // Summon ghoul: no ghoul
             if (!DarkRangerHasGhoul(source)) {
-                if (UnitCanUse(source, SIDSUMMONGHOUL)) {
-                    IssueImmediateOrderById(source, SpellData[SIDSUMMONGHOUL].oid);
+                if (UnitCanUse(source, SID_SUMMON_GHOUL)) {
+                    IssueImmediateOrderById(source, SpellData[SID_SUMMON_GHOUL].oid);
                     state = 1;
                 }
             }
             // Death pact: when danger >> summon ghoul ready
-            if (state == 0 && UnitCanUse(source, SIDDEATHPACT)) {
-                if (GetUnitLifePercent(source) < 35 || UnitCanUse(source, SIDSUMMONGHOUL)) {
-                    IssueImmediateOrderById(source, SpellData[SIDDEATHPACT].oid);
+            if (state == 0 && UnitCanUse(source, SID_DEATH_PACT)) {
+                if (GetUnitLifePercent(source) < 35 || UnitCanUse(source, SID_SUMMON_GHOUL)) {
+                    IssueImmediateOrderById(source, SpellData[SID_DEATH_PACT].oid);
                     state = 1;
                 }
             }
@@ -1124,31 +1124,31 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
                             }
                         }
                     } else {
-                        if (UnitCanUse(source, SIDFREEZINGTRAP)) {
+                        if (UnitCanUse(source, SID_FREEZING_TRAP)) {
                             rng = GetDistance.units2d(source, tar);
                             dis = rng;
                             if (rng > 200) {rng = 200.0;}
                             x = (GetUnitX(tar) - GetUnitX(source)) * rng / dis + GetUnitX(source);
                             y = (GetUnitY(tar) - GetUnitY(source)) * rng / dis + GetUnitY(source);
-                            IssuePointOrderById(source, SpellData[SIDFREEZINGTRAP].oid, x, y);
+                            IssuePointOrderById(source, SpellData[SID_FREEZING_TRAP].oid, x, y);
                             state = 1;
                         }
                     }
                 }
             }
             // concerntration: when ready >> someone casting
-            if (state == 0 && UnitCanUse(source, SIDCONCERNTRATION)) {
-                IssueImmediateOrderById(source, SpellData[SIDCONCERNTRATION].oid);
+            if (state == 0 && UnitCanUse(source, SID_CONCERNTRATION)) {
+                IssueImmediateOrderById(source, SpellData[SID_CONCERNTRATION].oid);
                 state = 1;
             }
             // black arrow: when ready
-            if (state == 0 && UnitCanUse(source, SIDDARKARROW)) {
-                IssueTargetOrderById(source, SpellData[SIDDARKARROW].oid, MobList.getLowestHP());
+            if (state == 0 && UnitCanUse(source, SID_DARK_ARROW)) {
+                IssueTargetOrderById(source, SpellData[SID_DARK_ARROW].oid, MobList.getLowestHP());
                 state = 1;
             }
             // Abomi/banshee: mana
-            if (UnitCanUse(source, SIDPOWEROFABOMINATION)) {
-                if (GetUnitMana(source) < SpellData[SIDDARKARROW].Cost(GetUnitAbilityLevel(source, SIDDARKARROW)) + SpellData[SIDSUMMONGHOUL].Cost(GetUnitAbilityLevel(source, SIDSUMMONGHOUL))) {
+            if (UnitCanUse(source, SID_POWER_OF_ABOMINATION)) {
+                if (GetUnitMana(source) < SpellData[SID_DARK_ARROW].Cost(GetUnitAbilityLevel(source, SID_DARK_ARROW)) + SpellData[SID_SUMMON_GHOUL].Cost(GetUnitAbilityLevel(source, SID_SUMMON_GHOUL))) {
                     if (DarkRangerIsAbominationOn(source)) {
                         IssueImmediateOrderById(source, OID_IMMOLATIONOFF);
                     }
@@ -1180,36 +1180,36 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
             // I have only one target!
             tar = MobList.getLowestHP();
             // overpower: when ready
-            if (UnitCanUse(source, SIDOVERPOWER) && !HexLordGlobalConst.normalAttackForbid) {
+            if (UnitCanUse(source, SID_OVER_POWER) && !HexLordGlobalConst.normalAttackForbid) {
                 if (BladeMasterCanOverpower(source) && GetUnitManaLost(source) >= BladeMasterGetOverpowerManaRep(source)) {
-                    IssueTargetOrderById(source, SpellData[SIDOVERPOWER].oid, tar);
+                    IssueTargetOrderById(source, SpellData[SID_OVER_POWER].oid, tar);
                     state = 1;
                 }
             }
             // rend: if no rend
-            if (state == 0 && UnitCanUse(source, SIDREND) && !HexLordGlobalConst.normalAttackForbid) {
+            if (state == 0 && UnitCanUse(source, SID_REND) && !HexLordGlobalConst.normalAttackForbid) {
                 if (GetUnitAbilityLevel(tar, BID_REND) == 0) {
-                    IssueTargetOrderById(source, SpellData[SIDREND].oid, tar);
+                    IssueTargetOrderById(source, SpellData[SID_REND].oid, tar);
                     state = 1;
                 }
             }
             // mortal strike: rend about to expire
-            if (state == 0 && UnitCanUse(source, SIDMORTALSTRIKE) && !HexLordGlobalConst.normalAttackForbid) {
-                IssueTargetOrderById(source, SpellData[SIDMORTALSTRIKE].oid, tar);
+            if (state == 0 && UnitCanUse(source, SID_MORTAL_STRIKE) && !HexLordGlobalConst.normalAttackForbid) {
+                IssueTargetOrderById(source, SpellData[SID_MORTAL_STRIKE].oid, tar);
                 state = 1;
             }
             // execute: when > 16
             if (state == 0 && !HexLordGlobalConst.normalAttackForbid) {
                 if (BladeMasterPeekValour(source) > 16) {
-                    IssueTargetOrderById(source, SpellData[SIDEXECUTEEND].oid, tar);
+                    IssueTargetOrderById(source, SpellData[SID_EXECUTE_END].oid, tar);
                     state = 1;
                 } else if (BladeMasterPeekValour(source) > 14) {
-                    IssueTargetOrderById(source, SpellData[SIDEXECUTE4].oid, tar);
+                    IssueTargetOrderById(source, SpellData[SID_EXECUTE_4].oid, tar);
                     state = 1;
                 }
             }
             // heroic strike: MANA% > BOSS HP% - 10 + Rend Cost
-            if (UnitCanUse(source, SID_HEROIC_STRIKE) && GetUnitMana(source) > SpellData[SIDREND].Cost(GetUnitAbilityLevel(source, SIDREND))) {
+            if (UnitCanUse(source, SID_HEROIC_STRIKE) && GetUnitMana(source) > SpellData[SID_REND].Cost(GetUnitAbilityLevel(source, SID_REND))) {
                 if (!BladeMasterIsHSOn(source)) {
                     IssueImmediateOrderById(source, SpellData[SID_HEROIC_STRIKE].oid);
                 }
@@ -1233,7 +1233,7 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
         integer state = 0;
         if (!IsUnitChanneling(source)) {
             // frost nova
-            if (UnitCanUse(source, SIDFROSTNOVA)) {
+            if (UnitCanUse(source, SID_FROST_NOVA)) {
                 i = 0;
                 flag = true;
                 while (i < MobList.n && flag) {
@@ -1245,8 +1245,8 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
                     i += 1;
                 }
                 if (!flag) {
-                    if (GetDistance.units2d(source, attacker) < FrostMageGetFrostNovaAOE(GetUnitAbilityLevel(source, SIDFROSTNOVA))) {
-                        IssueImmediateOrderById(source, SpellData[SIDFROSTNOVA].oid);
+                    if (GetDistance.units2d(source, attacker) < FrostMageGetFrostNovaAOE(GetUnitAbilityLevel(source, SID_FROST_NOVA))) {
+                        IssueImmediateOrderById(source, SpellData[SID_FROST_NOVA].oid);
                         state = 1;
                     } else {
                         IssuePointOrderById(source, OID_MOVE, GetUnitX(attacker), GetUnitY(attacker)); 
@@ -1282,15 +1282,15 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
                 }
             }
             // polymorph && counter spell
-            if (state == 0 && UnitCanUse(source, SIDPOLYMORPH)) {
+            if (state == 0 && UnitCanUse(source, SID_POLYMORPH)) {
                 ot = MobList.getChanneling();
                 if (ot != null) {
-                    IssueTargetOrderById(source, SpellData[SIDPOLYMORPH].oid, ot);
+                    IssueTargetOrderById(source, SpellData[SID_POLYMORPH].oid, ot);
                     state = 1;
                 }
             }
             // blizzard
-            if (state == 0 && (UnitCanUse(source, SIDBLIZZARD) || UnitCanUse(source, SIDBLIZZARD1)) && MobList.GetNum() > 2) {
+            if (state == 0 && (UnitCanUse(source, SID_BLIZZARD) || UnitCanUse(source, SID_BLIZZARD_1)) && MobList.GetNum() > 2) {
                 i = 0;
                 ot = null;
                 flag = true;
@@ -1302,17 +1302,17 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
                     i += 1;
                 }
                 if (!flag) {
-                    if (UnitCanUse(source, SIDBLIZZARD)) {
-                        IssuePointOrderById(source, SpellData[SIDBLIZZARD].oid, GetUnitX(ot), GetUnitY(ot));
-                    } else if (UnitCanUse(source, SIDBLIZZARD1)) {
-                        IssuePointOrderById(source, SpellData[SIDBLIZZARD1].oid, GetUnitX(ot), GetUnitY(ot));
+                    if (UnitCanUse(source, SID_BLIZZARD)) {
+                        IssuePointOrderById(source, SpellData[SID_BLIZZARD].oid, GetUnitX(ot), GetUnitY(ot));
+                    } else if (UnitCanUse(source, SID_BLIZZARD_1)) {
+                        IssuePointOrderById(source, SpellData[SID_BLIZZARD_1].oid, GetUnitX(ot), GetUnitY(ot));
                     }
                     state = 1;
                 }
             }
             // frost bolt
-            if (state == 0 && UnitCanUse(source, SIDFROSTBOLT)) {
-                IssueTargetOrderById(source, SpellData[SIDFROSTBOLT].oid, MobList.getLowestHP());
+            if (state == 0 && UnitCanUse(source, SID_FROST_BOLT)) {
+                IssueTargetOrderById(source, SpellData[SID_FROST_BOLT].oid, MobList.getLowestHP());
                 state = 1;
             }            
             // attack
@@ -1336,20 +1336,20 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
             if (ot == null) {
                 ot = MobList.getLowestHP();
             }
-            IssueTargetOrderById(source, SpellData[SIDEARTHSHOCK1].oid, ot);
+            IssueTargetOrderById(source, SpellData[SID_EARTH_SHOCK_1].oid, ot);
             state = 1;            
         }
         if (state == 0 && !IsUnitChanneling(source)) {
             // earth shock: counter spell
-            if (UnitCanUse(source, SIDEARTHSHOCK)) {
+            if (UnitCanUse(source, SID_EARTH_SHOCK)) {
                 ot = MobList.getChanneling();
                 if (ot != null) {
-                    IssueTargetOrderById(source, SpellData[SIDEARTHSHOCK].oid, ot);
+                    IssueTargetOrderById(source, SpellData[SID_EARTH_SHOCK].oid, ot);
                     state = 1;
                 }
             }
             // purge: offensive dispel, then defensive dispel
-            if (state == 0 && UnitCanUse(source, SIDPURGE)) {
+            if (state == 0 && UnitCanUse(source, SID_PURGE)) {
                 i = 0;
                 flag = true;
                 while (i < MobList.n && flag) {
@@ -1371,7 +1371,7 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
                     }
                 }
                 if (!flag) {
-                    IssueTargetOrderById(source, SpellData[SIDPURGE].oid, ot);
+                    IssueTargetOrderById(source, SpellData[SID_PURGE].oid, ot);
                     state = 1;
                 }
             }
@@ -1385,12 +1385,12 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
                 // torrent totem
                 if (whichBoss != null) {
                     if (GetUnitManaPercent(source) < GetUnitLifePercent(whichBoss) - 10) {
-                        if (EarthBinderGetCurrentTotem(source) != SIDTORRENTTOTEM) {
-                            if (UnitCanUse(source, SIDPURGE)) {
-                                IssueTargetOrderById(source, SpellData[SIDPURGE].oid, source);
+                        if (EarthBinderGetCurrentTotem(source) != SID_TORRENT_TOTEM) {
+                            if (UnitCanUse(source, SID_PURGE)) {
+                                IssueTargetOrderById(source, SpellData[SID_PURGE].oid, source);
                             }
-                        } else if (UnitCanUse(source, SIDTORRENTTOTEM)) {
-                            IssuePointOrderById(source, SpellData[SIDTORRENTTOTEM].oid, GetUnitX(source) - 128.0, GetUnitY(source) - 128.0);
+                        } else if (UnitCanUse(source, SID_TORRENT_TOTEM)) {
+                            IssuePointOrderById(source, SpellData[SID_TORRENT_TOTEM].oid, GetUnitX(source) - 128.0, GetUnitY(source) - 128.0);
                         }
                         state = 1;
                     }
@@ -1418,15 +1418,15 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
                                 }
                             }
                         } else {
-                            if (EarthBinderGetCurrentTotem(source) != SIDEARTHBINDTOTEM) {
+                            if (EarthBinderGetCurrentTotem(source) != SID_EARTH_BIND_TOTEM) {
                                 if (EarthBinderFreeES(source)) {
-                                    IssueTargetOrderById(source, SpellData[SIDEARTHSHOCK1].oid, MobList.getLowestHP());
-                                } else if (UnitCanUse(source, SIDEARTHSHOCK)) {
-                                    IssueTargetOrderById(source, SpellData[SIDEARTHSHOCK].oid, MobList.getLowestHP());
+                                    IssueTargetOrderById(source, SpellData[SID_EARTH_SHOCK_1].oid, MobList.getLowestHP());
+                                } else if (UnitCanUse(source, SID_EARTH_SHOCK)) {
+                                    IssueTargetOrderById(source, SpellData[SID_EARTH_SHOCK].oid, MobList.getLowestHP());
                                 }
                             } else {
-                                if (UnitCanUse(source, SIDEARTHBINDTOTEM)) {
-                                    IssuePointOrderById(source, SpellData[SIDEARTHBINDTOTEM].oid, GetUnitX(tar) - 128.0, GetUnitY(tar) - 128.0);
+                                if (UnitCanUse(source, SID_EARTH_BIND_TOTEM)) {
+                                    IssuePointOrderById(source, SpellData[SID_EARTH_BIND_TOTEM].oid, GetUnitX(tar) - 128.0, GetUnitY(tar) - 128.0);
                                 }
                             }
                             state = 1;
@@ -1435,14 +1435,14 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
                 }
                 if (state == 0) {
                     if (!EarthBinderHasLightningTotem(source)) {
-                        if (EarthBinderGetCurrentTotem(source) != SIDLIGHTNINGTOTEM) {
+                        if (EarthBinderGetCurrentTotem(source) != SID_LIGHTNING_TOTEM) {
                             if (UnitCanUse(source, SID_STORM_LASH)) {
                                 IssueTargetOrderById(source, SpellData[SID_STORM_LASH].oid, MobList.getLowestHP());
                             }
                         } else {
-                            if (UnitCanUse(source, SIDLIGHTNINGTOTEM)) {
+                            if (UnitCanUse(source, SID_LIGHTNING_TOTEM)) {
                                 tar = MobList.getLowestHP();
-                                IssuePointOrderById(source, SpellData[SIDLIGHTNINGTOTEM].oid, GetUnitX(tar) - 128.0, GetUnitY(tar) - 128.0);
+                                IssuePointOrderById(source, SpellData[SID_LIGHTNING_TOTEM].oid, GetUnitX(tar) - 128.0, GetUnitY(tar) - 128.0);
                             }
                         }
                         state = 1;
@@ -1469,7 +1469,7 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
         boolean flag;
         if (!IsUnitChanneling(source)) {
             // stealth
-            if (UnitCanUse(source, SIDSTEALTH)) {
+            if (UnitCanUse(source, SID_STEALTH)) {
                 i = 0;
                 flag = true;
                 while (i < MobList.n && flag) {
@@ -1477,7 +1477,7 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
                         ot = AggroList[MobList.units[i]].getFirst();
                         if (IsUnit(source, ot)) {
                             flag = false;
-                            IssueImmediateOrderById(source, SpellData[SIDSTEALTH].oid);
+                            IssueImmediateOrderById(source, SpellData[SID_STEALTH].oid);
                             state = 1;
                         }
                     }
@@ -1485,38 +1485,38 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
                 }
             }
             // blade flurry: use when ready
-            if (state == 0 && UnitCanUse(source, SIDBLADEFLURRY) && !IsUnitStealth(source) && !HexLordGlobalConst.normalAttackForbid) {
-                IssueImmediateOrderById(source, SpellData[SIDBLADEFLURRY].oid);
+            if (state == 0 && UnitCanUse(source, SID_BLADE_FLURRY) && !IsUnitStealth(source) && !HexLordGlobalConst.normalAttackForbid) {
+                IssueImmediateOrderById(source, SpellData[SID_BLADE_FLURRY].oid);
                 state = 1;
             }
             // stealth abilities
             if (state == 0 && IsUnitStealth(source) && !HexLordGlobalConst.normalAttackForbid) {
                 tar = MobList.getLowestHP();
                 if (GetUnitMana(tar) == 0) {
-                    IssueTargetOrderById(source, SpellData[SIDAMBUSH].oid, tar);
+                    IssueTargetOrderById(source, SpellData[SID_AMBUSH].oid, tar);
                 } else {
-                    IssueTargetOrderById(source, SpellData[SIDGARROTE].oid, tar);
+                    IssueTargetOrderById(source, SpellData[SID_GARROTE].oid, tar);
                 }
                 state = 1;
             }
             // assault: counter spell
-            if (state == 0 && UnitCanUse(source, SIDASSAULT) && !HexLordGlobalConst.normalAttackForbid) {
+            if (state == 0 && UnitCanUse(source, SID_ASSAULT) && !HexLordGlobalConst.normalAttackForbid) {
                 ot = MobList.getChanneling();
                 if (ot != null) {
-                    IssueTargetOrderById(source, SpellData[SIDASSAULT].oid, ot);
+                    IssueTargetOrderById(source, SpellData[SID_ASSAULT].oid, ot);
                     state = 1;
                 }
             }
             // eviscerate: when 5*
-            if (state == 0 && UnitCanUse(source, SIDEVISCERATE) && !HexLordGlobalConst.normalAttackForbid) {
+            if (state == 0 && UnitCanUse(source, SID_EVISCERATE) && !HexLordGlobalConst.normalAttackForbid) {
                 if (ComboPoints[source].n == 5 && GetUnitManaPercent(source) >= 25) {
-                    IssueTargetOrderById(source, SpellData[SIDEVISCERATE].oid, MobList.getLowestHP());
+                    IssueTargetOrderById(source, SpellData[SID_EVISCERATE].oid, MobList.getLowestHP());
                     state = 1;
                 }
             }
             // sinister strike
-            if (state == 0 && UnitCanUse(source, SIDSINISTERSTRIKE) && GetUnitManaPercent(source) >= 40 && !HexLordGlobalConst.normalAttackForbid) {
-                IssueTargetOrderById(source, SpellData[SIDSINISTERSTRIKE].oid, MobList.getLowestHP());
+            if (state == 0 && UnitCanUse(source, SID_SINISTER_STRIKE) && GetUnitManaPercent(source) >= 40 && !HexLordGlobalConst.normalAttackForbid) {
+                IssueTargetOrderById(source, SpellData[SID_SINISTER_STRIKE].oid, MobList.getLowestHP());
                 state = 1;
             }
             // attack
@@ -1535,12 +1535,12 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
         real r0;
         if (!IsUnitChanneling(source)) {
             // counter spell or crowd control
-            if (UnitCanUse(source, SIDTERROR)) {
+            if (UnitCanUse(source, SID_TERROR)) {
                 // try counter spell
                 ot = MobList.getChanneling();
                 if (ot != null) {
-                    if (GetDistance.units2d(source, ot) < HereticGetTerrorAOE(GetUnitAbilityLevel(source, SIDTERROR))) {
-                        IssueImmediateOrderById(source, SpellData[SIDTERROR].oid);
+                    if (GetDistance.units2d(source, ot) < HereticGetTerrorAOE(GetUnitAbilityLevel(source, SID_TERROR))) {
+                        IssueImmediateOrderById(source, SpellData[SID_TERROR].oid);
                     } else {
                         IssuePointOrderById(source, OID_MOVE, GetUnitX(ot), GetUnitY(ot)); 
                     }
@@ -1558,8 +1558,8 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
                         i += 1;
                     }
                     if (!flag) {
-                        if (GetDistance.units2d(source, tar) < HereticGetTerrorAOE(GetUnitAbilityLevel(source, SIDTERROR))) {
-                            IssueImmediateOrderById(source, SpellData[SIDTERROR].oid);
+                        if (GetDistance.units2d(source, tar) < HereticGetTerrorAOE(GetUnitAbilityLevel(source, SID_TERROR))) {
+                            IssueImmediateOrderById(source, SpellData[SID_TERROR].oid);
                         } else {
                             IssuePointOrderById(source, OID_MOVE, GetUnitX(tar), GetUnitY(tar)); 
                         }
@@ -1568,18 +1568,18 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
                 }
             }
             // death!
-            if (state == 0 && UnitCanUse(source, SIDDEATH)) {
-                IssueTargetOrderById(source, SpellData[SIDDEATH].oid, MobList.getLowestHP());
+            if (state == 0 && UnitCanUse(source, SID_DEATH)) {
+                IssueTargetOrderById(source, SpellData[SID_DEATH].oid, MobList.getLowestHP());
                 state = 1;
             }
             // pain on each target
-            if (state == 0 && UnitCanUse(source, SIDPAIN)) {
+            if (state == 0 && UnitCanUse(source, SID_PAIN)) {
                 i = 0;
                 flag = true;
                 while (i < MobList.n && flag) {
                     if (!IsUnitUseless(MobList.units[i])) {
                         if (GetUnitAbilityLevel(MobList.units[i], BID_PAIN) == 0) {
-                            IssueTargetOrderById(source, SpellData[SIDPAIN].oid, MobList.units[i]);
+                            IssueTargetOrderById(source, SpellData[SID_PAIN].oid, MobList.units[i]);
                             state = 1;
                             flag = false;
                         }
@@ -1596,17 +1596,17 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
                     flag = (GetUnitManaPercent(source) > 10);
                 }
                 if (flag) {
-                    r0 = SpellData[SIDPAIN].Cost(GetUnitAbilityLevel(source, SIDPAIN));
-                    r0 += SpellData[SIDMARROWSQUEEZE].Cost(GetUnitAbilityLevel(source, SIDMARROWSQUEEZE));
-                    r0 += SpellData[SIDMINDFLAY].Cost(GetUnitAbilityLevel(source, SIDMINDFLAY));
-                    if (GetUnitMana(source) >= r0 && UnitCanUse(source, SIDMARROWSQUEEZE)) {
-                        IssueTargetOrderById(source, SpellData[SIDMARROWSQUEEZE].oid, MobList.getLowestHP());
+                    r0 = SpellData[SID_PAIN].Cost(GetUnitAbilityLevel(source, SID_PAIN));
+                    r0 += SpellData[SID_MARROW_SQUEEZE].Cost(GetUnitAbilityLevel(source, SID_MARROW_SQUEEZE));
+                    r0 += SpellData[SID_MIND_FLAY].Cost(GetUnitAbilityLevel(source, SID_MIND_FLAY));
+                    if (GetUnitMana(source) >= r0 && UnitCanUse(source, SID_MARROW_SQUEEZE)) {
+                        IssueTargetOrderById(source, SpellData[SID_MARROW_SQUEEZE].oid, MobList.getLowestHP());
                         state = 1;
                     }
                 }
                 if (state == 0) {
-                    if (UnitCanUse(source, SIDMINDFLAY)) {
-                        IssueTargetOrderById(source, SpellData[SIDMINDFLAY].oid, MobList.getLowestHP());
+                    if (UnitCanUse(source, SID_MIND_FLAY)) {
+                        IssueTargetOrderById(source, SpellData[SID_MIND_FLAY].oid, MobList.getLowestHP());
                         state = 1;
                     }
                 }
@@ -1631,29 +1631,29 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinG
     }
     
     function register() {
-        unitCallBack['Hmkg'] = makeOrderHmkg;   // Ñª¾«Áé·ÀÓùÕß
-        unitCallBack['Hlgr'] = makeOrderHlgr;   // Àû×¦µÂÂ³ÒÀ 
-        unitCallBack['Emfr'] = makeOrderEmfr;   // ´ÔÁÖÊØ»¤Õß
-        unitCallBack['Hart'] = makeOrderHart;   // Ê¥ÆïÊ¿
-        unitCallBack['Ofar'] = makeOrderOfar;   // ÄÁÊ¦
-        unitCallBack['Obla'] = makeOrderObla;   // ½£Ê¥
-        unitCallBack['Nbrn'] = makeOrderNbrn;   // ºÚ°µÁÔÊÖ
-        unitCallBack['Hjai'] = makeOrderHjai;   // º®±ù·¨Ê¦
-        unitCallBack['Hapm'] = makeOrderHapm;   // µØ¸¿Õß
-        unitCallBack['H006'] = makeOrderHapm;   // µØ¸¿Õß
-        unitCallBack['Edem'] = makeOrderEdem;   // Á÷ÀË½£¿Í
-        unitCallBack['Hblm'] = makeOrderHblm;   // Òì½ÌÍ½
+        unitCallBack['Hmkg'] = makeOrderHmkg;   // Ñªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        unitCallBack['Hlgr'] = makeOrderHlgr;   // ï¿½ï¿½×¦ï¿½ï¿½Â³ï¿½ï¿½ 
+        unitCallBack['Emfr'] = makeOrderEmfr;   // ï¿½ï¿½ï¿½ï¿½ï¿½Ø»ï¿½ï¿½ï¿½
+        unitCallBack['Hart'] = makeOrderHart;   // Ê¥ï¿½ï¿½Ê¿
+        unitCallBack['Ofar'] = makeOrderOfar;   // ï¿½ï¿½Ê¦
+        unitCallBack['Obla'] = makeOrderObla;   // ï¿½ï¿½Ê¥
+        unitCallBack['Nbrn'] = makeOrderNbrn;   // ï¿½Ú°ï¿½ï¿½ï¿½ï¿½ï¿½
+        unitCallBack['Hjai'] = makeOrderHjai;   // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¦
+        unitCallBack['Hapm'] = makeOrderHapm;   // ï¿½Ø¸ï¿½ï¿½ï¿½
+        unitCallBack['H006'] = makeOrderHapm;   // ï¿½Ø¸ï¿½ï¿½ï¿½
+        unitCallBack['Edem'] = makeOrderEdem;   // ï¿½ï¿½ï¿½Ë½ï¿½ï¿½ï¿½
+        unitCallBack['Hblm'] = makeOrderHblm;   // ï¿½ï¿½ï¿½Í½
         unitLearSkill['Hmkg'] = learnSkillHmkg;   // 
-        unitLearSkill['Hlgr'] = learnSkillHlgr;   // Àû×¦µÂÂ³ÒÀ 
-        unitLearSkill['Emfr'] = learnSkillEmfr;   // ´ÔÁÖÊØ»¤Õß
-        unitLearSkill['Hart'] = learnSkillHart;   // Ê¥ÆïÊ¿
-        unitLearSkill['Ofar'] = learnSkillOfar;   // ÄÁÊ¦
-        unitLearSkill['Obla'] = learnSkillObla;   // ½£Ê¥
-        unitLearSkill['Nbrn'] = learnSkillNbrn;   // ºÚ°µÁÔÊÖ
-        unitLearSkill['Hjai'] = learnSkillHjai;   // º®±ù·¨Ê¦
-        unitLearSkill['Hapm'] = learnSkillHapm;   // µØ¸¿Õß
-        unitLearSkill['Edem'] = learnSkillEdem;   // Á÷ÀË½£¿Í
-        unitLearSkill['Hblm'] = learnSkillHblm;   // Òì½ÌÍ½
+        unitLearSkill['Hlgr'] = learnSkillHlgr;   // ï¿½ï¿½×¦ï¿½ï¿½Â³ï¿½ï¿½ 
+        unitLearSkill['Emfr'] = learnSkillEmfr;   // ï¿½ï¿½ï¿½ï¿½ï¿½Ø»ï¿½ï¿½ï¿½
+        unitLearSkill['Hart'] = learnSkillHart;   // Ê¥ï¿½ï¿½Ê¿
+        unitLearSkill['Ofar'] = learnSkillOfar;   // ï¿½ï¿½Ê¦
+        unitLearSkill['Obla'] = learnSkillObla;   // ï¿½ï¿½Ê¥
+        unitLearSkill['Nbrn'] = learnSkillNbrn;   // ï¿½Ú°ï¿½ï¿½ï¿½ï¿½ï¿½
+        unitLearSkill['Hjai'] = learnSkillHjai;   // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¦
+        unitLearSkill['Hapm'] = learnSkillHapm;   // ï¿½Ø¸ï¿½ï¿½ï¿½
+        unitLearSkill['Edem'] = learnSkillEdem;   // ï¿½ï¿½ï¿½Ë½ï¿½ï¿½ï¿½
+        unitLearSkill['Hblm'] = learnSkillHblm;   // ï¿½ï¿½ï¿½Í½
     }
     
     // learn skills once

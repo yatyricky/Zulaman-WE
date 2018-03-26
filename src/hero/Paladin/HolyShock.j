@@ -1,7 +1,7 @@
 //! zinc
 library HolyShock requires PaladinGlobal, SpellEvent, UnitProperty, BeaconOfLight, LightsJustice {
-#define ART_ID 'e00J'
-#define BUFF_ID 'A02E'
+constant integer ART_ID = 'e00J';
+constant integer BUFF_ID = 'A02E';
     struct delayedDosth1 {
         private timer tm;
         private unit sor, tar;
@@ -45,14 +45,14 @@ library HolyShock requires PaladinGlobal, SpellEvent, UnitProperty, BeaconOfLigh
 
     function onCast() {
         Buff buf;
-        integer lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SIDHOLYSHOCK);
+        integer lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_HOLY_SHOCK);
         integer id = GetPlayerId(GetOwningPlayer(SpellEvent.CastingUnit));       
         
         // equiped Justice of Light, won't consume Divine Favour
         if (HasLightsJustice(SpellEvent.CastingUnit)) {
-            HealTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, (GetUnitState(SpellEvent.TargetUnit, UNIT_STATE_MAX_LIFE) - GetWidgetLife(SpellEvent.TargetUnit)) * 0.75, SpellData[SIDHOLYSHOCK].name, 2.0);
+            HealTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, (GetUnitState(SpellEvent.TargetUnit, UNIT_STATE_MAX_LIFE) - GetWidgetLife(SpellEvent.TargetUnit)) * 0.75, SpellData[SID_HOLY_SHOCK].name, 2.0);
         } else {        
-            HealTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, (GetUnitState(SpellEvent.TargetUnit, UNIT_STATE_MAX_LIFE) - GetWidgetLife(SpellEvent.TargetUnit)) * 0.75, SpellData[SIDHOLYSHOCK].name, healCrit[id]);
+            HealTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, (GetUnitState(SpellEvent.TargetUnit, UNIT_STATE_MAX_LIFE) - GetWidgetLife(SpellEvent.TargetUnit)) * 0.75, SpellData[SID_HOLY_SHOCK].name, healCrit[id]);
             if (healCrit[id] > 0) {
                 healCrit[id] = 0.0;
             }
@@ -66,7 +66,7 @@ library HolyShock requires PaladinGlobal, SpellEvent, UnitProperty, BeaconOfLigh
         UnitProp[buf.bd.target].ModAttackSpeed(0 - buf.bd.i0);
         buf.bd.r0 = 0.1 * lvl;
         buf.bd.i0 = 10 * lvl;
-        if (HealResult.isCritical && lvl > 2 && GetUnitAbilityLevel(SpellEvent.CastingUnit, SIDBEACONOFLIGHT) > 0) {
+        if (HealResult.isCritical && lvl > 2 && GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_BEACON_OF_LIGHT) > 0) {
             buf.bd.i1 = 1;
         } //else {
           //  buf.bd.i1 = 0;
@@ -78,10 +78,10 @@ library HolyShock requires PaladinGlobal, SpellEvent, UnitProperty, BeaconOfLigh
     }
 
     function onInit() {
-        RegisterSpellEffectResponse(SIDHOLYSHOCK, onCast);
+        RegisterSpellEffectResponse(SID_HOLY_SHOCK, onCast);
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
     }
-#undef BUFF_ID
-#undef ART_ID
+
+
 }
 //! endzinc

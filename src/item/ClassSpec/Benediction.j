@@ -22,7 +22,7 @@ library Benediction requires ItemAttributes, DamageSystem {
 
     function onInit() {
         ht = HandleTable.create();
-        RegisterItemPropMod(ITIDBENEDICTION, action);
+        RegisterItemPropMod(ITID_BENEDICTION, action);
     }
 }
 //! endzinc

@@ -1,11 +1,11 @@
 //! zinc
 library ForceSight {
     public constant real value_CAMERA_FIELD_ANGLE_OF_ATTACK = 294.89;
-    public constant real value_CAMERA_FIELD_FARZ = 5500;	// 远景剪裁
-    public constant real value_CAMERA_FIELD_FIELD_OF_VIEW = 70; 	// 观察区域
+    public constant real value_CAMERA_FIELD_FARZ = 5500;    // 远景剪裁
+    public constant real value_CAMERA_FIELD_FIELD_OF_VIEW = 70;     // 观察区域
     public constant real value_CAMERA_FIELD_ROLL = 0;
-    public constant real value_CAMERA_FIELD_ROTATION = 90;	// 旋转角度
-    public constant real value_CAMERA_FIELD_TARGET_DISTANCE = 2500.00;	// 距离到目标
+    public constant real value_CAMERA_FIELD_ROTATION = 90;    // 旋转角度
+    public constant real value_CAMERA_FIELD_TARGET_DISTANCE = 2500.00;    // 距离到目标
     public constant real value_CAMERA_FIELD_ZOFFSET = 0;
     
     constant real DELAY = 0.0;

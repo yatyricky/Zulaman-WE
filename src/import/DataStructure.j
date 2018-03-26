@@ -13,12 +13,12 @@ library DataStructure {
         static method locate($Type$ elem) -> integer {
             integer i = 0;
             integer index = -1;
-			while (i < thistype.theSize && index == -1) {
-				if (elem == thistype.elem[i]) {
+            while (i < thistype.theSize && index == -1) {
+                if (elem == thistype.elem[i]) {
                     index = i;
                 }
-				i += 1;
-			}
+                i += 1;
+            }
             return index;
         }
         
@@ -45,12 +45,12 @@ library DataStructure {
         }
         
         static method remove($Type$ elem) -> boolean {
-			integer index = 0;
+            integer index = 0;
             if (elem == $NULL$) {
                 debug BJDebugMsg("|cffff0000thistype, Null pointer error|r");
                 return false;
             }
-			index = thistype.locate(elem);
+            index = thistype.locate(elem);
             if (index == -1) {
                 debug BJDebugMsg("Elem does not exist in thistype");
                 return false;
@@ -79,81 +79,81 @@ library DataStructure {
         }
     }
     //! endtextmacro   
-	
-	//! textmacro WriteQueueList takes Type, NULL
-	private struct QueueNode_$Type$ {
-		$Type$ elem;
-		thistype prev;
-		thistype next;
-		
-		static static method create($Type$ elem) -> thistype {
-			thistype this = thistype.allocate();
-			this.elem = elem;
-			return this;
-		}
-		
-		static method destroy() {
-			this.elem = $NULL$;
-			this.prev = 0;
-			this.next = 0;
-			this.deallocate();
-		}
-	}
-	
+    
+    //! textmacro WriteQueueList takes Type, NULL
+    private struct QueueNode_$Type$ {
+        $Type$ elem;
+        thistype prev;
+        thistype next;
+        
+        static static method create($Type$ elem) -> thistype {
+            thistype this = thistype.allocate();
+            this.elem = elem;
+            return this;
+        }
+        
+        static method destroy() {
+            this.elem = $NULL$;
+            this.prev = 0;
+            this.next = 0;
+            this.deallocate();
+        }
+    }
+    
     public struct QueueList_$Type$ {
-		private QueueNode_$Type$ front;
-		private QueueNode_$Type$ rear;
-		
-		static method isEmpty() -> boolean {
-			return (this.front == 0);
-		}
+        private QueueNode_$Type$ front;
+        private QueueNode_$Type$ rear;
+        
+        static method isEmpty() -> boolean {
+            return (this.front == 0);
+        }
         
         static method getLength() -> integer {
-			QueueNode_$Type$ index = this.front;
-			integer size = 0;
-			while (index != 0) {
-				index = index.next;
-				size += 1;
-			}
+            QueueNode_$Type$ index = this.front;
+            integer size = 0;
+            while (index != 0) {
+                index = index.next;
+                size += 1;
+            }
             return size;
         }
         
         static method in($Type$ elem) {
-			QueueNode_$Type$ newItem = 0;
+            QueueNode_$Type$ newItem = 0;
             if (elem == $NULL$) {
                 debug BJDebugMsg("|cffff0000thistype, Null pointer error|r");
                 return;
             }
-			newItem = QueueNode_$Type$.create(elem);
-			newItem.next = 0;
-			if (this.isEmpty()) {
-				this.front = newItem;
-				this.front.prev = 0;
-				this.rear = this.front;
-			} else {
-				newItem.prev = this.rear;
-				this.rear.next = newItem;
-				this.rear = newItem;
-			}
+            newItem = QueueNode_$Type$.create(elem);
+            newItem.next = 0;
+            if (this.isEmpty()) {
+                this.front = newItem;
+                this.front.prev = 0;
+                this.rear = this.front;
+            } else {
+                newItem.prev = this.rear;
+                this.rear.next = newItem;
+                this.rear = newItem;
+            }
         }
         
         static method out() -> $Type$ {
-			$Type$ ret = $NULL$;
-			QueueNode_$Type$ tmp = 0;
-			if (this.isEmpty()) {
-				debug BJDebugMsg("|cffff0000thistype, attempt to remove element from empty queue|r");
-				return $NULL$;
-			}
-			ret = this.front.elem;
-			tmp = this.front;
-			if (this.getLength() == 1) {
-				this.rear = 0;
-			}
-			this.front = this.front.next;
-			tmp.destroy();
-			if (this.front != 0) {
-				this.front.prev = 0;
-			}
+            $Type$ ret = $NULL$;
+            QueueNode_$Type$ tmp = 0;
+            if (this.isEmpty()) {
+                debug BJDebugMsg("|cffff0000thistype, attempt to remove element from empty queue|r");
+                return $NULL$;
+            }
+            ret = this.front.elem;
+            tmp = this.front;
+            if (this.getLength() == 1) {
+                this.rear = 0;
+            }
+            this.front = this.front.next;
+            tmp.destroy();
+            if (this.front != 0) {
+                this.front.prev = 0;
+            }
             return ret;
         }
         
@@ -165,12 +165,12 @@ library DataStructure {
         }
         
         static method destroy() {
-			QueueNode_$Type$ index = this.front;
-			while (index != 0) {
-				index = index.next;
-				this.out();
-			}
-			this.deallocate();
+            QueueNode_$Type$ index = this.front;
+            while (index != 0) {
+                index = index.next;
+                this.out();
+            }
+            this.deallocate();
         }
     }
     //! endtextmacro   

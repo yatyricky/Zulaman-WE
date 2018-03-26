@@ -1,6 +1,6 @@
 //! zinc
 library Terror requires SpellEvent, StunUtils {
-#define ART "Abilities\\Spells\\Other\\HowlOfTerror\\HowlCaster.mdl"
+constant string  ART  = "Abilities\\Spells\\Other\\HowlOfTerror\\HowlCaster.mdl";
 
     public function HereticGetTerrorAOE(integer lvl) -> real {
         return 800.0;
@@ -8,7 +8,7 @@ library Terror requires SpellEvent, StunUtils {
 
     function onCast() {
         //AddTimedEffect.atUnit("Abilities\\Spells\\Undead\\FreezingBreath\\FreezingBreathMissile.mdl", SpellEvent.CastingUnit, "origin", 0.0);
-        integer lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SIDTERROR);
+        integer lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_TERROR);
         real margin = 100 + 150.0 * lvl;
         unit tu;
         real time;
@@ -34,8 +34,8 @@ library Terror requires SpellEvent, StunUtils {
     }
 
     function onInit() {
-        RegisterSpellEffectResponse(SIDTERROR, onCast);
+        RegisterSpellEffectResponse(SID_TERROR, onCast);
     }
-#undef ART
+
 }
 //! endzinc

@@ -5,9 +5,9 @@ target ally deals 100% more damage
 duration 12 seconds
 magic positive effect
 */
-#define DURATION 10.0
-#define ART_LEFT "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustTarget.mdl"
-#define ART_RIGHT "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustSpecial.mdl"
+constant real DURATION = 10.0;
+constant string  ART_LEFT  = "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustTarget.mdl";
+constant string  ART_RIGHT  = "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustSpecial.mdl";
 
     function onEffect(Buff buf) { 
         UnitProp[buf.bd.target].damageDealt += buf.bd.r0;
@@ -34,8 +34,8 @@ magic positive effect
         BuffType.register(BID_BATTLE_COMMAND, BUFF_MAGE, BUFF_POS);
         RegisterSpellEffectResponse(SID_BATTLE_COMMAND, onCast);
     }
-#undef DURATION
-#undef ART_LEFT
-#undef ART_RIGHT
+
+
+
 }
 //! endzinc

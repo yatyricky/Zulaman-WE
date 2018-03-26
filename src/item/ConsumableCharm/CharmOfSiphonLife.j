@@ -1,8 +1,8 @@
 //! zinc
 library CharmOfSiphonLife requires BuffSystem, SpellEvent, DamageSystem {
-#define BUFF_ID 'A0AE'
-#define ART_TARGET "Abilities\\Spells\\Other\\Drain\\DrainTarget.mdl"
-#define ART_CASTER "Abilities\\Spells\\Other\\Drain\\DrainCaster.mdl"
+constant integer BUFF_ID = 'A0AE';
+constant string  ART_TARGET  = "Abilities\\Spells\\Other\\Drain\\DrainTarget.mdl";
+constant string  ART_CASTER  = "Abilities\\Spells\\Other\\Drain\\DrainCaster.mdl";
 
     function onEffect(Buff buf) {
         DamageTarget(buf.bd.caster, buf.bd.target, buf.bd.r0, SpellData[SID_CHARM_OF_SIPHON_LIFE].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
@@ -29,8 +29,8 @@ library CharmOfSiphonLife requires BuffSystem, SpellEvent, DamageSystem {
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_NEG);
         RegisterSpellEffectResponse(SID_CHARM_OF_SIPHON_LIFE, onCast);
     }
-#undef ART_CASTER
-#undef ART_TARGET
-#undef BUFF_ID 
+
+
+
 }
 //! endzinc

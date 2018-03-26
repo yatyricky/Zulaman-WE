@@ -14,9 +14,9 @@ library PaladinGlobal {
     }
     
     public function GetFlashLightAID(unit u) -> integer {
-        integer fleshLight = SIDFLASHLIGHT;
-        if (GetUnitAbilityLevel(u, SIDDIVINEFAVOR) == LEVEL_TO_IMPROVE_FLASH_LIGHT) {
-            fleshLight = SIDFLASHLIGHT1;
+        integer fleshLight = SID_FLASH_LIGHT;
+        if (GetUnitAbilityLevel(u, SID_DIVINE_FAVOR) == LEVEL_TO_IMPROVE_FLASH_LIGHT) {
+            fleshLight = SID_FLASH_LIGHT_1;
         }
         return fleshLight;
     }

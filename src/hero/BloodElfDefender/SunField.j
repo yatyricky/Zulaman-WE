@@ -1,8 +1,8 @@
 //! zinc
 library SunField requires SpellEvent, TimerUtils, AggroSystem {
-#define ART_CASTER "Abilities\\Weapons\\DemolisherFireMissile\\DemolisherFireMissile.mdl"
-#define ART_EFFECT "Abilities\\Spells\\Orc\\LiquidFire\\Liquidfire.mdl"
-//#define BUFF_ID 'A04F'
+constant string  ART_CASTER  = "Abilities\\Weapons\\DemolisherFireMissile\\DemolisherFireMissile.mdl";
+constant string  ART_EFFECT  = "Abilities\\Spells\\Orc\\LiquidFire\\Liquidfire.mdl";
+//constant integer BUFF_ID = 'A04F';
 
     function returnDamage(integer lvl) -> real {
         return 50.0 * lvl;
@@ -45,7 +45,7 @@ library SunField requires SpellEvent, TimerUtils, AggroSystem {
             tu = FirstOfGroup(ENUM_GROUP);
             while (tu != null) {
                 if (!IsUnitDummy(tu) && !IsUnitDead(tu) && IsUnitEnemy(tu, GetOwningPlayer(this.caster))) {
-                    DamageTarget(this.caster, tu, this.dmg, SpellData[SIDSUNFIRESTORM].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+                    DamageTarget(this.caster, tu, this.dmg, SpellData[SID_SUN_FIRE_STORM].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
                     AggroTarget(this.caster, tu, this.dmg * 7.0);
                 }
                 GroupRemoveUnit(ENUM_GROUP, tu);
@@ -71,7 +71,7 @@ library SunField requires SpellEvent, TimerUtils, AggroSystem {
     
         static method new(unit u) {
             thistype this = thistype.allocate();
-            integer lvl = GetUnitAbilityLevel(u, SIDSUNFIRESTORM);
+            integer lvl = GetUnitAbilityLevel(u, SID_SUN_FIRE_STORM);
             real hst = 1.0 + UnitProp[u].AttackSpeed() / 100.0 + UnitProp[u].SpellHaste();
             this.caster = u;
             this.aoe = 250.0;
@@ -93,7 +93,7 @@ library SunField requires SpellEvent, TimerUtils, AggroSystem {
         //integer lvl;
         SunField.new(SpellEvent.CastingUnit);
         
-        //lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SIDSUNFIRESTORM);
+        //lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_SUN_FIRE_STORM);
         //buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BUFF_ID);
         //buf.bd.tick = -1;
         //buf.bd.interval = returnDuration(lvl);
@@ -105,11 +105,11 @@ library SunField requires SpellEvent, TimerUtils, AggroSystem {
     }
 
     function onInit() {
-        RegisterSpellEffectResponse(SIDSUNFIRESTORM, onCast);
+        RegisterSpellEffectResponse(SID_SUN_FIRE_STORM, onCast);
         //BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_POS);
     }
-//#undef BUFF_ID
-#undef ART_EFFECT
-#undef ART_CASTER
+//
+
+
 }
 //! endzinc

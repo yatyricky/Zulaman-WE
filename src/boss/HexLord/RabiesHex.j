@@ -1,6 +1,6 @@
 //! zinc
 library RabiesHex requires MangleHex {
-#define BUFF_ID 'A05V'
+constant integer BUFF_ID = 'A05V';
     function RabiesOnEffect(Buff buf) {
         real dmg = 200.0;
         if (BuffSlot[buf.bd.target].getBuffByBid(MANGLEHEX_BUFF_ID) != 0) {
@@ -29,6 +29,6 @@ library RabiesHex requires MangleHex {
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_NEG);
         RegisterSpellEffectResponse(SIDRABIESHEX, onCast);
     }
-#undef BUFF_ID
+
 }
 //! endzinc

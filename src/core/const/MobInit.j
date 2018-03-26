@@ -1,7 +1,7 @@
 //! zinc
 library MobInit requires Table, BuffSystem, Patrol, NefUnion, WarlockGlobal, StunUtils {
-#define MOBINIT_RESPAWN_L 510
-#define MOBINIT_RESPAWN_H 600
+constant integer MOBINIT_RESPAWN_L = 510;
+constant integer MOBINIT_RESPAWN_H = 600;
 
     private HandleTable idTable;
     private integer numMobs;
@@ -12,7 +12,7 @@ library MobInit requires Table, BuffSystem, Patrol, NefUnion, WarlockGlobal, Stu
     
     function cancelStun(DelayTask dt) {
         RemoveStun(dt.u0);
-    }	
+    }    
 
     public function ResetMob(unit u) {
         integer id = idTable[u];
@@ -22,13 +22,13 @@ library MobInit requires Table, BuffSystem, Patrol, NefUnion, WarlockGlobal, Stu
             DelayTask.create(cancelStun, 0.5).u0 = u;
         }     
 
-        if (GetUnitTypeId(u) == UTID_ARCH_TINKER_MORPH || GetUnitTypeId(u) == UTIDTIDEBARONWATER) {
+        if (GetUnitTypeId(u) == UTID_ARCH_TINKER_MORPH || GetUnitTypeId(u) == UTID_TIDE_BARON_WATER) {
             DelayTask.create(cancelForm, 1.0).u0 = u;
         }
-		
-		if (GetUnitTypeId(u) == UTIDWARLOCK) {
-			ResetFireRunes();
-		}
+        
+        if (GetUnitTypeId(u) == UTID_WARLOCK) {
+            ResetFireRunes();
+        }
         
         IssueImmediateOrderById(u, OID_STOP);
         PauseUnit(u, true);
@@ -123,7 +123,7 @@ library MobInit requires Table, BuffSystem, Patrol, NefUnion, WarlockGlobal, Stu
             u = null;
         });
     }
-#undef MOBINIT_RESPAWN_H
-#undef MOBINIT_RESPAWN_L
+
+
 }
 //! endzinc

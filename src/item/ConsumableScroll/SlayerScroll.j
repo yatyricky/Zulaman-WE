@@ -1,8 +1,8 @@
 //! zinc
 library SlayerScroll requires SpellEvent, ZAMCore {
-#define ART_CASTER "Abilities\\Spells\\NightElf\\BattleRoar\\RoarCaster.mdl"
-#define ART_TARGET "Abilities\\Spells\\Other\\Levelup\\LevelupCaster.mdl"
-#define BUFF_ID 'A073'
+constant string  ART_CASTER  = "Abilities\\Spells\\NightElf\\BattleRoar\\RoarCaster.mdl";
+constant string  ART_TARGET  = "Abilities\\Spells\\Other\\Levelup\\LevelupCaster.mdl";
+constant integer BUFF_ID = 'A073';
     
     function onEffect(Buff buf) {
         UnitProp[buf.bd.target].damageDealt += buf.bd.r0;
@@ -37,8 +37,8 @@ library SlayerScroll requires SpellEvent, ZAMCore {
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
         
     }
-#undef BUFF_ID
-#undef ART_TARGET
-#undef ART_CASTER
+
+
+
 }
 //! endzinc

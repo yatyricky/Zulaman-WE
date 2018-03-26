@@ -1,11 +1,11 @@
 //! zinc
 library Loot requires IntegerPool, ZAMCore {
-#define RP_FACTOR 200000
-#define TABLE_SIZE 50
-#define RP_RELIC 1.0
-#define RP_RARE 10.0
-#define RP_UNCOMMON 0.0
-#define RP_COMMON 0.0
+constant integer RP_FACTOR = 200000;
+constant integer TABLE_SIZE = 50;
+constant real RP_RELIC = 1.0;
+constant real RP_RARE = 10.0;
+constant real RP_UNCOMMON = 0.0;
+constant real RP_COMMON = 0.0;
     public IntegerPool classSpec;
     IntegerPool relic;
     IntegerPool rare;
@@ -144,23 +144,23 @@ library Loot requires IntegerPool, ZAMCore {
         bossPools[UTID_ARCH_TINKER] = boss1;
         bossPools[UTID_ARCH_TINKER_MORPH] = boss1;
         bossPools[UTID_NAGA_SEA_WITCH] = boss2;
-        bossPools[UTIDTIDEBARON] = boss3;
-        bossPools[UTIDTIDEBARONWATER] = boss3;
-        bossPools[UTIDWARLOCK] = boss4;
+        bossPools[UTID_TIDE_BARON] = boss3;
+        bossPools[UTID_TIDE_BARON_WATER] = boss3;
+        bossPools[UTID_WARLOCK] = boss4;
         bossPools[UTID_PIT_ARCHON] = boss5;
         bossPools[UTID_FEL_GUARD] = boss6;
-        bossPools[UTIDHEXLORD] = boss7;
+        bossPools[UTID_HEX_LORD] = boss7;
         
-        relic.add(ITIDBREATHOFTHEDYING, 10);
-        relic.add(ITIDCALLTOARMS, 10);
+        relic.add(ITID_BREATH_OF_THE_DYING, 10);
+        relic.add(ITID_CALL_TO_ARMS, 10);
         relic.add(ITID_CTHUNS_DERANGEMENT, 10);
-        relic.add(ITIDENIGMA, 10);
-        relic.add(ITIDINFINITY, 10);
-        relic.add(ITIDINSIGHT, 10);
+        relic.add(ITID_ENIGMA, 10);
+        relic.add(ITID_INFINITY, 10);
+        relic.add(ITID_INSIGHT, 10);
         relic.add(ITID_TYRAELS_MIGHT, 10);
         relic.add(ITID_VOODOO_VIAL, 10);
-        relic.add(ITIDWOESTAVE, 10);
-        relic.add(ITIDWINDFORCE, 10);
+        relic.add(ITID_WOE_STAVE, 10);
+        relic.add(ITID_WIND_FORCE, 10);
 
         rare.add(ITID_ARANS_SOOTHING_AGATE, 10);
         rare.add(ITID_BULWARK_OF_THE_AMANI_EMPIRE, 10);
@@ -251,11 +251,11 @@ library Loot requires IntegerPool, ZAMCore {
         boss7.add(ITID_TIDAL_LOOP, 6);
 
     }
-#undef RP_COMMON
-#undef RP_UNCOMMON
-#undef RP_RARE
-#undef RP_RELIC
-#undef TABLE_SIZE
-#undef RP_FACTOR
+
+
+
+
+
+
 }
 //! endzinc

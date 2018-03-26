@@ -255,7 +255,7 @@ library BuffSystem requires TimerUtils, Table, Integer, ZAMCore {
         
         method dispel(integer buffCate, integer buffPoly) -> Buff {
             Buff current = this.top;
-            Buff prev;
+            Buff prev = 0;
             while (current != 0) {
                 if ((current.bd.bt.buffCate == buffCate || buffCate == BUFF_CATE_ALL) && current.bd.bt.buffPoly == buffPoly) {
                     if (current == this.top) {
@@ -277,7 +277,7 @@ library BuffSystem requires TimerUtils, Table, Integer, ZAMCore {
         
         method dispelByBuff(Buff buf) {
             Buff current = this.top;
-            Buff prev;
+            Buff prev = 0;
             while (current != 0) {
                 if (current == buf) {
                     if (current == this.top) {
@@ -307,7 +307,7 @@ library BuffSystem requires TimerUtils, Table, Integer, ZAMCore {
         
         method cancel(Buff buf) {
             Buff current = this.top;
-            Buff prev;
+            Buff prev = 0;
             while (current != 0) {
                 if (current == buf) {
                     if (current == this.top) {

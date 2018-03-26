@@ -1,7 +1,7 @@
 //! zinc
 library SpeedScroll requires SpellEvent, CastingBar {
-#define ART_TARGET "Abilities\\Spells\\Items\\AIsp\\SpeedTarget.mdl"
-#define BUFF_ID 'A06S'
+constant string  ART_TARGET  = "Abilities\\Spells\\Items\\AIsp\\SpeedTarget.mdl";
+constant integer BUFF_ID = 'A06S';
     
     function onEffect(Buff buf) {
         UnitProp[buf.bd.target].ModSpeed(buf.bd.i0);
@@ -35,7 +35,7 @@ library SpeedScroll requires SpellEvent, CastingBar {
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
         
     }
-#undef BUFF_ID
-#undef ART_TARGET
+
+
 }
 //! endzinc

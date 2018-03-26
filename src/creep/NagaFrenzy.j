@@ -1,7 +1,7 @@
 //! zinc
 library NagaFrenzy requires SpellEvent, BuffSystem {
-#define BUFF_ID 'A09V'
-#define ART "Abilities\\Spells\\Undead\\UnholyFrenzy\\UnholyFrenzyTarget.mdl"
+constant integer BUFF_ID = 'A09V';
+constant string  ART  = "Abilities\\Spells\\Undead\\UnholyFrenzy\\UnholyFrenzyTarget.mdl";
     function onEffect(Buff buf) {
         UnitProp[buf.bd.target].ModAttackSpeed(buf.bd.i0);
     }
@@ -26,7 +26,7 @@ library NagaFrenzy requires SpellEvent, BuffSystem {
         RegisterSpellEffectResponse(SID_NAGA_FRENZY, onCast);
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
     }
-#undef ART
-#undef BUFF_ID
+
+
 }
 //! endzinc

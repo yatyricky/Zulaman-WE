@@ -1,7 +1,7 @@
 //! zinc
 library ProtectionWard requires SpellEvent, BuffSystem {
-#define DURATION 30
-#define BUFF_ID 'A09B'
+constant integer DURATION = 30;
+constant integer BUFF_ID = 'A09B';
 
     function onEffect(Buff buf) {}
 
@@ -69,7 +69,7 @@ library ProtectionWard requires SpellEvent, BuffSystem {
         RegisterSpellEffectResponse(SID_PROTECTION_WARD, onCast);
         BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_POS);
     }
-#undef BUFF_ID
-#undef DURATION
+
+
 }
 //! endzinc

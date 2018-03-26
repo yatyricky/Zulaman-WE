@@ -1,6 +1,6 @@
 //! zinc
 library CombatMasterPotion requires SpellEvent, BuffSystem {
-#define BUFF_ID 'A07Y'
+constant integer BUFF_ID = 'A07Y';
     
     function onEffect(Buff buf) {
         UnitProp[buf.bd.target].ModLife(buf.bd.i0);
@@ -28,6 +28,6 @@ library CombatMasterPotion requires SpellEvent, BuffSystem {
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
         
     }
-#undef BUFF_ID
+
 }
 //! endzinc

@@ -20,12 +20,12 @@ library DamageSystem requires ZAMCore, UnitProperty, BuffSystem {
 //     real exCrit
 // )
 // - - - - - - - - - - - - - - - - - - - -
-#define MISS "|cffffcc00miss|r"
-#define DODGE "|cffffcc00dodge|r"
-#define BLOCK "|cffffcc00parry|r"
-#define ABSORB "|cffffcc00absorb|r"
-#define IMMUNE "|cffffcc00immune|r"
-#define NULL_STR ""
+constant string  MISS  = "|cffffcc00miss|r";
+constant string  DODGE  = "|cffffcc00dodge|r";
+constant string  BLOCK  = "|cffffcc00parry|r";
+constant string  ABSORB  = "|cffffcc00absorb|r";
+constant string  IMMUNE  = "|cffffcc00immune|r";
+constant string  NULL_STR  = "";
     
     public type ResponseDamaged extends function();       
     private ResponseDamaged responseDamagedCallList[];

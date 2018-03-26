@@ -478,10 +478,10 @@ library UnitProperty requires ModelInfo, ZAMCore {
         }
         u = null;
     }
-	
-	public function RegisterUnitProperty(unit u) {
-		register(u);
-	}
+    
+    public function RegisterUnitProperty(unit u) {
+        register(u);
+    }
     
     private function onInit() {
         RegisterUnitEnterMap(register);

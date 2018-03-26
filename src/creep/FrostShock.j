@@ -1,8 +1,8 @@
 //! zinc
 library FrostShock requires SpellReflection {
-#define BUFF_ID 'A096'
-#define ART_FROST "Abilities\\Spells\\Other\\FrostDamage\\FrostDamage.mdl"
-#define ART_TARGET "Abilities\\Weapons\\FrostWyrmMissile\\FrostWyrmMissile.mdl"
+constant integer BUFF_ID = 'A096';
+constant string  ART_FROST  = "Abilities\\Spells\\Other\\FrostDamage\\FrostDamage.mdl";
+constant string  ART_TARGET  = "Abilities\\Weapons\\FrostWyrmMissile\\FrostWyrmMissile.mdl";
     
     function onEffect(Buff buf) {
         UnitProp[buf.bd.target].ModSpeed(0 - buf.bd.i0);
@@ -49,8 +49,8 @@ library FrostShock requires SpellReflection {
         RegisterSpellEffectResponse(SID_FROST_SHOCK, onCast);
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_NEG);
     }
-#undef ART_TARGET
-#undef ART_FROST
-#undef BUFF_ID
+
+
+
 }
 //! endzinc

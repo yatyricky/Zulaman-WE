@@ -68,7 +68,7 @@ library WindForce requires ItemAttributes, DamageSystem {
 
     function onInit() {
         ht = HandleTable.create();
-        RegisterItemPropMod(ITIDWINDFORCE, action);
+        RegisterItemPropMod(ITID_WIND_FORCE, action);
         RegisterDamagedEvent(damaged);
     }
 }

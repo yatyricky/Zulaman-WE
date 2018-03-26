@@ -1,6 +1,6 @@
 //! zinc
 library Enigma requires ItemAttributes, DamageSystem {
-#define ART "Abilities\\Spells\\Items\\AIil\\AIilTarget.mdl"
+constant string  ART  = "Abilities\\Spells\\Items\\AIil\\AIilTarget.mdl";
     HandleTable ht;
 
     struct EnigmaData {
@@ -60,7 +60,7 @@ library Enigma requires ItemAttributes, DamageSystem {
                 i = 0;
                 while (i < 6) {
                     tmpi = UnitItemInSlot(u, i);
-                    if (GetItemTypeId(tmpi) == ITIDENIGMA) {
+                    if (GetItemTypeId(tmpi) == ITID_ENIGMA) {
                         ipmt.evaluate(u, tmpi, -1);
                         ipmt.evaluate(u, tmpi, 1);
                     }
@@ -73,10 +73,10 @@ library Enigma requires ItemAttributes, DamageSystem {
 
     function onInit() {
         ht = HandleTable.create();
-        RegisterItemPropMod(ITIDENIGMA, action);
-        RegisterSpellEffectResponse(SIDENIGMA, onCast);    
+        RegisterItemPropMod(ITID_ENIGMA, action);
+        RegisterSpellEffectResponse(SID_ENIGMA, onCast);    
         TriggerAnyUnit(EVENT_PLAYER_HERO_LEVEL, function lvledup);
     }
-#undef ART
+
 }
 //! endzinc

@@ -11,15 +11,15 @@ library CastingBar requires SpellEvent, TimerUtils, SpellData, UnitAbilityCD, ZA
 //
 //  CastingBar.create(response).channel([nodes]);
 //==============================================================================
-#define PROGRESS_BAR_ID 'e009'
-#define PROGRESS_BAR_X -10
-#define PROGRESS_BAR_Y (-100)
-#define PROGRESS_BAR_Z 30
-#define PROGRESS_BAR_SX 1.0
-#define PROGRESS_BAR_SY 0.45
-#define PROGRESS_BAR_SZ 0.45
-#define CAST_MODE_CAST 0x23459214
-#define CAST_MODE_CHANNEL 0x32148520
+constant integer PROGRESS_BAR_ID = 'e009';
+constant integer PROGRESS_BAR_X = -10;
+constant integer PROGRESS_BAR_Y = (-100);
+constant integer PROGRESS_BAR_Z = 30;
+constant real PROGRESS_BAR_SX = 1.0;
+constant real PROGRESS_BAR_SY = 0.45;
+constant real PROGRESS_BAR_SZ = 0.45;
+constant integer CAST_MODE_CAST = 0x23459214;
+constant integer CAST_MODE_CHANNEL = 0x32148520;
     
     public type CastBarFinishCast extends function(CastingBar);
     
@@ -108,7 +108,7 @@ library CastingBar requires SpellEvent, TimerUtils, SpellData, UnitAbilityCD, ZA
         real targetX, targetY;
         unit bar;
         timer tm;
-		real haste, cost, cast;
+        real haste, cost, cast;
         boolean success;
         integer channeling; // 0 not channeling; 1 normal; 2 uncounterable
         integer lvl;
@@ -127,7 +127,7 @@ library CastingBar requires SpellEvent, TimerUtils, SpellData, UnitAbilityCD, ZA
             ReleaseTimer(this.tm);
             ShowUnit(this.bar, false);
             KillUnit(this.bar);
-			DestroyTextTag(this.tt);
+            DestroyTextTag(this.tt);
             if (this.e0 != null) {DestroyEffect(this.e0); this.e0 = null;}
             if (this.e1 != null) {DestroyEffect(this.e1); this.e1 = null;}
             if (this.l0 != 0) {this.l0.destroy(); this.l0 = 0;}
@@ -140,11 +140,11 @@ library CastingBar requires SpellEvent, TimerUtils, SpellData, UnitAbilityCD, ZA
             this.castingSound = null;
             this.deallocate();
         }
-		
-		static method create(CastBarFinishCast cbfc) -> thistype {
-			thistype this = thistype.allocate();
+        
+        static method create(CastBarFinishCast cbfc) -> thistype {
+            thistype this = thistype.allocate();
             this.lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SpellEvent.AbilityId);
-			this.haste = 0.0;   
+            this.haste = 0.0;   
             this.finishResponse = cbfc;
             this.sd = SpellData[SpellEvent.AbilityId];
             this.cost = this.sd.Cost(this.lvl);
@@ -164,48 +164,48 @@ library CastingBar requires SpellEvent, TimerUtils, SpellData, UnitAbilityCD, ZA
             
             this.castingSound = null;
             
-			return this;
-		}
+            return this;
+        }
     
-		static method castingRunning() {
-			thistype this = GetTimerData(GetExpiredTimer());
-			this.success = true;
+        static method castingRunning() {
+            thistype this = GetTimerData(GetExpiredTimer());
+            this.success = true;
             if (this.target != null) {
                 if (IsUnitDead(this.target)) {
                     this.success = false;
                 }
             }
             //BJDebugMsg("Target = " + GetUnitNameEx(this.target));
-			IssueImmediateOrderById(this.caster, OID_STOP);
-		}
+            IssueImmediateOrderById(this.caster, OID_STOP);
+        }
         
         method setSound(integer sndType) -> thistype {
             this.castingSound = RunSoundAtPoint2d(sndType, GetUnitX(this.caster), GetUnitY(this.caster));
             return this;
         }
-		
-		method launch() {
+        
+        method launch() {
             real mscale = ModelInfo.get(GetUnitTypeId(this.caster), "CastingBar: 188").scale;
             //print(R2S(mscale));
-			thistype.ht[this.caster] = this;
-			this.channeling = this.sd.level;
+            thistype.ht[this.caster] = this;
+            this.channeling = this.sd.level;
             this.castMode = CAST_MODE_CAST;
-			this.tt = CreateTextTag();
-			//SetTextTagText(this.tt, this.sd.name, 0.023);
-			//SetTextTagColor(this.tt, 255, 255, 255, 255);
-			this.success = false;
-			this.bar = CreateUnit(GetOwningPlayer(this.caster), PROGRESS_BAR_ID, GetUnitX(this.caster) + PROGRESS_BAR_X, GetUnitY(this.caster) + PROGRESS_BAR_Y, 0);
+            this.tt = CreateTextTag();
+            //SetTextTagText(this.tt, this.sd.name, 0.023);
+            //SetTextTagColor(this.tt, 255, 255, 255, 255);
+            this.success = false;
+            this.bar = CreateUnit(GetOwningPlayer(this.caster), PROGRESS_BAR_ID, GetUnitX(this.caster) + PROGRESS_BAR_X, GetUnitY(this.caster) + PROGRESS_BAR_Y, 0);
             SetUnitScale(this.bar, PROGRESS_BAR_SX * mscale, PROGRESS_BAR_SY * mscale, PROGRESS_BAR_SZ * mscale);
-			SetUnitFlyable(this.bar);
-			SetUnitFlyHeight(this.bar, PROGRESS_BAR_Z, 0.0);
+            SetUnitFlyable(this.bar);
+            SetUnitFlyHeight(this.bar, PROGRESS_BAR_Z, 0.0);
             //BJDebugMsg(R2S(this.haste));
-			this.cast = (this.cast - this.haste) / (1.0 + UnitProp[this.caster].SpellHaste());
-			if (this.cast <= 0.01) {this.cast = 0.01;}
-			SetUnitTimeScale(this.bar, 1.0 / this.cast);
-			this.tm = NewTimer();
-			SetTimerData(this.tm, this);            
-			TimerStart(this.tm, this.cast, false, function thistype.castingRunning);
-		}
+            this.cast = (this.cast - this.haste) / (1.0 + UnitProp[this.caster].SpellHaste());
+            if (this.cast <= 0.01) {this.cast = 0.01;}
+            SetUnitTimeScale(this.bar, 1.0 / this.cast);
+            this.tm = NewTimer();
+            SetTimerData(this.tm, this);            
+            TimerStart(this.tm, this.cast, false, function thistype.castingRunning);
+        }
         
         private static method channelRunning() {
             thistype this = GetTimerData(GetExpiredTimer());
@@ -220,27 +220,27 @@ library CastingBar requires SpellEvent, TimerUtils, SpellData, UnitAbilityCD, ZA
         method channel(integer nodes) {
             real mscale = ModelInfo.get(GetUnitTypeId(this.caster), "CastingBar: 221").scale;
             //print(R2S(mscale));
-			thistype.ht[this.caster] = this;
-			this.channeling = this.sd.level;
+            thistype.ht[this.caster] = this;
+            this.channeling = this.sd.level;
             this.castMode = CAST_MODE_CHANNEL;
-			this.tt = CreateTextTag();
-			//SetTextTagText(this.tt, this.sd.name, 0.023);
-			//SetTextTagColor(this.tt, 255, 255, 255, 255);
-			this.success = false;
-			this.bar = CreateUnit(GetOwningPlayer(this.caster), PROGRESS_BAR_ID, GetUnitX(this.caster) + PROGRESS_BAR_X, GetUnitY(this.caster) + PROGRESS_BAR_Y, 0);
+            this.tt = CreateTextTag();
+            //SetTextTagText(this.tt, this.sd.name, 0.023);
+            //SetTextTagColor(this.tt, 255, 255, 255, 255);
+            this.success = false;
+            this.bar = CreateUnit(GetOwningPlayer(this.caster), PROGRESS_BAR_ID, GetUnitX(this.caster) + PROGRESS_BAR_X, GetUnitY(this.caster) + PROGRESS_BAR_Y, 0);
             SetUnitScale(this.bar, PROGRESS_BAR_SX * mscale, PROGRESS_BAR_SY * mscale, PROGRESS_BAR_SZ * mscale);
-			SetUnitFlyable(this.bar);
-			SetUnitFlyHeight(this.bar, PROGRESS_BAR_Z, 0.0);
+            SetUnitFlyable(this.bar);
+            SetUnitFlyHeight(this.bar, PROGRESS_BAR_Z, 0.0);
             //BJDebugMsg(R2S(this.haste));
             DelayedModUnitMana.new(SpellEvent.CastingUnit, 0 - this.cost);            
-			this.cast = (this.cast - this.haste);// * (1.0 - UnitProp[this.caster].SpellHaste());
-			if (this.cast <= 0.01) {this.cast = 0.01;}
+            this.cast = (this.cast - this.haste);// * (1.0 - UnitProp[this.caster].SpellHaste());
+            if (this.cast <= 0.01) {this.cast = 0.01;}
             SetUnitTimeScale(this.bar, 1.0 / this.cast);
             //BJDebugMsg(R2S(1.0 / this.cast) + ":" + R2S(this.cast / nodes));
             this.nodes = nodes;
-			this.tm = NewTimer();
-			SetTimerData(this.tm, this);
-			TimerStart(this.tm, this.cast / this.nodes, true, function thistype.channelRunning);
+            this.tm = NewTimer();
+            SetTimerData(this.tm, this);
+            TimerStart(this.tm, this.cast / this.nodes, true, function thistype.channelRunning);
         }
         
         private static method onInit() {
@@ -334,14 +334,14 @@ library CastingBar requires SpellEvent, TimerUtils, SpellData, UnitAbilityCD, ZA
         //responseTable = Table.create();
         lastChannelSuccess = HandleTable.create();
     }
-#undef CAST_MODE_CHANNEL
-#undef CAST_MODE_CAST
-#undef PROGRESS_BAR_SZ
-#undef PROGRESS_BAR_SY
-#undef PROGRESS_BAR_SX
-#undef PROGRESS_BAR_Z
-#undef PROGRESS_BAR_Y
-#undef PROGRESS_BAR_X
-#undef PROGRESS_BAR_ID
+
+
+
+
+
+
+
+
+
 }
 //! endzinc

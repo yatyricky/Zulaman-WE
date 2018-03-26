@@ -6,9 +6,9 @@ library ValourAura requires TimerUtils, ZAMCore, UnitProperty, OrcCaptureFlag {
 //* Overpower cannot trigger life rep due to judging by 
 //* "DamageResult.wasDodgable"
 //*****************************************************************************
-#define INTERVAL 1.0
-#define AOE 900.0
-#define BUFF_ID 'A04M'
+constant real INTERVAL = 1.0;
+constant real AOE = 900.0;
+constant integer BUFF_ID = 'A04M';
 
     function onEffect(Buff buf) {
         UnitProp[buf.bd.target].attackCrit += buf.bd.r0;
@@ -60,7 +60,7 @@ library ValourAura requires TimerUtils, ZAMCore, UnitProperty, OrcCaptureFlag {
     }
     
     function registerVA(unit u) {
-        if (GetUnitTypeId(u) == UTIDBLADEMASTER) {
+        if (GetUnitTypeId(u) == UTID_BLADE_MASTER) {
             ValourAura.register(u);
         }
     }
@@ -68,7 +68,7 @@ library ValourAura requires TimerUtils, ZAMCore, UnitProperty, OrcCaptureFlag {
     function responsedamaged() {
         if (GetUnitAbilityLevel(DamageResult.source, BUFF_ID) > 0) {
             if (DamageResult.isCritical && DamageResult.isPhyx && DamageResult.wasDodgable) {
-                HealTarget(DamageResult.source, DamageResult.source, GetUnitState(DamageResult.source, UNIT_STATE_MAX_LIFE) * 0.05, SpellData[SIDVALOURAURA].name, -3.0);
+                HealTarget(DamageResult.source, DamageResult.source, GetUnitState(DamageResult.source, UNIT_STATE_MAX_LIFE) * 0.05, SpellData[SID_VALOUR_AURA].name, -3.0);
             }
         }
     }
@@ -79,7 +79,7 @@ library ValourAura requires TimerUtils, ZAMCore, UnitProperty, OrcCaptureFlag {
         BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_POS);
     }
 }
-#undef BUFF_ID
-#undef AOE
-#undef INTERVAL
+
+
+
 //! endzinc

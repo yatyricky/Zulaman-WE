@@ -1,6 +1,6 @@
 //! zinc
 library SummonGhoul requires SpellEvent, DarkRangerGlobal {
-#define ART "Abilities\\Spells\\Undead\\RaiseSkeletonWarrior\\RaiseSkeleton.mdl"
+constant string  ART  = "Abilities\\Spells\\Undead\\RaiseSkeletonWarrior\\RaiseSkeleton.mdl";
 
     function delayAddLife(DelayTask dt) {
         UnitProp[dt.u0].ModLife((GetHeroLevel(darkranger[GetPidofu(dt.u0)]) - 1) * 350);
@@ -14,15 +14,15 @@ library SummonGhoul requires SpellEvent, DarkRangerGlobal {
         if (ghoul[id] != null) {
             KillUnit(ghoul[id]);
         }
-        ghoul[id] = CreateUnit(Player(id), UTIDGHOUL, x, y, ang);
+        ghoul[id] = CreateUnit(Player(id), UTID_GHOUL, x, y, ang);
         SetUnitPositionEx(ghoul[id], x, y);
         AddTimedEffect.atUnit(ART, ghoul[id], "origin", 0.4);
         DelayTask.create(delayAddLife, 0.15).u0 = ghoul[id];        
     }
 
     function onInit() {
-        RegisterSpellEffectResponse(SIDSUMMONGHOUL, onCast);
+        RegisterSpellEffectResponse(SID_SUMMON_GHOUL, onCast);
     }
-#undef ART
+
 }
 //! endzinc

@@ -1,8 +1,8 @@
 //! zinc
 library MindBlast {
-#define MISSILE "Abilities\\Weapons\\PhoenixMissile\\Phoenix_Missile.mdl"
-#define EXPLOSION_ART "Abilities\\Weapons\\Mortar\\MortarMissile.mdl"
-#define H_OVER_D 0.45
+constant string  MISSILE  = "Abilities\\Weapons\\PhoenixMissile\\Phoenix_Missile.mdl";
+constant string  EXPLOSION_ART  = "Abilities\\Weapons\\Mortar\\MortarMissile.mdl";
+constant real H_OVER_D = 0.45;
 
     struct Parabola {
         private timer tm;
@@ -15,8 +15,8 @@ library MindBlast {
         private Point p;
         
         private method destroy() {
-        	MindBlastSpots.remove(this.p);
-        	this.p.destroy();
+            MindBlastSpots.remove(this.p);
+            this.p.destroy();
             DestroyEffect(this.eff);
             KillUnit(this.missile);
             ReleaseTimer(this.tm);
@@ -38,10 +38,10 @@ library MindBlast {
                 height = 0.0;
                 // explosion
                 for (0 <= i < PlayerUnits.n) {
-                	if (GetDistance.unitCoord(PlayerUnits.units[i], GetUnitX(this.missile), GetUnitY(this.missile)) <= GodOfDeathGlobalConst.mindBlastAOE) {
-                		DamageTarget(this.caster, PlayerUnits.units[i], 1200.0, SpellData[SID].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
-                		ModUnitMana(this.caster, 1);
-                	}
+                    if (GetDistance.unitCoord(PlayerUnits.units[i], GetUnitX(this.missile), GetUnitY(this.missile)) <= GodOfDeathGlobalConst.mindBlastAOE) {
+                        DamageTarget(this.caster, PlayerUnits.units[i], 1200.0, SpellData[SID].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+                        ModUnitMana(this.caster, 1);
+                    }
                 }
 
                 AddTimedEffect.atCoord(EXPLOSION_ART, GetUnitX(this.missile), GetUnitY(this.missile), 0.5);
@@ -74,14 +74,14 @@ library MindBlast {
     }
 
     function onCast() {
-    	Parabola.start(SpellEvent.CastingUnit, Point.new(SpellEvent.TargetX, SpellEvent.TargetY));
+        Parabola.start(SpellEvent.CastingUnit, Point.new(SpellEvent.TargetX, SpellEvent.TargetY));
     }
 
     function onInit() {
         RegisterSpellEffectResponse(SID, onCast);
     }
-#undef H_OVER_D
-#undef EXPLOSION_ART
-#undef MISSILE
+
+
+
 }
 //! endzinc

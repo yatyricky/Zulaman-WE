@@ -1,12 +1,12 @@
 //! zinc
 library LightningTotemHex requires EarthBinderGlobal, GroupUtils, UnitProperty, BuffSystem {
-#define TOTEM_ID_STORM 'u000'
+constant integer TOTEM_ID_STORM = 'u000';
 
     struct StormTotem {
         private unit u;
         private unit c;
         private timer tm;
-		private integer tick;
+        private integer tick;
         
         private method destroy() {
             ReleaseTimer(this.tm);
@@ -20,14 +20,14 @@ library LightningTotemHex requires EarthBinderGlobal, GroupUtils, UnitProperty, 
         private static method run() {
             thistype this = GetTimerData(GetExpiredTimer());
             integer i = 0;
-			real far = 1.0;
-			unit select = null;
-			real tmp;
-			if (IsUnitDead(this.u)) {
-				this.tick -= 30;
-			}
-			if (this.tick > 0) {
-				while (i < PlayerUnits.n) {
+            real far = 1.0;
+            unit select = null;
+            real tmp;
+            if (IsUnitDead(this.u)) {
+                this.tick -= 30;
+            }
+            if (this.tick > 0) {
+                while (i < PlayerUnits.n) {
                     if (!IsUnitDead(PlayerUnits.units[i])) {
                         tmp = GetWidgetLife(PlayerUnits.units[i]);
                         if (far <= tmp) {
@@ -35,18 +35,18 @@ library LightningTotemHex requires EarthBinderGlobal, GroupUtils, UnitProperty, 
                             far = tmp;
                         }
                     }
-					i += 1;
-				}
-				if (select != null) {
-					AddTimedLight.atUnitsZ("CLPB", this.u, 80.0, select, 0.0, 0.5);
-					AddTimedEffect.atUnit(ART_IMPACT, select, "origin", 0.3);
-					DamageTarget(this.c, select, 100.0, SpellData[SIDLIGHTNINGTOTEMHEX].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
-				}
-			}
-			this.tick -= 1;
-			if (this.tick < 1) {
-				this.destroy();
-			}
+                    i += 1;
+                }
+                if (select != null) {
+                    AddTimedLight.atUnitsZ("CLPB", this.u, 80.0, select, 0.0, 0.5);
+                    AddTimedEffect.atUnit(ART_IMPACT, select, "origin", 0.3);
+                    DamageTarget(this.c, select, 100.0, SpellData[SID_LIGHTNING_TOTEM_HEX].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+                }
+            }
+            this.tick -= 1;
+            if (this.tick < 1) {
+                this.destroy();
+            }
         }
     
         static method start(unit caster, unit totem) {
@@ -55,7 +55,7 @@ library LightningTotemHex requires EarthBinderGlobal, GroupUtils, UnitProperty, 
             SetTimerData(this.tm, this);
             this.u = totem;
             this.c = caster;
-			this.tick = 30;
+            this.tick = 30;
             TimerStart(this.tm, 1.0, true, function thistype.run);
         }
     }
@@ -63,13 +63,13 @@ library LightningTotemHex requires EarthBinderGlobal, GroupUtils, UnitProperty, 
     function onCastStorm() {
         unit totem;
         RandomPoint.aroundUnit(SpellEvent.CastingUnit, 100.0, 200.0);
-		totem = CreateUnit(Player(MOB_PID), TOTEM_ID_STORM, RandomPoint.x, RandomPoint.y, 0.0);
+        totem = CreateUnit(Player(MOB_PID), TOTEM_ID_STORM, RandomPoint.x, RandomPoint.y, 0.0);
         StormTotem.start(SpellEvent.CastingUnit, totem);
     }
 
     function onInit() {
-        RegisterSpellEffectResponse(SIDLIGHTNINGTOTEMHEX, onCastStorm);
+        RegisterSpellEffectResponse(SID_LIGHTNING_TOTEM_HEX, onCastStorm);
     }
-#undef TOTEM_ID_STORM
+
 }
 //! endzinc

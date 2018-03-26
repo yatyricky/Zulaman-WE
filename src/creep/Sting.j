@@ -1,6 +1,6 @@
 //! zinc
 library Sting requires SpellEvent, DamageSystem, BuffSystem {
-#define BUFF_ID 'A09Z'
+constant integer BUFF_ID = 'A09Z';
 
     function onEffect(Buff buf) {
         DamageTarget(buf.bd.caster, buf.bd.target, buf.bd.r0, SpellData[SID_STING].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
@@ -29,6 +29,6 @@ library Sting requires SpellEvent, DamageSystem, BuffSystem {
         RegisterDamagedEvent(response);
         BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_NEG);
     }
-#undef BUFF_ID
+
 }
 //! endzinc

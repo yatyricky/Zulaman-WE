@@ -1,6 +1,6 @@
 //! zinc
 library ArchMagePotion requires SpellEvent, BuffSystem {
-#define BUFF_ID 'A07X'
+constant integer BUFF_ID = 'A07X';
     
     function onEffect(Buff buf) {
         UnitProp[buf.bd.target].ModMana(buf.bd.i0);
@@ -28,6 +28,6 @@ library ArchMagePotion requires SpellEvent, BuffSystem {
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
         
     }
-#undef BUFF_ID
+
 }
 //! endzinc

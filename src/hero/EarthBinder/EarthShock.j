@@ -1,6 +1,6 @@
 //! zinc
 library EarthShock requires DamageSystem, SpellData, BuffSystem, EarthBinderGlobal, MultipleAbility {
-#define ART "Abilities\\Spells\\Orc\\Disenchant\\DisenchantSpecialArt.mdl"
+constant string  ART  = "Abilities\\Spells\\Orc\\Disenchant\\DisenchantSpecialArt.mdl";
 
     function returnDamage(integer lvl, real sp) -> real {
         return 300 + 100 * lvl + sp * 3.6;
@@ -30,7 +30,7 @@ library EarthShock requires DamageSystem, SpellData, BuffSystem, EarthBinderGlob
     
     function onCast() {
         player p;
-        real dmg = returnDamage(GetUnitAbilityLevel(SpellEvent.CastingUnit, SIDEARTHSHOCK), UnitProp[SpellEvent.CastingUnit].SpellPower());
+        real dmg = returnDamage(GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_EARTH_SHOCK), UnitProp[SpellEvent.CastingUnit].SpellPower());
         //Buff buf;
         AddTimedEffect.atUnit(ART, SpellEvent.TargetUnit, "origin", 0.2);
         //buf = BuffSlot[SpellEvent.TargetUnit].getBuffByBid(BUFF_ID_STORM_STRIKE);
@@ -42,36 +42,36 @@ library EarthShock requires DamageSystem, SpellData, BuffSystem, EarthBinderGlob
         //print("Free earth shock used!");
         freeESAvailability.flush(SpellEvent.CastingUnit);
         
-        DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, dmg, SpellData[SIDEARTHSHOCK].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
+        DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, dmg, SpellData[SID_EARTH_SHOCK].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
         CounterSpell(SpellEvent.TargetUnit);
-        if (SpellEvent.AbilityId == SIDEARTHSHOCK1) {
+        if (SpellEvent.AbilityId == SID_EARTH_SHOCK_1) {
             RecoverOriginalEarthShock.start(SpellEvent.CastingUnit, 9.0);
             //SystemOrderIndicator = true;
             delayedDosth1.start(SpellEvent.CastingUnit);
             //SystemOrderIndicator = false;
         }
-        if (GetUnitAbilityLevel(SpellEvent.CastingUnit, SIDENCHANTEDTOTEM) > 0) {
+        if (GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_ENCHANTED_TOTEM) > 0) {
             p = GetOwningPlayer(SpellEvent.CastingUnit);
-            SetPlayerAbilityAvailable(p, SIDTORRENTTOTEM, false);
-            SetPlayerAbilityAvailable(p, SIDLIGHTNINGTOTEM, false);
-            SetPlayerAbilityAvailable(p, SIDEARTHBINDTOTEM, true);
-            currentTotemId[GetPlayerId(p)] = SIDEARTHBINDTOTEM;
+            SetPlayerAbilityAvailable(p, SID_TORRENT_TOTEM, false);
+            SetPlayerAbilityAvailable(p, SID_LIGHTNING_TOTEM, false);
+            SetPlayerAbilityAvailable(p, SID_EARTH_BIND_TOTEM, true);
+            currentTotemId[GetPlayerId(p)] = SID_EARTH_BIND_TOTEM;
             p = null;
         }
     }
     
     function initMultipleAbil(unit u) {
         if (GetUnitTypeId(u) == 'Hapm') {
-            MultipleAbility[SIDEARTHSHOCK].showPrimary(GetOwningPlayer(u));
+            MultipleAbility[SID_EARTH_SHOCK].showPrimary(GetOwningPlayer(u));
         }
     }
 
     function onInit() {
-        RegisterSpellEffectResponse(SIDEARTHSHOCK, onCast);
-        RegisterSpellEffectResponse(SIDEARTHSHOCK1, onCast);
-        MultipleAbility.register(SIDEARTHSHOCK, SIDEARTHSHOCK1);
+        RegisterSpellEffectResponse(SID_EARTH_SHOCK, onCast);
+        RegisterSpellEffectResponse(SID_EARTH_SHOCK_1, onCast);
+        MultipleAbility.register(SID_EARTH_SHOCK, SID_EARTH_SHOCK_1);
         RegisterUnitEnterMap(initMultipleAbil);
     }
-#undef ART
+
 }
 //! endzinc

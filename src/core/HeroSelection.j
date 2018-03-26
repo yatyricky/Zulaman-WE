@@ -1,7 +1,7 @@
 //! zinc
 library HeroSelection requires NefUnion, Table, MultipleAbility, ZAMCore, Loot, AllianceAIAction {
-#define HERO_SLCT_LOW 'IHS0'
-#define HERO_SLCT_HIGH 'IHS;'
+constant integer HERO_SLCT_LOW = 'IHS0';
+constant integer HERO_SLCT_HIGH = 'IHS;';
 
     Table heroRefTab;
     force playerForce, pf, aiForce;
@@ -142,17 +142,17 @@ library HeroSelection requires NefUnion, Table, MultipleAbility, ZAMCore, Loot, 
         heroRefTab['IHS:'] = 'Hblm';
         
         classSpecRefTab = Table.create();
-        classSpecRefTab[UTIDBLOODELFDEFENDER] = ITIDORBOFTHESINDOREI;
-        classSpecRefTab[UTIDCLAWDRUID] = ITIDREFORGEDBADGEOFTENACITY;
-        classSpecRefTab[UTIDPALADIN] = ITIDLIGHTSJUSTICE;
-        classSpecRefTab[UTIDPRIEST] = ITIDBENEDICTION;
-        classSpecRefTab[UTIDKEEPEROFGROVE] = ITIDHORNOFCENARIUS;
-        classSpecRefTab[UTIDBLADEMASTER] = ITIDORCCAPTUREFLAG;
-        classSpecRefTab[UTIDROGUE] = ITIDDAGGEROFASSASSINATION;
-        classSpecRefTab[UTIDDARKRANGER] = ITIDRHOKDELAR;
-        classSpecRefTab[UTIDFROSTMAGE] = ITIDRAGEWINTERCHILLSPHYLACTERY;
-        classSpecRefTab[UTIDHEATHEN] = ITIDANATHEMA;
-        classSpecRefTab[UTIDEARTHBINDER] = ITIDRARESHIMMERWEED;
+        classSpecRefTab[UTID_BLOOD_ELF_DEFENDER] = ITID_ORB_OF_THE_SINDOREI;
+        classSpecRefTab[UTID_CLAW_DRUID] = ITID_REFORGED_BADGE_OF_TENACITY;
+        classSpecRefTab[UTID_PALADIN] = ITID_LIGHTS_JUSTICE;
+        classSpecRefTab[UTID_PRIEST] = ITID_BENEDICTION;
+        classSpecRefTab[UTID_KEEPER_OF_GROVE] = ITID_HORN_OF_CENARIUS;
+        classSpecRefTab[UTID_BLADE_MASTER] = ITID_ORC_CAPTURE_FLAG;
+        classSpecRefTab[UTID_ROGUE] = ITID_DAGGER_OF_ASSASSINATION;
+        classSpecRefTab[UTID_DARK_RANGER] = ITID_RHOKDELAR;
+        classSpecRefTab[UTID_FROST_MAGE] = ITID_RAGE_WINTER_CHILLS_PHYLACTERY;
+        classSpecRefTab[UTID_HEATHEN] = ITID_ANATHEMA;
+        classSpecRefTab[UTID_EARTH_BINDER] = ITID_RARE_SHIMMER_WEED;
         
         p = null;
         
@@ -166,7 +166,7 @@ library HeroSelection requires NefUnion, Table, MultipleAbility, ZAMCore, Loot, 
         //SetPlayerAlliance(Player(2), Player(0), ALLIANCE_SHARED_CONTROL, true);
         //SetPlayerAlliance(Player(1), Player(0), ALLIANCE_SHARED_CONTROL, true);
     }
-#undef HERO_SLCT_LOW 
-#undef HERO_SLCT_HIGH 
+
+
 }
 //! endzinc

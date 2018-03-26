@@ -1,8 +1,8 @@
 //! zinc
 library Concerntration requires SpellEvent, DamageSystem, StunUtils, DarkRangerGlobal {
-#define ART "Abilities\\Weapons\\DragonHawkMissile\\DragonHawkMissile.mdl"
-#define BUFF_ID 'A03Z'
-#define BUFF_ID1 'A040'
+constant string  ART  = "Abilities\\Weapons\\DragonHawkMissile\\DragonHawkMissile.mdl";
+constant integer BUFF_ID = 'A03Z';
+constant integer BUFF_ID1 = 'A040';
 
     struct NextStun {
         static HandleTable ht;
@@ -50,19 +50,19 @@ library Concerntration requires SpellEvent, DamageSystem, StunUtils, DarkRangerG
         integer lvl;
         if (DamageResult.isHit) {
             if (NextStun.tryOne(DamageResult.source)) {
-                if (GetUnitTypeId(DamageResult.source) == UTIDDARKRANGER) {
+                if (GetUnitTypeId(DamageResult.source) == UTID_DARK_RANGER) {
                     buf = Buff.cast(DamageResult.source, DamageResult.target, BUFF_ID);
                     buf.bd.tick = -1;
-                    buf.bd.interval = GetUnitAbilityLevel(DamageResult.source, SIDCONCERNTRATION) * 4;
+                    buf.bd.interval = GetUnitAbilityLevel(DamageResult.source, SID_CONCERNTRATION) * 4;
                     UnitProp[buf.bd.target].ModArmor(buf.bd.i0);
-                    buf.bd.i0 = GetUnitAbilityLevel(DamageResult.source, SIDCONCERNTRATION) + 1;
+                    buf.bd.i0 = GetUnitAbilityLevel(DamageResult.source, SID_CONCERNTRATION) + 1;
                     buf.bd.boe = onEffect;
                     buf.bd.bor = onRemove;
                     buf.run();
-                } else if (GetUnitTypeId(DamageResult.source) == UTIDGHOUL) {
+                } else if (GetUnitTypeId(DamageResult.source) == UTID_GHOUL) {
                     buf = Buff.cast(DamageResult.source, DamageResult.target, BUFF_ID1);
                     buf.bd.tick = -1;
-                    lvl = GetUnitAbilityLevel(darkranger[GetPlayerId(GetOwningPlayer(DamageResult.source))], SIDCONCERNTRATION);
+                    lvl = GetUnitAbilityLevel(darkranger[GetPlayerId(GetOwningPlayer(DamageResult.source))], SID_CONCERNTRATION);
                     buf.bd.interval = lvl * 4;
                     UnitProp[buf.bd.target].ModArmor(buf.bd.i0);
                     buf.bd.i0 = lvl + 1;
@@ -85,13 +85,13 @@ library Concerntration requires SpellEvent, DamageSystem, StunUtils, DarkRangerG
     }
 
     function onInit() {
-        RegisterSpellEffectResponse(SIDCONCERNTRATION, onCast);
+        RegisterSpellEffectResponse(SID_CONCERNTRATION, onCast);
         RegisterDamagedEvent(damaged);
         BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_NEG);
         BuffType.register(BUFF_ID1, BUFF_PHYX, BUFF_NEG);
     }
-#undef BUFF_ID1
-#undef BUFF_ID
-#undef ART
+
+
+
 }
 //! endzinc

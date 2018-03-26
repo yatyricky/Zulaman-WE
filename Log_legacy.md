@@ -261,27 +261,27 @@ O 任何昏迷效果在被解除的时候将会直接解除昏迷,而不管身�
 ### *File: Credits*
 
 * Mc !
-	* Description:
-		* ZAM style (ruins) Models.
-	* Link:
-		* http://www.wc3c.net/showthread.php?t=83467
+    * Description:
+        * ZAM style (ruins) Models.
+    * Link:
+        * http://www.wc3c.net/showthread.php?t=83467
 
 * RetroSexual
-	* Project:
-		* Progressbar V2
-	* Description:
-		* Model, that is meant to be used for various channeling spells and etc. Basic lenght is one second, but it can be scaled via triggers. Idea of using screen button texture is borrowed from Hatebreeder's model, you might want to give him credits too.
-	* Link:
-		* http://www.hiveworkshop.com
-	* Upload Date:
-		* 2012-09-30
-	* Last Update Date:
-		* 2012-09-30
+    * Project:
+        * Progressbar V2
+    * Description:
+        * Model, that is meant to be used for various channeling spells and etc. Basic lenght is one second, but it can be scaled via triggers. Idea of using screen button texture is borrowed from Hatebreeder's model, you might want to give him credits too.
+    * Link:
+        * http://www.hiveworkshop.com
+    * Upload Date:
+        * 2012-09-30
+    * Last Update Date:
+        * 2012-09-30
 
 * TKOK Makers
-	* Project:
-		* TKOK
-	* Description:
-		* Used the aggro system representation.
-	* Link:
-		* [TODO]
+    * Project:
+        * TKOK
+    * Description:
+        * Used the aggro system representation.
+    * Link:
+        * [TODO]

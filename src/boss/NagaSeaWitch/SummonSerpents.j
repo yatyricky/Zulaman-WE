@@ -1,6 +1,6 @@
 //! zinc
 library SummonSerpents requires SpellEvent {
-#define SPELL_ID 'A03N'
+constant integer SPELL_ID = 'A03N';
 
     function onCast() {
         real ang = GetUnitFacing(SpellEvent.CastingUnit);
@@ -11,6 +11,6 @@ library SummonSerpents requires SpellEvent {
     function onInit() {
         RegisterSpellEffectResponse(SPELL_ID, onCast);
     }
-#undef SPELL_ID 
+
 }
 //! endzinc

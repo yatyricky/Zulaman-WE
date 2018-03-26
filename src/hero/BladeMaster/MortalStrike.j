@@ -1,9 +1,9 @@
 //! zinc
 library MortalStrike requires BladeMasterGlobal, Rend, BuffSystem, DamageSystem, UnitProperty, GroupUtils {
-#define BUFF_ID 'A02O'
-#define BUFF_ID1 'A02P'
-#define ART_TARGET "Abilities\\Spells\\Orc\\Disenchant\\DisenchantSpecialArt.mdl"
-#define ART_CASTER "Abilities\\Spells\\Other\\Andt\\Andt.mdl"
+constant integer BUFF_ID = 'A02O';
+constant integer BUFF_ID1 = 'A02P';
+constant string  ART_TARGET  = "Abilities\\Spells\\Orc\\Disenchant\\DisenchantSpecialArt.mdl";
+constant string  ART_CASTER  = "Abilities\\Spells\\Other\\Andt\\Andt.mdl";
     
     function returnDamage(integer lvl, real ap) -> real {
         return 50 + 50 * lvl + ap * (1.5 + 0.5 * lvl);
@@ -43,9 +43,9 @@ library MortalStrike requires BladeMasterGlobal, Rend, BuffSystem, DamageSystem,
         buf.bd.bor = onRemove;
         buf.run();
         
-        ilvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SIDMORTALSTRIKE);
+        ilvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_MORTAL_STRIKE);
         dmg = returnDamage(ilvl, UnitProp[SpellEvent.CastingUnit].AttackPower());
-        DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, dmg, SpellData[SIDMORTALSTRIKE].name, true, true, true, WEAPON_TYPE_METAL_HEAVY_SLICE);
+        DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, dmg, SpellData[SID_MORTAL_STRIKE].name, true, true, true, WEAPON_TYPE_METAL_HEAVY_SLICE);
         if (DamageResult.isHit) {            
             AddTimedEffect.atUnit(ART_TARGET, SpellEvent.TargetUnit, "origin", 0.2);
             // refresh Rend
@@ -83,12 +83,12 @@ library MortalStrike requires BladeMasterGlobal, Rend, BuffSystem, DamageSystem,
     function onInit() {
         BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_NEG);
         BuffType.register(BUFF_ID1, BUFF_PHYX, BUFF_POS);
-        RegisterSpellEffectResponse(SIDMORTALSTRIKE, onCast);
+        RegisterSpellEffectResponse(SID_MORTAL_STRIKE, onCast);
     }
     
-#undef ART_CASTER
-#undef ART_TARGET
-#undef BUFF_ID1
-#undef BUFF_ID
+
+
+
+
 }
 //! endzinc

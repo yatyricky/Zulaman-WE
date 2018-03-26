@@ -1,8 +1,8 @@
 //! zinc
 library LightningShield requires DamageSystem, AggroSystem {
-#define HEIGHT 600
-#define RADIUS 200
-#define ART_TARGET "Abilities\\Spells\\Orc\\Purge\\PurgeBuffTarget.mdl"
+constant integer HEIGHT = 600;
+constant integer RADIUS = 200;
+constant string  ART_TARGET  = "Abilities\\Spells\\Orc\\Purge\\PurgeBuffTarget.mdl";
 
     function onEffectNeg(Buff buf) {
         UnitProp[buf.bd.target].damageTaken += buf.bd.r0;
@@ -185,8 +185,8 @@ library LightningShield requires DamageSystem, AggroSystem {
         BuffType.register(BID_LIGHTNING_SHIELD, BUFF_PHYX, BUFF_POS);
         BuffType.register(BID_LIGHTNING_SHIELD_NEG, BUFF_PHYX, BUFF_NEG);
     }
-#undef ART_TARGET
-#undef RADIUS
-#undef HEIGHT
+
+
+
 }
 //! endzinc

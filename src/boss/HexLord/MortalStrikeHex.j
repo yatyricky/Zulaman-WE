@@ -1,7 +1,7 @@
 //! zinc
 library MortalStrikeHex requires BuffSystem, DamageSystem, UnitProperty {
-#define BUFF_ID 'A02O'
-#define ART_TARGET "Abilities\\Spells\\Orc\\Disenchant\\DisenchantSpecialArt.mdl"
+constant integer BUFF_ID = 'A02O';
+constant string  ART_TARGET  = "Abilities\\Spells\\Orc\\Disenchant\\DisenchantSpecialArt.mdl";
 
     function onEffect(Buff buf) {
         UnitProp[buf.bd.target].healTaken -= buf.bd.r0;
@@ -14,7 +14,7 @@ library MortalStrikeHex requires BuffSystem, DamageSystem, UnitProperty {
     function onCast() {
         Buff buf; 
         real dmg = UnitProp[SpellEvent.CastingUnit].AttackPower() + 300.0;
-        DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, dmg, SpellData[SIDMORTALSTRIKEHEX].name, true, true, true, WEAPON_TYPE_METAL_HEAVY_SLICE);
+        DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, dmg, SpellData[SID_MORTAL_STRIKE_HEX].name, true, true, true, WEAPON_TYPE_METAL_HEAVY_SLICE);
         if (DamageResult.isHit) {            
             AddTimedEffect.atUnit(ART_TARGET, SpellEvent.TargetUnit, "origin", 0.2);
             
@@ -31,10 +31,10 @@ library MortalStrikeHex requires BuffSystem, DamageSystem, UnitProperty {
 
     function onInit() {
         //BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_NEG);
-        RegisterSpellEffectResponse(SIDMORTALSTRIKEHEX, onCast);
+        RegisterSpellEffectResponse(SID_MORTAL_STRIKE_HEX, onCast);
     }
     
-#undef ART_TARGET
-#undef BUFF_ID
+
+
 }
 //! endzinc
