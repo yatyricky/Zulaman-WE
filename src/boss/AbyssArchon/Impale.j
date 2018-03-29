@@ -94,7 +94,7 @@ library Impale requires SpellEvent, StunUtils, TimerUtils, DamageSystem {
         }
     }
 
-    function onCast() {       
+    function onCast() {
         Impale.start(SpellEvent.CastingUnit, SpellEvent.TargetUnit);
     }
 

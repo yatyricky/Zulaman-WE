@@ -1,6 +1,7 @@
 //! zinc
 library GodOfDeathGlobal {
     //! runtextmacro WriteArrayList("MindBlastSpots", "Point", "0")
+    //! runtextmacro WriteArrayList("EternalGuardianSpots", "Point", "0")
 
     public struct GodOfDeathGlobalConst {
         static real mindBlastAOE = 300.0;
@@ -72,6 +73,12 @@ library GodOfDeathGlobal {
 
     function onInit() {
         RegisterUnitDeath(platformTentacleDeath);
+
+        EternalGuardianSpots.add(Point.new(1, 2));
+        EternalGuardianSpots.add(Point.new(2, 2));
+        EternalGuardianSpots.add(Point.new(3, 2));
+        EternalGuardianSpots.add(Point.new(4, 2));
+        EternalGuardianSpots.add(Point.new(5, 2));
     }
 }
 //! endzinc

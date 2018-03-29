@@ -2,13 +2,13 @@
 library Constants {
 public constant integer NUMBER_OF_MAX_PLAYERS = 6;
 public constant integer MOB_PID = 10;
-public constant string  FORCE_NPCS  = "冒险者";
-public constant string  FORCE_ENEMY  = "黑暗势力";
+public constant string FORCE_NPCS = "冒险者";
+public constant string FORCE_ENEMY = "黑暗势力";
 
 public constant real INIT_X = 5822.0;
 public constant real INIT_Y = -11907.0;
 
-public constant string  DAMAGE_NAME_MELEE  = "普通攻击";
+public constant string DAMAGE_NAME_MELEE = "普通攻击";
 
 public constant integer ATT_STR = 1;
 public constant integer ATT_AGI = 2;
@@ -298,6 +298,12 @@ public constant integer SID_TERROR_HEX = 'A05P';
 
 // God of Death
 public constant integer UTID_GOD_OF_DEATH = 'Uear';
+public constant integer SID_ANNIHILATION = 'XXXX';
+public constant integer SID_MIND_BLAST = 'XXXX';
+public constant integer SID_ETERNAL_GUARDIAN = 'XXXX';
+public constant integer UTID_ETERNAL_GUARDIAN = 'XXXX';
+public constant integer SID_ETERNAL_GUARDIAN_FRENZY = 'XXXX';
+public constant integer BID_ETERNAL_GUARDIAN_FRENZY = 'XXXX';
 
 // # All creeps
 
@@ -638,54 +644,55 @@ public constant integer ITID_FROSTMOURNE = 'I01O';
 public constant integer ITID_FROSTMOURNE1 = 'I01L';
 public constant integer ITID_FROSTMOURNE2 = 'I01M';
 
-public constant string  ART_ANGEL  = "Abilities\\Spells\\Human\\Resurrect\\ResurrectCaster.mdl";
-public constant string  ART_ANNIHILATION_MISSILE  = "Abilities\\Spells\\Undead\\OrbOfDeath\\AnnihilationMissile.mdl";
-public constant string  ART_ARCANE_TOWER_ATTACK  = "Abilities\\Spells\\Human\\Feedback\\ArcaneTowerAttack.mdl";
-public constant string  ART_BANISH_TARGET  = "Abilities\\Spells\\Human\\Banish\\BanishTarget.mdl";
-public constant string  ART_BLEED  = "Objects\\Spawnmodels\\Human\\HumanBlood\\HeroBloodElfBlood.mdl";
-public constant string  ART_BLINK  = "Abilities\\Spells\\NightElf\\Blink\\BlinkTarget.mdl";
-public constant string  ART_BLIZZARD_TARGET  = "Abilities\\Spells\\Human\\Blizzard\\BlizzardTarget.mdl";
-public constant string  ART_BLOOD_IMPACT  = "Abilities\\Weapons\\Blood\\BloodImpact.mdl";
-public constant string  ART_BLOOD_LUST_LEFT  = "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustTarget.mdl";
-public constant string  ART_BLOOD_LUST_RIGHT  = "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustSpecial.mdl";
-public constant string  ART_BREATH_OF_FROST_MISSILE  = "Abilities\\Spells\\Other\\BreathOfFrost\\BreathOfFrostMissile.mdl";
-public constant string  ART_CRATER  = "Objects\\Spawnmodels\\Other\\NeutralBuildingExplosion\\NeutralBuildingExplosion.mdl";
-public constant string  ART_CURSE  = "Abilities\\Spells\\Undead\\Curse\\CurseTarget.mdl";
-public constant string  ART_DEATH_AND_DECAY  = "Abilities\\Spells\\Undead\\DeathandDecay\\DeathandDecayTarget.mdl";
-public constant string  ART_DISPEL  = "Abilities\\Spells\\Human\\DispelMagic\\DispelMagicTarget.mdl";
-public constant string  ART_DOOM  = "Abilities\\Spells\\Other\\Doom\\DoomDeath.mdl";
-public constant string  ART_DRYAD_MISSILE  = "Abilities\\Weapons\\Dryadmissile\\Dryadmissile.mdl";
-public constant string  ART_DUST  = "Objects\\Spawnmodels\\Undead\\ImpaleTargetDust\\ImpaleTargetDust.mdl";
-public constant string  ART_FREEZING_BREATH  = "Abilities\\Spells\\Undead\\FreezingBreath\\FreezingBreathTargetArt.mdl";
-public constant string  ART_FROST_NOVA  = "Abilities\\Spells\\Undead\\FrostNova\\FrostNovaTarget.mdl";
-public constant string  ART_GORE  = "Objects\\Spawnmodels\\Orc\\OrcLargeDeathExplode\\OrcLargeDeathExplode.mdl";
-public constant string  ART_GREEN_LARGE_FIRE  = "Environment\\UndeadBuildingFire\\UndeadLargeBuildingFire0.mdl";
-public constant string  ART_HEAL  = "Abilities\\Spells\\Items\\AIhe\\AIheTarget.mdl";
-public constant string  ART_HEAL_SALVE  = "Abilities\\Spells\\Items\\HealingSalve\\HealingSalveTarget.mdl";
-public constant string  ART_ILLUSION_TARGET  = "Abilities\\Spells\\Items\\AIil\\AIilTarget.mdl";
-public constant string  ART_IMPACT  = "Abilities\\Weapons\\Bolt\\BoltImpact.mdl";
-public constant string  ART_INFERNAL_BIRTH  = "Units\\Demon\\Infernal\\InfernalBirth.mdl";
-public constant string  ART_INVULNERABLE  = "Abilities\\Spells\\Human\\DivineShield\\DivineShieldTarget.mdl";
-public constant string  ART_MANA  = "Abilities\\Spells\\Items\\AIma\\AImaTarget.mdl";
-public constant string  ART_MANA_DRAIN_TARGET  = "Abilities\\Spells\\Other\\Drain\\ManaDrainTarget.mdl";
-public constant string  ART_MASS_TELEPORT_TARGET  = "Abilities\\Spells\\Human\\MassTeleport\\MassTeleportTarget.mdl";
-public constant string  ART_MEATWAGON_MISSILE  = "Abilities\\Weapons\\MeatwagonMissile\\MeatwagonMissile.mdl";
-public constant string  ART_OBSIDIAN_REGEN_AURA  = "Abilities\\Spells\\Undead\\UnholyAura\\UnholyAura.mdl";
-public constant string  ART_PARASITE_TARGET  = "Abilities\\Spells\\Other\\Parasite\\ParasiteTarget.mdl";
-public constant string  ART_PHOENIX_MISSILE  = "Abilities\\Weapons\\PhoenixMissile\\Phoenix_Missile.mdl";
-public constant string  ART_PLAGUE  = "units\\undead\\PlagueCloud\\PlagueCloud.mdl";
-public constant string  ART_POISON  = "Abilities\\Weapons\\PoisonSting\\PoisonStingTarget.mdl";
-public constant string  ART_POISON_SLIME  = "Abilities\\Weapons\\ChimaeraAcidMissile\\ChimaeraAcidMissile.mdl";
-public constant string  ART_RED_IMPACT  = "Abilities\\Spells\\Demon\\DemonBoltImpact\\DemonBoltImpact.mdl";
-public constant string  ART_SHADOW_STRIKE_MISSILE  = "Abilities\\Spells\\NightElf\\shadowstrike\\ShadowStrikeMissile.mdl";
-public constant string  ART_SHADOW_STRIKE_TARGET  = "Abilities\\Spells\\NightElf\\shadowstrike\\shadowstrike.mdl";
-public constant string  ART_SHIELD  = "Abilities\\Spells\\Items\\StaffOfSanctuary\\Staff_Sanctuary_Target.mdl";
-public constant string  ART_SLOW  = "Abilities\\Spells\\Human\\slow\\slowtarget.mdl";
-public constant string  ART_SPELLSTEAL  = "Abilities\\Spells\\Human\\SpellSteal\\SpellStealTarget.mdl";
-public constant string  ART_STAMPEDE_MISSILE_DEATH  = "Abilities\\Spells\\Other\\Stampede\\StampedeMissileDeath.mdl";
-public constant string  ART_STOMP  = "Abilities\\Spells\\Orc\\WarStomp\\WarStompCaster.mdl";
-public constant string  ART_THUNDER_CLAPCASTER  = "Abilities\\Spells\\Human\\Thunderclap\\ThunderClapCaster.mdl";
-public constant string  ART_WATER  = "Objects\\Spawnmodels\\Naga\\NagaDeath\\NagaDeath.mdl";
-public constant string  ART_WISP_EXPLODE  = "Units\\NightElf\\Wisp\\WispExplode.mdl";
+public constant string ART_ANGEL = "Abilities\\Spells\\Human\\Resurrect\\ResurrectCaster.mdl";
+public constant string ART_ANNIHILATION_MISSILE = "Abilities\\Spells\\Undead\\OrbOfDeath\\AnnihilationMissile.mdl";
+public constant string ART_ARCANE_TOWER_ATTACK = "Abilities\\Spells\\Human\\Feedback\\ArcaneTowerAttack.mdl";
+public constant string ART_BANISH_TARGET = "Abilities\\Spells\\Human\\Banish\\BanishTarget.mdl";
+public constant string ART_BLEED = "Objects\\Spawnmodels\\Human\\HumanBlood\\HeroBloodElfBlood.mdl";
+public constant string ART_BLINK = "Abilities\\Spells\\NightElf\\Blink\\BlinkTarget.mdl";
+public constant string ART_BLIZZARD_TARGET = "Abilities\\Spells\\Human\\Blizzard\\BlizzardTarget.mdl";
+public constant string ART_BLOOD_IMPACT = "Abilities\\Weapons\\Blood\\BloodImpact.mdl";
+public constant string ART_BLOOD_LUST_LEFT = "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustTarget.mdl";
+public constant string ART_BLOOD_LUST_RIGHT = "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustSpecial.mdl";
+public constant string ART_BREATH_OF_FROST_MISSILE = "Abilities\\Spells\\Other\\BreathOfFrost\\BreathOfFrostMissile.mdl";
+public constant string ART_CRATER = "Objects\\Spawnmodels\\Other\\NeutralBuildingExplosion\\NeutralBuildingExplosion.mdl";
+public constant string ART_CURSE = "Abilities\\Spells\\Undead\\Curse\\CurseTarget.mdl";
+public constant string ART_DEATH_AND_DECAY = "Abilities\\Spells\\Undead\\DeathandDecay\\DeathandDecayTarget.mdl";
+public constant string ART_DISPEL = "Abilities\\Spells\\Human\\DispelMagic\\DispelMagicTarget.mdl";
+public constant string ART_DOOM = "Abilities\\Spells\\Other\\Doom\\DoomDeath.mdl";
+public constant string ART_DRYAD_MISSILE = "Abilities\\Weapons\\Dryadmissile\\Dryadmissile.mdl";
+public constant string ART_DUST = "Objects\\Spawnmodels\\Undead\\ImpaleTargetDust\\ImpaleTargetDust.mdl";
+public constant string ART_FREEZING_BREATH = "Abilities\\Spells\\Undead\\FreezingBreath\\FreezingBreathTargetArt.mdl";
+public constant string ART_FROST_NOVA = "Abilities\\Spells\\Undead\\FrostNova\\FrostNovaTarget.mdl";
+public constant string ART_GORE = "Objects\\Spawnmodels\\Orc\\OrcLargeDeathExplode\\OrcLargeDeathExplode.mdl";
+public constant string ART_GREEN_LARGE_FIRE = "Environment\\UndeadBuildingFire\\UndeadLargeBuildingFire0.mdl";
+public constant string ART_HEAL = "Abilities\\Spells\\Items\\AIhe\\AIheTarget.mdl";
+public constant string ART_HEAL_SALVE = "Abilities\\Spells\\Items\\HealingSalve\\HealingSalveTarget.mdl";
+public constant string ART_ILLUSION_TARGET = "Abilities\\Spells\\Items\\AIil\\AIilTarget.mdl";
+public constant string ART_IMPACT = "Abilities\\Weapons\\Bolt\\BoltImpact.mdl";
+public constant string ART_INFERNAL_BIRTH = "Units\\Demon\\Infernal\\InfernalBirth.mdl";
+public constant string ART_INVULNERABLE = "Abilities\\Spells\\Human\\DivineShield\\DivineShieldTarget.mdl";
+public constant string ART_MANA = "Abilities\\Spells\\Items\\AIma\\AImaTarget.mdl";
+public constant string ART_MANA_DRAIN_TARGET = "Abilities\\Spells\\Other\\Drain\\ManaDrainTarget.mdl";
+public constant string ART_MASS_TELEPORT_TARGET = "Abilities\\Spells\\Human\\MassTeleport\\MassTeleportTarget.mdl";
+public constant string ART_MEATWAGON_MISSILE = "Abilities\\Weapons\\MeatwagonMissile\\MeatwagonMissile.mdl";
+public constant string ART_OBSIDIAN_REGEN_AURA = "Abilities\\Spells\\Undead\\UnholyAura\\UnholyAura.mdl";
+public constant string ART_PARASITE_TARGET = "Abilities\\Spells\\Other\\Parasite\\ParasiteTarget.mdl";
+public constant string ART_PHOENIX_MISSILE = "Abilities\\Weapons\\PhoenixMissile\\Phoenix_Missile.mdl";
+public constant string ART_PLAGUE = "units\\undead\\PlagueCloud\\PlagueCloud.mdl";
+public constant string ART_POISON = "Abilities\\Weapons\\PoisonSting\\PoisonStingTarget.mdl";
+public constant string ART_POISON_SLIME = "Abilities\\Weapons\\ChimaeraAcidMissile\\ChimaeraAcidMissile.mdl";
+public constant string ART_RED_IMPACT = "Abilities\\Spells\\Demon\\DemonBoltImpact\\DemonBoltImpact.mdl";
+public constant string ART_SHADOW_STRIKE_MISSILE = "Abilities\\Spells\\NightElf\\shadowstrike\\ShadowStrikeMissile.mdl";
+public constant string ART_SHADOW_STRIKE_TARGET = "Abilities\\Spells\\NightElf\\shadowstrike\\shadowstrike.mdl";
+public constant string ART_SHIELD = "Abilities\\Spells\\Items\\StaffOfSanctuary\\Staff_Sanctuary_Target.mdl";
+public constant string ART_SLOW = "Abilities\\Spells\\Human\\slow\\slowtarget.mdl";
+public constant string ART_SPELLSTEAL = "Abilities\\Spells\\Human\\SpellSteal\\SpellStealTarget.mdl";
+public constant string ART_STAMPEDE_MISSILE_DEATH = "Abilities\\Spells\\Other\\Stampede\\StampedeMissileDeath.mdl";
+public constant string ART_STOMP = "Abilities\\Spells\\Orc\\WarStomp\\WarStompCaster.mdl";
+public constant string ART_THUNDER_CLAPCASTER = "Abilities\\Spells\\Human\\Thunderclap\\ThunderClapCaster.mdl";
+public constant string ART_WATER = "Objects\\Spawnmodels\\Naga\\NagaDeath\\NagaDeath.mdl";
+public constant string ART_WISP_EXPLODE = "Units\\NightElf\\Wisp\\WispExplode.mdl";
+public constant string ART_MORTAR_MISSILE = "Abilities\\Weapons\\Mortar\\MortarMissile.mdl";
 }
 //! endzinc

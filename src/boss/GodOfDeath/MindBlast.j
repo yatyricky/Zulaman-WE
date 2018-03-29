@@ -1,7 +1,5 @@
 //! zinc
-library MindBlast {
-constant string  MISSILE  = "Abilities\\Weapons\\PhoenixMissile\\Phoenix_Missile.mdl";
-constant string  EXPLOSION_ART  = "Abilities\\Weapons\\Mortar\\MortarMissile.mdl";
+library MindBlast requires GodOfDeathGlobal {
 constant real H_OVER_D = 0.45;
 
     struct Parabola {
@@ -39,15 +37,15 @@ constant real H_OVER_D = 0.45;
                 // explosion
                 for (0 <= i < PlayerUnits.n) {
                     if (GetDistance.unitCoord(PlayerUnits.units[i], GetUnitX(this.missile), GetUnitY(this.missile)) <= GodOfDeathGlobalConst.mindBlastAOE) {
-                        DamageTarget(this.caster, PlayerUnits.units[i], 1200.0, SpellData[SID].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+                        DamageTarget(this.caster, PlayerUnits.units[i], 1200.0, SpellData[SID_MIND_BLAST].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
                         ModUnitMana(this.caster, 1);
                     }
                 }
 
-                AddTimedEffect.atCoord(EXPLOSION_ART, GetUnitX(this.missile), GetUnitY(this.missile), 0.5);
+                AddTimedEffect.atCoord(ART_MORTAR_MISSILE, GetUnitX(this.missile), GetUnitY(this.missile), 0.5);
 
                 this.destroy();
-            } else {            
+            } else {
                 SetUnitX(this.missile, tx);
                 SetUnitY(this.missile, ty);
             }
@@ -59,7 +57,7 @@ constant real H_OVER_D = 0.45;
             real angle = GetAngle(GetUnitX(caster), GetUnitY(caster), p.x, p.y);
             this.missile = CreateUnit(Player(MOB_PID), DUMMY_ID, GetUnitX(caster), GetUnitY(caster), angle * bj_RADTODEG);
             SetUnitFlyable(this.missile);
-            this.eff = AddSpecialEffectTarget(MISSILE, this.missile, "origin");
+            this.eff = AddSpecialEffectTarget(ART_PHOENIX_MISSILE, this.missile, "origin");
             this.cosAng = Cos(angle);
             this.sinAng = Sin(angle);
             this.distance = GetDistance.coords2d(GetUnitX(caster), GetUnitY(caster), p.x, p.y);
@@ -78,10 +76,8 @@ constant real H_OVER_D = 0.45;
     }
 
     function onInit() {
-        RegisterSpellEffectResponse(SID, onCast);
+        RegisterSpellEffectResponse(SID_MIND_BLAST, onCast);
     }
-
-
 
 }
 //! endzinc
