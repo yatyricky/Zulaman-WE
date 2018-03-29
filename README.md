@@ -7,16 +7,7 @@ Zul'Aman - Reinvented with World Editor
 ## 系统要求
 
 Warcraft III TFT 1.28.2+  
-SharpCraft World Editor Extended Bundle v0.1.3.0  
-Nodejs
-
-## 构建
-
-1. 配置系统环境变量 TESH_HOME: ```.\SharpCraft World Editor Extended Bundle\SharpCraft WEX Bundle (0.1.3.0-FIX)\profiles\Warcraft III - World Editor (WEX)\plugins\War3EditorTriggerEditorSyntaxHighlight\tesh```
-2. npm install
-3. node build.js
-4. 在触发编辑器中，点击TESH的Load Templates
-5. 保存，测试
+SharpCraft World Editor Extended Bundle v0.1.2.9  
 
 ## 地图信息
 
