@@ -44,6 +44,7 @@ reader.on('line', (line) => {
             let key = ret[1];
             let val = ret[2];
 
+            const cs = val.split(",");
             switch (key) {
                 case '_parent':
                     val = val.substring(1, 5);
@@ -59,19 +60,20 @@ reader.on('line', (line) => {
                     break;
 
                 case 'Cost':
-                    const cs = val.split(",");
                     if (cs.length == 1) {
                         currentArr.push({
                             id: 'amcs',
-                            value: parseInt(val)
+                            type: 'int',
+                            value: parseInt(val),
+                            level: 1
                         });
                     } else if (cs.length == 3) {
                         for (let i = 0; i < cs.length; i++) {
                             const ts = parseInt(cs[i]);
                             currentArr.push({
                                 id: 'amcs',
+                                type: 'int',
                                 value: ts,
-                                column: 1,
                                 level: i + 1
                             });
                         }
@@ -93,31 +95,30 @@ reader.on('line', (line) => {
                     });
                     break;
                 case 'Art':
-                    // currentArr.push({
-                    //     id: 'aart',
-                    //     value: val.substring(1, val.length - 1)
-                    // });
+                    currentArr.push({
+                        id: 'aart',
+                        value: val.substring(1, val.length - 1)
+                    });
                     break;
                 case 'DataB':
                     switch (currentComment) {
                         case '目标类型':
-                            const cs = val.split(",");
                             if (cs.length == 1) {
-                                // currentArr.push({
-                                //     id: 'Ncl2',
-                                //     value: parseInt(val),
-                                //     type: "unreal"
-                                // });
+                                currentArr.push({
+                                    id: 'Ncl2',
+                                    value: parseInt(val),
+                                    level: 1,
+                                    column: 2
+                                });
                             } else if (cs.length == 3) {
                                 for (let i = 0; i < cs.length; i++) {
                                     const ts = parseInt(cs[i]);
-                                    // currentArr.push({
-                                    //     id: 'Ncl2',
-                                    //     value: ts,
-                                    //     column: 1,
-                                    //     level: i + 1,
-                                    //     type: "unreal"
-                                    // });
+                                    currentArr.push({
+                                        id: 'Ncl2',
+                                        value: ts,
+                                        level: i + 1,
+                                        column: 2
+                                    });
                                 }
                             } else {
                                 counter += 99999999;
@@ -125,19 +126,65 @@ reader.on('line', (line) => {
                             }
                             break;
                         case '每秒魔法消耗':
-
+                            if (cs.length == 1) {
+                                currentArr.push({
+                                    id: 'Eim2',
+                                    type: 'unreal',
+                                    value: parseFloat(val),
+                                    level: 1,
+                                    column: 2
+                                });
+                            } else if (cs.length == 3) {
+                                for (let i = 0; i < cs.length; i++) {
+                                    const ts = parseFloat(cs[i]);
+                                    currentArr.push({
+                                        id: 'Eim2',
+                                        type: 'unreal',
+                                        value: ts,
+                                        level: i + 1,
+                                        column: 2
+                                    });
+                                }
+                            } else {
+                                counter += 99999999;
+                                console.log(`Error: ${line}`);
+                            }
                             break;
                         case '每秒伤害':
-
+                            currentArr.push({
+                                id: 'Poa2',
+                                type: 'real',
+                                value: parseFloat(val),
+                                column: 2,
+                                level: 1
+                            });
                             break;
                         case '生命回复增加':
-
+                            currentArr.push({
+                                id: 'Uau2',
+                                type: 'unreal',
+                                value: parseFloat(val),
+                                column: 2,
+                                level: 1
+                            });
                             break;
                         case '攻击速度增加(%)':
-
+                            currentArr.push({
+                                id: 'Oae2',
+                                type: 'unreal',
+                                value: parseFloat(val),
+                                column: 2,
+                                level: 1
+                            });
                             break;
                         case '攻击奖励':
-
+                            currentArr.push({
+                                id: 'Neg2',
+                                type: 'unreal',
+                                value: parseFloat(val),
+                                column: 2,
+                                level: 1
+                            });
                             break;
                         case '防御奖励':
 
@@ -157,6 +204,12 @@ reader.on('line', (line) => {
 
                             break;
                     }
+                    break;
+                case 'levels':
+                    currentArr.push({
+                        id: 'alev',
+                        value: parseInt(val)
+                    });
                     break;
                 default:
                     // console.log(`Uncaught key ${key}`);
@@ -185,7 +238,7 @@ reader.on('line', (line) => {
             if (err) {
                 return console.log(err);
             }
-            console.log("The file was saved!");
+            console.log("Success - w3a.json saved to ./objects");
         });
     } else {
         console.log('Ultimate failure!');
