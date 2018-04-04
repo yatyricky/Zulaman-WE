@@ -45,3 +45,6 @@ Temporary Items
 ~*
 *.fw.png
 node_modules
+backups
+logs
+war3map.*
