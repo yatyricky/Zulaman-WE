@@ -1,6 +1,5 @@
 //! zinc
 library HolyShock requires PaladinGlobal, SpellEvent, UnitProperty, BeaconOfLight, LightsJustice {
-constant integer ART_ID = 'e00J';
 constant integer BUFF_ID = 'A02E';
     struct delayedDosth1 {
         private timer tm;
@@ -58,7 +57,7 @@ constant integer BUFF_ID = 'A02E';
             }
         }
         
-        AddTimedEffect.byDummy(ART_ID, GetUnitX(SpellEvent.TargetUnit), GetUnitY(SpellEvent.TargetUnit));
+        AddTimedEffect.atPos(ART_FAERIE_DRAGON_MISSILE, GetUnitX(SpellEvent.TargetUnit), GetUnitY(SpellEvent.TargetUnit), GetUnitZ(SpellEvent.TargetUnit) + 24, 0, 3);
         buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BUFF_ID);
         buf.bd.tick = -1;
         buf.bd.interval = 6.0;

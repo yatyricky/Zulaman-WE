@@ -41,7 +41,7 @@ constant integer BUFF_ID = 'A03D';
             if (thistype.current.art != "") {
                 AddTimedEffect.atUnit(thistype.current.art, e, "origin", 0.2);
             } else {
-                AddTimedEffect.byDummy('e00J', GetUnitX(e), GetUnitY(e));
+                AddTimedEffect.atPos(ART_FAERIE_DRAGON_MISSILE, GetUnitX(e), GetUnitY(e), GetUnitZ(e) + 24.0, 0, 3);
             }
             e = null;
         }
@@ -57,7 +57,7 @@ constant integer BUFF_ID = 'A03D';
                 if (art != "") {
                     AddTimedEffect.atUnit(art, this.primary, "origin", 0.2);
                 } else {
-                    AddTimedEffect.byDummy('e00J', GetUnitX(this.primary), GetUnitY(this.primary));
+                    AddTimedEffect.atPos(ART_FAERIE_DRAGON_MISSILE, GetUnitX(this.primary), GetUnitY(this.primary), GetUnitZ(this.primary) + 24.0, 0, 3);
                 }
             }
             if (FirstOfGroup(this.extras) != null) {

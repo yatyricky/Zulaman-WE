@@ -1,13 +1,5 @@
 //! zinc
 library NefUnion requires TimerUtils {
-//==============================================================================
-//  constant    integer:    DUMMY_ID
-//==============================================================================
-//              nothing:    DummyCast(unit caster, integer abilityID, 
-//                              string orderString, unit target)
-//              nothing:    TriggerAnyUnit(playerunitevent whichEvent, 
-//                              code action)
-//==============================================================================
 
     public struct AddTimedEffect {
         private timer t;
@@ -38,17 +30,22 @@ library NefUnion requires TimerUtils {
             TimerStart(this.t, et, false, function thistype.execute);
         }
         
-        static method byDummy(integer id, real x, real y) {
-            KillUnit(CreateUnit(Player(0), id, x + 16.0, y + 24.0, 0.0));
-        }
-
-        static method atCoordAngle(string se, real x, real y, real r) {
+        static method atPos(string se, real x, real y, real z, real et, real scale) {
             thistype this = thistype.allocate();
             this.t = NewTimer();
-            this.e = AddSpecialEffectTarget(se, CreateUnit(Player(0), 'e00I', x, y, r), "origin");
+            this.e = AddSpecialEffect(se, x, y);
+            BlzSetSpecialEffectPosition(this.e, x, y, z);
+            BlzSetSpecialEffectScale(this.e, scale);
             SetTimerData(this.t, this);
-            TimerStart(this.t, 1.0, false, function thistype.execute);
+            TimerStart(this.t, et, false, function thistype.execute);
         }
+    }
+
+    public function GetUnitZ(unit u) -> real {
+        location loc = GetUnitLoc(u);
+        real ret = GetLocationZ(loc) + GetUnitFlyHeight(u);
+        RemoveLocation(loc);
+        return ret;
     }
 
     public struct DelayedAddTimedEffect {
@@ -72,14 +69,6 @@ library NefUnion requires TimerUtils {
             this.e = AddSpecialEffect(this.se, this.x, this.y);
             TimerStart(this.t, this.et, false, function thistype.execute);
         }
-/*
-        static method atUnit(string se, unit a, string ap, real et) {
-            thistype this = thistype.allocate();
-            this.t = NewTimer();
-            this.e = AddSpecialEffectTarget(se, a, ap);
-            SetTimerData(this.t, this);
-            TimerStart(this.t, et, false, function thistype.execute);
-        }*/
 
         static method atCoord(string se, real x, real y, real et, real dt) {
             thistype this = thistype.allocate();
@@ -91,10 +80,7 @@ library NefUnion requires TimerUtils {
             this.et = et;
             TimerStart(this.t, dt, false, function thistype.launch);
         }
-        /*
-        static method byDummy(integer id, real x, real y) {
-            KillUnit(CreateUnit(Player(0), id, x + 16.0, y + 24.0, 0.0));
-        }*/
+        
     }
     
     // "CLPB" chain lightning - main

@@ -694,5 +694,6 @@ public constant string ART_THUNDER_CLAPCASTER = "Abilities\\Spells\\Human\\Thund
 public constant string ART_WATER = "Objects\\Spawnmodels\\Naga\\NagaDeath\\NagaDeath.mdl";
 public constant string ART_WISP_EXPLODE = "Units\\NightElf\\Wisp\\WispExplode.mdl";
 public constant string ART_MORTAR_MISSILE = "Abilities\\Weapons\\Mortar\\MortarMissile.mdl";
+public constant string ART_FAERIE_DRAGON_MISSILE = "Abilities\\Weapons\\FaerieDragonMissile\\FaerieDragonMissile.mdl";
 }
 //! endzinc
