@@ -942,7 +942,6 @@ constant real AIACTION_INTERVAL = 0.33;
         return (GetUnitLifeLost(u1) < GetUnitLifeLost(u2));
     }
     
-    // boolean: IsPaladinInstant(unit)
     function makeOrderHart(unit source) {
         UnitListSortRule ulsr;
         unit ot;
@@ -957,9 +956,9 @@ constant real AIACTION_INTERVAL = 0.33;
                     // holy shock
                     IssueTargetOrderById(source, SpellData[SID_HOLY_SHOCK].oid, ot);
                 } else {
-                    if (IsPaladinInstant(source)) {
+                    if (GetUnitAbilityLevel(source, BID_HOLY_LIGHT_IMPROVED) > 0) {
                         // instant cast holy light
-                        IssueTargetOrderById(source, SpellData[SID_HOLY_LIGHT_1].oid, ot);
+                        IssueTargetOrderById(source, SpellData[SID_HOLY_LIGHT].oid, ot);
                     } else {
                         if (UnitCanUse(source, SID_DIVINE_FAVOR)) {
                             // make sure next healing spell must have crit effect
@@ -995,8 +994,8 @@ constant real AIACTION_INTERVAL = 0.33;
                         IssueTargetOrderById(source, SpellData[SID_FLASH_LIGHT].oid, PlayerUnits.sorted[i]);
                         state = 1;
                     } else if (GetUnitLifePercent(PlayerUnits.sorted[i]) < 75) {
-                        if (IsPaladinInstant(source)) {
-                            IssueTargetOrderById(source, SpellData[SID_HOLY_LIGHT_1].oid, PlayerUnits.sorted[i]);
+                        if (GetUnitAbilityLevel(source, BID_HOLY_LIGHT_IMPROVED) > 0) {
+                            IssueTargetOrderById(source, SpellData[SID_HOLY_LIGHT].oid, PlayerUnits.sorted[i]);
                             state = 1;
                         } else if (UnitCanUse(source, SID_HOLY_LIGHT)) {
                             IssueTargetOrderById(source, SpellData[SID_HOLY_LIGHT].oid, PlayerUnits.sorted[i]);
@@ -1336,7 +1335,7 @@ constant real AIACTION_INTERVAL = 0.33;
             if (ot == null) {
                 ot = MobList.getLowestHP();
             }
-            IssueTargetOrderById(source, SpellData[SID_EARTH_SHOCK_1].oid, ot);
+            IssueTargetOrderById(source, SpellData[SID_EARTH_SHOCK].oid, ot);
             state = 1;
         }
         if (state == 0 && !IsUnitChanneling(source)) {
@@ -1420,7 +1419,7 @@ constant real AIACTION_INTERVAL = 0.33;
                         } else {
                             if (EarthBinderGetCurrentTotem(source) != SID_EARTH_BIND_TOTEM) {
                                 if (GetUnitAbilityLevel(source, BID_EARTH_SHOCK_IMPROVED) > 0) {
-                                    IssueTargetOrderById(source, SpellData[SID_EARTH_SHOCK_1].oid, MobList.getLowestHP());
+                                    IssueTargetOrderById(source, SpellData[SID_EARTH_SHOCK].oid, MobList.getLowestHP());
                                 } else if (UnitCanUse(source, SID_EARTH_SHOCK)) {
                                     IssueTargetOrderById(source, SpellData[SID_EARTH_SHOCK].oid, MobList.getLowestHP());
                                 }

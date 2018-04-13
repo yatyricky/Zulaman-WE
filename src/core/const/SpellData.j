@@ -125,7 +125,6 @@ SpellData.create(SID_TRANQUILITY_1,"宁静",200,8,1,OrderId("channel"),1,ORDER_T
 SpellData.create(SID_FLASH_LIGHT,"闪耀之光",50,0,3.5,OrderId("innerfire"),1,ORDER_TYPE_TARGET);
 SpellData.create(SID_FLASH_LIGHT_1,"闪耀之光",50,0,2.2,OrderId("cripple"),1,ORDER_TYPE_TARGET);
 SpellData.create(SID_HOLY_LIGHT,"圣光术",100,2.6,0,OrderId("holybolt"),1,ORDER_TYPE_TARGET).setCCC2(115,2.6,0).setCCC3(130,2.6,0);
-SpellData.create(SID_HOLY_LIGHT_1,"圣光术",0,0,1,OrderId("curse"),1,ORDER_TYPE_TARGET);
 SpellData.create(SID_HOLY_SHOCK,"神圣震击",100,0,15,OrderId("resurrection"),1,ORDER_TYPE_TARGET).setCCC2(150,0,15).setCCC3(200,0,15);
 SpellData.create(SID_DIVINE_FAVOR,"神恩",50,0,20,OrderId("massteleport"),1,ORDER_TYPE_IMMEDIATE).setCCC2(50,0,18).setCCC3(50,0,16);
 SpellData.create(SID_BEACON_OF_LIGHT,"圣光印记",10,0,10,OrderId("summonphoenix"),1,ORDER_TYPE_TARGET);
@@ -162,9 +161,7 @@ SpellData.create(SID_POLYMORPH_DUMMY,"变形术",25,0,5,OrderId("hex"),1,ORDER_T
 SpellData.create(SID_SPELL_TRANSFER,"法术转移",70,0,6,OrderId("dispel"),1,ORDER_TYPE_TARGET).setCCC2(210,0,3).setCCC3(350,0,1);
 SpellData.create(SID_INTELLIGENCE_CHANNEL,"智慧导能",0,0,1,OrderId("channel"),1,ORDER_TYPE_TARGET);
 SpellData.create(SID_STORM_LASH,"风暴鞭笞",10,2,0,OrderId("forkedlightning"),1,ORDER_TYPE_TARGET).setCCC2(13,2,0).setCCC3(16,2,0);
-SpellData.create(SID_STORM_STRIKE,"风暴打击",0,0,1,OrderId("forkedlightning"),1,ORDER_TYPE_TARGET);
 SpellData.create(SID_EARTH_SHOCK,"大地震击",85,0,9,OrderId("thunderbolt"),1,ORDER_TYPE_TARGET).setCCC2(95,0,9).setCCC3(105,0,9);
-SpellData.create(SID_EARTH_SHOCK_1,"大地震击",0,0,9,OrderId("frostarmor"),1,ORDER_TYPE_TARGET).setCCC2(0,0,9).setCCC3(0,0,9);
 SpellData.create(SID_PURGE,"净化术",15,0,15,OrderId("purge"),1,ORDER_TYPE_TARGET);
 SpellData.create(SID_ENCHANTED_TOTEM,"附魔图腾",0,0,1,OrderId("healingward"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_LIGHTNING_TOTEM,"闪电图腾",0,0,10,OrderId("blizzard"),1,ORDER_TYPE_POINT);

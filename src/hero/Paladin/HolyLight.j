@@ -1,7 +1,6 @@
 //! zinc
 library HolyLight requires CastingBar, MultipleAbility, PaladinGlobal, BeaconOfLight {
 constant string  ART  = "Abilities\\Spells\\Human\\DivineShield\\DivineShieldTarget.mdl";
-constant integer BUFF_ID1 = 'A029';
 
     integer castSound;
 
@@ -22,7 +21,7 @@ constant integer BUFF_ID1 = 'A029';
         integer ilvl = GetUnitAbilityLevel(a, SID_HOLY_LIGHT);
         real amt = returnHeal(ilvl) + UnitProp[a].SpellPower() * 1.05;
         real exct = healCrit[id];
-        Buff baf = BuffSlot[b].getBuffByBid(BUFF_ID_HOLY_LIGHT);
+        Buff baf = BuffSlot[b].getBuffByBid(BID_HOLY_LIGHT_AMP);
         if (baf != 0) {
             exct += baf.bd.r0;
         }
@@ -30,9 +29,9 @@ constant integer BUFF_ID1 = 'A029';
         if (healCrit[id] > 0) {
             healCrit[id] = 0.0;
         }
-        AddTimedEffect.atUnit(ART_HOLY_LIGHT, b, "origin", 0.2);
+        AddTimedEffect.atUnit(ART_RESURRECT_TARGET, b, "origin", 0.2);
         
-        buf = Buff.cast(a, b, BUFF_ID_HOLY_LIGHT);
+        buf = Buff.cast(a, b, BID_HOLY_LIGHT_AMP);
         buf.bd.tick = -1;
         buf.bd.interval = 5.0;
         buf.bd.r0 = returnExholy(ilvl);
@@ -42,7 +41,7 @@ constant integer BUFF_ID1 = 'A029';
         
         if (ilvl > 2) {
             if (HealResult.effective < HealResult.amount) {
-                buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BUFF_ID1);
+                buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BID_HOLY_LIGHT_SHIELD);
                 buf.bd.tick = -1;
                 buf.bd.interval = 4.0;
                 buf.bd.isShield = true;
@@ -55,46 +54,53 @@ constant integer BUFF_ID1 = 'A029';
                 buf.run();
             }
         }
-        BeaconOfLight[a].healBeacons(b, HealResult.amount, ART_HOLY_LIGHT);
+        BeaconOfLight[a].healBeacons(b, HealResult.amount, ART_RESURRECT_TARGET);
     }
 
     function response(CastingBar cd) {
         casted(cd.caster, cd.target);
-        
-        if (instantHolyBoltTab.exists(cd.caster)) {
-            instantHolyBoltTab.flush(cd.caster);
-        }
-    }
-    
-    function onCast() {
-        casted(SpellEvent.CastingUnit, SpellEvent.TargetUnit);
-        MultipleAbility[SID_HOLY_LIGHT].showPrimary(GetOwningPlayer(SpellEvent.CastingUnit));
     }
     
     function onChannel() {
         CastingBar cb = CastingBar.create(response).setSound(castSound);
+        BuffSlot bs;
+        Buff buf;
         if (GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_DIVINE_FAVOR) == 3) {
             cb.haste = 0.4;
         }
+        bs = BuffSlot[SpellEvent.CastingUnit];
+        buf = bs.getBuffByBid(BID_HOLY_LIGHT_IMPROVED);
+        if (buf != 0) {
+            cb.haste = SpellData[SID_HOLY_LIGHT].Cast(GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_HOLY_LIGHT));
+            bs.dispelByBuff(buf);
+            buf.destroy();
+        }
         cb.launch();
     }
-    
-    function registerentered(unit u) {           
-        if (GetUnitTypeId(u) == UTID_PALADIN) {
-            MultipleAbility[SID_HOLY_LIGHT].showPrimary(GetOwningPlayer(u));
-        }                
+
+    function onEffectImprove(Buff buf) {
+        BlzSetAbilityIcon(SID_HOLY_LIGHT, BTNInnerFire);
+    }
+    function onRemoveImprove(Buff buf) {
+        BlzSetAbilityIcon(SID_HOLY_LIGHT, BTNResurrection);
+    }
+
+    public function ImproveHolyLight(unit u) {
+        Buff buf = Buff.cast(u, u, BID_HOLY_LIGHT_IMPROVED);
+        buf.bd.interval = 10;
+        buf.bd.tick = -1;
+        buf.bd.boe = onEffectImprove;
+        buf.bd.bor = onRemoveImprove;
+        buf.run();
     }
 
     function onInit() {
         castSound = DefineSound("Sound\\Ambient\\DoodadEffects\\RunesGlow.wav", 5000, true, false);
         RegisterSpellChannelResponse(SID_HOLY_LIGHT, onChannel);
-        MultipleAbility.register(SID_HOLY_LIGHT, SID_HOLY_LIGHT_1);
-        RegisterSpellEffectResponse(SID_HOLY_LIGHT_1, onCast);
-        BuffType.register(BUFF_ID_HOLY_LIGHT, BUFF_MAGE, BUFF_POS);
-        BuffType.register(BUFF_ID1, BUFF_MAGE, BUFF_POS);
-        RegisterUnitEnterMap(registerentered);
+        BuffType.register(BID_HOLY_LIGHT_AMP, BUFF_MAGE, BUFF_POS);
+        BuffType.register(BID_HOLY_LIGHT_SHIELD, BUFF_MAGE, BUFF_POS);
+        BuffType.register(BID_HOLY_LIGHT_IMPROVED, BUFF_PHYX, BUFF_POS);
     }
-
 
 }
 //! endzinc

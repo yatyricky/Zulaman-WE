@@ -86,7 +86,9 @@ public constant integer UTID_PALADIN = 'Hart';
 public constant integer SID_FLASH_LIGHT = 'A00K';
 public constant integer SID_FLASH_LIGHT_1 = 'A02C';
 public constant integer SID_HOLY_LIGHT = 'A00L';
-public constant integer SID_HOLY_LIGHT_1 = 'A028';
+public constant integer BID_HOLY_LIGHT_AMP = 'A024';
+public constant integer BID_HOLY_LIGHT_SHIELD = 'A029';
+public constant integer BID_HOLY_LIGHT_IMPROVED = 'A0CH';
 public constant integer SID_HOLY_SHOCK = 'A00M';
 public constant integer SID_DIVINE_FAVOR = 'A00N';
 public constant integer SID_BEACON_OF_LIGHT = 'A00O';
@@ -146,11 +148,9 @@ public constant integer UTID_EARTH_BINDER_ASC = 'H006';
 public constant integer UTID_LIGHTNING_TOTEM = 'u000';
 public constant integer UTID_EARTH_BIND_TOTEM = 'u001';
 public constant integer UTID_TORRENT_TOTEM = 'u002';
-public constant integer SID_STORM_STRIKE = 'A01B';
 public constant integer SID_STORM_LASH = 'A0AG';
 public constant integer SID_EARTH_SHOCK = 'A01G';
 public constant integer BID_EARTH_SHOCK_IMPROVED = 'A0CG';
-public constant integer SID_EARTH_SHOCK_1 = 'A033';
 public constant integer SID_PURGE = 'A01H';
 public constant integer SID_ENCHANTED_TOTEM = 'A01M';
 public constant integer SID_LIGHTNING_TOTEM = 'A036';
@@ -697,8 +697,12 @@ public constant string ART_WISP_EXPLODE = "Units\\NightElf\\Wisp\\WispExplode.md
 public constant string ART_MORTAR_MISSILE = "Abilities\\Weapons\\Mortar\\MortarMissile.mdl";
 public constant string ART_FAERIE_DRAGON_MISSILE = "Abilities\\Weapons\\FaerieDragonMissile\\FaerieDragonMissile.mdl";
 public constant string ART_ANCIENT_PROTECTOR_MISSILE = "Abilities\\Weapons\\AncientProtectorMissile\\AncientProtectorMissile.mdl";
+public constant string ART_HOLY_BOLT_SPECIAL_ART = "Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpecialArt.mdl";
+public constant string ART_RESURRECT_TARGET = "Abilities\\Spells\\Human\\Resurrect\\ResurrectTarget.mdl";
 
 public constant string BTNVolcano = "ReplaceableTextures\\CommandButtons\\BTNVolcano.blp";
 public constant string BTNEarthquake = "ReplaceableTextures\\CommandButtons\\BTNEarthquake.blp";
+public constant string BTNInnerFire = "ReplaceableTextures\\CommandButtons\\BTNInnerFire.blp";
+public constant string BTNResurrection = "ReplaceableTextures\\CommandButtons\\BTNResurrection.blp";
 }
 //! endzinc

@@ -1,5 +1,5 @@
 //! zinc
-library FlashOfLight requires PaladinGlobal, SpellEvent, UnitProperty, BeaconOfLight {
+library FlashOfLight requires PaladinGlobal, SpellEvent, UnitProperty, BeaconOfLight, HolyLight {
     function returnHeal(integer lvl) -> real {
         return 200.0;
     }
@@ -25,7 +25,7 @@ library FlashOfLight requires PaladinGlobal, SpellEvent, UnitProperty, BeaconOfL
         // get the amount and heal
         amt = returnHeal(ilvl) + UnitProp[SpellEvent.CastingUnit].SpellPower() * 1.4;
         exct = healCrit[id] + returnExtraCritical(ilvl);
-        buf = BuffSlot[SpellEvent.TargetUnit].getBuffByBid(BUFF_ID_HOLY_LIGHT);
+        buf = BuffSlot[SpellEvent.TargetUnit].getBuffByBid(BID_HOLY_LIGHT_AMP);
         if (buf != 0) {
             exct += buf.bd.r0;
         }
@@ -33,19 +33,15 @@ library FlashOfLight requires PaladinGlobal, SpellEvent, UnitProperty, BeaconOfL
         if (healCrit[id] > 0) {
             healCrit[id] = 0.0;
         }
-        AddTimedEffect.atUnit(ART_FLASH_OF_LIGHT, SpellEvent.TargetUnit, "origin", 0.2);
+        AddTimedEffect.atUnit(ART_HOLY_BOLT_SPECIAL_ART, SpellEvent.TargetUnit, "origin", 0.2);
         // instant holy light
         if (HealResult.isCritical) {
             if (GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_HOLY_LIGHT) > 0) {
-                MultipleAbility[SID_HOLY_LIGHT].showSecondary(GetOwningPlayer(SpellEvent.CastingUnit));
+                ImproveHolyLight(SpellEvent.CastingUnit);
             }
-            //SystemOrderIndicator = true;
-            IssueImmediateOrderById(SpellEvent.CastingUnit, OrderId("curseon"));
-            
-            instantHolyBoltTab[SpellEvent.CastingUnit] = 1;
         }
         // beacon of light
-        BeaconOfLight[SpellEvent.CastingUnit].healBeacons(SpellEvent.TargetUnit, HealResult.amount, ART_FLASH_OF_LIGHT);
+        BeaconOfLight[SpellEvent.CastingUnit].healBeacons(SpellEvent.TargetUnit, HealResult.amount, ART_HOLY_BOLT_SPECIAL_ART);
     }
 
     function onInit() {
