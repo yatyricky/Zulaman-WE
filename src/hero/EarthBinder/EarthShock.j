@@ -4,6 +4,14 @@ library EarthShock requires DamageSystem, SpellData, BuffSystem {
     function returnDamage(integer lvl, real sp) -> real {
         return 300 + 100 * lvl + sp * 3.6;
     }
+
+    function onEffect(Buff buf) {
+        BlzSetAbilityIcon(SID_EARTH_SHOCK, BTNVolcano);
+    }
+
+    function onRemove(Buff buf) {
+        BlzSetAbilityIcon(SID_EARTH_SHOCK, BTNEarthquake);
+    }
     
     function onCast() {
         player p;
@@ -32,7 +40,19 @@ library EarthShock requires DamageSystem, SpellData, BuffSystem {
         }
     }
 
+    public function ImproveEarthShock(unit u) {
+        Buff buf;
+        CoolDown(u, SID_EARTH_SHOCK);
+        buf = Buff.cast(u, u, BID_EARTH_SHOCK_IMPROVED);
+        buf.bd.interval = 4;
+        buf.bd.tick = -1;
+        buf.bd.boe = onEffect;
+        buf.bd.bor = onRemove;
+        buf.run();
+    }
+
     function onInit() {
+        BuffType.register(BID_EARTH_SHOCK_IMPROVED, BUFF_PHYX, BUFF_POS);
         RegisterSpellEffectResponse(SID_EARTH_SHOCK, onCast);
     }
 

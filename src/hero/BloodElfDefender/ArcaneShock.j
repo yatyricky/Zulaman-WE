@@ -5,21 +5,6 @@ constant integer BUFF_ID = 'A025';
 //constant integer BUFF_ID2 = 'A02H';
 constant string  ART_TARGET  = "Abilities\\Spells\\Human\\ManaFlare\\ManaFlareBoltImpact.mdl";
 //constant string  ART_IMPROVED  = "Abilities\\Spells\\Human\\MagicSentry\\MagicSentryCaster.mdl";
-
-    //timer arcaneShockExTm[NUMBER_OF_MAX_PLAYERS];
-    //boolean arcaneShockHasEx[NUMBER_OF_MAX_PLAYERS];
-    
-    //function timesup() {        
-    //    MultipleAbility[SID_ARCANE_SHOCK].showPrimary(Player(GetTimerData(GetExpiredTimer())));
-    //}
-    
-    //function GrantArcaneShockEx(unit u) {
-    //    player p = GetOwningPlayer(u);
-    //    //arcaneShockHasEx[id] = true;
-    //    MultipleAbility[SID_ARCANE_SHOCK].showSecondary(p);
-    //    IssueImmediateOrderById(u, 852458);
-    //    TimerStart(arcaneShockExTm[GetPlayerId(p)], 5.0, false, function timesup);
-    //}
     
     function returnCurseAmt(integer lvl) -> real {
         return 0.04 * lvl;

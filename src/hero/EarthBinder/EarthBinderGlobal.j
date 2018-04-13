@@ -1,5 +1,5 @@
 //! zinc
-library EarthBinderGlobal requires MultipleAbility {
+library EarthBinderGlobal requires NefUnion {
     //public constant integer BUFF_ID_STORM_STRIKE = 'A032';
     public integer currentTotemId[];
     
