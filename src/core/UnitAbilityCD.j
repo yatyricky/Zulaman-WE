@@ -108,11 +108,7 @@ library UnitAbilityCD requires TimerUtils, Integer, ZAMCore {
     public function CoolDown(unit u, integer aid) {
         integer lvl;
         if (GetUnitAbilityLevel(u, aid) > 0) {
-            lvl = GetUnitAbilityLevel(u, aid);
-            UnitRemoveAbility(u, aid);
-            UnitAddAbility(u, aid);
-            SetUnitAbilityLevel(u, aid, lvl);
-            
+            BlzEndUnitAbilityCooldown(u, aid);
             UnitAbilityCD.make(u, aid, 0.0);
         }
     }

@@ -1330,14 +1330,14 @@ constant real AIACTION_INTERVAL = 0.33;
         boolean flag;
             
         // earth shock: free cast
-        if (EarthBinderFreeES(source)) {
-            IssueImmediateOrderById(source, OID_STOP);            
+        if (GetUnitAbilityLevel(source, BID_EARTH_SHOCK_IMPROVED) > 0) {
+            IssueImmediateOrderById(source, OID_STOP);
             ot = MobList.getChanneling();
             if (ot == null) {
                 ot = MobList.getLowestHP();
             }
             IssueTargetOrderById(source, SpellData[SID_EARTH_SHOCK_1].oid, ot);
-            state = 1;            
+            state = 1;
         }
         if (state == 0 && !IsUnitChanneling(source)) {
             // earth shock: counter spell
@@ -1419,7 +1419,7 @@ constant real AIACTION_INTERVAL = 0.33;
                             }
                         } else {
                             if (EarthBinderGetCurrentTotem(source) != SID_EARTH_BIND_TOTEM) {
-                                if (EarthBinderFreeES(source)) {
+                                if (GetUnitAbilityLevel(source, BID_EARTH_SHOCK_IMPROVED) > 0) {
                                     IssueTargetOrderById(source, SpellData[SID_EARTH_SHOCK_1].oid, MobList.getLowestHP());
                                 } else if (UnitCanUse(source, SID_EARTH_SHOCK)) {
                                     IssueTargetOrderById(source, SpellData[SID_EARTH_SHOCK].oid, MobList.getLowestHP());

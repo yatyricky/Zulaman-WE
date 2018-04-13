@@ -149,6 +149,7 @@ public constant integer UTID_TORRENT_TOTEM = 'u002';
 public constant integer SID_STORM_STRIKE = 'A01B';
 public constant integer SID_STORM_LASH = 'A0AG';
 public constant integer SID_EARTH_SHOCK = 'A01G';
+public constant integer BID_EARTH_SHOCK_IMPROVED = 'A0CG';
 public constant integer SID_EARTH_SHOCK_1 = 'A033';
 public constant integer SID_PURGE = 'A01H';
 public constant integer SID_ENCHANTED_TOTEM = 'A01M';
@@ -695,5 +696,9 @@ public constant string ART_WATER = "Objects\\Spawnmodels\\Naga\\NagaDeath\\NagaD
 public constant string ART_WISP_EXPLODE = "Units\\NightElf\\Wisp\\WispExplode.mdl";
 public constant string ART_MORTAR_MISSILE = "Abilities\\Weapons\\Mortar\\MortarMissile.mdl";
 public constant string ART_FAERIE_DRAGON_MISSILE = "Abilities\\Weapons\\FaerieDragonMissile\\FaerieDragonMissile.mdl";
+public constant string ART_ANCIENT_PROTECTOR_MISSILE = "Abilities\\Weapons\\AncientProtectorMissile\\AncientProtectorMissile.mdl";
+
+public constant string BTNVolcano = "ReplaceableTextures\\CommandButtons\\BTNVolcano.blp";
+public constant string BTNEarthquake = "ReplaceableTextures\\CommandButtons\\BTNEarthquake.blp";
 }
 //! endzinc

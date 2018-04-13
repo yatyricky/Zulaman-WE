@@ -9,49 +9,13 @@ library StormLash requires DamageSystem, CastingBar, SpellEvent, RareShimmerWeed
     function returnCDChance(integer lvl) -> real {
         return lvl * 20.0;
     }
-    
-    struct delayedDosth {
-        private timer tm;
-        private unit u;
-    
-        private static method run() {
-            thistype this = GetTimerData(GetExpiredTimer());
-            MultipleAbility[SID_EARTH_SHOCK].showSecondary(GetOwningPlayer(this.u));
-            ReleaseTimer(this.tm);
-            this.tm = null;
-            this.u = null;
-            this.deallocate();
-        }
-    
-        static method start(unit u) {
-            thistype this = thistype.allocate();
-            this.u = u;
-            this.tm = NewTimer();
-            SetTimerData(this.tm, this);
-            TimerStart(this.tm, 0.02, false, function thistype.run);
-        }
+
+    function onEffect(Buff buf) {
+        BlzSetAbilityIcon(SID_EARTH_SHOCK, BTNVolcano);
     }
-    
-    struct delayedDosth1 {
-        private timer tm;
-        private unit u;
-    
-        private static method run() {
-            thistype this = GetTimerData(GetExpiredTimer());
-            IssueImmediateOrderById(this.u, OID_FROSTARMORON);
-            ReleaseTimer(this.tm);
-            this.tm = null;
-            this.u = null;
-            this.deallocate();
-        }
-    
-        static method start(unit u) {
-            thistype this = thistype.allocate();
-            this.u = u;
-            this.tm = NewTimer();
-            SetTimerData(this.tm, this);
-            TimerStart(this.tm, 0.05, false, function thistype.run);
-        }
+
+    function onRemove(Buff buf) {
+        BlzSetAbilityIcon(SID_EARTH_SHOCK, BTNEarthquake);
     }
 
     function response(CastingBar cd) {
@@ -59,6 +23,8 @@ library StormLash requires DamageSystem, CastingBar, SpellEvent, RareShimmerWeed
         real dmg = UnitProp[cd.caster].AttackPower() * returnDamageMultiplier(lvl) + UnitProp[cd.caster].SpellPower() * 0.8;
         real fxdur = cd.cast;
         player p;
+        Buff buf;
+
         DamageTarget(cd.caster, cd.target, dmg, SpellData[SID_STORM_LASH].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
         AddTimedEffect.atUnit(ART_IMPACT, cd.target, "origin", 0.3);
         if (fxdur > 0.75) {fxdur = 0.75;}
@@ -68,17 +34,14 @@ library StormLash requires DamageSystem, CastingBar, SpellEvent, RareShimmerWeed
         if (GetUnitAbilityLevel(cd.caster, SID_EARTH_SHOCK) > 0) {
             if (GetRandomInt(0, 100) < returnCDChance(lvl) || HasRareShimmerWeed(cd.caster)) {
                 CoolDown(cd.caster, SID_EARTH_SHOCK);
-                CoolDown(cd.caster, SID_EARTH_SHOCK_1);
-                delayedDosth1.start(cd.caster);
-                //BJDebugMsg("����CD��??");
-                delayedDosth.start(cd.caster);
-                RecoverOriginalEarthShock.start(cd.caster, 3.0);
-                //BJDebugMsg("6");
-                
-                //print("Free earth shock now available!");
-                freeESAvailability[cd.caster] = 1;
+                buf = Buff.cast(cd.caster, cd.caster, BID_EARTH_SHOCK_IMPROVED);
+                buf.bd.interval = 4;
+                buf.bd.tick = -1;
+                buf.bd.boe = onEffect;
+                buf.bd.bor = onRemove;
+                buf.run();
             }
-        }        
+        }
         
         // change totem
         if (GetUnitAbilityLevel(cd.caster, SID_ENCHANTED_TOTEM) > 0) {
@@ -104,6 +67,7 @@ library StormLash requires DamageSystem, CastingBar, SpellEvent, RareShimmerWeed
 
     function onInit() {
         castSound = DefineSound("Sound\\Ambient\\DoodadEffects\\BlueFireBurstLoop.wav", 4000, true, false);
+        BuffType.register(BID_EARTH_SHOCK_IMPROVED, BUFF_PHYX, BUFF_POS);
         RegisterSpellChannelResponse(SID_STORM_LASH, onChannel);
     }
 }
