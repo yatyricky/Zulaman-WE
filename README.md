@@ -6,19 +6,17 @@ Zul'Aman - Reinvented with World Editor
 
 ## 系统要求
 
-- Warcraft III TFT 1.28.2+  
+- Warcraft III TFT 1.29+  
 - JassHelper 0.2.A.B  
-- MPQEditor v3.6.0.834  
 - Nodejs v9.8.0  
 
 你可以尝试其他版本，但是我没试过。
 
 ## 构建
 
-1. 设置环境变量，将MPQEditor与JassHelper的目录加入PATH
+1. 设置环境变量，将JassHelper的目录加入PATH
 2. npm install
-3. build.bat
-4. run.bat
+3. run.bat
 
 ## 地图信息
 
