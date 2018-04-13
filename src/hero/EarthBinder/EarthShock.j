@@ -6,11 +6,11 @@ library EarthShock requires DamageSystem, SpellData, BuffSystem {
     }
 
     function onEffect(Buff buf) {
-        BlzSetAbilityIcon(SID_EARTH_SHOCK, BTNVolcano);
+        NFSetPlayerAbilityIcon(GetOwningPlayer(buf.bd.target), SID_EARTH_SHOCK, BTNVolcano);
     }
 
     function onRemove(Buff buf) {
-        BlzSetAbilityIcon(SID_EARTH_SHOCK, BTNEarthquake);
+        NFSetPlayerAbilityIcon(GetOwningPlayer(buf.bd.target), SID_EARTH_SHOCK, BTNEarthquake);
     }
     
     function onCast() {

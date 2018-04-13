@@ -79,10 +79,10 @@ constant string  ART  = "Abilities\\Spells\\Human\\DivineShield\\DivineShieldTar
     }
 
     function onEffectImprove(Buff buf) {
-        BlzSetAbilityIcon(SID_HOLY_LIGHT, BTNInnerFire);
+        NFSetPlayerAbilityIcon(GetOwningPlayer(buf.bd.target), SID_HOLY_LIGHT, BTNInnerFire);
     }
     function onRemoveImprove(Buff buf) {
-        BlzSetAbilityIcon(SID_HOLY_LIGHT, BTNResurrection);
+        NFSetPlayerAbilityIcon(GetOwningPlayer(buf.bd.target), SID_HOLY_LIGHT, BTNResurrection);
     }
 
     public function ImproveHolyLight(unit u) {

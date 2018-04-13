@@ -82,6 +82,12 @@ library NefUnion requires TimerUtils {
         }
         
     }
+
+    public function NFSetPlayerAbilityIcon(player whichPlayer, integer abilId, string path) {
+        if (GetLocalPlayer() == whichPlayer) {
+            BlzSetAbilityIcon(abilId, path);
+        }
+    }
     
     // "CLPB" chain lightning - main
     // "CLSB" chain lightning - secondary
