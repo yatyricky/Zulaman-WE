@@ -88,6 +88,12 @@ library NefUnion requires TimerUtils {
             BlzSetAbilityIcon(abilId, path);
         }
     }
+
+    public function NFSetPlayerAbilityExtendedTooltip(player whichPlayer, integer abilCode, string ExtendedTooltip, integer level) {
+        if (GetLocalPlayer() == whichPlayer) {
+            BlzSetAbilityExtendedTooltip(abilCode, ExtendedTooltip, level);
+        }
+    }
     
     // "CLPB" chain lightning - main
     // "CLSB" chain lightning - secondary

@@ -1,12 +1,10 @@
 //! zinc
 library BladeMasterGlobal requires ZAMCore {
-constant integer PREMISE = 'e00B';
+    constant integer PREMISE = 'e00B';
     public constant integer BUFF_ID_REND = 'A008';
     public constant integer BUFF_ID_REND1 = 'A00J';   
-    public constant integer BM_VALOUR_MAX = 17;
-    public unit premises[NUMBER_OF_MAX_PLAYERS];
     
-    public integer valour[NUMBER_OF_MAX_PLAYERS];
+    public unit premises[NUMBER_OF_MAX_PLAYERS];
     
     public function EnableOverpower(integer id) {
         if (premises[id] != null) {
@@ -18,43 +16,6 @@ constant integer PREMISE = 'e00B';
         } else {
             premises[id] = CreateUnit(Player(id), PREMISE, DUMMY_X, DUMMY_Y, 0);
         }
-    }
-    
-    public function IncreaseValour(unit u, integer n) {
-        player p = GetOwningPlayer(u);
-        integer id = GetPlayerId(p);
-        integer show, j;
-        valour[id] += n;
-        if (valour[id] > BM_VALOUR_MAX) {
-            valour[id] = BM_VALOUR_MAX;
-        }
-        //BJDebugMsg("Valour + "+I2S(n)+" = " + I2S(valour[id]));
-        show = (valour[id] + 3) / 4;
-        j = SID_EXECUTE_START;
-        while (j <= SID_EXECUTE_END) {
-            SetPlayerAbilityAvailable(p, j, (j - SID_EXECUTE_START) == show);
-            j += 1;
-        }
-        if (show == 5) {
-        }
-    }
-    
-    public function GetAllVlour(unit u) -> integer {
-        player p = GetOwningPlayer(u);
-        integer i = GetPlayerId(p);
-        integer ret = valour[i];
-        valour[i] = 0;
-        SetPlayerAbilityAvailable(p, SID_EXECUTE_START, true);
-        i = SID_EXECUTE_START + 1;
-        while (i <= SID_EXECUTE_END) {
-            SetPlayerAbilityAvailable(p, i, false);
-            i += 1;
-        }
-        return ret;
-    }
-    
-    public function BladeMasterPeekValour(unit u) -> integer {
-        return valour[GetPidofu(u)];
     }
     
     public function BladeMasterCanOverpower(unit u) -> boolean {
@@ -74,10 +35,8 @@ constant integer PREMISE = 'e00B';
         integer i = 0;
         while (i < NUMBER_OF_MAX_PLAYERS) {
             premises[i] = null;
-            valour[i] = 0;
             i += 1;
-        }   
+        }
     }
 }
-
 //! endzinc

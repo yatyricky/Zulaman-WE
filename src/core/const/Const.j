@@ -123,13 +123,7 @@ public constant integer BID_REND = 'A008';
 public constant integer SID_OVER_POWER = 'A027';
 public constant integer SID_MORTAL_STRIKE = 'A00E';
 public constant integer SID_EXECUTE_LEARN = 'A00I';
-public constant integer SID_EXECUTE_START = 'A02Q';
-public constant integer SID_EXECUTE_1 = 'A02R';
-public constant integer SID_EXECUTE_2 = 'A02S';
-public constant integer SID_EXECUTE_3 = 'A02T';
-public constant integer SID_EXECUTE_4 = 'A02U';
-public constant integer SID_EXECUTE_END = 'A02V';
-public constant integer SID_VALOUR_AURA = 'A007';
+public constant integer SID_EXECUTE = 'A02S';
 // 寒冰法师
 public constant integer UTID_FROST_MAGE = 'Hjai';
 public constant integer SID_FROST_BOLT = 'A01S';
@@ -704,5 +698,11 @@ public constant string BTNVolcano = "ReplaceableTextures\\CommandButtons\\BTNVol
 public constant string BTNEarthquake = "ReplaceableTextures\\CommandButtons\\BTNEarthquake.blp";
 public constant string BTNInnerFire = "ReplaceableTextures\\CommandButtons\\BTNInnerFire.blp";
 public constant string BTNResurrection = "ReplaceableTextures\\CommandButtons\\BTNResurrection.blp";
+public constant string BTNExecute0 = "ReplaceableTextures\\CommandButtons\\BTNExecute0.blp";
+public constant string BTNExecute1 = "ReplaceableTextures\\CommandButtons\\BTNExecute1.blp";
+public constant string BTNExecute2 = "ReplaceableTextures\\CommandButtons\\BTNExecute2.blp";
+public constant string BTNExecute3 = "ReplaceableTextures\\CommandButtons\\BTNExecute3.blp";
+public constant string BTNExecute4 = "ReplaceableTextures\\CommandButtons\\BTNExecute4.blp";
+public constant string BTNCleavingAttack = "ReplaceableTextures\\CommandButtons\\BTNCleavingAttack.blp";
 }
 //! endzinc

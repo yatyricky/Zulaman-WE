@@ -146,12 +146,7 @@ SpellData.create(SID_REND,"撕裂",30,0,6,OrderId("whirlwind"),1,ORDER_TYPE_TARG
 SpellData.create(SID_OVER_POWER,"压制",0,0,3.5,OrderId("windwalk"),1,ORDER_TYPE_TARGET);
 SpellData.create(SID_MORTAL_STRIKE,"致死打击",15,0,9,OrderId("drunkenhaze"),1,ORDER_TYPE_TARGET).setCCC2(25,0,8).setCCC3(35,0,7);
 SpellData.create(SID_EXECUTE_LEARN,"斩杀",0,0,1,OrderId("massteleport"),1,ORDER_TYPE_TARGET);
-SpellData.create(SID_EXECUTE_START,"斩杀",0,0,1,OrderId("spiritwolf"),1,ORDER_TYPE_TARGET);
-SpellData.create(SID_EXECUTE_1,"斩杀",0,0,1,OrderId("stomp"),1,ORDER_TYPE_TARGET);
-SpellData.create(SID_EXECUTE_2,"斩杀",0,0,1,OrderId("slow"),1,ORDER_TYPE_TARGET);
-SpellData.create(SID_EXECUTE_3,"斩杀",0,0,1,OrderId("channel"),1,ORDER_TYPE_TARGET);
-SpellData.create(SID_EXECUTE_4,"斩杀",0,0,1,OrderId("voodoo"),1,ORDER_TYPE_TARGET);
-SpellData.create(SID_EXECUTE_END,"斩杀",0,0,1,OrderId("frostarmor"),1,ORDER_TYPE_TARGET);
+SpellData.create(SID_EXECUTE,"斩杀",0,0,1,OrderId("slow"),1,ORDER_TYPE_TARGET);
 SpellData.create(SID_FROST_BOLT,"寒冰箭",15,2,0,OrderId("heal"),1,ORDER_TYPE_TARGET).setCCC2(30,2,0).setCCC3(45,2,0);
 SpellData.create(SID_BLIZZARD,"暴风雪",100,5,0,OrderId("blizzard"),1,ORDER_TYPE_POINT);
 SpellData.create(SID_BLIZZARD_1,"暴风雪",170,0,5,OrderId("blizzard"),1,ORDER_TYPE_POINT);
@@ -346,7 +341,6 @@ SpellData.create(SID_CHARM_OF_DEATH_FINGER,"死亡之指符咒",0,0,1,OrderId("c
 SpellData.create(SID_CHARM_OF_SIPHON_LIFE,"生命虹吸符咒",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_DEMONIC_RUNE,"恶魔符文",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_STRANGE_WAND,"奇异的魔杖",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
-
         }
     }
 }

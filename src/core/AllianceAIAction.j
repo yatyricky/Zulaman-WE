@@ -1,5 +1,5 @@
 //! zinc
-library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinGlobal, FrostNova, WarlockGlobal {
+library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinGlobal, FrostNova, WarlockGlobal, Execute {
 constant real AIACTION_INTERVAL = 0.33;
     
     Table unitCallBack, unitLearSkill;
@@ -1199,11 +1199,8 @@ constant real AIACTION_INTERVAL = 0.33;
             }
             // execute: when > 16
             if (state == 0 && !HexLordGlobalConst.normalAttackForbid) {
-                if (BladeMasterPeekValour(source) > 16) {
-                    IssueTargetOrderById(source, SpellData[SID_EXECUTE_END].oid, tar);
-                    state = 1;
-                } else if (BladeMasterPeekValour(source) > 14) {
-                    IssueTargetOrderById(source, SpellData[SID_EXECUTE_4].oid, tar);
+                if (GetUnitValour(source) >= BM_VALOUR_MAX - 2) {
+                    IssueTargetOrderById(source, SpellData[SID_EXECUTE].oid, tar);
                     state = 1;
                 }
             }
