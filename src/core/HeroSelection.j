@@ -1,5 +1,5 @@
 //! zinc
-library HeroSelection requires NefUnion, Table, MultipleAbility, ZAMCore, Loot, AllianceAIAction {
+library HeroSelection requires NefUnion, Table, ZAMCore, Loot, AllianceAIAction {
 constant integer HERO_SLCT_LOW = 'IHS0';
 constant integer HERO_SLCT_HIGH = 'IHS;';
 

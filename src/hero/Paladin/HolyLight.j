@@ -1,5 +1,5 @@
 //! zinc
-library HolyLight requires CastingBar, MultipleAbility, PaladinGlobal, BeaconOfLight {
+library HolyLight requires CastingBar, PaladinGlobal, BeaconOfLight {
 constant string  ART  = "Abilities\\Spells\\Human\\DivineShield\\DivineShieldTarget.mdl";
 
     integer castSound;

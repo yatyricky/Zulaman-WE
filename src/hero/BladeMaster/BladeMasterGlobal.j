@@ -36,8 +36,6 @@ constant integer PREMISE = 'e00B';
             j += 1;
         }
         if (show == 5) {
-            SystemOrderIndicator = true;
-            IssueImmediateOrderById(u, 852458);
         }
     }
     
