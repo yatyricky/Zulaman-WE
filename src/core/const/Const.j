@@ -53,7 +53,7 @@ public constant integer SID_GENERAL_STUN = 'A001';
 public constant integer SID_HAUNT = 'A04A';
 public constant integer SID_HEAL_TESTER = 'A04H';
 
-// 血精灵防御者
+// blood elf defender
 public constant integer UTID_BLOOD_ELF_DEFENDER = 'Hmkg';
 public constant integer SID_SHIELD_BLOCK = 'A002';
 public constant integer SID_SUN_FIRE_STORM = 'A003';
@@ -68,8 +68,6 @@ public constant integer SID_SAVAGE_ROAR = 'A010';
 public constant integer SID_FOREST_CURE = 'A0A1';
 public constant integer SID_NATURAL_REFLEX = 'A016';
 public constant integer SID_SURVIVAL_INSTINCTS = 'A0A2';
-public constant integer SID_MANGLE = 'A014';
-public constant integer SID_FERAL_GNAW = 'A015';
 // 丛林守护者
 public constant integer UTID_KEEPER_OF_GROVE = 'Emfr';
 public constant integer SID_LIFE_BLOOM = 'A00D';
@@ -265,8 +263,6 @@ public constant integer SID_SPIRIT_BOLT = 'A053';
 public constant integer SID_SPIRIT_HARVEST = 'A05Q';
 public constant integer SID_SUN_FIRE_STORMHEX = 'A054';
 public constant integer SID_SHIELD_OF_SINDOREIHEX = 'A055';
-// public constant integer SID_MANGLEHEX = 'A056';
-// public constant integer SIDRABIESHEX = 'A057';
 public constant integer SID_SAVAGE_ROAR_HEX = 'A0AX';
 public constant integer BID_SAVAGE_ROAR_HEX = 'A0AZ';
 public constant integer SID_NATURAL_REFLEX_HEX = 'A0AY';
