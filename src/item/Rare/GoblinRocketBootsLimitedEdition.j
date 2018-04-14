@@ -4,18 +4,18 @@ constant integer BUFF_ID = 'A07A';
     //HandleTable ht;
 
     function oneffect(Buff buf) {
-        UnitProp[buf.bd.target].ModSpeed(buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModSpeed(buf.bd.i0);
     }
 
     function onremove(Buff buf) {
-        UnitProp[buf.bd.target].ModSpeed(0 - buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModSpeed(0 - buf.bd.i0);
     }
     
     function onCast() {
         Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BUFF_ID);
         buf.bd.tick = -1;
         buf.bd.interval = 10.0;
-        UnitProp[buf.bd.target].ModSpeed(0 - buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModSpeed(0 - buf.bd.i0);
         buf.bd.i0 = 300;
         buf.bd.boe = oneffect;
         buf.bd.bor = onremove;
@@ -23,7 +23,7 @@ constant integer BUFF_ID = 'A07A';
     }
 
     function action(unit u, item it, integer fac) {
-        UnitProp up = UnitProp[u];
+        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
         up.ModLife(120 * fac);
         up.ModMana(175 * fac);
         up.dodge += 0.01 * fac;

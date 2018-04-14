@@ -12,7 +12,7 @@ library StormLash requires DamageSystem, CastingBar, SpellEvent, RareShimmerWeed
 
     function response(CastingBar cd) {
         integer lvl = GetUnitAbilityLevel(cd.caster, SID_STORM_LASH);
-        real dmg = UnitProp[cd.caster].AttackPower() * returnDamageMultiplier(lvl) + UnitProp[cd.caster].SpellPower() * 0.8;
+        real dmg = UnitProp.inst(cd.caster, SCOPE_PREFIX).AttackPower() * returnDamageMultiplier(lvl) + UnitProp.inst(cd.caster, SCOPE_PREFIX).SpellPower() * 0.8;
         real fxdur = cd.cast;
         player p;
 
@@ -41,7 +41,7 @@ library StormLash requires DamageSystem, CastingBar, SpellEvent, RareShimmerWeed
     
     function onChannel() {
         CastingBar cb = CastingBar.create(response).setSound(castSound);
-        real hst = 2.0 - 2.0 / (1.0 + UnitProp[SpellEvent.CastingUnit].AttackSpeed() / 100.0);
+        real hst = 2.0 - 2.0 / (1.0 + UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).AttackSpeed() / 100.0);
         if (GetUnitTypeId(SpellEvent.CastingUnit) == UTID_EARTH_BINDER) {
             cb.haste = hst;
         } else {

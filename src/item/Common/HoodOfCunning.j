@@ -3,7 +3,7 @@ library HoodOfCunning requires ItemAttributes {
     //HandleTable ht;
 
     function action(unit u, item it, integer fac) {
-        UnitProp up = UnitProp[u];
+        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
         up.ModAgi(4 * fac);
         up.ModInt(4 * fac);
         //if (!ht.exists(u)) {ht[u] = 0;}

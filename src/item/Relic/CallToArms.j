@@ -7,11 +7,11 @@ constant integer BUFF_ID = 'A068';
     function onEffect(Buff buf) {}
 
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].ModLife(0 - buf.bd.i1);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModLife(0 - buf.bd.i1);
     }
 
     function action(unit u, item it, integer fac) {
-        UnitProp up = UnitProp[u];
+        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
         up.ModAP(20 * fac);
         up.spellPower += 15.0 * fac;
         up.lifeRegen += 12.0 * fac;
@@ -31,11 +31,11 @@ constant integer BUFF_ID = 'A068';
                 buf.bd.interval = 20.0;
                 if (buf.bd.i0 != 6) {
                     buf.bd.i1 = Rounding(GetUnitState(PlayerUnits.units[i], UNIT_STATE_MAX_LIFE) * 0.12);
-                    UnitProp[buf.bd.target].ModLife(buf.bd.i1);
+                    UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModLife(buf.bd.i1);
                     buf.bd.i0 = 6;
                 } else {
                     diff = Rounding(GetUnitState(PlayerUnits.units[i], UNIT_STATE_MAX_LIFE) * 0.12);
-                    UnitProp[buf.bd.target].ModLife(diff);
+                    UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModLife(diff);
                     buf.bd.i1 += diff;
                 }
                 buf.bd.boe = onEffect;

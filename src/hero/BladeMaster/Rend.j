@@ -23,20 +23,20 @@ library Rend requires DamageSystem, SpellEvent, BuffSystem, BladeMasterGlobal {
     }
     
     function onEffect1(Buff buf) {
-        UnitProp[buf.bd.target].ModSpeed(0 - buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModSpeed(0 - buf.bd.i0);
     }
     
     function onRemove1(Buff buf) {
-        UnitProp[buf.bd.target].ModSpeed(buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModSpeed(buf.bd.i0);
     }
     
     public function CastRend(unit a, unit b) {
         Buff buf = Buff.cast(a, b, BUFF_ID_REND);
-        buf.bd.interval = 2.5 / (1.0 + UnitProp[a].AttackSpeed() / 100.0);          // interval
+        buf.bd.interval = 2.5 / (1.0 + UnitProp.inst(a, SCOPE_PREFIX).AttackSpeed() / 100.0);          // interval
         buf.bd.tick = Rounding(10.0 / buf.bd.interval) + 1;
         buf.bd.i0 = GetUnitAbilityLevel(a, SID_REND);
         buf.bd.i1 = buf.bd.tick;
-        buf.bd.r0 = returnDamage(GetUnitAbilityLevel(a, SID_REND), UnitProp[a].AttackPower());
+        buf.bd.r0 = returnDamage(GetUnitAbilityLevel(a, SID_REND), UnitProp.inst(a, SCOPE_PREFIX).AttackPower());
         buf.bd.boe = onEffect;
         buf.bd.bor = onRemove;
         buf.run();
@@ -45,8 +45,8 @@ library Rend requires DamageSystem, SpellEvent, BuffSystem, BladeMasterGlobal {
             buf = Buff.cast(a, b, BUFF_ID_REND1);
             buf.bd.tick = -1;
             buf.bd.interval = 7.0;
-            UnitProp[buf.bd.target].ModSpeed(buf.bd.i0);
-            buf.bd.i0 = Rounding(UnitProp[buf.bd.target].Speed() * 0.45);
+            UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModSpeed(buf.bd.i0);
+            buf.bd.i0 = Rounding(UnitProp.inst(buf.bd.target, SCOPE_PREFIX).Speed() * 0.45);
             buf.bd.boe = onEffect1;
             buf.bd.bor = onRemove1;
             buf.run();

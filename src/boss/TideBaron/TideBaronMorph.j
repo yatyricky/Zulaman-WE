@@ -11,9 +11,9 @@ library TideBaronMorph requires BuffSystem, SpellEvent, AggroSystem {
             BuffSlot[u].removeAllBuff();
             
             if (iid == OID_BEARFORM) {
-                UnitProp[u].spellTaken += 0.5;
+                UnitProp.inst(u, SCOPE_PREFIX).spellTaken += 0.5;
             } else {
-                UnitProp[u].spellTaken -= 0.5;
+                UnitProp.inst(u, SCOPE_PREFIX).spellTaken -= 0.5;
             }
         }
         u = null;

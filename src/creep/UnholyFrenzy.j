@@ -9,18 +9,18 @@ constant string  ART  = "Abilities\\Spells\\Undead\\UnholyFrenzy\\UnholyFrenzyTa
 constant real DURATION = 8.0;
 
     function onEffect(Buff buf) {
-        UnitProp[buf.bd.target].ModAttackSpeed(buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(buf.bd.i0);
     }
 
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].ModAttackSpeed(0 - buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(0 - buf.bd.i0);
     }
 
     function onCast() {
         Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BID_UNHOLY_FRENZY);
         buf.bd.tick = -1;
         buf.bd.interval = DURATION;
-        UnitProp[buf.bd.target].ModAttackSpeed(0 - buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(0 - buf.bd.i0);
         buf.bd.i0 = 100;
         if (buf.bd.e0 == 0) {buf.bd.e0 = BuffEffect.create(ART, buf, "overhead");}
         buf.bd.boe = onEffect;

@@ -10,7 +10,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         private unit u;
         private static method run() {
             thistype this = GetTimerData(GetExpiredTimer());
-            UnitProp[this.u].responsive = true;
+            UnitProp.inst(this.u, SCOPE_PREFIX).responsive = true;
             ReleaseTimer(this.tm);
             this.tm = null;
             this.u = null;
@@ -21,7 +21,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
             this.tm = NewTimer();
             SetTimerData(this.tm, this);
             this.u = u;
-            UnitProp[u].responsive = false;
+            UnitProp.inst(u, SCOPE_PREFIX).responsive = false;
             TimerStart(this.tm, 1.0, false, function thistype.run);
         }
     }*/
@@ -107,7 +107,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         integer res;
         unit tu;
         /*        print("-- - - - - - - - - - - -  -");*/
-        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+        if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
             ip = IntegerPool.create();
             if (UnitCanUse(source, 'A03O') && combatTime > 49) {
                 ip.add('A03O', 30);
@@ -143,7 +143,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
                     IssueTargetOrderById(source, SpellData[res].oid, PlayerUnits.getFarest(source));
                 } else {
                     tu = PlayerUnits.getRandomHero(); // to avoid that strong breeze clashes with thunder storm
-                    if (!UnitProp[tu].stunned) {
+                    if (!UnitProp.inst(tu, SCOPE_PREFIX).stunned) {
                         IssueTargetOrderById(source, SpellData[res].oid, tu);
                     }
                 }
@@ -163,7 +163,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         // boss spec vars 
         real dis;
         unit tu;
-        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+        if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
             ip = IntegerPool.create();
             if (combatTime > 300) {
                 ip.add(SID_CLUSTER_ROCKETS, 50);
@@ -211,7 +211,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         // boss spec vars 
         real dis;
         unit tu;
-        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+        if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
             ip = IntegerPool.create();
             if (combatTime > 300) {
                 ip.add(SID_CLUSTER_ROCKETS, 50);
@@ -269,7 +269,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         IntegerPool ip;
         integer res;
         unit tu;
-        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+        if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
             ip = IntegerPool.create();
             ip.add(0, 1);
             if (UnitCanUse(source, SID_LIGHTNING_BOLT)) {
@@ -297,7 +297,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         IntegerPool ip;
         integer res;
         unit tu;
-        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+        if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
             ip = IntegerPool.create();
             ip.add(0, 10);
             if (UnitCanUse(source, SID_BLAZING_HASTE) && combatTime > 5.0) {
@@ -347,7 +347,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         IntegerPool ip;
         integer res;
         unit tu;
-        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+        if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
             ip = IntegerPool.create();
             ip.add(0, 1);
             if (UnitCanUse(source, SID_ARMOR_CRUSHING) && combatTime > 15.0) {
@@ -374,7 +374,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         IntegerPool ip;
         integer res;
         unit tu;
-        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+        if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
             ip = IntegerPool.create();
             ip.add(0, 15);
             tu = MobList.getLowestHPPercent();
@@ -407,7 +407,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         IntegerPool ip;
         integer res;
         unit tu;
-        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+        if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
             ip = IntegerPool.create();
             ip.add(0, 20);
             if (UnitCanUse(source, SID_THUNDER_CLAP) && combatTime > 20.0) {
@@ -453,7 +453,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         integer i;
         real max, tmp; 
         unit tu;
-        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+        if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
             ip = IntegerPool.create();
             ip.add(0, 10);
             if (UnitCanUse(source, SID_CHARGED_BREATH) && combatTime > 10.0 && GetUnitMana(source) > 500.0) {
@@ -495,13 +495,13 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
     }
     
     function makeOrderncgb(unit source, unit target, real combatTime) {
-        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+        if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
             IssueTargetOrderById(source, SpellData[SID_SELF_DESTRUCT].oid, PlayerUnits.getRandomHero());
         }
     }
     
     function makeOrdernfac(unit source, unit target, real combatTime) {
-        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+        if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
             IssueImmediateOrderById(source, SpellData[SID_SUMMON_CLOCKWORK_GOBLIN].oid);
         }
     }
@@ -510,7 +510,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         IntegerPool ip;
         integer res;
         /*        print("-- - - - - - - - - - - -  -");*/
-        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+        if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
             ip = IntegerPool.create();
             if (UnitCanUse(source, SID_TIDE_BARON_MORPH) && combatTime > 34) {
                 ip.add(SID_TIDE_BARON_MORPH, 50);
@@ -543,7 +543,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         IntegerPool ip;
         integer res;
         /*        print("-- - - - - - - - - - - -  -");*/
-        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+        if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
             ip = IntegerPool.create();
             if (UnitCanUse(source, SID_TIDE_BARON_MORPH) && combatTime > 34) {
                 ip.add(SID_TIDE_BARON_MORPH, 50);
@@ -589,7 +589,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
     function makeOrderWarlock(unit source, unit target, real combatTime) {
         IntegerPool ip;
         integer res;
-        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+        if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
             ip = IntegerPool.create();
             if (UnitCanUse(source, SID_RAGE_CREEP) && combatTime > 300) {
             // print("makeOrderWarlock: Time > 300 add " + ID2S(SID_RAGE_CREEP));
@@ -627,7 +627,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
     }
 
     function makeOrderAbyssArchon(unit source, unit target, real combatTime) {
-        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+        if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
             IssueTargetOrderById(source, OID_ATTACK, target);   
         }
     }
@@ -650,7 +650,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         IntegerPool ip;
         integer res;
         unit tu;
-        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+        if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
             ip = IntegerPool.create();
             ip.add(0, 20);
             if (UnitCanUse(source, SID_UNHOLY_FRENZY) && combatTime > 10.0) {
@@ -675,7 +675,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         IntegerPool ip;
         integer res;
         unit tu;
-        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+        if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
             ip = IntegerPool.create();
             ip.add(0, 20);
             if (UnitCanUse(source, SID_NETHER_SLOW) && combatTime > 10.0) {
@@ -696,7 +696,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         IntegerPool ip;
         integer res;
         unit tu;
-        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+        if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
             ip = IntegerPool.create();
             ip.add(0, 20);
             if (UnitCanUse(source, SID_CHAOS_LEAP) && combatTime > 10.0) {
@@ -718,7 +718,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         IntegerPool ip;
         integer res;
         unit tu;
-        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+        if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
             ip = IntegerPool.create();
             ip.add(0, 20);
             if (UnitCanUse(source, SID_BATTLE_COMMAND) && combatTime > 5.0) {
@@ -747,7 +747,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
     function makeOrderNetherDrake(unit source, unit target, real combatTime) {
         IntegerPool ip;
         integer res;
-        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+        if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
             ip = IntegerPool.create();
             ip.add(0, 10);
             if (UnitCanUse(source, SID_NETHER_IMPLOSION) && combatTime > 10.0) {
@@ -769,7 +769,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
     function makeOrderDracoLich(unit source, unit target, real combatTime) {
         IntegerPool ip;
         integer res;
-        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+        if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
             ip = IntegerPool.create();
             ip.add(0, 10);
             if (UnitCanUse(source, SID_DEATH_AND_DECAY) && combatTime > 10.0) {
@@ -792,7 +792,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         IntegerPool ip;
         integer res;
         unit tu;
-        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+        if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
             ip = IntegerPool.create();
             ip.add(0, 10);
             if (UnitCanUse(source, SID_MANA_TAP) && combatTime > 8.0) {
@@ -811,7 +811,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
     }
 
     function makeOrderParasiticalRoach(unit source, unit target, real combatTime) {
-        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+        if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
             if (combatTime > 10.0) {
                 ParasiteOnTarget(source, PlayerUnits.getRandomHero());
             } else {
@@ -823,7 +823,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
     function makeOrderGargantuan(unit source, unit target, real combatTime) {
         IntegerPool ip;
         integer res;
-        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+        if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
             ip = IntegerPool.create();
             ip.add(0, 10);
             if (UnitCanUse(source, SID_VOMIT) && combatTime > 15.0) {
@@ -842,7 +842,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
     function makeOrderZombie(unit source, unit target, real combatTime) {
         IntegerPool ip;
         integer res;
-        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+        if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
             ip = IntegerPool.create();
             ip.add(0, 10);
             if (UnitCanUse(source, SID_GNAW) && combatTime > 5.0) {
@@ -861,7 +861,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
     function makeOrderFacelessOne(unit source, unit target, real combatTime) {
         IntegerPool ip;
         integer res;
-        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+        if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
             ip = IntegerPool.create();
             ip.add(0, 10);
             if (UnitCanUse(source, SID_VICIOUS_STRIKE) && combatTime > 5.0) {
@@ -885,7 +885,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
     function makeOrderFelHound(unit source, unit target, real combatTime) {
         IntegerPool ip;
         integer res;
-        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+        if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
             ip = IntegerPool.create();
             ip.add(0, 10);
             if (UnitCanUse(source, SID_MANA_BURN) && combatTime > 5.0) {
@@ -904,7 +904,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
     function makeOrderDerangedPriest(unit source, unit target, real combatTime) {
         IntegerPool ip;
         integer res;
-        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+        if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
             ip = IntegerPool.create();
             ip.add(0, 10);
             if (UnitCanUse(source, SID_CORPSE_RAIN) && combatTime > 10.0) {
@@ -926,7 +926,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
     function makeOrderForestTroll(unit source, unit target, real combatTime) {
         IntegerPool ip;
         integer res;
-        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+        if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
             ip = IntegerPool.create();
             ip.add(0, 10);
             if (UnitCanUse(source, SID_CRUSHING_BLOW) && combatTime > 5.0) {
@@ -951,7 +951,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         IntegerPool ip;
         integer res;
         unit tu;
-        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+        if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
             ip = IntegerPool.create();
             ip.add(0, 10);
             if (UnitCanUse(source, SID_METEOR) && combatTime > 10.0) {
@@ -978,7 +978,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
     function makeOrderMaidOfAgony(unit source, unit target, real combatTime) {
         IntegerPool ip;
         integer res;
-        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+        if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
             ip = IntegerPool.create();
             ip.add(0, 10);
             if (UnitCanUse(source, SID_SHADOW_SPIKE) && combatTime > 5.0) {
@@ -1000,7 +1000,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
     function makeOrderVoidWalker(unit source, unit target, real combatTime) {
         IntegerPool ip;
         integer res;
-        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+        if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
             ip = IntegerPool.create();
             ip.add(0, 10);
             if (UnitCanUse(source, SID_NETHER_BOLT) && combatTime > 5.0 && GetUnitStatePercent(source, UNIT_STATE_LIFE, UNIT_STATE_MAX_LIFE) > 30) {
@@ -1026,7 +1026,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
     function makeOrderTwilightWitchDoctor(unit source, unit target, real combatTime) {
         IntegerPool ip;
         integer res;
-        if (!IsUnitChanneling(source) && !UnitProp[source].stunned) {
+        if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
             ip = IntegerPool.create();
             ip.add(0, 10);
             if (UnitCanUse(source, SID_GRIM_TOTEM) && combatTime > 5.0) {

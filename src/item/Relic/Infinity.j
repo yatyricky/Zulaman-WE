@@ -7,7 +7,7 @@ constant integer BUFF_ID = 'A065';
     }
 
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].spellTaken -= 0.05;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellTaken -= 0.05;
     }
     
     struct ChainLightning {
@@ -122,7 +122,7 @@ constant integer BUFF_ID = 'A065';
                         buf.bd.tick = -1;
                         buf.bd.interval = 1.5;
                         if (buf.bd.i0 != 6) {
-                            UnitProp[buf.bd.target].spellTaken += 0.05;
+                            UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellTaken += 0.05;
                             buf.bd.i0 = 6;
                         }
                         buf.bd.boe = onEffect;
@@ -181,7 +181,7 @@ constant integer BUFF_ID = 'A065';
     }
 
     function action(unit u, item it, integer fac) {
-        UnitProp up = UnitProp[u];
+        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
         InfinityData id = InfinityData[it];
         
         up.ModInt(15 * fac);

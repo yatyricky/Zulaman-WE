@@ -62,7 +62,7 @@ constant string  PATH  = "Abilities\\Weapons\\FaerieDragonMissile\\FaerieDragonM
                 if (amt < buf.bd.r0 * 80) {
                     amt = buf.bd.r0 * 80;
                 }
-                amt += UnitProp[buf.bd.u0].SpellPower() / 9.0;
+                amt += UnitProp.inst(buf.bd.u0, SCOPE_PREFIX).SpellPower() / 9.0;
                 HealTarget(buf.bd.u0, buf.bd.target, amt, SpellData[SID_PRAYER_OF_MENDING].name, 0.0);
                 AddTimedEffect.atUnit(ART_HEAL, buf.bd.target, "origin", 0.3);
                 // deduction

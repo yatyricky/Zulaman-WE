@@ -2,11 +2,11 @@
 library Vomit requires AggroSystem {
 
     function onEffect(Buff buf) {
-        UnitProp[buf.bd.target].attackRate -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).attackRate -= buf.bd.r0;
     }
 
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].attackRate += buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).attackRate += buf.bd.r0;
     }
 
     function biteByMaggots() {
@@ -16,7 +16,7 @@ library Vomit requires AggroSystem {
                 buf = Buff.cast(DamageResult.source, DamageResult.target, BID_VOMIT_MAGGOT_BITE);
                 buf.bd.tick = -1;
                 buf.bd.interval = 10;
-                UnitProp[buf.bd.target].attackRate += buf.bd.r0;
+                UnitProp.inst(buf.bd.target, SCOPE_PREFIX).attackRate += buf.bd.r0;
                 buf.bd.r0 = 0.45;
                 if (buf.bd.e0 == 0) {
                     buf.bd.e0 = BuffEffect.create(ART_CURSE, buf, "overhead");

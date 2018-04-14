@@ -3,11 +3,11 @@ library Dispel requires BuffSystem, SpellEvent, UnitProperty {
 constant integer BUFF_ID1 = 'A03U';
 
     function onEffect1(Buff buf) {
-        UnitProp[buf.bd.target].spellHaste += buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellHaste += buf.bd.r0;
     }
 
     function onRemove1(Buff buf) {
-        UnitProp[buf.bd.target].spellHaste -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellHaste -= buf.bd.r0;
     }
 
     function onCast() {
@@ -21,7 +21,7 @@ constant integer BUFF_ID1 = 'A03U';
                 buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BUFF_ID1);
                 buf.bd.tick = -1;
                 buf.bd.interval = 3.0;
-                UnitProp[buf.bd.target].spellHaste -= buf.bd.r0;
+                UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellHaste -= buf.bd.r0;
                 buf.bd.r0 = 0.15 * (GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_DISPEL) - 1);
                 buf.bd.boe = onEffect1;
                 buf.bd.bor = onRemove1;

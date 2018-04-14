@@ -3,7 +3,7 @@ library BulwarkOfTheAmaniEmpire requires ItemAttributes {
     //HandleTable ht;
 
     function action(unit u, item it, integer fac) {
-        UnitProp up = UnitProp[u];
+        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
         up.ModArmor(3 * fac);
         up.ModStr(10 * fac);
         up.ModLife(170 * fac);

@@ -13,7 +13,7 @@ constant string  ART  = "Abilities\\Spells\\Orc\\EtherealForm\\SpiritWalkerChang
     function onCast() {
         Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BUFF_ID);
         buf.bd.tick = 4;
-        buf.bd.interval = 2.0 * (1.0 - UnitProp[SpellEvent.CastingUnit].SpellHaste());
+        buf.bd.interval = 2.0 * (1.0 - UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).SpellHaste());
         buf.bd.boe = onEffect;
         buf.bd.bor = onRemove;
         buf.run();

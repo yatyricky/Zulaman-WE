@@ -6,11 +6,11 @@ constant string  ART_CLEAVE  = "Abilities\\Spells\\Other\\Cleave\\CleaveDamageTa
 constant integer BUFF_ID = 'A048';
 
     function onEffect(Buff buf) {
-        UnitProp[buf.bd.target].ModAttackSpeed(buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(buf.bd.i0);
     }
 
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].ModAttackSpeed(0 - buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(0 - buf.bd.i0);
     }
     
     function onCast() {
@@ -18,7 +18,7 @@ constant integer BUFF_ID = 'A048';
         buf.bd.tick = -1;
         buf.bd.i1 = GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_BLADE_FLURRY);
         buf.bd.interval = 9.0 + buf.bd.i1;
-        UnitProp[buf.bd.target].ModAttackSpeed(0 - buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(0 - buf.bd.i0);
         buf.bd.i0 = 40;
         if (buf.bd.e0 == 0) {buf.bd.e0 = BuffEffect.create(ART, buf, "overhead");}
         buf.bd.boe = onEffect;

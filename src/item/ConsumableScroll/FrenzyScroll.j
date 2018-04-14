@@ -5,11 +5,11 @@ constant string  ART_RIGHT  = "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustSpeci
 constant integer BUFF_ID = 'A06U';
     
     function onEffect(Buff buf) {
-        UnitProp[buf.bd.target].ModAttackSpeed(buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(buf.bd.i0);
     }
     
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].ModAttackSpeed(0 - buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(0 - buf.bd.i0);
     }
 
     function onCast() {
@@ -20,7 +20,7 @@ constant integer BUFF_ID = 'A06U';
                 buf = Buff.cast(SpellEvent.CastingUnit, PlayerUnits.units[i], BUFF_ID);
                 buf.bd.tick = -1;
                 buf.bd.interval = 10.0;
-                UnitProp[buf.bd.target].ModAttackSpeed(0 - buf.bd.i0);
+                UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(0 - buf.bd.i0);
                 buf.bd.i0 = 30;
                 if (buf.bd.e0 == 0) {buf.bd.e0 = BuffEffect.create(ART_LEFT, buf, "hand, left");}
                 if (buf.bd.e1 == 0) {buf.bd.e1 = BuffEffect.create(ART_RIGHT, buf, "hand, right");}

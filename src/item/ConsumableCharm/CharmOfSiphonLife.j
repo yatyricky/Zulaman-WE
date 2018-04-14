@@ -17,7 +17,7 @@ constant string  ART_CASTER  = "Abilities\\Spells\\Other\\Drain\\DrainCaster.mdl
         Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BUFF_ID);
         buf.bd.interval = 3.0;
         buf.bd.tick = 7;
-        buf.bd.r0 = 200.0 + (UnitProp[SpellEvent.CastingUnit].AttackPower() + UnitProp[SpellEvent.CastingUnit].SpellPower()) * 0.5;
+        buf.bd.r0 = 200.0 + (UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).AttackPower() + UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).SpellPower()) * 0.5;
         buf.bd.boe = onEffect;
         buf.bd.bor = onRemove;
         buf.run();

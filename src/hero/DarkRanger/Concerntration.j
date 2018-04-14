@@ -30,19 +30,19 @@ constant integer BUFF_ID1 = 'A040';
     }
 
     function onEffect(Buff buf) {
-        UnitProp[buf.bd.target].ModArmor(0 - buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModArmor(0 - buf.bd.i0);
     }
 
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].ModArmor(buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModArmor(buf.bd.i0);
     }
 
     function onEffect1(Buff buf) {
-        UnitProp[buf.bd.target].ModArmor(0 - buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModArmor(0 - buf.bd.i0);
     }
 
     function onRemove1(Buff buf) {
-        UnitProp[buf.bd.target].ModArmor(buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModArmor(buf.bd.i0);
     }
     
     function damaged() {
@@ -54,7 +54,7 @@ constant integer BUFF_ID1 = 'A040';
                     buf = Buff.cast(DamageResult.source, DamageResult.target, BUFF_ID);
                     buf.bd.tick = -1;
                     buf.bd.interval = GetUnitAbilityLevel(DamageResult.source, SID_CONCERNTRATION) * 4;
-                    UnitProp[buf.bd.target].ModArmor(buf.bd.i0);
+                    UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModArmor(buf.bd.i0);
                     buf.bd.i0 = GetUnitAbilityLevel(DamageResult.source, SID_CONCERNTRATION) + 1;
                     buf.bd.boe = onEffect;
                     buf.bd.bor = onRemove;
@@ -64,7 +64,7 @@ constant integer BUFF_ID1 = 'A040';
                     buf.bd.tick = -1;
                     lvl = GetUnitAbilityLevel(darkranger[GetPlayerId(GetOwningPlayer(DamageResult.source))], SID_CONCERNTRATION);
                     buf.bd.interval = lvl * 4;
-                    UnitProp[buf.bd.target].ModArmor(buf.bd.i0);
+                    UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModArmor(buf.bd.i0);
                     buf.bd.i0 = lvl + 1;
                     buf.bd.boe = onEffect1;
                     buf.bd.bor = onRemove1;

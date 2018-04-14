@@ -5,15 +5,15 @@ constant string  ART_FROST  = "Abilities\\Spells\\Other\\FrostDamage\\FrostDamag
 constant string  ART_TARGET  = "Abilities\\Weapons\\FrostWyrmMissile\\FrostWyrmMissile.mdl";
     
     function onEffect(Buff buf) {
-        UnitProp[buf.bd.target].ModSpeed(0 - buf.bd.i0);
-        UnitProp[buf.bd.target].ModAttackSpeed(0 - buf.bd.i1);
-        UnitProp[buf.bd.target].spellHaste -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModSpeed(0 - buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(0 - buf.bd.i1);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellHaste -= buf.bd.r0;
     }
     
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].ModSpeed(buf.bd.i0);
-        UnitProp[buf.bd.target].ModAttackSpeed(buf.bd.i1);
-        UnitProp[buf.bd.target].spellHaste += buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModSpeed(buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(buf.bd.i1);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellHaste += buf.bd.r0;
     }
 
     function onCast() {
@@ -31,10 +31,10 @@ constant string  ART_TARGET  = "Abilities\\Weapons\\FrostWyrmMissile\\FrostWyrmM
         buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BUFF_ID);
         buf.bd.tick = -1;
         buf.bd.interval = 5.0;
-        UnitProp[buf.bd.target].ModSpeed(buf.bd.i0);
-        UnitProp[buf.bd.target].ModAttackSpeed(buf.bd.i1);
-        UnitProp[buf.bd.target].spellHaste += buf.bd.r0;
-        buf.bd.i0 = Rounding(UnitProp[buf.bd.target].Speed() * 0.3);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModSpeed(buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(buf.bd.i1);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellHaste += buf.bd.r0;
+        buf.bd.i0 = Rounding(UnitProp.inst(buf.bd.target, SCOPE_PREFIX).Speed() * 0.3);
         buf.bd.i1 = 20;
         buf.bd.r0 = 0.2;
         if (buf.bd.e0 == 0) {

@@ -57,18 +57,18 @@ constant string  ART  = "Abilities\\Spells\\Undead\\FreezingBreath\\FreezingBrea
     }
 
     function oneffect(Buff buf) {
-        UnitProp[buf.bd.target].spellTaken += buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellTaken += buf.bd.r0;
     }
 
     function onremove(Buff buf) {
-        UnitProp[buf.bd.target].spellTaken -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellTaken -= buf.bd.r0;
     }
 
     function onCast() {
         //AddTimedEffect.atUnit("Abilities\\Spells\\Undead\\FreezingBreath\\FreezingBreathMissile.mdl", SpellEvent.CastingUnit, "origin", 0.0);
         integer lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_FROST_NOVA);
         unit tu;
-        real dmg = (25 + 25 * lvl + UnitProp[SpellEvent.CastingUnit].SpellPower() * 1.5) * returnFrostDamage(SpellEvent.CastingUnit);
+        real dmg = (25 + 25 * lvl + UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).SpellPower() * 1.5) * returnFrostDamage(SpellEvent.CastingUnit);
         Buff buf;
         GroupUnitsInArea(ENUM_GROUP, GetUnitX(SpellEvent.CastingUnit), GetUnitY(SpellEvent.CastingUnit), FrostMageGetFrostNovaAOE(lvl));
         tu = FirstOfGroup(ENUM_GROUP);
@@ -84,7 +84,7 @@ constant string  ART  = "Abilities\\Spells\\Undead\\FreezingBreath\\FreezingBrea
                 buf = Buff.cast(SpellEvent.CastingUnit, tu, BUFF_ID);
                 buf.bd.tick = -1;
                 buf.bd.interval = 12.0;
-                UnitProp[buf.bd.target].spellTaken -= buf.bd.r0;
+                UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellTaken -= buf.bd.r0;
                 buf.bd.r0 = 0.03 * lvl;
                 buf.bd.boe = oneffect;
                 buf.bd.bor = onremove;

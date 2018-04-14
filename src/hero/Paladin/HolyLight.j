@@ -19,7 +19,7 @@ constant string  ART  = "Abilities\\Spells\\Human\\DivineShield\\DivineShieldTar
         Buff buf;
         integer id = GetPlayerId(GetOwningPlayer(a));
         integer ilvl = GetUnitAbilityLevel(a, SID_HOLY_LIGHT);
-        real amt = returnHeal(ilvl) + UnitProp[a].SpellPower() * 1.05;
+        real amt = returnHeal(ilvl) + UnitProp.inst(a, SCOPE_PREFIX).SpellPower() * 1.05;
         real exct = healCrit[id];
         Buff baf = BuffSlot[b].getBuffByBid(BID_HOLY_LIGHT_AMP);
         if (baf != 0) {

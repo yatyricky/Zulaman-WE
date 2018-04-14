@@ -17,7 +17,7 @@ constant integer BUFF_ID = 'A011';
 
     function onCast() {
         Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BUFF_ID);
-        buf.bd.interval = 1.0 - UnitProp[SpellEvent.CastingUnit].SpellHaste();
+        buf.bd.interval = 1.0 - UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).SpellHaste();
         buf.bd.tick = 9;
         buf.bd.boe = onEffect;
         buf.bd.bor = onRemove;

@@ -64,7 +64,7 @@ constant integer INIT_AMT = 1000;
         static method start(unit caster, unit target, string maine, string less, real amt, integer num, real factor) {
             thistype this = thistype.allocate();
             this.caster = caster;
-            this.amount = amt + UnitProp[caster].AttackPower() + UnitProp[caster].SpellPower();
+            this.amount = amt + UnitProp.inst(caster, SCOPE_PREFIX).AttackPower() + UnitProp.inst(caster, SCOPE_PREFIX).SpellPower();
             DamageTarget(caster, target, this.amount, SpellData[SID_CHARM_OF_CHAIN_LIGHTNING].name, false, true, false, WEAPON_TYPE_WHOKNOWS);  
             AddTimedLight.atUnits(maine, caster, target, 0.7);
             AddTimedEffect.atUnit(ART_IMPACT, target, "origin", 0.2);

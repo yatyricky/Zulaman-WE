@@ -23,11 +23,11 @@ constant string  SFX1  = "Abilities\\Spells\\Other\\FrostDamage\\FrostDamage.mdl
     }
 
     function onEffect(Buff buf) {
-        UnitProp[buf.bd.target].ModSpeed(0 - buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModSpeed(0 - buf.bd.i0);
     }
 
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].ModSpeed(buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModSpeed(buf.bd.i0);
     }
     
     function RecordTerrain(integer x, integer y) {
@@ -212,7 +212,7 @@ constant string  SFX1  = "Abilities\\Spells\\Other\\FrostDamage\\FrostDamage.mdl
                     buf = Buff.cast(this.u, MobList.units[i], BID_FREEZING_TRAP);
                     buf.bd.tick = -1;
                     buf.bd.interval = 1.1;
-                    UnitProp[buf.bd.target].ModSpeed(buf.bd.i0);
+                    UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModSpeed(buf.bd.i0);
                     buf.bd.i0 = Rounding(GetUnitMoveSpeed(buf.bd.target) * returnSpeedReduc(lvl));
                     if (buf.bd.e0 == 0) {buf.bd.e0 = BuffEffect.create(SFX1, buf, "origin");}
                     buf.bd.boe = onEffect;

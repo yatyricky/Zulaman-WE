@@ -4,18 +4,18 @@ constant integer BUFF_ID = 'A06A';
     HandleTable ht;
     
     function onEffect(Buff buf) {
-        UnitProp[buf.bd.target].spellHaste -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellHaste -= buf.bd.r0;
     }
     
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].spellHaste += buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellHaste += buf.bd.r0;
     }
     
     public function CastParalysisPoison(unit caster, unit target) {
         Buff buf = Buff.cast(caster, target, BUFF_ID);
         buf.bd.tick = -1;
         buf.bd.interval = 9;
-        UnitProp[buf.bd.target].spellHaste += buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellHaste += buf.bd.r0;
         buf.bd.r0 = 0.2;
         buf.bd.boe = onEffect;
         buf.bd.bor = onRemove;
@@ -31,7 +31,7 @@ constant integer BUFF_ID = 'A06A';
     }
 
     function action(unit u, item it, integer fac) {
-        UnitProp up = UnitProp[u];
+        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
         up.ModAgi(10 * fac);
         up.ModAP(20 * fac);
         up.ModAttackSpeed(15 * fac);

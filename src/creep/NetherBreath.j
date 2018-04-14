@@ -2,11 +2,11 @@
 library NetherBreath requires DamageSystem {
 
     function onEffect(Buff buf) { 
-        UnitProp[buf.bd.target].spellTaken += buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellTaken += buf.bd.r0;
     }
 
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].spellTaken -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellTaken -= buf.bd.r0;
     }
     
     function onCast() {
@@ -21,7 +21,7 @@ library NetherBreath requires DamageSystem {
                 buf = Buff.cast(SpellEvent.CastingUnit, PlayerUnits.units[i], BID_NETHER_BREATH);
                 buf.bd.tick = -1;
                 buf.bd.interval = 12;
-                UnitProp[buf.bd.target].spellTaken -= buf.bd.r0;
+                UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellTaken -= buf.bd.r0;
                 buf.bd.r0 = 1.0;
                 buf.bd.boe = onEffect;
                 buf.bd.bor = onRemove;

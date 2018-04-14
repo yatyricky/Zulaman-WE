@@ -3,7 +3,7 @@ library StratholmeTragedy requires ItemAttributes, ArthassCorruption {
     HandleTable ht;
 
     function action(unit u, item it, integer fac) {
-        UnitProp up = UnitProp[u];
+        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
         up.ModAttackSpeed(15 * fac);
         up.ModSpeed(20 * fac);
         // +25 damage to minions
@@ -34,7 +34,7 @@ library StratholmeTragedy requires ItemAttributes, ArthassCorruption {
     }
 
     function action1(unit u, item it, integer fac) {
-        UnitProp up = UnitProp[u];
+        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
         StratholmeTragedy1Data std = StratholmeTragedy1Data[it];
         up.ModAttackSpeed(15 * fac);
         up.ModSpeed(20 * fac);

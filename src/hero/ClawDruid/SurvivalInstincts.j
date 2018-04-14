@@ -17,13 +17,13 @@ constant string  ART  = "Abilities\\Spells\\NightElf\\BattleRoar\\RoarTarget.mdl
 
     // i0 = current increment; i1 = final decrement
     function onEffect(Buff buf) {
-        UnitProp[buf.bd.target].ModLife(buf.bd.i0);
-        UnitProp[buf.bd.target].damageTaken -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModLife(buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageTaken -= buf.bd.r0;
     }
 
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].ModLife(0 - buf.bd.i1);
-        UnitProp[buf.bd.target].damageTaken += buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModLife(0 - buf.bd.i1);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageTaken += buf.bd.r0;
     }
 
     function onCast() {
@@ -41,7 +41,7 @@ constant string  ART  = "Abilities\\Spells\\NightElf\\BattleRoar\\RoarTarget.mdl
         
         buf.bd.i0 = R2I(GetUnitState(SpellEvent.CastingUnit, UNIT_STATE_MAX_LIFE) * percentage);
         buf.bd.i1 += buf.bd.i0;
-        UnitProp[buf.bd.target].damageTaken += buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageTaken += buf.bd.r0;
         buf.bd.r0 = returnDmgReduc(lvl);
         buf.bd.boe = onEffect;
         buf.bd.bor = onRemove;

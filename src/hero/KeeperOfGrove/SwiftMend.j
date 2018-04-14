@@ -10,11 +10,11 @@ constant string  ART_ATTACH  = "Abilities\\Spells\\Items\\ClarityPotion\\Clarity
     }
 
     function onEffect(Buff buf) {
-        UnitProp[buf.bd.target].ModArmor(buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModArmor(buf.bd.i0);
     }
 
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].ModArmor(0 - buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModArmor(0 - buf.bd.i0);
     }
 
     function onCast() {
@@ -41,7 +41,7 @@ constant string  ART_ATTACH  = "Abilities\\Spells\\Items\\ClarityPotion\\Clarity
             buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BUFF_ID);
             buf.bd.tick = -1;
             buf.bd.interval = 10.0;
-            UnitProp[SpellEvent.TargetUnit].ModArmor(0 - buf.bd.i0);
+            UnitProp.inst(SpellEvent.TargetUnit, SCOPE_PREFIX).ModArmor(0 - buf.bd.i0);
             buf.bd.i0 = returnArmor(ilvl);
             if (buf.bd.e0 == 0) {
                 buf.bd.e0 = BuffEffect.create(ART_ATTACH, buf, "origin");

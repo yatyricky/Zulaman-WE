@@ -2,11 +2,11 @@
 library Mangle requires BuffSystem, SpellEvent, UnitProperty, ClawDruidGlobal, AggroSystem {
 
     function onEffect(Buff buf) {
-        UnitProp[buf.bd.target].ModArmor(0 - buf.bd.i1);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModArmor(0 - buf.bd.i1);
     }
 
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].ModArmor(buf.bd.i1);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModArmor(buf.bd.i1);
     }
 
     function onCast() {
@@ -14,13 +14,13 @@ library Mangle requires BuffSystem, SpellEvent, UnitProperty, ClawDruidGlobal, A
         real dmg;
         buf.bd.tick = -1;
         buf.bd.interval = 10.0;
-        UnitProp[SpellEvent.TargetUnit].ModArmor(buf.bd.i1);
+        UnitProp.inst(SpellEvent.TargetUnit, SCOPE_PREFIX).ModArmor(buf.bd.i1);
         buf.bd.i0 = GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_MANGLE);
         buf.bd.i1 = 1 + buf.bd.i0 * 3;
         buf.bd.boe = onEffect;
         buf.bd.bor = onRemove;
         buf.run();
-        dmg = 100 * buf.bd.i0 + UnitProp[SpellEvent.CastingUnit].AttackPower();
+        dmg = 100 * buf.bd.i0 + UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).AttackPower();
         if (BuffSlot[SpellEvent.TargetUnit].getBuffByBid(RABIES_BUFF_ID) != 0) {
             dmg *= 1.2;
         }

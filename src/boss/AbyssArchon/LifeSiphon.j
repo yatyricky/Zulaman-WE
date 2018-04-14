@@ -36,7 +36,7 @@ library LifeSiphon requires DamageSystem, BuffSystem {
             }
             if (this.ctr == 0) {
                 // PauseUnit(caster, false);
-                UnitProp[caster].enable();
+                UnitProp.inst(caster, SCOPE_PREFIX).enable();
                 for (0 <= i < PlayerUnits.n) {
                     buf = BuffSlot[PlayerUnits.units[i]].getBuffByBid(BID_SUMMON_POISONOUS_CRAWLER);
                     if (buf != 0) {
@@ -56,7 +56,7 @@ library LifeSiphon requires DamageSystem, BuffSystem {
             this.ctr = 50;
             this.tm = NewTimer();
             // PauseUnit(caster, true);
-            UnitProp[caster].disable();
+            UnitProp.inst(caster, SCOPE_PREFIX).disable();
             SetTimerData(this.tm, this);
             TimerStart(this.tm, 0.1, true, function thistype.run);
 

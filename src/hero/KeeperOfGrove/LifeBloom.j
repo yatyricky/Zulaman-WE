@@ -31,11 +31,11 @@ library LifeBloom requires BuffSystem, SpellEvent, UnitProperty, KeeperOfGroveGl
 
     function onCast() {
         Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BID_LIFE_BLOOM);
-        real sp = UnitProp[SpellEvent.CastingUnit].SpellPower();
+        real sp = UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).SpellPower();
         integer lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_LIFE_BLOOM);
         buf.bd.r0 = returnHOT(lvl, sp);
         buf.bd.r1 = returnDH(lvl, sp);
-        buf.bd.interval = 1.0 / (1.0 + UnitProp[SpellEvent.CastingUnit].SpellHaste());
+        buf.bd.interval = 1.0 / (1.0 + UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).SpellHaste());
         buf.bd.tick = Rounding(lbtick[GetPlayerId(GetOwningPlayer(SpellEvent.CastingUnit))] / buf.bd.interval);
         buf.bd.boe = onEffect;
         buf.bd.bor = onRemove;

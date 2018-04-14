@@ -3,11 +3,11 @@ library ReflectionAura requires SpellEvent, SpellReflection, AggroSystem {
 constant real INTERVAL = 1.0;
     
     function onEffect(Buff buf) {
-        UnitProp[buf.bd.target].ModSpellReflect(buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModSpellReflect(buf.bd.i0);
     }
     
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].ModSpellReflect(0 - buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModSpellReflect(0 - buf.bd.i0);
     }
 
     struct ReflectionAura {

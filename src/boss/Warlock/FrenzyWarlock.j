@@ -35,22 +35,22 @@ constant string  ART_RIGHT  = "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustSpeci
     }
 
     function onEffect(Buff buf) {
-        UnitProp[buf.bd.target].damageDealt += buf.bd.r0;
-        UnitProp[buf.bd.target].ModAttackSpeed(buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageDealt += buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(buf.bd.i0);
     }
 
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].damageDealt -= buf.bd.r0;
-        UnitProp[buf.bd.target].ModAttackSpeed(0 - buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageDealt -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(0 - buf.bd.i0);
     }
     
     function onCast() {       
         Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BID_FRENZY_WARLOCK);
         buf.bd.tick = -1;
         buf.bd.interval = 200;
-        UnitProp[buf.bd.target].damageDealt -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageDealt -= buf.bd.r0;
         buf.bd.r0 = 0.3;
-        UnitProp[buf.bd.target].ModAttackSpeed(0 - buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(0 - buf.bd.i0);
         buf.bd.i0 = 50;
         if (buf.bd.e0 == 0) {buf.bd.e0 = BuffEffect.create(ART_LEFT, buf, "hand, left");}
         if (buf.bd.e1 == 0) {buf.bd.e1 = BuffEffect.create(ART_RIGHT, buf, "hand, right");}

@@ -11,11 +11,11 @@ constant integer PREMISE_ID = 'e003';
     unit premise[NUMBER_OF_MAX_PLAYERS];
 
     function onEffect(Buff buf) {
-        UnitProp[buf.bd.target].damageDealt += buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageDealt += buf.bd.r0;
     }
 
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].damageDealt -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageDealt -= buf.bd.r0;
     }
     
     function unstealth(unit u) {
@@ -25,13 +25,13 @@ constant integer PREMISE_ID = 'e003';
             MobList.addToAll(u);
         }
         UnitRemoveAbility(u, SID_APIV);
-        UnitProp[u].ModSpeed(-60);
+        UnitProp.inst(u, SCOPE_PREFIX).ModSpeed(-60);
         
         if (!IsUnitDead(u)) {
             buf = Buff.cast(u, u, BUFF_ID);
             buf.bd.tick = -1;
             buf.bd.interval = 10;
-            UnitProp[buf.bd.target].damageDealt -= buf.bd.r0;
+            UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageDealt -= buf.bd.r0;
             buf.bd.r0 = 0.3;
             if (buf.bd.e0 == 0) {buf.bd.e0 = BuffEffect.create(ART_WEAPON, buf, "weapon");}
             //if (buf.bd.e1 == 0) {buf.bd.e1 = BuffEffect.create(ART_WEAPON, buf, "weapon, right");}
@@ -60,7 +60,7 @@ constant integer PREMISE_ID = 'e003';
         SetPlayerAbilityAvailable(p, SID_AMBUSH, true);
         
         UnitAddAbility(u, SID_APIV);
-        UnitProp[u].ModSpeed(60);
+        UnitProp.inst(u, SCOPE_PREFIX).ModSpeed(60);
         AddTimedEffect.atCoord(ART, GetUnitX(u), GetUnitY(u), 1.0);
         
         KillUnit(premise[GetPlayerId(p)]);

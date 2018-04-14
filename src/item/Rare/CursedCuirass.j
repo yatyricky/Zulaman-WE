@@ -7,7 +7,7 @@ constant string  ART_TARGET  = "Abilities\\Spells\\Undead\\OrbOfDeath\\Annihilat
     function onEffect(Buff buf) {}
 
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].ModAP(30);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAP(30);
     }
     
     function damaged() {
@@ -20,7 +20,7 @@ constant string  ART_TARGET  = "Abilities\\Spells\\Undead\\OrbOfDeath\\Annihilat
                     buf.bd.interval = 5;
                     if (buf.bd.i0 == 0) {
                         buf.bd.i0 = 17;
-                        UnitProp[buf.bd.target].ModAP(-30);
+                        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAP(-30);
                         AddTimedEffect.atUnit(ART_TARGET, buf.bd.target, "origin", 0.0);
                     }
                     buf.bd.boe = onEffect;
@@ -32,7 +32,7 @@ constant string  ART_TARGET  = "Abilities\\Spells\\Undead\\OrbOfDeath\\Annihilat
     }
 
     function action(unit u, item it, integer fac) {
-        UnitProp up = UnitProp[u];
+        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
         up.ModArmor(4 * fac);
         up.ModStr(15 * fac);
         up.blockPoint += 35 * fac;

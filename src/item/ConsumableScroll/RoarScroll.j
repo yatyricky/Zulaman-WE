@@ -4,11 +4,11 @@ constant string  ART_CASTER  = "Abilities\\Spells\\NightElf\\BattleRoar\\RoarCas
 constant integer BUFF_ID = 'A071';
     
     function onEffect(Buff buf) {
-        UnitProp[buf.bd.target].ModAP(buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAP(buf.bd.i0);
     }
     
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].ModAP(0 - buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAP(0 - buf.bd.i0);
     }
 
     function onCast() {
@@ -19,7 +19,7 @@ constant integer BUFF_ID = 'A071';
                 buf = Buff.cast(SpellEvent.CastingUnit, PlayerUnits.units[i], BUFF_ID);
                 buf.bd.tick = -1;
                 buf.bd.interval = 20.0;
-                UnitProp[buf.bd.target].ModAP(0 - buf.bd.i0);
+                UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAP(0 - buf.bd.i0);
                 buf.bd.i0 = 15;
                 buf.bd.boe = onEffect;
                 buf.bd.bor = onRemove;

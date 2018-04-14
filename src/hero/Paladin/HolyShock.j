@@ -27,16 +27,16 @@ constant integer BUFF_ID = 'A02E';
     }
 
     function onEffect(Buff buf) {
-        UnitProp[buf.bd.target].spellHaste += buf.bd.r0;
-        UnitProp[buf.bd.target].ModAttackSpeed(buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellHaste += buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(buf.bd.i0);
         if (buf.bd.i1 == 1) {
             delayedDosth1.start(buf.bd.caster, buf.bd.target);
         }
     }
 
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].spellHaste -= buf.bd.r0;
-        UnitProp[buf.bd.target].ModAttackSpeed(0 - buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellHaste -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(0 - buf.bd.i0);
         if (buf.bd.i1 == 1) {
             BeaconOfLight[buf.bd.caster].removeExtras(buf.bd.target);
         }
@@ -61,8 +61,8 @@ constant integer BUFF_ID = 'A02E';
         buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BUFF_ID);
         buf.bd.tick = -1;
         buf.bd.interval = 6.0;
-        UnitProp[buf.bd.target].spellHaste -= buf.bd.r0;
-        UnitProp[buf.bd.target].ModAttackSpeed(0 - buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellHaste -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(0 - buf.bd.i0);
         buf.bd.r0 = 0.1 * lvl;
         buf.bd.i0 = 10 * lvl;
         if (HealResult.isCritical && lvl > 2 && GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_BEACON_OF_LIGHT) > 0) {

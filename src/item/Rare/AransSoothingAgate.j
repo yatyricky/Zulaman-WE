@@ -3,7 +3,7 @@ library AransSoothingAgate requires ItemAttributes {
     //HandleTable ht;
 
     function action(unit u, item it, integer fac) {
-        UnitProp up = UnitProp[u];
+        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
         up.ModInt(8 * fac);
         up.spellPower += 10 * fac;
         up.spellHaste += 0.05 * fac;

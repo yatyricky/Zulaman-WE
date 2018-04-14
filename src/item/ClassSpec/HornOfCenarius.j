@@ -11,7 +11,7 @@ library HornOfCenarius requires ItemAttributes, DamageSystem {
     }
 
     function action(unit u, item it, integer fac) {
-        UnitProp up = UnitProp[u];
+        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
         up.ModStr(8 * fac);
         up.ModAgi(8 * fac);
         up.ModInt(8 * fac);

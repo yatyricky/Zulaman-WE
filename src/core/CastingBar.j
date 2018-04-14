@@ -199,7 +199,7 @@ constant integer CAST_MODE_CHANNEL = 0x32148520;
             SetUnitFlyable(this.bar);
             SetUnitFlyHeight(this.bar, PROGRESS_BAR_Z, 0.0);
             //BJDebugMsg(R2S(this.haste));
-            this.cast = (this.cast - this.haste) / (1.0 + UnitProp[this.caster].SpellHaste());
+            this.cast = (this.cast - this.haste) / (1.0 + UnitProp.inst(this.caster, SCOPE_PREFIX).SpellHaste());
             if (this.cast <= 0.01) {this.cast = 0.01;}
             SetUnitTimeScale(this.bar, 1.0 / this.cast);
             this.tm = NewTimer();
@@ -233,7 +233,7 @@ constant integer CAST_MODE_CHANNEL = 0x32148520;
             SetUnitFlyHeight(this.bar, PROGRESS_BAR_Z, 0.0);
             //BJDebugMsg(R2S(this.haste));
             DelayedModUnitMana.new(SpellEvent.CastingUnit, 0 - this.cost);            
-            this.cast = (this.cast - this.haste);// * (1.0 - UnitProp[this.caster].SpellHaste());
+            this.cast = (this.cast - this.haste);// * (1.0 - UnitProp.inst(this.caster, SCOPE_PREFIX).SpellHaste());
             if (this.cast <= 0.01) {this.cast = 0.01;}
             SetUnitTimeScale(this.bar, 1.0 / this.cast);
             //BJDebugMsg(R2S(1.0 / this.cast) + ":" + R2S(this.cast / nodes));

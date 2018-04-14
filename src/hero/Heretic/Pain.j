@@ -14,11 +14,11 @@ library Pain requires BuffSystem, SpellEvent, UnitProperty {
     }
 
     function onEffect1(Buff buf) { 
-        UnitProp[buf.bd.target].spellTaken += buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellTaken += buf.bd.r0;
     }
 
     function onRemove1(Buff buf) {
-        UnitProp[buf.bd.target].spellTaken -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellTaken -= buf.bd.r0;
     }
 
     function onEffect(Buff buf) {
@@ -31,9 +31,9 @@ library Pain requires BuffSystem, SpellEvent, UnitProperty {
     function onCast() {
         integer lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_PAIN);
         Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BID_PAIN);
-        buf.bd.interval = returnInterval(lvl) / (1.0 + UnitProp[SpellEvent.CastingUnit].SpellHaste());
+        buf.bd.interval = returnInterval(lvl) / (1.0 + UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).SpellHaste());
         buf.bd.tick = Rounding(12.0 / buf.bd.interval);
-        buf.bd.r0 = returnDamage(lvl, UnitProp[SpellEvent.CastingUnit].SpellPower());
+        buf.bd.r0 = returnDamage(lvl, UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).SpellPower());
         buf.bd.boe = onEffect;
         buf.bd.bor = onRemove;
         buf.run();
@@ -41,7 +41,7 @@ library Pain requires BuffSystem, SpellEvent, UnitProperty {
         buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BID_PAIN_WEAKNESS);
         buf.bd.tick = -1;
         buf.bd.interval = 12;
-        UnitProp[buf.bd.target].spellTaken -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellTaken -= buf.bd.r0;
         buf.bd.r0 = returnSpellTaken(lvl);
         buf.bd.boe = onEffect1;
         buf.bd.bor = onRemove1;

@@ -45,7 +45,7 @@ constant integer BUFF_ID1 = 'A01J';
             buf.bd.tick = -1;
             buf.bd.interval = 20.0;
             buf.bd.isShield = true;
-            buf.bd.r0 = returnAbsorb(GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_SHIELD), UnitProp[SpellEvent.CastingUnit].SpellPower());
+            buf.bd.r0 = returnAbsorb(GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_SHIELD), UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).SpellPower());
             if (buf.bd.e0 == 0) {
                 buf.bd.e0 = BuffEffect.create(ART_SHIELD, buf, "overhead");
             }

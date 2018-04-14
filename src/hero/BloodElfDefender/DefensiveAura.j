@@ -7,7 +7,7 @@ constant integer BUFF_ID = 'A04B';
     function onEffect(Buff buf) {}
 
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].ModArmor(-6);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModArmor(-6);
     }
 
     struct DefensiveAura {
@@ -25,7 +25,7 @@ constant integer BUFF_ID = 'A04B';
                         buf.bd.tick = -1;
                         buf.bd.interval = INTERVAL * 2.0;
                         if (buf.bd.i0 != 6) {
-                            UnitProp[buf.bd.target].ModArmor(6);
+                            UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModArmor(6);
                             buf.bd.i0 = 6;
                         }
                         buf.bd.boe = onEffect;

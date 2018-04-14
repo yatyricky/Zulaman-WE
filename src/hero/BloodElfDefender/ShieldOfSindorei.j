@@ -3,11 +3,11 @@ library ShieldOfSindorei requires SpellEvent, BuffSystem, OrbOfTheSindorei {
 constant integer SPELL_ID = 'A006';
 constant integer BUFF_ID = 'A031';
     function onEffect(Buff buf) {
-        UnitProp[buf.bd.target].damageTaken -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageTaken -= buf.bd.r0;
     }
 
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].damageTaken += buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageTaken += buf.bd.r0;
     }
     
     function onCast() {   
@@ -17,7 +17,7 @@ constant integer BUFF_ID = 'A031';
         Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BUFF_ID);
         buf.bd.tick = -1;
         buf.bd.interval = 8.0;
-        UnitProp[buf.bd.target].damageTaken += buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageTaken += buf.bd.r0;
         buf.bd.r0 = 0.2 + 0.15 * GetUnitAbilityLevel(SpellEvent.CastingUnit, SPELL_ID);
         
         // equiped orb of the sindorei

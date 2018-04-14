@@ -4,15 +4,15 @@ constant integer BUFF_ID = 'A06K';
     //HandleTable ht;
 
     function oneffect(Buff buf) {
-        UnitProp[buf.bd.target].dodge += buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).dodge += buf.bd.r0;
     }
 
     function onremove(Buff buf) {
-        UnitProp[buf.bd.target].dodge -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).dodge -= buf.bd.r0;
     }
 
     function action(unit u, item it, integer fac) {
-        UnitProp up = UnitProp[u];
+        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
         up.dodge += 0.03 * fac;
         //if (!ht.exists(u)) {ht[u] = 0;}
         //ht[u] = ht[u] + fac;
@@ -22,7 +22,7 @@ constant integer BUFF_ID = 'A06K';
         Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BUFF_ID);
         buf.bd.tick = -1;
         buf.bd.interval = 10.0;
-        UnitProp[buf.bd.target].dodge -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).dodge -= buf.bd.r0;
         buf.bd.r0 = 0.3;
         buf.bd.boe = oneffect;
         buf.bd.bor = onremove;

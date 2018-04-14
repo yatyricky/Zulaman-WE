@@ -9,7 +9,7 @@ constant string  ART  = "Abilities\\Spells\\Orc\\EtherealForm\\SpiritWalkerChang
     }
 
     public function PriestCastHeal(unit caster, unit target, integer times) {
-        real amt = returnHealHOT(GetUnitAbilityLevel(caster, SID_HEAL), UnitProp[caster].SpellPower()) * times;
+        real amt = returnHealHOT(GetUnitAbilityLevel(caster, SID_HEAL), UnitProp.inst(caster, SCOPE_PREFIX).SpellPower()) * times;
         HealTarget(caster, target, amt, SpellData[SID_HEAL].name, 0.0);
         AddTimedEffect.atUnit(ART, target, "origin", 0.3);
     }
@@ -22,20 +22,20 @@ constant string  ART  = "Abilities\\Spells\\Orc\\EtherealForm\\SpiritWalkerChang
     function onRemove(Buff buf) {}
     
     function onEffect1(Buff buf) {
-        UnitProp[buf.bd.target].healTaken += buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).healTaken += buf.bd.r0;
     }
 
     function onRemove1(Buff buf) {
-        UnitProp[buf.bd.target].healTaken -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).healTaken -= buf.bd.r0;
     }
     
     public function CastHeal(unit caster, unit target) {
         integer lvl = GetUnitAbilityLevel(caster, SID_HEAL);
         real mult = 1.0;
         Buff buf = Buff.cast(caster, target, BUFF_ID);
-        buf.bd.interval = 2.0 / (1.0 + UnitProp[caster].SpellHaste());
+        buf.bd.interval = 2.0 / (1.0 + UnitProp.inst(caster, SCOPE_PREFIX).SpellHaste());
         buf.bd.tick = Rounding(12.0 / buf.bd.interval);
-        buf.bd.r0 = returnHealHOT(lvl, UnitProp[caster].SpellPower());
+        buf.bd.r0 = returnHealHOT(lvl, UnitProp.inst(caster, SCOPE_PREFIX).SpellPower());
         buf.bd.boe = onEffect;
         buf.bd.bor = onRemove;
         buf.run();
@@ -47,7 +47,7 @@ constant string  ART  = "Abilities\\Spells\\Orc\\EtherealForm\\SpiritWalkerChang
         buf = Buff.cast(caster, target, BUFF_ID1);
         buf.bd.tick = -1;
         buf.bd.interval = 12.0;
-        UnitProp[buf.bd.target].healTaken -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).healTaken -= buf.bd.r0;
         buf.bd.r0 = 0.04 * lvl * mult;
         buf.bd.boe = onEffect1;
         buf.bd.bor = onRemove1;

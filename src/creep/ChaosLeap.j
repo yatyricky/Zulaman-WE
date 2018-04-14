@@ -15,11 +15,11 @@ constant real AOE = 250.0;
 constant real DAMAGE = 300.0;
     
     function onEffect(Buff buf) {
-        UnitProp[buf.bd.target].aggroRate += buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).aggroRate += buf.bd.r0;
     }
 
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].aggroRate -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).aggroRate -= buf.bd.r0;
     }
 
     struct Leap {
@@ -63,7 +63,7 @@ constant real DAMAGE = 300.0;
                         buf = Buff.cast(this.caster, PlayerUnits.units[i], BID_CHAOS_LEAP);
                         buf.bd.tick = -1;
                         buf.bd.interval = 10;
-                        UnitProp[buf.bd.target].aggroRate -= buf.bd.r0;
+                        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).aggroRate -= buf.bd.r0;
                         buf.bd.r0 = 3.0;
                         if (buf.bd.e0 == 0) {buf.bd.e0 = BuffEffect.create(ART, buf, "overhead");}
                         buf.bd.boe = onEffect;

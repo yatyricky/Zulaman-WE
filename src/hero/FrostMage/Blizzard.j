@@ -20,7 +20,7 @@ library Blizzard requires CastingBar, GroupUtils, FrostMageGlobal, DamageSystem,
         } else {
             lvl = GetUnitAbilityLevel(caster, SID_BLIZZARD);
         }
-        dmg = returnDamage(lvl, UnitProp[caster].SpellPower()) * returnFrostDamage(caster);
+        dmg = returnDamage(lvl, UnitProp.inst(caster, SCOPE_PREFIX).SpellPower()) * returnFrostDamage(caster);
         aoe = 150.0 + 100.0 * lvl;
         GroupUnitsInArea(ENUM_GROUP, x, y, aoe);
         tu = FirstOfGroup(ENUM_GROUP);
@@ -49,7 +49,7 @@ library Blizzard requires CastingBar, GroupUtils, FrostMageGlobal, DamageSystem,
             lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_BLIZZARD);
         }
         cb.cost = 65 + lvl * 35;
-        cb.channel(Rounding(5.0 * (1.0 + UnitProp[SpellEvent.CastingUnit].SpellHaste())));
+        cb.channel(Rounding(5.0 * (1.0 + UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).SpellHaste())));
     }
     
     struct BlizzardAuto {
@@ -82,7 +82,7 @@ library Blizzard requires CastingBar, GroupUtils, FrostMageGlobal, DamageSystem,
             this.c = c;
             this.x = x;
             this.y = y;
-            intv = 1.0 / (1.0 + UnitProp[c].SpellHaste());
+            intv = 1.0 / (1.0 + UnitProp.inst(c, SCOPE_PREFIX).SpellHaste());
             this.tick = Rounding(5.0 / intv);
             TimerStart(this.tm, intv, true, function thistype.run);
         }

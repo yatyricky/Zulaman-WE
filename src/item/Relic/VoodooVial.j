@@ -64,7 +64,7 @@ constant string  MISSILE  = "Abilities\\Spells\\Other\\AcidBomb\\BottleMissile.m
                         tmpi = null;
                     
                         buf = Buff.cast(DamageResult.source, DamageResult.target, BUFF_ID);
-                        buf.bd.interval = 2.0 / (1.0 + UnitProp[buf.bd.caster].SpellHaste());
+                        buf.bd.interval = 2.0 / (1.0 + UnitProp.inst(buf.bd.caster, SCOPE_PREFIX).SpellHaste());
                         buf.bd.tick = Rounding(10.0 / buf.bd.interval);
                         buf.bd.r0 = charges * 9.5 + 3.0;
                         buf.bd.boe = onEffect;
@@ -78,7 +78,7 @@ constant string  MISSILE  = "Abilities\\Spells\\Other\\AcidBomb\\BottleMissile.m
     }
 
     function action(unit u, item it, integer fac) {
-        UnitProp up = UnitProp[u];
+        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
         
         up.ModInt(14 * fac);
         up.ModMana(250 * fac);

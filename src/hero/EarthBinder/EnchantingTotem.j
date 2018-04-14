@@ -75,11 +75,11 @@ constant integer DURATION = 20;
     }
 
     function onEffectEarth(Buff buf) { 
-        UnitProp[buf.bd.target].ModSpeed(0 - buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModSpeed(0 - buf.bd.i0);
     }
 
     function onRemoveEarth(Buff buf) {
-        UnitProp[buf.bd.target].ModSpeed(buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModSpeed(buf.bd.i0);
     }
     
     struct EarthTotem {
@@ -109,8 +109,8 @@ constant integer DURATION = 20;
                         buf = Buff.cast(this.c, MobList.units[i], BUFF_EARTH);
                         buf.bd.tick = -1;
                         buf.bd.interval = 2.0;
-                        UnitProp[buf.bd.target].ModSpeed(buf.bd.i0);
-                        buf.bd.i0 = Rounding(UnitProp[buf.bd.target].Speed() * this.slow);
+                        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModSpeed(buf.bd.i0);
+                        buf.bd.i0 = Rounding(UnitProp.inst(buf.bd.target, SCOPE_PREFIX).Speed() * this.slow);
                         if (buf.bd.e0 == 0) {
                             buf.bd.e0 = BuffEffect.create(ART_SLOW, buf, "origin");
                         }
@@ -165,11 +165,11 @@ constant integer DURATION = 20;
     }
 
     function onEffectStorm(Buff buf) { 
-        UnitProp[buf.bd.target].spellTaken += buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellTaken += buf.bd.r0;
     }
 
     function onRemoveStorm(Buff buf) {
-        UnitProp[buf.bd.target].spellTaken -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellTaken -= buf.bd.r0;
     }
 
     struct StormTotem {
@@ -191,7 +191,7 @@ constant integer DURATION = 20;
         
         private static method run() {
             thistype this = GetTimerData(GetExpiredTimer());
-            real dmg = returnDamage(this.lvl) + UnitProp[this.c].SpellPower() * 0.1;
+            real dmg = returnDamage(this.lvl) + UnitProp.inst(this.c, SCOPE_PREFIX).SpellPower() * 0.1;
             unit tu;
             real efx;
             Buff buf;
@@ -203,7 +203,7 @@ constant integer DURATION = 20;
                     buf = Buff.cast(this.c, tu, BUFF_STORM);
                     buf.bd.tick = -1;
                     buf.bd.interval = this.intv + 1.0;
-                    UnitProp[buf.bd.target].spellTaken -= buf.bd.r0;
+                    UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellTaken -= buf.bd.r0;
                     buf.bd.r0 = returnSpellTaken(this.lvl);
                     buf.bd.boe = onEffectStorm;
                     buf.bd.bor = onRemoveStorm;
@@ -233,7 +233,7 @@ constant integer DURATION = 20;
             this.u = totem;
             this.c = caster;
             this.aoe = returnLightAOE(lvl);
-            this.intv = 2.0 / (1.0 + UnitProp[caster].SpellHaste() + UnitProp[caster].AttackSpeed() / 100.0) * returnSpeedBoost(this.lvl);
+            this.intv = 2.0 / (1.0 + UnitProp.inst(caster, SCOPE_PREFIX).SpellHaste() + UnitProp.inst(caster, SCOPE_PREFIX).AttackSpeed() / 100.0) * returnSpeedBoost(this.lvl);
             if (GetUnitTypeId(caster) == UTID_EARTH_BINDER_ASC) {
                 this.intv *= 0.5;
             }

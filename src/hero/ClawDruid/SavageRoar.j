@@ -16,11 +16,11 @@ constant string  ART_CASTER  = "Abilities\\Spells\\NightElf\\BattleRoar\\RoarCas
     }
 
     function onEffect(Buff buf) {
-        UnitProp[buf.bd.target].ModAP(0 - buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAP(0 - buf.bd.i0);
     }
 
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].ModAP(buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAP(buf.bd.i0);
     }
 
     function onCast() {
@@ -34,8 +34,8 @@ constant string  ART_CASTER  = "Abilities\\Spells\\NightElf\\BattleRoar\\RoarCas
                 buf = Buff.cast(SpellEvent.CastingUnit, MobList.units[i], SAVAGE_ROAR_BUFF_ID);
                 buf.bd.tick = -1;
                 buf.bd.interval = returnDuration(lvl);
-                UnitProp[buf.bd.target].ModAP(buf.bd.i0);
-                buf.bd.i0 = Rounding(returnAPDec(lvl) * UnitProp[buf.bd.target].AttackPower());
+                UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAP(buf.bd.i0);
+                buf.bd.i0 = Rounding(returnAPDec(lvl) * UnitProp.inst(buf.bd.target, SCOPE_PREFIX).AttackPower());
                 if (buf.bd.e0 == 0) {buf.bd.e0 = BuffEffect.create(ART_DEBUFF, buf, "overhead");}
                 buf.bd.r0 = returnDmgAmp(lvl);
                 buf.bd.boe = onEffect;

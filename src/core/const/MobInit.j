@@ -17,7 +17,7 @@ constant integer MOBINIT_RESPAWN_H = 600;
     public function ResetMob(unit u) {
         integer id = idTable[u];
         BuffSlot[u].removeAllBuff();   
-        if (UnitProp[u].Stunned()) {
+        if (UnitProp.inst(u, SCOPE_PREFIX).Stunned()) {
             // print("cancel stun");
             DelayTask.create(cancelStun, 0.5).u0 = u;
         }     

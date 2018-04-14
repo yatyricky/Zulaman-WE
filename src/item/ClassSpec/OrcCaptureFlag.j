@@ -11,7 +11,7 @@ library OrcCaptureFlag requires ItemAttributes, DamageSystem {
     }
 
     function action(unit u, item it, integer fac) {
-        UnitProp up = UnitProp[u];
+        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
         up.ModStr(10 * fac);
         up.ModAgi(10 * fac);
         up.ModAP(15 * fac);

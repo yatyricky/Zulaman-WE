@@ -25,8 +25,8 @@ constant integer BUFF_ID = 'A04I';
     function response(CastingBar cd) {
         Buff buf = Buff.cast(cd.caster, cd.target, BID_REGROWTH);
         integer lvl = GetUnitAbilityLevel(cd.caster, SID_REGROWTH);
-        real sp = UnitProp[cd.caster].SpellPower();
-        buf.bd.interval = 5.0 / (1.0 + UnitProp[cd.caster].SpellHaste());
+        real sp = UnitProp.inst(cd.caster, SCOPE_PREFIX).SpellPower();
+        buf.bd.interval = 5.0 / (1.0 + UnitProp.inst(cd.caster, SCOPE_PREFIX).SpellHaste());
         buf.bd.tick = Rounding(25.0 / buf.bd.interval);
         buf.bd.r0 = returnHOT(lvl, sp);
         buf.bd.boe = onEffect;

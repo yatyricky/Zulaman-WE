@@ -28,7 +28,7 @@ constant string  ART_TARGET  = "Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpec
     }
 
     function action(unit u, item it, integer fac) {
-        UnitProp up = UnitProp[u];
+        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
         
         up.ModStr(20 * fac);
         up.ModArmor(8 * fac);

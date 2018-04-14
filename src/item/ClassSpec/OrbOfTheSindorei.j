@@ -11,7 +11,7 @@ library OrbOfTheSindorei requires ItemAttributes, DamageSystem {
     }
 
     function action(unit u, item it, integer fac) {
-        UnitProp up = UnitProp[u];
+        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
         up.ModStr(10 * fac);
         up.ModLife(125 * fac);
         up.spellPower += 25.0 * fac;

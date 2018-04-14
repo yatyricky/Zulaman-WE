@@ -3,7 +3,7 @@ library CruelColossusBladeOfQuickness requires ItemAttributes {
     //HandleTable ht;
 
     function action(unit u, item it, integer fac) {
-        UnitProp up = UnitProp[u];
+        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
         up.ModAP(50 * fac);
         up.ModAttackSpeed(30 * fac);
         //if (!ht.exists(u)) {ht[u] = 0;}

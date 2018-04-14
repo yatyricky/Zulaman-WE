@@ -10,11 +10,11 @@ constant string  ART_FROZEN  = "Abilities\\Spells\\Undead\\FreezingBreath\\Freez
     }
     
     function onEffect1(Buff buf) {
-        UnitProp[buf.bd.target].ModSpeed(0 - buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModSpeed(0 - buf.bd.i0);
     }
     
     function onRemove1(Buff buf) {
-        UnitProp[buf.bd.target].ModSpeed(buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModSpeed(buf.bd.i0);
     }
 
     function onhit(Projectile p) -> boolean {
@@ -34,8 +34,8 @@ constant string  ART_FROZEN  = "Abilities\\Spells\\Undead\\FreezingBreath\\Freez
             buf = Buff.cast(p.caster, p.target, BUFF_ID);
             buf.bd.tick = -1;
             buf.bd.interval = 5.0;
-            UnitProp[buf.bd.target].ModSpeed(buf.bd.i0);
-            buf.bd.i0 = Rounding(UnitProp[buf.bd.target].Speed() * 0.45);
+            UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModSpeed(buf.bd.i0);
+            buf.bd.i0 = Rounding(UnitProp.inst(buf.bd.target, SCOPE_PREFIX).Speed() * 0.45);
             if (buf.bd.e0 == 0) {
                 buf.bd.e0 = BuffEffect.create(ART_TARGET, buf, "origin");
             }
@@ -54,7 +54,7 @@ constant string  ART_FROZEN  = "Abilities\\Spells\\Undead\\FreezingBreath\\Freez
         p.path = ART_MISSILE;
         p.pr = onhit;
         p.speed = 700;
-        p.r0 = returnDamage(lvl, UnitProp[p.caster].SpellPower()) * returnFrostDamage(cd.caster);
+        p.r0 = returnDamage(lvl, UnitProp.inst(p.caster, SCOPE_PREFIX).SpellPower()) * returnFrostDamage(cd.caster);
         //BJDebugMsg("1??");
         p.launch();
     }

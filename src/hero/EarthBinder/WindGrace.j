@@ -7,8 +7,8 @@ constant integer BUFF_ID = 'A04R';
     function onEffect(Buff buf) {}
 
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].ModAttackSpeed(-5);
-        UnitProp[buf.bd.target].spellHaste -= 0.07;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(-5);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellHaste -= 0.07;
     }
 
     struct WindGraceAura {
@@ -26,8 +26,8 @@ constant integer BUFF_ID = 'A04R';
                         buf.bd.tick = -1;
                         buf.bd.interval = INTERVAL * 2.0;
                         if (buf.bd.i0 != 6) {
-                            UnitProp[buf.bd.target].ModAttackSpeed(5);
-                            UnitProp[buf.bd.target].spellHaste += 0.07;
+                            UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(5);
+                            UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellHaste += 0.07;
                             buf.bd.i0 = 6;
                         }
                         buf.bd.boe = onEffect;

@@ -28,7 +28,7 @@ library Lacerate requires BuffSystem, SpellEvent, UnitProperty, ClawDruidGlobal,
     function onCast() {
         Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, LACERATE_BUFF_ID);
         integer lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_LACERATE);
-        real dmg = returnDD(lvl) + UnitProp[SpellEvent.CastingUnit].AttackPower() * 0.3;
+        real dmg = returnDD(lvl) + UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).AttackPower() * 0.3;
         Buff debuff = BuffSlot[SpellEvent.TargetUnit].getBuffByBid(SAVAGE_ROAR_BUFF_ID);
         if (debuff != 0) {
             dmg *= (1.0 + debuff.bd.r0);
@@ -37,9 +37,9 @@ library Lacerate requires BuffSystem, SpellEvent, UnitProperty, ClawDruidGlobal,
         DamageTarget(buf.bd.caster, buf.bd.target, dmg, SpellData[SID_LACERATE].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
         AggroTarget(buf.bd.caster, buf.bd.target, dmg * 5.0);
         
-        buf.bd.interval = 2.0 / (1.0 + UnitProp[SpellEvent.CastingUnit].AttackSpeed() / 100.0);
+        buf.bd.interval = 2.0 / (1.0 + UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).AttackSpeed() / 100.0);
         buf.bd.tick = Rounding(16.0 / buf.bd.interval);
-        buf.bd.r0 = UnitProp[SpellEvent.CastingUnit].AttackPower() * 0.25 + returnDOT(lvl);
+        buf.bd.r0 = UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).AttackPower() * 0.25 + returnDOT(lvl);
         buf.bd.boe = RabiesOnEffect;
         buf.bd.bor = RabiesOnRemove;
         buf.run();        

@@ -8,19 +8,19 @@ constant string  ART_LEFT  = "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustTarget
 constant string  ART_RIGHT  = "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustSpecial.mdl";
 
     function onEffect(Buff buf) {
-        UnitProp[buf.bd.target].attackRate -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).attackRate -= buf.bd.r0;
     }
 
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].attackRate += buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).attackRate += buf.bd.r0;
     }
 
     function onEffect1(Buff buf) {
-        UnitProp[buf.bd.target].ModAttackSpeed(50);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(50);
     }
 
     function onRemove1(Buff buf) {
-        UnitProp[buf.bd.target].ModAttackSpeed(-50);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(-50);
     }
 
     function onEffect2(Buff buf) {}
@@ -65,7 +65,7 @@ constant string  ART_RIGHT  = "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustSpeci
             integer id;
             this.isBanshee = false;
             this.savedAP = GetUnitAbilityLevel(this.u, SID_POWER_OF_ABOMINATION) * 5 + 5;
-            UnitProp[this.u].ModAP(this.savedAP);
+            UnitProp.inst(this.u, SCOPE_PREFIX).ModAP(this.savedAP);
             //BJDebugMsg("Switched to Abomination!");
             PauseTimer(this.tm);
             
@@ -76,7 +76,7 @@ constant string  ART_RIGHT  = "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustSpeci
                 buf = Buff.cast(this.u, ghoul[id], BUFF_ID1);
                 buf.bd.tick = -1;
                 buf.bd.interval = 15;
-                UnitProp[buf.bd.target].ModAttackSpeed(0 - buf.bd.i0);
+                UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(0 - buf.bd.i0);
                 buf.bd.i0 = 50;
                 if (buf.bd.e0 == 0) {buf.bd.e0 = BuffEffect.create(ART_LEFT, buf, "hand, left");}
                 if (buf.bd.e1 == 0) {buf.bd.e1 = BuffEffect.create(ART_RIGHT, buf, "hand, right");}
@@ -96,7 +96,7 @@ constant string  ART_RIGHT  = "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustSpeci
         method banshee() {
             //BJDebugMsg("Switched to Banshee!");
             this.isBanshee = true;
-            UnitProp[this.u].ModAP(0 - this.savedAP);
+            UnitProp.inst(this.u, SCOPE_PREFIX).ModAP(0 - this.savedAP);
             this.savedAP = 0;
             TimerStart(this.tm, 1.0, true, function thistype.bansheeRegen);
         }
@@ -144,7 +144,7 @@ constant string  ART_RIGHT  = "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustSpeci
                 buf = Buff.cast(DamageResult.source, DamageResult.target, BUFF_ID);
                 buf.bd.tick = -1;
                 buf.bd.interval = 10.0;
-                UnitProp[buf.bd.target].attackRate += buf.bd.r0;
+                UnitProp.inst(buf.bd.target, SCOPE_PREFIX).attackRate += buf.bd.r0;
                 buf.bd.r0 = 0.05 * GetUnitAbilityLevel(DamageResult.source, SID_POWER_OF_ABOMINATION) - 0.05;
                 if (buf.bd.e0 == 0) {
                     buf.bd.e0 = BuffEffect.create(ART_CURSE, buf, "overhead");

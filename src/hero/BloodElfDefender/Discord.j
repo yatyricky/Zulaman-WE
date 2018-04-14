@@ -8,13 +8,13 @@ constant integer BUFF_ID = 'A030';
     }
 
     function onEffect(Buff buf) {
-        UnitProp[buf.bd.target].ModAP(0 - buf.bd.i0);
-        UnitProp[buf.bd.target].ModAttackSpeed(buf.bd.i1);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAP(0 - buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(buf.bd.i1);
     }
 
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].ModAP(buf.bd.i0);
-        UnitProp[buf.bd.target].ModAttackSpeed(0 - buf.bd.i1);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAP(buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(0 - buf.bd.i1);
     }
 
     function onCast() {
@@ -29,9 +29,9 @@ constant integer BUFF_ID = 'A030';
         buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BUFF_ID);
         buf.bd.tick = -1;
         buf.bd.interval = 5.0;
-        UnitProp[buf.bd.target].ModAP(buf.bd.i0);
-        UnitProp[buf.bd.target].ModAttackSpeed(0 - buf.bd.i1);
-        buf.bd.i0 = Rounding(returnApDecPer(lvl) * UnitProp[SpellEvent.TargetUnit].AttackPower());
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAP(buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(0 - buf.bd.i1);
+        buf.bd.i0 = Rounding(returnApDecPer(lvl) * UnitProp.inst(SpellEvent.TargetUnit, SCOPE_PREFIX).AttackPower());
         buf.bd.i1 = 20;
         if (buf.bd.e0 == 0) {
             buf.bd.e0 = BuffEffect.create(ART_BLOOD_LUST_LEFT, buf, "hand, left");

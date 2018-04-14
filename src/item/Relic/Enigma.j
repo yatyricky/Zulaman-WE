@@ -27,7 +27,7 @@ constant string  ART  = "Abilities\\Spells\\Items\\AIil\\AIilTarget.mdl";
     }
 
     function action(unit u, item it, integer fac) {
-        UnitProp up = UnitProp[u];
+        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
         EnigmaData ed = EnigmaData[it];
         up.damageTaken -= 0.05 * fac;
         up.damageDealt += 0.05 * fac;

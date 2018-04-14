@@ -29,18 +29,18 @@ library HeroicStrike requires DamageSystem, SpellEvent, OrcCaptureFlag {
     function level() -> boolean {
         if (GetLearnedSkill() == SID_HEROIC_STRIKE) {
             if (GetUnitAbilityLevel(GetTriggerUnit(), SID_HEROIC_STRIKE) > 2) {
-                UnitProp[GetTriggerUnit()].attackCrit += 0.1;
+                UnitProp.inst(GetTriggerUnit(), SCOPE_PREFIX).attackCrit += 0.1;
             }
         }
         return false;
     }
     
     function onEffect(Buff buf) {
-        UnitProp[buf.bd.target].ModAttackSpeed(buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(buf.bd.i0);
     }
     
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].ModAttackSpeed(0 - buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(0 - buf.bd.i0);
     }
 
     function onCast() {           
@@ -53,7 +53,7 @@ library HeroicStrike requires DamageSystem, SpellEvent, OrcCaptureFlag {
             buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BID_HEROIC_STRIKE);
             buf.bd.interval = 60.0;
             buf.bd.tick = -1;
-            UnitProp[buf.bd.target].ModAttackSpeed(0 - buf.bd.i0);
+            UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(0 - buf.bd.i0);
             buf.bd.i0 = 7 + GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_HEROIC_STRIKE) * 3;
             if (buf.bd.e0 == 0) {buf.bd.e0 = BuffEffect.create(ART_PHOENIX_MISSILE, buf, "weapon");}
             buf.bd.boe = onEffect;

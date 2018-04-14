@@ -7,7 +7,7 @@ constant integer BUFF_ID = 'A04L';
     function onEffect(Buff buf) {}
 
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].ModLife(-100);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModLife(-100);
     }
 
     struct FortitudeAura {
@@ -25,7 +25,7 @@ constant integer BUFF_ID = 'A04L';
                         buf.bd.tick = -1;
                         buf.bd.interval = INTERVAL * 2.0;
                         if (buf.bd.i0 != 6) {
-                            UnitProp[buf.bd.target].ModLife(100);
+                            UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModLife(100);
                             buf.bd.i0 = 6;
                         }
                         buf.bd.boe = onEffect;

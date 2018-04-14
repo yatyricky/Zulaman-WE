@@ -8,16 +8,16 @@ constant integer BUFF_ID = 'A04K';
     }
     
     function onEffect(Buff buf) {
-        UnitProp[buf.bd.target].aggroRate -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).aggroRate -= buf.bd.r0;
     }
 
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].aggroRate += buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).aggroRate += buf.bd.r0;
     }
 
     function response(CastingBar cd) {
         integer i = 0;
-        real amt = returnHeal(GetUnitAbilityLevel(cd.caster, SID_TRANQUILITY), UnitProp[cd.caster].SpellPower());
+        real amt = returnHeal(GetUnitAbilityLevel(cd.caster, SID_TRANQUILITY), UnitProp.inst(cd.caster, SCOPE_PREFIX).SpellPower());
         while (i < PlayerUnits.n) {
             if (GetDistance.unitCoord2d(PlayerUnits.units[i], GetUnitX(cd.caster), GetUnitY(cd.caster)) < 1200.0 && !IsUnitDead(PlayerUnits.units[i])) {
                 HealTarget(cd.caster, PlayerUnits.units[i], amt, SpellData[SID_TRANQUILITY].name, 0.0);
@@ -34,14 +34,14 @@ constant integer BUFF_ID = 'A04K';
         CastingBar cb = CastingBar.create(response);
         Buff buf;
         cb.cost = 150 + GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_TRANQUILITY) * 50;
-        cb.channel(Rounding(8.0 * (1.0 + UnitProp[SpellEvent.CastingUnit].SpellHaste())));
+        cb.channel(Rounding(8.0 * (1.0 + UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).SpellHaste())));
         
         AddTimedEffect.atCoord(ART, GetUnitX(SpellEvent.CastingUnit), GetUnitY(SpellEvent.CastingUnit), 4.75);
         
         buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BUFF_ID);
         buf.bd.tick = -1;
         buf.bd.interval = 8.0;
-        UnitProp[SpellEvent.TargetUnit].aggroRate += buf.bd.r0;
+        UnitProp.inst(SpellEvent.TargetUnit, SCOPE_PREFIX).aggroRate += buf.bd.r0;
         buf.bd.r0 = 1.0;
         buf.bd.boe = onEffect;
         buf.bd.bor = onRemove;

@@ -3,7 +3,7 @@ library RunedBracers requires ItemAttributes {
     //HandleTable ht;
 
     function action(unit u, item it, integer fac) {
-        UnitProp up = UnitProp[u];
+        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
         up.ModLife(75 * fac);
         up.spellTaken -= 0.1 * fac;
         //if (!ht.exists(u)) {ht[u] = 0;}

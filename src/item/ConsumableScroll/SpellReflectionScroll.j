@@ -7,11 +7,11 @@ constant integer DURATION = 10;
 constant integer MAX_REFL = 8;
     
     function onEffect(Buff buf) {
-        UnitProp[buf.bd.target].ModSpellReflect(buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModSpellReflect(buf.bd.i0);
     }
     
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].ModSpellReflect(0 - buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModSpellReflect(0 - buf.bd.i0);
     }
     
     struct ArcaneField {

@@ -3,7 +3,7 @@ library FrostMourne requires ItemAttributes, ArthassCorruption {
     HandleTable ht2;
 
     function action(unit u, item it, integer fac) {
-        UnitProp up = UnitProp[u];
+        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
         up.ModStr(15 * fac);
         up.ll += 0.11 * fac;
         
@@ -11,7 +11,7 @@ library FrostMourne requires ItemAttributes, ArthassCorruption {
     }
 
     function action1(unit u, item it, integer fac) {
-        UnitProp up = UnitProp[u];
+        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
         up.ModStr(15 * fac);
         up.ll += 0.11 * fac;
         up.ml += 0.09 * fac;
@@ -20,7 +20,7 @@ library FrostMourne requires ItemAttributes, ArthassCorruption {
     }
 
     function action2(unit u, item it, integer fac) {
-        UnitProp up = UnitProp[u];
+        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
         up.ModStr(15 * fac);
         up.ll += 0.11 * fac;
         up.ml += 0.09 * fac;

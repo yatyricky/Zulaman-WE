@@ -11,7 +11,7 @@ constant string  STUN_OSTR  = "thunderbolt";
 
         private method destroy() {
             ReleaseTimer(this.tm);
-            UnitProp[this.u].stunned = false;
+            UnitProp.inst(this.u, SCOPE_PREFIX).stunned = false;
             UnitRemoveAbility(this.u, STUN_DEBUFF_ID);
             thistype.ht.flush(this.u);
             this.tm = null;
@@ -47,7 +47,7 @@ constant string  STUN_OSTR  = "thunderbolt";
                 SetTimerData(this.tm, this);
                 this.u = u;
                 DummyCast(u, STUN_ID, STUN_OSTR, u);
-                UnitProp[u].stunned = true;
+                UnitProp.inst(u, SCOPE_PREFIX).stunned = true;
             }
             TimerStart(this.tm, dur, false, function thistype.execute);
         }

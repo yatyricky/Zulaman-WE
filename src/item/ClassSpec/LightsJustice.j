@@ -13,7 +13,7 @@ constant integer DEBUFF_ID = 'A06E';
     }
 
     function action(unit u, item it, integer fac) {
-        UnitProp up = UnitProp[u];
+        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
         up.ModInt(10 * fac);
         up.spellPower += 20 * fac;
         up.spellCrit += 0.05 * fac;

@@ -29,7 +29,7 @@ library TidalLoop requires ItemAttributes {
     }
 
     function action(unit u, item it, integer fac) {
-        UnitProp up = UnitProp[u];
+        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
         up.ModStr(10 * fac);
         up.ModInt(15 * fac);
         up.manaRegen += 6 * fac;

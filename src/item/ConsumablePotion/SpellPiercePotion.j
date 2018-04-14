@@ -4,11 +4,11 @@ constant integer BUFF_ID = 'A08B';
 constant integer DEBUFF_ID = 'A095';
     
     function onEffect1(Buff buf) {
-        UnitProp[buf.bd.target].spellTaken += buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellTaken += buf.bd.r0;
     }
     
     function onRemove1(Buff buf) {
-        UnitProp[buf.bd.target].spellTaken -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellTaken -= buf.bd.r0;
     }
     
     function damaged() {
@@ -18,7 +18,7 @@ constant integer DEBUFF_ID = 'A095';
                 buf = Buff.cast(DamageResult.source, DamageResult.target, DEBUFF_ID);
                 buf.bd.tick = -1;
                 buf.bd.interval = 5.0;
-                UnitProp[buf.bd.target].spellTaken -= buf.bd.r0;
+                UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellTaken -= buf.bd.r0;
                 buf.bd.r0 = 0.03;
                 //if (buf.bd.e0 == 0) {buf.bd.e0 = BuffEffect.create(ART_TARGET, buf, "origin");}
                 //if (buf.bd.e1 == 0) {buf.bd.e1 = BuffEffect.create(ART_RIGHT, buf, "hand, right");}

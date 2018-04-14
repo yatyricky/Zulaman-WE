@@ -18,7 +18,7 @@ constant string  PATH  = "Abilities\\Spells\\Other\\BlackArrow\\BlackArrowMissil
         p.path = PATH;
         p.pr = onhit;
         p.speed = 900;
-        p.r0 = returnDamage(GetUnitAbilityLevel(p.caster, SID_DARK_ARROW), UnitProp[p.caster].AttackPower());
+        p.r0 = returnDamage(GetUnitAbilityLevel(p.caster, SID_DARK_ARROW), UnitProp.inst(p.caster, SCOPE_PREFIX).AttackPower());
         p.launch();
     }
     

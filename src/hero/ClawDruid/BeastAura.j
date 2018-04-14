@@ -7,7 +7,7 @@ constant integer BUFF_ID = 'A04C';
     function onEffect(Buff buf) {}
 
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].ModAP(-10);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAP(-10);
     }
 
     struct BeastAura {
@@ -25,7 +25,7 @@ constant integer BUFF_ID = 'A04C';
                         buf.bd.tick = -1;
                         buf.bd.interval = INTERVAL * 2.0;
                         if (buf.bd.i0 != 6) {
-                            UnitProp[buf.bd.target].ModAP(10);
+                            UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAP(10);
                             buf.bd.i0 = 6;
                         }
                         buf.bd.boe = onEffect;

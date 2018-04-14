@@ -3,7 +3,7 @@ library Patricide requires ItemAttributes, ArthassCorruption {
     HandleTable ht, ht2;
 
     function action(unit u, item it, integer fac) {
-        UnitProp up = UnitProp[u];
+        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
         up.ModAP(30 * fac);
         
         if (!ht.exists(u)) {ht[u] = 0;}
@@ -13,7 +13,7 @@ library Patricide requires ItemAttributes, ArthassCorruption {
     }
 
     function action1(unit u, item it, integer fac) {
-        UnitProp up = UnitProp[u];
+        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
         up.ModAP(30 * fac);
         up.ModAttackSpeed(10 * fac);
         
@@ -24,7 +24,7 @@ library Patricide requires ItemAttributes, ArthassCorruption {
     }
 
     function action2(unit u, item it, integer fac) {
-        UnitProp up = UnitProp[u];
+        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
         up.ModAP(30 * fac);
         up.ModAttackSpeed(10 * fac);
         

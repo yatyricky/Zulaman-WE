@@ -4,7 +4,7 @@ constant string  ART  = "Abilities\\Spells\\Demon\\DarkPortal\\DarkPortalTarget.
 
     public function PriestCastHeal(unit caster, unit target, real portion) {
         integer i = 0;
-        real amt = (GetUnitAbilityLevel(caster, SID_HEAL) * 150 + UnitProp[caster].SpellPower()) * portion;
+        real amt = (GetUnitAbilityLevel(caster, SID_HEAL) * 150 + UnitProp.inst(caster, SCOPE_PREFIX).SpellPower()) * portion;
         integer count;
         AddTimedEffect.atUnit(ART, target, "origin", 0.3);
         HealTarget(caster, target, amt, SpellData[SID_HEAL].name, 0.0);

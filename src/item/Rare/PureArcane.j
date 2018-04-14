@@ -22,7 +22,7 @@ constant string  ART_TARGET  = "Objects\\Spawnmodels\\NightElf\\NEDeathSmall\\NE
             if (!thistype.ht.exists(it)) {
                 SetItemCharges(it, GetItemCharges(it) + 1);
                 if (GetItemCharges(it) == 3) {
-                    DelayedDamageTarget(caster, target, 300.0 + UnitProp[caster].SpellPower(), "�����ط�", false, true, false, WEAPON_TYPE_WHOKNOWS);
+                    DelayedDamageTarget(caster, target, 300.0 + UnitProp.inst(caster, SCOPE_PREFIX).SpellPower(), "�����ط�", false, true, false, WEAPON_TYPE_WHOKNOWS);
                     AddTimedLight.atUnits("MFPB", caster, target, 0.75);
                     AddTimedEffect.atUnit(ART_TARGET, target, "origin", 1.0);
                     SetItemCharges(it, 0);

@@ -3,7 +3,7 @@ library CoreHoundTooth requires ItemAttributes {
     //HandleTable ht;
 
     function action(unit u, item it, integer fac) {
-        UnitProp up = UnitProp[u];
+        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
         up.ModLife(100 * fac);
         up.ModAP(30 * fac);
         up.ModAttackSpeed(10 * fac);

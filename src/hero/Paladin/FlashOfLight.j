@@ -23,7 +23,7 @@ library FlashOfLight requires PaladinGlobal, SpellEvent, UnitProperty, BeaconOfL
             print(SCOPE_PREFIX+">|cffff0000error|r.flash of light level = 0 and triggered");
         }
         // get the amount and heal
-        amt = returnHeal(ilvl) + UnitProp[SpellEvent.CastingUnit].SpellPower() * 1.4;
+        amt = returnHeal(ilvl) + UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).SpellPower() * 1.4;
         exct = healCrit[id] + returnExtraCritical(ilvl);
         buf = BuffSlot[SpellEvent.TargetUnit].getBuffByBid(BID_HOLY_LIGHT_AMP);
         if (buf != 0) {

@@ -1111,7 +1111,7 @@ constant real AIACTION_INTERVAL = 0.33;
                     i += 1;
                 }
                 if (!flag) {
-                    if ((UnitProp[tar].Speed() < UnitProp[source].Speed() * 0.75) || UnitProp[tar].Stunned()) {
+                    if ((UnitProp.inst(tar, SCOPE_PREFIX).Speed() < UnitProp.inst(source, SCOPE_PREFIX).Speed() * 0.75) || UnitProp.inst(tar, SCOPE_PREFIX).Stunned()) {
                         if (IsUnit(source, ot)) {
                             if (GetDistance.units2d(source, tar) < 450.0) {
                                 IssuePointOrderById(source, OID_MOVE, 2 * GetUnitX(source) - GetUnitX(tar), 2 * GetUnitY(source) - GetUnitY(tar));
@@ -1617,7 +1617,7 @@ constant real AIACTION_INTERVAL = 0.33;
     function AIActions() {
         integer i = 0;
         while (i < ain) {
-            if (!UnitProp[aiu[i]].Stunned() && !UnitProp[aiu[i]].Disabled()) {
+            if (!UnitProp.inst(aiu[i], SCOPE_PREFIX).Stunned() && !UnitProp.inst(aiu[i], SCOPE_PREFIX).Disabled()) {
                 if (PositioningDone(aiu[i])) {
                     UnitActionType(unitCallBack[GetUnitTypeId(aiu[i])]).evaluate(aiu[i]);
                 }

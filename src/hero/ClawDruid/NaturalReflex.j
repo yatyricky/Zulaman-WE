@@ -13,12 +13,12 @@ constant string  ART  = "Abilities\\Spells\\Human\\Invisibility\\InvisibilityTar
 
     // i0 = current increment; i1 = final decrement
     function onEffect(Buff buf) {
-        UnitProp[buf.bd.target].dodge += buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).dodge += buf.bd.r0;
         SetUnitVertexColor(buf.bd.target, 255, 255, 255, 100);
     }
 
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].dodge -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).dodge -= buf.bd.r0;
         SetUnitVertexColor(buf.bd.target, 255, 255, 255, 255);
     }
 
@@ -26,7 +26,7 @@ constant string  ART  = "Abilities\\Spells\\Human\\Invisibility\\InvisibilityTar
         Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BUFF_ID);
         buf.bd.tick = -1;
         buf.bd.interval = 5.0;
-        UnitProp[SpellEvent.CastingUnit].dodge -= buf.bd.r0;
+        UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).dodge -= buf.bd.r0;
         SetUnitVertexColor(SpellEvent.CastingUnit, 255, 255, 255, 255);
         buf.bd.r0 = returnDodge(GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_NATURAL_REFLEX));
         buf.bd.boe = onEffect;

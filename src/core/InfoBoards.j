@@ -165,113 +165,113 @@ constant integer MAX_DAMAGE_HEAL_TYPES = 32;
             bi = staboards[id][0][2];
             bi.text = "AttackPower";
             bi = staboards[id][1][2];
-            bi.text = I2S(UnitProp[u].APMin()) + " - " + I2S(UnitProp[u].APMax());            
+            bi.text = I2S(UnitProp.inst(u, SCOPE_PREFIX).APMin()) + " - " + I2S(UnitProp.inst(u, SCOPE_PREFIX).APMax());            
             
             bi = staboards[id][0][3];
             bi.text = "AttackCrit";
             bi = staboards[id][1][3];
-            bi.text = R2S(UnitProp[u].AttackCrit() * 100) + "%";
+            bi.text = R2S(UnitProp.inst(u, SCOPE_PREFIX).AttackCrit() * 100) + "%";
             
             bi = staboards[id][0][4];
             bi.text = "AttackSpeed";
             bi = staboards[id][1][4];
-            bi.text = I2S(UnitProp[u].AttackSpeed() + 100) + "%";
+            bi.text = I2S(UnitProp.inst(u, SCOPE_PREFIX).AttackSpeed() + 100) + "%";
             
             bi = staboards[id][0][5];
             bi.text = "AttackRate";
             bi = staboards[id][1][5];
-            bi.text = R2S(UnitProp[u].AttackRate() * 100) + "%";
+            bi.text = R2S(UnitProp.inst(u, SCOPE_PREFIX).AttackRate() * 100) + "%";
             
             
             
             bi = staboards[id][2][2];
             bi.text = "SpellCrit";
             bi = staboards[id][3][2];
-            bi.text = R2S(UnitProp[u].SpellCrit() * 100) + "%";
+            bi.text = R2S(UnitProp.inst(u, SCOPE_PREFIX).SpellCrit() * 100) + "%";
             
             bi = staboards[id][2][3];
             bi.text = "SpellHaste";
             bi = staboards[id][3][3];
-            bi.text = R2S(UnitProp[u].SpellHaste() * 100) + "%";
+            bi.text = R2S(UnitProp.inst(u, SCOPE_PREFIX).SpellHaste() * 100) + "%";
             
             bi = staboards[id][2][4];
             bi.text = "SpellPower";
             bi = staboards[id][3][4];
-            bi.text = R2S(UnitProp[u].SpellPower());
+            bi.text = R2S(UnitProp.inst(u, SCOPE_PREFIX).SpellPower());
             
             
             
             bi = staboards[id][4][2];
             bi.text = "Armor";
             bi = staboards[id][5][2];
-            bi.text = R2S(UnitProp[u].Armor());
+            bi.text = R2S(UnitProp.inst(u, SCOPE_PREFIX).Armor());
             
             bi = staboards[id][4][3];
             bi.text = "Dodge";
             bi = staboards[id][5][3];
-            bi.text = R2S(UnitProp[u].Dodge() * 100) + "%";
+            bi.text = R2S(UnitProp.inst(u, SCOPE_PREFIX).Dodge() * 100) + "%";
             
             bi = staboards[id][4][4];
             bi.text = "BlockRate";
             bi = staboards[id][5][4];
-            bi.text = R2S(UnitProp[u].BlockRate() * 100) + "%";
+            bi.text = R2S(UnitProp.inst(u, SCOPE_PREFIX).BlockRate() * 100) + "%";
             
             bi = staboards[id][4][5];
             bi.text = "BlockPoint";
             bi = staboards[id][5][5];
-            bi.text = R2S(UnitProp[u].BlockPoint());
+            bi.text = R2S(UnitProp.inst(u, SCOPE_PREFIX).BlockPoint());
             
             bi = staboards[id][4][6];
             bi.text = "SpellTaken";
             bi = staboards[id][5][6];
-            bi.text = R2S(UnitProp[u].SpellTaken() * 100) + "%";
+            bi.text = R2S(UnitProp.inst(u, SCOPE_PREFIX).SpellTaken() * 100) + "%";
             
             bi = staboards[id][4][7];
             bi.text = "DamageTaken";
             bi = staboards[id][5][7];
-            bi.text = R2S(UnitProp[u].DamageTaken() * 100) + "%";
+            bi.text = R2S(UnitProp.inst(u, SCOPE_PREFIX).DamageTaken() * 100) + "%";
             
             bi = staboards[id][4][8];
             bi.text = "HealTaken";
             bi = staboards[id][5][8];
-            bi.text = R2S(UnitProp[u].HealTaken() * 100) + "%";
+            bi.text = R2S(UnitProp.inst(u, SCOPE_PREFIX).HealTaken() * 100) + "%";
             
             
             
             bi = staboards[id][6][2];
             bi.text = "SpellReflect";
             bi = staboards[id][7][2];
-            bi.text = I2S(UnitProp[u].SpellReflect());
+            bi.text = I2S(UnitProp.inst(u, SCOPE_PREFIX).SpellReflect());
             
             bi = staboards[id][6][3];
             bi.text = "AggroRate";
             bi = staboards[id][7][3];
-            bi.text = R2S(UnitProp[u].AggroRate() * 100) + "%";
+            bi.text = R2S(UnitProp.inst(u, SCOPE_PREFIX).AggroRate() * 100) + "%";
             
             bi = staboards[id][6][4];
             bi.text = "Disabled";
             bi = staboards[id][7][4];
-            bi.text = B2S(UnitProp[u].Disabled());
+            bi.text = B2S(UnitProp.inst(u, SCOPE_PREFIX).Disabled());
             
             bi = staboards[id][6][5];
             bi.text = "LifeRegen";
             bi = staboards[id][7][5];
-            bi.text = R2S(UnitProp[u].LifeRegen());
+            bi.text = R2S(UnitProp.inst(u, SCOPE_PREFIX).LifeRegen());
             
             bi = staboards[id][6][6];
             bi.text = "ManaRegen";
             bi = staboards[id][7][6];
-            bi.text = R2S(UnitProp[u].ManaRegen());
+            bi.text = R2S(UnitProp.inst(u, SCOPE_PREFIX).ManaRegen());
             
             bi = staboards[id][6][7];
             bi.text = "Speed";
             bi = staboards[id][7][7];
-            bi.text = I2S(UnitProp[u].Speed());
+            bi.text = I2S(UnitProp.inst(u, SCOPE_PREFIX).Speed());
             
             bi = staboards[id][6][8];
             bi.text = "DamageDealt";
             bi = staboards[id][7][8];
-            bi.text = R2S(UnitProp[u].DamageDealt() * 100) + "%";
+            bi.text = R2S(UnitProp.inst(u, SCOPE_PREFIX).DamageDealt() * 100) + "%";
             
             // BUFF BOARDS
             buffboards[id].all.text = "";

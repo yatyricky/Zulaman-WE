@@ -17,11 +17,11 @@ constant string  ART_EFFECT  = "Abilities\\Spells\\Orc\\LiquidFire\\Liquidfire.m
     }
 
     //function onEffect(Buff buf) {
-    //    UnitProp[buf.bd.target].damageGoesMana += buf.bd.r0;
+    //    UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageGoesMana += buf.bd.r0;
     //}
 
     //function onRemove(Buff buf) {
-    //    UnitProp[buf.bd.target].damageGoesMana -= buf.bd.r0;
+    //    UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageGoesMana -= buf.bd.r0;
     //}
 
     struct SunField {
@@ -72,11 +72,11 @@ constant string  ART_EFFECT  = "Abilities\\Spells\\Orc\\LiquidFire\\Liquidfire.m
         static method new(unit u) {
             thistype this = thistype.allocate();
             integer lvl = GetUnitAbilityLevel(u, SID_SUN_FIRE_STORM);
-            real hst = 1.0 + UnitProp[u].AttackSpeed() / 100.0 + UnitProp[u].SpellHaste();
+            real hst = 1.0 + UnitProp.inst(u, SCOPE_PREFIX).AttackSpeed() / 100.0 + UnitProp.inst(u, SCOPE_PREFIX).SpellHaste();
             this.caster = u;
             this.aoe = 250.0;
             this.count = Rounding(returnDuration(lvl) * hst);
-            this.dmg = returnDamage(lvl) + UnitProp[u].SpellPower() * 0.33;
+            this.dmg = returnDamage(lvl) + UnitProp.inst(u, SCOPE_PREFIX).SpellPower() * 0.33;
             //this.x = GetUnitX(u);
             //this.y = GetUnitY(u);
             this.damageNearBy();
@@ -97,7 +97,7 @@ constant string  ART_EFFECT  = "Abilities\\Spells\\Orc\\LiquidFire\\Liquidfire.m
         //buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BUFF_ID);
         //buf.bd.tick = -1;
         //buf.bd.interval = returnDuration(lvl);
-        //UnitProp[buf.bd.target].damageGoesMana -= buf.bd.r0;
+        //UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageGoesMana -= buf.bd.r0;
         //buf.bd.r0 = returnDamageGoesMana(lvl);
         //buf.bd.boe = onEffect;
         //buf.bd.bor = onRemove;

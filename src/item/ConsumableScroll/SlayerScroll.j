@@ -5,11 +5,11 @@ constant string  ART_TARGET  = "Abilities\\Spells\\Other\\Levelup\\LevelupCaster
 constant integer BUFF_ID = 'A073';
     
     function onEffect(Buff buf) {
-        UnitProp[buf.bd.target].damageDealt += buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageDealt += buf.bd.r0;
     }
     
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].damageDealt -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageDealt -= buf.bd.r0;
     }
 
     function onCast() {
@@ -20,7 +20,7 @@ constant integer BUFF_ID = 'A073';
                 buf = Buff.cast(SpellEvent.CastingUnit, PlayerUnits.units[i], BUFF_ID);
                 buf.bd.tick = -1;
                 buf.bd.interval = 10.0;
-                UnitProp[buf.bd.target].damageDealt -= buf.bd.r0;
+                UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageDealt -= buf.bd.r0;
                 buf.bd.r0 = 0.5;
                 buf.bd.boe = onEffect;
                 buf.bd.bor = onRemove;

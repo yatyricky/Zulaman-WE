@@ -5,18 +5,18 @@ constant string  ART_CASTER  = "Abilities\\Spells\\Items\\AIim\\AIimTarget.mdl";
     //HandleTable ht;
 
     function oneffect(Buff buf) {
-        UnitProp[buf.bd.target].spellPower += buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellPower += buf.bd.r0;
     }
 
     function onremove(Buff buf) {
-        UnitProp[buf.bd.target].spellPower -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellPower -= buf.bd.r0;
     }
     
     function onCast() {
         Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BUFF_ID);
         buf.bd.tick = -1;
         buf.bd.interval = 15.0;
-        UnitProp[buf.bd.target].spellPower -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellPower -= buf.bd.r0;
         buf.bd.r0 = 35;
         buf.bd.boe = oneffect;
         buf.bd.bor = onremove;
@@ -26,7 +26,7 @@ constant string  ART_CASTER  = "Abilities\\Spells\\Items\\AIim\\AIimTarget.mdl";
     }
 
     function action(unit u, item it, integer fac) {
-        UnitProp up = UnitProp[u];
+        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
         up.ModInt(17 * fac);
         up.spellPower += 17 * fac;
         //if (!ht.exists(u)) {ht[u] = 0;}

@@ -29,11 +29,11 @@ library Execute requires DamageSystem, AggroSystem {
             return TXT_CN_AET1_EXECUTE_0 + I2S(R2I(returnManaRegen(lvl))) + TXT_CN_AET1_EXECUTE_1 + I2S(R2I(returnTimerInterval(lvl))) + TXT_CN_AET1_EXECUTE_2 + I2S(this.valour);
         }
 
-        static method inst(unit u) -> thistype {
+        static method inst(unit u, string trace) -> thistype {
             if (thistype.ht.exists(u)) {
                 return thistype.ht[u];
             } else {
-                print("Unregistered Blademaster");
+                // print("Unregistered Blademaster: " + trace);
                 return 0;
             }
         }
@@ -109,7 +109,7 @@ library Execute requires DamageSystem, AggroSystem {
         if (lvl > 0) {
             mana = returnManaRegen(lvl);
             if (DamageResult.abilityName == DAMAGE_NAME_MELEE || DamageResult.abilityName == SpellData[SID_MORTAL_STRIKE].name || DamageResult.abilityName == SpellData[SID_HEROIC_STRIKE].name) {
-                vm = ValourManager.inst(DamageResult.source);
+                vm = ValourManager.inst(DamageResult.source, "damaged");
                 if (vm.continuous == 1) {
                     if (DamageResult.isCritical) {
                         vm.increaseValour(vm.continuous);
@@ -130,14 +130,14 @@ library Execute requires DamageSystem, AggroSystem {
     }
     
     function onCast() {
-        integer v = ValourManager.inst(SpellEvent.CastingUnit).flushValour();
-        real dmg = v * returnDamagePerPoint(GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_EXECUTE_LEARN)) + (UnitProp[SpellEvent.CastingUnit].AttackPower() * v * 0.1);
+        integer v = ValourManager.inst(SpellEvent.CastingUnit, "onCast").flushValour();
+        real dmg = v * returnDamagePerPoint(GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_EXECUTE_LEARN)) + (UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).AttackPower() * v * 0.1);
         DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, dmg, SpellData[SID_EXECUTE_LEARN].name, true, true, true, WEAPON_TYPE_METAL_HEAVY_SLICE);
         AddTimedEffect.atUnit(ART_GORE, SpellEvent.TargetUnit, "origin", 0.3);
     }
 
     public function GetUnitValour(unit u) -> integer {
-        ValourManager vm = ValourManager.inst(u);
+        ValourManager vm = ValourManager.inst(u, "GetValour");
         if (vm != 0) {
             return vm.getValour();
         } else {

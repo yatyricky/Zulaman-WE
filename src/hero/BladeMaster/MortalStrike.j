@@ -14,19 +14,19 @@ constant string  ART_CASTER  = "Abilities\\Spells\\Other\\Andt\\Andt.mdl";
     }
 
     function onEffect1(Buff buf) {
-        UnitProp[buf.bd.target].attackCrit += buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).attackCrit += buf.bd.r0;
     }
 
     function onRemove1(Buff buf) {
-        UnitProp[buf.bd.target].attackCrit -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).attackCrit -= buf.bd.r0;
     }
 
     function onEffect(Buff buf) {
-        UnitProp[buf.bd.target].healTaken -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).healTaken -= buf.bd.r0;
     }
 
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].healTaken += buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).healTaken += buf.bd.r0;
     }
     
     function onCast() {
@@ -37,14 +37,14 @@ constant string  ART_CASTER  = "Abilities\\Spells\\Other\\Andt\\Andt.mdl";
         Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BUFF_ID);
         buf.bd.tick = -1;
         buf.bd.interval = 15.0;
-        UnitProp[buf.bd.target].healTaken += buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).healTaken += buf.bd.r0;
         buf.bd.r0 = 0.5;
         buf.bd.boe = onEffect;
         buf.bd.bor = onRemove;
         buf.run();
         
         ilvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_MORTAL_STRIKE);
-        dmg = returnDamage(ilvl, UnitProp[SpellEvent.CastingUnit].AttackPower());
+        dmg = returnDamage(ilvl, UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).AttackPower());
         DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, dmg, SpellData[SID_MORTAL_STRIKE].name, true, true, true, WEAPON_TYPE_METAL_HEAVY_SLICE);
         if (DamageResult.isHit) {            
             AddTimedEffect.atUnit(ART_TARGET, SpellEvent.TargetUnit, "origin", 0.2);
@@ -66,7 +66,7 @@ constant string  ART_CASTER  = "Abilities\\Spells\\Other\\Andt\\Andt.mdl";
                         buf = Buff.cast(SpellEvent.CastingUnit, tu, BUFF_ID1);
                         buf.bd.tick = -1;
                         buf.bd.interval = 3.0;
-                        UnitProp[buf.bd.target].attackCrit -= buf.bd.r0;
+                        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).attackCrit -= buf.bd.r0;
                         buf.bd.r0 = returnExtraCritBuff(ilvl);
                         buf.bd.boe = onEffect1;
                         buf.bd.bor = onRemove1;

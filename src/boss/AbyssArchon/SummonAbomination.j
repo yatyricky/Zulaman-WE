@@ -4,11 +4,11 @@ constant string  ART  = "Units\\Undead\\Abomination\\AbominationExplosion.mdl";
 constant string  ART_DEBUFF  = "Abilities\\Spells\\Undead\\Cripple\\CrippleTarget.mdl";
 
     function onEffect(Buff buf) {
-        UnitProp[buf.bd.target].damageTaken += buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageTaken += buf.bd.r0;
     }
 
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].damageTaken -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageTaken -= buf.bd.r0;
     }
 
     function abominationDeath(unit u) {
@@ -25,7 +25,7 @@ constant string  ART_DEBUFF  = "Abilities\\Spells\\Undead\\Cripple\\CrippleTarge
                     buf = Buff.cast(u, PlayerUnits.units[i], BID_SUMMON_ABOMINATION);
                     buf.bd.tick = -1;
                     buf.bd.interval = 10;
-                    UnitProp[buf.bd.target].damageTaken -= buf.bd.r0;
+                    UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageTaken -= buf.bd.r0;
                     buf.bd.r0 = 0.5;
                     if (buf.bd.e0 == 0) {buf.bd.e0 = BuffEffect.create(ART_DEBUFF, buf, "origin");}
                     buf.bd.boe = onEffect;
@@ -42,7 +42,7 @@ constant string  ART_DEBUFF  = "Abilities\\Spells\\Undead\\Cripple\\CrippleTarge
                     buf = Buff.cast(u, MobList.units[i], BID_SUMMON_ABOMINATION);
                     buf.bd.tick = -1;
                     buf.bd.interval = 10;
-                    UnitProp[buf.bd.target].damageTaken -= buf.bd.r0;
+                    UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageTaken -= buf.bd.r0;
                     buf.bd.r0 = 2;
                     if (buf.bd.e0 == 0) {buf.bd.e0 = BuffEffect.create(ART_DEBUFF, buf, "origin");}
                     buf.bd.boe = onEffect;

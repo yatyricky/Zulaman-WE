@@ -7,12 +7,12 @@ constant string  ART  = "Abilities\\Spells\\Undead\\Cripple\\CrippleTarget.mdl";
     function onEffect(Buff buf) {}
 
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].ModSpeed(100);
-        UnitProp[buf.bd.target].ModAttackSpeed(30);
-        UnitProp[buf.bd.target].ModArmor(3);
-        UnitProp[buf.bd.target].attackRate += 0.1;
-        UnitProp[buf.bd.target].damageDealt += 0.04;
-        UnitProp[buf.bd.target].healTaken += 0.35;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModSpeed(100);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(30);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModArmor(3);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).attackRate += 0.1;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageDealt += 0.04;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).healTaken += 0.35;
     }
     
     function damaged() {
@@ -28,12 +28,12 @@ constant string  ART  = "Abilities\\Spells\\Undead\\Cripple\\CrippleTarget.mdl";
                     }
                     if (buf.bd.i0 == 0) {
                         buf.bd.i0 = 17;
-                        UnitProp[buf.bd.target].ModSpeed(-100);
-                        UnitProp[buf.bd.target].ModAttackSpeed(-30);
-                        UnitProp[buf.bd.target].ModArmor(-3);
-                        UnitProp[buf.bd.target].attackRate -= 0.1;
-                        UnitProp[buf.bd.target].damageDealt -= 0.04;
-                        UnitProp[buf.bd.target].healTaken -= 0.35;
+                        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModSpeed(-100);
+                        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(-30);
+                        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModArmor(-3);
+                        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).attackRate -= 0.1;
+                        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageDealt -= 0.04;
+                        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).healTaken -= 0.35;
                     }
                     buf.bd.boe = onEffect;
                     buf.bd.bor = onRemove;
@@ -44,7 +44,7 @@ constant string  ART  = "Abilities\\Spells\\Undead\\Cripple\\CrippleTarget.mdl";
     }
 
     function action(unit u, item i, integer fac) {
-        UnitProp up = UnitProp[u];
+        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
         up.ModAP(7 * fac);
         
         if (!ht.exists(u)) {ht[u] = 0;}

@@ -3,18 +3,18 @@ library ArmorCrushing requires SpellEvent, BuffSystem {
 constant integer BUFF_ID = 'A09W';
 
     function onEffect(Buff buf) {
-        UnitProp[buf.bd.target].ModArmor(0 - buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModArmor(0 - buf.bd.i0);
     }
 
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].ModArmor(buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModArmor(buf.bd.i0);
     }
     
     function onCast() {       
         Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BUFF_ID);
         buf.bd.tick = -1;
         buf.bd.interval = 7;
-        UnitProp[buf.bd.target].ModArmor(buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModArmor(buf.bd.i0);
         buf.bd.i0 = 50;
         buf.bd.boe = onEffect;
         buf.bd.bor = onRemove;

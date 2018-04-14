@@ -42,19 +42,19 @@ constant string  ART  = "units\\human\\WaterElemental\\WaterElemental.mdl";
     }
 
     function onEffect(Buff buf) {
-        UnitProp[buf.bd.target].ModAttackSpeed(buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(buf.bd.i0);
     }
 
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].ModAttackSpeed(0 - buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(0 - buf.bd.i0);
     }
 
     function onEffect1(Buff buf) {
-        UnitProp[buf.bd.target].ModAttackSpeed(0 - buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(0 - buf.bd.i0);
     }
 
     function onRemove1(Buff buf) {
-        UnitProp[buf.bd.target].ModAttackSpeed(buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(buf.bd.i0);
     }
 
     function onCast() {
@@ -69,7 +69,7 @@ constant string  ART  = "units\\human\\WaterElemental\\WaterElemental.mdl";
                 buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BUFF_ID);
                 buf.bd.tick = -1;
                 buf.bd.interval = 6.0;
-                UnitProp[buf.bd.target].ModAttackSpeed(0 - buf.bd.i0);
+                UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(0 - buf.bd.i0);
                 buf.bd.i0 = 15;
                 buf.bd.boe = onEffect;
                 buf.bd.bor = onRemove;
@@ -86,7 +86,7 @@ constant string  ART  = "units\\human\\WaterElemental\\WaterElemental.mdl";
                 buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BUFF_ID1);
                 buf.bd.tick = -1;
                 buf.bd.interval = 6.0;
-                UnitProp[buf.bd.target].ModAttackSpeed(buf.bd.i0);
+                UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(buf.bd.i0);
                 buf.bd.i0 = 15;
                 buf.bd.boe = onEffect1;
                 buf.bd.bor = onRemove1;

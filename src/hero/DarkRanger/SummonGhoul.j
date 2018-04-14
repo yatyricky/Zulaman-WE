@@ -3,7 +3,7 @@ library SummonGhoul requires SpellEvent, DarkRangerGlobal {
 constant string  ART  = "Abilities\\Spells\\Undead\\RaiseSkeletonWarrior\\RaiseSkeleton.mdl";
 
     function delayAddLife(DelayTask dt) {
-        UnitProp[dt.u0].ModLife((GetHeroLevel(darkranger[GetPidofu(dt.u0)]) - 1) * 350);
+        UnitProp.inst(dt.u0, SCOPE_PREFIX).ModLife((GetHeroLevel(darkranger[GetPidofu(dt.u0)]) - 1) * 350);
     }
 
     function onCast() {
@@ -17,7 +17,7 @@ constant string  ART  = "Abilities\\Spells\\Undead\\RaiseSkeletonWarrior\\RaiseS
         ghoul[id] = CreateUnit(Player(id), UTID_GHOUL, x, y, ang);
         SetUnitPositionEx(ghoul[id], x, y);
         AddTimedEffect.atUnit(ART, ghoul[id], "origin", 0.4);
-        DelayTask.create(delayAddLife, 0.15).u0 = ghoul[id];        
+        DelayTask.create(delayAddLife, 0.15).u0 = ghoul[id];
     }
 
     function onInit() {

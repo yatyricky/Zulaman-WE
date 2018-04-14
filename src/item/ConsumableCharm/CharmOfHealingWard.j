@@ -39,7 +39,7 @@ constant integer DURATION = 10;
             this.caster = u;
             this.ward = CreateUnit(GetOwningPlayer(u), UTID_NTR_HEALING_WARD, x, y, GetRandomInt(0, 359));
             this.c = DURATION;
-            this.amount = 100.0 + (UnitProp[u].AttackPower() + UnitProp[u].SpellPower()) * 0.33;
+            this.amount = 100.0 + (UnitProp.inst(u, SCOPE_PREFIX).AttackPower() + UnitProp.inst(u, SCOPE_PREFIX).SpellPower()) * 0.33;
             this.tm = NewTimer();
             SetTimerData(this.tm, this);
             TimerStart(this.tm, 1.0, true, function thistype.run);

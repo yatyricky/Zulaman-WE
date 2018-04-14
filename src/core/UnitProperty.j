@@ -12,7 +12,7 @@ library UnitProperty requires ModelInfo, ZAMCore {
         UnitProp up;
         integer tmp = 0;
         if (amount == 0) {return;}
-        up = UnitProp[u];
+        up = UnitProp.inst(u, SCOPE_PREFIX);
         up.$VAR$ += amount;
         amount = up.$VAR$;
         //BJDebugMsg("$VAR$ of " + GetUnitName(u) +" is set to " + I2S(amount));
@@ -370,15 +370,15 @@ library UnitProperty requires ModelInfo, ZAMCore {
             return R2I(GetUnitState(this.u, UNIT_STATE_MAX_LIFE) + GetUnitState(this.u, UNIT_STATE_MAX_MANA));
         }
         
-        //static method BleedTaken(unit u) -> real {return UnitProp[u].bleedTaken;}
-        //static method CritTaken(unit u) -> real {return UnitProp[u].critTaken;}
+        //static method BleedTaken(unit u) -> real {return UnitProp.inst(u, SCOPE_PREFIX).bleedTaken;}
+        //static method CritTaken(unit u) -> real {return UnitProp.inst(u, SCOPE_PREFIX).critTaken;}
         method LifeRegen() -> real {
             return this.lifeRegen;
         }
         
-        static method operator[] (unit u) -> thistype {
+        static method inst(unit u, string trace) -> thistype {
             if (!thistype.ht.exists(u)) {
-                print(SCOPE_PREFIX+">Unregistered unit: " + GetUnitName(u));
+                print(SCOPE_PREFIX+" Unregistered unit: " + GetUnitName(u) + " trace " + trace);
                 return 0/0;
             } else {
                 return thistype.ht[u];

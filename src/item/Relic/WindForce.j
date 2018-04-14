@@ -57,7 +57,7 @@ library WindForce requires ItemAttributes, DamageSystem {
     }
 
     function action(unit u, item i, integer fac) {
-        UnitProp up = UnitProp[u];
+        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
         up.ModAgi(15 * fac);
         up.ModAP(35 * fac);
         up.ModAttackSpeed(15 * fac);

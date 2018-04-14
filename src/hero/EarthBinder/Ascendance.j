@@ -3,13 +3,13 @@ library Ascendance requires SpellEvent, BuffSystem, DamageSystem {
 constant integer BUFF_ID = 'A03C';
 constant string  ART  = "Abilities\\Spells\\Orc\\Purge\\PurgeBuffTarget.mdl";
     function onEffect(Buff buf) {
-        UnitProp[buf.bd.target].damageDealt += buf.bd.r0;
-        UnitProp[buf.bd.target].ModArmor(buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageDealt += buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModArmor(buf.bd.i0);
     }
 
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].damageDealt -= buf.bd.r0;
-        UnitProp[buf.bd.target].ModArmor(0 - buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageDealt -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModArmor(0 - buf.bd.i0);
     }
     
     function ondamaging() {
@@ -18,7 +18,7 @@ constant string  ART  = "Abilities\\Spells\\Orc\\Purge\\PurgeBuffTarget.mdl";
             if (GetUnitAbilityLevel(DamageResult.source, BUFF_ID) > 0) {
                 DamageResult.wasDodgable = false;
                 DamageResult.isPhyx = false;
-                dur = 1.0 / (1.0 + UnitProp[DamageResult.source].AttackSpeed() / 100.0);
+                dur = 1.0 / (1.0 + UnitProp.inst(DamageResult.source, SCOPE_PREFIX).AttackSpeed() / 100.0);
                 AddTimedLight.atUnits("CLPB", DamageResult.source, DamageResult.target, dur);
                 AddTimedEffect.atUnit(ART_IMPACT, DamageResult.target, "origin", 0.3);
             }
@@ -46,9 +46,9 @@ constant string  ART  = "Abilities\\Spells\\Orc\\Purge\\PurgeBuffTarget.mdl";
                 buf = Buff.cast(u, u, BUFF_ID);
                 buf.bd.tick = -1;
                 buf.bd.interval = 8.0 + 4.0 * GetUnitAbilityLevel(u, SID_ASCENDANCE);
-                UnitProp[buf.bd.target].damageDealt -= buf.bd.r0;
+                UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageDealt -= buf.bd.r0;
                 buf.bd.r0 = 0.3;
-                UnitProp[buf.bd.target].ModArmor(0 - buf.bd.i0);
+                UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModArmor(0 - buf.bd.i0);
                 buf.bd.i0 = 75;
                 if (buf.bd.e0 == 0) {
                     buf.bd.e0 = BuffEffect.create(ART, buf, "origin");

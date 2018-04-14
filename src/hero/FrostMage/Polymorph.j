@@ -23,21 +23,21 @@ library Polymorph requires CastingBar, SpellReflection {
         // sheep effect
         if (!IsUnitBoss(buf.bd.target)) {
             DummyCast(buf.bd.caster, SID_POLYMORPH_DUMMY, "hex", buf.bd.target);
-            UnitProp[buf.bd.target].disabled += 1;
+            UnitProp.inst(buf.bd.target, SCOPE_PREFIX).disabled += 1;
         }        
         sheepTarget[pid] = buf.bd.target;      
         // damage taken
-        UnitProp[buf.bd.target].damageTaken += buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageTaken += buf.bd.r0;
     }
     
     function onRemove(Buff buf) {
         if (GetUnitAbilityLevel(buf.bd.target, 'B00I') > 0) {
             UnitRemoveAbility(buf.bd.target, 'B00I');
-            UnitProp[buf.bd.target].disabled -= 1;
+            UnitProp.inst(buf.bd.target, SCOPE_PREFIX).disabled -= 1;
         }
         sheepTarget[GetPlayerId(GetOwningPlayer(buf.bd.caster))] = null;        
         
-        UnitProp[buf.bd.target].damageTaken -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageTaken -= buf.bd.r0;
     }
     
     function onCasst() {
@@ -45,7 +45,7 @@ library Polymorph requires CastingBar, SpellReflection {
         integer lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_POLYMORPH);
         buf.bd.tick = -1;
         buf.bd.interval = 10.0;
-        UnitProp[buf.bd.target].damageTaken -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageTaken -= buf.bd.r0;
         buf.bd.r0 = returnDamageTaken(lvl);
         buf.bd.boe = onEffect;
         buf.bd.bor = onRemove;

@@ -78,8 +78,8 @@ constant string  NULL_STR  = "";
     public function HealTarget(unit a, unit b, real amount, string hName, real exCrit) {
         string display;
         integer i;        
-        HealResult.isCritical = GetRandomReal(0.0, 1.0) < UnitProp[a].SpellCrit() + exCrit;
-        amount = amount * UnitProp[a].DamageDealt() * UnitProp[b].HealTaken();
+        HealResult.isCritical = GetRandomReal(0.0, 1.0) < UnitProp.inst(a, SCOPE_PREFIX + "HealTarget 1").SpellCrit() + exCrit;
+        amount = amount * UnitProp.inst(a, SCOPE_PREFIX + "HealTarget 2").DamageDealt() * UnitProp.inst(b, SCOPE_PREFIX + "HealTarget 3").HealTaken();
         if (HealResult.isCritical) {
             amount *= 1.5;
         }
@@ -117,7 +117,7 @@ public boolean lifelock = false;
         DamageResult.target = b;
         DamageResult.isPhyx = isPhyx;
         DamageResult.wasDodgable = dodgable;
-        desk = 1.0 - UnitProp[a].AttackRate();
+        desk = 1.0 - UnitProp.inst(a, SCOPE_PREFIX + "DamageTarget 1").AttackRate();
         DamageResult.amount = amount;   
         DamageResult.extraCrit = 0.0;
         i = 0;
@@ -134,7 +134,7 @@ public boolean lifelock = false;
             DamageResult.isCritical = false;
             DamageResult.isImmune = false;
         } else {
-            desk += UnitProp[b].Dodge();
+            desk += UnitProp.inst(b, SCOPE_PREFIX + "DamageTarget 2").Dodge();
             if (factor < desk && DamageResult.wasDodgable) {
                 display = DODGE;
                 DamageResult.amount = 0.0;
@@ -144,20 +144,20 @@ public boolean lifelock = false;
                 DamageResult.isCritical = false;
                 DamageResult.isImmune = false;
             } else {
-                DamageResult.amount *= UnitProp[a].DamageDealt();
+                DamageResult.amount *= UnitProp.inst(a, SCOPE_PREFIX + "DamageTarget 3").DamageDealt();
                 DamageResult.isHit = true;
                 DamageResult.isDodged = false;
                 if (DamageResult.isPhyx) {
-                    DamageResult.amount *= (100.0 - UnitProp[b].Armor()) / 100.0;
+                    DamageResult.amount *= (100.0 - UnitProp.inst(b, SCOPE_PREFIX + "DamageTarget 4").Armor()) / 100.0;
                 } else {
-                    DamageResult.amount *= UnitProp[b].SpellTaken();
+                    DamageResult.amount *= UnitProp.inst(b, SCOPE_PREFIX + "DamageTarget 5").SpellTaken();
                 }
-                DamageResult.amount *= UnitProp[b].DamageTaken();
+                DamageResult.amount *= UnitProp.inst(b, SCOPE_PREFIX + "DamageTarget 6").DamageTaken();
                 if (DamageResult.amount < 2.0) {
                     DamageResult.amount = 0.0;
                     DamageResult.isBlocked = false;
                     DamageResult.isCritical = false;
-                    if (UnitProp[b].DamageTaken() <= 0.0) {
+                    if (UnitProp.inst(b, SCOPE_PREFIX + "DamageTarget 7").DamageTaken() <= 0.0) {
                         DamageResult.isImmune = true;
                         display = IMMUNE;
                     } else {
@@ -166,9 +166,9 @@ public boolean lifelock = false;
                     }
                 } else {
                     DamageResult.isImmune = false;   
-                    desk += UnitProp[b].BlockRate();
+                    desk += UnitProp.inst(b, SCOPE_PREFIX + "DamageTarget 8").BlockRate();
                     if (factor < desk && DamageResult.wasDodgable) {
-                        DamageResult.amount -= UnitProp[b].BlockPoint();
+                        DamageResult.amount -= UnitProp.inst(b, SCOPE_PREFIX + "DamageTarget 9").BlockPoint();
                         DamageResult.isCritical = false;
                         DamageResult.isBlocked = true;
                         if (DamageResult.amount < 2.0) {
@@ -177,8 +177,8 @@ public boolean lifelock = false;
                         }
                     } else {
                         DamageResult.isBlocked = false;
-                        desk += UnitProp[a].AttackCrit();
-                        if ((factor < desk + DamageResult.extraCrit && DamageResult.isPhyx) || (factor < UnitProp[a].SpellCrit() + DamageResult.extraCrit && !DamageResult.isPhyx) && criticable) {
+                        desk += UnitProp.inst(a, SCOPE_PREFIX + "DamageTarget 10").AttackCrit();
+                        if ((factor < desk + DamageResult.extraCrit && DamageResult.isPhyx) || (factor < UnitProp.inst(a, SCOPE_PREFIX+ "DamageTarget 15").SpellCrit() + DamageResult.extraCrit && !DamageResult.isPhyx) && criticable) {
                             DamageResult.amount *= 2.0;
                             DamageResult.isCritical = true;
                         } else {
@@ -259,7 +259,7 @@ if (GetWidgetLife(b) < GetUnitState(b, UNIT_STATE_MAX_LIFE) * 0.5 && lifelock) {
         } else if (dmg > 1.0) {
             a = null; b = null; return false;
         } else {
-            DamageTarget(a, b, UnitProp[a].AttackPower(), DAMAGE_NAME_MELEE, true, true, true, null);
+            DamageTarget(a, b, UnitProp.inst(a, SCOPE_PREFIX + "damaged 1").AttackPower(), DAMAGE_NAME_MELEE, true, true, true, null);
         }
         a = null; b = null; return false;
     }

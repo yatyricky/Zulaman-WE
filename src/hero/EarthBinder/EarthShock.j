@@ -18,7 +18,7 @@ library EarthShock requires DamageSystem, SpellData, BuffSystem {
         Buff buf;
         BuffSlot bs = BuffSlot[SpellEvent.CastingUnit];
         integer lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_EARTH_SHOCK);
-        real dmg = returnDamage(lvl, UnitProp[SpellEvent.CastingUnit].SpellPower());
+        real dmg = returnDamage(lvl, UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).SpellPower());
         AddTimedEffect.atUnit(ART_ANCIENT_PROTECTOR_MISSILE, SpellEvent.TargetUnit, "origin", 0.2);
         buf = bs.getBuffByBid(BID_EARTH_SHOCK_IMPROVED);
         if (buf != 0) {

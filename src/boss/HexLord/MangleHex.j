@@ -14,7 +14,7 @@ library MangleHex requires BuffSystem, SpellEvent, UnitProperty {
         buf.bd.bor = onRemove;
         buf.run();
         
-        dmg = 200 + UnitProp[SpellEvent.CastingUnit].AttackPower();        
+        dmg = 200 + UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).AttackPower();        
         DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, dmg, SpellData[SID_MANGLEHEX].name, true, true, true, WEAPON_TYPE_METAL_HEAVY_BASH);
         
         AddTimedEffect.atUnit(ART_BLEED, SpellEvent.TargetUnit, "origin", 0.2);

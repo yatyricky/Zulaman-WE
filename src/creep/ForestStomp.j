@@ -2,11 +2,11 @@
 library ForestStomp requires DamageSystem, ForcedMovement {
     
     function onEffect(Buff buf) {
-        UnitProp[buf.bd.target].ModSpeed(0 - buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModSpeed(0 - buf.bd.i0);
     }
     
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].ModSpeed(buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModSpeed(buf.bd.i0);
     }
 
     function onCast() {
@@ -28,8 +28,8 @@ library ForestStomp requires DamageSystem, ForcedMovement {
                 buf = Buff.cast(SpellEvent.CastingUnit, PlayerUnits.units[i], BID_FOREST_STOMP);
                 buf.bd.tick = -1;
                 buf.bd.interval = 3.0;
-                UnitProp[buf.bd.target].ModSpeed(buf.bd.i0);
-                buf.bd.i0 = Rounding(UnitProp[buf.bd.target].Speed() * 0.75);
+                UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModSpeed(buf.bd.i0);
+                buf.bd.i0 = Rounding(UnitProp.inst(buf.bd.target, SCOPE_PREFIX).Speed() * 0.75);
                 if (buf.bd.e0 == 0) {
                     buf.bd.e0 = BuffEffect.create(ART_SLOW, buf, "origin");
                 }

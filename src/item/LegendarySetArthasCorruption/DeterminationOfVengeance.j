@@ -3,7 +3,7 @@ library DeterminationOfVengeance requires ItemAttributes, ArthassCorruption {
     //HandleTable ht;
 
     function action(unit u, item it, integer fac) {
-        UnitProp up = UnitProp[u];
+        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
         up.ModAgi(15 * fac);
         up.ModLife(100 * fac);
         up.damageTaken -= 0.07 * fac;
@@ -13,7 +13,7 @@ library DeterminationOfVengeance requires ItemAttributes, ArthassCorruption {
     }
 
     function action1(unit u, item it, integer fac) {
-        UnitProp up = UnitProp[u];
+        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
         up.ModAgi(15 * fac);
         up.ModLife(100 * fac);
         up.damageTaken -= 0.07 * fac;

@@ -43,11 +43,11 @@ constant integer BUFF_ID = 'A047';
     }
 
     function onEffect(Buff buf) {
-        UnitProp[buf.bd.target].ModArmor(0 - buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModArmor(0 - buf.bd.i0);
     }
 
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].ModArmor(buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModArmor(buf.bd.i0);
     }
     
     function onCast() {
@@ -69,7 +69,7 @@ constant integer BUFF_ID = 'A047';
             
             //print("Mana used percent:" + R2S(costp));
                 lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_EVISCERATE);
-                ap = UnitProp[SpellEvent.CastingUnit].AttackPower();
+                ap = UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).AttackPower();
                 cp = ComboPoints[SpellEvent.CastingUnit].get();
                 amt = returnDD(lvl, ap, cp) * costp;
                 DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, amt, SpellData[SID_EVISCERATE].name, true, true, true, WEAPON_TYPE_METAL_HEAVY_SLICE);
@@ -79,14 +79,14 @@ constant integer BUFF_ID = 'A047';
                     buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BUFF_ID);
                     buf.bd.tick = -1;
                     buf.bd.interval = 8;
-                    UnitProp[buf.bd.target].ModArmor(buf.bd.i0);
+                    UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModArmor(buf.bd.i0);
                     buf.bd.i0 = 2 * cp;
                     buf.bd.boe = onEffect;
                     buf.bd.bor = onRemove;
                     buf.run();
                     
                     buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BID_EVISCERATE);
-                    buf.bd.interval = 3 / (1.0 + UnitProp[SpellEvent.CastingUnit].AttackSpeed() / 100.0);
+                    buf.bd.interval = 3 / (1.0 + UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).AttackSpeed() / 100.0);
                     buf.bd.tick = Rounding(18.0 / buf.bd.interval);
                     buf.bd.r0 = returnDOT(lvl, ap, cp);
                     buf.bd.boe = onEffectDot;

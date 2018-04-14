@@ -15,15 +15,15 @@ constant string  ART_REFLECTION  = "Abilities\\Spells\\NightElf\\ThornsAura\\Tho
     }
 
     function onEffect(Buff buf) {
-        UnitProp[buf.bd.target].blockRate += buf.bd.r0;
-        UnitProp[buf.bd.target].ModSpellReflect(1);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).blockRate += buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModSpellReflect(1);
     }
 
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].blockRate -= buf.bd.r0;
-        UnitProp[buf.bd.target].spellReflect -= 1;
-        if (UnitProp[buf.bd.target].spellReflect < 0) {
-            UnitProp[buf.bd.target].spellReflect = 0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).blockRate -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellReflect -= 1;
+        if (UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellReflect < 0) {
+            UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellReflect = 0;
         }
     }
     
@@ -47,9 +47,9 @@ constant string  ART_REFLECTION  = "Abilities\\Spells\\NightElf\\ThornsAura\\Tho
         buf.bd.tick = -1;
         buf.bd.interval = 5.0;
         buf.bd.i0 = GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_SHIELD_BLOCK);
-        UnitProp[SpellEvent.CastingUnit].blockRate -= buf.bd.r0;
+        UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).blockRate -= buf.bd.r0;
         buf.bd.r0 = returnBlockRate(buf.bd.i0);
-        buf.bd.r1 = UnitProp[buf.bd.target].BlockPoint() * returnBlockPointsAmp(buf.bd.i0);
+        buf.bd.r1 = UnitProp.inst(buf.bd.target, SCOPE_PREFIX).BlockPoint() * returnBlockPointsAmp(buf.bd.i0);
         buf.bd.boe = onEffect;
         buf.bd.bor = onRemove;
         buf.run();

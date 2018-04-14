@@ -5,11 +5,11 @@ constant string  ART_TARGET  = "Abilities\\Spells\\Items\\AIda\\AIdaTarget.mdl";
 constant integer BUFF_ID = 'A06W';
     
     function onEffect(Buff buf) {
-        UnitProp[buf.bd.target].ModArmor(buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModArmor(buf.bd.i0);
     }
     
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].ModArmor(0 - buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModArmor(0 - buf.bd.i0);
     }
 
     function onCast() {
@@ -20,7 +20,7 @@ constant integer BUFF_ID = 'A06W';
                 buf = Buff.cast(SpellEvent.CastingUnit, PlayerUnits.units[i], BUFF_ID);
                 buf.bd.tick = -1;
                 buf.bd.interval = 10.0;
-                UnitProp[buf.bd.target].ModArmor(0 - buf.bd.i0);
+                UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModArmor(0 - buf.bd.i0);
                 buf.bd.i0 = 8;
                 if (buf.bd.e0 == 0) {buf.bd.e0 = BuffEffect.create(ART_TARGET, buf, "overhead");}
                 buf.bd.boe = onEffect;

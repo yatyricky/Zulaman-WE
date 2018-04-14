@@ -3,7 +3,7 @@ library GoreHowl requires ItemAttributes {
     //HandleTable ht;
 
     function action(unit u, item it, integer fac) {
-        UnitProp up = UnitProp[u];
+        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
         up.ModStr(20 * fac);
         up.ModAP(20 * fac);
         up.attackCrit += 0.07 * fac;

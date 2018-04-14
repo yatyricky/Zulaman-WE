@@ -11,7 +11,7 @@ library ReforgedBadgeOfTenacity requires ItemAttributes, DamageSystem {
     }
 
     function action(unit u, item it, integer fac) {
-        UnitProp up = UnitProp[u];
+        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
         up.ModAgi(10 * fac);
         up.ModArmor(5 * fac);
         up.ModLife(150 * fac);

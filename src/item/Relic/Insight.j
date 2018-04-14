@@ -7,7 +7,7 @@ constant integer BUFF_ID = 'A066';
     }
 
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].manaRegen -= 6.0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).manaRegen -= 6.0;
     }
     
     function ondamaging() {
@@ -46,7 +46,7 @@ constant integer BUFF_ID = 'A066';
                         buf.bd.tick = -1;
                         buf.bd.interval = 1.5;
                         if (buf.bd.i0 != 6) {
-                            UnitProp[buf.bd.target].manaRegen += 6.0;
+                            UnitProp.inst(buf.bd.target, SCOPE_PREFIX).manaRegen += 6.0;
                             buf.bd.i0 = 6;
                         }
                         buf.bd.boe = onEffect;
@@ -84,7 +84,7 @@ constant integer BUFF_ID = 'A066';
     }
 
     function action(unit u, item it, integer fac) {
-        UnitProp up = UnitProp[u];
+        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
         
         up.ModInt(12 * fac);
         up.ModAP(15 * fac);

@@ -11,7 +11,7 @@ library RhokDelar requires ItemAttributes, DamageSystem {
     }
 
     function action(unit u, item it, integer fac) {
-        UnitProp up = UnitProp[u];
+        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
         up.ModAgi(10 * fac);
         up.ModAP(20 * fac);
         up.attackCrit += 0.08 * fac;

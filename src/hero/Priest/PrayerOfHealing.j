@@ -35,7 +35,7 @@ constant string  ART  = "Abilities\\Spells\\Demon\\DarkPortal\\DarkPortalTarget.
             i += 1;
         }
         if (count > 0) {
-            single = returnMaxHealPerUnit(lvl, UnitProp[cd.caster].SpellPower());
+            single = returnMaxHealPerUnit(lvl, UnitProp.inst(cd.caster, SCOPE_PREFIX).SpellPower());
             amt = single * returnTotalHealFactor(lvl) / count;
             if (amt > single) {
                 amt = single;

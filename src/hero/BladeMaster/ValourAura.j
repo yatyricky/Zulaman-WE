@@ -11,11 +11,11 @@ constant real AOE = 900.0;
 constant integer BUFF_ID = 'A04M';
 
     function onEffect(Buff buf) {
-        UnitProp[buf.bd.target].attackCrit += buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).attackCrit += buf.bd.r0;
     }
 
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].attackCrit -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).attackCrit -= buf.bd.r0;
     }
 
     struct ValourAura {
@@ -32,7 +32,7 @@ constant integer BUFF_ID = 'A04M';
                         buf = Buff.cast(this.u, PlayerUnits.units[i], BUFF_ID);
                         buf.bd.tick = -1;
                         buf.bd.interval = INTERVAL * 2.0;                        
-                        UnitProp[buf.bd.target].attackCrit -= buf.bd.r0;                        
+                        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).attackCrit -= buf.bd.r0;                        
                         
                         // equiped orc capture flag
                         if (HasOrcCaptureFlag(this.u)) {

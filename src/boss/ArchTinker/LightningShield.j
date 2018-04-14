@@ -5,11 +5,11 @@ constant integer RADIUS = 200;
 constant string  ART_TARGET  = "Abilities\\Spells\\Orc\\Purge\\PurgeBuffTarget.mdl";
 
     function onEffectNeg(Buff buf) {
-        UnitProp[buf.bd.target].damageTaken += buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageTaken += buf.bd.r0;
     }
 
     function onRemoveNeg(Buff buf) {
-        UnitProp[buf.bd.target].damageTaken -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageTaken -= buf.bd.r0;
     }
 
     public struct LightningShield {
@@ -139,7 +139,7 @@ constant string  ART_TARGET  = "Abilities\\Spells\\Orc\\Purge\\PurgeBuffTarget.m
                 buf = Buff.cast(caster, caster, BID_LIGHTNING_SHIELD_NEG);
                 buf.bd.interval = 20.0;
                 buf.bd.tick = -1;
-                UnitProp[buf.bd.target].damageTaken -= buf.bd.r0;
+                UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageTaken -= buf.bd.r0;
                 buf.bd.r0 = 5.0;
                 if (buf.bd.e0 == 0) {buf.bd.e0 = BuffEffect.create(ART_TARGET, buf, "origin");}
                 buf.bd.boe = onEffectNeg;
@@ -160,12 +160,12 @@ constant string  ART_TARGET  = "Abilities\\Spells\\Orc\\Purge\\PurgeBuffTarget.m
     }
 
     function onEffect(Buff buf) {
-        UnitProp[buf.bd.target].damageTaken -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageTaken -= buf.bd.r0;
         LightningShield.start(buf.bd.target);
     }
 
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].damageTaken += buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageTaken += buf.bd.r0;
         LightningShield.terminate(buf.bd.target);
     }
 
@@ -173,7 +173,7 @@ constant string  ART_TARGET  = "Abilities\\Spells\\Orc\\Purge\\PurgeBuffTarget.m
         Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BID_LIGHTNING_SHIELD);
         buf.bd.interval = 500.0;
         buf.bd.tick = -1;
-        UnitProp[buf.bd.target].damageTaken += buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageTaken += buf.bd.r0;
         buf.bd.r0 = 5.0;
         buf.bd.boe = onEffect;
         buf.bd.bor = onRemove;

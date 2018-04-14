@@ -4,11 +4,11 @@ constant string  ART_CASTER  = "Abilities\\Spells\\Items\\AIda\\AIdaCaster.mdl";
 constant integer BUFF_ID = 'A075';
     
     function onEffect(Buff buf) {
-        UnitProp[buf.bd.target].damageTaken -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageTaken -= buf.bd.r0;
     }
     
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].damageTaken += buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageTaken += buf.bd.r0;
     }
     
     function actualAct(DelayTask dt) {
@@ -19,7 +19,7 @@ constant integer BUFF_ID = 'A075';
                 buf = Buff.cast(dt.u0, PlayerUnits.units[i], BUFF_ID);
                 buf.bd.tick = -1;
                 buf.bd.interval = 9.0;
-                UnitProp[buf.bd.target].damageTaken += buf.bd.r0;
+                UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageTaken += buf.bd.r0;
                 buf.bd.r0 = 2.0;
                 buf.bd.boe = onEffect;
                 buf.bd.bor = onRemove;

@@ -8,11 +8,11 @@ constant integer BUFF_ID = 'A07J';
     }
     
     function onEffect(Buff buf) {
-        UnitProp[buf.bd.target].ModArmor(0 - buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModArmor(0 - buf.bd.i0);
     }
     
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].ModArmor(buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModArmor(buf.bd.i0);
     }
 
     function onCast() {
@@ -32,7 +32,7 @@ constant integer BUFF_ID = 'A07J';
                 buf = Buff.cast(SpellEvent.CastingUnit, MobList.units[i], BUFF_ID);
                 buf.bd.tick = -1;
                 buf.bd.interval = 10.0;
-                UnitProp[buf.bd.target].ModArmor(buf.bd.i0);
+                UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModArmor(buf.bd.i0);
                 buf.bd.i0 = 8;
                 //if (buf.bd.e0 == 0) {buf.bd.e0 = BuffEffect.create(ART_LEFT, buf, "hand, left");}
                 //if (buf.bd.e1 == 0) {buf.bd.e1 = BuffEffect.create(ART_RIGHT, buf, "hand, right");}

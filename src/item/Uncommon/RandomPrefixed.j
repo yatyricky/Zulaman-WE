@@ -17,7 +17,7 @@ library RandomPrefixed requires ItemAttributes {
     integer dge = 0;
 
     function action(unit u, item it, integer fac) {
-        UnitProp up = UnitProp[u];
+        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
         integer itid = GetItemTypeId(it);
         integer itype = itid / 0x100 * 0x100;
         integer prefix = itid - itype;
@@ -40,34 +40,34 @@ library RandomPrefixed requires ItemAttributes {
     
         itype += 0x30;
         if (itype == 'Igz0') {
-            //BJDebugMsg("XXÖ®¹¥»÷Ö®×¦");
+            //BJDebugMsg("XXÖ®ï¿½ï¿½ï¿½ï¿½Ö®×¦");
             ap += 5;
         } else if (itype == 'Ijs0') {
-            //BJDebugMsg("XXÖ®¼ÓËÙÊÖÌ×");
+            //BJDebugMsg("XXÖ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
             ias += 5;
         } else if (itype == 'Ics0') {
-            //BJDebugMsg("XXÖ®´ÌÉ±½£");
+            //BJDebugMsg("XXÖ®ï¿½ï¿½É±ï¿½ï¿½");
             cri += 3;
         } else if (itype == 'Ixp0') {
-            //BJDebugMsg("XXÖ®ÉúÃü»¤·û");
+            //BJDebugMsg("XXÖ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
             lif += 80;
         } else if (itype == 'Ish0') {
-            //BJDebugMsg("XXÖ®ÊØ»¤Ö¸»·");
+            //BJDebugMsg("XXÖ®ï¿½Ø»ï¿½Ö¸ï¿½ï¿½");
             def += 2;
         } else if (itype == 'Isb0') {
-            //BJDebugMsg("XXÖ®ÉÁ±Ü»¤·û");
+            //BJDebugMsg("XXÖ®ï¿½ï¿½ï¿½Ü»ï¿½ï¿½ï¿½");
             dge += 1;
         } else if (itype == 'Inl0') {
-            //BJDebugMsg("XXÖ®ÄÜÁ¿");
+            //BJDebugMsg("XXÖ®ï¿½ï¿½ï¿½ï¿½");
             man += 100;
         } else if (itype == 'Imz0') {
-            //BJDebugMsg("XXÖ®ÒÕÈË");
+            //BJDebugMsg("XXÖ®ï¿½ï¿½ï¿½ï¿½");
             mr += 4;
         } else if (itype == 'Iwz0') {
-            //BJDebugMsg("XXÖ®Î×ÕÈ");
+            //BJDebugMsg("XXÖ®ï¿½ï¿½ï¿½ï¿½");
             sp += 10;
         } else if (itype == 'Igh0') {
-            //BJDebugMsg("XXÖ®Ô²»·");
+            //BJDebugMsg("XXÖ®Ô²ï¿½ï¿½");
             str += 3; agi += 3; int += 3;
         }
         if (prefix == 0x31) {

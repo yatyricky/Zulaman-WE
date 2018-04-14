@@ -6,19 +6,19 @@ constant integer BUFF_ID = 'A05S';
 constant integer DEBUFF_ID = 'A05R';
 
     function onEffect1(Buff buf) {
-        UnitProp[buf.bd.target].damageDealt += buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageDealt += buf.bd.r0;
     }
 
     function onRemove1(Buff buf) {
-        UnitProp[buf.bd.target].damageDealt -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageDealt -= buf.bd.r0;
     }
 
     function onEffect(Buff buf) {
-        UnitProp[buf.bd.target].damageDealt -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageDealt -= buf.bd.r0;
     }
 
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].damageDealt += buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageDealt += buf.bd.r0;
     }
     
     function onhit(Projectile p) -> boolean {return true;}
@@ -33,7 +33,7 @@ constant integer DEBUFF_ID = 'A05R';
                 buf = Buff.cast(SpellEvent.CastingUnit, PlayerUnits.units[i], DEBUFF_ID);
                 buf.bd.tick = -1;
                 buf.bd.interval = 600.0;
-                UnitProp[buf.bd.target].damageDealt += buf.bd.r0;
+                UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageDealt += buf.bd.r0;
                 buf.bd.r0 += 0.02;
                 buf.bd.boe = onEffect;
                 buf.bd.bor = onRemove;
@@ -59,7 +59,7 @@ constant integer DEBUFF_ID = 'A05R';
             buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BUFF_ID);
             buf.bd.tick = -1;
             buf.bd.interval = 60.0;
-            UnitProp[buf.bd.target].damageDealt -= buf.bd.r0;
+            UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageDealt -= buf.bd.r0;
             buf.bd.r0 += newExtra;
             buf.bd.boe = onEffect1;
             buf.bd.bor = onRemove1;

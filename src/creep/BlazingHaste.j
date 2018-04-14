@@ -3,22 +3,22 @@ library BlazingHaste requires BuffSystem, SpellEvent, UnitProperty {
 constant string  ART_FIRE  = "Environment\\SmallBuildingFire\\SmallBuildingFire1.mdl";
 
     function onEffect(Buff buf) {
-        UnitProp[buf.bd.target].spellHaste += buf.bd.r0;
-        UnitProp[buf.bd.target].ModSpeed(buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellHaste += buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModSpeed(buf.bd.i0);
     }
 
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].spellHaste -= buf.bd.r0;
-        UnitProp[buf.bd.target].ModSpeed(0 - buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellHaste -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModSpeed(0 - buf.bd.i0);
     }
 
     function onCast() {
         Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BID_BLAZING_HASTE);
         buf.bd.tick = -1;
         buf.bd.interval = 20.0;
-        UnitProp[buf.bd.target].spellHaste -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellHaste -= buf.bd.r0;
         //BJDebugMsg("Original Spell Speed: " + I2S(buf.bd.i0));
-        UnitProp[buf.bd.target].ModSpeed(0 - buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModSpeed(0 - buf.bd.i0);
         buf.bd.i0 = 1000;
         //BJDebugMsg("New Speed mod: " + I2S(buf.bd.i0));
         buf.bd.r0 = 3.0;

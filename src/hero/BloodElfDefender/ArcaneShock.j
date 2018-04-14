@@ -15,11 +15,11 @@ constant string  ART_TARGET  = "Abilities\\Spells\\Human\\ManaFlare\\ManaFlareBo
     }
 
     function onEffect(Buff buf) {
-        UnitProp[buf.bd.target].attackRate -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).attackRate -= buf.bd.r0;
     }
 
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].attackRate += buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).attackRate += buf.bd.r0;
     }
     
     //function onEffect1(Buff buf) {}
@@ -78,7 +78,7 @@ constant string  ART_TARGET  = "Abilities\\Spells\\Human\\ManaFlare\\ManaFlareBo
         buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BUFF_ID);
         buf.bd.tick = -1;
         buf.bd.interval = 5.0;
-        UnitProp[buf.bd.target].attackRate += buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).attackRate += buf.bd.r0;
         buf.bd.r0 = returnCurseAmt(il);
         if (buf.bd.e0 == 0) {
             buf.bd.e0 = BuffEffect.create(ART_CURSE, buf, "overhead");
@@ -87,7 +87,7 @@ constant string  ART_TARGET  = "Abilities\\Spells\\Human\\ManaFlare\\ManaFlareBo
         buf.bd.bor = onRemove;
         buf.run();              // level > 1, curse on cast
         
-        dmg = returnDamage(il) + UnitProp[SpellEvent.CastingUnit].SpellPower() + UnitProp[SpellEvent.CastingUnit].AttackPower() * 0.31;
+        dmg = returnDamage(il) + UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).SpellPower() + UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).AttackPower() * 0.31;
         //bs = BuffSlot[SpellEvent.CastingUnit];
         //buf = bs.getBuffByBid(BUFF_ID1);
         //if (buf != 0) {

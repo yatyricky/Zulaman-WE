@@ -35,7 +35,7 @@ constant integer BUFF_ID = 'A03E';
     function onEffect(Buff buf) {            
         if (!IsUnitBoss(buf.bd.target)) {
             DummyCast(buf.bd.caster, SID_POLYMORPH_DUMMY, "hex", buf.bd.target);        
-            UnitProp[buf.bd.target].disabled += 1;
+            UnitProp.inst(buf.bd.target, SCOPE_PREFIX).disabled += 1;
         }
     }
     
@@ -45,7 +45,7 @@ constant integer BUFF_ID = 'A03E';
             UnitRemoveAbility(buf.bd.target, 'B00I');
         }
         periodicallyDosth1.start(buf.bd.target);
-        UnitProp[buf.bd.target].disabled -= 1;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).disabled -= 1;
     }
     
     function onCasst() {

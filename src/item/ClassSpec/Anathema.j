@@ -11,7 +11,7 @@ library Anathema requires ItemAttributes, DamageSystem {
     }
 
     function action(unit u, item it, integer fac) {
-        UnitProp up = UnitProp[u];
+        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
         up.ModLife(150 * fac);
         up.spellPower += 25 * fac;
         up.spellHaste += 0.05 * fac;

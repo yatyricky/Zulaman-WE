@@ -17,7 +17,7 @@ constant string  ART_TARGET  = "Abilities\\Spells\\Other\\Drain\\ManaDrainTarget
 
     function response(CastingBar cd) {
         integer lvl = GetUnitAbilityLevel(cd.caster, SID_MIND_FLAY);
-        real dmg = returnDamage(lvl, UnitProp[cd.caster].SpellPower());
+        real dmg = returnDamage(lvl, UnitProp.inst(cd.caster, SCOPE_PREFIX).SpellPower());
         real rate;
         unit tu;
         //BJDebugMsg("Run !");
@@ -46,7 +46,7 @@ constant string  ART_TARGET  = "Abilities\\Spells\\Other\\Drain\\ManaDrainTarget
         cb.e1 = AddSpecialEffectTarget(ART_TARGET, SpellEvent.TargetUnit, "chest");
         cb.l0 = CastAttachLightning.atUnits("DRAM", SpellEvent.CastingUnit, SpellEvent.TargetUnit);
         //BJDebugMsg("Createed");
-        cb.channel(Rounding(3.0 * (1.0 + UnitProp[SpellEvent.CastingUnit].SpellHaste())));
+        cb.channel(Rounding(3.0 * (1.0 + UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).SpellHaste())));
         //AddTimedLight.atUnits("DRAM", SpellEvent.CastingUnit, SpellEvent.TargetUnit, cb.r0);
         //AddTimedEffect.atUnit(ART_CASTER, SpellEvent.CastingUnit, "chest", cb.r0);
         //AddTimedEffect.atUnit(ART_TARGET, SpellEvent.TargetUnit, "chest", cb.r0);

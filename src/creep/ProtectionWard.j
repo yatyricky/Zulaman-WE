@@ -6,7 +6,7 @@ constant integer BUFF_ID = 'A09B';
     function onEffect(Buff buf) {}
 
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].damageTaken += 0.95;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageTaken += 0.95;
     }
 
     struct ProtectionWard {
@@ -32,7 +32,7 @@ constant integer BUFF_ID = 'A09B';
                         buf.bd.tick = -1;
                         buf.bd.interval = 1.5;
                         if (buf.bd.i0 != 6) {
-                            UnitProp[buf.bd.target].damageTaken -= 0.95;
+                            UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageTaken -= 0.95;
                             buf.bd.i0 = 6;
                         }
                         buf.bd.boe = onEffect;

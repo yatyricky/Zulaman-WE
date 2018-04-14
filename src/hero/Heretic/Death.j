@@ -16,7 +16,7 @@ constant string  ART_TARGET  = "Abilities\\Spells\\Undead\\AnimateDead\\AnimateD
         integer lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_DEATH);
         real dmg = returnSacrifice(lvl, GetWidgetLife(SpellEvent.CastingUnit));
         DamageTarget(SpellEvent.TargetUnit, SpellEvent.CastingUnit, dmg, SpellData[SID_DEATH].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
-        dmg = returnDamage(lvl, dmg, UnitProp[SpellEvent.CastingUnit].SpellPower());
+        dmg = returnDamage(lvl, dmg, UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).SpellPower());
         DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, dmg, SpellData[SID_DEATH].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
         AddTimedEffect.atUnit(ART_CASTER, SpellEvent.CastingUnit, "origin", 0.2);
         AddTimedEffect.atUnit(ART_TARGET, SpellEvent.TargetUnit, "origin", 0.2);

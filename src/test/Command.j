@@ -329,15 +329,15 @@ library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSys
         
         print("==== "+GetUnitNameEx(u)+" ====");
         print("-- 物理 --");
-        print("攻击: "+I2S(UnitProp[u].APMin()) + " - " + I2S(UnitProp[u].APMax())+" 暴击: "+R2S(UnitProp[u].AttackCrit() * 100) + "%"+" 攻速: "+I2S(UnitProp[u].AttackSpeed() + 100) + "%"+" 命中: "+R2S(UnitProp[u].AttackRate() * 100) + "%");
+        print("攻击: "+I2S(UnitProp.inst(u, SCOPE_PREFIX).APMin()) + " - " + I2S(UnitProp.inst(u, SCOPE_PREFIX).APMax())+" 暴击: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).AttackCrit() * 100) + "%"+" 攻速: "+I2S(UnitProp.inst(u, SCOPE_PREFIX).AttackSpeed() + 100) + "%"+" 命中: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).AttackRate() * 100) + "%");
         print("-- 法术 --");
-        print("法强: "+R2S(UnitProp[u].SpellPower())+" 法暴: "+R2S(UnitProp[u].SpellCrit() * 100) + "%"+" 法速: "+R2S(UnitProp[u].SpellHaste() * 100) + "%");
+        print("法强: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).SpellPower())+" 法暴: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).SpellCrit() * 100) + "%"+" 法速: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).SpellHaste() * 100) + "%");
         print("-- 防护 --");
-        print("护甲: "+R2S(UnitProp[u].Armor())+" 躲闪: "+R2S(UnitProp[u].Dodge() * 100) + "%"+" 格挡: "+R2S(UnitProp[u].BlockRate() * 100) + "%("+R2S(UnitProp[u].BlockPoint())+")");
-        print("魔抗: "+R2S(UnitProp[u].SpellTaken() * 100) + "%"+" 易伤: "+R2S(UnitProp[u].DamageTaken() * 100) + "%"+" 致死: "+R2S(UnitProp[u].HealTaken() * 100) + "%");
+        print("护甲: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).Armor())+" 躲闪: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).Dodge() * 100) + "%"+" 格挡: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).BlockRate() * 100) + "%("+R2S(UnitProp.inst(u, SCOPE_PREFIX).BlockPoint())+")");
+        print("魔抗: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).SpellTaken() * 100) + "%"+" 易伤: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).DamageTaken() * 100) + "%"+" 致死: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).HealTaken() * 100) + "%");
         print("-- 其它 --");
-        print("反射: "+I2S(UnitProp[u].SpellReflect())+" 仇恨: "+R2S(UnitProp[u].AggroRate() * 100) + "%"+" 禁用: "+B2S(UnitProp[u].Disabled()));
-        print("回复: "+R2S(UnitProp[u].LifeRegen())+"/"+R2S(UnitProp[u].ManaRegen())+" 速度: "+I2S(UnitProp[u].Speed())+" 伤害: "+R2S(UnitProp[u].DamageDealt() * 100) + "%");
+        print("反射: "+I2S(UnitProp.inst(u, SCOPE_PREFIX).SpellReflect())+" 仇恨: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).AggroRate() * 100) + "%"+" 禁用: "+B2S(UnitProp.inst(u, SCOPE_PREFIX).Disabled()));
+        print("回复: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).LifeRegen())+"/"+R2S(UnitProp.inst(u, SCOPE_PREFIX).ManaRegen())+" 速度: "+I2S(UnitProp.inst(u, SCOPE_PREFIX).Speed())+" 伤害: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).DamageDealt() * 100) + "%");
         
         DestroyGroup(g);
     }

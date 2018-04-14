@@ -4,13 +4,13 @@ constant string  ART_DEBUFF  = "Abilities\\Spells\\Other\\HowlOfTerror\\HowlTarg
 // constant string  ART_CASTER  = "Abilities\\Spells\\NightElf\\BattleRoar\\RoarCaster.mdl";
 
     function onEffect(Buff buf) {
-        UnitProp[buf.bd.target].ModAP(0 - buf.bd.i0);
-        UnitProp[buf.bd.target].spellPower -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAP(0 - buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellPower -= buf.bd.r0;
     }
 
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].ModAP(buf.bd.i0);
-        UnitProp[buf.bd.target].spellPower += buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAP(buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellPower += buf.bd.r0;
     }
 
     function onCast() {
@@ -21,10 +21,10 @@ constant string  ART_DEBUFF  = "Abilities\\Spells\\Other\\HowlOfTerror\\HowlTarg
             buf = Buff.cast(SpellEvent.CastingUnit, PlayerUnits.units[i], BID_SAVAGE_ROAR_HEX);
             buf.bd.tick = -1;
             buf.bd.interval = 6;
-            UnitProp[buf.bd.target].ModAP(buf.bd.i0);
-            UnitProp[buf.bd.target].spellPower += buf.bd.r0;
-            buf.bd.i0 = Rounding(0.5 * UnitProp[buf.bd.target].AttackPower());
-            buf.bd.r0 = UnitProp[buf.bd.target].SpellPower() * 0.5;
+            UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAP(buf.bd.i0);
+            UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellPower += buf.bd.r0;
+            buf.bd.i0 = Rounding(0.5 * UnitProp.inst(buf.bd.target, SCOPE_PREFIX).AttackPower());
+            buf.bd.r0 = UnitProp.inst(buf.bd.target, SCOPE_PREFIX).SpellPower() * 0.5;
             if (buf.bd.e0 == 0) {buf.bd.e0 = BuffEffect.create(ART_DEBUFF, buf, "overhead");}
             buf.bd.boe = onEffect;
             buf.bd.bor = onRemove;

@@ -2,11 +2,11 @@
 library Zeal requires BuffSystem {
 
     function onEffect(Buff buf) {
-        UnitProp[buf.bd.caster].ModAP(50);
+        UnitProp.inst(buf.bd.caster, SCOPE_PREFIX).ModAP(50);
     }
 
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.caster].ModAP(0 - buf.bd.i0);
+        UnitProp.inst(buf.bd.caster, SCOPE_PREFIX).ModAP(0 - buf.bd.i0);
     }
 
     function damaged() {

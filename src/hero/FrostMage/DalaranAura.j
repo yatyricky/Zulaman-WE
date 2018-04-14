@@ -7,7 +7,7 @@ constant integer BUFF_ID = 'A05Y';
     function onEffect(Buff buf) {}
 
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].ModInt(-9);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModInt(-9);
     }
 
     struct DalaranAura {
@@ -25,7 +25,7 @@ constant integer BUFF_ID = 'A05Y';
                         buf.bd.tick = -1;
                         buf.bd.interval = INTERVAL * 2.0;
                         if (buf.bd.i0 != 6) {
-                            UnitProp[buf.bd.target].ModInt(9);
+                            UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModInt(9);
                             buf.bd.i0 = 6;
                         }
                         buf.bd.boe = onEffect;

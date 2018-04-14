@@ -458,7 +458,7 @@ constant integer MAX_PLAYER_UNITS = 50;
                 i = 0;
                 while (i < thistype.n) {
                     if (!IsUnitUseless(thistype.units[i])) {
-                        damageReduc = UnitProp[thistype.units[i]].DamageTaken();
+                        damageReduc = UnitProp.inst(thistype.units[i], SCOPE_PREFIX).DamageTaken();
                         if (damageReduc < 0.01) {damageReduc = 0.01;}
                         if (damageReduc > 2.5) {damageReduc = 999999.0;}
                         td = GetWidgetLife(thistype.units[i]) / damageReduc;
@@ -581,7 +581,7 @@ constant integer MAX_PLAYER_UNITS = 50;
             if (MobList.locate(b) == -1) {
                 MobList.add(b);
             }
-            AggroList[b].aggroBy(a, amt * UnitProp[a].AggroRate());
+            AggroList[b].aggroBy(a, amt * UnitProp.inst(a, SCOPE_PREFIX).AggroRate());
         }
         //print(GetUnitName(b)+"'s aggro list of " + GetUnitName(a) + " has increased by " + R2S(amt));
     }

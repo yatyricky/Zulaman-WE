@@ -18,12 +18,12 @@ constant integer BUFF_ID = 'A04Q';
     function onEffect(Buff buf) {}
     
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].ModLife(0 - buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModLife(0 - buf.bd.i0);
     }
 
     function response(CastingBar cd) {
         integer lvl = GetUnitAbilityLevel(cd.caster, SID_MARROW_SQUEEZE);
-        real dmg = returnDamage(lvl, UnitProp[cd.caster].SpellPower());
+        real dmg = returnDamage(lvl, UnitProp.inst(cd.caster, SCOPE_PREFIX).SpellPower());
         integer incre;
         real heal;
         Buff buf, swpain;
@@ -56,7 +56,7 @@ constant integer BUFF_ID = 'A04Q';
 //BJDebugMsg("Overflow " + I2S(incre));
         }
         if (incre > 0) {
-            UnitProp[buf.bd.target].ModLife(incre);
+            UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModLife(incre);
             buf.bd.i0 += incre;
 //BJDebugMsg("Do it ");
         }

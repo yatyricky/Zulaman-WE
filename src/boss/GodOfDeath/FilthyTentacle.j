@@ -5,11 +5,11 @@ constant integer SPEED = 72;
 constant real SLOW = 0.5;
     
     function onEffect(Buff buf) {
-        UnitProp[buf.bd.target].ModSpeed(0 - buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModSpeed(0 - buf.bd.i0);
     }
     
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].ModSpeed(buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModSpeed(buf.bd.i0);
     }
 
     struct FilthyTentacle {
@@ -64,8 +64,8 @@ constant real SLOW = 0.5;
             buf = Buff.cast(caster, target, BID);
             buf.bd.tick = -1;
             buf.bd.interval = 10;
-            UnitProp[buf.bd.target].ModSpeed(buf.bd.i0);
-            buf.bd.i0 = Rounding(UnitProp[buf.bd.target].Speed() * SLOW);
+            UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModSpeed(buf.bd.i0);
+            buf.bd.i0 = Rounding(UnitProp.inst(buf.bd.target, SCOPE_PREFIX).Speed() * SLOW);
             // effect
             buf.bd.boe = onEffect;
             buf.bd.bor = onRemove;

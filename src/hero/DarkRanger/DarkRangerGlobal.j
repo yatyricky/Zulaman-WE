@@ -4,10 +4,8 @@ library DarkRangerGlobal requires Table, ZAMCore {
     public unit darkranger[NUMBER_OF_MAX_PLAYERS];
     
     function grantGhoul(unit u) {
-        real ang;
         if (GetUnitTypeId(u) == UTID_DARK_RANGER) {
-            ang = GetUnitFacing(u);
-            ghoul[GetPlayerId(GetOwningPlayer(u))] = CreateUnit(GetOwningPlayer(u), UTID_GHOUL, GetUnitX(u) + 200 * CosBJ(ang + 90.0), GetUnitY(u) + 200 * SinBJ(ang + 90.0), ang);
+            ghoul[GetPlayerId(GetOwningPlayer(u))] = null;
             darkranger[GetPlayerId(GetOwningPlayer(u))] = u;
         }
     }

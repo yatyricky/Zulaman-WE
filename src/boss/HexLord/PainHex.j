@@ -4,11 +4,11 @@ constant integer BUFF_ID = 'A01V';
 constant integer BUFF_ID1 = 'A021';
 
     function onEffect1(Buff buf) { 
-        UnitProp[buf.bd.target].spellTaken += buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellTaken += buf.bd.r0;
     }
 
     function onRemove1(Buff buf) {
-        UnitProp[buf.bd.target].spellTaken -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellTaken -= buf.bd.r0;
     }
 
     function onEffect(Buff buf) {
@@ -28,7 +28,7 @@ constant integer BUFF_ID1 = 'A021';
         }
         buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BUFF_ID);
         buf.bd.tick = 4;
-        buf.bd.interval = 2.0 * (1.0 - UnitProp[SpellEvent.CastingUnit].SpellHaste());
+        buf.bd.interval = 2.0 * (1.0 - UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).SpellHaste());
         buf.bd.boe = onEffect;
         buf.bd.bor = onRemove;
         buf.run();
@@ -36,7 +36,7 @@ constant integer BUFF_ID1 = 'A021';
         buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BUFF_ID1);
         buf.bd.tick = -1;
         buf.bd.interval = 8;
-        UnitProp[buf.bd.target].spellTaken -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellTaken -= buf.bd.r0;
         buf.bd.r0 = 0.3;
         buf.bd.boe = onEffect1;
         buf.bd.bor = onRemove1;

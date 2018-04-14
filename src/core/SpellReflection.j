@@ -5,7 +5,7 @@ library SpellReflection requires UnitProperty {
     integer responseSpellReflectionN = 0;
     
     public function TryReflect(unit u) -> boolean {
-        UnitProp up = UnitProp[u];
+        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
         integer i;
         if (up.SpellReflect() > 0) {
             AddTimedEffect.atUnit("Abilities\\Spells\\Items\\SpellShieldAmulet\\SpellShieldCaster.mdl", u, "origin", 0.1);            

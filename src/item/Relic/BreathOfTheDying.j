@@ -56,7 +56,7 @@ constant integer NOMIS = 32;
                     while (j < MobList.n) {
                         if (GetDistance.units2d(MobList.units[j], this.mis[i]) < 150 && !IsUnitDead(MobList.units[j]) && !IsUnitInGroup(MobList.units[j], this.damaged)) {
                             buf = Buff.cast(this.a, MobList.units[j], BUFF_ID);
-                            buf.bd.interval = 1.0 / (1.0 + UnitProp[this.a].SpellHaste() + UnitProp[this.a].AttackSpeed() / 100.0);
+                            buf.bd.interval = 1.0 / (1.0 + UnitProp.inst(this.a, SCOPE_PREFIX).SpellHaste() + UnitProp.inst(this.a, SCOPE_PREFIX).AttackSpeed() / 100.0);
                             buf.bd.tick = Rounding(6.0 / buf.bd.interval);
                             buf.bd.boe = onEffect;
                             buf.bd.bor = onRemove;
@@ -110,7 +110,7 @@ constant integer NOMIS = 32;
     }
 
     function action(unit u, item i, integer fac) {
-        UnitProp up = UnitProp[u];
+        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
         up.ModStr(10 * fac);
         up.ModAgi(10 * fac);
         up.ModInt(10 * fac);

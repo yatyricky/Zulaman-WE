@@ -14,7 +14,7 @@ constant string  ART  = "Abilities\\Spells\\NightElf\\shadowstrike\\shadowstrike
         Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BUFF_ID);
         buf.bd.tick = 3;
         buf.bd.interval = 4;
-        buf.bd.r0 = 75.0 + UnitProp[SpellEvent.CastingUnit].AttackPower() * 0.33;
+        buf.bd.r0 = 75.0 + UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).AttackPower() * 0.33;
         if (buf.bd.e0 == 0) {buf.bd.e0 = BuffEffect.create(ART, buf, "overhead");}
         buf.bd.boe = onEffect;
         buf.bd.bor = onRemove;

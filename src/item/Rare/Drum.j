@@ -6,19 +6,19 @@ constant string  ART_DEBUFF  = "Abilities\\Spells\\Other\\Aneu\\AneuTarget.mdl";
     HandleTable ht;
 
     function oneffect(Buff buf) {
-        UnitProp[buf.bd.target].damageTaken += buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageTaken += buf.bd.r0;
     }
 
     function onremove(Buff buf) {
-        UnitProp[buf.bd.target].damageTaken -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageTaken -= buf.bd.r0;
     }
 
     function onEffect1(Buff buf) {
     }
 
     function onRemove1(Buff buf) {
-        UnitProp[buf.bd.target].damageDealt -= 0.02;
-        UnitProp[buf.bd.target].healTaken -= 0.1;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageDealt -= 0.02;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).healTaken -= 0.1;
     }
     
     function damaged() {
@@ -29,7 +29,7 @@ constant string  ART_DEBUFF  = "Abilities\\Spells\\Other\\Aneu\\AneuTarget.mdl";
                     buf = Buff.cast(DamageResult.source, DamageResult.target, DEBUFF_ID);
                     buf.bd.tick = -1;
                     buf.bd.interval = 3.0;
-                    UnitProp[buf.bd.target].damageTaken -= buf.bd.r0;
+                    UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageTaken -= buf.bd.r0;
                     buf.bd.r0 = 0.02;
                     if (buf.bd.e0 == 0) {buf.bd.e0 = BuffEffect.create(ART_DEBUFF, buf, "overhead");}
                     buf.bd.boe = oneffect;
@@ -64,8 +64,8 @@ constant string  ART_DEBUFF  = "Abilities\\Spells\\Other\\Aneu\\AneuTarget.mdl";
                         buf.bd.tick = -1;
                         buf.bd.interval = 1.5;
                         if (buf.bd.i0 != 6) {
-                            UnitProp[buf.bd.target].damageDealt += 0.02;
-                            UnitProp[buf.bd.target].healTaken += 0.1;
+                            UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageDealt += 0.02;
+                            UnitProp.inst(buf.bd.target, SCOPE_PREFIX).healTaken += 0.1;
                             buf.bd.i0 = 6;
                         }
                         buf.bd.boe = onEffect1;
@@ -103,7 +103,7 @@ constant string  ART_DEBUFF  = "Abilities\\Spells\\Other\\Aneu\\AneuTarget.mdl";
     }
 
     function action(unit u, item it, integer fac) {
-        UnitProp up = UnitProp[u];
+        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
         up.ModAttackSpeed(10 * fac);
         //up.ModAP(20 * fac);
         //up.attackCrit += 0.07 * fac;

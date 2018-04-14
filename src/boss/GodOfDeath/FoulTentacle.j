@@ -5,11 +5,11 @@ constant real WRAITH_CHECK_INTERVAL = 0.34;
     timer wraithCheck;
 
     function onEffect(Buff buf) {
-        UnitProp[buf.bd.target].healTaken -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).healTaken -= buf.bd.r0;
     }
 
     function onRemove(Buff buf) {
-        UnitProp[buf.bd.target].healTaken += buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).healTaken += buf.bd.r0;
     }
 
     function checkRun() {
@@ -21,7 +21,7 @@ constant real WRAITH_CHECK_INTERVAL = 0.34;
                     buf = Buff.cast(SummonedWraiths.get(i), PlayerUnits.units[j], BID);
                     buf.bd.tick = -1;
                     buf.bd.interval = WRAITH_CHECK_INTERVAL + 0.1;
-                    UnitProp[buf.bd.target].healTaken += buf.bd.r0;
+                    UnitProp.inst(buf.bd.target, SCOPE_PREFIX).healTaken += buf.bd.r0;
                     buf.bd.r0 = 1.0;
                     buf.bd.boe = onEffect;
                     buf.bd.bor = onRemove;

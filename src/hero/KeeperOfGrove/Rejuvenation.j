@@ -25,19 +25,19 @@ constant string  ART_TARGET  = "Abilities\\Spells\\NightElf\\Rejuvenation\\Rejuv
     }
     
     function onEffect1(Buff buf) {
-        UnitProp[buf.bd.target].dodge += buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).dodge += buf.bd.r0;
     }
 
     function onRemove1(Buff buf) {
-        UnitProp[buf.bd.target].dodge -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).dodge -= buf.bd.r0;
     }
 
     function onCast() {
         Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BID_REJUVENATION);
         integer lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_REJUVENATION);
-        buf.bd.r0 = returnHeal(lvl) + UnitProp[SpellEvent.CastingUnit].SpellPower() * 1.2;
+        buf.bd.r0 = returnHeal(lvl) + UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).SpellPower() * 1.2;
         buf.bd.i0 = returnCriticalValue(lvl);
-        buf.bd.interval = 3.0 / (1.0 + UnitProp[SpellEvent.CastingUnit].SpellHaste());
+        buf.bd.interval = 3.0 / (1.0 + UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).SpellHaste());
         buf.bd.tick = Rounding(rejuvtick[GetPlayerId(GetOwningPlayer(SpellEvent.CastingUnit))] * 3 / buf.bd.interval);
         buf.bd.i1 = buf.bd.tick;
         buf.bd.boe = onEffect;
@@ -48,7 +48,7 @@ constant string  ART_TARGET  = "Abilities\\Spells\\NightElf\\Rejuvenation\\Rejuv
         buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BUFF_ID1);
         buf.bd.tick = -1;
         buf.bd.interval = 12.0;
-        UnitProp[buf.bd.target].dodge -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).dodge -= buf.bd.r0;
         buf.bd.r0 = 0.07;
         buf.bd.boe = onEffect1;
         buf.bd.bor = onRemove1;

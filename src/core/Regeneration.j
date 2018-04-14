@@ -14,7 +14,7 @@ constant real INTERVAL = 0.33;
         boolean b = IsInCombat();
         while (i < PlayerUnits.n) {
             if (!IsUnitDead(PlayerUnits.units[i])) {
-                r = UnitProp[PlayerUnits.units[i]].LifeRegen() * INTERVAL;
+                r = UnitProp.inst(PlayerUnits.units[i], SCOPE_PREFIX).LifeRegen() * INTERVAL;
                 if (!b && regenlock) {
                     r += GetUnitState(PlayerUnits.units[i], UNIT_STATE_MAX_LIFE) * 0.15 * INTERVAL;
                 }
@@ -24,7 +24,7 @@ constant real INTERVAL = 0.33;
                     SetWidgetLife(PlayerUnits.units[i], 1.0);
                 }
                 
-                r = UnitProp[PlayerUnits.units[i]].ManaRegen() * INTERVAL;
+                r = UnitProp.inst(PlayerUnits.units[i], SCOPE_PREFIX).ManaRegen() * INTERVAL;
                 if (!b && regenlock) {
                     r += GetUnitState(PlayerUnits.units[i], UNIT_STATE_MAX_MANA) * 0.15 * INTERVAL;
                 }                

@@ -21,7 +21,7 @@ constant real RP_COMMON = 0.0;
         real x, y;
         integer dropped = 0;
         x = GetUnitX(u); y = GetUnitY(u);
-        monsterDropValue = UnitProp[u].getDropValue();
+        monsterDropValue = UnitProp.inst(u, SCOPE_PREFIX).getDropValue();
         mdp = monsterDropValue + loot2;
         // print("MDP = " + R2S(mdp));
         while (mdp >= 0) {

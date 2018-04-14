@@ -24,7 +24,7 @@ library SignetOfTheLastDefender requires ItemAttributes {
     }
 
     function action(unit u, item it, integer fac) {
-        UnitProp up = UnitProp[u];
+        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
         SOTLDData sd = SOTLDData[it];
         up.ModStr(15 * fac);
         up.dodge += 0.04 * fac;

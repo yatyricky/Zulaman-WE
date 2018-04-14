@@ -5,11 +5,11 @@ constant string  ART_TARGET  = "Abilities\\Spells\\Other\\Tornado\\Tornado_Targe
     HandleTable ht;
 
     function oneffect(Buff buf) {
-        UnitProp[buf.bd.target].ModAttackSpeed(buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(buf.bd.i0);
     }
 
     function onremove(Buff buf) {
-        UnitProp[buf.bd.target].ModAttackSpeed(0 - buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(0 - buf.bd.i0);
     }
     
     function damaged() {
@@ -23,7 +23,7 @@ constant string  ART_TARGET  = "Abilities\\Spells\\Other\\Tornado\\Tornado_Targe
                         buf = Buff.cast(DamageResult.source, DamageResult.source, BUFF_ID);
                         buf.bd.tick = -1;
                         buf.bd.interval = 5.0;
-                        UnitProp[buf.bd.target].ModAttackSpeed(0 - buf.bd.i0);
+                        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(0 - buf.bd.i0);
                         buf.bd.i0 = 30;
                         if (buf.bd.e0 == 0) {buf.bd.e0 = BuffEffect.create(ART_TARGET, buf, "weapon");}
                         buf.bd.boe = oneffect;
@@ -47,7 +47,7 @@ constant string  ART_TARGET  = "Abilities\\Spells\\Other\\Tornado\\Tornado_Targe
     }
 
     function action(unit u, item it, integer fac) {
-        UnitProp up = UnitProp[u];
+        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
         up.ModAP(25 * fac);
         up.damageDealt += 0.03 * fac;
         if (!ht.exists(u)) {ht[u] = 0;}
