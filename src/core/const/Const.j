@@ -60,7 +60,7 @@ public constant integer SID_SUN_FIRE_STORM = 'A003';
 public constant integer SID_ARCANE_SHOCK = 'A004';
 public constant integer SID_DISCORD = 'A005';
 public constant integer SID_SHIELD_OF_SINDOREI = 'A006';
-// 利爪德鲁依
+// claw druid
 public constant integer UTID_CLAW_DRUID = 'Hlgr';
 public constant integer SID_LACERATE = 'A01F';
 public constant integer BID_LACERATE = 'A02K';
@@ -68,7 +68,7 @@ public constant integer SID_SAVAGE_ROAR = 'A010';
 public constant integer SID_FOREST_CURE = 'A0A1';
 public constant integer SID_NATURAL_REFLEX = 'A016';
 public constant integer SID_SURVIVAL_INSTINCTS = 'A0A2';
-// 丛林守护者
+// keeper of grove
 public constant integer UTID_KEEPER_OF_GROVE = 'Emfr';
 public constant integer SID_LIFE_BLOOM = 'A00D';
 public constant integer BID_LIFE_BLOOM = 'A011';
@@ -79,19 +79,19 @@ public constant integer BID_REGROWTH = 'A02J';
 public constant integer SID_SWIFT_MEND = 'A020';
 public constant integer SID_TRANQUILITY = 'A01Z';
 public constant integer SID_TRANQUILITY_1 = 'A04J';
-// 圣骑士
+// paladin
 public constant integer UTID_PALADIN = 'Hart';
 public constant integer SID_FLASH_LIGHT = 'A00K';
-public constant integer SID_FLASH_LIGHT_1 = 'A02C';
 public constant integer SID_HOLY_LIGHT = 'A00L';
 public constant integer BID_HOLY_LIGHT_AMP = 'A024';
 public constant integer BID_HOLY_LIGHT_SHIELD = 'A029';
 public constant integer BID_HOLY_LIGHT_IMPROVED = 'A0CH';
 public constant integer SID_HOLY_SHOCK = 'A00M';
 public constant integer SID_DIVINE_FAVOR = 'A00N';
+public constant integer BID_DIVINE_FAVOR = 'A02A';
+public constant integer BID_DIVINE_FAVOR_CRIT = 'A0CI';
 public constant integer SID_BEACON_OF_LIGHT = 'A00O';
-public constant integer SID_IMPROVE_FLASH_LIGHT = 'A02B';
-// 牧师
+// priest
 public constant integer UTID_PRIEST = 'Ofar';
 public constant integer SID_HEAL = 'A03V';
 public constant integer BID_HEAL = 'A03X';
@@ -101,7 +101,7 @@ public constant integer BID_SHIELD = 'A01I';
 public constant integer BID_SHIELD_SOUL_WEAK = 'A01J';
 public constant integer SID_PRAYER_OF_MENDING = 'A01D';
 public constant integer SID_PRAYER_OF_HEALING = 'A03W';
-// 黑暗猎手
+// dark ranger
 public constant integer UTID_DARK_RANGER = 'Nbrn';
 public constant integer SID_DARK_ARROW = 'A009';
 public constant integer SID_CONCERNTRATION = 'A00A';
@@ -122,7 +122,7 @@ public constant integer SID_OVER_POWER = 'A027';
 public constant integer SID_MORTAL_STRIKE = 'A00E';
 public constant integer SID_EXECUTE_LEARN = 'A00I';
 public constant integer SID_EXECUTE = 'A02S';
-// 寒冰法师
+// frost mage
 public constant integer UTID_FROST_MAGE = 'Hjai';
 public constant integer SID_FROST_BOLT = 'A01S';
 public constant integer SID_BLIZZARD = 'A01T';
@@ -134,7 +134,7 @@ public constant integer BID_POLYMORPH = 'A03E';
 public constant integer SID_POLYMORPH_DUMMY = 'A02F';
 public constant integer SID_SPELL_TRANSFER = 'A00V';
 public constant integer SID_INTELLIGENCE_CHANNEL = 'A00Q';
-// 地缚者
+// earth binder
 public constant integer UTID_EARTH_BINDER = 'Hapm';
 public constant integer UTID_EARTH_BINDER_ASC = 'H006';
 public constant integer UTID_LIGHTNING_TOTEM = 'u000';
@@ -151,7 +151,7 @@ public constant integer SID_TORRENT_TOTEM = 'A037';
 public constant integer SID_CHARGE = 'A01P';
 public constant integer SID_ASCENDANCE = 'A0A0';
 public constant integer BID_EARTH_BIND_TOTEM = 'A03A';
-// 流浪剑客
+// rogue
 public constant integer UTID_ROGUE = 'Edem';
 public constant integer SID_APIV = 'Apiv';
 public constant integer SID_SINISTER_STRIKE = 'A00W';

@@ -1,5 +1,5 @@
 //! zinc
-library HolyShock requires PaladinGlobal, SpellEvent, UnitProperty, BeaconOfLight, LightsJustice {
+library HolyShock requires SpellEvent, UnitProperty, BeaconOfLight, LightsJustice {
 constant integer BUFF_ID = 'A02E';
     struct delayedDosth1 {
         private timer tm;
@@ -43,18 +43,24 @@ constant integer BUFF_ID = 'A02E';
     }
 
     function onCast() {
+        BuffSlot bs;
         Buff buf;
         integer lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_HOLY_SHOCK);
-        integer id = GetPlayerId(GetOwningPlayer(SpellEvent.CastingUnit));       
+        integer id = GetPlayerId(GetOwningPlayer(SpellEvent.CastingUnit));
+        real excrit = 0;
         
         // equiped Justice of Light, won't consume Divine Favour
         if (HasLightsJustice(SpellEvent.CastingUnit)) {
             HealTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, (GetUnitState(SpellEvent.TargetUnit, UNIT_STATE_MAX_LIFE) - GetWidgetLife(SpellEvent.TargetUnit)) * 0.75, SpellData[SID_HOLY_SHOCK].name, 2.0);
-        } else {        
-            HealTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, (GetUnitState(SpellEvent.TargetUnit, UNIT_STATE_MAX_LIFE) - GetWidgetLife(SpellEvent.TargetUnit)) * 0.75, SpellData[SID_HOLY_SHOCK].name, healCrit[id]);
-            if (healCrit[id] > 0) {
-                healCrit[id] = 0.0;
+        } else {
+            bs = BuffSlot[SpellEvent.CastingUnit];
+            buf = bs.getBuffByBid(BID_DIVINE_FAVOR_CRIT);
+            if (buf != 0) {
+                excrit = 2.0;
+                bs.dispelByBuff(buf);
+                buf.destroy();
             }
+            HealTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, (GetUnitState(SpellEvent.TargetUnit, UNIT_STATE_MAX_LIFE) - GetWidgetLife(SpellEvent.TargetUnit)) * 0.75, SpellData[SID_HOLY_SHOCK].name, excrit);
         }
         
         AddTimedEffect.atPos(ART_FAERIE_DRAGON_MISSILE, GetUnitX(SpellEvent.TargetUnit), GetUnitY(SpellEvent.TargetUnit), GetUnitZ(SpellEvent.TargetUnit) + 24, 0, 3);

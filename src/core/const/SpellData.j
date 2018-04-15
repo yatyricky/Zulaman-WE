@@ -123,7 +123,6 @@ SpellData.create(SID_SWIFT_MEND,"迅捷治愈",150,0,11,OrderId("replenishlife")
 SpellData.create(SID_TRANQUILITY,"宁静",200,8,40,OrderId("tranquility"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_TRANQUILITY_1,"宁静",200,8,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_FLASH_LIGHT,"闪耀之光",50,0,3.5,OrderId("innerfire"),1,ORDER_TYPE_TARGET);
-SpellData.create(SID_FLASH_LIGHT_1,"闪耀之光",50,0,2.2,OrderId("cripple"),1,ORDER_TYPE_TARGET);
 SpellData.create(SID_HOLY_LIGHT,"圣光术",100,2.6,0,OrderId("holybolt"),1,ORDER_TYPE_TARGET).setCCC2(115,2.6,0).setCCC3(130,2.6,0);
 SpellData.create(SID_HOLY_SHOCK,"神圣震击",100,0,15,OrderId("resurrection"),1,ORDER_TYPE_TARGET).setCCC2(150,0,15).setCCC3(200,0,15);
 SpellData.create(SID_DIVINE_FAVOR,"神恩",50,0,20,OrderId("massteleport"),1,ORDER_TYPE_IMMEDIATE).setCCC2(50,0,18).setCCC3(50,0,16);

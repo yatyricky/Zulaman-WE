@@ -1,6 +1,5 @@
 //! zinc
-library HolyLight requires CastingBar, PaladinGlobal, BeaconOfLight {
-constant string  ART  = "Abilities\\Spells\\Human\\DivineShield\\DivineShieldTarget.mdl";
+library HolyLight requires CastingBar, BeaconOfLight {
 
     integer castSound;
 
@@ -20,15 +19,22 @@ constant string  ART  = "Abilities\\Spells\\Human\\DivineShield\\DivineShieldTar
         integer id = GetPlayerId(GetOwningPlayer(a));
         integer ilvl = GetUnitAbilityLevel(a, SID_HOLY_LIGHT);
         real amt = returnHeal(ilvl) + UnitProp.inst(a, SCOPE_PREFIX).SpellPower() * 1.05;
-        real exct = healCrit[id];
+        real exct = 0;
+        BuffSlot bs;
+        // extra chance Holy light buff
         Buff baf = BuffSlot[b].getBuffByBid(BID_HOLY_LIGHT_AMP);
         if (baf != 0) {
             exct += baf.bd.r0;
         }
-        HealTarget(a, b, amt, SpellData[SID_HOLY_LIGHT].name, exct);
-        if (healCrit[id] > 0) {
-            healCrit[id] = 0.0;
+        // must crit if divine favor
+        bs = BuffSlot[a];
+        baf = bs.getBuffByBid(BID_DIVINE_FAVOR_CRIT);
+        if (baf != 0) {
+            exct += 2.0;
+            bs.dispelByBuff(baf);
+            baf.destroy();
         }
+        HealTarget(a, b, amt, SpellData[SID_HOLY_LIGHT].name, exct);
         AddTimedEffect.atUnit(ART_RESURRECT_TARGET, b, "origin", 0.2);
         
         buf = Buff.cast(a, b, BID_HOLY_LIGHT_AMP);
@@ -47,7 +53,7 @@ constant string  ART  = "Abilities\\Spells\\Human\\DivineShield\\DivineShieldTar
                 buf.bd.isShield = true;
                 buf.bd.r0 += HealResult.amount - HealResult.effective;
                 if (buf.bd.e0 == 0) {
-                    buf.bd.e0 = BuffEffect.create(ART, buf, "origin");
+                    buf.bd.e0 = BuffEffect.create(ART_INVULNERABLE, buf, "origin");
                 }
                 buf.bd.boe = onEffect;
                 buf.bd.bor = onRemove;
@@ -65,8 +71,8 @@ constant string  ART  = "Abilities\\Spells\\Human\\DivineShield\\DivineShieldTar
         CastingBar cb = CastingBar.create(response).setSound(castSound);
         BuffSlot bs;
         Buff buf;
-        if (GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_DIVINE_FAVOR) == 3) {
-            cb.haste = 0.4;
+        if (GetUnitAbilityLevel(SpellEvent.CastingUnit, BID_DIVINE_FAVOR) > 0) {
+            cb.haste = SpellData[SID_HOLY_LIGHT].Cast(GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_HOLY_LIGHT)) * 0.5;
         }
         bs = BuffSlot[SpellEvent.CastingUnit];
         buf = bs.getBuffByBid(BID_HOLY_LIGHT_IMPROVED);

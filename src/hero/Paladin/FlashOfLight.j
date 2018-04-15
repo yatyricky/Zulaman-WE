@@ -1,5 +1,5 @@
 //! zinc
-library FlashOfLight requires PaladinGlobal, SpellEvent, UnitProperty, BeaconOfLight, HolyLight {
+library FlashOfLight requires SpellEvent, UnitProperty, BeaconOfLight, HolyLight {
     function returnHeal(integer lvl) -> real {
         return 200.0;
     }
@@ -9,30 +9,24 @@ library FlashOfLight requires PaladinGlobal, SpellEvent, UnitProperty, BeaconOfL
     }
 
     function onCast() {
-        integer ilvl;
-        real amt, exct;
-        integer id = GetPlayerId(GetOwningPlayer(SpellEvent.CastingUnit));
+        integer lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_FLASH_LIGHT);
+        real amt = returnHeal(lvl) + UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).SpellPower() * 1.4;
+        real exct = returnExtraCritical(lvl);
+        BuffSlot bs = BuffSlot[SpellEvent.CastingUnit];
         Buff buf;
-        // get the right ability level
-        if (GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_FLASH_LIGHT) > 0) {
-            ilvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_FLASH_LIGHT);
-        } else if (GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_FLASH_LIGHT_1) > 0) {
-            ilvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_FLASH_LIGHT_1);
-        } else {
-            ilvl = 0;
-            print(SCOPE_PREFIX+">|cffff0000error|r.flash of light level = 0 and triggered");
-        }
-        // get the amount and heal
-        amt = returnHeal(ilvl) + UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).SpellPower() * 1.4;
-        exct = healCrit[id] + returnExtraCritical(ilvl);
+        // buff amp
         buf = BuffSlot[SpellEvent.TargetUnit].getBuffByBid(BID_HOLY_LIGHT_AMP);
         if (buf != 0) {
             exct += buf.bd.r0;
         }
-        HealTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, amt, SpellData[SID_FLASH_LIGHT].name, exct);
-        if (healCrit[id] > 0) {
-            healCrit[id] = 0.0;
+        // must crit
+        buf = bs.getBuffByBid(BID_DIVINE_FAVOR_CRIT);
+        if (buf != 0) {
+            exct += 2.0;
+            bs.dispelByBuff(buf);
+            buf.destroy();
         }
+        HealTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, amt, SpellData[SID_FLASH_LIGHT].name, exct);
         AddTimedEffect.atUnit(ART_HOLY_BOLT_SPECIAL_ART, SpellEvent.TargetUnit, "origin", 0.2);
         // instant holy light
         if (HealResult.isCritical) {
@@ -46,7 +40,6 @@ library FlashOfLight requires PaladinGlobal, SpellEvent, UnitProperty, BeaconOfL
 
     function onInit() {
         RegisterSpellEffectResponse(SID_FLASH_LIGHT, onCast);
-        RegisterSpellEffectResponse(SID_FLASH_LIGHT_1, onCast);
     }
 }
 //! endzinc

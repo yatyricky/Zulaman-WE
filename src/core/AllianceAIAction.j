@@ -1,5 +1,5 @@
 //! zinc
-library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, PaladinGlobal, FrostNova, WarlockGlobal, Execute {
+library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, FrostNova, WarlockGlobal, Execute {
 constant real AIACTION_INTERVAL = 0.33;
     
     Table unitCallBack, unitLearSkill;
@@ -529,9 +529,8 @@ constant real AIACTION_INTERVAL = 0.33;
     
     // 4
     function learnSkillHart(unit source) {
-        integer fleshLight = GetFlashLightAID(source);
         if (GetHeroLevel(source) == 1) {
-            SelectHeroSkill(source, fleshLight);
+            SelectHeroSkill(source, SID_FLASH_LIGHT);
             SelectHeroSkill(source, SID_HOLY_LIGHT);
             SelectHeroSkill(source, SID_HOLY_SHOCK);
         } else if (GetHeroLevel(source) == 2) {
@@ -539,11 +538,11 @@ constant real AIACTION_INTERVAL = 0.33;
             SelectHeroSkill(source, SID_DIVINE_FAVOR);
             SelectHeroSkill(source, SID_BEACON_OF_LIGHT);
         } else if (GetHeroLevel(source) == 3) {
-            SelectHeroSkill(source, fleshLight);
+            SelectHeroSkill(source, SID_FLASH_LIGHT);
             SelectHeroSkill(source, SID_HOLY_LIGHT);
             SelectHeroSkill(source, SID_DIVINE_FAVOR);
         } else if (GetHeroLevel(source) == 4) {
-            SelectHeroSkill(source, fleshLight);
+            SelectHeroSkill(source, SID_FLASH_LIGHT);
             SelectHeroSkill(source, SID_HOLY_LIGHT);
             SelectHeroSkill(source, SID_HOLY_SHOCK);
         } else if (GetHeroLevel(source) == 5) {
@@ -947,7 +946,6 @@ constant real AIACTION_INTERVAL = 0.33;
         unit ot;
         integer i;
         integer state = 0;
-        integer fleshLight = GetFlashLightAID(source);
         if (!IsUnitChanneling(source)) {
             ot = PlayerUnits.getLowestHPAbove(0.0);
             if (GetUnitLifePercent(ot) < 35) {
@@ -963,7 +961,7 @@ constant real AIACTION_INTERVAL = 0.33;
                         if (UnitCanUse(source, SID_DIVINE_FAVOR)) {
                             // make sure next healing spell must have crit effect
                             IssueImmediateOrderById(source, SpellData[SID_DIVINE_FAVOR].oid);
-                        } else if (UnitCanUse(source, fleshLight)) {
+                        } else if (UnitCanUse(source, SID_FLASH_LIGHT)) {
                             // flash light
                             IssueTargetOrderById(source, SpellData[SID_FLASH_LIGHT].oid, ot); 
                         } else if (UnitCanUse(source, SID_HOLY_LIGHT)) {
@@ -990,7 +988,7 @@ constant real AIACTION_INTERVAL = 0.33;
                 }
                 i = 0;
                 while (i < PlayerUnits.n && GetUnitLifePercent(PlayerUnits.sorted[i]) < 85) {
-                    if (UnitCanUse(source, fleshLight)) {
+                    if (UnitCanUse(source, SID_FLASH_LIGHT)) {
                         IssueTargetOrderById(source, SpellData[SID_FLASH_LIGHT].oid, PlayerUnits.sorted[i]);
                         state = 1;
                     } else if (GetUnitLifePercent(PlayerUnits.sorted[i]) < 75) {

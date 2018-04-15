@@ -1,26 +1,41 @@
 //! zinc
-library DivineFavor requires PaladinGlobal, SpellEvent, UnitProperty, AggroSystem {
-constant integer BUFF_ID = 'A02A';
-    function onCast() {
-        healCrit[GetPlayerId(GetOwningPlayer(SpellEvent.CastingUnit))] = 2.0;
-        if (GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_DIVINE_FAVOR) > 1) {
-            AggroClear(SpellEvent.CastingUnit, 0.35);
-        }
+library DivineFavor requires SpellEvent, UnitProperty {
+
+    function returnDuration(integer lvl) -> real {
+        return 5.0 + lvl * 5;
     }
-    
-    function lvlup() -> boolean {
-        if (GetLearnedSkill() == SID_DIVINE_FAVOR) {
-            if (GetUnitAbilityLevel(GetTriggerUnit(), SID_DIVINE_FAVOR) == LEVEL_TO_IMPROVE_FLASH_LIGHT) {
-                SetPlayerAbilityAvailable(GetOwningPlayer(GetTriggerUnit()), SID_IMPROVE_FLASH_LIGHT, false);
-                UnitAddAbility(GetTriggerUnit(), SID_IMPROVE_FLASH_LIGHT);
-            }
-        }
-        return false;
+
+    function onEffectCrit(Buff buf) {}
+    function onRemoveCrit(Buff buf) {}
+
+    function onEffectHaste(Buff buf) {
+        BlzSetUnitAbilityCooldown(buf.bd.target, SID_FLASH_LIGHT, GetUnitAbilityLevel(buf.bd.target, SID_FLASH_LIGHT), 1.0);
+    }
+
+    function onRemoveHaste(Buff buf) {
+        BlzSetUnitAbilityCooldown(buf.bd.target, SID_FLASH_LIGHT, GetUnitAbilityLevel(buf.bd.target, SID_FLASH_LIGHT), 3.5);
+    }
+
+    function onCast() {
+        Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BID_DIVINE_FAVOR_CRIT);
+        buf.bd.tick = -1;
+        buf.bd.interval = 20.0;
+        buf.bd.boe = onEffectCrit;
+        buf.bd.bor = onRemoveCrit;
+        buf.run();
+        
+        buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BID_DIVINE_FAVOR);
+        buf.bd.tick = -1;
+        buf.bd.interval = returnDuration(GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_DIVINE_FAVOR));
+        buf.bd.boe = onEffectHaste;
+        buf.bd.bor = onRemoveHaste;
+        buf.run();
     }
 
     function onInit() {
+        BuffType.register(BID_DIVINE_FAVOR, BUFF_MAGE, BUFF_POS);
+        BuffType.register(BID_DIVINE_FAVOR_CRIT, BUFF_MAGE, BUFF_POS);
         RegisterSpellEffectResponse(SID_DIVINE_FAVOR, onCast);
-        TriggerAnyUnit(EVENT_PLAYER_HERO_SKILL, function lvlup);
     }
 
 }
