@@ -1284,7 +1284,7 @@ constant real AIACTION_INTERVAL = 0.33;
                 }
             }
             // blizzard
-            if (state == 0 && (UnitCanUse(source, SID_BLIZZARD) || UnitCanUse(source, SID_BLIZZARD_1)) && MobList.GetNum() > 2) {
+            if (state == 0 && UnitCanUse(source, SID_BLIZZARD) && MobList.GetNum() > 2) {
                 i = 0;
                 ot = null;
                 flag = true;
@@ -1296,11 +1296,7 @@ constant real AIACTION_INTERVAL = 0.33;
                     i += 1;
                 }
                 if (!flag) {
-                    if (UnitCanUse(source, SID_BLIZZARD)) {
-                        IssuePointOrderById(source, SpellData[SID_BLIZZARD].oid, GetUnitX(ot), GetUnitY(ot));
-                    } else if (UnitCanUse(source, SID_BLIZZARD_1)) {
-                        IssuePointOrderById(source, SpellData[SID_BLIZZARD_1].oid, GetUnitX(ot), GetUnitY(ot));
-                    }
+                    IssuePointOrderById(source, SpellData[SID_BLIZZARD].oid, GetUnitX(ot), GetUnitY(ot));
                     state = 1;
                 }
             }

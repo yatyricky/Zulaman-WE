@@ -125,7 +125,7 @@ SpellData.create(SID_TRANQUILITY_1,"宁静",200,8,1,OrderId("channel"),1,ORDER_T
 SpellData.create(SID_FLASH_LIGHT,"闪耀之光",50,0,3.5,OrderId("innerfire"),1,ORDER_TYPE_TARGET);
 SpellData.create(SID_HOLY_LIGHT,"圣光术",100,2.6,0,OrderId("holybolt"),1,ORDER_TYPE_TARGET).setCCC2(115,2.6,0).setCCC3(130,2.6,0);
 SpellData.create(SID_HOLY_SHOCK,"神圣震击",100,0,15,OrderId("resurrection"),1,ORDER_TYPE_TARGET).setCCC2(150,0,15).setCCC3(200,0,15);
-SpellData.create(SID_DIVINE_FAVOR,"神恩",50,0,20,OrderId("massteleport"),1,ORDER_TYPE_IMMEDIATE).setCCC2(50,0,18).setCCC3(50,0,16);
+SpellData.create(SID_DIVINE_FAVOR,"神恩",50,0,40,OrderId("massteleport"),1,ORDER_TYPE_IMMEDIATE).setCCC2(50,0,40).setCCC3(50,0,40);
 SpellData.create(SID_BEACON_OF_LIGHT,"圣光印记",10,0,10,OrderId("summonphoenix"),1,ORDER_TYPE_TARGET);
 SpellData.create(SID_HEAL,"治疗术",75,0,1,852063,1,ORDER_TYPE_TARGET).setCCC2(100,0,1).setCCC3(125,0,1);
 SpellData.create(SID_PRAYER_OF_HEALING,"治疗祷言",100,2.4,0,OrderId("blizzard"),1,ORDER_TYPE_POINT).setCCC2(100,2.1,0).setCCC3(100,1.8,0);
@@ -147,8 +147,7 @@ SpellData.create(SID_MORTAL_STRIKE,"致死打击",15,0,9,OrderId("drunkenhaze"),
 SpellData.create(SID_EXECUTE_LEARN,"斩杀",0,0,1,OrderId("massteleport"),1,ORDER_TYPE_TARGET);
 SpellData.create(SID_EXECUTE,"斩杀",0,0,1,OrderId("slow"),1,ORDER_TYPE_TARGET);
 SpellData.create(SID_FROST_BOLT,"寒冰箭",15,2,0,OrderId("heal"),1,ORDER_TYPE_TARGET).setCCC2(30,2,0).setCCC3(45,2,0);
-SpellData.create(SID_BLIZZARD,"暴风雪",100,5,0,OrderId("blizzard"),1,ORDER_TYPE_POINT);
-SpellData.create(SID_BLIZZARD_1,"暴风雪",170,0,5,OrderId("blizzard"),1,ORDER_TYPE_POINT);
+SpellData.create(SID_BLIZZARD,"暴风雪",100,0,10,OrderId("blizzard"),1,ORDER_TYPE_POINT).setCCC2(135,0,10).setCCC3(170,0,10);
 SpellData.create(SID_FROST_NOVA,"冰冻新星",70,0,15,OrderId("frostnova"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_POLYMORPH,"变形术",25,0,30,OrderId("polymorph"),1,ORDER_TYPE_TARGET).setCCC2(25,0,22).setCCC3(25,0,14);
 SpellData.create(SID_POLYMORPH_DUMMY,"变形术",25,0,5,OrderId("hex"),1,ORDER_TYPE_TARGET);

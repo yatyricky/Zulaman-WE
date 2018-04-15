@@ -15,11 +15,7 @@ library Blizzard requires CastingBar, GroupUtils, FrostMageGlobal, DamageSystem,
         real dmg;
         unit tu;
         real length, rad, aoe;
-        if (GetUnitAbilityLevel(caster, SID_BLIZZARD_1) == 1) {
-            lvl = 3;
-        } else {
-            lvl = GetUnitAbilityLevel(caster, SID_BLIZZARD);
-        }
+        lvl = GetUnitAbilityLevel(caster, SID_BLIZZARD);
         dmg = returnDamage(lvl, UnitProp.inst(caster, SCOPE_PREFIX).SpellPower()) * returnFrostDamage(caster);
         aoe = 150.0 + 100.0 * lvl;
         GroupUnitsInArea(ENUM_GROUP, x, y, aoe);
@@ -34,22 +30,6 @@ library Blizzard requires CastingBar, GroupUtils, FrostMageGlobal, DamageSystem,
         tu = null;
         SpamEffectsInCircle(ART_BLIZZARD_TARGET, x, y, aoe, lvl * 10, 0.5);
         RunSoundAtPoint2d(SND_BLIZZARD, x, y);
-    }
-
-    function response(CastingBar cd) {
-        fallWave(cd.caster, cd.targetX, cd.targetY);
-    }
-    
-    function onChannel() {
-        CastingBar cb = CastingBar.create(response);
-        integer lvl;
-        if (GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_BLIZZARD_1) == 1) {
-            lvl = 3;
-        } else {
-            lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_BLIZZARD);
-        }
-        cb.cost = 65 + lvl * 35;
-        cb.channel(Rounding(5.0 * (1.0 + UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).SpellHaste())));
     }
     
     struct BlizzardAuto {
@@ -91,21 +71,9 @@ library Blizzard requires CastingBar, GroupUtils, FrostMageGlobal, DamageSystem,
     function onCast() {
         BlizzardAuto.start(SpellEvent.CastingUnit, SpellEvent.TargetX, SpellEvent.TargetY);
     }
-    
-    function lvlup() -> boolean {
-        if (GetLearnedSkill() == SID_BLIZZARD) {
-            if (GetUnitAbilityLevel(GetTriggerUnit(), SID_BLIZZARD) == 3) {
-                TimedUnitRemoveAbility.start(GetTriggerUnit(), SID_BLIZZARD);
-                UnitAddAbility(GetTriggerUnit(), SID_BLIZZARD_1);
-            }
-        }
-        return false;
-    }
 
     function onInit() {
-        RegisterSpellChannelResponse(SID_BLIZZARD, onChannel);
-        RegisterSpellEffectResponse(SID_BLIZZARD_1, onCast);
-        TriggerAnyUnit(EVENT_PLAYER_HERO_SKILL, function lvlup);
+        RegisterSpellEffectResponse(SID_BLIZZARD, onCast);
     }
 }
 //! endzinc

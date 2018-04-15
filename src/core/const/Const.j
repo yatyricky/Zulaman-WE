@@ -125,8 +125,7 @@ public constant integer SID_EXECUTE = 'A02S';
 // frost mage
 public constant integer UTID_FROST_MAGE = 'Hjai';
 public constant integer SID_FROST_BOLT = 'A01S';
-public constant integer SID_BLIZZARD = 'A01T';
-public constant integer SID_BLIZZARD_1 = 'A03H';
+public constant integer SID_BLIZZARD = 'A03H';
 public constant integer SID_FROST_NOVA = 'A01U';
 public constant integer SID_POLYMORPH = 'A01W';
 public constant integer SID_POLYMORPH_1 = 'A03F';
