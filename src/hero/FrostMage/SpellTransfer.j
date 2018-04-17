@@ -94,7 +94,22 @@ library SpellTransfer requires BuffSystem, SpellEvent, UnitProperty {
         }
     }
 
+    function level() -> boolean {
+        unit u;
+        integer lvl;
+        if (GetLearnedSkill() == SID_SPELL_TRANSFER) {
+            u = GetTriggerUnit();
+            lvl = GetUnitAbilityLevel(u, SID_SPELL_TRANSFER);
+            if (lvl == 1) {
+                UnitAddAbility(u, SID_INTELLIGENCE_CHANNEL);
+            }
+        }
+        u = null;
+        return false;
+    }
+
     function onInit() {
+        TriggerAnyUnit(EVENT_PLAYER_HERO_SKILL, function level);
         RegisterSpellEffectResponse(SID_SPELL_TRANSFER, onCast);
         RegisterSpellEffectResponse(SID_INTELLIGENCE_CHANNEL, onCast1);
     }
