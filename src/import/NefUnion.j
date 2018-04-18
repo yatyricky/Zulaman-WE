@@ -88,6 +88,11 @@ library NefUnion requires TimerUtils {
             BlzSetAbilityIcon(abilId, path);
         }
     }
+    public function NFSetPlayerAbilityTooltip(player whichPlayer, integer abilCode, string Tooltip, integer level) {
+        if (GetLocalPlayer() == whichPlayer) {
+            BlzSetAbilityTooltip(abilCode, Tooltip, level);
+        }
+    }
 
     public function NFSetPlayerAbilityExtendedTooltip(player whichPlayer, integer abilCode, string ExtendedTooltip, integer level) {
         if (GetLocalPlayer() == whichPlayer) {

@@ -702,5 +702,7 @@ public constant string BTNExecute2 = "ReplaceableTextures\\CommandButtons\\BTNEx
 public constant string BTNExecute3 = "ReplaceableTextures\\CommandButtons\\BTNExecute3.blp";
 public constant string BTNExecute4 = "ReplaceableTextures\\CommandButtons\\BTNExecute4.blp";
 public constant string BTNCleavingAttack = "ReplaceableTextures\\CommandButtons\\BTNCleavingAttack.blp";
+public constant string BTNPossession = "ReplaceableTextures\\CommandButtons\\BTNPossession.blp";
+public constant string BTNUnholyFrenzy = "ReplaceableTextures\\CommandButtons\\BTNUnholyFrenzy.blp";
 }
 //! endzinc

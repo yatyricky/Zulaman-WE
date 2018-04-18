@@ -1,6 +1,13 @@
 //! zinc
 library PowerOfAbomination requires DarkRangerGlobal, SpellEvent, DamageSystem {
 
+    constant string TXT_CN_AET1_BANSHEE_1 = "当前激活：女妖之力，每秒恢复3点法力值，攻击附加诅咒效果，使敌人的攻击有5%的几率落空。|n可以切换至憎恶之力，每秒消耗3点法力值，你的每次攻击会召唤幽魂对你的目标造成50点额外伤害，同时提升食尸鬼的20%攻击速度。";
+    constant string TXT_CN_AET1_BANSHEE_2 = "当前激活：女妖之力，每秒恢复5点法力值，攻击附加诅咒效果，使敌人的攻击有10%的几率落空。|n可以切换至憎恶之力，每秒消耗5点法力值，你的每次攻击会召唤幽魂对你的目标造成100点额外伤害，同时提升食尸鬼的40%攻击速度。";
+    constant string TXT_CN_AET1_BANSHEE_3 = "当前激活：女妖之力，每秒恢复8点法力值，攻击附加诅咒效果，使敌人的攻击有15%的几率落空。|n可以切换至憎恶之力，每秒消耗8点法力值，你的每次攻击会召唤幽魂对你的目标造成200点额外伤害，同时提升食尸鬼的80%攻击速度。";
+    constant string TXT_CN_AET1_ABOMINATION_1 = "当前激活：憎恶之力，每秒消耗3点法力值，你的每次攻击会召唤幽魂对你的目标造成50点额外伤害，同时提升食尸鬼的20%攻击速度。|n可以切换至女妖之力，每秒恢复3点法力值，攻击附加诅咒效果，使敌人的攻击有5%的几率落空。";
+    constant string TXT_CN_AET1_ABOMINATION_2 = "当前激活：憎恶之力，每秒消耗5点法力值，你的每次攻击会召唤幽魂对你的目标造成100点额外伤害，同时提升食尸鬼的40%攻击速度。|n可以切换至女妖之力，每秒恢复5点法力值，攻击附加诅咒效果，使敌人的攻击有10%的几率落空。";
+    constant string TXT_CN_AET1_ABOMINATION_3 = "当前激活：憎恶之力，每秒消耗8点法力值，你的每次攻击会召唤幽魂对你的目标造成200点额外伤害，同时提升食尸鬼的80%攻击速度。|n可以切换至女妖之力，每秒恢复8点法力值，攻击附加诅咒效果，使敌人的攻击有15%的几率落空。";
+
     function returnManaRegen(integer lvl) -> real {
         if (lvl == 1) {
             return 3.0;
@@ -57,18 +64,15 @@ library PowerOfAbomination requires DarkRangerGlobal, SpellEvent, DamageSystem {
         UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(0 - buf.bd.i0);
     }
 
-    function onEffect2(Buff buf) {}
-    function onRemove2(Buff buf) {}
-    
     struct PowerOfAbomination {
         static HandleTable ht;
         timer tm;
         boolean isBanshee;
         unit u;
         
-        static method inst(unit u) -> thistype {
+        static method inst(unit u, string trace) -> thistype {
             if (!thistype.ht.exists(u)) {
-                print(SCOPE_PREFIX+">Unregistered unit: " + GetUnitNameEx(u));
+                print(SCOPE_PREFIX + " unregistered unit: " + GetUnitNameEx(u) + ", trace: " + trace);
                 return 0;
             } else {
                 return thistype.ht[u];
@@ -92,6 +96,29 @@ library PowerOfAbomination requires DarkRangerGlobal, SpellEvent, DamageSystem {
             thistype.ht[u] = this;
             TimerStart(this.tm, 1.0, true, function thistype.bansheeRegen);
         }
+
+        method updateIconAndText() {
+            integer lvl = GetUnitAbilityLevel(this.u, SID_POWER_OF_BANSHEE);
+            if (this.isBanshee) {
+                NFSetPlayerAbilityIcon(GetOwningPlayer(this.u), SID_POWER_OF_BANSHEE, BTNPossession);
+                if (lvl == 1) {
+                    NFSetPlayerAbilityExtendedTooltip(GetOwningPlayer(this.u), SID_POWER_OF_BANSHEE, TXT_CN_AET1_BANSHEE_1, 1);
+                } else if (lvl ==2) {
+                    NFSetPlayerAbilityExtendedTooltip(GetOwningPlayer(this.u), SID_POWER_OF_BANSHEE, TXT_CN_AET1_BANSHEE_2, 2);
+                } else if (lvl == 3) {
+                    NFSetPlayerAbilityExtendedTooltip(GetOwningPlayer(this.u), SID_POWER_OF_BANSHEE, TXT_CN_AET1_BANSHEE_3, 3);
+                }
+            } else {
+                NFSetPlayerAbilityIcon(GetOwningPlayer(this.u), SID_POWER_OF_BANSHEE, BTNUnholyFrenzy);
+                if (lvl == 1) {
+                    NFSetPlayerAbilityExtendedTooltip(GetOwningPlayer(this.u), SID_POWER_OF_BANSHEE, TXT_CN_AET1_ABOMINATION_1, 1);
+                } else if (lvl == 2) {
+                    NFSetPlayerAbilityExtendedTooltip(GetOwningPlayer(this.u), SID_POWER_OF_BANSHEE, TXT_CN_AET1_ABOMINATION_2, 2);
+                } else if (lvl == 3) {
+                    NFSetPlayerAbilityExtendedTooltip(GetOwningPlayer(this.u), SID_POWER_OF_BANSHEE, TXT_CN_AET1_ABOMINATION_3, 3);
+                }
+            }
+        }
         
         method abomination() {
             Buff buf;
@@ -112,14 +139,14 @@ library PowerOfAbomination requires DarkRangerGlobal, SpellEvent, DamageSystem {
                 buf.bd.bor = onRemoveFrenzy;
                 buf.run();
             }
+            this.updateIconAndText();
         }
         
         method banshee() {
             Buff buf;
             BuffSlot bs;
-            integer id;
+            integer id = GetPidofu(this.u);
             this.isBanshee = true;
-            id = GetPidofu(this.u);
             if (ghoul[id] != null) {
                 bs = BuffSlot[ghoul[id]];
                 buf = bs.getBuffByBid(BID_POWER_OF_BANSHEE_FRENZY);
@@ -128,6 +155,7 @@ library PowerOfAbomination requires DarkRangerGlobal, SpellEvent, DamageSystem {
                     buf.destroy();
                 }
             }
+            this.updateIconAndText();
         }
         
         private static method onInit() {
@@ -136,7 +164,7 @@ library PowerOfAbomination requires DarkRangerGlobal, SpellEvent, DamageSystem {
     }
     
     function onCast() {
-        PowerOfAbomination poa = PowerOfAbomination.inst(SpellEvent.CastingUnit);
+        PowerOfAbomination poa = PowerOfAbomination.inst(SpellEvent.CastingUnit, "onCast");
         if (poa != 0) {
             if (poa.isBanshee) {
                 poa.abomination();
@@ -147,7 +175,7 @@ library PowerOfAbomination requires DarkRangerGlobal, SpellEvent, DamageSystem {
     }
     
     public function DarkRangerIsAbominationOn(unit u) -> boolean {
-        PowerOfAbomination poa = PowerOfAbomination.inst(SpellEvent.CastingUnit);
+        PowerOfAbomination poa = PowerOfAbomination.inst(SpellEvent.CastingUnit, "DarkRangerIsAbominationOn");
         if (poa != 0) {
             return !poa.isBanshee;
         } else {
@@ -158,8 +186,8 @@ library PowerOfAbomination requires DarkRangerGlobal, SpellEvent, DamageSystem {
     function damaged() {
         Buff buf;
         PowerOfAbomination poa;
-        if (DamageResult.isHit && GetUnitTypeId(DamageResult.source) == UTID_DARK_RANGER && DamageResult.abilityName != SpellData[SID_POWER_OF_BANSHEE].name) {
-            poa = PowerOfAbomination.inst(DamageResult.source);
+        if (DamageResult.isHit && GetUnitTypeId(DamageResult.source) == UTID_DARK_RANGER && DamageResult.abilityName != SpellData[SID_POWER_OF_BANSHEE].name && GetUnitAbilityLevel(DamageResult.source, SID_POWER_OF_BANSHEE) > 0) {
+            poa = PowerOfAbomination.inst(DamageResult.source, "damaged");
             if (poa != 0) {
                 if (poa.isBanshee) {
                     buf = Buff.cast(DamageResult.source, DamageResult.target, BID_POWER_OF_BANSHEE_CURSE);
@@ -178,14 +206,19 @@ library PowerOfAbomination requires DarkRangerGlobal, SpellEvent, DamageSystem {
                     DamageTarget(DamageResult.source, DamageResult.target, returnExtraDamage(GetUnitAbilityLevel(DamageResult.source, SID_POWER_OF_BANSHEE)), SpellData[SID_POWER_OF_BANSHEE].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
                 }
             }
-            
         }
     }
     
     function learnt() -> boolean {
+        PowerOfAbomination poa;
         if (GetLearnedSkill() == SID_POWER_OF_BANSHEE) {
             if (GetUnitAbilityLevel(GetTriggerUnit(), SID_POWER_OF_BANSHEE) == 1) {
                 PowerOfAbomination.start(GetTriggerUnit());
+            } else {
+                poa = PowerOfAbomination.inst(GetTriggerUnit(), "learnt");
+                if (poa != 0) {
+                    poa.updateIconAndText();
+                }
             }
         }
         return false;
