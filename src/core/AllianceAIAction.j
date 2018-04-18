@@ -585,19 +585,19 @@ constant real AIACTION_INTERVAL = 0.33;
             SelectHeroSkill(source, SID_FREEZING_TRAP);
         } else if (GetHeroLevel(source) == 2) {
             SelectHeroSkill(source, SID_DARK_ARROW);
-            SelectHeroSkill(source, SID_POWER_OF_ABOMINATION);
+            SelectHeroSkill(source, SID_POWER_OF_BANSHEE);
             SelectHeroSkill(source, SID_DEATH_PACT);
         } else if (GetHeroLevel(source) == 3) {
             SelectHeroSkill(source, SID_DARK_ARROW);
             SelectHeroSkill(source, SID_FREEZING_TRAP);
-            SelectHeroSkill(source, SID_POWER_OF_ABOMINATION);
+            SelectHeroSkill(source, SID_POWER_OF_BANSHEE);
         } else if (GetHeroLevel(source) == 4) {
             SelectHeroSkill(source, SID_CONCERNTRATION);
             SelectHeroSkill(source, SID_FREEZING_TRAP);
             SelectHeroSkill(source, SID_DEATH_PACT);
         } else if (GetHeroLevel(source) == 5) {
             SelectHeroSkill(source, SID_CONCERNTRATION);
-            SelectHeroSkill(source, SID_POWER_OF_ABOMINATION);
+            SelectHeroSkill(source, SID_POWER_OF_BANSHEE);
             SelectHeroSkill(source, SID_DEATH_PACT);
         }
     }
@@ -1144,15 +1144,13 @@ constant real AIACTION_INTERVAL = 0.33;
                 state = 1;
             }
             // Abomi/banshee: mana
-            if (UnitCanUse(source, SID_POWER_OF_ABOMINATION)) {
-                if (GetUnitMana(source) < SpellData[SID_DARK_ARROW].Cost(GetUnitAbilityLevel(source, SID_DARK_ARROW)) + SpellData[SID_SUMMON_GHOUL].Cost(GetUnitAbilityLevel(source, SID_SUMMON_GHOUL))) {
-                    if (DarkRangerIsAbominationOn(source)) {
-                        IssueImmediateOrderById(source, OID_IMMOLATIONOFF);
-                    }
-                } else {
-                    if (!DarkRangerIsAbominationOn(source)) {
-                        IssueImmediateOrderById(source, OID_IMMOLATIONON);
-                    }
+            if (GetUnitMana(source) < SpellData[SID_DARK_ARROW].Cost(GetUnitAbilityLevel(source, SID_DARK_ARROW)) + SpellData[SID_SUMMON_GHOUL].Cost(GetUnitAbilityLevel(source, SID_SUMMON_GHOUL))) {
+                if (DarkRangerIsAbominationOn(source)) {
+                    IssueImmediateOrderById(source, SpellData[SID_POWER_OF_BANSHEE].oid);
+                }
+            } else {
+                if (!DarkRangerIsAbominationOn(source)) {
+                    IssueImmediateOrderById(source, SpellData[SID_POWER_OF_BANSHEE].oid);
                 }
             }
             // attack

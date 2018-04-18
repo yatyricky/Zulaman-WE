@@ -1,26 +1,60 @@
 //! zinc
 library PowerOfAbomination requires DarkRangerGlobal, SpellEvent, DamageSystem {
-constant string  ART  = "Abilities\\Weapons\\AvengerMissile\\AvengerMissile.mdl";
-constant integer BUFF_ID = 'A042';
-constant integer BUFF_ID1 = 'A043';
-constant integer BUFF_ID2 = 'A044';
-constant string  ART_LEFT  = "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustTarget.mdl";
-constant string  ART_RIGHT  = "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustSpecial.mdl";
 
-    function onEffect(Buff buf) {
+    function returnManaRegen(integer lvl) -> real {
+        if (lvl == 1) {
+            return 3.0;
+        } else if (lvl == 2) {
+            return 5.0;
+        } else {
+            return 8.0;
+        }
+    }
+
+    function returnExtraDamage(integer lvl) -> real {
+        if (lvl == 1) {
+            return 50.0;
+        } else if (lvl == 2) {
+            return 100.0;
+        } else {
+            return 200.0;
+        }
+    }
+
+    function returnMissRate(integer lvl) -> real {
+        if (lvl == 1) {
+            return 0.05;
+        } else if (lvl == 2) {
+            return 0.1;
+        } else {
+            return 0.15;
+        }
+    }
+
+    function returnAttackSpeed(integer lvl) -> integer {
+        if (lvl == 1) {
+            return 20;
+        } else if (lvl == 2) {
+            return 40;
+        } else {
+            return 80;
+        }
+    }
+
+    function onEffectCurse(Buff buf) {
         UnitProp.inst(buf.bd.target, SCOPE_PREFIX).attackRate -= buf.bd.r0;
     }
 
-    function onRemove(Buff buf) {
+    function onRemoveCurse(Buff buf) {
         UnitProp.inst(buf.bd.target, SCOPE_PREFIX).attackRate += buf.bd.r0;
     }
 
-    function onEffect1(Buff buf) {
-        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(50);
+    function onEffectFrenzy(Buff buf) {
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(buf.bd.i0);
     }
 
-    function onRemove1(Buff buf) {
-        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(-50);
+    function onRemoveFrenzy(Buff buf) {
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(0 - buf.bd.i0);
     }
 
     function onEffect2(Buff buf) {}
@@ -31,9 +65,8 @@ constant string  ART_RIGHT  = "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustSpeci
         timer tm;
         boolean isBanshee;
         unit u;
-        integer savedAP;
         
-        static method operator[] (unit u) -> thistype {
+        static method inst(unit u) -> thistype {
             if (!thistype.ht.exists(u)) {
                 print(SCOPE_PREFIX+">Unregistered unit: " + GetUnitNameEx(u));
                 return 0;
@@ -46,7 +79,7 @@ constant string  ART_RIGHT  = "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustSpeci
             thistype this = GetTimerData(GetExpiredTimer());
             // mana regen amount
             if (!IsUnitDead(this.u)) {
-                ModUnitMana(this.u, GetUnitAbilityLevel(this.u, SID_POWER_OF_ABOMINATION) * 2);
+                ModUnitMana(this.u, returnManaRegen(GetUnitAbilityLevel(this.u, SID_POWER_OF_BANSHEE)));
             }
         }
         
@@ -64,41 +97,37 @@ constant string  ART_RIGHT  = "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustSpeci
             Buff buf;
             integer id;
             this.isBanshee = false;
-            this.savedAP = GetUnitAbilityLevel(this.u, SID_POWER_OF_ABOMINATION) * 5 + 5;
-            UnitProp.inst(this.u, SCOPE_PREFIX).ModAP(this.savedAP);
-            //BJDebugMsg("Switched to Abomination!");
-            PauseTimer(this.tm);
             
-            id = GetPlayerId(GetOwningPlayer(this.u));
-            buf = BuffSlot[ghoul[id]].getBuffByBid(BUFF_ID2);
-            if (buf == 0 && ghoul[id] != null) {
+            id = GetPidofu(this.u);
+            if (ghoul[id] != null) {
                 // ghoul rage
-                buf = Buff.cast(this.u, ghoul[id], BUFF_ID1);
+                buf = Buff.cast(this.u, ghoul[id], BID_POWER_OF_BANSHEE_FRENZY);
                 buf.bd.tick = -1;
-                buf.bd.interval = 15;
+                buf.bd.interval = 300;
                 UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(0 - buf.bd.i0);
-                buf.bd.i0 = 50;
-                if (buf.bd.e0 == 0) {buf.bd.e0 = BuffEffect.create(ART_LEFT, buf, "hand, left");}
-                if (buf.bd.e1 == 0) {buf.bd.e1 = BuffEffect.create(ART_RIGHT, buf, "hand, right");}
-                buf.bd.boe = onEffect1;
-                buf.bd.bor = onRemove1;
-                buf.run();
-                // tired interval
-                buf = Buff.cast(this.u, ghoul[id], BUFF_ID2);
-                buf.bd.tick = -1;
-                buf.bd.interval = 30;
-                buf.bd.boe = onEffect2;
-                buf.bd.bor = onRemove2;
+                buf.bd.i0 = returnAttackSpeed(GetUnitAbilityLevel(this.u, SID_POWER_OF_BANSHEE));
+                if (buf.bd.e0 == 0) {buf.bd.e0 = BuffEffect.create(ART_BLOOD_LUST_LEFT, buf, "hand, left");}
+                if (buf.bd.e1 == 0) {buf.bd.e1 = BuffEffect.create(ART_BLOOD_LUST_RIGHT, buf, "hand, right");}
+                buf.bd.boe = onEffectFrenzy;
+                buf.bd.bor = onRemoveFrenzy;
                 buf.run();
             }
         }
         
         method banshee() {
-            //BJDebugMsg("Switched to Banshee!");
+            Buff buf;
+            BuffSlot bs;
+            integer id;
             this.isBanshee = true;
-            UnitProp.inst(this.u, SCOPE_PREFIX).ModAP(0 - this.savedAP);
-            this.savedAP = 0;
-            TimerStart(this.tm, 1.0, true, function thistype.bansheeRegen);
+            id = GetPidofu(this.u);
+            if (ghoul[id] != null) {
+                bs = BuffSlot[ghoul[id]];
+                buf = bs.getBuffByBid(BID_POWER_OF_BANSHEE_FRENZY);
+                if (buf != 0) {
+                    bs.dispelByBuff(buf);
+                    buf.destroy();
+                }
+            }
         }
         
         private static method onInit() {
@@ -106,81 +135,69 @@ constant string  ART_RIGHT  = "Abilities\\Spells\\Orc\\Bloodlust\\BloodlustSpeci
         }
     }
     
-    function onCast() -> boolean {        
-        unit u = GetTriggerUnit();
-        integer pid = GetPlayerId(GetOwningPlayer(u));
-        if (GetUnitTypeId(u) == UTID_DARK_RANGER) {
-            if (GetIssuedOrderId() == OID_IMMOLATIONON) {
-                PowerOfAbomination[u].abomination();
-            } else if (GetIssuedOrderId() == OID_IMMOLATIONOFF) {
-                //BJDebugMsg("immolation off");
-                PowerOfAbomination[u].banshee();
+    function onCast() {
+        PowerOfAbomination poa = PowerOfAbomination.inst(SpellEvent.CastingUnit);
+        if (poa != 0) {
+            if (poa.isBanshee) {
+                poa.abomination();
+            } else {
+                poa.banshee();
             }
         }
-        u = null;
-        return false;
+    }
+    
+    public function DarkRangerIsAbominationOn(unit u) -> boolean {
+        PowerOfAbomination poa = PowerOfAbomination.inst(SpellEvent.CastingUnit);
+        if (poa != 0) {
+            return !poa.isBanshee;
+        } else {
+            return false;
+        }
+    }
+    
+    function damaged() {
+        Buff buf;
+        PowerOfAbomination poa;
+        if (DamageResult.isHit && GetUnitTypeId(DamageResult.source) == UTID_DARK_RANGER && DamageResult.abilityName != SpellData[SID_POWER_OF_BANSHEE].name) {
+            poa = PowerOfAbomination.inst(DamageResult.source);
+            if (poa != 0) {
+                if (poa.isBanshee) {
+                    buf = Buff.cast(DamageResult.source, DamageResult.target, BID_POWER_OF_BANSHEE_CURSE);
+                    buf.bd.tick = -1;
+                    buf.bd.interval = 10.0;
+                    UnitProp.inst(buf.bd.target, SCOPE_PREFIX).attackRate += buf.bd.r0;
+                    buf.bd.r0 = returnMissRate(GetUnitAbilityLevel(DamageResult.source, SID_POWER_OF_BANSHEE));
+                    if (buf.bd.e0 == 0) {
+                        buf.bd.e0 = BuffEffect.create(ART_CURSE, buf, "overhead");
+                    }
+                    buf.bd.boe = onEffectCurse;
+                    buf.bd.bor = onRemoveCurse;
+                    buf.run();
+                } else {
+                    DestroyEffect(AddSpecialEffectTarget(ART_AVENGER_MISSILE, DamageResult.target, "origin"));
+                    DamageTarget(DamageResult.source, DamageResult.target, returnExtraDamage(GetUnitAbilityLevel(DamageResult.source, SID_POWER_OF_BANSHEE)), SpellData[SID_POWER_OF_BANSHEE].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
+                }
+            }
+            
+        }
     }
     
     function learnt() -> boolean {
-        if (GetLearnedSkill() == SID_POWER_OF_ABOMINATION) {
-            if (GetUnitAbilityLevel(GetTriggerUnit(), SID_POWER_OF_ABOMINATION) == 1) {
+        if (GetLearnedSkill() == SID_POWER_OF_BANSHEE) {
+            if (GetUnitAbilityLevel(GetTriggerUnit(), SID_POWER_OF_BANSHEE) == 1) {
                 PowerOfAbomination.start(GetTriggerUnit());
             }
         }
         return false;
     }
-    
-    public function DarkRangerIsAbominationOn(unit u) -> boolean {
-        return (!PowerOfAbomination[u].isBanshee);
-    }
-    
-    function damaged() {
-        Buff buf;
-        if (DamageResult.isHit && GetUnitTypeId(DamageResult.source) == UTID_DARK_RANGER) {
-            if (GetUnitAbilityLevel(DamageResult.source, SID_POWER_OF_ABOMINATION) > 0 && !PowerOfAbomination[DamageResult.source].isBanshee) {
-                DestroyEffect(AddSpecialEffectTarget(ART, DamageResult.target, "origin"));
-            }
-            if (GetUnitAbilityLevel(DamageResult.source, SID_POWER_OF_ABOMINATION) > 1 && PowerOfAbomination[DamageResult.source].isBanshee) {
-                buf = Buff.cast(DamageResult.source, DamageResult.target, BUFF_ID);
-                buf.bd.tick = -1;
-                buf.bd.interval = 10.0;
-                UnitProp.inst(buf.bd.target, SCOPE_PREFIX).attackRate += buf.bd.r0;
-                buf.bd.r0 = 0.05 * GetUnitAbilityLevel(DamageResult.source, SID_POWER_OF_ABOMINATION) - 0.05;
-                if (buf.bd.e0 == 0) {
-                    buf.bd.e0 = BuffEffect.create(ART_CURSE, buf, "overhead");
-                }
-                buf.bd.boe = onEffect;
-                buf.bd.bor = onRemove;
-                buf.run();
-            }
-        }
-    }
-    /*
-    function drDeath(unit u) {
-        if (GetUnitTypeId(u) == UTID_DARK_RANGER) {
-            if (GetUnitAbilityLevel(u, SID_POWER_OF_ABOMINATION) > 0) {
-                if (!PowerOfAbomination[u].isBanshee) {
-                    BJDebugMsg("Bug ��̬����");
-                    PowerOfAbomination[u].banshee();
-                }
-            }
-        }
-    }*/
 
     function onInit() {
-        TriggerAnyUnit(EVENT_PLAYER_UNIT_ISSUED_ORDER, function onCast);
-        BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_NEG);
-        BuffType.register(BUFF_ID1, BUFF_PHYX, BUFF_POS);
-        BuffType.register(BUFF_ID2, BUFF_PHYX, BUFF_NEG);
+        RegisterSpellEffectResponse(SID_POWER_OF_BANSHEE, onCast);
+        BuffType.register(BID_POWER_OF_BANSHEE_CURSE, BUFF_MAGE, BUFF_NEG);
+        BuffType.register(BID_POWER_OF_BANSHEE_FRENZY, BUFF_PHYX, BUFF_POS);
         TriggerAnyUnit(EVENT_PLAYER_HERO_SKILL, function learnt);
         RegisterDamagedEvent(damaged);
-        //RegisterUnitDeath(drDeath);
     }
-
-
-
-
-
 
 }
 //! endzinc
