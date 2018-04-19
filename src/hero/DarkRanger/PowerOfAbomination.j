@@ -81,9 +81,18 @@ library PowerOfAbomination requires DarkRangerGlobal, SpellEvent, DamageSystem {
         
         private static method bansheeRegen() {
             thistype this = GetTimerData(GetExpiredTimer());
+            real amt;
             // mana regen amount
             if (!IsUnitDead(this.u)) {
-                ModUnitMana(this.u, returnManaRegen(GetUnitAbilityLevel(this.u, SID_POWER_OF_BANSHEE)));
+                amt = returnManaRegen(GetUnitAbilityLevel(this.u, SID_POWER_OF_BANSHEE));
+                if (this.isBanshee) {
+                    ModUnitMana(this.u, amt);
+                } else {
+                    ModUnitMana(this.u, 0 - amt);
+                    if (GetUnitMana(this.u) < amt) {
+                        IssueImmediateOrderById(this.u, SpellData[SID_POWER_OF_BANSHEE].oid);
+                    }
+                }
             }
         }
         
