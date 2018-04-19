@@ -2,6 +2,7 @@
 library Constants {
 public constant integer NUMBER_OF_MAX_PLAYERS = 6;
 public constant integer MOB_PID = 10;
+public constant integer NUMBER_OF_BOSSES = 8;
 public constant string FORCE_NPCS = "冒险者";
 public constant string FORCE_ENEMY = "黑暗势力";
 
@@ -27,6 +28,10 @@ public constant integer BUFF_PHYX = 4;
 public constant integer BUFF_MAGE = 5;
 public constant integer BUFF_POS = 10;
 public constant integer BUFF_NEG = 20;
+
+public constant integer UTID_TOWN_PORTAL = 'n00P';
+public constant integer ITID_PORTAL_0 = 'I025';
+public constant integer ITID_PORTAL_1 = 'I024';
 
 public constant integer DUMMY_X = -8500;
 public constant integer DUMMY_Y = -11000;

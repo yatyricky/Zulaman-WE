@@ -169,9 +169,6 @@ library ZAMCore requires NefUnion {
         SetPlayerAlliance(Player(11), Player(4), ALLIANCE_PASSIVE, true);
         SetPlayerAlliance(Player(11), Player(5), ALLIANCE_PASSIVE, true);
         
-        SetPlayerAlliance(Player(10), Player(0), ALLIANCE_SHARED_CONTROL, true);
-        //SetPlayerAlliance(Player(10), Player(0), ALLIANCE_PASSIVE, true);
-        
         MAP_AREA = CreateRegion();
         RegionAddRect(MAP_AREA, bj_mapInitialPlayableArea);
         TriggerRegisterEnterRegion(regTrig, MAP_AREA, Filter(function DummyFilter));

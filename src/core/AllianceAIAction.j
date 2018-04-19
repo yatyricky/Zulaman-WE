@@ -1144,13 +1144,15 @@ constant real AIACTION_INTERVAL = 0.33;
                 state = 1;
             }
             // Abomi/banshee: mana
-            if (GetUnitMana(source) < SpellData[SID_DARK_ARROW].Cost(GetUnitAbilityLevel(source, SID_DARK_ARROW)) + SpellData[SID_SUMMON_GHOUL].Cost(GetUnitAbilityLevel(source, SID_SUMMON_GHOUL))) {
-                if (DarkRangerIsAbominationOn(source)) {
-                    IssueImmediateOrderById(source, SpellData[SID_POWER_OF_BANSHEE].oid);
-                }
-            } else {
-                if (!DarkRangerIsAbominationOn(source)) {
-                    IssueImmediateOrderById(source, SpellData[SID_POWER_OF_BANSHEE].oid);
+            if (UnitCanUse(source, SID_POWER_OF_BANSHEE)) {
+                if (GetUnitMana(source) < SpellData[SID_DARK_ARROW].Cost(GetUnitAbilityLevel(source, SID_DARK_ARROW)) + SpellData[SID_SUMMON_GHOUL].Cost(GetUnitAbilityLevel(source, SID_SUMMON_GHOUL))) {
+                    if (DarkRangerIsAbominationOn(source)) {
+                        IssueImmediateOrderById(source, SpellData[SID_POWER_OF_BANSHEE].oid);
+                    }
+                } else {
+                    if (!DarkRangerIsAbominationOn(source)) {
+                        IssueImmediateOrderById(source, SpellData[SID_POWER_OF_BANSHEE].oid);
+                    }
                 }
             }
             // attack
