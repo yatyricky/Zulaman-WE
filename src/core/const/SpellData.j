@@ -138,7 +138,7 @@ SpellData.create(SID_CONCERNTRATION,"专注",0,0,13,OrderId("thunderclap"),1,ORD
 SpellData.create(SID_FREEZING_TRAP,"冰冻陷阱",0,0,16,OrderId("blizzard"),1,ORDER_TYPE_POINT).setCCC2(0,0,13).setCCC3(0,0,10);
 SpellData.create(SID_POWER_OF_BANSHEE,"女妖之力",0,0,1,OrderId("howlofterror"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_DEATH_PACT,"死亡契约",0,0,5,OrderId("stomp"),1,ORDER_TYPE_IMMEDIATE);
-SpellData.create(SID_SUMMON_GHOUL,"食尸鬼仆从",50,0,60,852503,1,ORDER_TYPE_IMMEDIATE).setCCC2(0,0,45).setCCC3(0,0,30);
+SpellData.create(SID_SUMMON_GHOUL,"食尸鬼仆从",50,0,60,OrderId("voodoo"),1,ORDER_TYPE_IMMEDIATE).setCCC2(0,0,45).setCCC3(0,0,30);
 SpellData.create(SID_LIFE_LEECH,"生命偷取",0,0,1,0,1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_HEROIC_STRIKE,"英勇打击",0,0,1,OrderId("roar"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_REND,"撕裂",30,0,6,OrderId("whirlwind"),1,ORDER_TYPE_TARGET);

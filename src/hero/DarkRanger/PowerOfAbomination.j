@@ -49,19 +49,19 @@ library PowerOfAbomination requires DarkRangerGlobal, SpellEvent, DamageSystem {
     }
 
     function onEffectCurse(Buff buf) {
-        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).attackRate -= buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX + "_function_onEffectCurse").attackRate -= buf.bd.r0;
     }
 
     function onRemoveCurse(Buff buf) {
-        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).attackRate += buf.bd.r0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX + "_function_onRemoveCurse").attackRate += buf.bd.r0;
     }
 
     function onEffectFrenzy(Buff buf) {
-        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX + "_function onEffectFrenzy").ModAttackSpeed(buf.bd.i0);
     }
 
     function onRemoveFrenzy(Buff buf) {
-        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(0 - buf.bd.i0);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX + "_function onRemoveFrenzy").ModAttackSpeed(0 - buf.bd.i0);
     }
 
     struct PowerOfAbomination {
@@ -140,7 +140,7 @@ library PowerOfAbomination requires DarkRangerGlobal, SpellEvent, DamageSystem {
                 buf = Buff.cast(this.u, ghoul[id], BID_POWER_OF_BANSHEE_FRENZY);
                 buf.bd.tick = -1;
                 buf.bd.interval = 300;
-                UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(0 - buf.bd.i0);
+                UnitProp.inst(buf.bd.target, SCOPE_PREFIX + "method_abomination").ModAttackSpeed(0 - buf.bd.i0);
                 buf.bd.i0 = returnAttackSpeed(GetUnitAbilityLevel(this.u, SID_POWER_OF_BANSHEE));
                 if (buf.bd.e0 == 0) {buf.bd.e0 = BuffEffect.create(ART_BLOOD_LUST_LEFT, buf, "hand, left");}
                 if (buf.bd.e1 == 0) {buf.bd.e1 = BuffEffect.create(ART_BLOOD_LUST_RIGHT, buf, "hand, right");}
@@ -184,7 +184,7 @@ library PowerOfAbomination requires DarkRangerGlobal, SpellEvent, DamageSystem {
     }
     
     public function DarkRangerIsAbominationOn(unit u) -> boolean {
-        PowerOfAbomination poa = PowerOfAbomination.inst(SpellEvent.CastingUnit, "DarkRangerIsAbominationOn");
+        PowerOfAbomination poa = PowerOfAbomination.inst(u, "DarkRangerIsAbominationOn");
         if (poa != 0) {
             return !poa.isBanshee;
         } else {
@@ -202,7 +202,7 @@ library PowerOfAbomination requires DarkRangerGlobal, SpellEvent, DamageSystem {
                     buf = Buff.cast(DamageResult.source, DamageResult.target, BID_POWER_OF_BANSHEE_CURSE);
                     buf.bd.tick = -1;
                     buf.bd.interval = 10.0;
-                    UnitProp.inst(buf.bd.target, SCOPE_PREFIX).attackRate += buf.bd.r0;
+                    UnitProp.inst(buf.bd.target, SCOPE_PREFIX + "_function_damaged").attackRate += buf.bd.r0;
                     buf.bd.r0 = returnMissRate(GetUnitAbilityLevel(DamageResult.source, SID_POWER_OF_BANSHEE));
                     if (buf.bd.e0 == 0) {
                         buf.bd.e0 = BuffEffect.create(ART_CURSE, buf, "overhead");

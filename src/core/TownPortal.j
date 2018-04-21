@@ -34,18 +34,21 @@ library TownPortal requires DebugExporter {
             SetUnitPosition(u, 5300, -12266);
             PanCameraToTimedForPlayer(p, 5300, -12266, 1.00);
             AddTimedEffect.atUnit(ART_MASS_TELEPORT_TARGET, u, "origin", 0.5);
+            SelectUnitForPlayerSingle(u, p);
             RemoveItem(it);
         }
         if (itid == ITID_PORTAL_1) {
             SetUnitPosition(u, -5989, -12197);
             PanCameraToTimedForPlayer(p, -5989, -12197, 1.00);
             AddTimedEffect.atUnit(ART_MASS_TELEPORT_TARGET, u, "origin", 0.5);
+            SelectUnitForPlayerSingle(u, p);
             RemoveItem(it);
         }
         if (itid == ITID_PORTAL_2) {
             SetUnitPosition(u, -1210, -5429);
             PanCameraToTimedForPlayer(p, -1210, -5429, 1.00);
             AddTimedEffect.atUnit(ART_MASS_TELEPORT_TARGET, u, "origin", 0.5);
+            SelectUnitForPlayerSingle(u, p);
             RemoveItem(it);
         }
         it = null;

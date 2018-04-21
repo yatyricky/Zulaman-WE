@@ -24,7 +24,7 @@ library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSys
         group g = CreateGroup();
         GroupEnumUnitsSelected(g, Player(0), null);
         u = FirstOfGroup(g);
-        SetHeroLevel(u, GetHeroLevel(u) + 1, true);
+        SetHeroLevel(u, GetHeroLevel(u) + 14, true);
         DestroyGroup(g);
     }
     

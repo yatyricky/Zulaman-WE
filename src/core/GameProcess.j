@@ -32,10 +32,27 @@ library GameProcess requires PlayerUnitList, MobInit {
         }
     }
 
+    function openNewArea(unit u) {
+        integer utid = GetUnitTypeId(u);
+        if (utid == UTID_ARCH_TINKER || utid == UTID_ARCH_TINKER_MORPH) {
+            MobInitAllowArea(2);
+        }
+        if (utid == UTID_NAGA_SEA_WITCH) {
+            MobInitAllowArea(3);
+        }
+        if (utid == UTID_TIDE_BARON || utid == UTID_TIDE_BARON_WATER) {
+            MobInitAllowArea(4);
+        }
+        if (utid == UTID_WARLOCK) {
+            MobInitAllowArea(5);
+        }
+    }
+
     function onInit() {
         TimerStart(CreateTimer(), 2.0, false, function() {
             MobInitAllowArea(1);
         });
+        RegisterUnitDeath(openNewArea);
     }
 }
 //! endzinc

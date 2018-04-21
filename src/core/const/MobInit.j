@@ -155,6 +155,5 @@ constant integer MOBINIT_RESPAWN_H = 720;
         });
     }
 
-
 }
 //! endzinc

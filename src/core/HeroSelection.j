@@ -43,11 +43,12 @@ constant integer HERO_SLCT_HIGH = 'IHS;';
     function heroSelected() -> boolean {
         integer aid = GetItemTypeId(GetManipulatedItem());
         unit u;
-        player p = GetTriggerPlayer();
+        player p = GetOwningPlayer(GetTriggerUnit());
         integer i;
         if (aid >= HERO_SLCT_LOW && aid <= HERO_SLCT_HIGH) {
             u = CreateUnit(p, heroRefTab[aid], GetInitX(GetPlayerId(p)), GetInitY(GetPlayerId(p)), 270);
             PanCameraToTimedForPlayer(p, GetInitX(GetPlayerId(p)), GetInitY(GetPlayerId(p)), 1.00);
+            SelectUnitForPlayerSingle(u, p);
             GroupAddUnit(PlayerUnits.g, u);
             classSpec.add(classSpecRefTab[heroRefTab[aid]], 10);
             RemoveItem(GetManipulatedItem());
