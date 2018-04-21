@@ -6,8 +6,8 @@ public constant integer NUMBER_OF_BOSSES = 8;
 public constant string FORCE_NPCS = "冒险者";
 public constant string FORCE_ENEMY = "黑暗势力";
 
-public constant real INIT_X = 5822.0;
-public constant real INIT_Y = -11907.0;
+public constant real INIT_X = 5902.0;
+public constant real INIT_Y = -12016.0;
 
 public constant string DAMAGE_NAME_MELEE = "普通攻击";
 
@@ -32,6 +32,7 @@ public constant integer BUFF_NEG = 20;
 public constant integer UTID_TOWN_PORTAL = 'n00P';
 public constant integer ITID_PORTAL_0 = 'I025';
 public constant integer ITID_PORTAL_1 = 'I024';
+public constant integer ITID_PORTAL_2 = 'I026';
 
 public constant integer DUMMY_X = -8500;
 public constant integer DUMMY_Y = -11000;
@@ -696,6 +697,7 @@ public constant string ART_ANCIENT_PROTECTOR_MISSILE = "Abilities\\Weapons\\Anci
 public constant string ART_HOLY_BOLT_SPECIAL_ART = "Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpecialArt.mdl";
 public constant string ART_RESURRECT_TARGET = "Abilities\\Spells\\Human\\Resurrect\\ResurrectTarget.mdl";
 public constant string ART_AVENGER_MISSILE = "Abilities\\Weapons\\AvengerMissile\\AvengerMissile.mdl";
+public constant string ART_TOME_OF_RETRAINING_CASTER = "Abilities\\Spells\\Items\\TomeOfRetraining\\TomeOfRetrainingCaster.mdl";
 
 public constant string BTNVolcano = "ReplaceableTextures\\CommandButtons\\BTNVolcano.blp";
 public constant string BTNEarthquake = "ReplaceableTextures\\CommandButtons\\BTNEarthquake.blp";

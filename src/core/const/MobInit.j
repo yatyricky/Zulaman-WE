@@ -131,9 +131,11 @@ constant integer MOBINIT_RESPAWN_H = 720;
 
                     numMobs = numMobs + 1;
                 }
+                // Add portals
                 if (GetUnitTypeId(tu) == UTID_TOWN_PORTAL) {
                     AddPortal(tu);
                 }
+
                 GroupRemoveUnit(g, tu);
                 tu = FirstOfGroup(g);
             }

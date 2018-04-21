@@ -300,14 +300,7 @@ library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSys
     }
 
     function testGeneral(string str) {
-        vector v2 = vector.create(13727, 14374, 0);
-        vector v1 = vector.create(13540, 14817, 0);
-        vector v3 = vector.create(13585, 14410, 0);
-        print(R2S(DistancePointAndLineSegment(v1, v2, v3)));
-        v3.reset(13400, 14483, 0);
-        print(R2S(DistancePointAndLineSegment(v1, v2, v3)));
-        v3.reset(13216, 14647, 0);
-        print(R2S(DistancePointAndLineSegment(v1, v2, v3)));
+        CreateUnit(Player(0), 'Hmkg', -5255, -12589, 0);
     }
 
     function getunitlevel(string str) {

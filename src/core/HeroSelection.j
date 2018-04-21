@@ -47,6 +47,7 @@ constant integer HERO_SLCT_HIGH = 'IHS;';
         integer i;
         if (aid >= HERO_SLCT_LOW && aid <= HERO_SLCT_HIGH) {
             u = CreateUnit(p, heroRefTab[aid], GetInitX(GetPlayerId(p)), GetInitY(GetPlayerId(p)), 270);
+            PanCameraToTimedForPlayer(p, GetInitX(GetPlayerId(p)), GetInitY(GetPlayerId(p)), 1.00);
             GroupAddUnit(PlayerUnits.g, u);
             classSpec.add(classSpecRefTab[heroRefTab[aid]], 10);
             RemoveItem(GetManipulatedItem());
