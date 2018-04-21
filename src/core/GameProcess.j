@@ -39,6 +39,7 @@ library GameProcess requires PlayerUnitList, MobInit {
         }
         if (utid == UTID_NAGA_SEA_WITCH) {
             MobInitAllowArea(3);
+            ModifyGateBJ(bj_GATEOPERATION_OPEN, gg_dest_ZTsx_0031);
         }
         if (utid == UTID_TIDE_BARON || utid == UTID_TIDE_BARON_WATER) {
             MobInitAllowArea(4);

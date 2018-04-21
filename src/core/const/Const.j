@@ -33,6 +33,8 @@ public constant integer UTID_TOWN_PORTAL = 'n00P';
 public constant integer ITID_PORTAL_0 = 'I025';
 public constant integer ITID_PORTAL_1 = 'I024';
 public constant integer ITID_PORTAL_2 = 'I026';
+public constant integer ITID_PORTAL_3 = 'I027';
+public constant integer ITID_PORTAL_4 = 'I028';
 
 public constant integer DUMMY_X = -8500;
 public constant integer DUMMY_Y = -11000;

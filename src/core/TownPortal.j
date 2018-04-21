@@ -1,6 +1,6 @@
 //! zinc
 library TownPortal requires DebugExporter {
-    public constant integer NUM_PORTALS = 3;
+    public constant integer NUM_PORTALS = 5;
     unit portals[];
     boolean activated[];
 
@@ -11,6 +11,10 @@ library TownPortal requires DebugExporter {
             portals[1] = portal;
         } else if (RectContainsUnit(gg_rct_ActivatePortal2, portal)) {
             portals[2] = portal;
+        } else if (RectContainsUnit(gg_rct_ActivatePortal3, portal)) {
+            portals[3] = portal;
+        } else if (RectContainsUnit(gg_rct_ActivatePortal4, portal)) {
+            portals[4] = portal;
         }
     }
 
@@ -51,6 +55,20 @@ library TownPortal requires DebugExporter {
             SelectUnitForPlayerSingle(u, p);
             RemoveItem(it);
         }
+        if (itid == ITID_PORTAL_3) {
+            SetUnitPosition(u, 3074, -4825);
+            PanCameraToTimedForPlayer(p, 3074, -4825, 1.00);
+            AddTimedEffect.atUnit(ART_MASS_TELEPORT_TARGET, u, "origin", 0.5);
+            SelectUnitForPlayerSingle(u, p);
+            RemoveItem(it);
+        }
+        if (itid == ITID_PORTAL_4) {
+            SetUnitPosition(u, 6479, -1116);
+            PanCameraToTimedForPlayer(p, 6479, -1116, 1.00);
+            AddTimedEffect.atUnit(ART_MASS_TELEPORT_TARGET, u, "origin", 0.5);
+            SelectUnitForPlayerSingle(u, p);
+            RemoveItem(it);
+        }
         it = null;
         u = null;
         p = null;
@@ -61,6 +79,8 @@ library TownPortal requires DebugExporter {
         trigger trg0;
         trigger trg1;
         trigger trg2;
+        trigger trg3;
+        trigger trg4;
         integer i = 0;
         TriggerAnyUnit(EVENT_PLAYER_UNIT_PICKUP_ITEM, function usedTownPortal);
         while (i < NUM_PORTALS) {
@@ -91,9 +111,27 @@ library TownPortal requires DebugExporter {
             }
             return false;
         }));
+        trg3 = CreateTrigger();
+        TriggerRegisterEnterRectSimple(trg3, gg_rct_ActivatePortal3);
+        TriggerAddCondition(trg3, Condition(function() -> boolean {
+            if (GetPidofu(GetTriggerUnit()) < NUMBER_OF_MAX_PLAYERS && activated[3] == false) {
+                activate(ITID_PORTAL_3, 3);
+            }
+            return false;
+        }));
+        trg4 = CreateTrigger();
+        TriggerRegisterEnterRectSimple(trg4, gg_rct_ActivatePortal4);
+        TriggerAddCondition(trg4, Condition(function() -> boolean {
+            if (GetPidofu(GetTriggerUnit()) < NUMBER_OF_MAX_PLAYERS && activated[4] == false) {
+                activate(ITID_PORTAL_4, 4);
+            }
+            return false;
+        }));
         trg0 = null;
         trg1 = null;
         trg2 = null;
+        trg3 = null;
+        trg4 = null;
     }
 }
 //! endzinc
