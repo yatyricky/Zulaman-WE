@@ -300,7 +300,27 @@ library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSys
     }
 
     function testGeneral(string str) {
-        CreateUnit(Player(0), 'Hmkg', -5255, -12589, 0);
+        real x = 8624;
+        real y = -5439;
+        unit u = CreateUnit(Player(0), UTID_CLAW_DRUID, x, y, 0);
+        SetHeroLevel(u, GetHeroLevel(u) + 14, true);
+        u = CreateUnit(Player(0), UTID_CLAW_DRUID, x, y, 0);
+        SetHeroLevel(u, GetHeroLevel(u) + 14, true);
+        u = CreateUnit(Player(0), UTID_CLAW_DRUID, x, y, 0);
+        SetHeroLevel(u, GetHeroLevel(u) + 14, true);
+        u = CreateUnit(Player(0), UTID_CLAW_DRUID, x, y, 0);
+        SetHeroLevel(u, GetHeroLevel(u) + 14, true);
+        u = CreateUnit(Player(0), UTID_CLAW_DRUID, x, y, 0);
+        SetHeroLevel(u, GetHeroLevel(u) + 14, true);
+        u = CreateUnit(Player(0), UTID_CLAW_DRUID, x, y, 0);
+        SetHeroLevel(u, GetHeroLevel(u) + 14, true);
+        CreateItemEx(ITID_BREATH_OF_THE_DYING, x, y);
+        CreateItemEx(ITID_BREATH_OF_THE_DYING, x, y);
+        CreateItemEx(ITID_BREATH_OF_THE_DYING, x, y);
+        CreateItemEx(ITID_BREATH_OF_THE_DYING, x, y);
+        CreateItemEx(ITID_BREATH_OF_THE_DYING, x, y);
+        CreateItemEx(ITID_BREATH_OF_THE_DYING, x, y);
+        MobInitAllowArea(4);
     }
 
     function getunitlevel(string str) {

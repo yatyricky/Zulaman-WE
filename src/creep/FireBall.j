@@ -1,11 +1,7 @@
 //! zinc
 library FireBall requires DamageSystem {
-/*
-AOE fire balls, deals 600 damage to all targets
-
-*/
 constant string  PATH  = "Abilities\\Weapons\\FireBallMissile\\FireBallMissile.mdl";
-constant real DAMAGE = 600.0;
+constant real DAMAGE = 500.0;
 
     function onhit(Projectile p) -> boolean {
         if (TryReflect(p.target)) {
@@ -26,7 +22,7 @@ constant real DAMAGE = 600.0;
             p.target = PlayerUnits.units[i];
             p.path = PATH;
             p.pr = onhit;
-            p.speed = 700;
+            p.speed = 900;
             p.r0 = DAMAGE;
             p.launch();
         }

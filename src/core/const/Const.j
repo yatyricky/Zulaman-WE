@@ -359,6 +359,9 @@ public constant integer BID_BLAZING_HASTE = 'A02Z';
 public constant integer SID_FIRE_BALL = 'A09L';
 public constant integer SID_FLAME_SHOCK = 'A09M';
 public constant integer BID_FLAME_SHOCK = 'A0BE';
+// smoldering tower
+public constant integer UTID_SMOLDERING_TOWER = 'ntx2';
+public constant integer SID_SMOLDER = 'A0CK';
 
 // ## Area 4
 // Noxious Spider
@@ -700,6 +703,7 @@ public constant string ART_HOLY_BOLT_SPECIAL_ART = "Abilities\\Spells\\Human\\Ho
 public constant string ART_RESURRECT_TARGET = "Abilities\\Spells\\Human\\Resurrect\\ResurrectTarget.mdl";
 public constant string ART_AVENGER_MISSILE = "Abilities\\Weapons\\AvengerMissile\\AvengerMissile.mdl";
 public constant string ART_TOME_OF_RETRAINING_CASTER = "Abilities\\Spells\\Items\\TomeOfRetraining\\TomeOfRetrainingCaster.mdl";
+public constant string ART_BREATH_OF_FIRE_DAMAGE = "Abilities\\Spells\\Other\\BreathOfFire\\BreathOfFireDamage.mdl";
 
 public constant string BTNVolcano = "ReplaceableTextures\\CommandButtons\\BTNVolcano.blp";
 public constant string BTNEarthquake = "ReplaceableTextures\\CommandButtons\\BTNEarthquake.blp";

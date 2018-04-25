@@ -1047,6 +1047,21 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         }
     }
 
+    function makeOrderSmolderingTower(unit source, unit target, real combatTime) {
+        integer res;
+        if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX + "smoldering tower").stunned) {
+            res = 0;
+            if (UnitCanUse(source, SID_SMOLDER) && combatTime > 0.1) {
+                res = SID_SMOLDER;
+            }
+            if (res == 0) {
+                IssueTargetOrderById(source, OID_ATTACK, target);
+            } else {
+                IssueImmediateOrderById(source, SpellData[res].oid);
+            }
+        }
+    }
+
     public function OrderCreeps(unit s, unit t, real c) {
         integer utid = GetUnitTypeId(s);
         //print(I2S(R2I(c)));
@@ -1112,6 +1127,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         unitCallBack[UTID_FEL_RIDER] = makeOrderFelRider;   // Fel Rider
         unitCallBack[UTID_FEL_WAR_BRINGER] = makeOrderFelWarBringer; // Fel war bringer
         unitCallBack[UTID_DEMONIC_WITCH] = makeOrderDemonicWitch;   // 
+        unitCallBack[UTID_SMOLDERING_TOWER] = makeOrderSmolderingTower;
 
         // ============= Area 4 ==================
         unitCallBack[UTID_NOXIOUS_SPIDER] = makeOrderNoxiousSpider;
