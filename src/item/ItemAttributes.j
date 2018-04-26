@@ -38,7 +38,47 @@ library ItemAttributes requires UnitProperty, Table {
         }
     }
 
-    function itemon() -> boolean {  
+    function ItemAffixEffect(unit u, item it, integer polar) {
+        ItemAffix data = ItemAffix.inst(it, "ItemAttributes.ItemAffixEffect");
+        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
+        integer i;
+        while (data != 0) {
+            i = 0;
+            while (i < data.attributeN) {
+                if (data.attribute[i] == AFFIX_TYPE_STR) {
+                    up.ModStr(Rounding(data.value[i]) * polar);
+                } else if (data.attribute[i] == AFFIX_TYPE_AGI) {
+                    up.ModAgi(Rounding(data.value[i]) * polar);
+                } else if (data.attribute[i] == AFFIX_TYPE_INT) {
+                    up.ModInt(Rounding(data.value[i]) * polar);
+                } else if (data.attribute[i] == AFFIX_TYPE_HP) {
+                    up.ModLife(Rounding(data.value[i]) * polar);
+                } else if (data.attribute[i] == AFFIX_TYPE_AP) {
+                    up.ModAP(Rounding(data.value[i]) * polar);
+                } else if (data.attribute[i] == AFFIX_TYPE_CRIT) {
+                    up.attackCrit += data.value[i] * polar;
+                } else if (data.attribute[i] == AFFIX_TYPE_IAS) {
+                    up.ModAttackSpeed(Rounding(data.value[i]) * polar);
+                } else if (data.attribute[i] == AFFIX_TYPE_SP) {
+                    up.spellPower += (data.value[i] * polar);
+                } else if (data.attribute[i] == AFFIX_TYPE_SCRIT) {
+                    up.spellCrit += (data.value[i] * polar);
+                } else if (data.attribute[i] == AFFIX_TYPE_SHASTE) {
+                    up.spellHaste += (data.value[i] * polar);
+                } else if (data.attribute[i] == AFFIX_TYPE_MREGEN) {
+                    up.manaRegen += (data.value[i] * polar);
+                } else if (data.attribute[i] == AFFIX_TYPE_DEF) {
+                    up.ModArmor(Rounding(data.value[i]) * polar);
+                } else if (data.attribute[i] == AFFIX_TYPE_DODGE) {
+                    up.dodge += (data.value[i] * polar);
+                }
+                i += 1;
+            }
+            data = data.next;
+        }
+    }
+
+    function itemon() -> boolean {
         item it = GetManipulatedItem();
         integer itid = GetItemTypeId(it);
         integer i;
@@ -46,6 +86,7 @@ library ItemAttributes requires UnitProperty, Table {
         unit u = GetTriggerUnit();
         if (ItemAttributes.exists(itid)) {
             ItemPropModType(ItemAttributes[itid]).evaluate(u, it, 1);
+            ItemAffixEffect(u, it, 1);
             //if (!itemInst.exists())
         }
         // stack charges
@@ -71,6 +112,7 @@ library ItemAttributes requires UnitProperty, Table {
         integer itid = GetItemTypeId(GetManipulatedItem());
         if (ItemAttributes.exists(itid)) {
             ItemPropModType(ItemAttributes[itid]).evaluate(GetTriggerUnit(), GetManipulatedItem(), -1);
+            ItemAffixEffect(GetTriggerUnit(), GetManipulatedItem(), -1);
         }
         return false;
     }

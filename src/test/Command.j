@@ -89,7 +89,7 @@ library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSys
     }
     
     function createitem(string str) {
-        CreateItemEx(S2ID(SubString(str, 5, 9)), GetInitX(0), GetInitY(0));
+        CreateItemEx(S2ID(SubString(str, 5, 9)), GetInitX(0), GetInitY(0), GetRandomReal(10000, 100000));
     }
     
     function screenClear(string str) {
@@ -279,12 +279,12 @@ library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSys
         integer i = 0;
         while (i < PlayerUnits.n) {
             SetUnitPosition(PlayerUnits.units[i], testx, testy);
-            UnitAddItem(PlayerUnits.units[i], CreateItemEx('Ieng', testx, testy));
-            UnitAddItem(PlayerUnits.units[i], CreateItemEx('Ieng', testx, testy));
-            UnitAddItem(PlayerUnits.units[i], CreateItemEx('Ieng', testx, testy));
-            UnitAddItem(PlayerUnits.units[i], CreateItemEx('Ieng', testx, testy));
-            UnitAddItem(PlayerUnits.units[i], CreateItemEx('Ieng', testx, testy));
-            UnitAddItem(PlayerUnits.units[i], CreateItemEx('Ieng', testx, testy));
+            UnitAddItem(PlayerUnits.units[i], CreateItemEx('Ieng', testx, testy, 10000));
+            UnitAddItem(PlayerUnits.units[i], CreateItemEx('Ieng', testx, testy, 30000));
+            UnitAddItem(PlayerUnits.units[i], CreateItemEx('Ieng', testx, testy, 50000));
+            UnitAddItem(PlayerUnits.units[i], CreateItemEx('Ieng', testx, testy, 70000));
+            UnitAddItem(PlayerUnits.units[i], CreateItemEx('Ieng', testx, testy, 90000));
+            UnitAddItem(PlayerUnits.units[i], CreateItemEx('Ieng', testx, testy, 110000));
             i += 1;
         }
     }
@@ -314,12 +314,12 @@ library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSys
         SetHeroLevel(u, GetHeroLevel(u) + 14, true);
         u = CreateUnit(Player(0), UTID_CLAW_DRUID, x, y, 0);
         SetHeroLevel(u, GetHeroLevel(u) + 14, true);
-        CreateItemEx(ITID_BREATH_OF_THE_DYING, x, y);
-        CreateItemEx(ITID_BREATH_OF_THE_DYING, x, y);
-        CreateItemEx(ITID_BREATH_OF_THE_DYING, x, y);
-        CreateItemEx(ITID_BREATH_OF_THE_DYING, x, y);
-        CreateItemEx(ITID_BREATH_OF_THE_DYING, x, y);
-        CreateItemEx(ITID_BREATH_OF_THE_DYING, x, y);
+        CreateItemEx(ITID_BREATH_OF_THE_DYING, x, y, 10000);
+        CreateItemEx(ITID_BREATH_OF_THE_DYING, x, y, 30000);
+        CreateItemEx(ITID_BREATH_OF_THE_DYING, x, y, 50000);
+        CreateItemEx(ITID_BREATH_OF_THE_DYING, x, y, 70000);
+        CreateItemEx(ITID_BREATH_OF_THE_DYING, x, y, 90000);
+        CreateItemEx(ITID_BREATH_OF_THE_DYING, x, y, 110000);
         MobInitAllowArea(4);
     }
 

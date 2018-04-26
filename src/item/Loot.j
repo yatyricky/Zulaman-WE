@@ -1,14 +1,15 @@
 //! zinc
 library Loot requires IntegerPool, ZAMCore {
-constant integer RP_FACTOR = 200000;
-constant integer TABLE_SIZE = 50;
+constant integer RP_FACTOR = 20000;
+constant integer TABLE_SIZE = 65;
 constant real RP_RELIC = 1.0;
-constant real RP_RARE = 10.0;
-constant real RP_UNCOMMON = 0.0;
+constant real RP_RARE = 6.0;
+constant real RP_UNCOMMON = 15.0;
 constant real RP_COMMON = 0.0;
     public IntegerPool classSpec;
     IntegerPool relic;
     IntegerPool rare;
+    IntegerPool uncommon;
     IntegerPool boss1, boss2, boss3, boss4, boss5, boss6, boss7;
     Table bossPools;
     real loot2;
@@ -44,16 +45,19 @@ constant real RP_COMMON = 0.0;
                     } else {
                         itid = rare.get();
                     }
-                    CreateItemEx(itid, x, y);
+                    CreateItemEx(itid, x, y, monsterDropValue);
                     loot2 = 0.0;
                     dropped = 1;
                 } else if (roll < rp0 + rp1) {
                     itid = rare.get();
-                    CreateItemEx(itid, x, y);
+                    CreateItemEx(itid, x, y, monsterDropValue);
                     loot2 = 0.0;
                     dropped = 1;
                 } else if (roll < rp0 + rp1 + rp2) {
-
+                    itid = uncommon.get();
+                    CreateItemEx(itid, x, y, monsterDropValue);
+                    loot2 = 0.0;
+                    dropped = 1;
                 } else if (roll < rp0 + rp1 + rp2 + rp3) {
 
                 } else {
@@ -65,7 +69,7 @@ constant real RP_COMMON = 0.0;
         }
         if (dropped == 0 && IsUnitChampion(u)) {
             itid = rare.get();
-            CreateItemEx(itid, x, y);
+            CreateItemEx(itid, x, y, monsterDropValue);
             loot2 = 0.0;
         }
     }
@@ -74,9 +78,11 @@ constant real RP_COMMON = 0.0;
         integer itid;
         IntegerPool ip;
         real x, y;
+        integer monsterDropValue;
         if (GetPlayerId(GetOwningPlayer(u)) == MOB_PID) {
             x = GetUnitX(u); y = GetUnitY(u);
             if (IsUnitType(u, UNIT_TYPE_HERO)) {
+                monsterDropValue = UnitProp.inst(u, SCOPE_PREFIX).getDropValue() / 10;
                 // boss drops
                 // 1. 50% relic + 50% rare
                 if (GetRandomInt(0, 99) < 50) { 
@@ -89,7 +95,7 @@ constant real RP_COMMON = 0.0;
                 } else {
                     itid = rare.get();
                 }
-                CreateItemEx(itid, x, y);
+                CreateItemEx(itid, x, y, monsterDropValue);
                 // 2. class spec gear
                 itid = classSpec.get();
                 if (itid > 0) {
@@ -102,7 +108,7 @@ constant real RP_COMMON = 0.0;
                         itid = rare.get();
                     }
                 }
-                CreateItemEx(itid, x, y);
+                CreateItemEx(itid, x, y, monsterDropValue);
                 // 3. rare boss
                 ip = IntegerPool(bossPools[GetUnitTypeId(u)]);
                 itid = ip.get();
@@ -117,7 +123,7 @@ constant real RP_COMMON = 0.0;
                 } else {
                     itid = rare.get();
                 }
-                CreateItemEx(itid, x, y);
+                CreateItemEx(itid, x, y, monsterDropValue);
             } else if (CanUnitAttack(u) && !IsUnitSummoned(u)) {
                 // Minions drop
                 minionsDrop(u);
@@ -132,6 +138,7 @@ constant real RP_COMMON = 0.0;
         classSpec = IntegerPool.create();
         relic = IntegerPool.create();
         rare = IntegerPool.create();
+        uncommon = IntegerPool.create();
         
         bossPools = Table.create();
         boss1 = IntegerPool.create();
@@ -178,7 +185,62 @@ constant real RP_COMMON = 0.0;
         rare.add(ITID_TIDAL_LOOP, 10);
         rare.add(ITID_TROLL_BANE, 10);
         rare.add(ITID_VISKAG, 10);
-        rare.add(ITID_CRUEL_COLOSSUS_BLADE_OF_QUICKNESS, 10);
+
+        uncommon.add(ITID_CRUEL_COLOSSUS_BLADE_OF_QUICKNESS, 20);
+        uncommon.add(ITID_HEALTH_STONE, 20);
+        uncommon.add(ITID_ICON_OF_THE_UNGLAZED_CRESCENT, 20);
+        uncommon.add(ITID_MANA_STONE, 20);
+        uncommon.add(ITID_MOROES_LUCKY_GEAR, 20);
+        uncommon.add(ITID_ROMULOS_EXPIRED_POISON, 20);
+        uncommon.add(ITID_RUNED_BRACERS, 20);
+
+        uncommon.add(ITID_ARMAGEDDON_SCROLL, 2);
+        uncommon.add(ITID_WEAKEN_CURSE_SCROLL, 2);
+
+        uncommon.add(ITID_HEAL_SCROLL, 5);
+        uncommon.add(ITID_SLAYER_SCROLL, 5);
+        uncommon.add(ITID_SANCTUARY_SCROLL, 5);
+        // uncommon.add(ITID_BANSHEE_SCROLL, 5);
+
+        // uncommon.add(ITID_ARANS_COUNTER_SPELL_SCROLL, 10);
+        // uncommon.add(ITID_SPEED_SCROLL, 10);
+        uncommon.add(ITID_FRENZY_SCROLL, 10);
+        uncommon.add(ITID_DEFEND_SCROLL, 10);
+        uncommon.add(ITID_MANA_SCROLL, 10);
+        // uncommon.add(ITID_ROAR_SCROLL, 10);
+        uncommon.add(ITID_SPELL_REFLECTION_SCROLL, 10);
+        uncommon.add(ITID_MASS_DISPEL_SCROLL, 10);
+        // uncommon.add(ITID_MASS_TELEPORT_SCROLL, 10);
+        // uncommon.add(ITID_CORRUPTION_SCROLL, 10);
+
+        uncommon.add(ITID_MANA_SOURCE_POTION, 5);
+        // uncommon.add(ITID_ARCH_MAGE_POTION, 5);
+        // uncommon.add(ITID_COMBAT_MASTER_POTION, 5);
+        // uncommon.add(ITID_SHIELD_POTION, 5);
+        // uncommon.add(ITID_FORTRESS_POTION, 5);
+        uncommon.add(ITID_INVUL_POTION, 5);
+        // uncommon.add(ITID_UNSTABLE_POTION, 5);
+
+        // uncommon.add(ITID_LEECH_POTION, 10);
+        // uncommon.add(ITID_LIFE_REGEN_POTION, 10);
+        // uncommon.add(ITID_MANA_REGEN_POTION, 10);
+        // uncommon.add(ITID_TRANQUILITY_POTION, 10);
+        uncommon.add(ITID_BIG_LIFE_POTION, 10);
+        uncommon.add(ITID_EMPERORS_NEW_POTION, 10);
+        // uncommon.add(ITID_TRANSFER_POTION, 10);
+        // uncommon.add(ITID_DODGE_POTION, 10);
+        // uncommon.add(ITID_SMALL_INVUL_POTION, 10);
+        // uncommon.add(ITID_STONE_SKIN_POTION, 10);
+        uncommon.add(ITID_SPELL_POWER_POTION, 10);
+        // uncommon.add(ITID_SPELL_MASTER_POTION, 10);
+        uncommon.add(ITID_ARCANE_POTION, 10);
+        // uncommon.add(ITID_ANGRY_CAST_POTION, 10);
+        // uncommon.add(ITID_SPELL_PIERCE_POTION, 10);
+        // uncommon.add(ITID_AGILITY_POTION, 10);
+        // uncommon.add(ITID_ACUTE_POTION, 10);
+        // uncommon.add(ITID_DEXTERITY_POTION, 10);
+        // uncommon.add(ITID_LIFE_POTION, 10);
+        // uncommon.add(ITID_MANA_POTION, 10);
 
         boss1.add(ITID_THE_21_RING, 15);
         boss1.add(ITID_GOBLIN_ROCKET_BOOTS_LIMITED_EDITION, 25);
@@ -249,13 +311,7 @@ constant real RP_COMMON = 0.0;
         boss7.add(ITID_PURE_ARCANE, 7);
         boss7.add(ITID_STAFF_OF_THE_SHADOW_FLAME, 7);
         boss7.add(ITID_TIDAL_LOOP, 6);
-
     }
-
-
-
-
-
 
 }
 //! endzinc
