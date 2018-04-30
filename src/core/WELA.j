@@ -13,7 +13,7 @@ library WELA requires CastingBar, SpellData, AggroSystem {
         if (name == null || name == "") {
             name = "Auto";
         }
-        filePath = sessionName + "-" + I2S(welaN) + "-" + name + ".wela";
+        filePath = sessionName + "-" + I2S(welaN) + "-" + name + ".pld";
         // print("WELA generate, Name = "+name+", size = "+I2S(welaI)+", path = "+filePath);
         PreloadGenClear();
         PreloadGenStart();
