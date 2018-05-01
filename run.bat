@@ -9,7 +9,7 @@ for %%x in (%*) do set /A argC+=1
 
 if %argC% == 0 (
     copy .\ZAM_ruins.w3x .\build
-    clijasshelper.exe .\objects\common.j .\objects\blizzard.j .\build\ZAM_ruins.w3x
+    clijasshelper.exe .\assets\data\common.j .\assets\data\blizzard.j .\build\ZAM_ruins.w3x
 )
 "Warcraft III.exe" -window -loadfile "%~dp0\build\ZAM_ruins.w3x"
 del .\logs\*.j
