@@ -3,13 +3,13 @@ library Constants {
 public constant integer NUMBER_OF_MAX_PLAYERS = 6;
 public constant integer MOB_PID = 10;
 public constant integer NUMBER_OF_BOSSES = 8;
-public constant string FORCE_NPCS = "冒险者";
-public constant string FORCE_ENEMY = "黑暗势力";
+public constant string FORCE_NPCS = "Adventurers";
+public constant string FORCE_ENEMY = "The Dark Below";
 
 public constant real INIT_X = 5902.0;
 public constant real INIT_Y = -12016.0;
 
-public constant string DAMAGE_NAME_MELEE = "普通攻击";
+public constant string DAMAGE_NAME_MELEE = "Normal Attack";
 
 public constant integer ATT_STR = 1;
 public constant integer ATT_AGI = 2;
