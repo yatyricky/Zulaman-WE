@@ -1,6 +1,5 @@
 //! zinc
 library PoisonousCrawler requires DamageSystem, BuffSystem {
-constant string  ART  = "units\\undead\\PlagueCloud\\PlagueCloud.mdl";
 
     HandleTable ownerHT;
 
@@ -80,15 +79,15 @@ constant string  ART  = "units\\undead\\PlagueCloud\\PlagueCloud.mdl";
             SetTimerData(this.tm, this);
             TimerStart(this.tm, 0.1, true, function thistype.run);
 
-            AddTimedEffect.atCoord(ART, p.x, p.y, 10.0);
-            AddTimedEffect.atCoord(ART, p.x, p.y + 256, 10.0);
-            AddTimedEffect.atCoord(ART, p.x, p.y - 256, 10.0);
-            AddTimedEffect.atCoord(ART, p.x + 256, p.y, 10.0);
-            AddTimedEffect.atCoord(ART, p.x - 256, p.y, 10.0);
-            AddTimedEffect.atCoord(ART, p.x + 180, p.y - 180, 10.0);
-            AddTimedEffect.atCoord(ART, p.x + 180, p.y + 180, 10.0);
-            AddTimedEffect.atCoord(ART, p.x - 180, p.y - 180, 10.0);
-            AddTimedEffect.atCoord(ART, p.x - 180, p.y + 180, 10.0);
+            AddTimedEffect.atCoord(ART_PLAGUE, p.x, p.y, 10.0);
+            AddTimedEffect.atCoord(ART_PLAGUE, p.x, p.y + 256, 10.0);
+            AddTimedEffect.atCoord(ART_PLAGUE, p.x, p.y - 256, 10.0);
+            AddTimedEffect.atCoord(ART_PLAGUE, p.x + 256, p.y, 10.0);
+            AddTimedEffect.atCoord(ART_PLAGUE, p.x - 256, p.y, 10.0);
+            AddTimedEffect.atCoord(ART_PLAGUE, p.x + 180, p.y - 180, 10.0);
+            AddTimedEffect.atCoord(ART_PLAGUE, p.x + 180, p.y + 180, 10.0);
+            AddTimedEffect.atCoord(ART_PLAGUE, p.x - 180, p.y - 180, 10.0);
+            AddTimedEffect.atCoord(ART_PLAGUE, p.x - 180, p.y + 180, 10.0);
 
             // DrawCircle(p.x, p.y, AbyssArchonGlobal.poisonAOE, 24, "Doodads\\Cinematic\\GlowingRunes\\GlowingRunes2.mdl", 10);
         }

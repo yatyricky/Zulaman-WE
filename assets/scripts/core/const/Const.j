@@ -239,22 +239,17 @@ public constant integer BID_FRENZY_WARLOCK = 'A0AW';
 
 // Abyss Archon
 public constant integer UTID_PIT_ARCHON = 'Ucrl';
-
 public constant integer SID_IMPALE = 'A0B1';
 public constant integer UTID_SPIKE = 'n00O';
-
 public constant integer SID_SUMMON_POISONOUS_CRAWLER = 'A0B2';
 public constant integer UTID_POISONOUS_CRAWLER = 'ucry';
 public constant integer BID_SUMMON_POISONOUS_CRAWLER = 'A0B6';
-
 public constant integer SID_SUMMON_ABOMINATION = 'A0B4';
 public constant integer UTID_ABOMINATION = 'uabo';
 public constant integer BID_SUMMON_ABOMINATION = 'A0B7';
-
 public constant integer SID_SUMMON_WRAITH = 'A0B5';
 public constant integer UTID_WRAITH = 'ushd';
 public constant integer BID_SUMMON_WRAITH = 'A0B8';
-
 public constant integer SID_LIFE_SIPHON = 'A0B3';
 
 // 恶魔守卫 The Felguards
@@ -266,7 +261,7 @@ public constant integer BID_FEL_FRENZY = 'A0XX';
 public constant integer UTID_VOID_LORD = 'A0XX';
 public constant integer SID_POWER_SHADOW_SHIFT = 'A0XX';
 
-// 妖术领主
+// hex lord
 public constant integer UTID_HEX_LORD = 'Oshd';
 public constant integer SID_SPIRIT_BOLT = 'A053';
 public constant integer SID_SPIRIT_HARVEST = 'A05Q';
@@ -291,7 +286,7 @@ public constant integer SID_POLYMORPH_HEX = 'A05J';
 public constant integer SID_LIGHTNING_TOTEM_HEX = 'A05K';
 public constant integer SID_CHARGE_HEX = 'A05L';
 public constant integer SID_STEALTH_HEX = 'A05M';
-public constant integer SID_STEALTH_AMBUSH = 'A05W';
+public constant integer SID_STEALTH_AMBUSH_HEX = 'A05W';
 public constant integer SID_BLADE_FLURRY_HEX = 'A05N';
 public constant integer SID_PAIN_HEX = 'A05O';
 public constant integer SID_TERROR_HEX = 'A05P';
@@ -757,6 +752,8 @@ public constant string ART_RESURRECT_TARGET = "Abilities\\Spells\\Human\\Resurre
 public constant string ART_AVENGER_MISSILE = "Abilities\\Weapons\\AvengerMissile\\AvengerMissile.mdl";
 public constant string ART_TOME_OF_RETRAINING_CASTER = "Abilities\\Spells\\Items\\TomeOfRetraining\\TomeOfRetrainingCaster.mdl";
 public constant string ART_BREATH_OF_FIRE_DAMAGE = "Abilities\\Spells\\Other\\BreathOfFire\\BreathOfFireDamage.mdl";
+public constant string ART_ABOMINATION_EXPLOSION = "Units\\Undead\\Abomination\\AbominationExplosion.mdl";
+public constant string ART_CRIPPLE_TARGET = "Abilities\\Spells\\Undead\\Cripple\\CrippleTarget.mdl";
 
 public constant string BTNVolcano = "ReplaceableTextures\\CommandButtons\\BTNVolcano.blp";
 public constant string BTNEarthquake = "ReplaceableTextures\\CommandButtons\\BTNEarthquake.blp";

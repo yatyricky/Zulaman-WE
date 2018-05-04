@@ -121,10 +121,6 @@ library ItemType requires ItemAffix {
             thistype.create(ITID_STRANGE_WAND, 3, true, false, 2, 2);
         }
     }
-
-    public function IsItemUnique(item it) -> boolean {
-        return GetWidgetLife(it) > 100.0;
-    }
     
     public function IsItemTypeConsumable(integer id) -> boolean {
         return ItemData.typeIsConsumable(id);

@@ -1,7 +1,5 @@
 //! zinc
 library Abomination requires DamageSystem {
-constant string  ART  = "Units\\Undead\\Abomination\\AbominationExplosion.mdl";
-constant string  ART_DEBUFF  = "Abilities\\Spells\\Undead\\Cripple\\CrippleTarget.mdl";
 
     function onEffect(Buff buf) {
         UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageTaken += buf.bd.r0;
@@ -16,7 +14,7 @@ constant string  ART_DEBUFF  = "Abilities\\Spells\\Undead\\Cripple\\CrippleTarge
         real amt;
         Buff buf;
         if (GetUnitTypeId(u) == UTID_ABOMINATION) {
-            AddTimedEffect.atUnit(ART, u, "origin", 1.0);
+            AddTimedEffect.atUnit(ART_ABOMINATION_EXPLOSION, u, "origin", 1.0);
             for (0 <= i< PlayerUnits.n) {
                 if (GetDistance.units(u, PlayerUnits.units[i]) <= AbyssArchonGlobal.abominationAOE) {
                     amt = GetUnitState(PlayerUnits.units[i], UNIT_STATE_MAX_LIFE) * 0.25;
@@ -27,7 +25,7 @@ constant string  ART_DEBUFF  = "Abilities\\Spells\\Undead\\Cripple\\CrippleTarge
                     buf.bd.interval = 10;
                     UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageTaken -= buf.bd.r0;
                     buf.bd.r0 = 0.5;
-                    if (buf.bd.e0 == 0) {buf.bd.e0 = BuffEffect.create(ART_DEBUFF, buf, "origin");}
+                    if (buf.bd.e0 == 0) {buf.bd.e0 = BuffEffect.create(ART_CRIPPLE_TARGET, buf, "origin");}
                     buf.bd.boe = onEffect;
                     buf.bd.bor = onRemove;
                     buf.run();
@@ -44,7 +42,7 @@ constant string  ART_DEBUFF  = "Abilities\\Spells\\Undead\\Cripple\\CrippleTarge
                     buf.bd.interval = 10;
                     UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageTaken -= buf.bd.r0;
                     buf.bd.r0 = 2;
-                    if (buf.bd.e0 == 0) {buf.bd.e0 = BuffEffect.create(ART_DEBUFF, buf, "origin");}
+                    if (buf.bd.e0 == 0) {buf.bd.e0 = BuffEffect.create(ART_CRIPPLE_TARGET, buf, "origin");}
                     buf.bd.boe = onEffect;
                     buf.bd.bor = onRemove;
                     buf.run();
