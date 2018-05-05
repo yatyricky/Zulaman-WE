@@ -45,7 +45,7 @@ constant integer INIT_AMT = 1000;
             }
             if (nextt != null) {
                 this.amount *= this.factor;
-                DamageTarget(this.caster, nextt, this.amount, SpellData[SID_CHARM_OF_CHAIN_LIGHTNING].name, false, true, false, WEAPON_TYPE_WHOKNOWS);  
+                DamageTarget(this.caster, nextt, this.amount, SpellData.inst(SID_CHARM_OF_CHAIN_LIGHTNING, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS);  
                 AddTimedLight.atUnits(this.less, this.next, nextt, 0.7);
                 AddTimedEffect.atUnit(ART_IMPACT, nextt, "origin", 0.2);
                 this.ht[nextt] = 0x1A2B3C4D;
@@ -65,7 +65,7 @@ constant integer INIT_AMT = 1000;
             thistype this = thistype.allocate();
             this.caster = caster;
             this.amount = amt + UnitProp.inst(caster, SCOPE_PREFIX).AttackPower() + UnitProp.inst(caster, SCOPE_PREFIX).SpellPower();
-            DamageTarget(caster, target, this.amount, SpellData[SID_CHARM_OF_CHAIN_LIGHTNING].name, false, true, false, WEAPON_TYPE_WHOKNOWS);  
+            DamageTarget(caster, target, this.amount, SpellData.inst(SID_CHARM_OF_CHAIN_LIGHTNING, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS);  
             AddTimedLight.atUnits(maine, caster, target, 0.7);
             AddTimedEffect.atUnit(ART_IMPACT, target, "origin", 0.2);
             this.factor = factor;

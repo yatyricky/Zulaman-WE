@@ -8,7 +8,7 @@ constant string  ART  = "Abilities\\Spells\\Undead\\DeathPact\\DeathPactTarget.m
         if (ghoul[id] != null) {
             life = GetWidgetLife(ghoul[id]) * GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_DEATH_PACT) * 0.5;
             KillUnit(ghoul[id]);
-            HealTarget(SpellEvent.CastingUnit, SpellEvent.CastingUnit, life, SpellData[SID_DEATH_PACT].name, 0.0);
+            HealTarget(SpellEvent.CastingUnit, SpellEvent.CastingUnit, life, SpellData.inst(SID_DEATH_PACT, SCOPE_PREFIX).name, 0.0);
             AddTimedEffect.atUnit(ART_HEAL, SpellEvent.CastingUnit, "origin", 0.1);
         }
     }

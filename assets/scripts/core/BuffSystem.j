@@ -346,7 +346,7 @@ library BuffSystem requires TimerUtils, Table, Integer, ZAMCore {
                     AbsorbResult.source = current.bd.caster;
                     AbsorbResult.target = current.bd.target;
                     //logcat(current.bd.toString());
-                    AbsorbResult.abilityName = SpellData[current.bd.bt.bid].name;
+                    AbsorbResult.abilityName = SpellData.inst(current.bd.bt.bid, SCOPE_PREFIX).name;
                     if (current.bd.r0 > amount) {
                         AbsorbResult.amount = amount;
                         

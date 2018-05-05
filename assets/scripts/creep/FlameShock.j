@@ -9,7 +9,7 @@ constant string  ART  = "Doodads\\Cinematic\\TownBurningFireEmitter\\TownBurning
 constant string  IMPACT  = "Doodads\\Cinematic\\FireTrapUp\\FireTrapUp.mdl";
 
     function onEffect(Buff buf) {
-        DamageTarget(buf.bd.caster, buf.bd.target, buf.bd.r0, SpellData[SID_FLAME_SHOCK].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+        DamageTarget(buf.bd.caster, buf.bd.target, buf.bd.r0, SpellData.inst(SID_FLAME_SHOCK, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS);
         AddTimedEffect.atUnit(ART, buf.bd.target, "origin", 0.3);
     }
 
@@ -31,7 +31,7 @@ constant string  IMPACT  = "Doodads\\Cinematic\\FireTrapUp\\FireTrapUp.mdl";
         buf.bd.bor = onRemove;
         buf.run();
         
-        DamageTarget(buf.bd.caster, buf.bd.target, buf.bd.r0, SpellData[SID_FLAME_SHOCK].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+        DamageTarget(buf.bd.caster, buf.bd.target, buf.bd.r0, SpellData.inst(SID_FLAME_SHOCK, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS);
         AddTimedEffect.atUnit(IMPACT, buf.bd.target, "origin", 1.0);
     }
 

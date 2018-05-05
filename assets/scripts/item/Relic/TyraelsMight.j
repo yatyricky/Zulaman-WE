@@ -8,7 +8,7 @@ constant string  ART_TARGET  = "Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpec
         item tmpi;
         if (ht.exists(HealResult.target)) {
             if (ht[HealResult.target] > 0) {
-                if (HealResult.abilityName != SpellData[SID_ATTACK_LL].name && HealResult.abilityName != SpellData[SID_TYRAELS_MIGHT].name) {
+                if (HealResult.abilityName != SpellData.inst(SID_ATTACK_LL, SCOPE_PREFIX).name && HealResult.abilityName != SpellData.inst(SID_TYRAELS_MIGHT, SCOPE_PREFIX).name) {
                     i = 0;
                     while (i < 6) {
                         tmpi = UnitItemInSlot(HealResult.target, i);
@@ -49,7 +49,7 @@ constant string  ART_TARGET  = "Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpec
             u = GetTriggerUnit();
             if (charges > 0) {
                 charges += 1;
-                HealTarget(u, u, charges * 50.0, SpellData[SID_TYRAELS_MIGHT].name, 0.0);
+                HealTarget(u, u, charges * 50.0, SpellData.inst(SID_TYRAELS_MIGHT, SCOPE_PREFIX).name, 0.0);
                 SetItemCharges(it, 0);
                 AddTimedEffect.atUnit(ART_TARGET, u, "origin", 0.5);
             }

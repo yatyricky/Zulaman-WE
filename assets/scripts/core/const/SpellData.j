@@ -25,11 +25,11 @@ library SpellData requires Table, Integer {
         integer level;
         integer sid;
     
-        static method operator[](integer sid) -> SpellData {
+        static method inst(integer sid, string trace) -> SpellData {
             if (SpellData.db.exists(sid)) {
                 return SpellData(SpellData.db[sid]);
             } else {
-                BJDebugMsg(SCOPE_PREFIX+">Unknown spell ID: " + ID2S(sid));
+                print(SCOPE_PREFIX+" Unknown spell ID: " + ID2S(sid) + ", trace: " + trace);
                 return 0;
             }
         }

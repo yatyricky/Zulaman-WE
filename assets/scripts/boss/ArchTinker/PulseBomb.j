@@ -5,11 +5,11 @@ constant string  ART_DAMAGE  = "Abilities\\Weapons\\LordofFlameMissile\\LordofFl
 
     function onEffect(Buff buf) {
         integer i = 0;
-        DamageTarget(buf.bd.caster, buf.bd.target, 100.0, SpellData[SID_PULSE_BOMB].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+        DamageTarget(buf.bd.caster, buf.bd.target, 100.0, SpellData.inst(SID_PULSE_BOMB, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS);
         AddTimedEffect.atUnit(ART_DAMAGE, buf.bd.target, "origin", 0.0);
         while (i < PlayerUnits.n) {
             if (!IsUnitDead(PlayerUnits.units[i]) && !IsUnitDummy(PlayerUnits.units[i]) && !IsUnit(PlayerUnits.units[i], buf.bd.target) && GetDistance.units2d(buf.bd.target, PlayerUnits.units[i]) < DBMArchTinker.bombAOE) {
-                DamageTarget(buf.bd.caster, PlayerUnits.units[i], 200.0, SpellData[SID_PULSE_BOMB].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+                DamageTarget(buf.bd.caster, PlayerUnits.units[i], 200.0, SpellData.inst(SID_PULSE_BOMB, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS);
                 AddTimedEffect.atUnit(ART_DAMAGE, PlayerUnits.units[i], "origin", 0.0);
             }
             i += 1;

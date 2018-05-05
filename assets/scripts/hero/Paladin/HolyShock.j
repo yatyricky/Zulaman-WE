@@ -51,7 +51,7 @@ constant integer BUFF_ID = 'A02E';
         
         // equiped Justice of Light, won't consume Divine Favour
         if (HasLightsJustice(SpellEvent.CastingUnit)) {
-            HealTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, (GetUnitState(SpellEvent.TargetUnit, UNIT_STATE_MAX_LIFE) - GetWidgetLife(SpellEvent.TargetUnit)) * 0.75, SpellData[SID_HOLY_SHOCK].name, 2.0);
+            HealTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, (GetUnitState(SpellEvent.TargetUnit, UNIT_STATE_MAX_LIFE) - GetWidgetLife(SpellEvent.TargetUnit)) * 0.75, SpellData.inst(SID_HOLY_SHOCK, SCOPE_PREFIX).name, 2.0);
         } else {
             bs = BuffSlot[SpellEvent.CastingUnit];
             buf = bs.getBuffByBid(BID_DIVINE_FAVOR_CRIT);
@@ -60,7 +60,7 @@ constant integer BUFF_ID = 'A02E';
                 bs.dispelByBuff(buf);
                 buf.destroy();
             }
-            HealTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, (GetUnitState(SpellEvent.TargetUnit, UNIT_STATE_MAX_LIFE) - GetWidgetLife(SpellEvent.TargetUnit)) * 0.75, SpellData[SID_HOLY_SHOCK].name, excrit);
+            HealTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, (GetUnitState(SpellEvent.TargetUnit, UNIT_STATE_MAX_LIFE) - GetWidgetLife(SpellEvent.TargetUnit)) * 0.75, SpellData.inst(SID_HOLY_SHOCK, SCOPE_PREFIX).name, excrit);
         }
         
         AddTimedEffect.atPos(ART_FAERIE_DRAGON_MISSILE, GetUnitX(SpellEvent.TargetUnit), GetUnitY(SpellEvent.TargetUnit), GetUnitZ(SpellEvent.TargetUnit) + 24, 0, 3);

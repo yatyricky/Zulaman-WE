@@ -37,7 +37,7 @@ constant real H_OVER_D = 0.45;
                 // explosion
                 for (0 <= i < PlayerUnits.n) {
                     if (GetDistance.unitCoord(PlayerUnits.units[i], GetUnitX(this.missile), GetUnitY(this.missile)) <= GodOfDeathGlobalConst.mindBlastAOE) {
-                        DamageTarget(this.caster, PlayerUnits.units[i], 1200.0, SpellData[SID_MIND_BLAST].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+                        DamageTarget(this.caster, PlayerUnits.units[i], 1200.0, SpellData.inst(SID_MIND_BLAST, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS);
                         ModUnitMana(this.caster, 1);
                     }
                 }

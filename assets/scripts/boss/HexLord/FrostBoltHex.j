@@ -7,7 +7,7 @@ constant string  ART_MISSILE  = "Abilities\\Weapons\\LichMissile\\LichMissile.md
             p.reverse();
             return false;
         } else {
-            DamageTarget(p.caster, p.target, 400.0, SpellData[SID_FROST_BOLT_HEX].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
+            DamageTarget(p.caster, p.target, 400.0, SpellData.inst(SID_FROST_BOLT_HEX, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS);
             return true;
         }
     }

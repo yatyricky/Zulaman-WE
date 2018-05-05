@@ -26,7 +26,7 @@ library FlashOfLight requires SpellEvent, UnitProperty, BeaconOfLight, HolyLight
             bs.dispelByBuff(buf);
             buf.destroy();
         }
-        HealTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, amt, SpellData[SID_FLASH_LIGHT].name, exct);
+        HealTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, amt, SpellData.inst(SID_FLASH_LIGHT, SCOPE_PREFIX).name, exct);
         AddTimedEffect.atUnit(ART_HOLY_BOLT_SPECIAL_ART, SpellEvent.TargetUnit, "origin", 0.2);
         // instant holy light
         if (HealResult.isCritical) {

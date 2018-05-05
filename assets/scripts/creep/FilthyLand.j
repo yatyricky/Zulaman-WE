@@ -34,7 +34,7 @@ library FilthyLand requires DamageSystem {
             if (ModuloInteger(this.count, 25) == 0) {
                 for (0 <= i < PlayerUnits.n) {
                     if (GetDistance.unitCoord(PlayerUnits.units[i], this.x, this.y) < this.r) {
-                        DamageTarget(this.caster, PlayerUnits.units[i], 200.0, SpellData[SID_FILTHY_LAND].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+                        DamageTarget(this.caster, PlayerUnits.units[i], 200.0, SpellData.inst(SID_FILTHY_LAND, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS);
                     }
                 }
             }

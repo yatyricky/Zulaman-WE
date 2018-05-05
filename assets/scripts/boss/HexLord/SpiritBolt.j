@@ -17,7 +17,7 @@ constant string  ART_ABSORB  = "Objects\\Spawnmodels\\Undead\\UndeadDissipate\\U
             p.reverse();
             return false;
         } else {
-            DamageTarget(p.caster, p.target, 30.0, SpellData[SID_SPIRIT_BOLT].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+            DamageTarget(p.caster, p.target, 30.0, SpellData.inst(SID_SPIRIT_BOLT, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS);
             return true;
         }
     }

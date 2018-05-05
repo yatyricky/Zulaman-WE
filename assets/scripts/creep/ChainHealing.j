@@ -32,7 +32,7 @@ constant integer INIT_AMT = 1000;
         while (count > 0) {
             AddTimedLight.atUnits(ART_CH_LIGHT, prev, next, 0.5);
             AddTimedEffect.atUnit(ART_TARGET, next, "origin", 0.1);
-            HealTarget(SpellEvent.CastingUnit, next, amount, SpellData[SID_CHAIN_HEALING].name, 0.0);
+            HealTarget(SpellEvent.CastingUnit, next, amount, SpellData.inst(SID_CHAIN_HEALING, SCOPE_PREFIX).name, 0.0);
             prev = next;
             
             new = null;

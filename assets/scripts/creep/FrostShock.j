@@ -26,7 +26,7 @@ constant string  ART_TARGET  = "Abilities\\Weapons\\FrostWyrmMissile\\FrostWyrmM
         }
         AddTimedEffect.atUnit(ART_TARGET, SpellEvent.TargetUnit, "origin", 0.0);
         
-        DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, 200.0, SpellData[SID_FROST_SHOCK].name, false, true, false, WEAPON_TYPE_WHOKNOWS);   
+        DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, 200.0, SpellData.inst(SID_FROST_SHOCK, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS);   
         
         buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BUFF_ID);
         buf.bd.tick = -1;

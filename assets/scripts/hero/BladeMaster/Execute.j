@@ -108,7 +108,7 @@ library Execute requires DamageSystem, AggroSystem {
         lvl = GetUnitAbilityLevel(DamageResult.source, SID_EXECUTE_LEARN);
         if (lvl > 0) {
             mana = returnManaRegen(lvl);
-            if (DamageResult.abilityName == DAMAGE_NAME_MELEE || DamageResult.abilityName == SpellData[SID_MORTAL_STRIKE].name || DamageResult.abilityName == SpellData[SID_HEROIC_STRIKE].name) {
+            if (DamageResult.abilityName == DAMAGE_NAME_MELEE || DamageResult.abilityName == SpellData.inst(SID_MORTAL_STRIKE, SCOPE_PREFIX).name || DamageResult.abilityName == SpellData.inst(SID_HEROIC_STRIKE, SCOPE_PREFIX).name) {
                 vm = ValourManager.inst(DamageResult.source, "damaged");
                 if (vm.continuous == 1) {
                     if (DamageResult.isCritical) {
@@ -132,7 +132,7 @@ library Execute requires DamageSystem, AggroSystem {
     function onCast() {
         integer v = ValourManager.inst(SpellEvent.CastingUnit, "onCast").flushValour();
         real dmg = v * returnDamagePerPoint(GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_EXECUTE_LEARN)) + (UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).AttackPower() * v * 0.1);
-        DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, dmg, SpellData[SID_EXECUTE_LEARN].name, true, true, true, WEAPON_TYPE_METAL_HEAVY_SLICE);
+        DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, dmg, SpellData.inst(SID_EXECUTE_LEARN, SCOPE_PREFIX).name, true, true, true, WEAPON_TYPE_METAL_HEAVY_SLICE);
         AddTimedEffect.atUnit(ART_GORE, SpellEvent.TargetUnit, "origin", 0.3);
     }
 

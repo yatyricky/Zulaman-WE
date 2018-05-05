@@ -21,7 +21,7 @@ constant integer DURATION = 10;
             if (!IsUnitDead(this.ward)) {
                 while (i < PlayerUnits.n) {
                     if (GetDistance.units2d(this.ward, PlayerUnits.units[i]) < 600.0 + 197.0) {
-                        HealTarget(this.caster, PlayerUnits.units[i], this.amount, SpellData[SID_CHARM_OF_HEALING_WARD].name, -3.0);
+                        HealTarget(this.caster, PlayerUnits.units[i], this.amount, SpellData.inst(SID_CHARM_OF_HEALING_WARD, SCOPE_PREFIX).name, -3.0);
                     }
                     i += 1;
                 }

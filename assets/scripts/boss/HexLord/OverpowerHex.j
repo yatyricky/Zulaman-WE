@@ -8,7 +8,7 @@ library OverpowerHex requires DamageSystem, CombatFacts {
     
     function onCast() {
         if (DBMHexLord.canOverpower) {
-            DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, 700.0, SpellData[SID_OVER_POWER_HEX].name, true, true, false, WEAPON_TYPE_METAL_HEAVY_CHOP);
+            DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, 700.0, SpellData.inst(SID_OVER_POWER_HEX, SCOPE_PREFIX).name, true, true, false, WEAPON_TYPE_METAL_HEAVY_CHOP);
             DBMHexLord.canOverpower = false;
         }
     }

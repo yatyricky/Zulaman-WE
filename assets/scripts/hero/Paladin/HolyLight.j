@@ -34,7 +34,7 @@ library HolyLight requires CastingBar, BeaconOfLight {
             bs.dispelByBuff(baf);
             baf.destroy();
         }
-        HealTarget(a, b, amt, SpellData[SID_HOLY_LIGHT].name, exct);
+        HealTarget(a, b, amt, SpellData.inst(SID_HOLY_LIGHT, SCOPE_PREFIX).name, exct);
         AddTimedEffect.atUnit(ART_RESURRECT_TARGET, b, "origin", 0.2);
         
         buf = Buff.cast(a, b, BID_HOLY_LIGHT_AMP);
@@ -72,12 +72,12 @@ library HolyLight requires CastingBar, BeaconOfLight {
         BuffSlot bs;
         Buff buf;
         if (GetUnitAbilityLevel(SpellEvent.CastingUnit, BID_DIVINE_FAVOR) > 0) {
-            cb.haste = SpellData[SID_HOLY_LIGHT].Cast(GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_HOLY_LIGHT)) * 0.5;
+            cb.haste = SpellData.inst(SID_HOLY_LIGHT, SCOPE_PREFIX).Cast(GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_HOLY_LIGHT)) * 0.5;
         }
         bs = BuffSlot[SpellEvent.CastingUnit];
         buf = bs.getBuffByBid(BID_HOLY_LIGHT_IMPROVED);
         if (buf != 0) {
-            cb.haste = SpellData[SID_HOLY_LIGHT].Cast(GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_HOLY_LIGHT));
+            cb.haste = SpellData.inst(SID_HOLY_LIGHT, SCOPE_PREFIX).Cast(GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_HOLY_LIGHT));
             bs.dispelByBuff(buf);
             buf.destroy();
         }

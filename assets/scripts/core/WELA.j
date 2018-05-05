@@ -76,7 +76,7 @@ library WELA requires CastingBar, SpellData, AggroSystem {
             */ + "|cast|" /*
             */ + GetUnitNameEx(SpellEvent.CastingUnit) + "|" /*
             */ + GetUnitNameEx(SpellEvent.TargetUnit) + "|" /*
-            */ + SpellData[SpellEvent.AbilityId].name;
+            */ + SpellData.inst(SpellEvent.AbilityId, SCOPE_PREFIX).name;
             welaI += 1; if (welaI >= 8100) {GenerateCombatLog("AutoGen");}
         }
     }

@@ -146,7 +146,7 @@ constant integer CAST_MODE_CHANNEL = 0x32148520;
             this.lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SpellEvent.AbilityId);
             this.haste = 0.0;   
             this.finishResponse = cbfc;
-            this.sd = SpellData[SpellEvent.AbilityId];
+            this.sd = SpellData.inst(SpellEvent.AbilityId, SCOPE_PREFIX);
             this.cost = this.sd.Cost(this.lvl);
             this.cast = this.sd.Cast(this.lvl);
             this.caster = SpellEvent.CastingUnit;
@@ -324,7 +324,7 @@ constant integer CAST_MODE_CHANNEL = 0x32148520;
     }
     
     public function UnitCanUse(unit source, integer abil) -> boolean {
-        return (GetUnitAbilityLevel(source, abil) > 0 && !UnitAbilityCD.isCooling(source, abil) && GetUnitState(source, UNIT_STATE_MANA) >= SpellData[abil].Cost(GetUnitAbilityLevel(source, abil)));
+        return (GetUnitAbilityLevel(source, abil) > 0 && !UnitAbilityCD.isCooling(source, abil) && GetUnitState(source, UNIT_STATE_MANA) >= SpellData.inst(abil, SCOPE_PREFIX).Cost(GetUnitAbilityLevel(source, abil)));
     }
 
     function onInit() {

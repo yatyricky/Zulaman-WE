@@ -31,7 +31,7 @@ constant string  ART  = "Abilities\\Spells\\Orc\\Purge\\PurgeBuffTarget.mdl";
         integer iid = GetIssuedOrderId();
         real x, y, z;
         location loc;
-        if ((GetUnitTypeId(u) == UTID_EARTH_BINDER || GetUnitTypeId(u) == UTID_EARTH_BINDER_ASC) && (iid == SpellData[SID_ASCENDANCE].oid)) {
+        if ((GetUnitTypeId(u) == UTID_EARTH_BINDER || GetUnitTypeId(u) == UTID_EARTH_BINDER_ASC) && (iid == SpellData.inst(SID_ASCENDANCE, SCOPE_PREFIX).oid)) {
             //BJDebugMsg("Ascendance!");
             x = GetUnitX(u);
             y = GetUnitY(u);
@@ -42,7 +42,7 @@ constant string  ART  = "Abilities\\Spells\\Orc\\Purge\\PurgeBuffTarget.mdl";
             loc = null;
 
             
-            if (iid == SpellData[SID_ASCENDANCE].oid) {
+            if (iid == SpellData.inst(SID_ASCENDANCE, SCOPE_PREFIX).oid) {
                 buf = Buff.cast(u, u, BUFF_ID);
                 buf.bd.tick = -1;
                 buf.bd.interval = 8.0 + 4.0 * GetUnitAbilityLevel(u, SID_ASCENDANCE);

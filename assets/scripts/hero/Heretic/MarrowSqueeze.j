@@ -28,7 +28,7 @@ constant integer BUFF_ID = 'A04Q';
         real heal;
         Buff buf, swpain;
         AddTimedEffect.atUnit(ART, cd.target, "origin", 0.3);
-        DamageTarget(cd.caster, cd.target, dmg, SpellData[SID_MARROW_SQUEEZE].name, false, true, false, WEAPON_TYPE_WHOKNOWS);  
+        DamageTarget(cd.caster, cd.target, dmg, SpellData.inst(SID_MARROW_SQUEEZE, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS);  
         
         // equiped Anathema
         if (HasAnathema(cd.caster)) {
@@ -64,7 +64,7 @@ constant integer BUFF_ID = 'A04Q';
         buf.bd.bor = onRemove;
         buf.run();
         
-        HealTarget(cd.caster, cd.caster, heal, SpellData[SID_MARROW_SQUEEZE].name, 0.0);
+        HealTarget(cd.caster, cd.caster, heal, SpellData.inst(SID_MARROW_SQUEEZE, SCOPE_PREFIX).name, 0.0);
     }
     
     function onChannel() {

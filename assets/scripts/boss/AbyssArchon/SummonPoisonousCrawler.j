@@ -25,7 +25,7 @@ library PoisonousCrawler requires DamageSystem, BuffSystem {
     }
 
     function onEffect(Buff buf) {
-        DamageTarget(buf.bd.caster, buf.bd.target, buf.bd.r0, SpellData[SID_SUMMON_POISONOUS_CRAWLER].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+        DamageTarget(buf.bd.caster, buf.bd.target, buf.bd.r0, SpellData.inst(SID_SUMMON_POISONOUS_CRAWLER, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS);
         AddTimedEffect.atUnit(ART_PLAGUE, buf.bd.target, "origin", 0.2);
     }
 

@@ -6,7 +6,7 @@ constant integer BUFF_ID = 'A05V';
         if (BuffSlot[buf.bd.target].getBuffByBid(MANGLEHEX_BUFF_ID) != 0) {
             dmg *= 2.0;
         }
-        DamageTarget(buf.bd.caster, buf.bd.target, dmg, SpellData[SIDRABIESHEX].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
+        DamageTarget(buf.bd.caster, buf.bd.target, dmg, SpellData.inst(SIDRABIESHEX, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS);
         AddTimedEffect.atUnit(ART_BLEED, buf.bd.target, "origin", 0.2);
         AddTimedEffect.atUnit(ART_POISON, buf.bd.target, "origin", 0.2);
     }

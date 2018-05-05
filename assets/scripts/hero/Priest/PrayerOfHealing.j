@@ -43,7 +43,7 @@ constant string  ART  = "Abilities\\Spells\\Demon\\DarkPortal\\DarkPortalTarget.
             i = 0;
             while (i < PlayerUnits.n) {
                 if (GetDistance.unitCoord2d(PlayerUnits.units[i], cd.targetX, cd.targetY) < 200 + 50 * lvl) {
-                    HealTarget(cd.caster, PlayerUnits.units[i], amt, SpellData[SID_PRAYER_OF_HEALING].name, 0.0);
+                    HealTarget(cd.caster, PlayerUnits.units[i], amt, SpellData.inst(SID_PRAYER_OF_HEALING, SCOPE_PREFIX).name, 0.0);
                     AddTimedEffect.atUnit(ART, PlayerUnits.units[i], "origin", 0.3);
                     //AddTimedLight.atUnits("HWSB", cd.caster, PlayerUnits.units[i], 0.25);
                 }

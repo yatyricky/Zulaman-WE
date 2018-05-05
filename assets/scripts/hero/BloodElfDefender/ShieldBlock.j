@@ -32,7 +32,7 @@ constant string  ART_REFLECTION  = "Abilities\\Spells\\NightElf\\ThornsAura\\Tho
         if (buf != 0 && DamageResult.isBlocked) {
             if (GetDistance.units2d(DamageResult.source, DamageResult.target) < 200.0) {
                 //BJDebugMsg("Exe once!!!");
-                DelayedDamageTarget(DamageResult.target, DamageResult.source, buf.bd.r1, SpellData[SID_SHIELD_BLOCK].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+                DelayedDamageTarget(DamageResult.target, DamageResult.source, buf.bd.r1, SpellData.inst(SID_SHIELD_BLOCK, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS);
                 AddTimedEffect.atUnit(ART_REFLECTION, DamageResult.source, "origin", 0.5);   
                 AggroTarget(DamageResult.target, DamageResult.source, buf.bd.r1 * 7.0);
             } else {

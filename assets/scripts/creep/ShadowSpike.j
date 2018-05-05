@@ -3,7 +3,7 @@ library ShadowSpike requires DamageSystem {
 
     function onEffect(Buff buf) {
         real amt = 150.0 + GetUnitLifeLost(buf.bd.target) * 0.5;
-        DamageTarget(buf.bd.caster, buf.bd.target, amt, SpellData[SID_SHADOW_SPIKE].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+        DamageTarget(buf.bd.caster, buf.bd.target, amt, SpellData.inst(SID_SHADOW_SPIKE, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS);
         AddTimedEffect.atUnit(ART_PLAGUE, buf.bd.target, "origin", 0.2);
     }
 
@@ -15,7 +15,7 @@ library ShadowSpike requires DamageSystem {
             p.reverse();
             return false;
         } else {
-            DamageTarget(p.caster, p.target, 500.0, SpellData[SID_SHADOW_SPIKE].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
+            DamageTarget(p.caster, p.target, 500.0, SpellData.inst(SID_SHADOW_SPIKE, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS);
             AddTimedEffect.atUnit(ART_SHADOW_STRIKE_TARGET, p.target, "origin", 0.2);
 
             buf = Buff.cast(p.caster, p.target, BID_SHADOW_SPIKE);

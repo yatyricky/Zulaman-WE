@@ -45,7 +45,7 @@ constant string  ART_EFFECT  = "Abilities\\Spells\\Orc\\LiquidFire\\Liquidfire.m
             tu = FirstOfGroup(ENUM_GROUP);
             while (tu != null) {
                 if (!IsUnitDummy(tu) && !IsUnitDead(tu) && IsUnitEnemy(tu, GetOwningPlayer(this.caster))) {
-                    DamageTarget(this.caster, tu, this.dmg, SpellData[SID_SUN_FIRE_STORM].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+                    DamageTarget(this.caster, tu, this.dmg, SpellData.inst(SID_SUN_FIRE_STORM, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS);
                     AggroTarget(this.caster, tu, this.dmg * 7.0);
                 }
                 GroupRemoveUnit(ENUM_GROUP, tu);

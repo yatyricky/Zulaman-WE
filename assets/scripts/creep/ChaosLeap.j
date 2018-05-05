@@ -58,7 +58,7 @@ constant real DAMAGE = 300.0;
                 AddTimedEffect.atCoord(IMPACT, GetUnitX(this.caster), GetUnitY(this.caster), 0.1);
                 for (0 <= i < PlayerUnits.n) {
                     if (GetDistance.units(this.caster, PlayerUnits.units[i]) < AOE) {
-                        DamageTarget(this.caster, PlayerUnits.units[i], DAMAGE, SpellData[SID_CHAOS_LEAP].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
+                        DamageTarget(this.caster, PlayerUnits.units[i], DAMAGE, SpellData.inst(SID_CHAOS_LEAP, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS);
 
                         buf = Buff.cast(this.caster, PlayerUnits.units[i], BID_CHAOS_LEAP);
                         buf.bd.tick = -1;

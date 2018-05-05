@@ -90,7 +90,7 @@ library PowerOfAbomination requires DarkRangerGlobal, SpellEvent, DamageSystem {
                 } else {
                     ModUnitMana(this.u, 0 - amt);
                     if (GetUnitMana(this.u) < amt) {
-                        IssueImmediateOrderById(this.u, SpellData[SID_POWER_OF_BANSHEE].oid);
+                        IssueImmediateOrderById(this.u, SpellData.inst(SID_POWER_OF_BANSHEE, SCOPE_PREFIX).oid);
                     }
                 }
             }
@@ -195,7 +195,7 @@ library PowerOfAbomination requires DarkRangerGlobal, SpellEvent, DamageSystem {
     function damaged() {
         Buff buf;
         PowerOfAbomination poa;
-        if (DamageResult.isHit && GetUnitTypeId(DamageResult.source) == UTID_DARK_RANGER && DamageResult.abilityName != SpellData[SID_POWER_OF_BANSHEE].name && GetUnitAbilityLevel(DamageResult.source, SID_POWER_OF_BANSHEE) > 0) {
+        if (DamageResult.isHit && GetUnitTypeId(DamageResult.source) == UTID_DARK_RANGER && DamageResult.abilityName != SpellData.inst(SID_POWER_OF_BANSHEE, SCOPE_PREFIX).name && GetUnitAbilityLevel(DamageResult.source, SID_POWER_OF_BANSHEE) > 0) {
             poa = PowerOfAbomination.inst(DamageResult.source, "damaged");
             if (poa != 0) {
                 if (poa.isBanshee) {
@@ -212,7 +212,7 @@ library PowerOfAbomination requires DarkRangerGlobal, SpellEvent, DamageSystem {
                     buf.run();
                 } else {
                     DestroyEffect(AddSpecialEffectTarget(ART_AVENGER_MISSILE, DamageResult.target, "origin"));
-                    DamageTarget(DamageResult.source, DamageResult.target, returnExtraDamage(GetUnitAbilityLevel(DamageResult.source, SID_POWER_OF_BANSHEE)), SpellData[SID_POWER_OF_BANSHEE].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
+                    DamageTarget(DamageResult.source, DamageResult.target, returnExtraDamage(GetUnitAbilityLevel(DamageResult.source, SID_POWER_OF_BANSHEE)), SpellData.inst(SID_POWER_OF_BANSHEE, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS);
                 }
             }
         }

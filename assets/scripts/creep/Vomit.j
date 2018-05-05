@@ -59,7 +59,7 @@ library Vomit requires AggroSystem {
 
                     for (0 <= i < PlayerUnits.n) {
                         if (GetDistance.units(PlayerUnits.units[i], this.mis) < 250.0) {
-                            DamageTarget(this.caster, PlayerUnits.units[i], 550.0, SpellData[SID_VOMIT].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
+                            DamageTarget(this.caster, PlayerUnits.units[i], 550.0, SpellData.inst(SID_VOMIT, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS);
                         }
                     }
 

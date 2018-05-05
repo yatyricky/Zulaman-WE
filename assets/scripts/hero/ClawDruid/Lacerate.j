@@ -15,7 +15,7 @@ library Lacerate requires BuffSystem, SpellEvent, UnitProperty, ClawDruidGlobal,
         //BJDebugMsg("dmg amp> " + R2S(debuff.bd.r0));
             dmg *= (1.0 + debuff.bd.r0);
         }
-        DamageTarget(buf.bd.caster, buf.bd.target, dmg, SpellData[SID_LACERATE].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
+        DamageTarget(buf.bd.caster, buf.bd.target, dmg, SpellData.inst(SID_LACERATE, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS);
         if (!IsUnitDead(buf.bd.caster)) {
             AggroTarget(buf.bd.caster, buf.bd.target, dmg * 10.0);
         }
@@ -34,7 +34,7 @@ library Lacerate requires BuffSystem, SpellEvent, UnitProperty, ClawDruidGlobal,
             dmg *= (1.0 + debuff.bd.r0);
         }
         AddTimedEffect.atUnit(ART_BLEED, SpellEvent.TargetUnit, "origin", 0.2);
-        DamageTarget(buf.bd.caster, buf.bd.target, dmg, SpellData[SID_LACERATE].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
+        DamageTarget(buf.bd.caster, buf.bd.target, dmg, SpellData.inst(SID_LACERATE, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS);
         AggroTarget(buf.bd.caster, buf.bd.target, dmg * 5.0);
         
         buf.bd.interval = 2.0 / (1.0 + UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).AttackSpeed() / 100.0);

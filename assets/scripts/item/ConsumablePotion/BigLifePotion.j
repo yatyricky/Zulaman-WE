@@ -2,7 +2,7 @@
 library BigLifePotion requires SpellEvent, ZAMCore, DamageSystem {
 
     function onCast() {
-        HealTarget(SpellEvent.CastingUnit, SpellEvent.CastingUnit, GetRandomReal(400, 800), SpellData[SID_BIG_LIFE_POTION].name, 0.0);
+        HealTarget(SpellEvent.CastingUnit, SpellEvent.CastingUnit, GetRandomReal(400, 800), SpellData.inst(SID_BIG_LIFE_POTION, SCOPE_PREFIX).name, 0.0);
         AddTimedEffect.atUnit(ART_HEAL, SpellEvent.CastingUnit, "origin", 0.2);
     }
 

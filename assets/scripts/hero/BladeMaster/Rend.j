@@ -7,7 +7,7 @@ library Rend requires DamageSystem, SpellEvent, BuffSystem, BladeMasterGlobal {
     boolean nextNormalCrit[NUMBER_OF_MAX_PLAYERS];
     
     function onEffect(Buff buf) {
-        DamageTarget(buf.bd.caster, buf.bd.target, buf.bd.r0, SpellData[SID_REND].name, true, true, false, WEAPON_TYPE_WHOKNOWS);
+        DamageTarget(buf.bd.caster, buf.bd.target, buf.bd.r0, SpellData.inst(SID_REND, SCOPE_PREFIX).name, true, true, false, WEAPON_TYPE_WHOKNOWS);
         AddTimedEffect.atUnit(ART_BLEED, buf.bd.target, "origin", 0.2);
         // condition to enable next critical
         if (DamageResult.isCritical) {
@@ -54,14 +54,14 @@ library Rend requires DamageSystem, SpellEvent, BuffSystem, BladeMasterGlobal {
     }
     
     function onCast() {
-        DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, 20.0, SpellData[SID_REND].name, true, false, true, WEAPON_TYPE_METAL_LIGHT_SLICE);
+        DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, 20.0, SpellData.inst(SID_REND, SCOPE_PREFIX).name, true, false, true, WEAPON_TYPE_METAL_LIGHT_SLICE);
         if (DamageResult.isHit && !DamageResult.isBlocked) {
             CastRend(SpellEvent.CastingUnit, SpellEvent.TargetUnit);
         }
     }
     
     function ondamageresponse() {
-        if (nextNormalCrit[GetPlayerId(GetOwningPlayer(DamageResult.source))] && (DamageResult.abilityName == DAMAGE_NAME_MELEE || DamageResult.abilityName == SpellData[SID_HEROIC_STRIKE].name)) {
+        if (nextNormalCrit[GetPlayerId(GetOwningPlayer(DamageResult.source))] && (DamageResult.abilityName == DAMAGE_NAME_MELEE || DamageResult.abilityName == SpellData.inst(SID_HEROIC_STRIKE, SCOPE_PREFIX).name)) {
             //BJDebugMsg("next must crit");
             DamageResult.extraCrit = 1.0;
             nextNormalCrit[GetPlayerId(GetOwningPlayer(DamageResult.source))] = false;

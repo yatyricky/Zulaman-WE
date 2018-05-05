@@ -10,7 +10,7 @@ library HealthStone requires ItemAttributes {
     }
     
     function onCast() {
-        HealTarget(SpellEvent.CastingUnit, SpellEvent.CastingUnit, GetRandomReal(300.0, 600.0), SpellData[SID_HEALTH_STONE].name, 0.0);
+        HealTarget(SpellEvent.CastingUnit, SpellEvent.CastingUnit, GetRandomReal(300.0, 600.0), SpellData.inst(SID_HEALTH_STONE, SCOPE_PREFIX).name, 0.0);
         AddTimedEffect.atUnit(ART_HEAL, SpellEvent.CastingUnit, "origin", 1.0);
     }
 

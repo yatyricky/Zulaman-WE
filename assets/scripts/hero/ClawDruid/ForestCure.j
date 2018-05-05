@@ -27,7 +27,7 @@ constant string  ART_CASTER  = "Units\\NightElf\\Owl\\Owl.mdl";
         amt = (returnPercent(lvl) * GetUnitState(SpellEvent.CastingUnit, UNIT_STATE_MAX_LIFE) + returnPoints(lvl)) * (cost / 0.5);
         // ����ǿ�ȼӳɣ����ᱩ��        
         UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).aggroRate += 3.0;
-        HealTarget(SpellEvent.CastingUnit, SpellEvent.CastingUnit, amt, SpellData[SID_FOREST_CURE].name, -3.0);
+        HealTarget(SpellEvent.CastingUnit, SpellEvent.CastingUnit, amt, SpellData.inst(SID_FOREST_CURE, SCOPE_PREFIX).name, -3.0);
         UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).aggroRate -= 3.0;
         AddTimedEffect.atUnit(ART_CASTER, SpellEvent.CastingUnit, "overhead", 1.0);
     }

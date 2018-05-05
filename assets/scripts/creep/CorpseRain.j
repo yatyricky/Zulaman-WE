@@ -66,13 +66,13 @@ library CorpseRain requires DamageSystem {
                 // Damage
                 for (0 <= i < PlayerUnits.n) {
                     if (GetDistance.unitCoord(PlayerUnits.units[i], this.x, this.y) < 350.0) {
-                        DamageTarget(this.caster, PlayerUnits.units[i], 300.0, SpellData[SID_CORPSE_RAIN].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+                        DamageTarget(this.caster, PlayerUnits.units[i], 300.0, SpellData.inst(SID_CORPSE_RAIN, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS);
                     }
                 }
                 // Heal
                 for (0 <= i < MobList.n) {
                     if (GetDistance.unitCoord(MobList.units[i], this.x, this.y) < 350.0) {
-                        HealTarget(this.caster, MobList.units[i], 2000, SpellData[SID_CORPSE_RAIN].name, 0.0);
+                        HealTarget(this.caster, MobList.units[i], 2000, SpellData.inst(SID_CORPSE_RAIN, SCOPE_PREFIX).name, 0.0);
                     }
                 }
             }

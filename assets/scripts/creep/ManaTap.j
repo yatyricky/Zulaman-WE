@@ -22,7 +22,7 @@ library ManaTap requires SpellEvent, ZAMCore {
 
     function endCast() {
         if (GetUnitAbilityLevel(SpellEvent.CastingUnit, BID_MANA_TAP) > 0) {
-            ModUnitMana(SpellEvent.CastingUnit, 0.0 - SpellData[SpellEvent.AbilityId].Cost(GetUnitAbilityLevel(SpellEvent.CastingUnit, SpellEvent.AbilityId)));
+            ModUnitMana(SpellEvent.CastingUnit, 0.0 - SpellData.inst(SpellEvent.AbilityId, SCOPE_PREFIX).Cost(GetUnitAbilityLevel(SpellEvent.CastingUnit, SpellEvent.AbilityId)));
             AddTimedEffect.atUnit(ART_MANA_DRAIN_TARGET, SpellEvent.CastingUnit, "origin", 0.2);
         }
     }

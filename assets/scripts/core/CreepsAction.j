@@ -55,10 +55,10 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
                 }
             }
             res = ip.get();
-// print("选取技能"+SpellData[res].name);
+// print("选取技能"+SpellData.inst(res, SCOPE_PREFIX).name);
             if (res == 0) {
                 IssueTargetOrderById(source, OID_ATTACK, target);
-            } else if (SpellData[res].otp == ORDER_TYPE_TARGET) {
+            } else if (SpellData.inst(res, SCOPE_PREFIX).otp == ORDER_TYPE_TARGET) {
                 if (res == SID_DARK_ARROW_HEX || res == SID_STEALTH_HEX || res == SID_PAIN_HEX) {
                     tar = PlayerUnits.getRandomHero();                    
                 } else if (res == SID_POLYMORPH_HEX) {
@@ -73,11 +73,11 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
                     }
                 }
                 if (tar != null) {target = tar;}
-//print("Going to " + SpellData[res].name + " on " + GetUnitNameEx(target));
-                IssueTargetOrderById(source, SpellData[res].oid, target);
-            } else if (SpellData[res].otp == ORDER_TYPE_IMMEDIATE) {
-                IssueImmediateOrderById(source, SpellData[res].oid);
-//            } else if (SpellData[res].otp == ORDER_TYPE_POINT) {
+//print("Going to " + SpellData.inst(res, SCOPE_PREFIX).name + " on " + GetUnitNameEx(target));
+                IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, target);
+            } else if (SpellData.inst(res, SCOPE_PREFIX).otp == ORDER_TYPE_IMMEDIATE) {
+                IssueImmediateOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid);
+//            } else if (SpellData.inst(res, SCOPE_PREFIX).otp == ORDER_TYPE_POINT) {
 //                x = GetUnitX(target); y = GetUnitY(target);
 //                if (res == SID_SUN_FIRE_STORMHEX) {
 //                    tar = PlayerUnits.getRandomInRange(source, 3600.0);
@@ -87,14 +87,14 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
 //                    }
                 //} else if (res == SID_FREEZING_TRAP_HEX) {
 //print("lightning totem casting point: " + R2S(GetUnitX(target)) + " - " + R2S(GetUnitY(target)));
-                //    IssuePointOrderById(source, SpellData[res].oid, GetUnitX(target), GetUnitY(target));
+                //    IssuePointOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, GetUnitX(target), GetUnitY(target));
 //                } else if (res == SID_LIGHTNING_TOTEM_HEX) {
 //                    RandomPoint.aroundUnit(source, 100.0, 200.0);
 //print("lightning totem casting point: " + R2S(RandomPoint.x) + " - " + R2S(RandomPoint.y));
 //                    x = RandomPoint.x; y = RandomPoint.y;
 //                }
-//print("about to make order, source = " + GetUnitNameEx(source) + ", ids = " + OrderId2String(SpellData[res].oid) + ", x=" + R2S(x) + ", y=" + R2S(y));
-//                IssuePointOrderById(source, SpellData[res].oid, x, y);
+//print("about to make order, source = " + GetUnitNameEx(source) + ", ids = " + OrderId2String(SpellData.inst(res, SCOPE_PREFIX).oid) + ", x=" + R2S(x) + ", y=" + R2S(y));
+//                IssuePointOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, x, y);
 //print("order made");
             }
             ip.destroy();
@@ -137,19 +137,19 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
             res = ip.get();
             if (res == 0) {
                 IssueTargetOrderById(source, OID_ATTACK, target);
-            } else if (SpellData[res].otp == ORDER_TYPE_TARGET) {
+            } else if (SpellData.inst(res, SCOPE_PREFIX).otp == ORDER_TYPE_TARGET) {
                 //NotAttacking(source);
                 if (res == 'A03L') {
-                    IssueTargetOrderById(source, SpellData[res].oid, PlayerUnits.getFarest(source));
+                    IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, PlayerUnits.getFarest(source));
                 } else {
                     tu = PlayerUnits.getRandomHero(); // to avoid that strong breeze clashes with thunder storm
                     if (!UnitProp.inst(tu, SCOPE_PREFIX).stunned) {
-                        IssueTargetOrderById(source, SpellData[res].oid, tu);
+                        IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, tu);
                     }
                 }
-            } else if (SpellData[res].otp == ORDER_TYPE_IMMEDIATE) {
+            } else if (SpellData.inst(res, SCOPE_PREFIX).otp == ORDER_TYPE_IMMEDIATE) {
                 //NotAttacking(source);
-                IssueImmediateOrderById(source, SpellData[res].oid);
+                IssueImmediateOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid);
             }
             ip.destroy();
         }    
@@ -195,10 +195,10 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
             res = ip.get();
             if (res == 0) {
                 IssueTargetOrderById(source, OID_ATTACK, PlayerUnits.getRandomHero());
-            } else if (SpellData[res].otp == ORDER_TYPE_TARGET) {
-                IssueTargetOrderById(source, SpellData[res].oid, tu);
-            } else if (SpellData[res].otp == ORDER_TYPE_IMMEDIATE) {
-                IssueImmediateOrderById(source, SpellData[res].oid);
+            } else if (SpellData.inst(res, SCOPE_PREFIX).otp == ORDER_TYPE_TARGET) {
+                IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, tu);
+            } else if (SpellData.inst(res, SCOPE_PREFIX).otp == ORDER_TYPE_IMMEDIATE) {
+                IssueImmediateOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid);
             }
             ip.destroy();
         }
@@ -239,10 +239,10 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
             res = ip.get();
             if (res == 0) {
                 IssueTargetOrderById(source, OID_ATTACK, target);
-            } else if (SpellData[res].otp == ORDER_TYPE_TARGET) {
-                IssueTargetOrderById(source, SpellData[res].oid, tu);
-            } else if (SpellData[res].otp == ORDER_TYPE_IMMEDIATE) {
-                IssueImmediateOrderById(source, SpellData[res].oid);
+            } else if (SpellData.inst(res, SCOPE_PREFIX).otp == ORDER_TYPE_TARGET) {
+                IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, tu);
+            } else if (SpellData.inst(res, SCOPE_PREFIX).otp == ORDER_TYPE_IMMEDIATE) {
+                IssueImmediateOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid);
             }
             ip.destroy();
         }
@@ -283,10 +283,10 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
                 IssueTargetOrderById(source, OID_ATTACK, target);
             } else if (res == SID_FROST_SHOCK) {
                 tu = PlayerUnits.getRandomHero(); 
-                IssueTargetOrderById(source, SpellData[res].oid, tu);
+                IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, tu);
                 tu = null;
             } else {
-                IssueTargetOrderById(source, SpellData[res].oid, target);
+                IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, target);
             }
             ip.destroy();
         }
@@ -313,7 +313,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
             if (res == 0) {
                 IssueTargetOrderById(source, OID_ATTACK, target);
             } else if (res == SID_FIRE_BALL) {
-                IssueImmediateOrderById(source, SpellData[res].oid);
+                IssueImmediateOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid);
             } else if (res == SID_BLAZING_HASTE) {
                 if (GetUnitAbilityLevel(source, BID_BLAZING_HASTE) == 0) {
                     tu = source;
@@ -323,11 +323,11 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
                         tu = source;
                     }
                 }
-                IssueTargetOrderById(source, SpellData[res].oid, tu);
+                IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, tu);
             } else {
                 tu = PlayerUnits.getRandomHero();
                 if (tu != null) {
-                    IssueTargetOrderById(source, SpellData[res].oid, tu);
+                    IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, tu);
                 } else {
                     IssueTargetOrderById(source, OID_ATTACK, source);
                 }
@@ -359,10 +359,10 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
             res = ip.get();
             if (res == 0) {
                 IssueTargetOrderById(source, OID_ATTACK, target);
-            } else if (SpellData[res].otp == ORDER_TYPE_IMMEDIATE) {
-                IssueImmediateOrderById(source, SpellData[res].oid);
+            } else if (SpellData.inst(res, SCOPE_PREFIX).otp == ORDER_TYPE_IMMEDIATE) {
+                IssueImmediateOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid);
             } else {
-                IssueTargetOrderById(source, SpellData[res].oid, target);
+                IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, target);
             }
             ip.destroy();
         }
@@ -392,10 +392,10 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
             res = ip.get();
             if (res == 0) {
                 IssueTargetOrderById(source, OID_ATTACK, target);
-            } else if (SpellData[res].otp == ORDER_TYPE_IMMEDIATE) {
-                IssueImmediateOrderById(source, SpellData[res].oid);
+            } else if (SpellData.inst(res, SCOPE_PREFIX).otp == ORDER_TYPE_IMMEDIATE) {
+                IssueImmediateOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid);
             } else {
-                IssueTargetOrderById(source, SpellData[res].oid, tu);
+                IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, tu);
             }
             ip.destroy();
         }
@@ -420,7 +420,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
             if (res == 0) {
                 IssueTargetOrderById(source, OID_ATTACK, target);
             } else {
-                IssueImmediateOrderById(source, SpellData[res].oid);
+                IssueImmediateOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid);
             }
             ip.destroy();
         }
@@ -481,12 +481,12 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
                         i += 1;
                     }
                     if (tu != null) {
-                        IssueTargetOrderById(source, SpellData[res].oid, tu);
+                        IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, tu);
                     } else {
                         IssueTargetOrderById(source, OID_ATTACK, target);
                     }
                 } else {
-                    IssueImmediateOrderById(source, SpellData[res].oid);
+                    IssueImmediateOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid);
                 }
             }
             ip.destroy();
@@ -496,13 +496,13 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
     
     function makeOrderncgb(unit source, unit target, real combatTime) {
         if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
-            IssueTargetOrderById(source, SpellData[SID_SELF_DESTRUCT].oid, PlayerUnits.getRandomHero());
+            IssueTargetOrderById(source, SpellData.inst(SID_SELF_DESTRUCT, SCOPE_PREFIX).oid, PlayerUnits.getRandomHero());
         }
     }
     
     function makeOrdernfac(unit source, unit target, real combatTime) {
         if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
-            IssueImmediateOrderById(source, SpellData[SID_SUMMON_CLOCKWORK_GOBLIN].oid);
+            IssueImmediateOrderById(source, SpellData.inst(SID_SUMMON_CLOCKWORK_GOBLIN, SCOPE_PREFIX).oid);
         }
     }
     
@@ -530,10 +530,10 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
             res = ip.get();
             if (res == 0) {
                 IssueTargetOrderById(source, OID_ATTACK, target);
-            } else if (SpellData[res].otp == ORDER_TYPE_TARGET) {
-                IssueTargetOrderById(source, SpellData[res].oid, AggroList[source].getFirst());
-            } else if (SpellData[res].otp == ORDER_TYPE_IMMEDIATE) {
-                IssueImmediateOrderById(source, SpellData[res].oid);
+            } else if (SpellData.inst(res, SCOPE_PREFIX).otp == ORDER_TYPE_TARGET) {
+                IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, AggroList[source].getFirst());
+            } else if (SpellData.inst(res, SCOPE_PREFIX).otp == ORDER_TYPE_IMMEDIATE) {
+                IssueImmediateOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid);
             }
             ip.destroy();
         }    
@@ -560,14 +560,14 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
             res = ip.get();
             if (res == 0) {
                 IssueTargetOrderById(source, OID_ATTACK, target);
-            } else if (SpellData[res].otp == ORDER_TYPE_TARGET) {
+            } else if (SpellData.inst(res, SCOPE_PREFIX).otp == ORDER_TYPE_TARGET) {
                 //NotAttacking(source);
                 if (res == SID_ALKALINE_WATER) {
-                    IssueTargetOrderById(source, SpellData[res].oid, AggroList[source].getFirst());
+                    IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, AggroList[source].getFirst());
                 } else {
-                    IssueTargetOrderById(source, SpellData[res].oid, PlayerUnits.getRandomHero());
+                    IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, PlayerUnits.getRandomHero());
                 }
-            } else if (SpellData[res].otp == ORDER_TYPE_IMMEDIATE) {
+            } else if (SpellData.inst(res, SCOPE_PREFIX).otp == ORDER_TYPE_IMMEDIATE) {
                 if (res == SID_TIDE_BARON_MORPH) {
 //print("wanna be slardar");
                     IssueImmediateOrderById(source, OID_UNBEARFORM);
@@ -613,10 +613,10 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
             res = ip.get();
             if (res == 0) {
                 IssueTargetOrderById(source, OID_ATTACK, target);
-            } else if (SpellData[res].otp == ORDER_TYPE_TARGET) {
-                IssueTargetOrderById(source, SpellData[res].oid, PlayerUnits.getRandomHero());
-            } else if (SpellData[res].otp == ORDER_TYPE_IMMEDIATE) {
-                IssueImmediateOrderById(source, SpellData[res].oid);
+            } else if (SpellData.inst(res, SCOPE_PREFIX).otp == ORDER_TYPE_TARGET) {
+                IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, PlayerUnits.getRandomHero());
+            } else if (SpellData.inst(res, SCOPE_PREFIX).otp == ORDER_TYPE_IMMEDIATE) {
+                IssueImmediateOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid);
             }
             ip.destroy();
         }    
@@ -652,10 +652,10 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
             res = ip.get();
             if (res == 0) {
                 IssueTargetOrderById(source, OID_ATTACK, target);
-            } else if (SpellData[res].otp == ORDER_TYPE_TARGET) {
-                IssueTargetOrderById(source, SpellData[res].oid, PlayerUnits.getRandomHero());
-            } else if (SpellData[res].otp == ORDER_TYPE_IMMEDIATE) {
-                IssueImmediateOrderById(source, SpellData[res].oid);
+            } else if (SpellData.inst(res, SCOPE_PREFIX).otp == ORDER_TYPE_TARGET) {
+                IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, PlayerUnits.getRandomHero());
+            } else if (SpellData.inst(res, SCOPE_PREFIX).otp == ORDER_TYPE_IMMEDIATE) {
+                IssueImmediateOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid);
             }
             ip.destroy();
         }
@@ -689,7 +689,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
             if (res == 0) {
                 IssueTargetOrderById(source, OID_ATTACK, target);
             } else {
-                IssueImmediateOrderById(source, SpellData[res].oid);
+                IssueImmediateOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid);
             }
             ip.destroy();
         }
@@ -714,7 +714,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
             if (res == 0) {
                 IssueTargetOrderById(source, OID_ATTACK, target);
             } else {
-                IssueTargetOrderById(source, SpellData[res].oid, PlayerUnits.getRandomHero());
+                IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, PlayerUnits.getRandomHero());
             }
             ip.destroy();
         }
@@ -736,7 +736,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
                 IssueTargetOrderById(source, OID_ATTACK, target);
             } else {
                 tu = PlayerUnits.getFarest(source);
-                IssueTargetOrderById(source, SpellData[res].oid, tu);
+                IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, tu);
             }
             ip.destroy();
         }
@@ -760,13 +760,13 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
             if (res == 0) {
                 IssueTargetOrderById(source, OID_ATTACK, target);
             } else if (res == SID_WAR_STOMP) {
-                IssueImmediateOrderById(source, SpellData[res].oid);
+                IssueImmediateOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid);
             } else {
                 tu = MobList.getWithoutBuff(BID_BATTLE_COMMAND);
                 if (tu == null) {
                     tu = source;
                 }
-                IssueTargetOrderById(source, SpellData[res].oid, tu);
+                IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, tu);
             }
             ip.destroy();
         }
@@ -789,7 +789,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
             if (res == 0) {
                 IssueTargetOrderById(source, OID_ATTACK, target);
             } else {
-                IssueImmediateOrderById(source, SpellData[res].oid);
+                IssueImmediateOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid);
             }
             ip.destroy();
         }
@@ -811,7 +811,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
             if (res == 0) {
                 IssueTargetOrderById(source, OID_ATTACK, target);
             } else {
-                IssueTargetOrderById(source, SpellData[res].oid, PlayerUnits.getRandomHero());
+                IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, PlayerUnits.getRandomHero());
             }
             ip.destroy();
         }
@@ -832,7 +832,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
                 IssueTargetOrderById(source, OID_ATTACK, target);
             } else {
                 tu = PlayerUnits.getRandomHero();
-                IssuePointOrderById(source, SpellData[res].oid, GetUnitX(tu), GetUnitY(tu));
+                IssuePointOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, GetUnitX(tu), GetUnitY(tu));
                 tu = null;
             }
             ip.destroy();
@@ -862,7 +862,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
             if (res == 0) {
                 IssueTargetOrderById(source, OID_ATTACK, target);
             } else {
-                IssueImmediateOrderById(source, SpellData[res].oid);
+                IssueImmediateOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid);
             }
             ip.destroy();
         }
@@ -881,7 +881,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
             if (res == 0) {
                 IssueTargetOrderById(source, OID_ATTACK, target);
             } else {
-                IssueTargetOrderById(source, SpellData[res].oid, target);
+                IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, target);
             }
             ip.destroy();
         }
@@ -903,9 +903,9 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
             if (res == 0) {
                 IssueTargetOrderById(source, OID_ATTACK, target);
             } else if (res == SID_VICIOUS_STRIKE) {
-                IssueTargetOrderById(source, SpellData[res].oid, PlayerUnits.getRandomHero());
+                IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, PlayerUnits.getRandomHero());
             } else {
-                IssueImmediateOrderById(source, SpellData[res].oid);
+                IssueImmediateOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid);
             }
             ip.destroy();
         }
@@ -924,7 +924,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
             if (res == 0) {
                 IssueTargetOrderById(source, OID_ATTACK, target);
             } else {
-                IssueTargetOrderById(source, SpellData[res].oid, PlayerUnits.getHighestMP());
+                IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, PlayerUnits.getHighestMP());
             }
             ip.destroy();
         }
@@ -946,7 +946,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
             if (res == 0) {
                 IssueTargetOrderById(source, OID_ATTACK, target);
             } else {
-                IssueTargetOrderById(source, SpellData[res].oid, PlayerUnits.getRandomHero());
+                IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, PlayerUnits.getRandomHero());
             }
             ip.destroy();
         }
@@ -968,9 +968,9 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
             if (res == 0) {
                 IssueTargetOrderById(source, OID_ATTACK, target);
             } else if (res == SID_CRUSHING_BLOW) {
-                IssueTargetOrderById(source, SpellData[res].oid, target);
+                IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, target);
             } else {
-                IssueImmediateOrderById(source, SpellData[res].oid);
+                IssueImmediateOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid);
             }
             ip.destroy();
         }
@@ -995,10 +995,10 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
             } else if (res == SID_METEOR) {
                 tu = PlayerUnits.getRandomHero();
                 // print("Random Target = " + GetUnitNameEx(tu));
-                IssuePointOrderById(source, SpellData[res].oid, GetUnitX(tu), GetUnitY(tu));
+                IssuePointOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, GetUnitX(tu), GetUnitY(tu));
                 tu = null;
             } else {
-                IssueImmediateOrderById(source, SpellData[res].oid);
+                IssueImmediateOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid);
             }
             ip.destroy();
         }
@@ -1020,7 +1020,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
             if (res == 0) {
                 IssueTargetOrderById(source, OID_ATTACK, target);
             } else {
-                IssueTargetOrderById(source, SpellData[res].oid, PlayerUnits.getRandomHero());
+                IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, PlayerUnits.getRandomHero());
             }
             ip.destroy();
         }
@@ -1042,9 +1042,9 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
             if (res == 0) {
                 IssueTargetOrderById(source, OID_ATTACK, target);
             } else if (res == SID_NETHER_BOLT) {
-                IssueTargetOrderById(source, SpellData[res].oid, PlayerUnits.getHighestHP());
+                IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, PlayerUnits.getHighestHP());
             } else {
-                IssueTargetOrderById(source, SpellData[res].oid, target);
+                IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, target);
             }
             ip.destroy();
         }
@@ -1068,9 +1068,9 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
             if (res == 0) {
                 IssueTargetOrderById(source, OID_ATTACK, target);
             } else if (res == SID_GRIM_TOTEM) {
-                IssueImmediateOrderById(source, SpellData[res].oid);
+                IssueImmediateOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid);
             } else {
-                IssueTargetOrderById(source, SpellData[res].oid, target);
+                IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, target);
             }
             ip.destroy();
         }
@@ -1086,7 +1086,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
             if (res == 0) {
                 IssueTargetOrderById(source, OID_ATTACK, target);
             } else {
-                IssueImmediateOrderById(source, SpellData[res].oid);
+                IssueImmediateOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid);
             }
         }
     }

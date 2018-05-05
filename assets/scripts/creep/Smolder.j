@@ -6,7 +6,7 @@ library Smolder requires DamageSystem {
             p.reverse();
             return false;
         } else {
-            DamageTarget(p.caster, p.target, p.r0, SpellData[SID_SMOLDER].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+            DamageTarget(p.caster, p.target, p.r0, SpellData.inst(SID_SMOLDER, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS);
             return true;
         }
     }

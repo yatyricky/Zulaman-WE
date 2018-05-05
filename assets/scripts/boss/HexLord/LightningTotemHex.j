@@ -40,7 +40,7 @@ constant integer TOTEM_ID_STORM = 'u000';
                 if (select != null) {
                     AddTimedLight.atUnitsZ("CLPB", this.u, 80.0, select, 0.0, 0.5);
                     AddTimedEffect.atUnit(ART_IMPACT, select, "origin", 0.3);
-                    DamageTarget(this.c, select, 100.0, SpellData[SID_LIGHTNING_TOTEM_HEX].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+                    DamageTarget(this.c, select, 100.0, SpellData.inst(SID_LIGHTNING_TOTEM_HEX, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS);
                 }
             }
             this.tick -= 1;

@@ -32,7 +32,7 @@ library NaturalReflexHex requires BuffSystem, SpellEvent, UnitProperty {
         if (DamageResult.isDodged) {
             ilvl = GetUnitAbilityLevel(DamageResult.target, BID_NATURAL_REFLEX_HEX);
             if (ilvl > 0) {
-                HealTarget(DamageResult.target, DamageResult.target, GetUnitState(DamageResult.target, UNIT_STATE_MAX_LIFE) * 0.1, SpellData[SID_NATURAL_REFLEX_HEX].name, -3.0);
+                HealTarget(DamageResult.target, DamageResult.target, GetUnitState(DamageResult.target, UNIT_STATE_MAX_LIFE) * 0.1, SpellData.inst(SID_NATURAL_REFLEX_HEX, SCOPE_PREFIX).name, -3.0);
                 AddTimedEffect.atUnit(ART_HEAL, DamageResult.target, "origin", 0.2);
             }
         }

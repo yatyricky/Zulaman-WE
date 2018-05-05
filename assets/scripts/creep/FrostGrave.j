@@ -22,7 +22,7 @@ library FrostGrave requires DamageSystem {
             if (IsUnitDead(this.target)) {
                 this.count = 0;
             } else {
-                DamageTarget(this.caster, this.target, 200.0, SpellData[SID_FROST_GRAVE].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
+                DamageTarget(this.caster, this.target, 200.0, SpellData.inst(SID_FROST_GRAVE, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS);
             }
             this.count -= 1;
 

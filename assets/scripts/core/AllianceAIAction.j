@@ -736,13 +736,13 @@ constant real AIACTION_INTERVAL = 0.33;
         if (GetWidgetLife(source) / GetUnitState(source, UNIT_STATE_MAX_LIFE) < 0.35) {
             if (UnitCanUse(source, SID_SHIELD_OF_SINDOREI)) {
                 // shield
-                IssueImmediateOrderById(source, SpellData[SID_SHIELD_OF_SINDOREI].oid);
+                IssueImmediateOrderById(source, SpellData.inst(SID_SHIELD_OF_SINDOREI, SCOPE_PREFIX).oid);
             } else if (UnitCanUse(source, SID_DISCORD)) {
                 // discord nearest
-                IssueTargetOrderById(source, SpellData[SID_DISCORD].oid, MobList.getNearestFrom(source));
+                IssueTargetOrderById(source, SpellData.inst(SID_DISCORD, SCOPE_PREFIX).oid, MobList.getNearestFrom(source));
             } else if (UnitCanUse(source, SID_SHIELD_BLOCK)) {
                 // block
-                IssueImmediateOrderById(source, SpellData[SID_SHIELD_BLOCK].oid);
+                IssueImmediateOrderById(source, SpellData.inst(SID_SHIELD_BLOCK, SCOPE_PREFIX).oid);
             }
         }
         // ot
@@ -753,10 +753,10 @@ constant real AIACTION_INTERVAL = 0.33;
                 state = 1;
                 if (UnitCanUse(source, SID_DISCORD)) {
                     // discord
-                    IssueTargetOrderById(source, SpellData[SID_DISCORD].oid, MobList.units[i]);
+                    IssueTargetOrderById(source, SpellData.inst(SID_DISCORD, SCOPE_PREFIX).oid, MobList.units[i]);
                 } else if (UnitCanUse(source, SID_ARCANE_SHOCK)) {
                     // shock
-                    IssueTargetOrderById(source, SpellData[SID_ARCANE_SHOCK].oid, MobList.units[i]);
+                    IssueTargetOrderById(source, SpellData.inst(SID_ARCANE_SHOCK, SCOPE_PREFIX).oid, MobList.units[i]);
                 } else {
                     // attack
                     IssueNormalAttackOrder(source, MobList.units[i]);
@@ -770,14 +770,14 @@ constant real AIACTION_INTERVAL = 0.33;
         if (state == 0) {
             if (UnitCanUse(source, SID_ARCANE_SHOCK) && !IsUnitICD(source, SID_ARCANE_SHOCK)) {
                 // shock if not internal cd
-                IssueTargetOrderById(source, SpellData[SID_ARCANE_SHOCK].oid, MobList.getLowestHPPercent());
+                IssueTargetOrderById(source, SpellData.inst(SID_ARCANE_SHOCK, SCOPE_PREFIX).oid, MobList.getLowestHPPercent());
                 SetUnitICD(source, SID_ARCANE_SHOCK, 5.0);
-            } else if (UnitCanUse(source, SID_SHIELD_BLOCK) && GetUnitState(source, UNIT_STATE_MANA) > SpellData[SID_SHIELD_BLOCK].cost + SpellData[SID_SUN_FIRE_STORM].cost) {
+            } else if (UnitCanUse(source, SID_SHIELD_BLOCK) && GetUnitState(source, UNIT_STATE_MANA) > SpellData.inst(SID_SHIELD_BLOCK, SCOPE_PREFIX).cost + SpellData.inst(SID_SUN_FIRE_STORM, SCOPE_PREFIX).cost) {
                 // block if can cast shield + sunfire
-                IssueImmediateOrderById(source, SpellData[SID_SHIELD_BLOCK].oid);
-            } else if (UnitCanUse(source, SID_SUN_FIRE_STORM) && GetUnitState(source, UNIT_STATE_MANA) > SpellData[SID_SHIELD_BLOCK].cost + SpellData[SID_SUN_FIRE_STORM].cost) {
+                IssueImmediateOrderById(source, SpellData.inst(SID_SHIELD_BLOCK, SCOPE_PREFIX).oid);
+            } else if (UnitCanUse(source, SID_SUN_FIRE_STORM) && GetUnitState(source, UNIT_STATE_MANA) > SpellData.inst(SID_SHIELD_BLOCK, SCOPE_PREFIX).cost + SpellData.inst(SID_SUN_FIRE_STORM, SCOPE_PREFIX).cost) {
                 // sunfire if can cast shield + sunfire
-                IssueImmediateOrderById(source, SpellData[SID_SUN_FIRE_STORM].oid);
+                IssueImmediateOrderById(source, SpellData.inst(SID_SUN_FIRE_STORM, SCOPE_PREFIX).oid);
             } else {
                 // attack lowest hp
                 IssueNormalAttackOrder(source, MobList.getLowestHPPercent());
@@ -794,28 +794,28 @@ constant real AIACTION_INTERVAL = 0.33;
             // low health danger
             if (UnitCanUse(source, SID_SURVIVAL_INSTINCTS)) {
                 // instinct
-                IssueImmediateOrderById(source, SpellData[SID_SURVIVAL_INSTINCTS].oid);
+                IssueImmediateOrderById(source, SpellData.inst(SID_SURVIVAL_INSTINCTS, SCOPE_PREFIX).oid);
             } else if (UnitCanUse(source, SID_NATURAL_REFLEX)) {
                 // reflex
-                IssueImmediateOrderById(source, SpellData[SID_NATURAL_REFLEX].oid);
+                IssueImmediateOrderById(source, SpellData.inst(SID_NATURAL_REFLEX, SCOPE_PREFIX).oid);
             } else if (UnitCanUse(source, SID_FOREST_CURE) && GetUnitManaPercent(source) > 20) {
                 // cure if mana > 20%
-                IssueImmediateOrderById(source, SpellData[SID_FOREST_CURE].oid);
+                IssueImmediateOrderById(source, SpellData.inst(SID_FOREST_CURE, SCOPE_PREFIX).oid);
             } else if (UnitCanUse(source, SID_SAVAGE_ROAR)) {
                 // roar for next cure
-                IssueImmediateOrderById(source, SpellData[SID_SAVAGE_ROAR].oid);
+                IssueImmediateOrderById(source, SpellData.inst(SID_SAVAGE_ROAR, SCOPE_PREFIX).oid);
             }
         } else if (GetUnitLifePercent(source) < 45) {
             // normal low health
             if (UnitCanUse(source, SID_NATURAL_REFLEX)) {
                 // reflex
-                IssueImmediateOrderById(source, SpellData[SID_NATURAL_REFLEX].oid);
+                IssueImmediateOrderById(source, SpellData.inst(SID_NATURAL_REFLEX, SCOPE_PREFIX).oid);
             } else if (UnitCanUse(source, SID_FOREST_CURE) && GetUnitManaPercent(source) > 30) {
                 // cure if mana > 30%
-                IssueImmediateOrderById(source, SpellData[SID_FOREST_CURE].oid);
+                IssueImmediateOrderById(source, SpellData.inst(SID_FOREST_CURE, SCOPE_PREFIX).oid);
             } else if (UnitCanUse(source, SID_SAVAGE_ROAR)) {
                 // roar for next cure
-                IssueImmediateOrderById(source, SpellData[SID_SAVAGE_ROAR].oid);
+                IssueImmediateOrderById(source, SpellData.inst(SID_SAVAGE_ROAR, SCOPE_PREFIX).oid);
             }
         }
         // ot
@@ -826,7 +826,7 @@ constant real AIACTION_INTERVAL = 0.33;
                 state = 1;
                 if (UnitCanUse(source, SID_LACERATE) && GetUnitTypeId(MobList.units[i]) != UTID_TIDE_BARON_WATER && !HexLordGlobalConst.normalAttackForbid) {
                     // lacerate
-                    IssueTargetOrderById(source, SpellData[SID_LACERATE].oid, MobList.units[i]);
+                    IssueTargetOrderById(source, SpellData.inst(SID_LACERATE, SCOPE_PREFIX).oid, MobList.units[i]);
                 } else {
                     // attack
                     IssueNormalAttackOrder(source, MobList.units[i]);
@@ -840,17 +840,17 @@ constant real AIACTION_INTERVAL = 0.33;
         if (state == 0) {
             if (GetUnitManaPercent(source) > 90 && UnitCanUse(source, SID_FOREST_CURE) && GetUnitLifePercent(source) < 90) {
                 // cure if mana overflow
-                IssueImmediateOrderById(source, SpellData[SID_FOREST_CURE].oid);
+                IssueImmediateOrderById(source, SpellData.inst(SID_FOREST_CURE, SCOPE_PREFIX).oid);
             } else if (UnitCanUse(source, SID_SAVAGE_ROAR) && GetUnitManaPercent(source) < 90) {
                 // roar if mana not full
-                IssueImmediateOrderById(source, SpellData[SID_SAVAGE_ROAR].oid);
+                IssueImmediateOrderById(source, SpellData.inst(SID_SAVAGE_ROAR, SCOPE_PREFIX).oid);
             } else if (UnitCanUse(source, SID_LACERATE) && !HexLordGlobalConst.normalAttackForbid) {
                 // lacerate 1 by 1
                 i = 0;
                 findAny = 0;
                 while (i < MobList.n) {
                     if (GetUnitAbilityLevel(MobList.units[i], BID_LACERATE) == 0 && GetUnitTypeId(MobList.units[i]) != UTID_TIDE_BARON_WATER) {
-                        IssueTargetOrderById(source, SpellData[SID_LACERATE].oid, MobList.units[i]);
+                        IssueTargetOrderById(source, SpellData.inst(SID_LACERATE, SCOPE_PREFIX).oid, MobList.units[i]);
                         findAny += 1;
                         i += MobList.n;
                     }
@@ -895,16 +895,16 @@ constant real AIACTION_INTERVAL = 0.33;
                 // emergent
                 if (UnitCanUse(source, SID_SWIFT_MEND) && (GetUnitAbilityLevel(ot, BID_REJUVENATION) > 0 || GetUnitAbilityLevel(ot, BID_REGROWTH) > 0)) {
                     // swift if target rejuv or regrowth
-                    IssueTargetOrderById(source, SpellData[SID_SWIFT_MEND].oid, ot);
+                    IssueTargetOrderById(source, SpellData.inst(SID_SWIFT_MEND, SCOPE_PREFIX).oid, ot);
                 } else if (UnitCanUse(source, SID_REJUVENATION)) {
                     // rejuv for next swift
-                    IssueTargetOrderById(source, SpellData[SID_REJUVENATION].oid, ot);
+                    IssueTargetOrderById(source, SpellData.inst(SID_REJUVENATION, SCOPE_PREFIX).oid, ot);
                 } else if (UnitCanUse(source, SID_REGROWTH)) {
                     // regrowth
-                    IssueTargetOrderById(source, SpellData[SID_REGROWTH].oid, ot);   
+                    IssueTargetOrderById(source, SpellData.inst(SID_REGROWTH, SCOPE_PREFIX).oid, ot);   
                 } else if (UnitCanUse(source, SID_LIFE_BLOOM)) {
                     // lifebloom
-                    IssueTargetOrderById(source, SpellData[SID_LIFE_BLOOM].oid, ot);   
+                    IssueTargetOrderById(source, SpellData.inst(SID_LIFE_BLOOM, SCOPE_PREFIX).oid, ot);   
                 }
             } else {
                 // normal rotation
@@ -921,11 +921,11 @@ constant real AIACTION_INTERVAL = 0.33;
                 while (i < PlayerUnits.n && GetUnitLifePercent(PlayerUnits.sorted[i]) < 90) {
                     if (UnitCanUse(source, SID_LIFE_BLOOM) && GetUnitAbilityLevel(PlayerUnits.sorted[i], BID_LIFE_BLOOM) == 0) {
                         // lifebloom if not applied yet
-                        IssueTargetOrderById(source, SpellData[SID_LIFE_BLOOM].oid, PlayerUnits.sorted[i]);
+                        IssueTargetOrderById(source, SpellData.inst(SID_LIFE_BLOOM, SCOPE_PREFIX).oid, PlayerUnits.sorted[i]);
                         state = 1;
                     } else if (UnitCanUse(source, SID_REJUVENATION) && GetUnitAbilityLevel(PlayerUnits.sorted[i], BID_REJUVENATION) == 0) {
                         // rejuv if not applied yet
-                        IssueTargetOrderById(source, SpellData[SID_REJUVENATION].oid, PlayerUnits.sorted[i]);
+                        IssueTargetOrderById(source, SpellData.inst(SID_REJUVENATION, SCOPE_PREFIX).oid, PlayerUnits.sorted[i]);
                         state = 1;
                     }
                     i += 1;
@@ -952,21 +952,21 @@ constant real AIACTION_INTERVAL = 0.33;
                 // emergent
                 if (UnitCanUse(source, SID_HOLY_SHOCK)) {
                     // holy shock
-                    IssueTargetOrderById(source, SpellData[SID_HOLY_SHOCK].oid, ot);
+                    IssueTargetOrderById(source, SpellData.inst(SID_HOLY_SHOCK, SCOPE_PREFIX).oid, ot);
                 } else {
                     if (GetUnitAbilityLevel(source, BID_HOLY_LIGHT_IMPROVED) > 0) {
                         // instant cast holy light
-                        IssueTargetOrderById(source, SpellData[SID_HOLY_LIGHT].oid, ot);
+                        IssueTargetOrderById(source, SpellData.inst(SID_HOLY_LIGHT, SCOPE_PREFIX).oid, ot);
                     } else {
                         if (UnitCanUse(source, SID_DIVINE_FAVOR)) {
                             // make sure next healing spell must have crit effect
-                            IssueImmediateOrderById(source, SpellData[SID_DIVINE_FAVOR].oid);
+                            IssueImmediateOrderById(source, SpellData.inst(SID_DIVINE_FAVOR, SCOPE_PREFIX).oid);
                         } else if (UnitCanUse(source, SID_FLASH_LIGHT)) {
                             // flash light
-                            IssueTargetOrderById(source, SpellData[SID_FLASH_LIGHT].oid, ot); 
+                            IssueTargetOrderById(source, SpellData.inst(SID_FLASH_LIGHT, SCOPE_PREFIX).oid, ot); 
                         } else if (UnitCanUse(source, SID_HOLY_LIGHT)) {
                             // normal holy light
-                            IssueTargetOrderById(source, SpellData[SID_HOLY_LIGHT].oid, ot);   
+                            IssueTargetOrderById(source, SpellData.inst(SID_HOLY_LIGHT, SCOPE_PREFIX).oid, ot);   
                         }
                     }
                 }
@@ -983,20 +983,20 @@ constant real AIACTION_INTERVAL = 0.33;
                 
                 if (PlayerUnits.n > 1 && GetUnitLifePercent(PlayerUnits.sorted[1]) < 75) {
                     if (UnitCanUse(source, SID_BEACON_OF_LIGHT)) {
-                        IssueTargetOrderById(source, SpellData[SID_BEACON_OF_LIGHT].oid, PlayerUnits.sorted[1]);
+                        IssueTargetOrderById(source, SpellData.inst(SID_BEACON_OF_LIGHT, SCOPE_PREFIX).oid, PlayerUnits.sorted[1]);
                     }
                 }
                 i = 0;
                 while (i < PlayerUnits.n && GetUnitLifePercent(PlayerUnits.sorted[i]) < 85) {
                     if (UnitCanUse(source, SID_FLASH_LIGHT)) {
-                        IssueTargetOrderById(source, SpellData[SID_FLASH_LIGHT].oid, PlayerUnits.sorted[i]);
+                        IssueTargetOrderById(source, SpellData.inst(SID_FLASH_LIGHT, SCOPE_PREFIX).oid, PlayerUnits.sorted[i]);
                         state = 1;
                     } else if (GetUnitLifePercent(PlayerUnits.sorted[i]) < 75) {
                         if (GetUnitAbilityLevel(source, BID_HOLY_LIGHT_IMPROVED) > 0) {
-                            IssueTargetOrderById(source, SpellData[SID_HOLY_LIGHT].oid, PlayerUnits.sorted[i]);
+                            IssueTargetOrderById(source, SpellData.inst(SID_HOLY_LIGHT, SCOPE_PREFIX).oid, PlayerUnits.sorted[i]);
                             state = 1;
                         } else if (UnitCanUse(source, SID_HOLY_LIGHT)) {
-                            IssueTargetOrderById(source, SpellData[SID_HOLY_LIGHT].oid, PlayerUnits.sorted[i]);
+                            IssueTargetOrderById(source, SpellData.inst(SID_HOLY_LIGHT, SCOPE_PREFIX).oid, PlayerUnits.sorted[i]);
                             state = 1;
                         }
                     }
@@ -1032,16 +1032,16 @@ constant real AIACTION_INTERVAL = 0.33;
                 // danger
                 if (UnitCanUse(source, SID_SHIELD) && (GetUnitAbilityLevel(ot, BID_SHIELD) == 0) && (GetUnitAbilityLevel(ot, BID_SHIELD_SOUL_WEAK) == 0)) {
                     // sheld if target no shield and no soul weak
-                    IssueTargetOrderById(source, SpellData[SID_SHIELD].oid, ot);
+                    IssueTargetOrderById(source, SpellData.inst(SID_SHIELD, SCOPE_PREFIX).oid, ot);
                 } else if (UnitCanUse(source, SID_PRAYER_OF_MENDING)) {
                     // mending
-                    IssueTargetOrderById(source, SpellData[SID_PRAYER_OF_MENDING].oid, ot);
+                    IssueTargetOrderById(source, SpellData.inst(SID_PRAYER_OF_MENDING, SCOPE_PREFIX).oid, ot);
                 } else if (UnitCanUse(source, SID_HEAL) && (GetUnitAbilityLevel(ot, BID_HEAL) == 0)) {
                     // heal
-                    IssueTargetOrderById(source, SpellData[SID_HEAL].oid, ot);   
+                    IssueTargetOrderById(source, SpellData.inst(SID_HEAL, SCOPE_PREFIX).oid, ot);   
                 } else if (UnitCanUse(source, SID_PRAYER_OF_HEALING)) {
                     // healing
-                    IssuePointOrderById(source, SpellData[SID_PRAYER_OF_HEALING].oid, GetUnitX(ot), GetUnitY(ot));   
+                    IssuePointOrderById(source, SpellData.inst(SID_PRAYER_OF_HEALING, SCOPE_PREFIX).oid, GetUnitX(ot), GetUnitY(ot));   
                 }
             } else {
                 ulsr = ruleOfarHeal;
@@ -1054,13 +1054,13 @@ constant real AIACTION_INTERVAL = 0.33;
                 }*/
                 
                 if (GetUnitLifePercent(PlayerUnits.sorted[1]) < 75 && (GetDistance.units2d(PlayerUnits.sorted[0], PlayerUnits.sorted[1]) < 500.0) && UnitCanUse(source, SID_PRAYER_OF_HEALING)) {
-                    IssuePointOrderById(source, SpellData[SID_PRAYER_OF_HEALING].oid, (GetUnitX(PlayerUnits.sorted[0]) + GetUnitX(PlayerUnits.sorted[1])) / 2.0, (GetUnitY(PlayerUnits.sorted[0]) + GetUnitY(PlayerUnits.sorted[1])) / 2.0);   
+                    IssuePointOrderById(source, SpellData.inst(SID_PRAYER_OF_HEALING, SCOPE_PREFIX).oid, (GetUnitX(PlayerUnits.sorted[0]) + GetUnitX(PlayerUnits.sorted[1])) / 2.0, (GetUnitY(PlayerUnits.sorted[0]) + GetUnitY(PlayerUnits.sorted[1])) / 2.0);   
                     state = 1;
                 } else {
                     i = 0;
                     while (i < PlayerUnits.n && GetUnitLifePercent(PlayerUnits.sorted[i]) < 90) {
                         if (UnitCanUse(source, SID_HEAL) && GetUnitAbilityLevel(PlayerUnits.sorted[i], BID_HEAL) == 0) {
-                            IssueTargetOrderById(source, SpellData[SID_HEAL].oid, PlayerUnits.sorted[i]);
+                            IssueTargetOrderById(source, SpellData.inst(SID_HEAL, SCOPE_PREFIX).oid, PlayerUnits.sorted[i]);
                             state = 1;
                         }
                         i += 1;
@@ -1085,14 +1085,14 @@ constant real AIACTION_INTERVAL = 0.33;
             // Summon ghoul: no ghoul
             if (!DarkRangerHasGhoul(source)) {
                 if (UnitCanUse(source, SID_SUMMON_GHOUL)) {
-                    IssueImmediateOrderById(source, SpellData[SID_SUMMON_GHOUL].oid);
+                    IssueImmediateOrderById(source, SpellData.inst(SID_SUMMON_GHOUL, SCOPE_PREFIX).oid);
                     state = 1;
                 }
             }
             // Death pact: when danger >> summon ghoul ready
             if (state == 0 && UnitCanUse(source, SID_DEATH_PACT)) {
                 if (GetUnitLifePercent(source) < 35 || UnitCanUse(source, SID_SUMMON_GHOUL)) {
-                    IssueImmediateOrderById(source, SpellData[SID_DEATH_PACT].oid);
+                    IssueImmediateOrderById(source, SpellData.inst(SID_DEATH_PACT, SCOPE_PREFIX).oid);
                     state = 1;
                 }
             }
@@ -1127,7 +1127,7 @@ constant real AIACTION_INTERVAL = 0.33;
                             if (rng > 200) {rng = 200.0;}
                             x = (GetUnitX(tar) - GetUnitX(source)) * rng / dis + GetUnitX(source);
                             y = (GetUnitY(tar) - GetUnitY(source)) * rng / dis + GetUnitY(source);
-                            IssuePointOrderById(source, SpellData[SID_FREEZING_TRAP].oid, x, y);
+                            IssuePointOrderById(source, SpellData.inst(SID_FREEZING_TRAP, SCOPE_PREFIX).oid, x, y);
                             state = 1;
                         }
                     }
@@ -1135,23 +1135,23 @@ constant real AIACTION_INTERVAL = 0.33;
             }
             // concerntration: when ready >> someone casting
             if (state == 0 && UnitCanUse(source, SID_CONCERNTRATION)) {
-                IssueImmediateOrderById(source, SpellData[SID_CONCERNTRATION].oid);
+                IssueImmediateOrderById(source, SpellData.inst(SID_CONCERNTRATION, SCOPE_PREFIX).oid);
                 state = 1;
             }
             // black arrow: when ready
             if (state == 0 && UnitCanUse(source, SID_DARK_ARROW)) {
-                IssueTargetOrderById(source, SpellData[SID_DARK_ARROW].oid, MobList.getLowestHP());
+                IssueTargetOrderById(source, SpellData.inst(SID_DARK_ARROW, SCOPE_PREFIX).oid, MobList.getLowestHP());
                 state = 1;
             }
             // Abomi/banshee: mana
             if (state == 0 && UnitCanUse(source, SID_POWER_OF_BANSHEE)) {
-                if (GetUnitMana(source) < SpellData[SID_DARK_ARROW].Cost(GetUnitAbilityLevel(source, SID_DARK_ARROW)) + SpellData[SID_SUMMON_GHOUL].Cost(GetUnitAbilityLevel(source, SID_SUMMON_GHOUL))) {
+                if (GetUnitMana(source) < SpellData.inst(SID_DARK_ARROW, SCOPE_PREFIX).Cost(GetUnitAbilityLevel(source, SID_DARK_ARROW)) + SpellData.inst(SID_SUMMON_GHOUL, SCOPE_PREFIX).Cost(GetUnitAbilityLevel(source, SID_SUMMON_GHOUL))) {
                     if (DarkRangerIsAbominationOn(source)) {
-                        IssueImmediateOrderById(source, SpellData[SID_POWER_OF_BANSHEE].oid);
+                        IssueImmediateOrderById(source, SpellData.inst(SID_POWER_OF_BANSHEE, SCOPE_PREFIX).oid);
                     }
                 } else {
                     if (!DarkRangerIsAbominationOn(source)) {
-                        IssueImmediateOrderById(source, SpellData[SID_POWER_OF_BANSHEE].oid);
+                        IssueImmediateOrderById(source, SpellData.inst(SID_POWER_OF_BANSHEE, SCOPE_PREFIX).oid);
                     }
                 }
             }
@@ -1179,37 +1179,37 @@ constant real AIACTION_INTERVAL = 0.33;
             // overpower: when ready
             if (UnitCanUse(source, SID_OVER_POWER) && !HexLordGlobalConst.normalAttackForbid) {
                 if (BladeMasterCanOverpower(source) && GetUnitManaLost(source) >= BladeMasterGetOverpowerManaRep(source)) {
-                    IssueTargetOrderById(source, SpellData[SID_OVER_POWER].oid, tar);
+                    IssueTargetOrderById(source, SpellData.inst(SID_OVER_POWER, SCOPE_PREFIX).oid, tar);
                     state = 1;
                 }
             }
             // rend: if no rend
             if (state == 0 && UnitCanUse(source, SID_REND) && !HexLordGlobalConst.normalAttackForbid) {
                 if (GetUnitAbilityLevel(tar, BID_REND) == 0) {
-                    IssueTargetOrderById(source, SpellData[SID_REND].oid, tar);
+                    IssueTargetOrderById(source, SpellData.inst(SID_REND, SCOPE_PREFIX).oid, tar);
                     state = 1;
                 }
             }
             // mortal strike: rend about to expire
             if (state == 0 && UnitCanUse(source, SID_MORTAL_STRIKE) && !HexLordGlobalConst.normalAttackForbid) {
-                IssueTargetOrderById(source, SpellData[SID_MORTAL_STRIKE].oid, tar);
+                IssueTargetOrderById(source, SpellData.inst(SID_MORTAL_STRIKE, SCOPE_PREFIX).oid, tar);
                 state = 1;
             }
             // execute: when > 16
             if (state == 0 && !HexLordGlobalConst.normalAttackForbid) {
                 if (GetUnitValour(source) >= BM_VALOUR_MAX - 2) {
-                    IssueTargetOrderById(source, SpellData[SID_EXECUTE].oid, tar);
+                    IssueTargetOrderById(source, SpellData.inst(SID_EXECUTE, SCOPE_PREFIX).oid, tar);
                     state = 1;
                 }
             }
             // heroic strike: MANA% > BOSS HP% - 10 + Rend Cost
-            if (UnitCanUse(source, SID_HEROIC_STRIKE) && GetUnitMana(source) > SpellData[SID_REND].Cost(GetUnitAbilityLevel(source, SID_REND))) {
+            if (UnitCanUse(source, SID_HEROIC_STRIKE) && GetUnitMana(source) > SpellData.inst(SID_REND, SCOPE_PREFIX).Cost(GetUnitAbilityLevel(source, SID_REND))) {
                 if (!BladeMasterIsHSOn(source)) {
-                    IssueImmediateOrderById(source, SpellData[SID_HEROIC_STRIKE].oid);
+                    IssueImmediateOrderById(source, SpellData.inst(SID_HEROIC_STRIKE, SCOPE_PREFIX).oid);
                 }
             } else {
                 if (BladeMasterIsHSOn(source)) {
-                    IssueImmediateOrderById(source, SpellData[SID_HEROIC_STRIKE].oid);
+                    IssueImmediateOrderById(source, SpellData.inst(SID_HEROIC_STRIKE, SCOPE_PREFIX).oid);
                 }
             }
             // attack
@@ -1240,7 +1240,7 @@ constant real AIACTION_INTERVAL = 0.33;
                 }
                 if (!flag) {
                     if (GetDistance.units2d(source, attacker) < FrostMageGetFrostNovaAOE(GetUnitAbilityLevel(source, SID_FROST_NOVA))) {
-                        IssueImmediateOrderById(source, SpellData[SID_FROST_NOVA].oid);
+                        IssueImmediateOrderById(source, SpellData.inst(SID_FROST_NOVA, SCOPE_PREFIX).oid);
                         state = 1;
                     } else {
                         IssuePointOrderById(source, OID_MOVE, GetUnitX(attacker), GetUnitY(attacker)); 
@@ -1271,7 +1271,7 @@ constant real AIACTION_INTERVAL = 0.33;
                     }
                 }
                 if (!flag) {
-                    IssueTargetOrderById(source, SpellData[SID_SPELL_TRANSFER].oid, ot);
+                    IssueTargetOrderById(source, SpellData.inst(SID_SPELL_TRANSFER, SCOPE_PREFIX).oid, ot);
                     state = 1;
                 }
             }
@@ -1279,7 +1279,7 @@ constant real AIACTION_INTERVAL = 0.33;
             if (state == 0 && UnitCanUse(source, SID_POLYMORPH)) {
                 ot = MobList.getChanneling();
                 if (ot != null) {
-                    IssueTargetOrderById(source, SpellData[SID_POLYMORPH].oid, ot);
+                    IssueTargetOrderById(source, SpellData.inst(SID_POLYMORPH, SCOPE_PREFIX).oid, ot);
                     state = 1;
                 }
             }
@@ -1296,13 +1296,13 @@ constant real AIACTION_INTERVAL = 0.33;
                     i += 1;
                 }
                 if (!flag) {
-                    IssuePointOrderById(source, SpellData[SID_BLIZZARD].oid, GetUnitX(ot), GetUnitY(ot));
+                    IssuePointOrderById(source, SpellData.inst(SID_BLIZZARD, SCOPE_PREFIX).oid, GetUnitX(ot), GetUnitY(ot));
                     state = 1;
                 }
             }
             // frost bolt
             if (state == 0 && UnitCanUse(source, SID_FROST_BOLT)) {
-                IssueTargetOrderById(source, SpellData[SID_FROST_BOLT].oid, MobList.getLowestHP());
+                IssueTargetOrderById(source, SpellData.inst(SID_FROST_BOLT, SCOPE_PREFIX).oid, MobList.getLowestHP());
                 state = 1;
             }            
             // attack
@@ -1326,7 +1326,7 @@ constant real AIACTION_INTERVAL = 0.33;
             if (ot == null) {
                 ot = MobList.getLowestHP();
             }
-            IssueTargetOrderById(source, SpellData[SID_EARTH_SHOCK].oid, ot);
+            IssueTargetOrderById(source, SpellData.inst(SID_EARTH_SHOCK, SCOPE_PREFIX).oid, ot);
             state = 1;
         }
         if (state == 0 && !IsUnitChanneling(source)) {
@@ -1334,7 +1334,7 @@ constant real AIACTION_INTERVAL = 0.33;
             if (UnitCanUse(source, SID_EARTH_SHOCK)) {
                 ot = MobList.getChanneling();
                 if (ot != null) {
-                    IssueTargetOrderById(source, SpellData[SID_EARTH_SHOCK].oid, ot);
+                    IssueTargetOrderById(source, SpellData.inst(SID_EARTH_SHOCK, SCOPE_PREFIX).oid, ot);
                     state = 1;
                 }
             }
@@ -1361,13 +1361,13 @@ constant real AIACTION_INTERVAL = 0.33;
                     }
                 }
                 if (!flag) {
-                    IssueTargetOrderById(source, SpellData[SID_PURGE].oid, ot);
+                    IssueTargetOrderById(source, SpellData.inst(SID_PURGE, SCOPE_PREFIX).oid, ot);
                     state = 1;
                 }
             }
             // ascendance: use when ready
             if (state == 0 && UnitCanUse(source, SID_ASCENDANCE)) {
-                IssueImmediateOrderById(source, SpellData[SID_ASCENDANCE].oid);
+                IssueImmediateOrderById(source, SpellData.inst(SID_ASCENDANCE, SCOPE_PREFIX).oid);
                 state = 1;
             }
             // totem
@@ -1377,10 +1377,10 @@ constant real AIACTION_INTERVAL = 0.33;
                     if (GetUnitManaPercent(source) < GetUnitLifePercent(whichBoss) - 10) {
                         if (EarthBinderGetCurrentTotem(source) != SID_TORRENT_TOTEM) {
                             if (UnitCanUse(source, SID_PURGE)) {
-                                IssueTargetOrderById(source, SpellData[SID_PURGE].oid, source);
+                                IssueTargetOrderById(source, SpellData.inst(SID_PURGE, SCOPE_PREFIX).oid, source);
                             }
                         } else if (UnitCanUse(source, SID_TORRENT_TOTEM)) {
-                            IssuePointOrderById(source, SpellData[SID_TORRENT_TOTEM].oid, GetUnitX(source) - 128.0, GetUnitY(source) - 128.0);
+                            IssuePointOrderById(source, SpellData.inst(SID_TORRENT_TOTEM, SCOPE_PREFIX).oid, GetUnitX(source) - 128.0, GetUnitY(source) - 128.0);
                         }
                         state = 1;
                     }
@@ -1410,13 +1410,13 @@ constant real AIACTION_INTERVAL = 0.33;
                         } else {
                             if (EarthBinderGetCurrentTotem(source) != SID_EARTH_BIND_TOTEM) {
                                 if (GetUnitAbilityLevel(source, BID_EARTH_SHOCK_IMPROVED) > 0) {
-                                    IssueTargetOrderById(source, SpellData[SID_EARTH_SHOCK].oid, MobList.getLowestHP());
+                                    IssueTargetOrderById(source, SpellData.inst(SID_EARTH_SHOCK, SCOPE_PREFIX).oid, MobList.getLowestHP());
                                 } else if (UnitCanUse(source, SID_EARTH_SHOCK)) {
-                                    IssueTargetOrderById(source, SpellData[SID_EARTH_SHOCK].oid, MobList.getLowestHP());
+                                    IssueTargetOrderById(source, SpellData.inst(SID_EARTH_SHOCK, SCOPE_PREFIX).oid, MobList.getLowestHP());
                                 }
                             } else {
                                 if (UnitCanUse(source, SID_EARTH_BIND_TOTEM)) {
-                                    IssuePointOrderById(source, SpellData[SID_EARTH_BIND_TOTEM].oid, GetUnitX(tar) - 128.0, GetUnitY(tar) - 128.0);
+                                    IssuePointOrderById(source, SpellData.inst(SID_EARTH_BIND_TOTEM, SCOPE_PREFIX).oid, GetUnitX(tar) - 128.0, GetUnitY(tar) - 128.0);
                                 }
                             }
                             state = 1;
@@ -1427,12 +1427,12 @@ constant real AIACTION_INTERVAL = 0.33;
                     if (!EarthBinderHasLightningTotem(source)) {
                         if (EarthBinderGetCurrentTotem(source) != SID_LIGHTNING_TOTEM) {
                             if (UnitCanUse(source, SID_STORM_LASH)) {
-                                IssueTargetOrderById(source, SpellData[SID_STORM_LASH].oid, MobList.getLowestHP());
+                                IssueTargetOrderById(source, SpellData.inst(SID_STORM_LASH, SCOPE_PREFIX).oid, MobList.getLowestHP());
                             }
                         } else {
                             if (UnitCanUse(source, SID_LIGHTNING_TOTEM)) {
                                 tar = MobList.getLowestHP();
-                                IssuePointOrderById(source, SpellData[SID_LIGHTNING_TOTEM].oid, GetUnitX(tar) - 128.0, GetUnitY(tar) - 128.0);
+                                IssuePointOrderById(source, SpellData.inst(SID_LIGHTNING_TOTEM, SCOPE_PREFIX).oid, GetUnitX(tar) - 128.0, GetUnitY(tar) - 128.0);
                             }
                         }
                         state = 1;
@@ -1441,7 +1441,7 @@ constant real AIACTION_INTERVAL = 0.33;
             }
             // storm lash: MANA >= BOSS HP - 10
             if ((state == 0 || state == 2) && UnitCanUse(source, SID_STORM_LASH)) {
-                IssueTargetOrderById(source, SpellData[SID_STORM_LASH].oid, MobList.getLowestHP());
+                IssueTargetOrderById(source, SpellData.inst(SID_STORM_LASH, SCOPE_PREFIX).oid, MobList.getLowestHP());
                 state = 1;
             }
             // attack
@@ -1467,7 +1467,7 @@ constant real AIACTION_INTERVAL = 0.33;
                         ot = AggroList[MobList.units[i]].getFirst();
                         if (IsUnit(source, ot)) {
                             flag = false;
-                            IssueImmediateOrderById(source, SpellData[SID_STEALTH].oid);
+                            IssueImmediateOrderById(source, SpellData.inst(SID_STEALTH, SCOPE_PREFIX).oid);
                             state = 1;
                         }
                     }
@@ -1476,16 +1476,16 @@ constant real AIACTION_INTERVAL = 0.33;
             }
             // blade flurry: use when ready
             if (state == 0 && UnitCanUse(source, SID_BLADE_FLURRY) && !IsUnitStealth(source) && !HexLordGlobalConst.normalAttackForbid) {
-                IssueImmediateOrderById(source, SpellData[SID_BLADE_FLURRY].oid);
+                IssueImmediateOrderById(source, SpellData.inst(SID_BLADE_FLURRY, SCOPE_PREFIX).oid);
                 state = 1;
             }
             // stealth abilities
             if (state == 0 && IsUnitStealth(source) && !HexLordGlobalConst.normalAttackForbid) {
                 tar = MobList.getLowestHP();
                 if (GetUnitMana(tar) == 0) {
-                    IssueTargetOrderById(source, SpellData[SID_AMBUSH].oid, tar);
+                    IssueTargetOrderById(source, SpellData.inst(SID_AMBUSH, SCOPE_PREFIX).oid, tar);
                 } else {
-                    IssueTargetOrderById(source, SpellData[SID_GARROTE].oid, tar);
+                    IssueTargetOrderById(source, SpellData.inst(SID_GARROTE, SCOPE_PREFIX).oid, tar);
                 }
                 state = 1;
             }
@@ -1493,20 +1493,20 @@ constant real AIACTION_INTERVAL = 0.33;
             if (state == 0 && UnitCanUse(source, SID_ASSAULT) && !HexLordGlobalConst.normalAttackForbid) {
                 ot = MobList.getChanneling();
                 if (ot != null) {
-                    IssueTargetOrderById(source, SpellData[SID_ASSAULT].oid, ot);
+                    IssueTargetOrderById(source, SpellData.inst(SID_ASSAULT, SCOPE_PREFIX).oid, ot);
                     state = 1;
                 }
             }
             // eviscerate: when 5*
             if (state == 0 && UnitCanUse(source, SID_EVISCERATE) && !HexLordGlobalConst.normalAttackForbid) {
                 if (ComboPoints[source].n == 5 && GetUnitManaPercent(source) >= 25) {
-                    IssueTargetOrderById(source, SpellData[SID_EVISCERATE].oid, MobList.getLowestHP());
+                    IssueTargetOrderById(source, SpellData.inst(SID_EVISCERATE, SCOPE_PREFIX).oid, MobList.getLowestHP());
                     state = 1;
                 }
             }
             // sinister strike
             if (state == 0 && UnitCanUse(source, SID_SINISTER_STRIKE) && GetUnitManaPercent(source) >= 40 && !HexLordGlobalConst.normalAttackForbid) {
-                IssueTargetOrderById(source, SpellData[SID_SINISTER_STRIKE].oid, MobList.getLowestHP());
+                IssueTargetOrderById(source, SpellData.inst(SID_SINISTER_STRIKE, SCOPE_PREFIX).oid, MobList.getLowestHP());
                 state = 1;
             }
             // attack
@@ -1530,7 +1530,7 @@ constant real AIACTION_INTERVAL = 0.33;
                 ot = MobList.getChanneling();
                 if (ot != null) {
                     if (GetDistance.units2d(source, ot) < HereticGetTerrorAOE(GetUnitAbilityLevel(source, SID_TERROR))) {
-                        IssueImmediateOrderById(source, SpellData[SID_TERROR].oid);
+                        IssueImmediateOrderById(source, SpellData.inst(SID_TERROR, SCOPE_PREFIX).oid);
                     } else {
                         IssuePointOrderById(source, OID_MOVE, GetUnitX(ot), GetUnitY(ot)); 
                     }
@@ -1549,7 +1549,7 @@ constant real AIACTION_INTERVAL = 0.33;
                     }
                     if (!flag) {
                         if (GetDistance.units2d(source, tar) < HereticGetTerrorAOE(GetUnitAbilityLevel(source, SID_TERROR))) {
-                            IssueImmediateOrderById(source, SpellData[SID_TERROR].oid);
+                            IssueImmediateOrderById(source, SpellData.inst(SID_TERROR, SCOPE_PREFIX).oid);
                         } else {
                             IssuePointOrderById(source, OID_MOVE, GetUnitX(tar), GetUnitY(tar)); 
                         }
@@ -1559,7 +1559,7 @@ constant real AIACTION_INTERVAL = 0.33;
             }
             // death!
             if (state == 0 && UnitCanUse(source, SID_DEATH)) {
-                IssueTargetOrderById(source, SpellData[SID_DEATH].oid, MobList.getLowestHP());
+                IssueTargetOrderById(source, SpellData.inst(SID_DEATH, SCOPE_PREFIX).oid, MobList.getLowestHP());
                 state = 1;
             }
             // pain on each target
@@ -1569,7 +1569,7 @@ constant real AIACTION_INTERVAL = 0.33;
                 while (i < MobList.n && flag) {
                     if (!IsUnitUseless(MobList.units[i])) {
                         if (GetUnitAbilityLevel(MobList.units[i], BID_PAIN) == 0) {
-                            IssueTargetOrderById(source, SpellData[SID_PAIN].oid, MobList.units[i]);
+                            IssueTargetOrderById(source, SpellData.inst(SID_PAIN, SCOPE_PREFIX).oid, MobList.units[i]);
                             state = 1;
                             flag = false;
                         }
@@ -1586,17 +1586,17 @@ constant real AIACTION_INTERVAL = 0.33;
                     flag = (GetUnitManaPercent(source) > 10);
                 }
                 if (flag) {
-                    r0 = SpellData[SID_PAIN].Cost(GetUnitAbilityLevel(source, SID_PAIN));
-                    r0 += SpellData[SID_MARROW_SQUEEZE].Cost(GetUnitAbilityLevel(source, SID_MARROW_SQUEEZE));
-                    r0 += SpellData[SID_MIND_FLAY].Cost(GetUnitAbilityLevel(source, SID_MIND_FLAY));
+                    r0 = SpellData.inst(SID_PAIN, SCOPE_PREFIX).Cost(GetUnitAbilityLevel(source, SID_PAIN));
+                    r0 += SpellData.inst(SID_MARROW_SQUEEZE, SCOPE_PREFIX).Cost(GetUnitAbilityLevel(source, SID_MARROW_SQUEEZE));
+                    r0 += SpellData.inst(SID_MIND_FLAY, SCOPE_PREFIX).Cost(GetUnitAbilityLevel(source, SID_MIND_FLAY));
                     if (GetUnitMana(source) >= r0 && UnitCanUse(source, SID_MARROW_SQUEEZE)) {
-                        IssueTargetOrderById(source, SpellData[SID_MARROW_SQUEEZE].oid, MobList.getLowestHP());
+                        IssueTargetOrderById(source, SpellData.inst(SID_MARROW_SQUEEZE, SCOPE_PREFIX).oid, MobList.getLowestHP());
                         state = 1;
                     }
                 }
                 if (state == 0) {
                     if (UnitCanUse(source, SID_MIND_FLAY)) {
-                        IssueTargetOrderById(source, SpellData[SID_MIND_FLAY].oid, MobList.getLowestHP());
+                        IssueTargetOrderById(source, SpellData.inst(SID_MIND_FLAY, SCOPE_PREFIX).oid, MobList.getLowestHP());
                         state = 1;
                     }
                 }

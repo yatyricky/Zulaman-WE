@@ -18,7 +18,7 @@ library Abomination requires DamageSystem {
             for (0 <= i< PlayerUnits.n) {
                 if (GetDistance.units(u, PlayerUnits.units[i]) <= AbyssArchonGlobal.abominationAOE) {
                     amt = GetUnitState(PlayerUnits.units[i], UNIT_STATE_MAX_LIFE) * 0.25;
-                    DamageTarget(u, PlayerUnits.units[i], amt, SpellData[SID_SUMMON_ABOMINATION].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+                    DamageTarget(u, PlayerUnits.units[i], amt, SpellData.inst(SID_SUMMON_ABOMINATION, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS);
 
                     buf = Buff.cast(u, PlayerUnits.units[i], BID_SUMMON_ABOMINATION);
                     buf.bd.tick = -1;
@@ -35,7 +35,7 @@ library Abomination requires DamageSystem {
             for (0 <= i< MobList.n) {
                 if (!IsUnit(MobList.units[i], u) && GetDistance.units(u, MobList.units[i]) <= AbyssArchonGlobal.abominationAOE) {
                     amt = GetUnitState(MobList.units[i], UNIT_STATE_MAX_LIFE) * 0.05;
-                    DamageTarget(u, MobList.units[i], amt, SpellData[SID_SUMMON_ABOMINATION].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+                    DamageTarget(u, MobList.units[i], amt, SpellData.inst(SID_SUMMON_ABOMINATION, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS);
 
                     buf = Buff.cast(u, MobList.units[i], BID_SUMMON_ABOMINATION);
                     buf.bd.tick = -1;

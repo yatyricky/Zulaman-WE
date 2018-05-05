@@ -25,7 +25,7 @@ library Mangle requires BuffSystem, SpellEvent, UnitProperty, ClawDruidGlobal, A
             dmg *= 1.2;
         }
         
-        DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, dmg, SpellData[SID_MANGLE].name, true, true, true, WEAPON_TYPE_METAL_HEAVY_BASH);
+        DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, dmg, SpellData.inst(SID_MANGLE, SCOPE_PREFIX).name, true, true, true, WEAPON_TYPE_METAL_HEAVY_BASH);
         AggroTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, dmg * 5.0);
         
         AddTimedEffect.atUnit(ART_BLEED, SpellEvent.TargetUnit, "origin", 0.2);

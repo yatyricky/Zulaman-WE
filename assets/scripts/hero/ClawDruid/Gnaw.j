@@ -31,7 +31,7 @@ library Gnaw requires SpellEvent, GroupUtils, Rabies {
                         
                         AddTimedLight.atUnits("DRAL", SpellEvent.TargetUnit, tu, 0.5);                 
                     }
-                    DamageTarget(SpellEvent.CastingUnit, tu, buf.bd.r0 * buf.bd.i0, SpellData[SIDRABIES].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
+                    DamageTarget(SpellEvent.CastingUnit, tu, buf.bd.r0 * buf.bd.i0, SpellData.inst(SIDRABIES, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS);
                     regen += DamageResult.amount;
                     manaregen += returnManaRegen(lvl);
 //BJDebugMsg("cannot understand");
@@ -42,7 +42,7 @@ library Gnaw requires SpellEvent, GroupUtils, Rabies {
                 GroupRemoveUnit(ENUM_GROUP, tu);
                 tu = FirstOfGroup(ENUM_GROUP);
             }
-            HealTarget(SpellEvent.CastingUnit, SpellEvent.CastingUnit, regen, SpellData[SID_FERAL_GNAW].name, -3.0);
+            HealTarget(SpellEvent.CastingUnit, SpellEvent.CastingUnit, regen, SpellData.inst(SID_FERAL_GNAW, SCOPE_PREFIX).name, -3.0);
             ModUnitMana(SpellEvent.CastingUnit, manaregen);
             AddTimedEffect.atUnit(ART_HEAL, SpellEvent.CastingUnit, "origin", 0.2);
             AddTimedEffect.atUnit(ART_MANA, SpellEvent.CastingUnit, "origin", 0.2);

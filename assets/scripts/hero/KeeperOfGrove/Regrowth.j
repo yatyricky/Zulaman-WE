@@ -15,7 +15,7 @@ constant integer BUFF_ID = 'A04I';
     function onRemove1(Buff buf) {}
 
     function onEffect(Buff buf) {
-        HealTarget(buf.bd.caster, buf.bd.target, buf.bd.r0, SpellData[SID_REGROWTH].name, 0.0);
+        HealTarget(buf.bd.caster, buf.bd.target, buf.bd.r0, SpellData.inst(SID_REGROWTH, SCOPE_PREFIX).name, 0.0);
         AddTimedEffect.atUnit(ART_HEAL, buf.bd.target, "origin", 0.3);
     }
 
@@ -34,7 +34,7 @@ constant integer BUFF_ID = 'A04I';
         buf.run();
         
         AddTimedEffect.atUnit(ART, cd.target, "origin", 0.3);
-        HealTarget(cd.caster, cd.target, returnDH(lvl, sp), SpellData[SID_REGROWTH].name, 0.0);
+        HealTarget(cd.caster, cd.target, returnDH(lvl, sp), SpellData.inst(SID_REGROWTH, SCOPE_PREFIX).name, 0.0);
     }
     
     function onChannel() {

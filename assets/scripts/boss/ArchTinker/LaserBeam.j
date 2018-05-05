@@ -43,7 +43,7 @@ constant real VELOCITY = 4.0;
             integer i = 0;
             while (i < PlayerUnits.n) {
                 if (!IsUnitDead(PlayerUnits.units[i]) && !IsUnitDummy(PlayerUnits.units[i]) && GetDistance.unitCoord2d(PlayerUnits.units[i], this.x, this.y) <= DBMArchTinker.laserBeamAOE) {
-                    DamageTarget(this.caster, PlayerUnits.units[i], 200.0, SpellData[SID_LASER_BEAM].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+                    DamageTarget(this.caster, PlayerUnits.units[i], 200.0, SpellData.inst(SID_LASER_BEAM, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS);
                     AddTimedEffect.atUnit(ART_TARGET, PlayerUnits.units[i], "origin", 0.3);
                 }
                 i += 1;
@@ -119,7 +119,7 @@ constant real VELOCITY = 4.0;
                 i = 0;
                 while (i < PlayerUnits.n) {
                     if (!IsUnitDead(PlayerUnits.units[i]) && !IsUnitDummy(PlayerUnits.units[i]) && GetDistance.unitCoord(PlayerUnits.units[i], data.x2, data.y2) < DBMArchTinker.laserBeamAOE) {
-                        DamageTarget(cd.caster, PlayerUnits.units[i], 200.0, SpellData[SID_LASER_BEAM].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+                        DamageTarget(cd.caster, PlayerUnits.units[i], 200.0, SpellData.inst(SID_LASER_BEAM, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS);
                     }
                     i += 1;
                 }

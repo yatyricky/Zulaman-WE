@@ -36,7 +36,7 @@ constant integer BUFF_ID = 'A03D';
         
         private static method healExtras() {
             unit e = GetEnumUnit();
-            HealTarget(thistype.current.u, e, thistype.current.amount, SpellData[SID_BEACON_OF_LIGHT].name, -3.0);
+            HealTarget(thistype.current.u, e, thistype.current.amount, SpellData.inst(SID_BEACON_OF_LIGHT, SCOPE_PREFIX).name, -3.0);
             AddTimedLight.atUnitsZ("HWPB", thistype.current.from, 10.0, e, 10.0, 0.5);
             if (thistype.current.art != "") {
                 AddTimedEffect.atUnit(thistype.current.art, e, "origin", 0.2);
@@ -52,7 +52,7 @@ constant integer BUFF_ID = 'A03D';
             this.from = from;
             this.art = art;
             if (!IsUnit(from, this.primary) && this.primary != null) {
-                HealTarget(this.u, this.primary, this.amount, SpellData[SID_BEACON_OF_LIGHT].name, -3.0);
+                HealTarget(this.u, this.primary, this.amount, SpellData.inst(SID_BEACON_OF_LIGHT, SCOPE_PREFIX).name, -3.0);
                 AddTimedLight.atUnitsZ("HWPB", from, 10.0, this.primary, 10.0, 0.5);
                 if (art != "") {
                     AddTimedEffect.atUnit(art, this.primary, "origin", 0.2);

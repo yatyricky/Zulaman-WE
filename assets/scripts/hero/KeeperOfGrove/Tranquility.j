@@ -20,7 +20,7 @@ constant integer BUFF_ID = 'A04K';
         real amt = returnHeal(GetUnitAbilityLevel(cd.caster, SID_TRANQUILITY), UnitProp.inst(cd.caster, SCOPE_PREFIX).SpellPower());
         while (i < PlayerUnits.n) {
             if (GetDistance.unitCoord2d(PlayerUnits.units[i], GetUnitX(cd.caster), GetUnitY(cd.caster)) < 1200.0 && !IsUnitDead(PlayerUnits.units[i])) {
-                HealTarget(cd.caster, PlayerUnits.units[i], amt, SpellData[SID_TRANQUILITY].name, 0.0);
+                HealTarget(cd.caster, PlayerUnits.units[i], amt, SpellData.inst(SID_TRANQUILITY, SCOPE_PREFIX).name, 0.0);
                 ModUnitMana(PlayerUnits.units[i], GetUnitState(PlayerUnits.units[i], UNIT_STATE_MAX_MANA) * 0.0375);
                 AddTimedEffect.atUnit(ART_HEAL, PlayerUnits.units[i], "origin", 0.5);
                 //AddTimedEffect.atUnit(ART_MANA, PlayerUnits.units[i], "origin", 0.5);
@@ -75,7 +75,7 @@ constant integer BUFF_ID = 'A04K';
     function onEndCast() {
         SetPlayerAbilityAvailable(GetOwningPlayer(SpellEvent.CastingUnit), SID_TRANQUILITY, false);
         SetPlayerAbilityAvailable(GetOwningPlayer(SpellEvent.CastingUnit), SID_TRANQUILITY_1, true);
-        IssueImmediateOrderById(SpellEvent.CastingUnit, SpellData[SID_TRANQUILITY_1].oid);
+        IssueImmediateOrderById(SpellEvent.CastingUnit, SpellData.inst(SID_TRANQUILITY_1, SCOPE_PREFIX).oid);
         delayedDosth1.start(SpellEvent.CastingUnit);
     }
     

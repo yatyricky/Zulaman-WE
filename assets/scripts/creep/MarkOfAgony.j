@@ -74,7 +74,7 @@ library MarkOfAgony requires DamageSystem {
             if (MarkOfAgony.ht.exists(DamageResult.target)) {
                 data = MarkOfAgony.ht[DamageResult.target];
                 for (0 <= i < data.n) {
-                    DamageTarget(DamageResult.target, data.targets[i], DamageResult.amount * 0.25, SpellData[SID_MARK_OF_AGONY].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+                    DamageTarget(DamageResult.target, data.targets[i], DamageResult.amount * 0.25, SpellData.inst(SID_MARK_OF_AGONY, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS);
                 }
             }
         }

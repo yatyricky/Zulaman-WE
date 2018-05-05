@@ -7,7 +7,7 @@ library NetherBolt requires CastingBar, Projectile, SpellReflection {
             p.reverse();
             return false;
         } else {
-            DamageTarget(p.caster, p.target, p.r0, SpellData[SID_NETHER_BOLT].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
+            DamageTarget(p.caster, p.target, p.r0, SpellData.inst(SID_NETHER_BOLT, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS);
             return true;
         }
     }
@@ -24,7 +24,7 @@ library NetherBolt requires CastingBar, Projectile, SpellReflection {
         p.launch();
 
         amt = GetUnitState(SpellEvent.CastingUnit, UNIT_STATE_MAX_LIFE) * 0.2;
-        DamageTarget(SpellEvent.CastingUnit, SpellEvent.CastingUnit, amt, SpellData[SID_NETHER_BOLT].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+        DamageTarget(SpellEvent.CastingUnit, SpellEvent.CastingUnit, amt, SpellData.inst(SID_NETHER_BOLT, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS);
     }
 
     function onInit() {

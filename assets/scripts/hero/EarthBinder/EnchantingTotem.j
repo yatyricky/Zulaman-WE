@@ -213,7 +213,7 @@ constant integer DURATION = 20;
                     if (efx > 0.75) {efx = 0.75;}
                     AddTimedLight.atUnitsZ("AFOD", this.u, 80.0, tu, 0.0, efx);
                     AddTimedEffect.atUnit(ART_RED_IMPACT, tu, "origin", 0.3);
-                    DamageTarget(this.c, tu, dmg, SpellData[SID_LIGHTNING_TOTEM].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
+                    DamageTarget(this.c, tu, dmg, SpellData.inst(SID_LIGHTNING_TOTEM, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS);
                 }
                 this.count -= 1;
             } else {

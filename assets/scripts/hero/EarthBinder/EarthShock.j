@@ -28,7 +28,7 @@ library EarthShock requires DamageSystem, SpellData, BuffSystem {
             buf.destroy();
         }
         
-        DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, dmg, SpellData[SID_EARTH_SHOCK].name, false, true, false, WEAPON_TYPE_WHOKNOWS);
+        DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, dmg, SpellData.inst(SID_EARTH_SHOCK, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS);
         CounterSpell(SpellEvent.TargetUnit);
         if (GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_ENCHANTED_TOTEM) > 0) {
             p = GetOwningPlayer(SpellEvent.CastingUnit);

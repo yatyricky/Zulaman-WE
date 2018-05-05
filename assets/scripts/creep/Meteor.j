@@ -26,7 +26,7 @@ library Meteor requires DamageSystem {
             damage /= count;
             for (0 <= i < PlayerUnits.n) {
                 if (GetDistance.unitCoord(PlayerUnits.units[i], this.x, this.y) < 450.0) {
-                    DamageTarget(this.caster, PlayerUnits.units[i], damage, SpellData[SID_METEOR].name, true, false, false, WEAPON_TYPE_WHOKNOWS);
+                    DamageTarget(this.caster, PlayerUnits.units[i], damage, SpellData.inst(SID_METEOR, SCOPE_PREFIX).name, true, false, false, WEAPON_TYPE_WHOKNOWS);
                 }
             }
             AddTimedEffect.atCoord(ART_CRATER, this.x, this.y, 0.7);

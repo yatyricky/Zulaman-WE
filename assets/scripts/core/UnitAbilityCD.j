@@ -92,8 +92,8 @@ library UnitAbilityCD requires TimerUtils, Integer, ZAMCore {
         }
         
         static method start(unit u, integer abil) {
-            //BJDebugMsg("Making " + ID2S(abil) + " cd, for " + R2S(SpellData[abil].cd) + " secs");
-            thistype.make(u, abil, SpellData[abil].CD(GetUnitAbilityLevel(u, abil)));
+            //BJDebugMsg("Making " + ID2S(abil) + " cd, for " + R2S(SpellData.inst(abil, SCOPE_PREFIX).cd) + " secs");
+            thistype.make(u, abil, SpellData.inst(abil, SCOPE_PREFIX).CD(GetUnitAbilityLevel(u, abil)));
         }
         
         static method isCooling(unit u, integer abil) -> boolean {

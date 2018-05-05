@@ -629,7 +629,7 @@ constant integer COMBAT_LOG_MAX = 20;
                                           */ + R2S(GetGameTime()) + "\",\"" /*
                                           */ + GetUnitNameEx(SpellEvent.CastingUnit) + "\",\"" /*
                                           */ + GetUnitNameEx(SpellEvent.TargetUnit) + "\",\"" /*
-                                          */ + SpellData[SpellEvent.AbilityId].name + "\"]";
+                                          */ + SpellData.inst(SpellEvent.AbilityId, SCOPE_PREFIX).name + "\"]";
         } else if (eventType == 4) {
             combatLogAll[combatLogAllIndex] = "[\"combat\",\"" + R2S(GetGameTime())+ "\"]";
         } else {

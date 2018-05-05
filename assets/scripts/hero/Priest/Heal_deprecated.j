@@ -7,7 +7,7 @@ constant string  ART  = "Abilities\\Spells\\Demon\\DarkPortal\\DarkPortalTarget.
         real amt = (GetUnitAbilityLevel(caster, SID_HEAL) * 150 + UnitProp.inst(caster, SCOPE_PREFIX).SpellPower()) * portion;
         integer count;
         AddTimedEffect.atUnit(ART, target, "origin", 0.3);
-        HealTarget(caster, target, amt, SpellData[SID_HEAL].name, 0.0);
+        HealTarget(caster, target, amt, SpellData.inst(SID_HEAL, SCOPE_PREFIX).name, 0.0);
         count = 0;
         while (i < PlayerUnits.n) {  
             if (GetDistance.units2d(target, PlayerUnits.units[i]) < 301.0) {
@@ -19,7 +19,7 @@ constant string  ART  = "Abilities\\Spells\\Demon\\DarkPortal\\DarkPortalTarget.
         i = 0;
         while (i < PlayerUnits.n) {  
             if (GetDistance.units2d(target, PlayerUnits.units[i]) < 301.0) {
-                HealTarget(caster, PlayerUnits.units[i], amt, SpellData[SID_HEAL].name, -3.0);
+                HealTarget(caster, PlayerUnits.units[i], amt, SpellData.inst(SID_HEAL, SCOPE_PREFIX).name, -3.0);
                 AddTimedEffect.atUnit(ART, PlayerUnits.units[i], "origin", 0.3);
             }
             i += 1;

@@ -47,7 +47,7 @@ constant string  ART  = "Abilities\\Spells\\Human\\Invisibility\\InvisibilityTar
                     cost = 0.1;
                 }
                 amt = (returnHealPercent(ilvl) * GetUnitState(DamageResult.target, UNIT_STATE_MAX_LIFE)) * (cost / 0.1);
-                HealTarget(DamageResult.target, DamageResult.target, amt, SpellData[SID_NATURAL_REFLEX].name, -3.0);
+                HealTarget(DamageResult.target, DamageResult.target, amt, SpellData.inst(SID_NATURAL_REFLEX, SCOPE_PREFIX).name, -3.0);
                 AddTimedEffect.atUnit(ART_HEAL, DamageResult.target, "origin", 0.2);
                 if (GetUnitAbilityLevel(DamageResult.target, BUFF_ID) <= 0) {
                     ModUnitMana(DamageResult.target, 0.0 - GetUnitState(DamageResult.target, UNIT_STATE_MAX_MANA) * cost);

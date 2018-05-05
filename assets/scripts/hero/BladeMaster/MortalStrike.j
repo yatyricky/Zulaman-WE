@@ -45,7 +45,7 @@ constant string  ART_CASTER  = "Abilities\\Spells\\Other\\Andt\\Andt.mdl";
         
         ilvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_MORTAL_STRIKE);
         dmg = returnDamage(ilvl, UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).AttackPower());
-        DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, dmg, SpellData[SID_MORTAL_STRIKE].name, true, true, true, WEAPON_TYPE_METAL_HEAVY_SLICE);
+        DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, dmg, SpellData.inst(SID_MORTAL_STRIKE, SCOPE_PREFIX).name, true, true, true, WEAPON_TYPE_METAL_HEAVY_SLICE);
         if (DamageResult.isHit) {            
             AddTimedEffect.atUnit(ART_TARGET, SpellEvent.TargetUnit, "origin", 0.2);
             // refresh Rend

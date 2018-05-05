@@ -21,8 +21,8 @@ library VoodooDoll requires DamageSystem {
         static method run() {
             thistype this = GetTimerData(GetExpiredTimer());
             if (this.illusion != null) {
-                DamageTarget(this.target, this.illusion, GetUnitState(this.illusion, UNIT_STATE_MAX_LIFE) * 0.1, SpellData[SID_VOODOO_DOLL].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
-                // HealTarget(this.caster, this.illusion, GetUnitState(this.illusion, UNIT_STATE_MAX_LIFE) * 0.15, SpellData[SID_VOODOO_DOLL].name, 0.0);
+                DamageTarget(this.target, this.illusion, GetUnitState(this.illusion, UNIT_STATE_MAX_LIFE) * 0.1, SpellData.inst(SID_VOODOO_DOLL, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+                // HealTarget(this.caster, this.illusion, GetUnitState(this.illusion, UNIT_STATE_MAX_LIFE) * 0.15, SpellData.inst(SID_VOODOO_DOLL, SCOPE_PREFIX).name, 0.0);
             }
         }
     
@@ -79,7 +79,7 @@ library VoodooDoll requires DamageSystem {
             if (VoodooDoll.ht.exists(DamageResult.target)) {
                 data = VoodooDoll.ht[DamageResult.target];
                 if (!IsUnitDead(data.target)) {
-                    DamageTarget(data.caster, data.target, DamageResult.amount, SpellData[SID_VOODOO_DOLL].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+                    DamageTarget(data.caster, data.target, DamageResult.amount, SpellData.inst(SID_VOODOO_DOLL, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS);
                     AddTimedEffect.atUnit(ART_ARCANE_TOWER_ATTACK, data.target, "chest", 2.5);
                 }
             }

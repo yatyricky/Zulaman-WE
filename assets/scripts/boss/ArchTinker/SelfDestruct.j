@@ -6,7 +6,7 @@ constant string  ART_EXPLOSION  = "Objects\\Spawnmodels\\Other\\NeutralBuildingE
         integer i = 0;
         while (i < PlayerUnits.n) {
             if (!IsUnitDummy(PlayerUnits.units[i]) && !IsUnitDead(PlayerUnits.units[i]) && GetDistance.units2d(cd.caster, PlayerUnits.units[i]) < DBMArchTinker.selfDestructAOE) {
-                DamageTarget(cd.caster, PlayerUnits.units[i], 300.0, SpellData[SID_SELF_DESTRUCT].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+                DamageTarget(cd.caster, PlayerUnits.units[i], 300.0, SpellData.inst(SID_SELF_DESTRUCT, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS);
             }
             i += 1;
         }

@@ -8,7 +8,7 @@ constant real DAMAGE = 500.0;
             p.reverse();
             return false;
         } else {
-            DamageTarget(p.caster, p.target, p.r0, SpellData[SID_FIRE_BALL].name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+            DamageTarget(p.caster, p.target, p.r0, SpellData.inst(SID_FIRE_BALL, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS);
             return true;
         }
     }

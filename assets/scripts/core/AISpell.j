@@ -128,7 +128,7 @@ library AISpell requires SpellData, CastingBar, TimerUtils {
             SetTimerData(this.tm, this);
             this.tab = forWhich;
             this.aid = aid;
-            TimerStart(this.tm, SpellData[aid].cd, false, function thistype.run);
+            TimerStart(this.tm, SpellData.inst(aid, SCOPE_PREFIX).cd, false, function thistype.run);
             return this;
         }
     }
@@ -161,7 +161,7 @@ library AISpell requires SpellData, CastingBar, TimerUtils {
         if (!IsUnitChanneling(u)) {
             aid = AbilityList[GetUnitTypeId(u)].getRandom(u);
             if (aid > 0) {
-                if (GetUnitState(u, UNIT_STATE_MANA) > SpellData[aid].cost) {
+                if (GetUnitState(u, UNIT_STATE_MANA) > SpellData.inst(aid, SCOPE_PREFIX).cost) {
                     return aid;
                 }
             }
@@ -170,7 +170,7 @@ library AISpell requires SpellData, CastingBar, TimerUtils {
     }
 
     function spellEndCast() {
-        if (IsLastSpellSuccess(SpellEvent.CastingUnit) && SpellData[SpellEvent.AbilityId].cd > 0.0) {
+        if (IsLastSpellSuccess(SpellEvent.CastingUnit) && SpellData.inst(SpellEvent.AbilityId, SCOPE_PREFIX).cd > 0.0) {
             UnitSpells.new(SpellEvent.CastingUnit, SpellEvent.AbilityId);
         }
     }
