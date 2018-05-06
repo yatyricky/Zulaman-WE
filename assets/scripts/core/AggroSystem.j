@@ -286,8 +286,8 @@ constant integer MAX_PLAYER_UNITS = 50;
         private static method run() {
             PauseTimer(thistype.tm);
             thistype.done = true;
-            TimerDialogDisplay(thistype.td, false);            
-            ForGroup(PlayerUnits.g, function thistype.resurrect);            
+            TimerDialogDisplay(thistype.td, false);
+            ForGroup(PlayerUnits.g, function thistype.resurrect);
             CheckHeroLevel();
         }
         
@@ -295,7 +295,7 @@ constant integer MAX_PLAYER_UNITS = 50;
             CheckHeroLevel();
             if (thistype.done) {
                 thistype.done = false;
-                TimerDialogSetTitle(thistype.td, "等待复活");
+                TimerDialogSetTitle(thistype.td, "Resurrecting");
                 TimerDialogDisplay(thistype.td, true);
                 TimerStart(thistype.tm, 10.0, false, function thistype.run);
             }
@@ -347,7 +347,8 @@ constant integer MAX_PLAYER_UNITS = 50;
                 combatStateNotifyCallList[i].evaluate();
                 i += 1;
             }
-            BJDebugMsg("|cffffcc00脱离战斗|r");
+            ClearTextMessages();
+            BJDebugMsg("|cffffcc00Combat End|r");
             whichBoss = null;
             PauseTimer(thistype.combatTimer);
             thistype.combatTime = -1.0;
@@ -390,7 +391,8 @@ constant integer MAX_PLAYER_UNITS = 50;
                 combatStateNotifyCallList[i].evaluate();
                 i += 1;
             }
-            BJDebugMsg("|cffffcc00进入战斗|r");            
+            ClearTextMessages();
+            BJDebugMsg("|cffffcc00Combat Start|r");
             thistype.combatTime = 0.01;
             TimerStart(thistype.combatTimer, TIME_TICK, true, function thistype.reorderMobs);
         }

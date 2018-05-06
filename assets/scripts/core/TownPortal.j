@@ -1,6 +1,6 @@
 //! zinc
 library TownPortal requires DebugExporter {
-    public constant integer NUM_PORTALS = 5;
+    public constant integer NUM_PORTALS = 6;
     unit portals[];
     boolean activated[];
 
@@ -15,6 +15,8 @@ library TownPortal requires DebugExporter {
             portals[3] = portal;
         } else if (RectContainsUnit(gg_rct_ActivatePortal4, portal)) {
             portals[4] = portal;
+        } else if (RectContainsUnit(gg_rct_ActivatePortal5, portal)) {
+            portals[5] = portal;
         }
     }
 
@@ -69,6 +71,13 @@ library TownPortal requires DebugExporter {
             SelectUnitForPlayerSingle(u, p);
             RemoveItem(it);
         }
+        if (itid == ITID_PORTAL_5) {
+            SetUnitPosition(u, 7275, 8812);
+            PanCameraToTimedForPlayer(p, 7275, 8812, 1.00);
+            AddTimedEffect.atUnit(ART_MASS_TELEPORT_TARGET, u, "origin", 0.5);
+            SelectUnitForPlayerSingle(u, p);
+            RemoveItem(it);
+        }
         it = null;
         u = null;
         p = null;
@@ -81,6 +90,7 @@ library TownPortal requires DebugExporter {
         trigger trg2;
         trigger trg3;
         trigger trg4;
+        trigger trg5;
         integer i = 0;
         TriggerAnyUnit(EVENT_PLAYER_UNIT_PICKUP_ITEM, function usedTownPortal);
         while (i < NUM_PORTALS) {
@@ -127,11 +137,20 @@ library TownPortal requires DebugExporter {
             }
             return false;
         }));
+        trg5 = CreateTrigger();
+        TriggerRegisterEnterRectSimple(trg5, gg_rct_ActivatePortal5);
+        TriggerAddCondition(trg5, Condition(function() -> boolean {
+            if (GetPidofu(GetTriggerUnit()) < NUMBER_OF_MAX_PLAYERS && activated[5] == false) {
+                activate(ITID_PORTAL_5, 5);
+            }
+            return false;
+        }));
         trg0 = null;
         trg1 = null;
         trg2 = null;
         trg3 = null;
         trg4 = null;
+        trg5 = null;
     }
 }
 //! endzinc
