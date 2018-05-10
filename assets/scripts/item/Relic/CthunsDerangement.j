@@ -110,7 +110,7 @@ constant string  ART  = "Abilities\\Spells\\Undead\\UnholyFrenzy\\UnholyFrenzyTa
                 i = 0;
                 while (i < 6) {
                     tmpi = UnitItemInSlot(u, i);
-                    if (GetItemTypeId(tmpi) == ITID_CTHUNS_DERANGEMENT) {
+                    if (GetItemTypeId(tmpi) == ITID_DERANGEMENT_OF_CTHUN) {
                         ipmt.evaluate(u, tmpi, -1);
                         ipmt.evaluate(u, tmpi, 1);
                     }
@@ -123,7 +123,7 @@ constant string  ART  = "Abilities\\Spells\\Undead\\UnholyFrenzy\\UnholyFrenzyTa
 
     function onInit() {
         ht = HandleTable.create();
-        RegisterItemPropMod(ITID_CTHUNS_DERANGEMENT, action);
+        RegisterItemPropMod(ITID_DERANGEMENT_OF_CTHUN, action);
         RegisterSpellEffectResponse(SID_CTHUNS_DERANGEMENT, onCast);
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
         BuffType.register(BUFF_ID1, BUFF_PHYX, BUFF_POS);

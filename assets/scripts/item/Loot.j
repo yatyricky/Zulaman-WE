@@ -160,14 +160,14 @@ constant real RP_COMMON = 0.0;
         
         relic.add(ITID_BREATH_OF_THE_DYING, 10);
         relic.add(ITID_CALL_TO_ARMS, 10);
-        relic.add(ITID_CTHUNS_DERANGEMENT, 10);
+        relic.add(ITID_DERANGEMENT_OF_CTHUN, 10);
         relic.add(ITID_ENIGMA, 10);
         relic.add(ITID_INFINITY, 10);
         relic.add(ITID_INSIGHT, 10);
-        relic.add(ITID_TYRAELS_MIGHT, 10);
+        relic.add(ITID_MIGHT_OF_THE_ANGEL_OF_JUSTICE, 10);
         relic.add(ITID_VOODOO_VIAL, 10);
-        relic.add(ITID_WOE_STAVE, 10);
-        relic.add(ITID_WIND_FORCE, 10);
+        relic.add(ITID_WOESTAVE, 10);
+        relic.add(ITID_WINDFORCE, 10);
 
         rare.add(ITID_ARANS_SOOTHING_AGATE, 10);
         rare.add(ITID_BULWARK_OF_THE_AMANI_EMPIRE, 10);

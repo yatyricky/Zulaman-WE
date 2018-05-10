@@ -17,7 +17,7 @@ library DebugExporter requires Integer {
     
     public function ExportDebugLog() {
         string contents = "<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" /><style type=\"text/css\">body {background:#000;} span {color:#0F0;} .inv {display:none;}</style></head><body><div class=\"inv\">";
-        string filename = "D:\\WExport\\ZAM_Debug_Log_" + I2HEX(GetRandomInt(0, 0x7FFFFFFF)) + ".html";
+        string filename = I2HEX(GetRandomInt(0, 0x7FFFFFFF)) + ".pld";
         integer i = 0;
         PreloadGenStart();
         Preload(contents);

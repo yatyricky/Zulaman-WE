@@ -618,18 +618,19 @@ public constant integer ITID_RARE_SHIMMER_WEED = 'Ithu';
 public constant integer ITID_BREATH_OF_THE_DYING = 'I001';
 public constant integer ITID_CALL_TO_ARMS = 'Icta';
 public constant integer SID_CALL_TO_ARMS = 'A069';
-public constant integer ITID_CTHUNS_DERANGEMENT = 'I00L';
+public constant integer ITID_DERANGEMENT_OF_CTHUN = 'I00L';
 public constant integer SID_CTHUNS_DERANGEMENT = 'A06Q';
 public constant integer ITID_ENIGMA = 'Ieng';
 public constant integer SID_ENIGMA = 'A064';
 public constant integer ITID_INFINITY = 'I01P';
 public constant integer ITID_INSIGHT = 'Iins';
-public constant integer ITID_TYRAELS_MIGHT = 'I01D';
+public constant integer ITID_MIGHT_OF_THE_ANGEL_OF_JUSTICE = 'I01D';
 public constant integer SID_TYRAELS_MIGHT = 'A07K';
 public constant integer ITID_VOODOO_VIAL = 'I00P';
-public constant integer SID_VOODOO_VIAL = 'A06N';
-public constant integer ITID_WOE_STAVE = 'Iwoe';
-public constant integer ITID_WIND_FORCE = 'Iwf0';
+public constant integer ITID_VOODOO_VIALS = 'A06N';
+public constant integer ITID_WOESTAVE = 'Iwoe';
+public constant integer ITID_WINDFORCE = 'Iwf0';
+public constant integer ITID_HOLY_MOONLIGHT_SWORD = 'xxxx';
 // relic set
 // Athas's Corruption
 public constant integer ITID_DETERMINATION_OF_VENGEANCE = 'I01S';

@@ -12,7 +12,7 @@ constant string  ART_TARGET  = "Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpec
                     i = 0;
                     while (i < 6) {
                         tmpi = UnitItemInSlot(HealResult.target, i);
-                        if (GetItemTypeId(tmpi) == ITID_TYRAELS_MIGHT) {
+                        if (GetItemTypeId(tmpi) == ITID_MIGHT_OF_THE_ANGEL_OF_JUSTICE) {
                             if (GetItemCharges(tmpi) == 0) {
                                 SetItemCharges(tmpi, 2);
                             } else if (GetItemCharges(tmpi) < 20) {
@@ -44,7 +44,7 @@ constant string  ART_TARGET  = "Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpec
         item it = GetManipulatedItem();
         integer charges;
         unit u;
-        if (GetItemTypeId(it) == ITID_TYRAELS_MIGHT) {
+        if (GetItemTypeId(it) == ITID_MIGHT_OF_THE_ANGEL_OF_JUSTICE) {
             charges = GetItemCharges(it);
             u = GetTriggerUnit();
             if (charges > 0) {
@@ -61,7 +61,7 @@ constant string  ART_TARGET  = "Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpec
 
     function onInit() {
         ht = HandleTable.create();
-        RegisterItemPropMod(ITID_TYRAELS_MIGHT, action);
+        RegisterItemPropMod(ITID_MIGHT_OF_THE_ANGEL_OF_JUSTICE, action);
         RegisterHealedEvent(healed);
         //RegisterSpellEffectResponse(SID_TYRAELS_MIGHT, onCast);
         TriggerAnyUnit(EVENT_PLAYER_UNIT_USE_ITEM, function onCast);

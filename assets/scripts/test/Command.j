@@ -1,5 +1,5 @@
 //! zinc
-library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSystem, IntegerPool, Regeneration, WarlockGlobal, LightningShield, PlayerUnitList {
+library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSystem, IntegerPool, Regeneration, WarlockGlobal, LightningShield, PlayerUnitList, ItemAttributes {
     
     function testStunUnit(string str) {
         unit u; 
@@ -323,6 +323,12 @@ library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSys
         MobInitAllowArea(4);
     }
 
+    function testItemAttributes(string str) {
+        item it;
+        it = CreateItem(ITID_BREATH_OF_THE_DYING, INIT_X, INIT_Y);
+        ItemExAttributes.instantiate(it);
+    }
+
     function getunitlevel(string str) {
         unit u; 
         group g = CreateGroup();
@@ -341,16 +347,16 @@ library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSys
         u = FirstOfGroup(g);
         
         print("==== "+GetUnitNameEx(u)+" ====");
-        print("-- 物理 --");
-        print("攻击: "+I2S(UnitProp.inst(u, SCOPE_PREFIX).APMin()) + " - " + I2S(UnitProp.inst(u, SCOPE_PREFIX).APMax())+" 暴击: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).AttackCrit() * 100) + "%"+" 攻速: "+I2S(UnitProp.inst(u, SCOPE_PREFIX).AttackSpeed() + 100) + "%"+" 命中: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).AttackRate() * 100) + "%");
-        print("-- 法术 --");
-        print("法强: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).SpellPower())+" 法暴: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).SpellCrit() * 100) + "%"+" 法速: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).SpellHaste() * 100) + "%");
-        print("-- 防护 --");
-        print("护甲: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).Armor())+" 躲闪: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).Dodge() * 100) + "%"+" 格挡: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).BlockRate() * 100) + "%("+R2S(UnitProp.inst(u, SCOPE_PREFIX).BlockPoint())+")");
-        print("魔抗: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).SpellTaken() * 100) + "%"+" 易伤: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).DamageTaken() * 100) + "%"+" 致死: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).HealTaken() * 100) + "%");
-        print("-- 其它 --");
-        print("反射: "+I2S(UnitProp.inst(u, SCOPE_PREFIX).SpellReflect())+" 仇恨: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).AggroRate() * 100) + "%"+" 禁用: "+B2S(UnitProp.inst(u, SCOPE_PREFIX).Disabled()));
-        print("回复: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).LifeRegen())+"/"+R2S(UnitProp.inst(u, SCOPE_PREFIX).ManaRegen())+" 速度: "+I2S(UnitProp.inst(u, SCOPE_PREFIX).Speed())+" 伤害: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).DamageDealt() * 100) + "%");
+        print("-- Physics --");
+        print("AP: "+I2S(UnitProp.inst(u, SCOPE_PREFIX).APMin()) + " - " + I2S(UnitProp.inst(u, SCOPE_PREFIX).APMax())+" CRIT: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).AttackCrit() * 100) + "%"+" IAS: "+I2S(UnitProp.inst(u, SCOPE_PREFIX).AttackSpeed() + 100) + "%"+" AR: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).AttackRate() * 100) + "%");
+        print("-- Magic --");
+        print("SP: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).SpellPower())+" SC: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).SpellCrit() * 100) + "%"+" SH: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).SpellHaste() * 100) + "%");
+        print("-- Defense --");
+        print("AM: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).Armor())+" DG: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).Dodge() * 100) + "%"+" BR: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).BlockRate() * 100) + "%("+R2S(UnitProp.inst(u, SCOPE_PREFIX).BlockPoint())+")");
+        print("MDEF: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).SpellTaken() * 100) + "%"+" DT: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).DamageTaken() * 100) + "%"+" HT: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).HealTaken() * 100) + "%");
+        print("-- Miscs --");
+        print("Refl: "+I2S(UnitProp.inst(u, SCOPE_PREFIX).SpellReflect())+" Aggro: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).AggroRate() * 100) + "%"+" Disabled: "+B2S(UnitProp.inst(u, SCOPE_PREFIX).Disabled()));
+        print("Regen: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).LifeRegen())+"/"+R2S(UnitProp.inst(u, SCOPE_PREFIX).ManaRegen())+" Speed: "+I2S(UnitProp.inst(u, SCOPE_PREFIX).Speed())+" Amp: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).DamageDealt() * 100) + "%");
         
         DestroyGroup(g);
     }
@@ -395,6 +401,7 @@ library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSys
         // console[Player(0)].add("testwlk", testwarlock);
         // Console[Player(0)].add("angle", testgetangle);
         Console[Player(0)].add("test", testGeneral);
+        Console[Player(0)].add("zxc", testItemAttributes);
         Console[Player(0)].add("sta", printStats);
     }
 }
