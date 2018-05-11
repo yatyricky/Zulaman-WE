@@ -325,7 +325,6 @@ library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSys
 
     function testItemAttributes(string str) {
         real rnd = GetRandomReal(150000, 220000);
-        print("drop value = "+ R2S(rnd));
         CreateItemEx(ITID_BREATH_OF_THE_DYING, INIT_X, INIT_Y, rnd);
     }
 

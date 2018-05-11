@@ -64,10 +64,12 @@ constant integer MAX_PLAYER_UNITS = 50;
             return -1;
         }
         
-        method aggroBy(unit s, real amt) {
+        method aggroBy(unit s, real amt, string trace) {
             integer index = this.locate(s);
             if (index == -1) {
-                print(SCOPE_PREFIX+".aggroBy unit " + GetUnitNameEx(s)+" is not in list.");
+                if (IsUnitUseless(s) == false) {
+                    print(SCOPE_PREFIX+".aggroBy unit " + GetUnitNameEx(s)+" is not in list. trace: "+ trace);
+                }
             } else {
                 this.aps[index] += amt;
             }
@@ -578,12 +580,12 @@ constant integer MAX_PLAYER_UNITS = 50;
         return AggroList[u].sort();
     }
     
-    public function AggroTarget(unit a, unit b, real amt) {
+    public function AggroTarget(unit a, unit b, real amt, string trace) {
         if (!IsUnitDead(a) && !IsUnitDead(b)) {
             if (MobList.locate(b) == -1) {
                 MobList.add(b);
             }
-            AggroList[b].aggroBy(a, amt * UnitProp.inst(a, SCOPE_PREFIX).AggroRate());
+            AggroList[b].aggroBy(a, amt * UnitProp.inst(a, SCOPE_PREFIX).AggroRate(), "AggroSystem.AggroTarget < " + trace);
         }
         //print(GetUnitName(b)+"'s aggro list of " + GetUnitName(a) + " has increased by " + R2S(amt));
     }
@@ -641,14 +643,14 @@ constant integer MAX_PLAYER_UNITS = 50;
             if (!CanUnitAttack(DamageResult.target) && DamageResult.amount < GetUnitState(DamageResult.target, UNIT_STATE_MAX_LIFE)) {
                 MobList.add(DamageResult.target);
             }
-            AggroTarget(DamageResult.source, DamageResult.target, DamageResult.amount);
+            AggroTarget(DamageResult.source, DamageResult.target, DamageResult.amount, SCOPE_PREFIX + "setAggros");
         }
     }
     
     public function AggroAll(unit a, real amt) {
         integer i = 0;
         while (i < MobList.n) {
-            AggroTarget(a, MobList.units[i], amt / I2R(MobList.n));
+            AggroTarget(a, MobList.units[i], amt / I2R(MobList.n), SCOPE_PREFIX + "AggroAll");
             i += 1;
         }
     }
@@ -663,7 +665,7 @@ constant integer MAX_PLAYER_UNITS = 50;
             while (j < al.aggrosN) {
                 if (al.aggros[j] == a) {
                     //print("Original AP " + R2S(al.aps[j]));
-                    al.aggroBy(a, 0.0 - al.aps[j] * percentage);
+                    al.aggroBy(a, 0.0 - al.aps[j] * percentage, "AggroSystem.AggroClear");
                     //print("After AP " + R2S(al.aps[j]));
                 }
                 j += 1;

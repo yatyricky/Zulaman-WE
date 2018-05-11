@@ -58,6 +58,7 @@ public constant integer ORDER_TYPE_POINT = 2;
 
 // dummy ability
 public constant integer SID_ATTACK_LL = 1;
+public constant integer SID_EXTRA_MAGIC_DAMAGE = 2;
 public constant integer SID_GENERAL_STUN = 'A001';
 public constant integer SID_HAUNT = 'A04A';
 public constant integer SID_HEAL_TESTER = 'A04H';
@@ -628,6 +629,7 @@ public constant integer ITID_BREATH_OF_THE_DYING = 'I001';
 public constant integer BID_BREATH_OF_THE_DYING = 'A063';
 public constant integer ITID_CALL_TO_ARMS = 'Icta';
 public constant integer SID_CALL_TO_ARMS = 'A069';
+public constant integer BID_CALL_TO_ARMS = 'A068';
 public constant integer ITID_DERANGEMENT_OF_CTHUN = 'I00L';
 public constant integer SID_CTHUNS_DERANGEMENT = 'A06Q';
 public constant integer ITID_ENIGMA = 'Ieng';
@@ -864,6 +866,7 @@ public constant string ART_TOME_OF_RETRAINING_CASTER = "Abilities\\Spells\\Items
 public constant string ART_BREATH_OF_FIRE_DAMAGE = "Abilities\\Spells\\Other\\BreathOfFire\\BreathOfFireDamage.mdl";
 public constant string ART_ABOMINATION_EXPLOSION = "Units\\Undead\\Abomination\\AbominationExplosion.mdl";
 public constant string ART_CRIPPLE_TARGET = "Abilities\\Spells\\Undead\\Cripple\\CrippleTarget.mdl";
+public constant string ART_ROAR_CASTER = "Abilities\\Spells\\NightElf\\BattleRoar\\RoarCaster.mdl";
 
 public constant string BTNVolcano = "ReplaceableTextures\\CommandButtons\\BTNVolcano.blp";
 public constant string BTNEarthquake = "ReplaceableTextures\\CommandButtons\\BTNEarthquake.blp";

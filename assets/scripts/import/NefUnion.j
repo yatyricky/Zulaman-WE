@@ -300,8 +300,9 @@ library NefUnion requires TimerUtils {
     public struct DelayTask {
         private timer tm;
         private DelayedTaskExecute response;
-        unit u0;
+        unit u0, u1;
         integer i0;
+        real r0;
         integer data;
         
         private method destroy() {

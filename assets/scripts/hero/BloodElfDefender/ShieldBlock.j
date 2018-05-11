@@ -34,7 +34,7 @@ constant string  ART_REFLECTION  = "Abilities\\Spells\\NightElf\\ThornsAura\\Tho
                 //BJDebugMsg("Exe once!!!");
                 DelayedDamageTarget(DamageResult.target, DamageResult.source, buf.bd.r1, SpellData.inst(SID_SHIELD_BLOCK, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS);
                 AddTimedEffect.atUnit(ART_REFLECTION, DamageResult.source, "origin", 0.5);   
-                AggroTarget(DamageResult.target, DamageResult.source, buf.bd.r1 * 7.0);
+                AggroTarget(DamageResult.target, DamageResult.source, buf.bd.r1 * 7.0, SCOPE_PREFIX);
             } else {
                 //BJDebugMsg("Too far away");
             }

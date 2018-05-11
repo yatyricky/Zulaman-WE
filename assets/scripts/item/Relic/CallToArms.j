@@ -1,40 +1,39 @@
 //! zinc
 library CallToArms requires ItemAttributes, DamageSystem {
-constant string  ART_CASTER  = "Abilities\\Spells\\NightElf\\BattleRoar\\RoarCaster.mdl";
-constant integer BUFF_ID = 'A068';
-    HandleTable ht;
     
     function onEffect(Buff buf) {}
 
     function onRemove(Buff buf) {
         UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModLife(0 - buf.bd.i1);
     }
-
-    function action(unit u, item it, integer fac) {
-        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
-        up.ModAP(20 * fac);
-        up.spellPower += 15.0 * fac;
-        up.lifeRegen += 12.0 * fac;
-        up.ll += 0.07 * fac;
-        if (!ht.exists(u)) {ht[u] = 0;}
-        ht[u] = ht[u] + fac;
-    }
     
     function onCast() {
         integer i = 0;
         Buff buf;
         integer diff;
+        real amp;
+        integer ii = 0;
+        item ti;
+        amp = 0.0;
+        while (ii < 6) {
+            ti = UnitItemInSlot(SpellEvent.CastingUnit, ii);
+            if (ti != null) {
+                amp += ItemExAttributes.getAttributeValue(ti, IATTR_USE_BATTLE, SCOPE_PREFIX+"onCast") * (ItemExAttributes.getAttributeValue(ti, IATTR_LP, SCOPE_PREFIX + "onCast") * 0.33 + 1);
+            }
+            ii += 1;
+        }
+        ti = null;
         while (i < PlayerUnits.n) {
             if (GetDistance.units2d(PlayerUnits.units[i], SpellEvent.CastingUnit) <= 900.0 && !IsUnitDead(PlayerUnits.units[i])) {
-                buf = Buff.cast(SpellEvent.CastingUnit, PlayerUnits.units[i], BUFF_ID);
+                buf = Buff.cast(SpellEvent.CastingUnit, PlayerUnits.units[i], BID_CALL_TO_ARMS);
                 buf.bd.tick = -1;
-                buf.bd.interval = 20.0;
+                buf.bd.interval = 75.0;
                 if (buf.bd.i0 != 6) {
-                    buf.bd.i1 = Rounding(GetUnitState(PlayerUnits.units[i], UNIT_STATE_MAX_LIFE) * 0.12);
+                    buf.bd.i1 = Rounding(GetUnitState(PlayerUnits.units[i], UNIT_STATE_MAX_LIFE) * amp);
                     UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModLife(buf.bd.i1);
                     buf.bd.i0 = 6;
                 } else {
-                    diff = Rounding(GetUnitState(PlayerUnits.units[i], UNIT_STATE_MAX_LIFE) * 0.12);
+                    diff = Rounding(GetUnitState(PlayerUnits.units[i], UNIT_STATE_MAX_LIFE) * amp);
                     UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModLife(diff);
                     buf.bd.i1 += diff;
                 }
@@ -44,27 +43,13 @@ constant integer BUFF_ID = 'A068';
             }
             i += 1;
         }
-        AddTimedEffect.atUnit(ART_CASTER, SpellEvent.CastingUnit, "origin", 1.0);
-    }
-    
-    function ondamaging() {
-        if (DamageResult.abilityName == DAMAGE_NAME_MELEE) {
-            if (ht.exists(DamageResult.source)) {
-                if (ht[DamageResult.source] > 0) {
-                    DamageResult.amount += 30.0;
-                }
-            }
-        }
+        AddTimedEffect.atUnit(ART_ROAR_CASTER, SpellEvent.CastingUnit, "origin", 1.0);
     }
 
     function onInit() {
-        ht = HandleTable.create();
-        RegisterItemPropMod(ITID_CALL_TO_ARMS, action);
         RegisterSpellEffectResponse(SID_CALL_TO_ARMS, onCast);
-        BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
-        RegisterOnDamageEvent(ondamaging);
+        BuffType.register(BID_CALL_TO_ARMS, BUFF_MAGE, BUFF_POS);
     }
-
 
 }
 //! endzinc

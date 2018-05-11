@@ -100,9 +100,9 @@ library SpellData requires Table, Integer {
     
         private static method onInit() {
             thistype.db = Table.create();
-
 SpellData.create(0,"Dummy",0,0,0,0,1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_ATTACK_LL,"Attack LL",0,0,1,0,1,ORDER_TYPE_IMMEDIATE);
+SpellData.create(SID_EXTRA_MAGIC_DAMAGE,"Extra Magic Damage",0,0,0,0,1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_GENERAL_STUN,"General Stun",0,0,1,0,1,ORDER_TYPE_TARGET);
 SpellData.create(SID_HAUNT,"Haunt",0,0,5,852581,1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_HEAL_TESTER,"Heal Tester",0,0,5,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
@@ -293,7 +293,7 @@ SpellData.create(SID_LIGHTS_JUSTICE,"Lights Justice",0,0,1,OrderId("channel"),1,
 SpellData.create(SID_MOROES_LUCKY_GEAR,"Moroes Lucky Gear",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_REFORGED_BADGE_OF_TENACITY,"Reforged Badge of Tenacity",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_TYRAELS_MIGHT,"Tyraels Might",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
-SpellData.create(SID_VOODOO_VIALS,"Voodoo Vial",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
+SpellData.create(SID_VOODOO_VIALS,"Voodoo Vials",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_ARMAGEDDON_SCROLL,"Armageddon Scroll",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_ARANS_COUNTER_SPELL_SCROLL,"Arans Counter Spell Scroll",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_BANSHEE_SCROLL,"Banshee Scroll",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);

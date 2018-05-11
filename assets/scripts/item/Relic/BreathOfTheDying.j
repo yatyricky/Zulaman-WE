@@ -94,8 +94,6 @@ library BreathOfTheDying requires DamageSystem, SpellData, AggroSystem {
                 iteratorItem = UnitItemInSlot(a, j);
                 if (GetItemTypeId(iteratorItem) == ITID_BREATH_OF_THE_DYING) {
                     this.amount += ItemExAttributes.getAttributeValue(iteratorItem, IATTR_ATK_POISNOVA, "BOTD.start") * (ItemExAttributes.getAttributeValue(iteratorItem, IATTR_LP, "BOTD.start") + 1);
-                    print("poison nova base dmg = " + R2S(ItemExAttributes.getAttributeValue(iteratorItem, IATTR_ATK_POISNOVA, "BOTD.start")));
-                    print("legendary power amp = " + R2S(ItemExAttributes.getAttributeValue(iteratorItem, IATTR_LP, "BOTD.start")));
                 }
                 j += 1;
             }
