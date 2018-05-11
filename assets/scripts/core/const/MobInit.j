@@ -1,7 +1,7 @@
 //! zinc
 library MobInit requires Table, BuffSystem, Patrol, NefUnion, WarlockGlobal, StunUtils, TownPortal {
-constant integer MOBINIT_RESPAWN_L = 600;
-constant integer MOBINIT_RESPAWN_H = 720;
+constant integer MOBINIT_RESPAWN_L = 60;
+constant integer MOBINIT_RESPAWN_H = 72;
 
     private HandleTable idTable;
     private integer numMobs;
@@ -74,7 +74,7 @@ constant integer MOBINIT_RESPAWN_H = 720;
         TimerStart(CreateTimer(), 5.0, true, function() {
             integer i;
             for (0 <= i < numMobs) {
-                if (mobInfo[i].u != null && !IsUnitType(mobInfo[i].u, UNIT_TYPE_HERO) && IsUnitDead(mobInfo[i].u)) {
+                if (mobInfo[i].u != null && !IsUnitType(mobInfo[i].u, UNIT_TYPE_HERO) && IsUnitDead(mobInfo[i].u) && mobInfo[i].utid != UTID_SMOLDERING_TOWER) {
                     if (mobInfo[i].respawning == -1) {
                         mobInfo[i].respawning = 1;
                         mobInfo[i].respawnCounter = GetRandomInt(mobInfo[i].respawnTime, mobInfo[i].respawnTimeVar);
@@ -142,16 +142,6 @@ constant integer MOBINIT_RESPAWN_H = 720;
             ReleaseGroup(g);
             g = null;
             tu = null;
-
-            // ********************* boss ************************
-            // ("Ntin", "-8022.00", "-11433", "134")
-            // ("Hvsh", "-6593.5", "-5616.7", "0.0")
-            // ("Udea", "5819.00", "-4582.0", "90.0")
-            // ("Ulic", "4608.00", "768.0", "270.0")
-            // ("Ucrl", "5133.00", "8502.0", "0.0")
-            // ("Nplh", "-5511.00", "579.0", "90.0")
-            // ("Oshd", "573.00", "4800.0", "270.0")
-            // ("Opgh", "741.00", "8989.0", "270.0")
         });
     }
 

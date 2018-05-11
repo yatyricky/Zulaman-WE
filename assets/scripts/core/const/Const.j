@@ -336,6 +336,7 @@ public constant integer SID_MANA_LEECH = 'A0AV';
 
 // ## Area 3
 // fel peon
+public constant integer UTID_FEL_PEON = 'xxxx';
 public constant integer SID_BLOOD_BOIL = 'xxxx';
 // fel grunt
 public constant integer UTID_FEL_GRUNT = 'n00C';
@@ -373,6 +374,7 @@ public constant integer BID_PARASITE = 'A0BM';
 public constant integer UTID_ZOMBIE = 'nzom';
 public constant integer SID_GNAW = 'A0BK';
 // skeletal mage
+public constant integer UTID_SKELETAL_MAGE = 'xxxx';
 public constant integer SID_CURSE_OF_THE_DEAD = 'xxxx';
 public constant integer SID_DEATH_ORB = 'xxxx';
 // Obsdian Statue
@@ -447,6 +449,7 @@ public constant integer BID_VICIOUS_STRIKE = 'A0CE';
 public constant integer SID_FILTHY_LAND = 'A0CF';
 
 // test unit type id
+public constant integer UTID_DAMAGE_DUMMY = 'e00I';
 public constant integer UTID_STATIC_TARGET = 'h000';
 public constant integer UTID_TARGET = 'h001';
 public constant integer UTID_TANK_TESTER = 'h002';

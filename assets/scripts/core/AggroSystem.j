@@ -462,7 +462,7 @@ constant integer MAX_PLAYER_UNITS = 50;
                     if (!IsUnitUseless(thistype.units[i])) {
                         damageReduc = UnitProp.inst(thistype.units[i], SCOPE_PREFIX).DamageTaken();
                         if (damageReduc < 0.01) {damageReduc = 0.01;}
-                        if (damageReduc > 2.5) {damageReduc = 999999.0;}
+                        if (damageReduc > 2.5) {damageReduc = 999999.0;} // tinker priority
                         td = GetWidgetLife(thistype.units[i]) / damageReduc;
                         if (td < dis) {
                             dis = td;
@@ -604,7 +604,7 @@ constant integer MAX_PLAYER_UNITS = 50;
     
     // any unit enter map
     function register(unit u) {
-        if (!IsUnitDummy(u) && !IsUnitIllusion(u)) {
+        if (!IsUnitDummy(u) && !IsUnitIllusion(u) && !IsUnitUseless(u)) {
             if (GetPlayerId(GetOwningPlayer(u)) == MOB_PID) {
                 if (IsInCombat()) {
                     if (GetDistance.units2d(PlayerUnits.units[0], u) < 1500) {
@@ -636,7 +636,7 @@ constant integer MAX_PLAYER_UNITS = 50;
     
     // any enermy unit damaged
     function setAggros() {
-        if ((GetPlayerId(GetOwningPlayer(DamageResult.target)) == MOB_PID) && (!IsUnitDead(DamageResult.target)) && (!IsUnitDead(DamageResult.source)) && !IsUnit(DamageResult.source, DamageResult.target)) {
+        if ((GetPlayerId(GetOwningPlayer(DamageResult.target)) == MOB_PID) && (!IsUnitDead(DamageResult.target)) && (!IsUnitDead(DamageResult.source)) && !IsUnit(DamageResult.source, DamageResult.target) && !IsUnitUseless(DamageResult.target)) {
             //print("To aggro target");
             if (!CanUnitAttack(DamageResult.target) && DamageResult.amount < GetUnitState(DamageResult.target, UNIT_STATE_MAX_LIFE)) {
                 MobList.add(DamageResult.target);
@@ -689,8 +689,6 @@ constant integer MAX_PLAYER_UNITS = 50;
         RegisterDamagedEvent(setAggros);
         RegisterHealedEvent(setAggrosHealed);
     }
-    
-
 
 }
 //! endzinc

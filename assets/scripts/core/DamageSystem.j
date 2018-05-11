@@ -20,12 +20,13 @@ library DamageSystem requires ZAMCore, UnitProperty, BuffSystem {
 //     real exCrit
 // )
 // - - - - - - - - - - - - - - - - - - - -
-constant string  MISS  = "|cffffcc00miss|r";
-constant string  DODGE  = "|cffffcc00dodge|r";
-constant string  BLOCK  = "|cffffcc00parry|r";
-constant string  ABSORB  = "|cffffcc00absorb|r";
-constant string  IMMUNE  = "|cffffcc00immune|r";
-constant string  NULL_STR  = "";
+constant string MISS = "|cffffcc00miss|r";
+constant string DODGE = "|cffffcc00dodge|r";
+constant string BLOCK = "|cffffcc00parry|r";
+constant string ABSORB = "|cffffcc00absorb|r";
+constant string IMMUNE = "|cffffcc00immune|r";
+constant string NULL_STR = "";
+    unit damageDummy;
     
     public type ResponseDamaged extends function();       
     private ResponseDamaged responseDamagedCallList[];
@@ -112,12 +113,14 @@ public boolean lifelock = false;
         real absorbAmt;
         real factor = GetRandomReal(0.0, 1.0);
         real desk = 0.0;
+        UnitProp upa = UnitProp.inst(a, SCOPE_PREFIX + " DamageTarget upa");
+        UnitProp upb = UnitProp.inst(b, SCOPE_PREFIX + " DamageTarget upb");
         DamageResult.abilityName = dmgName;
         DamageResult.source = a;
         DamageResult.target = b;
         DamageResult.isPhyx = isPhyx;
         DamageResult.wasDodgable = dodgable;
-        desk = 1.0 - UnitProp.inst(a, SCOPE_PREFIX + "DamageTarget 1").AttackRate();
+        desk = 1.0 - upa.AttackRate();
         DamageResult.amount = amount;   
         DamageResult.extraCrit = 0.0;
         i = 0;
@@ -134,7 +137,7 @@ public boolean lifelock = false;
             DamageResult.isCritical = false;
             DamageResult.isImmune = false;
         } else {
-            desk += UnitProp.inst(b, SCOPE_PREFIX + "DamageTarget 2").Dodge();
+            desk += upb.Dodge();
             if (factor < desk && DamageResult.wasDodgable) {
                 display = DODGE;
                 DamageResult.amount = 0.0;
@@ -144,20 +147,20 @@ public boolean lifelock = false;
                 DamageResult.isCritical = false;
                 DamageResult.isImmune = false;
             } else {
-                DamageResult.amount *= UnitProp.inst(a, SCOPE_PREFIX + "DamageTarget 3").DamageDealt();
+                DamageResult.amount *= upa.DamageDealt();
                 DamageResult.isHit = true;
                 DamageResult.isDodged = false;
                 if (DamageResult.isPhyx) {
-                    DamageResult.amount *= (100.0 - UnitProp.inst(b, SCOPE_PREFIX + "DamageTarget 4").Armor()) / 100.0;
+                    DamageResult.amount *= (100.0 - upb.Armor()) / 100.0;
                 } else {
-                    DamageResult.amount *= UnitProp.inst(b, SCOPE_PREFIX + "DamageTarget 5").SpellTaken();
+                    DamageResult.amount *= upb.SpellTaken();
                 }
-                DamageResult.amount *= UnitProp.inst(b, SCOPE_PREFIX + "DamageTarget 6").DamageTaken();
+                DamageResult.amount *= upb.DamageTaken();
                 if (DamageResult.amount < 2.0) {
                     DamageResult.amount = 0.0;
                     DamageResult.isBlocked = false;
                     DamageResult.isCritical = false;
-                    if (UnitProp.inst(b, SCOPE_PREFIX + "DamageTarget 7").DamageTaken() <= 0.0) {
+                    if (upb.DamageTaken() <= 0.0) {
                         DamageResult.isImmune = true;
                         display = IMMUNE;
                     } else {
@@ -166,9 +169,9 @@ public boolean lifelock = false;
                     }
                 } else {
                     DamageResult.isImmune = false;   
-                    desk += UnitProp.inst(b, SCOPE_PREFIX + "DamageTarget 8").BlockRate();
+                    desk += upb.BlockRate();
                     if (factor < desk && DamageResult.wasDodgable) {
-                        DamageResult.amount -= UnitProp.inst(b, SCOPE_PREFIX + "DamageTarget 9").BlockPoint();
+                        DamageResult.amount -= upb.BlockPoint();
                         DamageResult.isCritical = false;
                         DamageResult.isBlocked = true;
                         if (DamageResult.amount < 2.0) {
@@ -177,8 +180,8 @@ public boolean lifelock = false;
                         }
                     } else {
                         DamageResult.isBlocked = false;
-                        desk += UnitProp.inst(a, SCOPE_PREFIX + "DamageTarget 10").AttackCrit();
-                        if ((factor < desk + DamageResult.extraCrit && DamageResult.isPhyx) || (factor < UnitProp.inst(a, SCOPE_PREFIX+ "DamageTarget 15").SpellCrit() + DamageResult.extraCrit && !DamageResult.isPhyx) && criticable) {
+                        desk += upa.AttackCrit();
+                        if ((factor < desk + DamageResult.extraCrit && DamageResult.isPhyx) || (factor < upa.SpellCrit() + DamageResult.extraCrit && !DamageResult.isPhyx) && criticable) {
                             DamageResult.amount *= 2.0;
                             DamageResult.isCritical = true;
                         } else {
@@ -208,6 +211,10 @@ if (GetWidgetLife(b) < GetUnitState(b, UNIT_STATE_MAX_LIFE) * 0.5 && lifelock) {
         }
         display = NULL_STR;
         TextTag_Damage(b, display, DamageResult.isCritical);
+    }
+
+    public function DummyDamageTarget(unit target, real amount, string dmgName) {
+        DamageTarget(damageDummy, target, amount, dmgName, false, false, false, WEAPON_TYPE_WHOKNOWS);
     }
     
     public struct TimedDamageTarget {
@@ -271,11 +278,23 @@ if (GetWidgetLife(b) < GetUnitState(b, UNIT_STATE_MAX_LIFE) * 0.5 && lifelock) {
             TriggerRegisterUnitEvent(dmgtrg, u, EVENT_UNIT_DAMAGED);
         }
     }
+
+    function dummyDeath(unit u) {
+        if (GetUnitTypeId(u) == UTID_DAMAGE_DUMMY) {
+            print("[Warning] Damage dummy is dead, please log");
+            damageDummy = CreateUnit(Player(0), UTID_DAMAGE_DUMMY, -10516, -14027, 0);
+        }
+    }
     
     private function onInit() {
         dmgtrg = CreateTrigger();
         TriggerAddCondition(dmgtrg, Condition(function damaged));
         RegisterUnitEnterMap(register);
+        TimerStart(CreateTimer(), 1.0, false, function() {
+            DestroyTimer(GetExpiredTimer());
+            damageDummy = CreateUnit(Player(0), UTID_DAMAGE_DUMMY, -10516, -14027, 0);
+        });
+        RegisterUnitDeath(dummyDeath);
     }
 }
 //! endzinc

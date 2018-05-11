@@ -424,9 +424,16 @@ library UnitProperty requires ModelInfo, ZAMCore {
     function register(unit u) {
         UnitProp up;
         ModelInfo mi;
+        if (GetUnitTypeId(u) == UTID_DAMAGE_DUMMY) {
+            print("catcha");
+        }
         if (UnitProp.ht.exists(u)) {
             //BJDebugMsg(SCOPE_PREFIX+">Double registering: " + GetUnitName(u));
-        } else if (!IsUnitDummy(u)) {
+        } else if (!IsUnitDummy(u) || GetUnitTypeId(u) == UTID_DAMAGE_DUMMY) {
+            
+        if (GetUnitTypeId(u) == UTID_DAMAGE_DUMMY) {
+            print("catcha 2");
+        }
             up = UnitProp.create();
             UnitProp.ht[u] = up;
             mi = ModelInfo.get(GetUnitTypeId(u), "UnitProperty: 424");

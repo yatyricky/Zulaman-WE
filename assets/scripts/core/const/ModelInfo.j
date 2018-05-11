@@ -79,6 +79,7 @@ library ModelInfo requires Table, Integer {
         tab = Table.create();
         TimerStart(CreateTimer(), 0.05, false, function() {
             DestroyTimer(GetExpiredTimer());
+ModelInfo.rg(UTID_DAMAGE_DUMMY,ATT_NON,499999,5,0,0,0,0,0,1,0,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNHeroPaladin.blp");
 ModelInfo.rg(UTID_STATIC_TARGET,ATT_NON,49999,5,0,0,0,0,0,1,0,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNHeroPaladin.blp");
 ModelInfo.rg(UTID_TARGET,ATT_NON,49999,30,5,0,0,0,0,1,0,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNPeasant.blp");
 ModelInfo.rg(UTID_TANK_TESTER,ATT_NON,49999,300,0,0,0,0,0,1,0,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNVengeanceIncarnate.blp");
@@ -126,6 +127,7 @@ ModelInfo.rg(UTID_WIND_SERPENT,ATT_NON,31999,275,125,7,0.1,0,0,1,0.1,CAREER_TYPE
 ModelInfo.rg(UTID_NAGA_MYRMIDON,ATT_NON,23999,200,200,15,0.05,0.1,30,1,0.05,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNNagaMyrmidon.blp");
 ModelInfo.rg(UTID_CHMP_NAGA_MYRMIDON,ATT_NON,44999,250,250,15,0.05,0.1,30,1,0.05,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNNagaMyrmidon.blp");
 ModelInfo.rg(UTID_NAGA_ROYAL_GUARD,ATT_NON,47999,300,150,15,0.05,0.1,30,1,0.05,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNNagaMyrmidonRoyalGuard.blp");
+ModelInfo.rg(UTID_FEL_PEON,ATT_NON,34999,420,180,5,0.05,0.05,0,1,0.01,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNChaosPeon.blp");
 ModelInfo.rg(UTID_FEL_GRUNT,ATT_NON,54999,650,300,5,0.05,0.05,100,0.95,0.05,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNChaosGrunt.blp");
 ModelInfo.rg(UTID_FEL_RIDER,ATT_NON,49999,600,200,10,0.05,0,0,1,0.1,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNChaosWolfRider.blp");
 ModelInfo.rg(UTID_FEL_WAR_BRINGER,ATT_NON,99999,750,150,5,0.05,0.15,240,0.8,0.05,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNChaosKotoBeast.blp");
@@ -134,6 +136,7 @@ ModelInfo.rg(UTID_SMOLDERING_TOWER,ATT_NON,9999,1000,200,50,0,0,0,0.5,0,CAREER_T
 ModelInfo.rg(UTID_NOXIOUS_SPIDER,ATT_NON,87499,700,300,5,0.05,0,0,1,0.05,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNCryptFiend.blp");
 ModelInfo.rg(UTID_PARASITICAL_ROACH,ATT_NON,54999,300,100,0,0.05,0,0,0.95,0.05,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNCarrionScarabs.blp");
 ModelInfo.rg(UTID_ZOMBIE,ATT_NON,94999,400,300,5,0,0,0,1,0.05,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNZombie.blp");
+ModelInfo.rg(UTID_SKELETAL_MAGE,ATT_NON,79999,300,300,25,0.25,0,0,0.8,0.01,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNSkeletonMage.blp");
 ModelInfo.rg(UTID_OBSIDIAN_CONSTRUCT,ATT_NON,99999,500,0,30,0,0,0,0.7,0,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNObsidianStatue.blp");
 ModelInfo.rg(UTID_DRACOLICH,ATT_NON,124999,800,200,10,0.05,0,0,0.9,0.05,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNFrostWyrm.blp");
 ModelInfo.rg(UTID_VOID_WALKER,ATT_NON,99999,950,50,20,0.05,0,0,1,0.01,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNVoidWalker.blp");
@@ -150,7 +153,6 @@ ModelInfo.rg(UTID_VOMIT_MAGGOT,ATT_NON,1999,100,100,0,0,0,0,1,0,CAREER_TYPE_CREE
 ModelInfo.rg(UTID_TWILIGHT_WITCH_DOCTOR,ATT_NON,139999,1100,300,5,0.05,0,0,1,0.05,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNDarkTrollShadowPriest.blp");
 ModelInfo.rg(UTID_GRIM_TOTEM,ATT_NON,199999,1,0,0,0,0,0,1,0,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNHealingWard.blp");
 ModelInfo.rg(UTID_FACELESS_ONE,ATT_NON,219999,1300,300,5,0,0,0,1,0.05,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNFacelessOne.blp");
-
         });
     }
 }
