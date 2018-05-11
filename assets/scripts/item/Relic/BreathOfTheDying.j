@@ -93,7 +93,7 @@ library BreathOfTheDying requires DamageSystem, SpellData, AggroSystem {
             while (j < 6) {
                 iteratorItem = UnitItemInSlot(a, j);
                 if (GetItemTypeId(iteratorItem) == ITID_BREATH_OF_THE_DYING) {
-                    this.amount += ItemExAttributes.getValue(iteratorItem, 50, "BOTD.start");
+                    this.amount += ItemExAttributes.getValue(iteratorItem, IATTR_ATK_POISNOVA, "BOTD.start") * (ItemExAttributes.getValue(iteratorItem, IATTR_LP, "BOTD.start") + 1);
                 }
                 j += 1;
             }

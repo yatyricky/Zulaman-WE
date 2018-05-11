@@ -197,7 +197,9 @@ library ItemAttributes requires UnitProperty, BreathOfTheDying {
             if (found == true) {
                 return ret;
             } else {
-                print("ItemExAttributes.getValue: unable to find " + I2S(id) + " in item: " + ID2S(GetItemTypeId(it)));
+                if (id != IATTR_LP) {
+                    print("ItemExAttributes.getValue: unable to find " + I2S(id) + " in item: " + ID2S(GetItemTypeId(it)));
+                }
                 return 0.0;
             }
         }
@@ -408,218 +410,218 @@ library ItemAttributes requires UnitProperty, BreathOfTheDying {
             return this;
         }
 
-        static method callback1(unit u, real val, integer polar) {}
-        static method callback2(unit u, real val, integer polar) {}
-        static method callback3(unit u, real val, integer polar) {}
-        static method callback4(unit u, real val, integer polar) {}
-        static method callback5(unit u, real val, integer polar) {}
-        static method callback6(unit u, real val, integer polar) {}
-        static method callback7(unit u, real val, integer polar) {
+        static method callbackSTR(unit u, real val, integer polar) {}
+        static method callbackSTRPL(unit u, real val, integer polar) {}
+        static method callbackAGI(unit u, real val, integer polar) {}
+        static method callbackINT(unit u, real val, integer polar) {}
+        static method callbackALLSTAT(unit u, real val, integer polar) {
             UnitProp up = UnitProp.inst(u, "ItemAttributeMeta.callback7");
             up.ModStr(Rounding(val) * polar);
             up.ModAgi(Rounding(val) * polar);
             up.ModInt(Rounding(val) * polar);
         }
-        static method callback8(unit u, real val, integer polar) {}
-        static method callback9(unit u, real val, integer polar) {
+        static method callbackHP(unit u, real val, integer polar) {}
+        static method callbackHPPCT(unit u, real val, integer polar) {}
+        static method callbackHPPL(unit u, real val, integer polar) {}
+        static method callbackMP(unit u, real val, integer polar) {}
+        static method callbackAP(unit u, real val, integer polar) {
             UnitProp up = UnitProp.inst(u, "ItemAttributeMeta.callback9");
             up.ModAP(Rounding(val) * polar);
         }
-        static method callback10(unit u, real val, integer polar) {}
-        static method callback11(unit u, real val, integer polar) {}
-        static method callback12(unit u, real val, integer polar) {
+        static method callbackAPPL(unit u, real val, integer polar) {}
+        static method callbackCRIT(unit u, real val, integer polar) {}
+        static method callbackIAS(unit u, real val, integer polar) {
             UnitProp up = UnitProp.inst(u, "ItemAttributeMeta.callback12");
             up.ModAttackSpeed(Rounding(val) * polar);
         }
-        static method callback13(unit u, real val, integer polar) {}
-        static method callback14(unit u, real val, integer polar) {}
-        static method callback15(unit u, real val, integer polar) {}
-        static method callback16(unit u, real val, integer polar) {}
-        static method callback17(unit u, real val, integer polar) {}
-        static method callback18(unit u, real val, integer polar) {}
-        static method callback19(unit u, real val, integer polar) {}
-        static method callback20(unit u, real val, integer polar) {}
-        static method callback21(unit u, real val, integer polar) {}
-        static method callback22(unit u, real val, integer polar) {}
-        static method callback23(unit u, real val, integer polar) {}
-        static method callback24(unit u, real val, integer polar) {}
-        static method callback25(unit u, real val, integer polar) {}
-        static method callback26(unit u, real val, integer polar) {}
-        static method callback27(unit u, real val, integer polar) {}
-        static method callback28(unit u, real val, integer polar) {}
-        static method callback29(unit u, real val, integer polar) {}
-        static method callback30(unit u, real val, integer polar) {}
-        static method callback31(unit u, real val, integer polar) {}
-        static method callback32(unit u, real val, integer polar) {}
-        static method callback33(unit u, real val, integer polar) {}
-        static method callback34(unit u, real val, integer polar) {}
-        static method callback35(unit u, real val, integer polar) {}
-        static method callback36(unit u, real val, integer polar) {}
-        static method callback37(unit u, real val, integer polar) {}
-        static method callback38(unit u, real val, integer polar) {}
-        static method callback39(unit u, real val, integer polar) {}
-        static method callback40(unit u, real val, integer polar) {}
-        static method callback41(unit u, real val, integer polar) {}
-        static method callback42(unit u, real val, integer polar) {}
-        static method callback43(unit u, real val, integer polar) {}
-        static method callback44(unit u, real val, integer polar) {}
-        static method callback45(unit u, real val, integer polar) {
+        static method callbackSP(unit u, real val, integer polar) {}
+        static method callbackSCRIT(unit u, real val, integer polar) {}
+        static method callbackSHASTE(unit u, real val, integer polar) {}
+        static method callbackDEF(unit u, real val, integer polar) {}
+        static method callbackDEFPL(unit u, real val, integer polar) {}
+        static method callbackBR(unit u, real val, integer polar) {}
+        static method callbackBP(unit u, real val, integer polar) {}
+        static method callbackDODGE(unit u, real val, integer polar) {}
+        static method callbackDR(unit u, real val, integer polar) {}
+        static method callbackMDR(unit u, real val, integer polar) {}
+        static method callbackAMP(unit u, real val, integer polar) {}
+        static method callbackHAMP(unit u, real val, integer polar) {}
+        static method callbackMREG(unit u, real val, integer polar) {}
+        static method callbackHREG(unit u, real val, integer polar) {}
+        static method callbackHLOST(unit u, real val, integer polar) {}
+        static method callbackMS(unit u, real val, integer polar) {}
+        static method callbackMSPL(unit u, real val, integer polar) {}
+        static method callbackLP(unit u, real val, integer polar) {}
+        static method callbackBM_VALOR(unit u, real val, integer polar) {}
+        static method callbackRG_ONESHOT(unit u, real val, integer polar) {}
+        static method callbackRG_RUSH(unit u, real val, integer polar) {}
+        static method callbackCRKILLER(unit u, real val, integer polar) {}
+        static method callbackMCVT(unit u, real val, integer polar) {}
+        static method callbackKG_REGRCD(unit u, real val, integer polar) {}
+        static method callbackLEECHAURA(unit u, real val, integer polar) {}
+        static method callbackPR_POHDEF(unit u, real val, integer polar) {}
+        static method callbackDR_MAXHP(unit u, real val, integer polar) {}
+        static method callbackPL_SHOCK(unit u, real val, integer polar) {}
+        static method callbackPR_SHIELD(unit u, real val, integer polar) {}
+        static method callbackCT_PAIN(unit u, real val, integer polar) {}
+        static method callbackBD_SHIELD(unit u, real val, integer polar) {}
+        static method callbackRG_PARALZ(unit u, real val, integer polar) {}
+        static method callbackPL_LIGHT(unit u, real val, integer polar) {}
+        static method callbackDR_CDR(unit u, real val, integer polar) {}
+        static method callbackSM_LASH(unit u, real val, integer polar) {}
+        static method callbackDK_ARROW(unit u, real val, integer polar) {}
+        static method callbackMG_FDMG(unit u, real val, integer polar) {}
+        static method callbackMG_BLZ(unit u, real val, integer polar) {}
+        static method callbackATK_ML(unit u, real val, integer polar) {}
+        static method callbackATK_LL(unit u, real val, integer polar) {}
+        static method callbackATK_LLML(unit u, real val, integer polar) {
             UnitProp up = UnitProp.inst(u, "ItemAttributeMeta.callback45");
             up.ll += val * polar;
             up.ml += val * polar;
         }
-        static method callback46(unit u, real val, integer polar) {}
-        static method callback47(unit u, real val, integer polar) {}
-        static method callback48(unit u, real val, integer polar) {}
-        static method callback49(unit u, real val, integer polar) {}
-        static method callback50(unit u, real val, integer polar) {
+        static method callbackATK_CTHUN(unit u, real val, integer polar) {}
+        static method callbackATK_WF(unit u, real val, integer polar) {}
+        static method callbackATK_LION(unit u, real val, integer polar) {}
+        static method callbackATK_MOONWAVE(unit u, real val, integer polar) {}
+        static method callbackATK_POISNOVA(unit u, real val, integer polar) {
             EquipedBOTD(u, polar);
         }
-        static method callback51(unit u, real val, integer polar) {}
-        static method callback52(unit u, real val, integer polar) {}
-        static method callback53(unit u, real val, integer polar) {}
-        static method callback54(unit u, real val, integer polar) {}
-        static method callback55(unit u, real val, integer polar) {}
-        static method callback56(unit u, real val, integer polar) {}
-        static method callback57(unit u, real val, integer polar) {}
-        static method callback58(unit u, real val, integer polar) {}
-        static method callback59(unit u, real val, integer polar) {}
-        static method callback60(unit u, real val, integer polar) {}
-        static method callback61(unit u, real val, integer polar) {}
-        static method callback62(unit u, real val, integer polar) {}
-        static method callback63(unit u, real val, integer polar) {}
-        static method callback64(unit u, real val, integer polar) {}
-        static method callback65(unit u, real val, integer polar) {}
-        static method callback66(unit u, real val, integer polar) {}
-        static method callback67(unit u, real val, integer polar) {}
-        static method callback68(unit u, real val, integer polar) {}
-        static method callback69(unit u, real val, integer polar) {}
-        static method callback70(unit u, real val, integer polar) {}
-        static method callback71(unit u, real val, integer polar) {}
-        static method callback72(unit u, real val, integer polar) {}
-        static method callback73(unit u, real val, integer polar) {}
-        static method callback74(unit u, real val, integer polar) {}
-        static method callback75(unit u, real val, integer polar) {}
-        static method callback76(unit u, real val, integer polar) {}
-        static method callback77(unit u, real val, integer polar) {}
-        static method callback78(unit u, real val, integer polar) {}
-        static method callback79(unit u, real val, integer polar) {}
-        static method callback80(unit u, real val, integer polar) {}
-        static method callback81(unit u, real val, integer polar) {}
-        static method callback82(unit u, real val, integer polar) {}
-        static method callback83(unit u, real val, integer polar) {}
-        static method callback84(unit u, real val, integer polar) {}
-        static method callback85(unit u, real val, integer polar) {}
-        static method callback86(unit u, real val, integer polar) {}
-        static method callback87(unit u, real val, integer polar) {}
-        static method callback88(unit u, real val, integer polar) {}
-        static method callback89(unit u, real val, integer polar) {}
-        static method callback90(unit u, real val, integer polar) {}
-        static method callback91(unit u, real val, integer polar) {}
-        static method callback92(unit u, real val, integer polar) {}
-        static method callback93(unit u, real val, integer polar) {}
-        static method callback94(unit u, real val, integer polar) {}
-        static method callback95(unit u, real val, integer polar) {}
-        static method callback96(unit u, real val, integer polar) {}
+        static method callbackATK_COIL(unit u, real val, integer polar) {}
+        static method callbackATK_BLEED(unit u, real val, integer polar) {}
+        static method callbackATK_MDC(unit u, real val, integer polar) {}
+        static method callbackATK_STUN(unit u, real val, integer polar) {}
+        static method callbackATK_CRIT(unit u, real val, integer polar) {}
+        static method callbackATK_AMP(unit u, real val, integer polar) {}
+        static method callbackATK_MD(unit u, real val, integer polar) {}
+        static method callbackATK_MDK(unit u, real val, integer polar) {}
+        static method callbackATK_MORTAL(unit u, real val, integer polar) {}
+        static method callbackATK_MISS(unit u, real val, integer polar) {}
+        static method callbackATK_DDEF(unit u, real val, integer polar) {}
+        static method callbackATK_DAS(unit u, real val, integer polar) {}
+        static method callbackATK_DMS(unit u, real val, integer polar) {}
+        static method callbackATK_WEAK(unit u, real val, integer polar) {}
+        static method callback3ATK_MOONEXP(unit u, real val, integer polar) {}
+        static method callbackMD_MREGEN(unit u, real val, integer polar) {}
+        static method callbackMD_POISON(unit u, real val, integer polar) {}
+        static method callbackMD_CHAIN(unit u, real val, integer polar) {}
+        static method callbackMDC_ARCANE(unit u, real val, integer polar) {}
+        static method callbackDT_MREGEN(unit u, real val, integer polar) {}
+        static method callbackATKED_WEAK(unit u, real val, integer polar) {}
+        static method callbackHEAL_HOLY(unit u, real val, integer polar) {}
+        static method callbackAURA_CONVIC(unit u, real val, integer polar) {}
+        static method callbackAURA_MEDITA(unit u, real val, integer polar) {}
+        static method callbackAURA_WARSONG(unit u, real val, integer polar) {}
+        static method callbackAURA_UNHOLY(unit u, real val, integer polar) {}
+        static method callbackUSE_TP(unit u, real val, integer polar) {}
+        static method callbackUSE_BATTLE(unit u, real val, integer polar) {}
+        static method callbackUSE_MREGEN(unit u, real val, integer polar) {}
+        static method callbackUSE_HREGEN(unit u, real val, integer polar) {}
+        static method callbackUSE_VOODOO(unit u, real val, integer polar) {}
+        static method callbackUSE_INT(unit u, real val, integer polar) {}
+        static method callbackUSE_SP(unit u, real val, integer polar) {}
+        static method callbackUSE_DODGE(unit u, real val, integer polar) {}
+        static method callbackUSE_MS(unit u, real val, integer polar) {}
+        static method callbackUSE_CTHUN(unit u, real val, integer polar) {}
+        static method callbackUSE_HOLYHEAL(unit u, real val, integer polar) {}
 
         static method onInit() {
             thistype.ht = Table.create();
-            thistype.create(4,100,"+"," Strength", thistype.callback4);
-            thistype.create(5,101,"+"," Strength/level", thistype.callback5);
-            thistype.create(13,102,"+"," Agility", thistype.callback13);
-            thistype.create(14,104,"+"," Intelligence", thistype.callback14);
-            thistype.create(7,106,"+"," All stats", thistype.callback7);
-            thistype.create(21,110,"+"," Max HP", thistype.callback21);
-            thistype.create(22,111,"+"," Max HP", thistype.callback22);
-            thistype.create(23,112,"+"," Max HP/level", thistype.callback23);
-            thistype.create(17,114,"+"," Max MP", thistype.callback17);
-            thistype.create(9,120,"+"," Attack power", thistype.callback9);
-            thistype.create(10,121,"+"," Attack power/level", thistype.callback10);
-            thistype.create(11,122,"+"," Attack critical", thistype.callback11);
-            thistype.create(12,124,"+","% Attack speed", thistype.callback12);
-            thistype.create(18,130,"+"," Spell power", thistype.callback18);
-            thistype.create(20,132,"+"," Spell critical", thistype.callback20);
-            thistype.create(19,134,"+"," Spell haste", thistype.callback19);
-            thistype.create(8,140,"+"," Armor", thistype.callback8);
-            thistype.create(95,141,"+"," Armor/level", thistype.callback95);
-            thistype.create(16,142,"+"," Block chance", thistype.callback16);
-            thistype.create(15,144,"+"," Block points", thistype.callback15);
-            thistype.create(27,146,"+"," Dodge chance", thistype.callback27);
-            thistype.create(1,150,"-"," All damage taken", thistype.callback1);
-            thistype.create(2,152,"-"," Spell damage taken", thistype.callback2);
-            thistype.create(3,154,"+"," Damage and healing dealt", thistype.callback3);
-            thistype.create(6,156,"+"," Healing taken", thistype.callback6);
-            thistype.create(72,160,"Regens "," MP per second", thistype.callback72);
-            thistype.create(73,162,"Regens "," HP per second", thistype.callback73);
-            thistype.create(74,164,"Lost "," HP per second during combat", thistype.callback74);
-            thistype.create(24,170,"+"," Movement speed", thistype.callback24);
-            thistype.create(25,171,"+"," Movement speed/level", thistype.callback25);
-            thistype.create(26,180,"+"," Item special power level", thistype.callback26);
-            thistype.create(39,200,"|CFF33FF33Regenerates "," more valor points|R", thistype.callback39);
-            thistype.create(66,201,"|cff33ff33One-shot target when it's HP is less than yours|R","", thistype.callback66);
-            thistype.create(65,202,"|CFF33FF33Deals "," extra damage to target below 30% max HP|R", thistype.callback65);
-            thistype.create(67,203,"|CFF33FF33Deals "," extra damage to non-hero targets|R", thistype.callback67);
-            thistype.create(68,204,"|cff33ff33Converts your normal attacks into magical damage|R","", thistype.callback68);
-            thistype.create(69,205,"|CFF33FF33Reduce cooldown of Instant Regrowth by "," seconds|R", thistype.callback69);
-            thistype.create(71,207,"|CFF33FF33Absorb "," HP from all enemies nearby every second|R", thistype.callback71);
-            thistype.create(76,208,"|CFF33FF33Prayer of healing increases armor of target by ","|R", thistype.callback76);
-            thistype.create(78,210,"|CFF33FF33Survival Instincts provides "," extra healing and max HP|R", thistype.callback78);
-            thistype.create(79,211,"|cff33ff33Holy Shock always deals critical healing|R","", thistype.callback79);
-            thistype.create(80,212,"|cff33ff33Removes weakness effect of Shield|R","", thistype.callback80);
-            thistype.create(81,213,"|CFF33FF33Marrow Squeeze extends the Pain on target by "," seconds|R", thistype.callback81);
-            thistype.create(86,214,"|CFF33FF33Shield of Sin'dorei provides "," extra damage reduction, and forces all nearby enemies to attack you|R", thistype.callback86);
-            thistype.create(90,215,"|CFF33FF33Sinister Strike has a "," chance to paralyze target, reduce target spell haste by 20% and gain an extra combo point|R", thistype.callback90);
-            thistype.create(91,216,"|cff33ff33Flash Light dispels one debuff from target|R","", thistype.callback91);
-            thistype.create(92,217,"|CFF33FF33Reduce cooldown of Survival Instincts by "," seconds|R", thistype.callback92);
-            thistype.create(93,218,"|CFF33FF33Storm Lash has "," extra chance to cooldown Earth Shock|R", thistype.callback93);
-            thistype.create(94,219,"|CFF33FF33Number of Dark Arrows increased by ","|R", thistype.callback94);
-            thistype.create(96,220,"|CFF33FF33Increase ice spell damage by ","|R", thistype.callback96);
-            thistype.create(70,222,"|CFF33FF33"," chance to cast an instant Frost Bolt to targets damaged by Blizzard|R", thistype.callback70);
-            thistype.create(43,400,"|CFF33FF33On Attack: "," mana steal|R", thistype.callback43);
-            thistype.create(44,401,"|CFF33FF33On Attack: "," life steal|R", thistype.callback44);
-            thistype.create(45,402,"|CFF33FF33On Attack: "," life and mana steal|R", thistype.callback45);
-            thistype.create(46,403,"|CFF33FF33On Attack: Increase attack speed by 1% per attack, stacks up to ",", lasts for 3 seconds|R", thistype.callback46);
-            thistype.create(47,404,"|CFF33FF33On Attack: "," chance to knock back target|R", thistype.callback47);
-            thistype.create(48,405,"|CFF33FF33On Attack: "," chance to increase 30% attack speed, lasts for 5 seconds|R", thistype.callback48);
-            thistype.create(49,406,"|CFF33FF33On Attack: 10% chance to consume 5% of max MP, deals "," magical damage to all enemies in a row|R", thistype.callback49);
-            thistype.create(50,407,"|CFF33FF33On Attack: 15% chance to cast poison nova, dealing "," magic damage over time to all enemies within 600 yards|R", thistype.callback50);
-            thistype.create(51,408,"|CFF33FF33On Attack: 15% chance to cast Death Coil, deals "," magical damage to target. Target takes 3% extra damge|R", thistype.callback51);
-            thistype.create(52,409,"|CFF33FF33On Attack: 20% chance to deal bleed effect to target. Target takes "," physical damage over time, lasts for 10 seconds|R", thistype.callback52);
-            thistype.create(53,410,"|CFF33FF33On Attack: 25% chance to deal "," magical damage to target|R", thistype.callback53);
-            thistype.create(54,411,"|CFF33FF33On Attack: 5% chance to stun target for "," seconds|R", thistype.callback54);
-            thistype.create(55,412,"|CFF33FF33On Attack: 5% chance to increase "," attack critical chance, lasts for 5 seconds|R", thistype.callback55);
-            thistype.create(56,413,"|CFF33FF33On Attack: Target takes "," extra damage, lasts for 3 seconds|R", thistype.callback56);
-            thistype.create(57,414,"|CFF33FF33On Attack: Deals "," magical damage, scaled up by your attack power and spell power|R", thistype.callback57);
-            thistype.create(58,415,"|CFF33FF33On Attack: Deals "," magical damage, scaled up by target HP lost|R", thistype.callback58);
-            thistype.create(59,416,"|CFF33FF33On Attack: Decrease target healing taken by ","|R", thistype.callback59);
-            thistype.create(60,417,"|CFF33FF33On Attack: Decrease target attack hit chance by ","|R", thistype.callback60);
-            thistype.create(61,418,"|CFF33FF33On Attack: Decrease target armor by ","|R", thistype.callback61);
-            thistype.create(62,419,"|CFF33FF33On Attack: Decrease target attack speed by ","|R", thistype.callback62);
-            thistype.create(63,420,"|CFF33FF33On Attack: Decrease target movement speed by ","|R", thistype.callback63);
-            thistype.create(64,421,"|CFF33FF33On Attack: Decrease target damage and healing dealt by ","|R", thistype.callback64);
-            thistype.create(75,430,"|CFF33FF33Every Third Attack: Consumes 5% of max MP, deals "," magical damage to all enemies nearby|R", thistype.callback75);
-            thistype.create(87,450,"|CFF33FF33Spell Damage: 1% chance to regen "," MP|R", thistype.callback87);
-            thistype.create(88,451,"|CFF33FF33Spell Damage: 10% chance to poison target, dealing "," magical damage over time|R", thistype.callback88);
-            thistype.create(89,452,"|CFF33FF33Spell Damage: 10% chance to cast Chain Lightning to target, dealing "," magical damage|R", thistype.callback89);
-            thistype.create(77,460,"|CFF33FF33Spell Critical: Charges with arcane power. All arcane power will be released automatically after 3 stacks, dealing "," magical damage to target|R", thistype.callback77);
-            thistype.create(40,500,"|CFF33FF33On Damaged: Regens MP from "," of the damage taken|R", thistype.callback40);
-            thistype.create(41,600,"|CFF33FF33On Attacked: Decreases attacker's attack power by ","|R", thistype.callback41);
-            thistype.create(42,700,"|cff33ff33On Healed: Charges 1 holy power|R","", thistype.callback42);
-            thistype.create(82,800,"|CFF33FF33Grant Aura of Conviction: All enemies within 600 yards take "," more magical damage|R", thistype.callback82);
-            thistype.create(83,801,"|CFF33FF33Grant Aura of Meditation: All allies within 600 yards regen "," MP per second|R", thistype.callback83);
-            thistype.create(84,802,"|CFF33FF33Grant Aura of Warsong: All allies deal "," more damage and healing, take 10% more healing within 600 yards|R", thistype.callback84);
-            thistype.create(85,803,"|CFF33FF33Grant Aura of Unholy: All allies within 600 yards regen "," HP per second|R", thistype.callback85);
-            thistype.create(28,900,"|cff33ff33Use: Teleports to an ally|R","", thistype.callback28);
-            thistype.create(29,901,"|CFF33FF33Use: Battle Orders, increases "," max HP to all allies within 900 yards, lasts for 75 seconds|R", thistype.callback29);
-            thistype.create(30,902,"|CFF33FF33Use: Regens "," MP|R", thistype.callback30);
-            thistype.create(31,903,"|CFF33FF33Use: Regens "," HP|R", thistype.callback31);
-            thistype.create(32,904,"|CFF33FF33Use: Deals "," magical damage to all enemies within range over time|R", thistype.callback32);
-            thistype.create(33,905,"|CFF33FF33Use: Increase intelligence by ",", lasts for 20 seconds|R", thistype.callback33);
-            thistype.create(34,906,"|CFF33FF33Use: Increase spell power by ",", lasts for 15 seconds|R", thistype.callback34);
-            thistype.create(35,907,"|CFF33FF33Use: Increase dodge chance by 30%, lasts for "," seconds|R", thistype.callback35);
-            thistype.create(36,908,"|CFF33FF33Use: Increase movement speed by 300, lasts for "," seconds. Possible failures.|R", thistype.callback36);
-            thistype.create(37,909,"|CFF33FF33Use: Increase attack speed by 40%, take "," extra damage|R", thistype.callback37);
-            thistype.create(38,910,"|CFF33FF33Use: Release all holy power to heal yourself, each point heals "," HP|R", thistype.callback38);
+            thistype.create(IATTR_STR,100,"+"," Strength",thistype.callbackSTR);
+            thistype.create(IATTR_STRPL,101,"+"," Strength/level",thistype.callbackSTRPL);
+            thistype.create(IATTR_AGI,102,"+"," Agility",thistype.callbackAGI);
+            thistype.create(IATTR_INT,104,"+"," Intelligence",thistype.callbackINT);
+            thistype.create(IATTR_ALLSTAT,106,"+"," All stats",thistype.callbackALLSTAT);
+            thistype.create(IATTR_HP,110,"+"," Max HP",thistype.callbackHP);
+            thistype.create(IATTR_HPPCT,111,"+"," Max HP",thistype.callbackHPPCT);
+            thistype.create(IATTR_HPPL,112,"+"," Max HP/level",thistype.callbackHPPL);
+            thistype.create(IATTR_MP,114,"+"," Max MP",thistype.callbackMP);
+            thistype.create(IATTR_AP,120,"+"," Attack power",thistype.callbackAP);
+            thistype.create(IATTR_APPL,121,"+"," Attack power/level",thistype.callbackAPPL);
+            thistype.create(IATTR_CRIT,122,"+"," Attack critical",thistype.callbackCRIT);
+            thistype.create(IATTR_IAS,124,"+","% Attack speed",thistype.callbackIAS);
+            thistype.create(IATTR_SP,130,"+"," Spell power",thistype.callbackSP);
+            thistype.create(IATTR_SCRIT,132,"+"," Spell critical",thistype.callbackSCRIT);
+            thistype.create(IATTR_SHASTE,134,"+"," Spell haste",thistype.callbackSHASTE);
+            thistype.create(IATTR_DEF,140,"+"," Armor",thistype.callbackDEF);
+            thistype.create(IATTR_DEFPL,141,"+"," Armor/level",thistype.callbackDEFPL);
+            thistype.create(IATTR_BR,142,"+"," Block chance",thistype.callbackBR);
+            thistype.create(IATTR_BP,144,"+"," Block points",thistype.callbackBP);
+            thistype.create(IATTR_DODGE,146,"+"," Dodge chance",thistype.callbackDODGE);
+            thistype.create(IATTR_DR,150,"-"," All damage taken",thistype.callbackDR);
+            thistype.create(IATTR_MDR,152,"-"," Magical damage taken",thistype.callbackMDR);
+            thistype.create(IATTR_AMP,154,"+"," Damage and healing dealt",thistype.callbackAMP);
+            thistype.create(IATTR_HAMP,156,"+"," Healing taken",thistype.callbackHAMP);
+            thistype.create(IATTR_MREG,160,"Regens "," MP per second",thistype.callbackMREG);
+            thistype.create(IATTR_HREG,162,"Regens "," HP per second",thistype.callbackHREG);
+            thistype.create(IATTR_HLOST,164,"Lost "," HP per second during combat",thistype.callbackHLOST);
+            thistype.create(IATTR_MS,170,"+"," Movement speed",thistype.callbackMS);
+            thistype.create(IATTR_MSPL,171,"+"," Movement speed/level",thistype.callbackMSPL);
+            thistype.create(IATTR_LP,180,"+"," Item special power level",thistype.callbackLP);
+            thistype.create(IATTR_BM_VALOR,200,"Regenerates "," more valor points",thistype.callbackBM_VALOR);
+            thistype.create(IATTR_RG_ONESHOT,201,"One-shot target when it's HP is less than yours","",thistype.callbackRG_ONESHOT);
+            thistype.create(IATTR_RG_RUSH,202,"Deals "," extra damage to target below 30% max HP",thistype.callbackRG_RUSH);
+            thistype.create(IATTR_CRKILLER,203,"Deals "," extra damage to non-hero targets",thistype.callbackCRKILLER);
+            thistype.create(IATTR_MCVT,204,"Converts your normal attacks into magical damage","",thistype.callbackMCVT);
+            thistype.create(IATTR_KG_REGRCD,205,"Reduce cooldown of Instant Regrowth by "," seconds",thistype.callbackKG_REGRCD);
+            thistype.create(IATTR_LEECHAURA,207,"Absorb "," HP from all enemies nearby every second",thistype.callbackLEECHAURA);
+            thistype.create(IATTR_PR_POHDEF,208,"Prayer of healing increases armor of target by ","",thistype.callbackPR_POHDEF);
+            thistype.create(IATTR_DR_MAXHP,210,"Survival Instincts provides "," extra healing and max HP",thistype.callbackDR_MAXHP);
+            thistype.create(IATTR_PL_SHOCK,211,"Holy Shock always deals critical healing","",thistype.callbackPL_SHOCK);
+            thistype.create(IATTR_PR_SHIELD,212,"Removes weakness effect of Shield","",thistype.callbackPR_SHIELD);
+            thistype.create(IATTR_CT_PAIN,213,"Marrow Squeeze extends the Pain on target by "," seconds",thistype.callbackCT_PAIN);
+            thistype.create(IATTR_BD_SHIELD,214,"Shield of Sin'dorei provides "," extra damage reduction, and forces all nearby enemies to attack you",thistype.callbackBD_SHIELD);
+            thistype.create(IATTR_RG_PARALZ,215,"Sinister Strike has a "," chance to paralyze target, reduce target spell haste by 20% and gain an extra combo point",thistype.callbackRG_PARALZ);
+            thistype.create(IATTR_PL_LIGHT,216,"Flash Light dispels one debuff from target","",thistype.callbackPL_LIGHT);
+            thistype.create(IATTR_DR_CDR,217,"Reduce cooldown of Survival Instincts by "," seconds",thistype.callbackDR_CDR);
+            thistype.create(IATTR_SM_LASH,218,"Storm Lash has "," extra chance to cooldown Earth Shock",thistype.callbackSM_LASH);
+            thistype.create(IATTR_DK_ARROW,219,"Number of Dark Arrows increased by ","",thistype.callbackDK_ARROW);
+            thistype.create(IATTR_MG_FDMG,220,"Increase ice spell damage by ","",thistype.callbackMG_FDMG);
+            thistype.create(IATTR_MG_BLZ,222,""," chance to cast an instant Frost Bolt to targets damaged by Blizzard",thistype.callbackMG_BLZ);
+            thistype.create(IATTR_ATK_ML,400,"On Attack: "," mana steal",thistype.callbackATK_ML);
+            thistype.create(IATTR_ATK_LL,401,"On Attack: "," life steal",thistype.callbackATK_LL);
+            thistype.create(IATTR_ATK_LLML,402,"On Attack: "," life and mana steal",thistype.callbackATK_LLML);
+            thistype.create(IATTR_ATK_CTHUN,403,"On Attack: Increase attack speed by 1% per attack, stacks up to ",", lasts for 3 seconds",thistype.callbackATK_CTHUN);
+            thistype.create(IATTR_ATK_WF,404,"On Attack: "," chance to knock back target",thistype.callbackATK_WF);
+            thistype.create(IATTR_ATK_LION,405,"On Attack: "," chance to increase 30% attack speed, lasts for 5 seconds",thistype.callbackATK_LION);
+            thistype.create(IATTR_ATK_MOONWAVE,406,"On Attack: 10% chance to consume 5% of max MP, deals "," magical damage to all enemies in a row",thistype.callbackATK_MOONWAVE);
+            thistype.create(IATTR_ATK_POISNOVA,407,"On Attack: 15% chance to cast poison nova, dealing "," magic damage over time to all enemies within 600 yards",thistype.callbackATK_POISNOVA);
+            thistype.create(IATTR_ATK_COIL,408,"On Attack: 15% chance to cast Death Coil, deals "," magical damage to target. Target takes 3% extra damge",thistype.callbackATK_COIL);
+            thistype.create(IATTR_ATK_BLEED,409,"On Attack: 20% chance to deal bleed effect to target. Target takes "," physical damage over time, lasts for 10 seconds",thistype.callbackATK_BLEED);
+            thistype.create(IATTR_ATK_MDC,410,"On Attack: 25% chance to deal "," magical damage to target",thistype.callbackATK_MDC);
+            thistype.create(IATTR_ATK_STUN,411,"On Attack: 5% chance to stun target for "," seconds",thistype.callbackATK_STUN);
+            thistype.create(IATTR_ATK_CRIT,412,"On Attack: 5% chance to increase "," attack critical chance, lasts for 5 seconds",thistype.callbackATK_CRIT);
+            thistype.create(IATTR_ATK_AMP,413,"On Attack: Target takes "," extra damage, lasts for 3 seconds",thistype.callbackATK_AMP);
+            thistype.create(IATTR_ATK_MD,414,"On Attack: Deals "," magical damage, scaled up by your attack power and spell power",thistype.callbackATK_MD);
+            thistype.create(IATTR_ATK_MDK,415,"On Attack: Deals "," magical damage, scaled up by target HP lost",thistype.callbackATK_MDK);
+            thistype.create(IATTR_ATK_MORTAL,416,"On Attack: Decrease target healing taken by ","",thistype.callbackATK_MORTAL);
+            thistype.create(IATTR_ATK_MISS,417,"On Attack: Decrease target attack hit chance by ","",thistype.callbackATK_MISS);
+            thistype.create(IATTR_ATK_DDEF,418,"On Attack: Decrease target armor by ","",thistype.callbackATK_DDEF);
+            thistype.create(IATTR_ATK_DAS,419,"On Attack: Decrease target attack speed by ","",thistype.callbackATK_DAS);
+            thistype.create(IATTR_ATK_DMS,420,"On Attack: Decrease target movement speed by ","",thistype.callbackATK_DMS);
+            thistype.create(IATTR_ATK_WEAK,421,"On Attack: Decrease target damage and healing dealt by ","",thistype.callbackATK_WEAK);
+            thistype.create(IATTR_3ATK_MOONEXP,430,"Every Third Attack: Consumes 5% of max MP, deals "," magical damage to all enemies nearby",thistype.callback3ATK_MOONEXP);
+            thistype.create(IATTR_MD_MREGEN,450,"Spell Damage: 1% chance to regen "," MP",thistype.callbackMD_MREGEN);
+            thistype.create(IATTR_MD_POISON,451,"Spell Damage: 10% chance to poison target, dealing "," magical damage over time",thistype.callbackMD_POISON);
+            thistype.create(IATTR_MD_CHAIN,452,"Spell Damage: 10% chance to cast Chain Lightning to target, dealing "," magical damage",thistype.callbackMD_CHAIN);
+            thistype.create(IATTR_MDC_ARCANE,460,"Spell Critical: Charges with arcane power. All arcane power will be released automatically after 3 stacks, dealing "," magical damage to target",thistype.callbackMDC_ARCANE);
+            thistype.create(IATTR_DT_MREGEN,500,"On Damaged: Regens MP from "," of the damage taken",thistype.callbackDT_MREGEN);
+            thistype.create(IATTR_ATKED_WEAK,600,"On Attacked: Decreases attacker's attack power by ","",thistype.callbackATKED_WEAK);
+            thistype.create(IATTR_HEAL_HOLY,700,"On Healed: Charges 1 holy power","",thistype.callbackHEAL_HOLY);
+            thistype.create(IATTR_AURA_CONVIC,800,"Grant Aura of Conviction: All enemies within 600 yards take "," more magical damage",thistype.callbackAURA_CONVIC);
+            thistype.create(IATTR_AURA_MEDITA,801,"Grant Aura of Meditation: All allies within 600 yards regen "," MP per second",thistype.callbackAURA_MEDITA);
+            thistype.create(IATTR_AURA_WARSONG,802,"Grant Aura of Warsong: All allies deal "," more damage and healing, take 10% more healing within 600 yards",thistype.callbackAURA_WARSONG);
+            thistype.create(IATTR_AURA_UNHOLY,803,"Grant Aura of Unholy: All allies within 600 yards regen "," HP per second",thistype.callbackAURA_UNHOLY);
+            thistype.create(IATTR_USE_TP,900,"Use: Teleports to an ally","",thistype.callbackUSE_TP);
+            thistype.create(IATTR_USE_BATTLE,901,"Use: Battle Orders, increases "," max HP to all allies within 900 yards, lasts for 75 seconds",thistype.callbackUSE_BATTLE);
+            thistype.create(IATTR_USE_MREGEN,902,"Use: Regens "," MP",thistype.callbackUSE_MREGEN);
+            thistype.create(IATTR_USE_HREGEN,903,"Use: Regens "," HP",thistype.callbackUSE_HREGEN);
+            thistype.create(IATTR_USE_VOODOO,904,"Use: Deals "," magical damage to all enemies within range over time",thistype.callbackUSE_VOODOO);
+            thistype.create(IATTR_USE_INT,905,"Use: Increase intelligence by ",", lasts for 20 seconds",thistype.callbackUSE_INT);
+            thistype.create(IATTR_USE_SP,906,"Use: Increase spell power by ",", lasts for 15 seconds",thistype.callbackUSE_SP);
+            thistype.create(IATTR_USE_DODGE,907,"Use: Increase dodge chance by 30%, lasts for "," seconds",thistype.callbackUSE_DODGE);
+            thistype.create(IATTR_USE_MS,908,"Use: Increase movement speed by 300, lasts for "," seconds. Possible failures.",thistype.callbackUSE_MS);
+            thistype.create(IATTR_USE_CTHUN,909,"Use: Increase attack speed by 40%, take "," extra damage",thistype.callbackUSE_CTHUN);
+            thistype.create(IATTR_USE_HOLYHEAL,910,"Use: Release all holy power to heal yourself, each point heals "," HP",thistype.callbackUSE_HOLYHEAL);
         }
     }
 
