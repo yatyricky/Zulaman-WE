@@ -324,9 +324,9 @@ library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSys
     }
 
     function testItemAttributes(string str) {
-        item it;
-        it = CreateItem(ITID_BREATH_OF_THE_DYING, INIT_X, INIT_Y);
-        ItemExAttributes.instantiate(it);
+        real rnd = GetRandomReal(150000, 220000);
+        print("drop value = "+ R2S(rnd));
+        CreateItemEx(ITID_BREATH_OF_THE_DYING, INIT_X, INIT_Y, rnd);
     }
 
     function getunitlevel(string str) {

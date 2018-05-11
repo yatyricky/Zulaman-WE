@@ -1,11 +1,18 @@
 //! zinc
-library Loot requires IntegerPool, ZAMCore {
+library Loot requires IntegerPool, ZAMCore, ItemAttributes {
 constant integer RP_FACTOR = 20000;
 constant integer TABLE_SIZE = 65;
 constant real RP_RELIC = 1.0;
 constant real RP_RARE = 6.0;
 constant real RP_UNCOMMON = 15.0;
 constant real RP_COMMON = 0.0;
+
+public          real    ILVL_THRESHOLD[];
+public          real    ILVL_THRESHOLD_VALUE[];
+public constant real    ILVL_DROP_RATE = 0.33;
+public constant real    ILVL_MULTIPLE_REDUCTION = 3.0;
+public constant real    ILVL_MAX_RATE = 0.6;
+
     public IntegerPool classSpec;
     IntegerPool relic;
     IntegerPool rare;
@@ -132,6 +139,12 @@ constant real RP_COMMON = 0.0;
     }
     
     function onInit() {
+        ILVL_THRESHOLD[0] = 50000;
+        ILVL_THRESHOLD[1] = 100000;
+        ILVL_THRESHOLD[2] = 300000;
+        ILVL_THRESHOLD_VALUE[0] = 50000;
+        ILVL_THRESHOLD_VALUE[1] = 200000;
+        ILVL_THRESHOLD_VALUE[2] = 1200000;
         loot2 = 0.0;
         RegisterUnitDeath(mobDeathDrop);
     

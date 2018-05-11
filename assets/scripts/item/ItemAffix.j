@@ -3,7 +3,7 @@ library ItemAffix requires Table {
     constant integer MAX_ATTRIBUTES = 4;
     constant integer MAX_LANGUAGES = 2;
 
-    struct AffixRawData {
+    public struct AffixRawData {
         static Table ht;
         integer attribute[MAX_ATTRIBUTES];
         real valueLow[MAX_ATTRIBUTES];
@@ -12,6 +12,19 @@ library ItemAffix requires Table {
         string text[MAX_LANGUAGES];
         integer qlvl;
         integer slot;
+
+        method toString() -> string {
+            string sb = "[AffixMetaData]";
+            integer i = 0;
+            while (i < this.attributeN) {
+                sb += "attribute[" + I2S(i) + "]=" + I2S(this.attribute[i]);
+                i += 1;
+            }
+            sb += "text=" + this.text[1];
+            sb += "qlvl=" + I2S(this.qlvl);
+            sb += "slot=" + I2S(this.slot);
+            return sb;
+        }
 
         static method inst(integer id, string trace) -> thistype {
             if (thistype.ht.exists(id)) {
@@ -43,23 +56,23 @@ library ItemAffix requires Table {
 
         static method onInit() {
             thistype.ht = Table.create();
-            thistype.create(SUFIX_LETHALITY, 1, 2, AFFIX_TYPE_CRIT, 1, 3, "致命之", " of Lethality");
-            thistype.create(SUFIX_SNAKE, 1, 2, AFFIX_TYPE_SCRIT, 1, 3, "灵蛇之", " of Snake");
+            thistype.create(SUFIX_LETHALITY, 1, 2, AFFIX_TYPE_CRIT, 0.01, 0.03, "致命之", " of Lethality");
+            thistype.create(SUFIX_SNAKE, 1, 2, AFFIX_TYPE_SCRIT, 0.01, 0.03, "灵蛇之", " of Snake");
             thistype.create(SUFIX_QUICKNESS, 1, 2, AFFIX_TYPE_AP, 5, 10, "快速之", " of Quickness");
-            thistype.create(SUFIX_WIND_SERPENT, 1, 2, AFFIX_TYPE_SHASTE, 4, 8, "风蛇之", " of Wind Serpent");
+            thistype.create(SUFIX_WIND_SERPENT, 1, 2, AFFIX_TYPE_SHASTE, 0.04, 0.08, "风蛇之", " of Wind Serpent");
             thistype.create(SUFIX_BRUTE, 1, 2, AFFIX_TYPE_STR, 6, 12, "蛮力之", " of Brute");
             thistype.create(SUFIX_DEXTERITY, 1, 2, AFFIX_TYPE_AGI, 6, 12, "灵巧之", " of Dexterity");
             thistype.create(SUFIX_WISDOM, 1, 2, AFFIX_TYPE_INT, 6, 12, "学识之", " of Wisdom");
             thistype.create(SUFIX_VITALITY, 1, 2, AFFIX_TYPE_HP, 90, 180, "活力之", " of Vitality");
             thistype.create(SUFIX_CHAMPION, 1, 2, AFFIX_TYPE_STR, 5, 7, "勇士之", " of Champion").addAttribute(AFFIX_TYPE_AP, 8, 11);
-            thistype.create(SUFIX_BUTCHER, 1, 2, AFFIX_TYPE_STR, 5, 7, "屠夫之", " of Butcher").addAttribute(AFFIX_TYPE_CRIT, 1, 2);
-            thistype.create(SUFIX_ASSASSIN, 1, 2, AFFIX_TYPE_AGI, 5, 7, "刺客之", " of Assassin").addAttribute(AFFIX_TYPE_CRIT, 1, 2);
+            thistype.create(SUFIX_BUTCHER, 1, 2, AFFIX_TYPE_STR, 5, 7, "屠夫之", " of Butcher").addAttribute(AFFIX_TYPE_CRIT, 0.01, 0.02);
+            thistype.create(SUFIX_ASSASSIN, 1, 2, AFFIX_TYPE_AGI, 5, 7, "刺客之", " of Assassin").addAttribute(AFFIX_TYPE_CRIT, 0.01, 0.02);
             thistype.create(SUFIX_RANGER, 1, 2, AFFIX_TYPE_AGI, 5, 7, "游侠之", " of Ranger").addAttribute(AFFIX_TYPE_AP, 8, 11);
-            thistype.create(SUFIX_WIZARD, 1, 2, AFFIX_TYPE_INT, 5, 7, "巫师之", " of Wizard").addAttribute(AFFIX_TYPE_SHASTE, 2, 4);
+            thistype.create(SUFIX_WIZARD, 1, 2, AFFIX_TYPE_INT, 5, 7, "巫师之", " of Wizard").addAttribute(AFFIX_TYPE_SHASTE, 0.02, 0.04);
             thistype.create(SUFIX_PRIEST, 1, 2, AFFIX_TYPE_INT, 5, 7, "祭司之", " of Priest").addAttribute(AFFIX_TYPE_MREGEN, 2, 3);
-            thistype.create(SUFIX_GUARDIAN, 1, 2, AFFIX_TYPE_HP, 70, 100, "护卫之", " of Guardian").addAttribute(AFFIX_TYPE_DODGE, 1, 2);
+            thistype.create(SUFIX_GUARDIAN, 1, 2, AFFIX_TYPE_HP, 70, 100, "护卫之", " of Guardian").addAttribute(AFFIX_TYPE_DODGE, 0.01, 0.02);
             thistype.create(SUFIX_MASTERY, 1, 2, AFFIX_TYPE_SLVL, 1, 3, "精通之", " of Mastery");
-            thistype.create(SUFIX_BLUR, 1, 2, AFFIX_TYPE_DODGE, 1, 3, "模糊之", " of Blur");
+            thistype.create(SUFIX_BLUR, 1, 2, AFFIX_TYPE_DODGE, 0.01, 0.03, "模糊之", " of Blur");
             thistype.create(SUFIX_STRONGHOLD, 1, 2, AFFIX_TYPE_DEF, 5, 10, "堡垒之", " of Stronghold");
             thistype.create(SUFIX_DEEP_SEA, 1, 2, AFFIX_TYPE_MREGEN, 3, 6, "深海之", " of Deep Sea");
             thistype.create(SUFIX_VOID, 1, 2, AFFIX_TYPE_SP, 12, 24, "虚空之", " of Void");
@@ -98,40 +111,25 @@ library ItemAffix requires Table {
             }
         }
 
-        static method addToItem(item it, integer id) {
-            thistype this;
-            thistype index;
-            integer i;
-            AffixRawData data = AffixRawData.inst(id, "ItemAffix.addToItem");
-            if (data != 0) {
-                // init Item Affix
-                this = thistype.allocate();
-                this.id = id;
-                this.attributeN = 0;
-                i = 0;
-                while (i < data.attributeN) {
-                    this.addAttribute(data.attribute[i], GetRandomReal(data.valueLow[i], data.valueHigh[i]));
-                    i += 1;
-                }
-                this.next = 0;
-
-                // attach to item
-                if (thistype.ht.exists(it)) {
-                    index = thistype.ht[it];
-                    while (index.next != 0) {
-                        index = index.next;
-                    }
-                    index.next = this;
-                } else {
-                    thistype.ht[it] = this;
-                }
-            }
-        }
-
         method addAttribute(integer attrType, real val) {
             this.attribute[this.attributeN] = attrType;
             this.value[this.attributeN] = val;
             this.attributeN += 1;
+        }
+
+        static method instantiate(integer id) -> thistype {
+            thistype this = thistype.allocate();
+            integer i;
+            AffixRawData data = AffixRawData.inst(id, "ItemAffix.instantiate");
+            this.id = id;
+            this.attributeN = 0;
+            i = 0;
+            while (i < data.attributeN) {
+                this.addAttribute(data.attribute[i], GetRandomReal(data.valueLow[i], data.valueHigh[i]));
+                i += 1;
+            }
+            this.next = 0;
+            return this;
         }
 
         static method onInit() {

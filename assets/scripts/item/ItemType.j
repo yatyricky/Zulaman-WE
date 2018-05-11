@@ -1,23 +1,12 @@
 //! zinc
-library ItemType requires ItemAffix {
+library ItemType {
     public constant integer QLVL_COMMON = 1;
     public constant integer QLVL_UNCOMMON = 2;
     public constant integer QLVL_RARE = 3;
     public constant integer QLVL_RELIC = 4;
     public constant integer QLVL_LEGENDARY = 5;
-    public constant real AFFIX_FACTOR_BASE = 15000;
-    public constant real AFFIX_FACTOR_DELTA = 2500;
-    public constant real SUFIX_MULTIPLIER = 4;
-    public constant real PREFIX_STATIC_MOD = -0.5;
-    public constant real SUFIX_STATIC_MOD = -0.2;
-    public constant real PREFIX_MAX_PROB = 0.9;
-    public constant real SUFIX_MAX_PROB = 0.75;
-
-    IntegerPool ipPrefix1;
-    IntegerPool ipPrefix2;
-    IntegerPool ipSufix;
     
-    public struct ItemData {
+    struct ItemData {
         private static Table db;
         integer qlvl;
         boolean isConsumable;
@@ -124,96 +113,6 @@ library ItemType requires ItemAffix {
     
     public function IsItemTypeConsumable(integer id) -> boolean {
         return ItemData.typeIsConsumable(id);
-    }
-    
-    public function CreateItemEx(integer id, real x, real y, real affixValue) -> item {
-        item it = CreateItem(id, x + GetRandomReal(-50, 50), y + GetRandomReal(-50, 50));
-        real prefixFactor;
-        real sufixFactor;
-        real prob, prob1;
-        boolean prefixDone;
-        string itemName;
-        if (IsItemTypeConsumable(id)) {
-            SetItemCharges(it, GetRandomInt(ItemData[id].spawnChargeMin, ItemData[id].spawnChargeMin + ItemData[id].spawnChargeRange));
-        } else {
-            prefixFactor = AFFIX_FACTOR_BASE + (GetItemLevel(it) - 1) * AFFIX_FACTOR_DELTA;
-            sufixFactor = prefixFactor * SUFIX_MULTIPLIER;
-            prob = affixValue / prefixFactor + PREFIX_STATIC_MOD;
-            prefixDone = false;
-            if (prob > 1.0) {
-                prob1 = prob - 1.0;
-                if (prob1 > PREFIX_MAX_PROB) {
-                    prob1 = PREFIX_MAX_PROB;
-                }
-                if (GetRandomReal(0, 1) < prob1) {
-                    prefixDone = true;
-                    ItemAffix.addToItem(it, ipPrefix2.get());
-                }
-            }
-            if (prefixDone == false) {
-                if (GetRandomReal(0, 1) < prob) {
-                    prefixDone = true;
-                    ItemAffix.addToItem(it, ipPrefix1.get());
-                }
-            }
-            prob = (affixValue - prefixFactor) / sufixFactor + SUFIX_STATIC_MOD;
-            if (prob > SUFIX_MAX_PROB) {
-                prob = SUFIX_MAX_PROB;
-            }
-            if (GetRandomReal(0, 1) < prob) {
-                ItemAffix.addToItem(it, ipSufix.get());
-            }
-            // itemName = GetAllItemAffixesText(it, 1);
-            // BlzSetItemTooltip(it, itemName);
-            // BlzSetItemName(it, itemName);
-            // print("Set item " + I2HEX(GetHandleId(it)) + " name to: " + itemName);
-        }
-        return it;
-    }
-
-    function onInit() {
-        ipPrefix1 = IntegerPool.create();
-        ipPrefix2 = IntegerPool.create();
-        ipSufix = IntegerPool.create();
-
-        ipPrefix1.add(PREFIX_HEAVY, 10);
-        ipPrefix1.add(PREFIX_SHARP, 10);
-        ipPrefix1.add(PREFIX_SHIMERING, 10);
-        ipPrefix1.add(PREFIX_ENDURABLE, 10);
-        ipPrefix1.add(PREFIX_SKILLED, 10);
-        ipPrefix1.add(PREFIX_ENCHANTED, 10);
-        ipPrefix1.add(PREFIX_MYSTERIOUS, 10);
-        ipPrefix1.add(PREFIX_STEADY, 10);
-
-        ipPrefix2.add(PREFIX_STRONG, 10);
-        ipPrefix2.add(PREFIX_AGILE, 10);
-        ipPrefix2.add(PREFIX_INTELLIGENT, 10);
-        ipPrefix2.add(PREFIX_VIBRANT, 10);
-        ipPrefix2.add(PREFIX_CRUEL, 10);
-        ipPrefix2.add(PREFIX_SORCEROUS, 10);
-        ipPrefix2.add(PREFIX_ETERNAL, 10);
-        ipPrefix2.add(PREFIX_TOUGH, 10);
-
-        ipSufix.add(SUFIX_LETHALITY, 10);
-        ipSufix.add(SUFIX_SNAKE, 10);
-        ipSufix.add(SUFIX_QUICKNESS, 10);
-        ipSufix.add(SUFIX_WIND_SERPENT, 10);
-        ipSufix.add(SUFIX_BRUTE, 10);
-        ipSufix.add(SUFIX_DEXTERITY, 10);
-        ipSufix.add(SUFIX_WISDOM, 10);
-        ipSufix.add(SUFIX_VITALITY, 10);
-        ipSufix.add(SUFIX_CHAMPION, 10);
-        ipSufix.add(SUFIX_BUTCHER, 10);
-        ipSufix.add(SUFIX_ASSASSIN, 10);
-        ipSufix.add(SUFIX_RANGER, 10);
-        ipSufix.add(SUFIX_WIZARD, 10);
-        ipSufix.add(SUFIX_PRIEST, 10);
-        ipSufix.add(SUFIX_GUARDIAN, 10);
-        ipSufix.add(SUFIX_MASTERY, 10);
-        ipSufix.add(SUFIX_BLUR, 10);
-        ipSufix.add(SUFIX_STRONGHOLD, 10);
-        ipSufix.add(SUFIX_DEEP_SEA, 10);
-        ipSufix.add(SUFIX_VOID, 10);
     }
 }
 //! endzinc
