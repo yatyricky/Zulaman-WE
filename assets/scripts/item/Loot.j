@@ -165,7 +165,7 @@ constant real RP_COMMON = 0.0;
         relic.add(ITID_INFINITY, 10);
         relic.add(ITID_INSIGHT, 10);
         relic.add(ITID_MIGHT_OF_THE_ANGEL_OF_JUSTICE, 10);
-        relic.add(ITID_VOODOO_VIAL, 10);
+        relic.add(ITID_VOODOO_VIALS, 10);
         relic.add(ITID_WOESTAVE, 10);
         relic.add(ITID_WINDFORCE, 10);
 

@@ -1,5 +1,5 @@
 //! zinc
-library SinisterStrike requires DamageSystem, SpellEvent, RogueGlobal {
+library SinisterStrike requires DamageSystem, SpellEvent, RogueGlobal, DaggerOfAssassination {
 constant integer BUFF_ID = 'A046';
 constant string  ART  = "Abilities\\Weapons\\KeeperGroveMissile\\KeeperGroveMissile.mdl";    
 

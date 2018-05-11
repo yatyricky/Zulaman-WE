@@ -242,6 +242,7 @@ SpellData.create(SID_NAGA_FRENZY,"Naga Frenzy",0,0,20,OrderId("unholyfrenzy"),1,
 SpellData.create(SID_ARMOR_CRUSHING,"Armor Crushing",0,0,20,OrderId("sleep"),1,ORDER_TYPE_TARGET);
 SpellData.create(SID_THUNDER_CLAP,"Thunder Clap",0,0,12,OrderId("thunderclap"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_RAGE_ROAR,"Rage Roar",0,0,20,OrderId("slow"),1,ORDER_TYPE_IMMEDIATE);
+SpellData.create(SID_BLOOD_BOIL,"Blood Boil",0,0,20,OrderId("howlofterror"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_UNHOLY_FRENZY,"Unholy Frenzy",0,0,12,OrderId("sleep"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_CHAOS_LEAP,"Chaos Leap",0,0,20,OrderId("sleep"),1,ORDER_TYPE_TARGET);
 SpellData.create(SID_WAR_STOMP,"War Stomp",0,4,8,OrderId("sleep"),1,ORDER_TYPE_IMMEDIATE);
@@ -250,8 +251,11 @@ SpellData.create(SID_BLAZING_HASTE,"Blazing Haste",75,0,5,OrderId("heal"),1,ORDE
 SpellData.create(SID_FIRE_BALL,"Fire Ball",100,3,1,OrderId("sleep"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_FLAME_SHOCK,"Flame Shock",50,0,5,OrderId("slow"),1,ORDER_TYPE_TARGET);
 SpellData.create(SID_SMOLDER,"Smolder",0,1,0,OrderId("howlofterror"),1,ORDER_TYPE_IMMEDIATE);
+SpellData.create(SID_SUMMON_PARASITICAL_ROACH,"Summon Parasitical Roach",0,0,15,OrderId("howlofterror"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_PARASITE,"Parasite",0,0,0,0,1,ORDER_TYPE_TARGET);
 SpellData.create(SID_GNAW,"Gnaw",0,5,0,OrderId("sleep"),2,ORDER_TYPE_TARGET);
+SpellData.create(SID_CURSE_OF_THE_DEAD,"Curse of the Dead",0,0,15,OrderId("sleep"),1,ORDER_TYPE_TARGET);
+SpellData.create(SID_DEATH_ORB,"Death Orb",0,3,0,OrderId("slow"),1,ORDER_TYPE_TARGET);
 SpellData.create(SID_MANA_TAP,"Mana Tap",0,0,13,OrderId("sleep"),1,ORDER_TYPE_POINT);
 SpellData.create(SID_FROST_GRAVE,"Frost Grave",0,0,8,OrderId("sleep"),1,ORDER_TYPE_TARGET);
 SpellData.create(SID_DEATH_AND_DECAY,"Death and Decay",0,0,8,OrderId("heal"),1,ORDER_TYPE_TARGET);
@@ -278,6 +282,7 @@ SpellData.create(SID_VICIOUS_STRIKE,"Vicious Strike",0,0,12,OrderId("sleep"),1,O
 SpellData.create(SID_FILTHY_LAND,"Filthy Land",0,0,18,OrderId("roar"),1,ORDER_TYPE_POINT);
 SpellData.create(SID_CALL_TO_ARMS,"Call To Arms",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_CTHUNS_DERANGEMENT,"Cthuns Derangement",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
+SpellData.create(BID_BREATH_OF_THE_DYING,"Breath of the Dying",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_ENIGMA,"Enigma",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_GOBLIN_ROCKET_BOOTS_LIMITED_EDITION,"Goblin Rocket Boots LIMITED EDITION",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_HEALTH_STONE,"Health Stone",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
@@ -288,7 +293,7 @@ SpellData.create(SID_LIGHTS_JUSTICE,"Lights Justice",0,0,1,OrderId("channel"),1,
 SpellData.create(SID_MOROES_LUCKY_GEAR,"Moroes Lucky Gear",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_REFORGED_BADGE_OF_TENACITY,"Reforged Badge of Tenacity",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_TYRAELS_MIGHT,"Tyraels Might",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
-SpellData.create(ITID_VOODOO_VIALS,"Voodoo Vial",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
+SpellData.create(SID_VOODOO_VIALS,"Voodoo Vial",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_ARMAGEDDON_SCROLL,"Armageddon Scroll",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_ARANS_COUNTER_SPELL_SCROLL,"Arans Counter Spell Scroll",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_BANSHEE_SCROLL,"Banshee Scroll",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);

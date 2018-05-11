@@ -335,6 +335,8 @@ public constant integer SID_CHARGED_BREATH = 'A0AU';
 public constant integer SID_MANA_LEECH = 'A0AV';
 
 // ## Area 3
+// fel peon
+public constant integer SID_BLOOD_BOIL = 'xxxx';
 // fel grunt
 public constant integer UTID_FEL_GRUNT = 'n00C';
 public constant integer SID_UNHOLY_FRENZY = 'A09H';
@@ -362,6 +364,7 @@ public constant integer SID_SMOLDER = 'A0CK';
 // ## Area 4
 // Noxious Spider
 public constant integer UTID_NOXIOUS_SPIDER = 'u003';
+public constant integer SID_SUMMON_PARASITICAL_ROACH = 'xxxx';
 // Parasitical Roach
 public constant integer UTID_PARASITICAL_ROACH = 'ucs1';
 public constant integer SID_PARASITE = 'A0BL';
@@ -369,6 +372,9 @@ public constant integer BID_PARASITE = 'A0BM';
 // Zombie
 public constant integer UTID_ZOMBIE = 'nzom';
 public constant integer SID_GNAW = 'A0BK';
+// skeletal mage
+public constant integer SID_CURSE_OF_THE_DEAD = 'xxxx';
+public constant integer SID_DEATH_ORB = 'xxxx';
 // Obsdian Statue
 public constant integer UTID_OBSIDIAN_CONSTRUCT = 'uobs';
 public constant integer BID_REFLECTION_AURA = 'A0BH';
@@ -616,6 +622,7 @@ public constant integer ITID_ANATHEMA = 'Iana';
 public constant integer ITID_RARE_SHIMMER_WEED = 'Ithu';
 // legendary
 public constant integer ITID_BREATH_OF_THE_DYING = 'I001';
+public constant integer BID_BREATH_OF_THE_DYING = 'A063';
 public constant integer ITID_CALL_TO_ARMS = 'Icta';
 public constant integer SID_CALL_TO_ARMS = 'A069';
 public constant integer ITID_DERANGEMENT_OF_CTHUN = 'I00L';
@@ -626,8 +633,8 @@ public constant integer ITID_INFINITY = 'I01P';
 public constant integer ITID_INSIGHT = 'Iins';
 public constant integer ITID_MIGHT_OF_THE_ANGEL_OF_JUSTICE = 'I01D';
 public constant integer SID_TYRAELS_MIGHT = 'A07K';
-public constant integer ITID_VOODOO_VIAL = 'I00P';
-public constant integer ITID_VOODOO_VIALS = 'A06N';
+public constant integer ITID_VOODOO_VIALS = 'I00P';
+public constant integer SID_VOODOO_VIALS = 'A06N';
 public constant integer ITID_WOESTAVE = 'Iwoe';
 public constant integer ITID_WINDFORCE = 'Iwf0';
 public constant integer ITID_HOLY_MOONLIGHT_SWORD = 'xxxx';

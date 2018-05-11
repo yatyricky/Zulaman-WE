@@ -37,7 +37,7 @@ constant string  MISSILE  = "Abilities\\Spells\\Other\\AcidBomb\\BottleMissile.m
     }
 
     function onEffect(Buff buf) {
-        DamageTarget(buf.bd.caster, buf.bd.target, buf.bd.r0, SpellData.inst(ITID_VOODOO_VIALS, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS);
+        DamageTarget(buf.bd.caster, buf.bd.target, buf.bd.r0, SpellData.inst(SID_VOODOO_VIALS, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS);
         AddTimedEffect.atUnit(ART_POISON, buf.bd.target, "origin", 0.5);
     }
 
@@ -56,7 +56,7 @@ constant string  MISSILE  = "Abilities\\Spells\\Other\\AcidBomb\\BottleMissile.m
                         charges = 0;
                         while (i < 6) {
                             tmpi = UnitItemInSlot(DamageResult.source, i);
-                            if (GetItemTypeId(tmpi) == ITID_VOODOO_VIAL) {
+                            if (GetItemTypeId(tmpi) == ITID_VOODOO_VIALS) {
                                 charges += GetItemCharges(tmpi);
                             }
                             i += 1;
@@ -124,7 +124,7 @@ constant integer MAX_BUGS = 10;
                 j = 0;
                 while (j < MobList.n) {
                     if (GetDistance.unitCoord(MobList.units[j], this.x, this.y) < 250 && !IsUnitDead(MobList.units[j])) {
-                        DamageTarget(this.u, MobList.units[j], 73.0, SpellData.inst(ITID_VOODOO_VIALS, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS);
+                        DamageTarget(this.u, MobList.units[j], 73.0, SpellData.inst(SID_VOODOO_VIALS, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS);
                         AddTimedEffect.atUnit(ART_PLAGUE, MobList.units[j], "origin", 0.5);
                     }
                     j += 1;
@@ -232,10 +232,10 @@ constant integer MAX_BUGS = 10;
 
     function onInit() {
         ht = HandleTable.create();
-        RegisterItemPropMod(ITID_VOODOO_VIAL, action);
+        RegisterItemPropMod(ITID_VOODOO_VIALS, action);
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_NEG);
         RegisterDamagedEvent(damaged);
-        RegisterSpellEffectResponse(ITID_VOODOO_VIALS, onCast);
+        RegisterSpellEffectResponse(SID_VOODOO_VIALS, onCast);
         bugsn = 5;
         bugs[0] = 'e005';
         bugs[1] = 'e006';

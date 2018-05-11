@@ -1,12 +1,11 @@
 //! zinc
-library BreathOfTheDying requires ItemAttributes, DamageSystem, SpellData, AggroSystem {
-constant string  MISSILE  = "Abilities\\Weapons\\ChimaeraAcidMissile\\ChimaeraAcidMissile.mdl";
-constant integer BUFF_ID = 'A063';
-constant integer NOMIS = 32;
+library BreathOfTheDying requires DamageSystem, SpellData, AggroSystem {
+
+    constant integer NOMIS = 32;
     HandleTable ht;
     
     function onEffect(Buff buf) {
-        DamageTarget(buf.bd.caster, buf.bd.target, 30.0, "死亡呼吸", false, false, false, WEAPON_TYPE_WHOKNOWS);
+        DamageTarget(buf.bd.caster, buf.bd.target, buf.bd.r0, SpellData.inst(BID_BREATH_OF_THE_DYING, "BreathOfTheDying.onEffect").name, false, false, false, WEAPON_TYPE_WHOKNOWS);
         AddTimedEffect.atUnit(ART_POISON, buf.bd.target, "origin", 0.2);
     }
     
@@ -15,10 +14,12 @@ constant integer NOMIS = 32;
     struct BOTD {
         private timer tm;
         private unit a;
+        private unit target;
         private unit mis[NOMIS];
         private integer tick;
-        private group damaged;
+        private HandleTable damaged;
         private effect eff[NOMIS];
+        private real amount;
         
         private method destroy() {
             integer i = 0;
@@ -29,11 +30,11 @@ constant integer NOMIS = 32;
                 this.mis[i] = null;
                 i += 1;
             }
-            ReleaseGroup(this.damaged);
             ReleaseTimer(this.tm);
             this.tm = null;
-            this.damaged = null;
+            this.damaged.destroy();
             this.a = null;
+            this.target = null;
             this.deallocate();
         }
         
@@ -50,24 +51,23 @@ constant integer NOMIS = 32;
                 nexty = GetUnitY(this.mis[i]) + Sin(angle * i) * 24.0;
                 SetUnitX(this.mis[i], nextx);
                 SetUnitY(this.mis[i], nexty);
-                
-                if (IsInCombat()) {
-                    j = 0;
-                    while (j < MobList.n) {
-                        if (GetDistance.units2d(MobList.units[j], this.mis[i]) < 150 && !IsUnitDead(MobList.units[j]) && !IsUnitInGroup(MobList.units[j], this.damaged)) {
-                            buf = Buff.cast(this.a, MobList.units[j], BUFF_ID);
-                            buf.bd.interval = 1.0 / (1.0 + UnitProp.inst(this.a, SCOPE_PREFIX).SpellHaste() + UnitProp.inst(this.a, SCOPE_PREFIX).AttackSpeed() / 100.0);
-                            buf.bd.tick = Rounding(6.0 / buf.bd.interval);
-                            buf.bd.boe = onEffect;
-                            buf.bd.bor = onRemove;
-                            buf.run();
-                            GroupAddUnit(this.damaged, MobList.units[j]);
-                        }
-                        j += 1;
-                    }
-                }
-                
                 i += 1;
+            }
+            if (IsInCombat()) {
+                j = 0;
+                while (j < MobList.n) {
+                    if (GetDistance.units2d(MobList.units[j], this.target) < (600 - 24.0 * this.tick) && !IsUnitDead(MobList.units[j]) && this.damaged.exists(MobList.units[j]) == false) {
+                        buf = Buff.cast(this.a, MobList.units[j], BID_BREATH_OF_THE_DYING);
+                        buf.bd.interval = 1.0 / (1.0 + UnitProp.inst(this.a, SCOPE_PREFIX).SpellHaste() + UnitProp.inst(this.a, SCOPE_PREFIX).AttackSpeed() / 100.0);
+                        buf.bd.tick = Rounding(6.0 / buf.bd.interval);
+                        buf.bd.r0 = this.amount;
+                        buf.bd.boe = onEffect;
+                        buf.bd.bor = onRemove;
+                        buf.run();
+                        this.damaged[MobList.units[j]] = 1;
+                    }
+                    j += 1;
+                }
             }
             if (this.tick > 0) {
                 this.tick -= 1;
@@ -80,17 +80,29 @@ constant integer NOMIS = 32;
             thistype this = thistype.allocate();
             real angle = 6.283 / NOMIS;
             integer i = 0;
+            integer j = 0;
+            item iteratorItem;
+            UnitProp up = UnitProp.inst(a, "BOTD.start");
             this.a = a;
+            this.target = b;
             this.tm = NewTimer();
             SetTimerData(this.tm, this);
             this.tick = 25;
-            this.damaged = NewGroup();
+            this.damaged = HandleTable.create();
+            this.amount = 0;
+            while (j < 6) {
+                iteratorItem = UnitItemInSlot(a, j);
+                if (GetItemTypeId(iteratorItem) == ITID_BREATH_OF_THE_DYING) {
+                    this.amount += ItemExAttributes.getValue(iteratorItem, 50, "BOTD.start");
+                }
+                j += 1;
+            }
+            this.amount += (up.AttackPower() + up.SpellPower()) / 40.0;
             while (i < NOMIS) {
                 this.mis[i] = CreateUnit(Player(0), DUMMY_ID, GetUnitX(b), GetUnitY(b), Rad2Deg(angle * i));
                 SetUnitFlyable(this.mis[i]);
                 SetUnitFlyHeight(this.mis[i], 50.0, 0.0);
-                //SetUnitScale(this.mis, 2.0, 2.0, 2.0);
-                this.eff[i] = AddSpecialEffectTarget(MISSILE, this.mis[i], "origin");
+                this.eff[i] = AddSpecialEffectTarget(ART_POISON_SLIME, this.mis[i], "origin");
                 i += 1;
             }
             TimerStart(this.tm, 0.04, true, function thistype.run);
@@ -98,38 +110,27 @@ constant integer NOMIS = 32;
     }
     
     function damaged() {
-        if (DamageResult.isHit) {
-            if (ht.exists(DamageResult.source)) {
-                if (ht[DamageResult.source] > 0 && DamageResult.abilityName == DAMAGE_NAME_MELEE) {
-                    if (GetRandomInt(0, 99) < 15) {
-                        BOTD.start(DamageResult.source, DamageResult.target);
-                    }
+        if (DamageResult.isHit == true && DamageResult.abilityName == DAMAGE_NAME_MELEE) {
+            if (ht.exists(DamageResult.source) && ht[DamageResult.source] > 0) {
+                if (GetRandomInt(0, 99) < 15) {
+                    BOTD.start(DamageResult.source, DamageResult.target);
                 }
             }
         }
     }
 
-    function action(unit u, item i, integer fac) {
-        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
-        up.ModStr(10 * fac);
-        up.ModAgi(10 * fac);
-        up.ModInt(10 * fac);
-        up.ModAP(40 * fac);
-        up.ModAttackSpeed(20 * fac);
-        up.ll += 0.1 * fac;
-        up.ml += 0.1 * fac;
-        if (!ht.exists(u)) {ht[u] = 0;}
-        ht[u] = ht[u] + fac;
+    public function EquipedBOTD(unit u, integer polar) {
+        if (ht.exists(u) == false) {
+            ht[u] = 0;
+        }
+        ht[u] = ht[u] + polar;
     }
 
     function onInit() {
         ht = HandleTable.create();
-        RegisterItemPropMod(ITID_BREATH_OF_THE_DYING, action);
-        BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_NEG);
+        BuffType.register(BID_BREATH_OF_THE_DYING, BUFF_MAGE, BUFF_NEG);
         RegisterDamagedEvent(damaged);
     }
-
-
 
 }
 //! endzinc

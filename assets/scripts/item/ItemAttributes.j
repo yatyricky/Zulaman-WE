@@ -1,5 +1,5 @@
 //! zinc
-library ItemAttributes requires UnitProperty, Table {
+library ItemAttributes requires UnitProperty, BreathOfTheDying {
     public type ItemPropModType extends function(unit, item, integer);
     public type ItemAttributeCallback extends function(unit, real, integer);
     //public HandleTable itemInst;
@@ -183,6 +183,25 @@ library ItemAttributes requires UnitProperty, Table {
             }
         }
 
+        static method getValue(item it, integer id, string trace) -> real {
+            thistype head = thistype.inst(it, trace);
+            real ret = 0;
+            boolean found = false;
+            while (found == false && head != 0) {
+                if (head.id == id) {
+                    found = true;
+                    ret = head.value;
+                }
+                head = head.next;
+            }
+            if (found == true) {
+                return ret;
+            } else {
+                print("ItemExAttributes.getValue: unable to find " + I2S(id) + " in item: " + ID2S(GetItemTypeId(it)));
+                return 0.0;
+            }
+        }
+
         static method create(DefaultItemAttributesData raw) -> thistype {
             thistype this = thistype.allocate();
             this.id = raw.id;
@@ -326,11 +345,6 @@ library ItemAttributes requires UnitProperty, Table {
             }
             attr = attr.next;
         }
-        if (ItemAttributes.exists(itid)) {
-            // ItemPropModType(ItemAttributes[itid]).evaluate(u, it, 1);
-            // ItemAffixEffect(u, it, 1);
-            //if (!itemInst.exists())
-        }
         // stack charges
         if (IsItemTypeConsumable(itid)) {
             i = 0;
@@ -452,12 +466,15 @@ library ItemAttributes requires UnitProperty, Table {
         static method callback45(unit u, real val, integer polar) {
             UnitProp up = UnitProp.inst(u, "ItemAttributeMeta.callback45");
             up.ll += val * polar;
+            up.ml += val * polar;
         }
         static method callback46(unit u, real val, integer polar) {}
         static method callback47(unit u, real val, integer polar) {}
         static method callback48(unit u, real val, integer polar) {}
         static method callback49(unit u, real val, integer polar) {}
-        static method callback50(unit u, real val, integer polar) {}
+        static method callback50(unit u, real val, integer polar) {
+            EquipedBOTD(u, polar);
+        }
         static method callback51(unit u, real val, integer polar) {}
         static method callback52(unit u, real val, integer polar) {}
         static method callback53(unit u, real val, integer polar) {}
