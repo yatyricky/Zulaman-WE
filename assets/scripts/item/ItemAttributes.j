@@ -270,7 +270,6 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying {
             string prefix = "";
             while (head != 0) {
                 meta = AffixRawData.inst(head.id, "ItemExAttributes.updateName");
-                print(meta.toString());
                 if (meta.slot == 1) {
                     prefix = prefix + meta.text[1];
                 } else if (meta.slot == 2) {
@@ -281,7 +280,6 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying {
                 head = head.next;
             }
             BlzSetItemName(it, prefix + rawName + sufix);
-            print("name should be " + prefix + rawName + sufix);
         }
 
         static method apply(item it, real exp) {
@@ -352,7 +350,6 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying {
             thistype this = thistype.inst(it, "ItemExAttributes.appendAffix");
             integer i;
             ItemAffix index = this.affix;
-            print("Appended affix: "+ AffixRawData.inst(affix.id, "test").text[1]);
             while (index != 0 && index.next != 0) {
                 index = index.next;
             }

@@ -89,7 +89,7 @@ library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSys
     }
     
     function createitem(string str) {
-        CreateItemEx(S2ID(SubString(str, 5, 9)), GetInitX(0), GetInitY(0), GetRandomReal(10000, 100000));
+        CreateItemEx(S2ID(SubString(str, 5, 9)), GetInitX(0), GetInitY(0), GetRandomReal(100000, 250000));
     }
     
     function screenClear(string str) {
