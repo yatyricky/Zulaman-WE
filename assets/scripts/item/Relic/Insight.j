@@ -1,35 +1,18 @@
 //! zinc
-library Insight requires ItemAttributes, DamageSystem {
-constant integer BUFF_ID = 'A066';
+library Insight requires DamageSystem {
     HandleTable ht;
-
-    function onEffect(Buff buf) {
-    }
-
-    function onRemove(Buff buf) {
-        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).manaRegen -= 6.0;
-    }
-    
-    function ondamaging() {
-        if (DamageResult.abilityName == DAMAGE_NAME_MELEE) {
-            if (ht.exists(DamageResult.source)) {
-                if (ht[DamageResult.source] > 0) {
-                    DamageResult.wasDodgable = false;
-                    DamageResult.isPhyx = false;
-                    DamageResult.amount += 45.0;
-                }
-            }
-        }
-    }
     
     struct InsightAura {
         private static HandleTable caht;
         private unit u;
         private timer tm;
+        effect eff;
         
         private method destroy() {
             ReleaseTimer(this.tm);
             thistype.caht.flush(this.u);
+            DestroyEffect(this.eff);
+            this.eff = null;
             this.tm = null;
             this.u = null;
             this.deallocate();
@@ -39,19 +22,22 @@ constant integer BUFF_ID = 'A066';
             thistype this = GetTimerData(GetExpiredTimer());
             integer j = 0;
             Buff buf;
+            integer ii = 0;
+            item ti;
+            real amt = 0;
+            while (ii < 6) {
+                ti = UnitItemInSlot(this.u, ii);
+                if (ti != null) {
+                    amt += ItemExAttributes.getAttributeValue(ti, IATTR_AURA_MEDITA, SCOPE_PREFIX) * (1 + ItemExAttributes.getAttributeValue(ti, IATTR_LP, SCOPE_PREFIX) * 0.14);
+                }
+                ii += 1;
+            }
+            ti = null;
+
             if (!IsUnitDead(this.u)) {
                 while (j < PlayerUnits.n) {
                     if (GetDistance.units2d(PlayerUnits.units[j], this.u) < 600 && !IsUnitDead(PlayerUnits.units[j])) {
-                        buf = Buff.cast(this.u, PlayerUnits.units[j], BUFF_ID);
-                        buf.bd.tick = -1;
-                        buf.bd.interval = 1.5;
-                        if (buf.bd.i0 != 6) {
-                            UnitProp.inst(buf.bd.target, SCOPE_PREFIX).manaRegen += 6.0;
-                            buf.bd.i0 = 6;
-                        }
-                        buf.bd.boe = onEffect;
-                        buf.bd.bor = onRemove;
-                        buf.run();
+                        ModUnitMana(PlayerUnits.units[j], amt);
                     }
                     j += 1;
                 }
@@ -66,12 +52,12 @@ constant integer BUFF_ID = 'A066';
                 this.u = u;
                 this.tm = NewTimer();
                 SetTimerData(this.tm, this);
-                //BJDebugMsg("Registered once");
             } else {
                 this = thistype.caht[u];
             }
             if (flag) {
                 TimerStart(this.tm, 1.0, true, function thistype.run);
+                this.eff = AddSpecialEffectTarget(ART_BRILLIANCE, u, "origin");
             } else {
                 //BJDebugMsg("To destroy");
                 this.destroy();
@@ -83,27 +69,22 @@ constant integer BUFF_ID = 'A066';
         }
     }
 
-    function action(unit u, item it, integer fac) {
-        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
-        
-        up.ModInt(12 * fac);
-        up.ModAP(15 * fac);
-        up.spellPower += 25 * fac;
-        up.spellHaste += 0.1 * fac;
-        
-        if (!ht.exists(u)) {ht[u] = 0;}
-        ht[u] = ht[u] + fac;
-        
-        //BJDebugMsg("ht[u] = " + I2S(ht[u]));
-        
-        InsightAura.start(u, ht[u] > 0);
+    public function EquipedInsightAura(unit u, integer polar) {
+        if (ht.exists(u) == false) {
+            ht[u] = 0;
+        }
+        if (ht[u] == 0) {
+            InsightAura.start(u, true);
+        }
+        ht[u] = ht[u] + polar;
+        if (ht[u] == 0) {
+            InsightAura.start(u, false);
+        }
     }
 
     function onInit() {
         ht = HandleTable.create();
-        RegisterItemPropMod(ITID_INSIGHT, action);
-        BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_POS);
-        RegisterOnDamageEvent(ondamaging);
+        BuffType.register(BID_INSIGHT, BUFF_PHYX, BUFF_POS);
     }
 
 }

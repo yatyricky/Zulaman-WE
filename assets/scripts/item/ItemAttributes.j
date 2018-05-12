@@ -1,5 +1,5 @@
 //! zinc
-library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindForce, Infinity {
+library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindForce, Infinity, ConvertAttackMagic {
     public constant real AFFIX_FACTOR_BASE = 15000;
     public constant real AFFIX_FACTOR_DELTA = 2500;
     public constant real SUFIX_MULTIPLIER = 4;
@@ -631,7 +631,9 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
         static method callbackRG_ONESHOT(unit u, real val, integer polar) {}
         static method callbackRG_RUSH(unit u, real val, integer polar) {}
         static method callbackCRKILLER(unit u, real val, integer polar) {}
-        static method callbackMCVT(unit u, real val, integer polar) {}
+        static method callbackMCVT(unit u, real val, integer polar) {
+            EquipedConvertAttackMagic(u, polar);
+        }
         static method callbackKG_REGRCD(unit u, real val, integer polar) {}
         static method callbackLEECHAURA(unit u, real val, integer polar) {}
         static method callbackPR_POHDEF(unit u, real val, integer polar) {}
@@ -714,7 +716,9 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
         static method callbackAURA_CONVIC(unit u, real val, integer polar) {
             EquipedConvictionAura(u, polar);
         }
-        static method callbackAURA_MEDITA(unit u, real val, integer polar) {}
+        static method callbackAURA_MEDITA(unit u, real val, integer polar) {
+            EquipedInsightAura(u, polar);
+        }
         static method callbackAURA_WARSONG(unit u, real val, integer polar) {}
         static method callbackAURA_UNHOLY(unit u, real val, integer polar) {}
         static method callbackUSE_TP(unit u, real val, integer polar) {}
