@@ -698,7 +698,9 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying {
         static method callbackMD_POISON(unit u, real val, integer polar) {}
         static method callbackMD_CHAIN(unit u, real val, integer polar) {}
         static method callbackMDC_ARCANE(unit u, real val, integer polar) {}
-        static method callbackDT_MREGEN(unit u, real val, integer polar) {}
+        static method callbackDT_MREGEN(unit u, real val, integer polar) {
+            UnitProp.inst(u, "ItemAttributeMeta.callback45").damageGoesMana += val * polar;
+        }
         static method callbackATKED_WEAK(unit u, real val, integer polar) {}
         static method callbackHEAL_HOLY(unit u, real val, integer polar) {}
         static method callbackAURA_CONVIC(unit u, real val, integer polar) {}
@@ -761,6 +763,7 @@ thistype.create(IATTR_PL_SHOCK,256,"|cff87ceebHoly Shock always deals critical h
 thistype.create(IATTR_PR_SHIELD,259,"|cff87ceebRemoves weakness effect of Shield","|r",thistype.callbackPR_SHIELD);
 thistype.create(IATTR_PL_LIGHT,262,"|cff87ceebFlash Light dispels one debuff from target","|r",thistype.callbackPL_LIGHT);
 thistype.create(IATTR_HEAL_HOLY,265,"|cff87ceebOn Healed: Charges 1 holy power","|r",thistype.callbackHEAL_HOLY);
+thistype.create(IATTR_DT_MREGEN,266,"|cff87ceebRegens MP from "," of the damage taken|r",thistype.callbackDT_MREGEN);
 thistype.create(IATTR_USE_TP,268,"|cff87ceebUse: Teleports to an ally","|r",thistype.callbackUSE_TP);
 thistype.create(IATTR_BM_VALOR,300,"|cff33ff33Regenerates "," more valor points|r",thistype.callbackBM_VALOR);
 thistype.create(IATTR_RG_RUSH,302,"|cff33ff33Deals "," extra damage to target below 30% max HP|r",thistype.callbackRG_RUSH);
@@ -799,7 +802,6 @@ thistype.create(IATTR_MD_MREGEN,450,"|cff33ff33Dealing Magic Damage: 1% chance t
 thistype.create(IATTR_MD_POISON,451,"|cff33ff33Dealing Magic Damage: 10% chance to poison target, dealing "," magic damage over time|r",thistype.callbackMD_POISON);
 thistype.create(IATTR_MD_CHAIN,452,"|cff33ff33Dealing Magic Damage: 10% chance to cast Chain Lightning to target, dealing "," magic damage|r",thistype.callbackMD_CHAIN);
 thistype.create(IATTR_MDC_ARCANE,460,"|cff33ff33Magic Damage Critical: Charges with arcane power. All arcane power will be released automatically after 3 stacks, dealing "," magic damage to target|r",thistype.callbackMDC_ARCANE);
-thistype.create(IATTR_DT_MREGEN,500,"|cff33ff33On Damaged: Regens MP from "," of the damage taken|r",thistype.callbackDT_MREGEN);
 thistype.create(IATTR_ATKED_WEAK,600,"|cff33ff33On Attacked: Decreases attacker's attack power by ","|r",thistype.callbackATKED_WEAK);
 thistype.create(IATTR_AURA_CONVIC,800,"|cff33ff33Grant Aura of Conviction: All enemies within 600 yards take "," more magic damage|r",thistype.callbackAURA_CONVIC);
 thistype.create(IATTR_AURA_MEDITA,801,"|cff33ff33Grant Aura of Meditation: All allies within 600 yards regen "," MP per second|r",thistype.callbackAURA_MEDITA);

@@ -1,81 +1,14 @@
 //! zinc
 library Enigma requires ItemAttributes, DamageSystem {
-constant string  ART  = "Abilities\\Spells\\Items\\AIil\\AIilTarget.mdl";
-    HandleTable ht;
-
-    struct EnigmaData {
-        private static HandleTable enigtable;
-        integer life;
-        integer str;
-        
-        static method operator[] (item it) -> thistype {
-            thistype this;
-            if (!thistype.enigtable.exists(it)) {
-                this = thistype.allocate();
-                thistype.enigtable[it] = this;
-                this.life = 0;
-                this.str = 0;
-            } else {
-                this = thistype.enigtable[it];
-            }
-            return this;
-        }
-        
-        private static method onInit() {
-            thistype.enigtable = HandleTable.create();
-        }
-    }
-
-    function action(unit u, item it, integer fac) {
-        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
-        EnigmaData ed = EnigmaData[it];
-        up.damageTaken -= 0.05 * fac;
-        up.damageDealt += 0.05 * fac;
-        up.ModSpeed(45 * fac);
-        up.damageGoesMana += 0.04 * fac;
-        if (fac == 1) {
-            ed.str = 4 * GetHeroLevel(u);
-            ed.life = Rounding(0.05 * GetUnitState(u, UNIT_STATE_MAX_LIFE));
-        }
-        up.ModStr(ed.str * fac);
-        up.ModLife(ed.life * fac);
-        if (!ht.exists(u)) {ht[u] = 0;}
-        ht[u] = ht[u] + fac;
-    }
     
     function onCast() {
         SetUnitX(SpellEvent.CastingUnit, GetUnitX(SpellEvent.TargetUnit));
         SetUnitY(SpellEvent.CastingUnit, GetUnitY(SpellEvent.TargetUnit));
-        AddTimedEffect.atUnit(ART, SpellEvent.CastingUnit, "origin", 1.0);
-    }
-    
-    function lvledup() -> boolean {
-        unit u = GetTriggerUnit();
-        integer i;
-        item tmpi;
-        ItemPropModType ipmt;
-        if (ht.exists(u)) {
-            if (ht[u] > 0) {
-                ipmt = action;
-                i = 0;
-                while (i < 6) {
-                    tmpi = UnitItemInSlot(u, i);
-                    if (GetItemTypeId(tmpi) == ITID_ENIGMA) {
-                        ipmt.evaluate(u, tmpi, -1);
-                        ipmt.evaluate(u, tmpi, 1);
-                    }
-                    i += 1;
-                }
-            }
-        }
-        return false;
+        AddTimedEffect.atUnit(ART_ILLUSION_TARGET, SpellEvent.CastingUnit, "origin", 1.0);
     }
 
     function onInit() {
-        ht = HandleTable.create();
-        RegisterItemPropMod(ITID_ENIGMA, action);
-        RegisterSpellEffectResponse(SID_ENIGMA, onCast);    
-        TriggerAnyUnit(EVENT_PLAYER_HERO_LEVEL, function lvledup);
+        RegisterSpellEffectResponse(SID_ENIGMA, onCast);
     }
 
 }

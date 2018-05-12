@@ -342,20 +342,23 @@ library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSys
     function printStats(string str) {
         unit u; 
         group g = CreateGroup();
+        UnitProp up;
         GroupEnumUnitsSelected(g, Player(0), null);
         u = FirstOfGroup(g);
+        up = UnitProp.inst(u, SCOPE_PREFIX);
         
         print("==== "+GetUnitNameEx(u)+" ====");
         print("-- Physics --");
-        print("AP: "+I2S(UnitProp.inst(u, SCOPE_PREFIX).APMin()) + " - " + I2S(UnitProp.inst(u, SCOPE_PREFIX).APMax())+" CRIT: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).AttackCrit() * 100) + "%"+" IAS: "+I2S(UnitProp.inst(u, SCOPE_PREFIX).AttackSpeed() + 100) + "%"+" AR: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).AttackRate() * 100) + "%");
+        print("AP: "+I2S(up.APMin()) + " - " + I2S(up.APMax())+" CRIT: "+R2S(up.AttackCrit() * 100) + "%"+" IAS: "+I2S(up.AttackSpeed() + 100) + "%"+" AR: "+R2S(up.AttackRate() * 100) + "%");
         print("-- Magic --");
-        print("SP: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).SpellPower())+" SC: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).SpellCrit() * 100) + "%"+" SH: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).SpellHaste() * 100) + "%");
+        print("SP: "+R2S(up.SpellPower())+" SC: "+R2S(up.SpellCrit() * 100) + "%"+" SH: "+R2S(up.SpellHaste() * 100) + "%");
         print("-- Defense --");
-        print("AM: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).Armor())+" DG: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).Dodge() * 100) + "%"+" BR: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).BlockRate() * 100) + "%("+R2S(UnitProp.inst(u, SCOPE_PREFIX).BlockPoint())+")");
-        print("MDEF: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).SpellTaken() * 100) + "%"+" DT: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).DamageTaken() * 100) + "%"+" HT: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).HealTaken() * 100) + "%");
+        print("AM: "+R2S(up.Armor())+" DG: "+R2S(up.Dodge() * 100) + "%"+" BR: "+R2S(up.BlockRate() * 100) + "%("+R2S(up.BlockPoint())+")");
+        print("MDEF: "+R2S(up.SpellTaken() * 100) + "%"+" DT: "+R2S(up.DamageTaken() * 100) + "%"+" HT: "+R2S(up.HealTaken() * 100) + "%");
         print("-- Miscs --");
-        print("Refl: "+I2S(UnitProp.inst(u, SCOPE_PREFIX).SpellReflect())+" Aggro: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).AggroRate() * 100) + "%"+" Disabled: "+B2S(UnitProp.inst(u, SCOPE_PREFIX).Disabled()));
-        print("Regen: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).LifeRegen())+"/"+R2S(UnitProp.inst(u, SCOPE_PREFIX).ManaRegen())+" Speed: "+I2S(UnitProp.inst(u, SCOPE_PREFIX).Speed())+" Amp: "+R2S(UnitProp.inst(u, SCOPE_PREFIX).DamageDealt() * 100) + "%");
+        print("Refl: "+I2S(up.SpellReflect())+" Aggro: "+R2S(up.AggroRate() * 100) + "%"+" Disabled: "+B2S(up.Disabled()));
+        print("Regen: "+R2S(up.LifeRegen())+"/"+R2S(up.ManaRegen())+" Speed: "+I2S(up.Speed())+" Amp: "+R2S(up.DamageDealt() * 100) + "%");
+        print(" DGM: " + R2S(up.damageGoesMana * 100) + "%" + " LL: " + R2S(up.ll * 100) + "%" + " ML: " + R2S(up.ml * 100) + "%");
         
         DestroyGroup(g);
     }
