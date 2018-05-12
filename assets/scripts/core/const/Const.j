@@ -641,6 +641,13 @@ public constant integer SID_TYRAELS_MIGHT = 'A07K';
 public constant integer ITID_VOODOO_VIALS = 'I00P';
 public constant integer SID_VOODOO_VIALS = 'A06N';
 public constant integer ITID_WOESTAVE = 'Iwoe';
+public constant integer BID_DECREASE_MOVESPEED = 'A0CL';
+public constant integer BID_DECREASE_ATTACKSPEED = 'A0CM';
+public constant integer BID_DECREASE_ARMOR = 'A0CN';
+public constant integer BID_DECREASE_ATTACKRATE = 'A0CO';
+public constant integer BID_DECREASE_DAMAGEDEALT = 'A0CP';
+public constant integer BID_DECREASE_HEALTAKEN = 'A0CQ';
+
 public constant integer ITID_WINDFORCE = 'Iwf0';
 public constant integer ITID_HOLY_MOONLIGHT_SWORD = 'xxxx';
 // relic set

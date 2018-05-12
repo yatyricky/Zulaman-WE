@@ -78,9 +78,9 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying {
 
             thistype.setLoreText(ITID_CALL_TO_ARMS,"|CFFFF8C00Call To Arms|R","|CFFFFCC00Lore|R|N|CFFFFDEADWhen Zakarum was exiled, he led a mercenary team. It is this very battle axe and his Holy Shield that lead his brothers through the bodies of countless enemies.|R");
 
-            thistype.append(ITID_WOESTAVE,9,15,45);
-            thistype.append(ITID_WOESTAVE,63,40,50);
-            thistype.append(ITID_WOESTAVE,62,12,15);
+            thistype.append(ITID_WOESTAVE,9,7,21);
+            thistype.append(ITID_WOESTAVE,63,0.01,0.03);
+            thistype.append(ITID_WOESTAVE,62,0.02,0.04);
             thistype.append(ITID_WOESTAVE,61,1,2);
             thistype.append(ITID_WOESTAVE,60,0.03,0.04);
             thistype.append(ITID_WOESTAVE,64,0.01,0.01);
@@ -91,8 +91,7 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying {
             thistype.append(ITID_ENIGMA,1,0.01,0.02);
             thistype.append(ITID_ENIGMA,3,0.01,0.02);
             thistype.append(ITID_ENIGMA,24,12,20);
-            thistype.append(ITID_ENIGMA,5,2,3);
-            thistype.append(ITID_ENIGMA,22,0.01,0.02);
+            thistype.append(ITID_ENIGMA,IATTR_STR,8,13);
             thistype.append(ITID_ENIGMA,40,0.01,0.02);
             thistype.append(ITID_ENIGMA,28,0,0);
 
@@ -676,12 +675,24 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying {
             EquipedExtraMagicDamage(u, polar);
         }
         static method callbackATK_MDK(unit u, real val, integer polar) {}
-        static method callbackATK_MORTAL(unit u, real val, integer polar) {}
-        static method callbackATK_MISS(unit u, real val, integer polar) {}
-        static method callbackATK_DDEF(unit u, real val, integer polar) {}
-        static method callbackATK_DAS(unit u, real val, integer polar) {}
-        static method callbackATK_DMS(unit u, real val, integer polar) {}
-        static method callbackATK_WEAK(unit u, real val, integer polar) {}
+        static method callbackATK_MORTAL(unit u, real val, integer polar) {
+            EquipedAttackDecreaseHealed(u, polar);
+        }
+        static method callbackATK_MISS(unit u, real val, integer polar) {
+            EquipedAttackDecreaseAttackRate(u, polar);
+        }
+        static method callbackATK_DDEF(unit u, real val, integer polar) {
+            EquipedAttackDecreaseArmor(u, polar);
+        }
+        static method callbackATK_DAS(unit u, real val, integer polar) {
+            EquipedAttackDecreaseAttackSpeed(u, polar);
+        }
+        static method callbackATK_DMS(unit u, real val, integer polar) {
+            EquipedAttackDecreaseMoveSpeed(u, polar);
+        }
+        static method callbackATK_WEAK(unit u, real val, integer polar) {
+            EquipedAttackDecreaseDamage(u, polar);
+        }
         static method callback3ATK_MOONEXP(unit u, real val, integer polar) {}
         static method callbackMD_MREGEN(unit u, real val, integer polar) {}
         static method callbackMD_POISON(unit u, real val, integer polar) {}
@@ -776,7 +787,7 @@ thistype.create(IATTR_ATK_BLEED,409,"|cff33ff33On Attack: 20% chance to deal ble
 thistype.create(IATTR_ATK_MDC,410,"|cff33ff33On Attack: 25% chance to deal "," magic damage to target|r",thistype.callbackATK_MDC);
 thistype.create(IATTR_ATK_STUN,411,"|cff33ff33On Attack: 5% chance to stun target for "," seconds|r",thistype.callbackATK_STUN);
 thistype.create(IATTR_ATK_CRIT,412,"|cff33ff33On Attack: 5% chance to increase "," attack critical chance, lasts for 5 seconds|r",thistype.callbackATK_CRIT);
-thistype.create(IATTR_ATK_AMP,413,"|cff33ff33On Attack: Target takes "," extra damage, lasts for 3 seconds|r",thistype.callbackATK_AMP);
+thistype.create(IATTR_ATK_AMP,413,"|cff33ff33On Attack: Target takes "," extra damage|r",thistype.callbackATK_AMP);
 thistype.create(IATTR_ATK_MORTAL,416,"|cff33ff33On Attack: Decrease target healing taken by ","|r",thistype.callbackATK_MORTAL);
 thistype.create(IATTR_ATK_MISS,417,"|cff33ff33On Attack: Decrease target attack hit chance by ","|r",thistype.callbackATK_MISS);
 thistype.create(IATTR_ATK_DDEF,418,"|cff33ff33On Attack: Decrease target armor by ","|r",thistype.callbackATK_DDEF);
@@ -850,7 +861,7 @@ thistype.create(IATTR_USE_HOLYHEAL,910,"|cff33ff33Use: Release all holy power to
         ipSufix.add(SUFIX_WIZARD, 10);
         ipSufix.add(SUFIX_PRIEST, 10);
         ipSufix.add(SUFIX_GUARDIAN, 10);
-        ipSufix.add(SUFIX_MASTERY, 10);
+        ipSufix.add(SUFIX_MASTERY, 100);
         ipSufix.add(SUFIX_BLUR, 10);
         ipSufix.add(SUFIX_STRONGHOLD, 10);
         ipSufix.add(SUFIX_DEEP_SEA, 10);
