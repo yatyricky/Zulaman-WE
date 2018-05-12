@@ -632,6 +632,8 @@ public constant integer SID_CALL_TO_ARMS = 'A069';
 public constant integer BID_CALL_TO_ARMS = 'A068';
 public constant integer ITID_DERANGEMENT_OF_CTHUN = 'I00L';
 public constant integer SID_CTHUNS_DERANGEMENT = 'A06Q';
+public constant integer BID_CTHUNS_DERANGEMENT_IAS = 'A0CR';
+public constant integer BID_CTHUNS_ACTIVE_IAS = 'A06P';
 public constant integer ITID_ENIGMA = 'Ieng';
 public constant integer SID_ENIGMA = 'A064';
 public constant integer ITID_INFINITY = 'I01P';
@@ -874,6 +876,7 @@ public constant string ART_BREATH_OF_FIRE_DAMAGE = "Abilities\\Spells\\Other\\Br
 public constant string ART_ABOMINATION_EXPLOSION = "Units\\Undead\\Abomination\\AbominationExplosion.mdl";
 public constant string ART_CRIPPLE_TARGET = "Abilities\\Spells\\Undead\\Cripple\\CrippleTarget.mdl";
 public constant string ART_ROAR_CASTER = "Abilities\\Spells\\NightElf\\BattleRoar\\RoarCaster.mdl";
+public constant string ART_UNHOLY_FRENZY_TARGET = "Abilities\\Spells\\Undead\\UnholyFrenzy\\UnholyFrenzyTarget.mdl";
 
 public constant string BTNVolcano = "ReplaceableTextures\\CommandButtons\\BTNVolcano.blp";
 public constant string BTNEarthquake = "ReplaceableTextures\\CommandButtons\\BTNEarthquake.blp";

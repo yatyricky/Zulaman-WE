@@ -116,7 +116,7 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
             thistype.setLoreText(ITID_WINDFORCE,"|CFFFF8C00Windforce|R","|CFFFFDEAD\"The wind carries life for those enveloped in its flow, and death for those arrayed against it.\"|R");
 
             thistype.append(ITID_DERANGEMENT_OF_CTHUN,4,7,10);
-            thistype.append(ITID_DERANGEMENT_OF_CTHUN,10,2,4);
+            thistype.append(ITID_DERANGEMENT_OF_CTHUN,9,17,24);
             thistype.append(ITID_DERANGEMENT_OF_CTHUN,11,0.01,0.02);
             thistype.append(ITID_DERANGEMENT_OF_CTHUN,74,3,30);
             thistype.append(ITID_DERANGEMENT_OF_CTHUN,44,0.03,0.06);
@@ -239,7 +239,7 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
                 head = thistype.ht[it];
                 while (head != 0) {
                     meta = ItemAttributeMeta.inst(head.id, "ItemExAttributes.updateUbertip.meta");
-                    if (head.value < 1) {
+                    if (head.value < 1 || head.id == IATTR_USE_CTHUN) {
                         valstr = I2S(Rounding(head.value * 100)) + "%";
                     } else {
                         valstr = I2S(Rounding(head.value));
@@ -658,7 +658,9 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
             up.ll += val * polar;
             up.ml += val * polar;
         }
-        static method callbackATK_CTHUN(unit u, real val, integer polar) {}
+        static method callbackATK_CTHUN(unit u, real val, integer polar) {
+            EquipedAttackStackableIAS(u, polar);
+        }
         static method callbackATK_WF(unit u, real val, integer polar) {
             EquipedWindforce(u, polar);
         }
@@ -817,7 +819,7 @@ thistype.create(IATTR_USE_INT,905,"|cff33ff33Use: Increase intelligence by ",", 
 thistype.create(IATTR_USE_SP,906,"|cff33ff33Use: Increase spell power by ",", lasts for 15 seconds|r",thistype.callbackUSE_SP);
 thistype.create(IATTR_USE_DODGE,907,"|cff33ff33Use: Increase dodge chance by 30%, lasts for "," seconds|r",thistype.callbackUSE_DODGE);
 thistype.create(IATTR_USE_MS,908,"|cff33ff33Use: Increase movement speed by 300, lasts for "," seconds. Possible failures.|r",thistype.callbackUSE_MS);
-thistype.create(IATTR_USE_CTHUN,909,"|cff33ff33Use: Increase attack speed by 40%, take "," extra damage|r",thistype.callbackUSE_CTHUN);
+thistype.create(IATTR_USE_CTHUN,909,"|cff33ff33Use: Increase attack speed by 100%, take "," extra damage|r",thistype.callbackUSE_CTHUN);
 thistype.create(IATTR_USE_HOLYHEAL,910,"|cff33ff33Use: Release all holy power to heal yourself, each point heals "," HP|r",thistype.callbackUSE_HOLYHEAL);
         }
     }

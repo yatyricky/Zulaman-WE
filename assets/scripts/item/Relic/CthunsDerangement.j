@@ -1,9 +1,5 @@
 //! zinc
 library CthunsDerangement requires ItemAttributes, DamageSystem {
-constant integer BUFF_ID = 'A06P';
-constant integer BUFF_ID1 = 'A06R';
-constant string  ART  = "Abilities\\Spells\\Undead\\UnholyFrenzy\\UnholyFrenzyTarget.mdl";
-    HandleTable ht;
     
     function onEffect(Buff buf) {
         UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageTaken += buf.bd.r0;
@@ -16,122 +12,35 @@ constant string  ART  = "Abilities\\Spells\\Undead\\UnholyFrenzy\\UnholyFrenzyTa
     }
     
     function onCast() {
-        Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BUFF_ID);
+        Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BID_CTHUNS_ACTIVE_IAS);
+        real exdmg = 0;
+        integer ii = 0;
+        item ti;
+        while (ii < 6) {
+            ti = UnitItemInSlot(SpellEvent.CastingUnit, ii);
+            if (ti != null) {
+                exdmg += ItemExAttributes.getAttributeValue(ti, IATTR_USE_CTHUN, SCOPE_PREFIX + "onCast") / (ItemExAttributes.getAttributeValue(ti, IATTR_LP, "onCast") + 1);
+            }
+            ii += 1;
+        }
+        ti = null;
+        
         buf.bd.tick = -1;
         buf.bd.interval = 10;
         UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageTaken -= buf.bd.r0;
-        buf.bd.r0 = 1.0;
+        buf.bd.r0 = exdmg;
         UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(0 - buf.bd.i0);
-        buf.bd.i0 = 40;
-        if (buf.bd.e0 == 0) {buf.bd.e0 = BuffEffect.create(ART, buf, "overhead");}
+        buf.bd.i0 = 100;
+        if (buf.bd.e0 == 0) {buf.bd.e0 = BuffEffect.create(ART_UNHOLY_FRENZY_TARGET, buf, "overhead");}
         buf.bd.boe = onEffect;
         buf.bd.bor = onRemove;
         buf.run();
     }
 
-    struct CthunsDerangementData {
-        private static HandleTable enigtable;
-        // mod
-        integer ap;
-        
-        static method operator[] (item it) -> thistype {
-            thistype this;
-            if (!thistype.enigtable.exists(it)) {
-                this = thistype.allocate();
-                thistype.enigtable[it] = this;
-                // mod
-                this.ap = 0;
-            } else {
-                this = thistype.enigtable[it];
-            }
-            return this;
-        }
-        
-        private static method onInit() {thistype.enigtable = HandleTable.create();}
-    }
-
-    function action(unit u, item it, integer fac) {
-        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
-        CthunsDerangementData cd = CthunsDerangementData[it];
-        
-        up.ModStr(20 * fac);
-        up.attackCrit += 0.04 * fac;
-        up.lifeRegen -= 40.0 * fac;
-        up.ll += 0.14 * fac;
-        
-        if (fac == 1) {
-            cd.ap = 5 * GetHeroLevel(u);
-        }
-        up.ModAP(cd.ap * fac);
-        
-        if (!ht.exists(u)) {ht[u] = 0;}
-        ht[u] = ht[u] + fac;
-    }
-    
-    // i0 = current increment; i1 = final decrement
-    function onEffect1(Buff buf) {
-        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(buf.bd.i0);
-    }
-
-    function onRemove1(Buff buf) {
-        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(0 - buf.bd.i1);
-    }
-    
-    function damaged() {
-        Buff buf;
-        if (DamageResult.isHit) {
-            if (ht.exists(DamageResult.source)) {
-                if (ht[DamageResult.source] > 0 && DamageResult.abilityName == DAMAGE_NAME_MELEE) {
-                    buf = Buff.cast(DamageResult.source, DamageResult.source, BUFF_ID1);
-                    buf.bd.tick = -1;
-                    buf.bd.interval = 3.0;    
-                    if (buf.bd.i1 < 10) {
-                        buf.bd.i0 = 1;
-                    } else {
-                        buf.bd.i0 = 0;
-                    }
-                    buf.bd.i1 += buf.bd.i0;
-                    buf.bd.boe = onEffect1;
-                    buf.bd.bor = onRemove1;
-                    buf.run();
-                }
-            }
-        }
-    }
-    
-    function lvledup() -> boolean {
-        unit u = GetTriggerUnit();
-        integer i;
-        item tmpi;
-        ItemPropModType ipmt;
-        if (ht.exists(u)) {
-            if (ht[u] > 0) {
-                ipmt = action;
-                i = 0;
-                while (i < 6) {
-                    tmpi = UnitItemInSlot(u, i);
-                    if (GetItemTypeId(tmpi) == ITID_DERANGEMENT_OF_CTHUN) {
-                        ipmt.evaluate(u, tmpi, -1);
-                        ipmt.evaluate(u, tmpi, 1);
-                    }
-                    i += 1;
-                }
-            }
-        }
-        return false;
-    }
-
     function onInit() {
-        ht = HandleTable.create();
-        RegisterItemPropMod(ITID_DERANGEMENT_OF_CTHUN, action);
         RegisterSpellEffectResponse(SID_CTHUNS_DERANGEMENT, onCast);
-        BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
-        BuffType.register(BUFF_ID1, BUFF_PHYX, BUFF_POS);
-        RegisterDamagedEvent(damaged);
-        TriggerAnyUnit(EVENT_PLAYER_HERO_LEVEL, function lvledup);
+        BuffType.register(BID_CTHUNS_ACTIVE_IAS, BUFF_MAGE, BUFF_POS);
     }
-
-
 
 }
 //! endzinc
