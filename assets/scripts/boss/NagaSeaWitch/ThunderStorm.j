@@ -55,7 +55,7 @@ constant string  INDICATOR  = "Doodads\\Cinematic\\GlowingRunes\\GlowingRunes2.m
             i = 0;
             while (i < PlayerUnits.n) {  
                 if (GetDistance.units2d(cd.target, PlayerUnits.units[i]) > DBMNagaSeaWitch.safeRange) {
-                    DamageTarget(cd.caster, PlayerUnits.units[i], box, SpellData.inst(SPELL_ID, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+                    DamageTarget(cd.caster, PlayerUnits.units[i], box, SpellData.inst(SPELL_ID, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS, false);
                     AddTimedLight.atUnits("CLSB", cd.target, PlayerUnits.units[i], 0.25);
                     AddTimedEffect.atCoord(ART_IMPACT, GetUnitX(PlayerUnits.units[i]), GetUnitY(PlayerUnits.units[i]), 0.3);
                 }

@@ -1,132 +1,66 @@
 //! zinc
-library Infinity requires ItemAttributes, DamageSystem, Sounds {
-constant integer BUFF_ID = 'A065';
+library Infinity requires DamageSystem, Sounds {
+
     HandleTable ht;
-
-    function onEffect(Buff buf) {
-    }
-
-    function onRemove(Buff buf) {
-        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellTaken -= 0.05;
-    }
-    
-    struct ChainLightning {
-        private timer tm;
-        private unit caster, target;
-        private integer tick;
-        private real dmg;
-        private group damaged;
-        
-        private method destroy() {
-            ReleaseTimer(this.tm);
-            ReleaseGroup(this.damaged);
-            this.tm = null;
-            this.caster = null;
-            this.target = null;
-            this.deallocate();
-        }
-        
-        private method getNearestInMobList(unit excl) -> unit {
-            unit ret = null;
-            real dis = 9999.0;
-            real tmp;
-            integer i = 0;
-            if (MobList.n == 0) {
-                return ret;
-            } else {
-                while (i < MobList.n) {
-                    if (!IsUnit(MobList.units[i], excl) && !IsUnitInGroup(MobList.units[i], this.damaged)) {
-                        tmp = GetDistance.units2d(excl, MobList.units[i]);
-                        if (tmp < dis) {
-                            dis = tmp;
-                            ret = MobList.units[i];
-                        }
-                    }
-                    i += 1;
-                }
-                return ret;
-            }
-        }
-        
-        private static method run() {
-            thistype this = GetTimerData(GetExpiredTimer());
-            unit next = this.getNearestInMobList(this.target);
-            if (next != null) {
-                AddTimedLight.atUnits("CLSB", this.target, next, 0.75);
-                this.dmg *= 0.5;
-                DamageTarget(this.caster, next, this.dmg, "����-������", false, true, false, WEAPON_TYPE_WHOKNOWS);
-                GroupAddUnit(this.damaged, next);
-                AddTimedEffect.atUnit(ART_IMPACT, next, "origin", 0.2);
-            } else {
-                this.tick -= 100;
-            }
-            this.tick -= 1;
-            if (this.tick < 2) {
-                this.destroy();
-            } else {
-                this.target = next;
-            }
-            next = null;
-        }
-        
-        static method start(unit caster, unit target) {
-            thistype this = thistype.allocate();
-            this.tm = NewTimer();
-            SetTimerData(this.tm, this);
-            this.damaged = NewGroup();
-            this.caster = caster;
-            this.target = target;
-            this.tick = 3;
-            AddTimedLight.atUnits("CLPB", this.caster, this.target, 0.75);
-            this.dmg = 300.0;
-            DamageTarget(this.caster, this.target, this.dmg, "����-������", false, true, false, WEAPON_TYPE_WHOKNOWS);
-            GroupAddUnit(this.damaged, this.target);
-            AddTimedEffect.atUnit(ART_IMPACT, this.target, "origin", 0.2);
-            TimerStart(this.tm, 0.5, true, function thistype.run);
-        }
-    }
-    
-    function damaged() {
-        if (DamageResult.isHit) {
-            if (ht.exists(DamageResult.source)) {
-                if (ht[DamageResult.source] > 0 && !DamageResult.isPhyx) {
-                    if (GetRandomInt(0, 99) < 10) {
-                        ChainLightning.start(DamageResult.source, DamageResult.target);
-                    }
-                }
-            }
-        }
-    }
     
     struct ConvictionAura {
-        private static HandleTable caht;
+        private static HandleTable ht;
         private unit u;
         private timer tm;
+        effect eff;
         
         private method destroy() {
             ReleaseTimer(this.tm);
-            thistype.caht.flush(this.u);
+            thistype.ht.flush(this.u);
+            DestroyEffect(this.eff);
+            this.eff = null;
             this.tm = null;
             this.u = null;
             this.deallocate();
+        }
+        
+
+        static method onEffect(Buff buf) {
+        }
+
+        static method onRemove(Buff buf) {
+            UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellTaken -= buf.bd.r0;
         }
         
         private static method run() {
             thistype this = GetTimerData(GetExpiredTimer());
             integer j = 0;
             Buff buf;
+            integer ii = 0;
+            item ti;
+            real amt = 0;
+            while (ii < 6) {
+                ti = UnitItemInSlot(this.u, ii);
+                if (ti != null) {
+                    amt += ItemExAttributes.getAttributeValue(ti, IATTR_AURA_CONVIC, SCOPE_PREFIX) * (1 + ItemExAttributes.getAttributeValue(ti, IATTR_LP, SCOPE_PREFIX) * 0.33);
+                }
+                ii += 1;
+            }
+            ti = null;
+
             if (!IsUnitDead(this.u)) {
                 while (j < MobList.n) {
                     if (GetDistance.units2d(MobList.units[j], this.u) < 600 && !IsUnitDead(MobList.units[j])) {
-                        buf = Buff.cast(this.u, MobList.units[j], BUFF_ID);
+                        buf = Buff.cast(this.u, MobList.units[j], BID_INFINITY);
                         buf.bd.tick = -1;
                         buf.bd.interval = 1.5;
                         if (buf.bd.i0 != 6) {
-                            UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellTaken += 0.05;
+                            buf.bd.r0 = amt;
+                            UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellTaken += buf.bd.r0;
                             buf.bd.i0 = 6;
+                        } else {
+                            if (amt > buf.bd.r0) {
+                                UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellTaken += (amt - buf.bd.r0);
+                            }
+                            buf.bd.r0 = amt;
                         }
-                        buf.bd.boe = onEffect;
-                        buf.bd.bor = onRemove;
+                        buf.bd.boe = thistype.onEffect;
+                        buf.bd.bor = thistype.onRemove;
                         buf.run();
                     }
                     j += 1;
@@ -136,99 +70,45 @@ constant integer BUFF_ID = 'A065';
     
         static method start(unit u, boolean flag) {
             thistype this;
-            if (!thistype.caht.exists(u)) {
+            if (!thistype.ht.exists(u)) {
                 this = thistype.allocate();
-                thistype.caht[u] = this;
+                thistype.ht[u] = this;
                 this.u = u;
                 this.tm = NewTimer();
                 SetTimerData(this.tm, this);
-                //BJDebugMsg("Registered once");
             } else {
-                this = thistype.caht[u];
+                this = thistype.ht[u];
             }
             if (flag) {
                 TimerStart(this.tm, 1.0, true, function thistype.run);
+                RunSoundOnUnit(SND_CONVICTION_AURA, u);
+                this.eff = AddSpecialEffectTarget(ART_VAMPIRIC_AURA, u, "origin");
             } else {
-                //BJDebugMsg("To destroy");
                 this.destroy();
             }
         }
         
         private static method onInit() {
-            thistype.caht = HandleTable.create();
+            thistype.ht = HandleTable.create();
         }
     }
 
-    struct InfinityData {
-        private static HandleTable infinititab;
-        integer life;
-        
-        static method operator[] (item it) -> thistype {
-            thistype this;
-            if (!thistype.infinititab.exists(it)) {
-                this = thistype.allocate();
-                thistype.infinititab[it] = this;
-                this.life = 0;
-            } else {
-                this = thistype.infinititab[it];
-            }
-            return this;
+    public function EquipedConvictionAura(unit u, integer polar) {
+        if (ht.exists(u) == false) {
+            ht[u] = 0;
         }
-        
-        private static method onInit() {
-            thistype.infinititab = HandleTable.create();
+        if (ht[u] == 0) {
+            ConvictionAura.start(u, true);
         }
-    }
-
-    function action(unit u, item it, integer fac) {
-        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
-        InfinityData id = InfinityData[it];
-        
-        up.ModInt(15 * fac);
-        up.spellPower += 15 * fac;
-        
-        if (fac == 1) {
-            id.life = 35 * GetHeroLevel(u);
-            RunSoundOnUnit(SND_CONVICTION_AURA, u);
+        ht[u] = ht[u] + polar;
+        if (ht[u] == 0) {
+            ConvictionAura.start(u, false);
         }
-        up.ModLife(id.life * fac);
-        
-        if (!ht.exists(u)) {ht[u] = 0;}
-        ht[u] = ht[u] + fac;
-        
-        //BJDebugMsg("ht[u] = " + I2S(ht[u]));
-        
-        ConvictionAura.start(u, ht[u] > 0);
-    }
-    
-    function lvledup() -> boolean {
-        unit u = GetTriggerUnit();
-        integer i;
-        item tmpi;
-        ItemPropModType ipmt;
-        if (ht.exists(u)) {
-            if (ht[u] > 0) {
-                ipmt = action;
-                i = 0;
-                while (i < 6) {
-                    tmpi = UnitItemInSlot(u, i);
-                    if (GetItemTypeId(tmpi) == ITID_INFINITY) {
-                        ipmt.evaluate(u, tmpi, -1);
-                        ipmt.evaluate(u, tmpi, 1);
-                    }
-                    i += 1;
-                }
-            }
-        }
-        return false;
     }
 
     function onInit() {
         ht = HandleTable.create();
-        RegisterItemPropMod(ITID_INFINITY, action);
-        BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_NEG);
-        TriggerAnyUnit(EVENT_PLAYER_HERO_LEVEL, function lvledup);
-        RegisterDamagedEvent(damaged);
+        BuffType.register(BID_INFINITY, BUFF_PHYX, BUFF_NEG);
     }
 
 }

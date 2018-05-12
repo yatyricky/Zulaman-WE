@@ -28,7 +28,7 @@ constant integer BUFF_ID = 'A04Q';
         real heal;
         Buff buf, swpain;
         AddTimedEffect.atUnit(ART, cd.target, "origin", 0.3);
-        DamageTarget(cd.caster, cd.target, dmg, SpellData.inst(SID_MARROW_SQUEEZE, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS);  
+        DamageTarget(cd.caster, cd.target, dmg, SpellData.inst(SID_MARROW_SQUEEZE, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS, true);
         
         // equiped Anathema
         if (HasAnathema(cd.caster)) {

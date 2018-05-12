@@ -8,7 +8,7 @@ library NetherImplosion requires DamageSystem {
         while (tu != null) {
             GroupRemoveUnit(ENUM_GROUP, tu);
             if (!IsUnitDummy(tu) && !IsUnitDead(tu) && !IsUnitUseless(tu) && GetPidofu(tu) < NUMBER_OF_MAX_PLAYERS) {
-                DamageTarget(cd.caster, tu, 1500, SpellData.inst(SID_NETHER_IMPLOSION, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS);
+                DamageTarget(cd.caster, tu, 1500, SpellData.inst(SID_NETHER_IMPLOSION, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS, false);
             }
             tu = FirstOfGroup(ENUM_GROUP);
         }

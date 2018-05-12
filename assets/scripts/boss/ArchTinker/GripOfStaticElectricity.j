@@ -31,7 +31,7 @@ library GripOfStaticElectricity requires DamageSystem {
                 AddTimedLight.atUnits("CLPB", this.caster, this.target, 0.04);
                 this.count -= 1;
                 if (this.count < 1) {
-                    DamageTarget(this.caster, this.target, this.damage, SpellData.inst(SID_GRIP_OF_STATIC_ELECTRICITY, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS);  
+                    DamageTarget(this.caster, this.target, this.damage, SpellData.inst(SID_GRIP_OF_STATIC_ELECTRICITY, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS, false);  
                     AddTimedEffect.atUnit(ART_IMPACT, this.target, "origin", 0.3);
                 }
             } else {

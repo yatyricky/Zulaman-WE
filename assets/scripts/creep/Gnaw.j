@@ -3,7 +3,7 @@ library Gnaw requires CastingBar {
 
     function response(CastingBar cd) {
         // SetUnitAnimation(SpellEvent.CastingUnit, "Attack - 1");
-        DamageTarget(cd.caster, cd.target, 300.0, SpellData.inst(SID_GNAW, SCOPE_PREFIX).name, true, true, false, WEAPON_TYPE_WHOKNOWS);
+        DamageTarget(cd.caster, cd.target, 300.0, SpellData.inst(SID_GNAW, SCOPE_PREFIX).name, true, true, false, WEAPON_TYPE_WHOKNOWS, false);
         StunUnit(cd.caster, cd.target, 1.0);
         AddTimedEffect.atUnit(ART_BLEED, cd.target, "origin", 0.2);
     }

@@ -6,7 +6,7 @@ constant integer BUFF_ID = 'A04Z';
         if (GetUnitAbilityLevel(buf.bd.target, BUFF_ID_ALKALINE_WATER) > 0) {
             amt += amt;
         }
-        DamageTarget(buf.bd.caster, buf.bd.target, amt, SpellData.inst(SID_TEAR_UP, SCOPE_PREFIX).name, true, false, false, WEAPON_TYPE_WHOKNOWS);
+        DamageTarget(buf.bd.caster, buf.bd.target, amt, SpellData.inst(SID_TEAR_UP, SCOPE_PREFIX).name, true, false, false, WEAPON_TYPE_WHOKNOWS, false);
         AddTimedEffect.atUnit(ART_BLEED, buf.bd.target, "origin", 0.2);
     }
     
@@ -15,7 +15,7 @@ constant integer BUFF_ID = 'A04Z';
 
     function onCast() {
         Buff buf;
-        DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, 20.0, SpellData.inst(SID_TEAR_UP, SCOPE_PREFIX).name, true, false, true, WEAPON_TYPE_METAL_LIGHT_SLICE);
+        DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, 20.0, SpellData.inst(SID_TEAR_UP, SCOPE_PREFIX).name, true, false, true, WEAPON_TYPE_METAL_LIGHT_SLICE, false);
         if (DamageResult.isHit && !DamageResult.isBlocked) {
             buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BUFF_ID);
             buf.bd.tick = 6;

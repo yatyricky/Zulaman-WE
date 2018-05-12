@@ -23,7 +23,7 @@ library Blizzard requires CastingBar, GroupUtils, FrostMageGlobal, DamageSystem,
         while (tu != null) {
             GroupRemoveUnit(ENUM_GROUP, tu);
             if (!IsUnitDummy(tu) && !IsUnitDead(tu) && IsUnitEnemy(tu, GetOwningPlayer(caster))) {
-                DamageTarget(caster, tu, dmg, SpellData.inst(SID_BLIZZARD, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+                DamageTarget(caster, tu, dmg, SpellData.inst(SID_BLIZZARD, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS, true);
             }
             tu = FirstOfGroup(ENUM_GROUP);
         }

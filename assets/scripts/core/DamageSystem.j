@@ -65,6 +65,7 @@ constant string NULL_STR = "";
         static real extraCrit = 0.0;
         static boolean isPhyx = false;
         static boolean wasDodgable = false;
+        static boolean wasDirect = false;
     }
     
     public struct HealResult {
@@ -109,7 +110,7 @@ constant string NULL_STR = "";
     
 public boolean lifelock = false;
 
-    public function DamageTarget(unit a, unit b, real amount, string dmgName, boolean isPhyx, boolean criticable, boolean dodgable, weapontype wtype) {
+    public function DamageTarget(unit a, unit b, real amount, string dmgName, boolean isPhyx, boolean criticable, boolean dodgable, weapontype wtype, boolean direct) {
         integer i;
         string display;
         real absorbAmt;
@@ -122,6 +123,7 @@ public boolean lifelock = false;
         DamageResult.target = b;
         DamageResult.isPhyx = isPhyx;
         DamageResult.wasDodgable = dodgable;
+        DamageResult.wasDirect = direct;
         desk = 1.0 - upa.AttackRate();
         DamageResult.amount = amount;   
         DamageResult.extraCrit = 0.0;
@@ -216,7 +218,7 @@ if (GetWidgetLife(b) < GetUnitState(b, UNIT_STATE_MAX_LIFE) * 0.5 && lifelock) {
     }
 
     public function DummyDamageTarget(unit target, real amount, string dmgName) {
-        DamageTarget(damageDummy, target, amount, dmgName, false, false, false, WEAPON_TYPE_WHOKNOWS);
+        DamageTarget(damageDummy, target, amount, dmgName, false, false, false, WEAPON_TYPE_WHOKNOWS, false);
     }
     
     public struct TimedDamageTarget {
@@ -229,7 +231,7 @@ if (GetWidgetLife(b) < GetUnitState(b, UNIT_STATE_MAX_LIFE) * 0.5 && lifelock) {
         
         private static method run() {
             thistype this = GetTimerData(GetExpiredTimer());
-            DamageTarget(this.a, this.b, this.amount, this.dmgName, this.isPhyx, this.criticable, this.dodgable, this.wtype);
+            DamageTarget(this.a, this.b, this.amount, this.dmgName, this.isPhyx, this.criticable, this.dodgable, this.wtype, false);
             ReleaseTimer(this.tm);
             this.tm = null;
             this.a = null;
@@ -268,7 +270,7 @@ if (GetWidgetLife(b) < GetUnitState(b, UNIT_STATE_MAX_LIFE) * 0.5 && lifelock) {
         } else if (dmg > 1.0) {
             a = null; b = null; return false;
         } else {
-            DamageTarget(a, b, UnitProp.inst(a, SCOPE_PREFIX + "damaged 1").AttackPower(), DAMAGE_NAME_MELEE, true, true, true, null);
+            DamageTarget(a, b, UnitProp.inst(a, SCOPE_PREFIX + "damaged 1").AttackPower(), DAMAGE_NAME_MELEE, true, true, true, null, false);
         }
         a = null; b = null; return false;
     }

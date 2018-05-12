@@ -37,7 +37,7 @@ constant string  MISSILE  = "Abilities\\Spells\\Other\\AcidBomb\\BottleMissile.m
     }
 
     function onEffect(Buff buf) {
-        DamageTarget(buf.bd.caster, buf.bd.target, buf.bd.r0, SpellData.inst(SID_VOODOO_VIALS, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS);
+        DamageTarget(buf.bd.caster, buf.bd.target, buf.bd.r0, SpellData.inst(SID_VOODOO_VIALS, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS, false);
         AddTimedEffect.atUnit(ART_POISON, buf.bd.target, "origin", 0.5);
     }
 
@@ -124,7 +124,7 @@ constant integer MAX_BUGS = 10;
                 j = 0;
                 while (j < MobList.n) {
                     if (GetDistance.unitCoord(MobList.units[j], this.x, this.y) < 250 && !IsUnitDead(MobList.units[j])) {
-                        DamageTarget(this.u, MobList.units[j], 73.0, SpellData.inst(SID_VOODOO_VIALS, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS);
+                        DamageTarget(this.u, MobList.units[j], 73.0, SpellData.inst(SID_VOODOO_VIALS, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS, false);
                         AddTimedEffect.atUnit(ART_PLAGUE, MobList.units[j], "origin", 0.5);
                     }
                     j += 1;

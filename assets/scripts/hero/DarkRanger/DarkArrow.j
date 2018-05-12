@@ -7,7 +7,7 @@ constant string  PATH  = "Abilities\\Spells\\Other\\BlackArrow\\BlackArrowMissil
     }
 
     function onhit(Projectile p) -> boolean {
-        DamageTarget(p.caster, p.target, p.r0, SpellData.inst(SID_DARK_ARROW, SCOPE_PREFIX).name, true, true, false, WEAPON_TYPE_WHOKNOWS);
+        DamageTarget(p.caster, p.target, p.r0, SpellData.inst(SID_DARK_ARROW, SCOPE_PREFIX).name, true, true, false, WEAPON_TYPE_WHOKNOWS, false);
         return true;
     }
     

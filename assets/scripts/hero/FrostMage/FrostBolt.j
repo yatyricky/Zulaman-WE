@@ -23,7 +23,7 @@ constant string  ART_FROZEN  = "Abilities\\Spells\\Undead\\FreezingBreath\\Freez
             p.reverse();
             return false;
         } else {
-            DamageTarget(p.caster, p.target, p.r0, SpellData.inst(SID_FROST_BOLT, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS);   
+            DamageTarget(p.caster, p.target, p.r0, SpellData.inst(SID_FROST_BOLT, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS, true);
             
             // equiped Rage Winterchill's Phylactery
             if (HasRageWinterchillsPhylactery(p.caster)) {

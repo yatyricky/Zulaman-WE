@@ -1,5 +1,5 @@
 //! zinc
-library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindForce {
+library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindForce, Infinity {
     public constant real AFFIX_FACTOR_BASE = 15000;
     public constant real AFFIX_FACTOR_DELTA = 2500;
     public constant real SUFIX_MULTIPLIER = 4;
@@ -138,7 +138,7 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
             thistype.setLoreText(ITID_MIGHT_OF_THE_ANGEL_OF_JUSTICE,"|CFFFF8C00Might of the Angel of Justice|R","|CFFFFCC00Lore|R|N|CFFFFDEADThe armor used by Tyrael, the Archangel of Wisdom when he was once the incarnation of justice.|R");
 
             thistype.append(ITID_INFINITY,14,4,6);
-            thistype.append(ITID_INFINITY,23,30,43);
+            thistype.append(ITID_INFINITY,21,70,166);
             thistype.append(ITID_INFINITY,18,8,12);
             thistype.append(ITID_INFINITY,82,0.01,0.02);
             thistype.append(ITID_INFINITY,89,60,75);
@@ -700,7 +700,9 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
         static method callback3ATK_MOONEXP(unit u, real val, integer polar) {}
         static method callbackMD_MREGEN(unit u, real val, integer polar) {}
         static method callbackMD_POISON(unit u, real val, integer polar) {}
-        static method callbackMD_CHAIN(unit u, real val, integer polar) {}
+        static method callbackMD_CHAIN(unit u, real val, integer polar) {
+            EquipedMagicChainLightning(u, polar);
+        }
         static method callbackMDC_ARCANE(unit u, real val, integer polar) {}
         static method callbackDT_MREGEN(unit u, real val, integer polar) {
             UnitProp.inst(u, "ItemAttributeMeta.callback45").damageGoesMana += val * polar;
@@ -709,7 +711,9 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
         static method callbackHEAL_HOLY(unit u, real val, integer polar) {
             EquipedHealedStackHoly(u, polar);
         }
-        static method callbackAURA_CONVIC(unit u, real val, integer polar) {}
+        static method callbackAURA_CONVIC(unit u, real val, integer polar) {
+            EquipedConvictionAura(u, polar);
+        }
         static method callbackAURA_MEDITA(unit u, real val, integer polar) {}
         static method callbackAURA_WARSONG(unit u, real val, integer polar) {}
         static method callbackAURA_UNHOLY(unit u, real val, integer polar) {}

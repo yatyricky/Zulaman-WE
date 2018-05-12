@@ -12,7 +12,7 @@ constant integer BUFF_ID1 = 'A021';
     }
 
     function onEffect(Buff buf) {
-        DamageTarget(buf.bd.caster, buf.bd.target, 200.0, SpellData.inst(SID_PAIN_HEX, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS);
+        DamageTarget(buf.bd.caster, buf.bd.target, 200.0, SpellData.inst(SID_PAIN_HEX, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS, false);
         AddTimedEffect.atUnit(ART_PLAGUE, buf.bd.target, "origin", 0.2);
     }
 

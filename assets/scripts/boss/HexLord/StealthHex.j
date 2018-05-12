@@ -57,7 +57,7 @@ constant string  ART  = "Abilities\\Spells\\Human\\CloudOfFog\\CloudOfFog.mdl";
     }
     
     function gotodamage() {
-        DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, 800.0, SpellData.inst(SID_STEALTH_AMBUSH_HEX, SCOPE_PREFIX).name, true, false, false, WEAPON_TYPE_METAL_LIGHT_SLICE);
+        DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, 800.0, SpellData.inst(SID_STEALTH_AMBUSH_HEX, SCOPE_PREFIX).name, true, false, false, WEAPON_TYPE_METAL_LIGHT_SLICE, false);
         AddTimedEffect.atUnit(ART_BLEED, SpellEvent.TargetUnit, "origin", 1.0);
         
         UnitRemoveAbility(SpellEvent.CastingUnit, SID_APIV);

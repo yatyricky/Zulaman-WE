@@ -637,6 +637,8 @@ public constant integer BID_CTHUNS_ACTIVE_IAS = 'A06P';
 public constant integer ITID_ENIGMA = 'Ieng';
 public constant integer SID_ENIGMA = 'A064';
 public constant integer ITID_INFINITY = 'I01P';
+public constant integer SID_INFINITY = 'dinf';
+public constant integer BID_INFINITY = 'A065';
 public constant integer ITID_INSIGHT = 'Iins';
 public constant integer ITID_MIGHT_OF_THE_ANGEL_OF_JUSTICE = 'I01D';
 public constant integer SID_TYRAELS_MIGHT = 'A07K';
@@ -877,6 +879,7 @@ public constant string ART_ABOMINATION_EXPLOSION = "Units\\Undead\\Abomination\\
 public constant string ART_CRIPPLE_TARGET = "Abilities\\Spells\\Undead\\Cripple\\CrippleTarget.mdl";
 public constant string ART_ROAR_CASTER = "Abilities\\Spells\\NightElf\\BattleRoar\\RoarCaster.mdl";
 public constant string ART_UNHOLY_FRENZY_TARGET = "Abilities\\Spells\\Undead\\UnholyFrenzy\\UnholyFrenzyTarget.mdl";
+public constant string ART_VAMPIRIC_AURA = "Abilities\\Spells\\Undead\\VampiricAura\\VampiricAura.mdl";
 
 public constant string BTNVolcano = "ReplaceableTextures\\CommandButtons\\BTNVolcano.blp";
 public constant string BTNEarthquake = "ReplaceableTextures\\CommandButtons\\BTNEarthquake.blp";

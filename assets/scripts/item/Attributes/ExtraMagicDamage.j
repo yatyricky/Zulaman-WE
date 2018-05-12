@@ -3,7 +3,7 @@ library ExtraMagicDamage requires Table, DamageSystem {
     HandleTable ht;
 
     function extraDamageEffect(DelayTask dt) {
-        DamageTarget(dt.u0, dt.u1, dt.r0, SpellData.inst(SID_EXTRA_MAGIC_DAMAGE, SCOPE_PREFIX + "damaged").name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+        DamageTarget(dt.u0, dt.u1, dt.r0, SpellData.inst(SID_EXTRA_MAGIC_DAMAGE, SCOPE_PREFIX + "damaged").name, false, false, false, WEAPON_TYPE_WHOKNOWS, false);
     }
     
     function damaged() {

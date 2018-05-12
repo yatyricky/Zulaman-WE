@@ -212,7 +212,7 @@ library PowerOfAbomination requires DarkRangerGlobal, SpellEvent, DamageSystem {
                     buf.run();
                 } else {
                     DestroyEffect(AddSpecialEffectTarget(ART_AVENGER_MISSILE, DamageResult.target, "origin"));
-                    DamageTarget(DamageResult.source, DamageResult.target, returnExtraDamage(GetUnitAbilityLevel(DamageResult.source, SID_POWER_OF_BANSHEE)), SpellData.inst(SID_POWER_OF_BANSHEE, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS);
+                    DamageTarget(DamageResult.source, DamageResult.target, returnExtraDamage(GetUnitAbilityLevel(DamageResult.source, SID_POWER_OF_BANSHEE)), SpellData.inst(SID_POWER_OF_BANSHEE, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS, false);
                 }
             }
         }

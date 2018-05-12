@@ -16,7 +16,7 @@ library StormLash requires DamageSystem, CastingBar, SpellEvent, RareShimmerWeed
         real fxdur = cd.cast;
         player p;
 
-        DamageTarget(cd.caster, cd.target, dmg, SpellData.inst(SID_STORM_LASH, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS);
+        DamageTarget(cd.caster, cd.target, dmg, SpellData.inst(SID_STORM_LASH, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS, true);
         AddTimedEffect.atUnit(ART_IMPACT, cd.target, "origin", 0.3);
         if (fxdur > 0.75) {fxdur = 0.75;}
         AddTimedLight.atUnits("CLSB", cd.caster, cd.target, fxdur);

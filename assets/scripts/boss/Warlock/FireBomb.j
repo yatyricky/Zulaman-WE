@@ -65,7 +65,7 @@ constant real H_OVER_D = 0.45;
             i = 0;
             while (i < PlayerUnits.n) {
                 if (GetDistance.units2d(PlayerUnits.units[i], FireBombGroup.bombs[j]) < DBMWarlock.fireBombRadius && !IsUnitDead(PlayerUnits.units[i])) {
-                    DamageTarget(dt.u0, PlayerUnits.units[i], 350.0 + GetRandomReal(0.0, 200.0), SpellData.inst(SID_FLAME_BOMB, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+                    DamageTarget(dt.u0, PlayerUnits.units[i], 350.0 + GetRandomReal(0.0, 200.0), SpellData.inst(SID_FLAME_BOMB, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS, false);
                     AddTimedEffect.atUnit(MISSILE, PlayerUnits.units[i], "origin", 0.0);
                 }
                 i += 1;

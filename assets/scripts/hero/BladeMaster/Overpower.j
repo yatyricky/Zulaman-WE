@@ -22,7 +22,7 @@ library Overpower requires DamageSystem, BladeMasterGlobal, Rend {
         real exct = returnExtraCriticalChance(GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_OVER_POWER));
         KillUnit(premises[GetPlayerId(GetOwningPlayer(SpellEvent.CastingUnit))]);
         UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).attackCrit += exct;
-        DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).AttackPower() * 1.5, SpellData.inst(SID_OVER_POWER, SCOPE_PREFIX).name, true, true, false, WEAPON_TYPE_METAL_HEAVY_CHOP);
+        DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).AttackPower() * 1.5, SpellData.inst(SID_OVER_POWER, SCOPE_PREFIX).name, true, true, false, WEAPON_TYPE_METAL_HEAVY_CHOP, false);
         UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).attackCrit -= exct;
         if (DamageResult.isHit) {
             ModUnitMana(DamageResult.source, returnManaRegen(GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_OVER_POWER)));

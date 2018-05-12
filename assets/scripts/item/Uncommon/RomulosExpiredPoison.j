@@ -7,7 +7,7 @@ library RomulosExpiredPoison requires ItemAttributes {
             if (ht.exists(DamageResult.source)) {
                 if (ht[DamageResult.source] > 0 && DamageResult.abilityName == DAMAGE_NAME_MELEE) {
                     if (GetRandomInt(0, 99) < 25) {
-                        DelayedDamageTarget(DamageResult.source, DamageResult.target, GetRandomReal(80.0, 115.0), "ÂÞÃÜÅ·µÄ¹ýÆÚ¶¾Ò©", false, true, false, WEAPON_TYPE_WHOKNOWS);
+                        DelayedDamageTarget(DamageResult.source, DamageResult.target, GetRandomReal(80.0, 115.0), "", false, true, false, WEAPON_TYPE_WHOKNOWS);
                         AddTimedEffect.atUnit(ART_POISON, DamageResult.target, "origin", 0.5);
                     }
                 }

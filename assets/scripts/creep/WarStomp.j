@@ -14,7 +14,7 @@ constant real DURATION = 3.0;
         for (0 <= i < PlayerUnits.n) {
             print(GetUnitNameEx(cd.caster) + " to " + GetUnitNameEx(PlayerUnits.units[i]) + " = " + R2S(GetDistance.units(cd.caster, PlayerUnits.units[i])));
             if (GetDistance.units(cd.caster, PlayerUnits.units[i]) <= AOE) {
-                DamageTarget(cd.caster, PlayerUnits.units[i], DAMAGE, SpellData.inst(SID_WAR_STOMP, SCOPE_PREFIX).name, true, false, false, WEAPON_TYPE_WHOKNOWS);
+                DamageTarget(cd.caster, PlayerUnits.units[i], DAMAGE, SpellData.inst(SID_WAR_STOMP, SCOPE_PREFIX).name, true, false, false, WEAPON_TYPE_WHOKNOWS, false);
                 StunUnit(cd.caster, PlayerUnits.units[i], DURATION);
             }
         }

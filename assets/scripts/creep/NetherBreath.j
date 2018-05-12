@@ -16,7 +16,7 @@ library NetherBreath requires DamageSystem {
         Projectile p;
         for (0 <= i < PlayerUnits.n) {
             if (GetAngleDiffDeg(fcaster, GetAngleDeg(GetUnitX(SpellEvent.CastingUnit), GetUnitY(SpellEvent.CastingUnit), GetUnitX(PlayerUnits.units[i]), GetUnitY(PlayerUnits.units[i]))) <= 38.0 && GetDistance.units(SpellEvent.CastingUnit, PlayerUnits.units[i]) <= 800.0) {
-                DamageTarget(SpellEvent.CastingUnit, PlayerUnits.units[i], 800.0, SpellData.inst(SID_NETHER_BREATH, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS);
+                DamageTarget(SpellEvent.CastingUnit, PlayerUnits.units[i], 800.0, SpellData.inst(SID_NETHER_BREATH, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS, false);
 
                 buf = Buff.cast(SpellEvent.CastingUnit, PlayerUnits.units[i], BID_NETHER_BREATH);
                 buf.bd.tick = -1;

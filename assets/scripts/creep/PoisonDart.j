@@ -36,7 +36,7 @@ library PoisonDart requires DamageSystem, Sounds {
                 
                 for (0 <= i < PlayerUnits.n) {
                     if (GetDistance.units2d(PlayerUnits.units[i], this.mis) < 150.0 && !IsUnitDead(PlayerUnits.units[i]) && !IsUnitInGroup(PlayerUnits.units[i], this.damaged)) {
-                        DamageTarget(this.caster, PlayerUnits.units[i], 300.0, SpellData.inst(SID_POISON_DART, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+                        DamageTarget(this.caster, PlayerUnits.units[i], 300.0, SpellData.inst(SID_POISON_DART, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS, false);
                         AddTimedEffect.atUnit(ART_STAMPEDE_MISSILE_DEATH, PlayerUnits.units[i], "origin", 0.0);
                         GroupAddUnit(this.damaged, PlayerUnits.units[i]);
                     }

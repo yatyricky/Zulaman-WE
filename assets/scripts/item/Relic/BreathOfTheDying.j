@@ -5,7 +5,7 @@ library BreathOfTheDying requires DamageSystem, SpellData, AggroSystem {
     HandleTable ht;
     
     function onEffect(Buff buf) {
-        DamageTarget(buf.bd.caster, buf.bd.target, buf.bd.r0, SpellData.inst(BID_BREATH_OF_THE_DYING, "BreathOfTheDying.onEffect").name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+        DamageTarget(buf.bd.caster, buf.bd.target, buf.bd.r0, SpellData.inst(BID_BREATH_OF_THE_DYING, "BreathOfTheDying.onEffect").name, false, false, false, WEAPON_TYPE_WHOKNOWS, false);
         AddTimedEffect.atUnit(ART_POISON, buf.bd.target, "origin", 0.2);
     }
     

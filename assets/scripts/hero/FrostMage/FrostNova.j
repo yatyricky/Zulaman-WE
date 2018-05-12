@@ -76,7 +76,7 @@ constant string  ART  = "Abilities\\Spells\\Undead\\FreezingBreath\\FreezingBrea
             GroupRemoveUnit(ENUM_GROUP, tu);
             if (!IsUnitDummy(tu) && !IsUnitDead(tu) && IsUnitEnemy(tu, GetOwningPlayer(SpellEvent.CastingUnit))) {
                 // damage
-                DamageTarget(SpellEvent.CastingUnit, tu, dmg, SpellData.inst(SID_FROST_NOVA, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS);
+                DamageTarget(SpellEvent.CastingUnit, tu, dmg, SpellData.inst(SID_FROST_NOVA, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS, true);
                 // stun
                 StunUnit(SpellEvent.CastingUnit, tu, 3 + lvl);
                 AddTimedEffect.atUnit(ART, tu, "origin", 3 + lvl);

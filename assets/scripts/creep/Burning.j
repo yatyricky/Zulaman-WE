@@ -5,7 +5,7 @@ library Burning requires DamageSystem {
         integer i;
         for (0 <= i < PlayerUnits.n) {
             if (GetDistance.units2d(buf.bd.caster, PlayerUnits.units[i]) <= 256) {
-                DamageTarget(buf.bd.caster, PlayerUnits.units[i], 200.0, SpellData.inst(SID_BURNING, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+                DamageTarget(buf.bd.caster, PlayerUnits.units[i], 200.0, SpellData.inst(SID_BURNING, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS, false);
             }
         }
     }

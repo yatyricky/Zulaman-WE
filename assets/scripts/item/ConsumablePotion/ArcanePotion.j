@@ -4,7 +4,7 @@ constant integer BUFF_ID = 'A089';
 constant string  PATH  = "Abilities\\Spells\\Items\\OrbCorruption\\OrbCorruptionMissile.mdl";
 
     function onhit(Projectile p) -> boolean {
-        DamageTarget(p.caster, p.target, 100.0, SpellData.inst(SID_ARCANE_POTION, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS);
+        DamageTarget(p.caster, p.target, 100.0, SpellData.inst(SID_ARCANE_POTION, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS, false);
         return true;
     }
     

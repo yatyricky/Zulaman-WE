@@ -17,7 +17,7 @@ library RageStrike {
     function onCast() {
         UnitListSortRule ulsr = ruleHighestHPInrange;
         PlayerUnits.sortByRule(ulsr);
-        DamageTarget(SpellEvent.CastingUnit, PlayerUnits.sorted[0], 1000.0, SpellData.inst(SID_RAGE_STRIKE, SCOPE_PREFIX).name, true, true, true, WEAPON_TYPE_WHOKNOWS);
+        DamageTarget(SpellEvent.CastingUnit, PlayerUnits.sorted[0], 1000.0, SpellData.inst(SID_RAGE_STRIKE, SCOPE_PREFIX).name, true, true, true, WEAPON_TYPE_WHOKNOWS, false);
         // TODO Play some effects
     }
 

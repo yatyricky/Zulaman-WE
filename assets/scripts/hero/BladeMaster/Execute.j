@@ -132,7 +132,7 @@ library Execute requires DamageSystem, AggroSystem {
     function onCast() {
         integer v = ValourManager.inst(SpellEvent.CastingUnit, "onCast").flushValour();
         real dmg = v * returnDamagePerPoint(GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_EXECUTE_LEARN)) + (UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).AttackPower() * v * 0.1);
-        DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, dmg, SpellData.inst(SID_EXECUTE_LEARN, SCOPE_PREFIX).name, true, true, true, WEAPON_TYPE_METAL_HEAVY_SLICE);
+        DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, dmg, SpellData.inst(SID_EXECUTE_LEARN, SCOPE_PREFIX).name, true, true, true, WEAPON_TYPE_METAL_HEAVY_SLICE, false);
         AddTimedEffect.atUnit(ART_GORE, SpellEvent.TargetUnit, "origin", 0.3);
     }
 

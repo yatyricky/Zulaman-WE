@@ -3,7 +3,7 @@ library Sting requires SpellEvent, DamageSystem, BuffSystem {
 constant integer BUFF_ID = 'A09Z';
 
     function onEffect(Buff buf) {
-        DamageTarget(buf.bd.caster, buf.bd.target, buf.bd.r0, SpellData.inst(SID_STING, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+        DamageTarget(buf.bd.caster, buf.bd.target, buf.bd.r0, SpellData.inst(SID_STING, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS, false);
         AddTimedEffect.atUnit(ART_POISON, buf.bd.target, "origin", 0.0);
     }
 

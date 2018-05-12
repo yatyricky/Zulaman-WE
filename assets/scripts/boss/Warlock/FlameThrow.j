@@ -39,7 +39,7 @@ constant string  IMPACT  = "Abilities\\Weapons\\FireBallMissile\\FireBallMissile
                 
                 while (i < PlayerUnits.n) {
                     if (GetDistance.units2d(PlayerUnits.units[i], this.mis) < FlameThrowAux.radius && !IsUnitDead(PlayerUnits.units[i]) && !IsUnitInGroup(PlayerUnits.units[i], this.damaged)) {
-                        DamageTarget(this.a, PlayerUnits.units[i], 750.0, SpellData.inst(SID_FLAME_THROW, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+                        DamageTarget(this.a, PlayerUnits.units[i], 750.0, SpellData.inst(SID_FLAME_THROW, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS, false);
                         AddTimedEffect.atUnit(IMPACT, PlayerUnits.units[i], "origin", 0.0);
                         GroupAddUnit(this.damaged, PlayerUnits.units[i]);
                     }

@@ -1,17 +1,12 @@
 //! zinc
-library CharmOfChainLightning requires SpellEvent, DamageSystem {
-constant string  ART_CH_LIGHT  = "CLPB";
-constant string  ART_CH_LESS  = "CLSB";
-constant real JUMP_FACTOR = 0.5;
-constant integer MAX_TARGETS = 3;
-constant integer INIT_AMT = 1000;
+library ChainLightning requires DamageSystem {
 
-    struct ChainLightning {
+    public struct ChainLightning {
         private timer tm;
         private integer count;
         private unit caster, next;
         private real amount, factor;
-        private string less;
+        private string less, abilName;
         private HandleTable ht;
         
         private method destroy() {
@@ -20,7 +15,7 @@ constant integer INIT_AMT = 1000;
             this.caster = null;
             this.next = null;
             this.less = null;
-            this.ht.destroy();            
+            this.ht.destroy();
             this.deallocate();
         }
         
@@ -34,7 +29,7 @@ constant integer INIT_AMT = 1000;
             tu = FirstOfGroup(ENUM_GROUP);
             while (tu != null) {
                 GroupRemoveUnit(ENUM_GROUP, tu);
-                if (!IsUnitDummy(tu) && !IsUnitDead(tu) && IsUnitEnemy(tu, GetOwningPlayer(this.caster)) && !this.ht.exists(tu)) {
+                if (!IsUnitDummy(tu) && !IsUnitUseless(tu) && !IsUnitDead(tu) && IsUnitEnemy(tu, GetOwningPlayer(this.caster)) && !this.ht.exists(tu)) {
                     td = GetDistance.units2d(this.next, tu);
                     if (td < distance) {
                         distance = td;
@@ -45,7 +40,7 @@ constant integer INIT_AMT = 1000;
             }
             if (nextt != null) {
                 this.amount *= this.factor;
-                DamageTarget(this.caster, nextt, this.amount, SpellData.inst(SID_CHARM_OF_CHAIN_LIGHTNING, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS, false);  
+                DamageTarget(this.caster, nextt, this.amount, this.abilName, false, true, false, WEAPON_TYPE_WHOKNOWS, false);
                 AddTimedLight.atUnits(this.less, this.next, nextt, 0.7);
                 AddTimedEffect.atUnit(ART_IMPACT, nextt, "origin", 0.2);
                 this.ht[nextt] = 0x1A2B3C4D;
@@ -61,11 +56,13 @@ constant integer INIT_AMT = 1000;
             tu = null;
         }
         
-        static method start(unit caster, unit target, string maine, string less, real amt, integer num, real factor) {
+        static method start(unit caster, unit target, string abilName, string maine, string less, real amt, integer num, real factor) {
             thistype this = thistype.allocate();
+            UnitProp up = UnitProp.inst(caster, SCOPE_PREFIX);
             this.caster = caster;
-            this.amount = amt + UnitProp.inst(caster, SCOPE_PREFIX).AttackPower() + UnitProp.inst(caster, SCOPE_PREFIX).SpellPower();
-            DamageTarget(caster, target, this.amount, SpellData.inst(SID_CHARM_OF_CHAIN_LIGHTNING, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS, false);  
+            this.abilName = abilName;
+            this.amount = amt + (up.AttackPower() + up.SpellPower()) * 0.125;
+            DamageTarget(caster, target, this.amount, abilName, false, true, false, WEAPON_TYPE_WHOKNOWS, true);
             AddTimedLight.atUnits(maine, caster, target, 0.7);
             AddTimedEffect.atUnit(ART_IMPACT, target, "origin", 0.2);
             this.factor = factor;
@@ -79,19 +76,6 @@ constant integer INIT_AMT = 1000;
             TimerStart(this.tm, 0.35, true, function thistype.run);
         }
     }
-    
-    function onCast() {
-        ChainLightning.start(SpellEvent.CastingUnit, SpellEvent.TargetUnit, ART_CH_LIGHT, ART_CH_LESS, INIT_AMT, MAX_TARGETS, JUMP_FACTOR);
-    }
-
-    function onInit() {
-        RegisterSpellChannelResponse(SID_CHARM_OF_CHAIN_LIGHTNING, onCast);
-    }
-    
-
-
-
-
 
 }
 //! endzinc

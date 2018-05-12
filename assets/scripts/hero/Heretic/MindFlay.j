@@ -21,7 +21,7 @@ constant string  ART_TARGET  = "Abilities\\Spells\\Other\\Drain\\ManaDrainTarget
         real rate;
         unit tu;
         //BJDebugMsg("Run !");
-        DamageTarget(cd.caster, cd.target, dmg, SpellData.inst(SID_MIND_FLAY, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS);
+        DamageTarget(cd.caster, cd.target, dmg, SpellData.inst(SID_MIND_FLAY, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS, true);
         ModUnitMana(cd.caster, dmg * returnManaConvertRateSelf(lvl));
         rate = returnManaConvertRateAlly(lvl);
         if (lvl > 1) {

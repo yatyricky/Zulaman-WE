@@ -27,7 +27,7 @@ constant string  ART  = "Abilities\\Weapons\\KeeperGroveMissile\\KeeperGroveMiss
             }
             //print("Mana used percent:" + R2S(cost / threshold));
             amt = returnDamage(GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_SINISTER_STRIKE), UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).AttackPower()) * cost / threshold;
-            DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, amt, SpellData.inst(SID_SINISTER_STRIKE, SCOPE_PREFIX).name, true, true, true, WEAPON_TYPE_METAL_LIGHT_SLICE);
+            DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, amt, SpellData.inst(SID_SINISTER_STRIKE, SCOPE_PREFIX).name, true, true, true, WEAPON_TYPE_METAL_LIGHT_SLICE, false);
             ModUnitMana(SpellEvent.CastingUnit, 0 - cost);
             
             buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BUFF_ID);

@@ -29,7 +29,7 @@ library Impale requires SpellEvent, StunUtils, TimerUtils, DamageSystem {
 
         private static method run() {
             thistype this = GetTimerData(GetExpiredTimer());
-            DamageTarget(this.source, this.target, 300.0, SpellData.inst(SID_IMPALE, SCOPE_PREFIX).name, true, false, false, WEAPON_TYPE_WHOKNOWS);
+            DamageTarget(this.source, this.target, 300.0, SpellData.inst(SID_IMPALE, SCOPE_PREFIX).name, true, false, false, WEAPON_TYPE_WHOKNOWS, false);
 
             AddTimedEffect.atUnit(ART_BLEED, this.target, "origin", 0.5);
         }

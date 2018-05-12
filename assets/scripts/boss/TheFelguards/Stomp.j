@@ -5,7 +5,7 @@ library Stomp requires DamageSystem {
         integer i;
         for (0 <= i < PlayerUnits.n) {
             if (GetDistance.units(SpellEvent.CastingUnit, PlayerUnits.units[i]) <= 500.0) {
-               DamageTarget(SpellEvent.CastingUnit, PlayerUnits.units[i], 1500.0, SpellData.inst(SID_STOMP, SCOPE_PREFIX).name, true, false, false, WEAPON_TYPE_WHOKNOWS);
+               DamageTarget(SpellEvent.CastingUnit, PlayerUnits.units[i], 1500.0, SpellData.inst(SID_STOMP, SCOPE_PREFIX).name, true, false, false, WEAPON_TYPE_WHOKNOWS, false);
                StunUnit(SpellEvent.CastingUnit, PlayerUnits.units[i], 2.0);
             }
         }

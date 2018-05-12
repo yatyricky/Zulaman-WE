@@ -3,7 +3,7 @@ library ClusterRockets requires CastingBar, Projectile {
 constant string  ART_MISSILE  = "Abilities\\Spells\\Other\\TinkerRocket\\TinkerRocketMissile.mdl";
 
     function onhit(Projectile p) -> boolean {
-        DamageTarget(p.caster, p.target, 450, SpellData.inst(SID_CLUSTER_ROCKETS, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS);   
+        DamageTarget(p.caster, p.target, 450, SpellData.inst(SID_CLUSTER_ROCKETS, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS, false);   
         return true;
     }
 

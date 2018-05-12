@@ -22,7 +22,7 @@ constant string  ART  = "Abilities\\Spells\\NightElf\\Cyclone\\CycloneTarget.mdl
             SetUnitFlyHeight(this.b, Sin(3.1416 / 50 * this.c) * 700.0, 0.0);
             if (this.c > 49) {
                 SetUnitFlyHeight(this.b, 0.0, 0.0);
-                DamageTarget(this.a, this.b, GetUnitState(this.b, UNIT_STATE_MAX_LIFE) * 0.33, SpellData.inst(SPELL_ID, SCOPE_PREFIX).name, true, false, false, WEAPON_TYPE_WHOKNOWS);
+                DamageTarget(this.a, this.b, GetUnitState(this.b, UNIT_STATE_MAX_LIFE) * 0.33, SpellData.inst(SPELL_ID, SCOPE_PREFIX).name, true, false, false, WEAPON_TYPE_WHOKNOWS, false);
                 DestroyEffect(AddSpecialEffect(ART_DUST, GetUnitX(this.b), GetUnitY(this.b)));
                 this.destroy();
             }

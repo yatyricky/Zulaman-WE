@@ -103,7 +103,7 @@ constant string  ART_TARGET  = "Abilities\\Spells\\Human\\ManaFlare\\ManaFlareBo
         //    buf.run();
         //}
         AddTimedEffect.atUnit(ART_TARGET, SpellEvent.TargetUnit, "origin", 0.1);
-        DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, dmg, SpellData.inst(SID_ARCANE_SHOCK, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS);
+        DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, dmg, SpellData.inst(SID_ARCANE_SHOCK, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS, true);
         AggroTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, dmg * 3.0, SCOPE_PREFIX);
         tmp = null;
     }

@@ -5,7 +5,7 @@ constant string  ART_TARGET  = "Abilities\\Spells\\Orc\\Purge\\PurgeBuffTarget.m
 constant integer BUFF_ID = 'A09Y';
     
     function onEffect(Buff buf) {
-        DamageTarget(buf.bd.caster, buf.bd.target, buf.bd.r0, SpellData.inst(SID_THUNDER_CLAP, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+        DamageTarget(buf.bd.caster, buf.bd.target, buf.bd.r0, SpellData.inst(SID_THUNDER_CLAP, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS, false);
     }
     
     function onRemove(Buff buf) {
@@ -16,7 +16,7 @@ constant integer BUFF_ID = 'A09Y';
         Buff buf;
         while (i < PlayerUnits.n) {
             if (GetDistance.units2d(PlayerUnits.units[i], SpellEvent.CastingUnit) <= 400.0 + 197.0 && !IsUnitDead(PlayerUnits.units[i])) {                
-                DamageTarget(SpellEvent.CastingUnit, PlayerUnits.units[i], 400, SpellData.inst(SID_THUNDER_CLAP, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+                DamageTarget(SpellEvent.CastingUnit, PlayerUnits.units[i], 400, SpellData.inst(SID_THUNDER_CLAP, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS, false);
                 if (GetUnitAbilityLevel(PlayerUnits.units[i], 'A09X') > 0) {
                     buf = Buff.cast(SpellEvent.CastingUnit, PlayerUnits.units[i], BUFF_ID);
                     buf.bd.tick = 6;

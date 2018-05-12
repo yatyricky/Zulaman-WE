@@ -30,7 +30,7 @@ library FelExecution requires SpellEvent, TimerUtils, DamageSystem {
                 SetUnitPosition(this.caster, GetUnitX(this.lastTarget), GetUnitY(this.lastTarget));
                 AddTimedEffect.atUnit(ART_BLINK, this.caster, "origin", 1.0);
                 SetUnitAnimation(this.caster, "Attack");
-                DamageTarget(this.caster, this.lastTarget, 1000.0, SpellData.inst(SID_FEL_EXECUTION, SCOPE_PREFIX).name, true, true, true, WEAPON_TYPE_METAL_HEAVY_SLICE);
+                DamageTarget(this.caster, this.lastTarget, 1000.0, SpellData.inst(SID_FEL_EXECUTION, SCOPE_PREFIX).name, true, true, true, WEAPON_TYPE_METAL_HEAVY_SLICE, false);
             }
 
         }

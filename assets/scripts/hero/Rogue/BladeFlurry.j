@@ -37,7 +37,7 @@ constant integer BUFF_ID = 'A048';
             integer i = 0;
             while (i < MobList.n) {  
                 if (GetDistance.units2d(MobList.units[i], this.tar) < 200 && !IsUnit(this.tar, MobList.units[i])) {
-                    DamageTarget(this.sor, MobList.units[i], this.amt, SpellData.inst(SID_BLADE_FLURRY, SCOPE_PREFIX).name, true, false, false, WEAPON_TYPE_WHOKNOWS);
+                    DamageTarget(this.sor, MobList.units[i], this.amt, SpellData.inst(SID_BLADE_FLURRY, SCOPE_PREFIX).name, true, false, false, WEAPON_TYPE_WHOKNOWS, false);
                     AddTimedEffect.atUnit(ART_CLEAVE, MobList.units[i], "origin", 0.2);                    
                 }
                 i += 1;

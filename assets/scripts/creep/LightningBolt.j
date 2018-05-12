@@ -7,7 +7,7 @@ constant string  PATH  = "Abilities\\Weapons\\FarseerMissile\\FarseerMissile.mdl
             p.reverse();
             return false;
         } else {
-            DamageTarget(p.caster, p.target, p.r0, SpellData.inst(SID_LIGHTNING_BOLT, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+            DamageTarget(p.caster, p.target, p.r0, SpellData.inst(SID_LIGHTNING_BOLT, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS, false);
             return true;
         }
     }

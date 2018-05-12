@@ -37,7 +37,7 @@ library SpellTransfer requires BuffSystem, SpellEvent, UnitProperty {
                         buf.refresh();
                         bl.push(buf);
                         
-                        DamageTarget(SpellEvent.CastingUnit, buf.bd.target, 100 + UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).SpellPower(), SpellData.inst(SID_SPELL_TRANSFER, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS);  
+                        DamageTarget(SpellEvent.CastingUnit, buf.bd.target, 100 + UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).SpellPower(), SpellData.inst(SID_SPELL_TRANSFER, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS, false);  
                     }
                 } else {
                     i += 999;
@@ -49,7 +49,7 @@ library SpellTransfer requires BuffSystem, SpellEvent, UnitProperty {
             while (i < num) {
                 buf = BuffSlot[SpellEvent.TargetUnit].dispel(BUFF_MAGE, BUFF_POS);
                 if (buf != 0) {                        
-                    DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, 100 + UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).SpellPower(), SpellData.inst(SID_SPELL_TRANSFER, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS);  
+                    DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, 100 + UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).SpellPower(), SpellData.inst(SID_SPELL_TRANSFER, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS, false);  
                     
                     //print("positive buff catched");
                     bl = BuffSlot[SpellEvent.CastingUnit];

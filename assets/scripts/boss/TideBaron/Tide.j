@@ -41,7 +41,7 @@ library Tide requires BuffSystem, SpellEvent, UnitProperty, DamageSystem, GroupU
                 
                 while (i < PlayerUnits.n) {
                     if (GetDistance.units2d(PlayerUnits.units[i], this.a) < 200 && !IsUnitDead(PlayerUnits.units[i]) && !IsUnitInGroup(PlayerUnits.units[i], this.damaged)) {
-                        DamageTarget(this.a, PlayerUnits.units[i], 180.0 + GetRandomReal(0.0, 40.0), SpellData.inst(SID_TIDE, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+                        DamageTarget(this.a, PlayerUnits.units[i], 180.0 + GetRandomReal(0.0, 40.0), SpellData.inst(SID_TIDE, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS, false);
                         GroupAddUnit(this.damaged, PlayerUnits.units[i]);
                     }
                     i += 1;

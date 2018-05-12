@@ -4,7 +4,7 @@ constant integer BUFF_ID = 'A04P';
 constant string  ART  = "Abilities\\Spells\\NightElf\\shadowstrike\\shadowstrike.mdl";    
 
     function onEffect(Buff buf) {
-        DamageTarget(buf.bd.caster, buf.bd.target, buf.bd.r0, SpellData.inst(SID_GARROTE, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS);
+        DamageTarget(buf.bd.caster, buf.bd.target, buf.bd.r0, SpellData.inst(SID_GARROTE, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS, false);
         CounterSpell(buf.bd.target);
     }
 

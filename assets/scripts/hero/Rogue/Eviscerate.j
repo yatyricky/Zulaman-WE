@@ -35,7 +35,7 @@ constant integer BUFF_ID = 'A047';
     }
 
     function onEffectDot(Buff buf) {
-        DamageTarget(buf.bd.caster, buf.bd.target, buf.bd.r0, SpellData.inst(SID_EVISCERATE, SCOPE_PREFIX).name, true, true, false, WEAPON_TYPE_WHOKNOWS);
+        DamageTarget(buf.bd.caster, buf.bd.target, buf.bd.r0, SpellData.inst(SID_EVISCERATE, SCOPE_PREFIX).name, true, true, false, WEAPON_TYPE_WHOKNOWS, false);
         AddTimedEffect.atUnit(ART_BLEED, buf.bd.target, "origin", 0.2);
     }
 
@@ -72,7 +72,7 @@ constant integer BUFF_ID = 'A047';
                 ap = UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).AttackPower();
                 cp = ComboPoints[SpellEvent.CastingUnit].get();
                 amt = returnDD(lvl, ap, cp) * costp;
-                DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, amt, SpellData.inst(SID_EVISCERATE, SCOPE_PREFIX).name, true, true, true, WEAPON_TYPE_METAL_HEAVY_SLICE);
+                DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, amt, SpellData.inst(SID_EVISCERATE, SCOPE_PREFIX).name, true, true, true, WEAPON_TYPE_METAL_HEAVY_SLICE, false);
                 if (DamageResult.isHit) {
                     DestroyEffect(AddSpecialEffectTarget(ART_GORE, DamageResult.target, "origin"));
                     

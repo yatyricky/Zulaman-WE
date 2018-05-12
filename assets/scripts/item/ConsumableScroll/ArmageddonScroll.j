@@ -29,7 +29,7 @@ constant string  ART_FIRE  = "Environment\\LargeBuildingFire\\LargeBuildingFire0
                     tu = FirstOfGroup(ENUM_GROUP);
                     while (tu != null) {
                         if (!IsUnitDummy(tu) && !IsUnitDead(tu)) {
-                            DamageTarget(this.caster, tu, GetRandomReal(1000, 1500), SpellData.inst(SID_ARMAGEDDON_SCROLL, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS);
+                            DamageTarget(this.caster, tu, GetRandomReal(1000, 1500), SpellData.inst(SID_ARMAGEDDON_SCROLL, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS, false);
                             AddTimedEffect.atUnit(ART_FIRE, tu, "origin", 0.5);
                         }
                         GroupRemoveUnit(ENUM_GROUP, tu);

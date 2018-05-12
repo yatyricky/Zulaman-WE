@@ -20,7 +20,7 @@ library ForkedLightning requires SpellEvent, DamageSystem {
                 } else {
                     amp = 1.0;
                 }
-                DamageTarget(SpellEvent.CastingUnit, tu, 300 * amp, SpellData.inst(SID_FUCKED_LIGHTNING, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS);  
+                DamageTarget(SpellEvent.CastingUnit, tu, 300 * amp, SpellData.inst(SID_FUCKED_LIGHTNING, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS, false);  
                 if (IsUnit(tu, SpellEvent.TargetUnit)) {
                     AddTimedLight.atUnits("CLPB", SpellEvent.CastingUnit, SpellEvent.TargetUnit, 0.5);
                 } else {

@@ -28,7 +28,7 @@ library LifeSiphon requires DamageSystem, BuffSystem {
                     } else {
                         AddTimedLight.atUnits("DRAL", this.caster, PlayerUnits.units[i], 1.0).setColour(1,0.2,0.2,1);
                         amt = GetUnitState(PlayerUnits.units[i], UNIT_STATE_MAX_LIFE) * 0.16;
-                        DamageTarget(this.caster, PlayerUnits.units[i], amt, SpellData.inst(SID_LIFE_SIPHON, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+                        DamageTarget(this.caster, PlayerUnits.units[i], amt, SpellData.inst(SID_LIFE_SIPHON, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS, false);
                         HealTarget(this.caster, this.caster, amt * 30.0, SpellData.inst(SID_LIFE_SIPHON, SCOPE_PREFIX).name, 0.0, false);
                         AddTimedEffect.atUnit(ART_HEAL, this.caster, "origin", 0.2);
                     }

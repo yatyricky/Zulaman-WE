@@ -23,7 +23,7 @@ library DeathAndDecay requires DamageSystem {
 
             for (0 <= i < PlayerUnits.n) {
                 if (GetDistance.unitCoord(PlayerUnits.units[i], this.cx, this.cy) <= 300.0) {
-                    DamageTarget(this.caster, PlayerUnits.units[i], GetUnitState(PlayerUnits.units[i], UNIT_STATE_MAX_LIFE) * 0.03, SpellData.inst(SID_DEATH_AND_DECAY, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS);
+                    DamageTarget(this.caster, PlayerUnits.units[i], GetUnitState(PlayerUnits.units[i], UNIT_STATE_MAX_LIFE) * 0.03, SpellData.inst(SID_DEATH_AND_DECAY, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS, false);
                 }
             }
 

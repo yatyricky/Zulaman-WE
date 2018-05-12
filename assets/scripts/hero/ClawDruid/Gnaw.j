@@ -31,7 +31,7 @@ library Gnaw requires SpellEvent, GroupUtils, Rabies {
                         
                         AddTimedLight.atUnits("DRAL", SpellEvent.TargetUnit, tu, 0.5);                 
                     }
-                    DamageTarget(SpellEvent.CastingUnit, tu, buf.bd.r0 * buf.bd.i0, SpellData.inst(SIDRABIES, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS);
+                    DamageTarget(SpellEvent.CastingUnit, tu, buf.bd.r0 * buf.bd.i0, SpellData.inst(SIDRABIES, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS, false);
                     regen += DamageResult.amount;
                     manaregen += returnManaRegen(lvl);
 //BJDebugMsg("cannot understand");
