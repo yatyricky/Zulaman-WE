@@ -10,13 +10,6 @@ constant integer BUFF_ID = 'A06K';
     function onremove(Buff buf) {
         UnitProp.inst(buf.bd.target, SCOPE_PREFIX).dodge -= buf.bd.r0;
     }
-
-    function action(unit u, item it, integer fac) {
-        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
-        up.dodge += 0.03 * fac;
-        //if (!ht.exists(u)) {ht[u] = 0;}
-        //ht[u] = ht[u] + fac;
-    }
     
     function onCast() {
         Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BUFF_ID);
@@ -31,7 +24,6 @@ constant integer BUFF_ID = 'A06K';
 
     function onInit() {
         //ht = HandleTable.create();
-        RegisterItemPropMod(ITID_MOROES_LUCKY_GEAR, action);
         RegisterSpellEffectResponse(SID_MOROES_LUCKY_GEAR, onCast);
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
     }

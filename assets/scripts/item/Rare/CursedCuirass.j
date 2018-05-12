@@ -44,7 +44,7 @@ constant string  ART_TARGET  = "Abilities\\Spells\\Undead\\OrbOfDeath\\Annihilat
 
     function onInit() {
         ht = HandleTable.create();
-        RegisterItemPropMod(ITID_CURSED_CUIRASS, action);
+        RegisterItemPropMod(ITID_ARMOR_OF_THE_DAMNED, action);
         RegisterDamagedEvent(damaged);
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_NEG);
     }

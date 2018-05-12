@@ -115,7 +115,7 @@ constant string  ART_DEBUFF  = "Abilities\\Spells\\Other\\Aneu\\AneuTarget.mdl";
 
     function onInit() {
         ht = HandleTable.create();
-        RegisterItemPropMod(ITID_DRUM, action);
+        RegisterItemPropMod(ITID_WARSONG_BATTLE_DRUMS, action);
         RegisterDamagedEvent(damaged);
         BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_POS);
         BuffType.register(DEBUFF_ID, BUFF_PHYX, BUFF_NEG);
