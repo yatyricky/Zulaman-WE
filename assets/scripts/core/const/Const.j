@@ -645,6 +645,7 @@ public constant integer ITID_MIGHT_OF_THE_ANGEL_OF_JUSTICE = 'I01D';
 public constant integer SID_TYRAELS_MIGHT = 'A07K';
 public constant integer ITID_VOODOO_VIALS = 'I00P';
 public constant integer SID_VOODOO_VIALS = 'A06N';
+public constant integer BID_VOODOO_VIALS = 'A06O';
 public constant integer ITID_WOESTAVE = 'Iwoe';
 public constant integer BID_DECREASE_MOVESPEED = 'A0CL';
 public constant integer BID_DECREASE_ATTACKSPEED = 'A0CM';
@@ -882,6 +883,7 @@ public constant string ART_ROAR_CASTER = "Abilities\\Spells\\NightElf\\BattleRoa
 public constant string ART_UNHOLY_FRENZY_TARGET = "Abilities\\Spells\\Undead\\UnholyFrenzy\\UnholyFrenzyTarget.mdl";
 public constant string ART_VAMPIRIC_AURA = "Abilities\\Spells\\Undead\\VampiricAura\\VampiricAura.mdl";
 public constant string ART_BRILLIANCE = "Abilities\\Spells\\Human\\Brilliance\\Brilliance.mdl";
+public constant string ART_BOTTLE_MISSILE = "Abilities\\Spells\\Other\\AcidBomb\\BottleMissile.mdl";
 
 public constant string BTNVolcano = "ReplaceableTextures\\CommandButtons\\BTNVolcano.blp";
 public constant string BTNEarthquake = "ReplaceableTextures\\CommandButtons\\BTNEarthquake.blp";

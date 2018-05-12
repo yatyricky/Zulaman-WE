@@ -1,95 +1,61 @@
 //! zinc
-library VoodooVial requires ItemAttributes, DamageSystem {
-constant integer BUFF_ID = 'A06O';
-constant string  MISSILE  = "Abilities\\Spells\\Other\\AcidBomb\\BottleMissile.mdl";
+library VoodooVial requires DamageSystem {
     HandleTable ht;
     integer bugs[];
     integer bugsn;
     
     struct AuroIncreaseCharges {
-        private static HandleTable ht;
+        private static HandleTable caht;
+        private unit u;
         private timer tm;
-        private item it;
+        
+        private method destroy() {
+            ReleaseTimer(this.tm);
+            thistype.caht.flush(this.u);
+            this.tm = null;
+            this.u = null;
+            this.deallocate();
+        }
         
         private static method run() {
             thistype this = GetTimerData(GetExpiredTimer());
-            integer current = GetItemCharges(this.it);
-            if (current < 5) {
-                SetItemCharges(this.it, current + 1);
+            integer ii = 0;
+            item ti;
+            integer current;
+            while (ii < 6) {
+                ti = UnitItemInSlot(this.u, ii);
+                if (ti != null && GetItemTypeId(ti) == ITID_VOODOO_VIALS) {
+                    current = GetItemCharges(ti);
+                    if (current < 5) {
+                        SetItemCharges(ti, current + 1);
+                    }
+                }
+                ii += 1;
             }
+            ti = null;
         }
     
-        static method start(item it) {
+        static method start(unit u, boolean flag) {
             thistype this;
-            if (!thistype.ht.exists(it)) {
+            if (!thistype.caht.exists(u)) {
                 this = thistype.allocate();
+                thistype.caht[u] = this;
+                this.u = u;
                 this.tm = NewTimer();
                 SetTimerData(this.tm, this);
-                thistype.ht[it] = this;
-                this.it = it;
+            } else {
+                this = thistype.caht[u];
+            }
+            if (flag) {
                 TimerStart(this.tm, 30.0, true, function thistype.run);
+            } else {
+                this.destroy();
             }
         }
         
         private static method onInit() {
-            thistype.ht = HandleTable.create();
+            thistype.caht = HandleTable.create();
         }
-    }
-
-    function onEffect(Buff buf) {
-        DamageTarget(buf.bd.caster, buf.bd.target, buf.bd.r0, SpellData.inst(SID_VOODOO_VIALS, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS, false);
-        AddTimedEffect.atUnit(ART_POISON, buf.bd.target, "origin", 0.5);
-    }
-
-    function onRemove(Buff buf) {}
-    
-    function damaged() {
-        Buff buf;
-        integer i;
-        integer charges;
-        item tmpi;
-        if (DamageResult.isHit) {
-            if (ht.exists(DamageResult.source)) {
-                if (ht[DamageResult.source] > 0 && !DamageResult.isPhyx) {
-                    if (GetRandomInt(0, 99) < 10) {
-                        i = 0;
-                        charges = 0;
-                        while (i < 6) {
-                            tmpi = UnitItemInSlot(DamageResult.source, i);
-                            if (GetItemTypeId(tmpi) == ITID_VOODOO_VIALS) {
-                                charges += GetItemCharges(tmpi);
-                            }
-                            i += 1;
-                        }
-                        tmpi = null;
-                    
-                        buf = Buff.cast(DamageResult.source, DamageResult.target, BUFF_ID);
-                        buf.bd.interval = 2.0 / (1.0 + UnitProp.inst(buf.bd.caster, SCOPE_PREFIX).SpellHaste());
-                        buf.bd.tick = Rounding(10.0 / buf.bd.interval);
-                        buf.bd.r0 = charges * 9.5 + 3.0;
-                        buf.bd.boe = onEffect;
-                        buf.bd.bor = onRemove;
-                        buf.run();
-                        AddTimedEffect.atUnit(ART_POISON, buf.bd.target, "origin", 0.5);
-                    }
-                }
-            }
-        }
-    }
-
-    function action(unit u, item it, integer fac) {
-        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
-        
-        up.ModInt(14 * fac);
-        up.ModMana(250 * fac);
-        up.spellCrit += 0.03 * fac;
-        up.spellHaste += 0.07 * fac;
-        //up.ml += 0.1 * fac;
-        
-        AuroIncreaseCharges.start(it);
-        
-        if (!ht.exists(u)) {ht[u] = 0;}
-        ht[u] = ht[u] + fac;
     }
     
 constant integer MAX_BUGS = 10;
@@ -120,11 +86,23 @@ constant integer MAX_BUGS = 10;
             thistype this = GetTimerData(GetExpiredTimer());
             integer j, i;
             real angle, distance;
+            integer ii = 0;
+            item ti;
+            real amt = 0;
+            
             if (ModuloInteger(this.tick, 10) == 1) {
+                while (ii < 6) {
+                    ti = UnitItemInSlot(this.u, ii);
+                    if (ti != null) {
+                        amt += ItemExAttributes.getAttributeValue(ti, IATTR_USE_VOODOO, SCOPE_PREFIX) * (1 + ItemExAttributes.getAttributeValue(ti, IATTR_LP, SCOPE_PREFIX));
+                    }
+                    ii += 1;
+                }
+                ti = null;
                 j = 0;
                 while (j < MobList.n) {
                     if (GetDistance.unitCoord(MobList.units[j], this.x, this.y) < 250 && !IsUnitDead(MobList.units[j])) {
-                        DamageTarget(this.u, MobList.units[j], 73.0, SpellData.inst(SID_VOODOO_VIALS, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS, false);
+                        DamageTarget(this.u, MobList.units[j], amt, SpellData.inst(SID_VOODOO_VIALS, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS, false);
                         AddTimedEffect.atUnit(ART_PLAGUE, MobList.units[j], "origin", 0.5);
                     }
                     j += 1;
@@ -169,7 +147,6 @@ constant integer MAX_BUGS = 10;
             TimerStart(this.tm, 0.1, true, function thistype.run);
         }
     }
-
 
     struct Parabola_sin {
         private real stepx, stepy;
@@ -227,14 +204,24 @@ constant integer MAX_BUGS = 10;
     }
     
     function onCast() {
-        Parabola_sin.start(GetUnitX(SpellEvent.CastingUnit), GetUnitY(SpellEvent.CastingUnit), SpellEvent.TargetX, SpellEvent.TargetY, 400.0, 600.0, MISSILE, SpellEvent.CastingUnit);
+        Parabola_sin.start(GetUnitX(SpellEvent.CastingUnit), GetUnitY(SpellEvent.CastingUnit), SpellEvent.TargetX, SpellEvent.TargetY, 400.0, 600.0, ART_BOTTLE_MISSILE, SpellEvent.CastingUnit);
+    }
+
+    public function EquipedVoodooVials(unit u, integer polar) {
+        if (ht.exists(u) == false) {
+            ht[u] = 0;
+        }
+        if (ht[u] == 0) {
+            AuroIncreaseCharges.start(u, true);
+        }
+        ht[u] = ht[u] + polar;
+        if (ht[u] == 0) {
+            AuroIncreaseCharges.start(u, false);
+        }
     }
 
     function onInit() {
         ht = HandleTable.create();
-        RegisterItemPropMod(ITID_VOODOO_VIALS, action);
-        BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_NEG);
-        RegisterDamagedEvent(damaged);
         RegisterSpellEffectResponse(SID_VOODOO_VIALS, onCast);
         bugsn = 5;
         bugs[0] = 'e005';

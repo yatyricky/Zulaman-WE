@@ -1,5 +1,5 @@
 //! zinc
-library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindForce, Infinity, ConvertAttackMagic {
+library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindForce, Infinity, ConvertAttackMagic, MagicPoison, VoodooVial {
     public constant real AFFIX_FACTOR_BASE = 15000;
     public constant real AFFIX_FACTOR_DELTA = 2500;
     public constant real SUFIX_MULTIPLIER = 4;
@@ -701,7 +701,9 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
         }
         static method callback3ATK_MOONEXP(unit u, real val, integer polar) {}
         static method callbackMD_MREGEN(unit u, real val, integer polar) {}
-        static method callbackMD_POISON(unit u, real val, integer polar) {}
+        static method callbackMD_POISON(unit u, real val, integer polar) {
+            EquipedMagicPoison(u, polar);
+        }
         static method callbackMD_CHAIN(unit u, real val, integer polar) {
             EquipedMagicChainLightning(u, polar);
         }
@@ -725,7 +727,9 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
         static method callbackUSE_BATTLE(unit u, real val, integer polar) {}
         static method callbackUSE_MREGEN(unit u, real val, integer polar) {}
         static method callbackUSE_HREGEN(unit u, real val, integer polar) {}
-        static method callbackUSE_VOODOO(unit u, real val, integer polar) {}
+        static method callbackUSE_VOODOO(unit u, real val, integer polar) {
+            EquipedVoodooVials(u, polar);
+        }
         static method callbackUSE_INT(unit u, real val, integer polar) {}
         static method callbackUSE_SP(unit u, real val, integer polar) {}
         static method callbackUSE_DODGE(unit u, real val, integer polar) {}
