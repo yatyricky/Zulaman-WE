@@ -131,7 +131,7 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
             thistype.append(ITID_MIGHT_OF_THE_ANGEL_OF_JUSTICE,1,0.01,0.02);
             thistype.append(ITID_MIGHT_OF_THE_ANGEL_OF_JUSTICE,2,0.01,0.03);
             thistype.append(ITID_MIGHT_OF_THE_ANGEL_OF_JUSTICE,24,12,15);
-            thistype.append(ITID_MIGHT_OF_THE_ANGEL_OF_JUSTICE,42,0,0);
+            thistype.append(ITID_MIGHT_OF_THE_ANGEL_OF_JUSTICE,42,2,5);
             thistype.append(ITID_MIGHT_OF_THE_ANGEL_OF_JUSTICE,38,25,35);
 
 
@@ -706,7 +706,9 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
             UnitProp.inst(u, "ItemAttributeMeta.callback45").damageGoesMana += val * polar;
         }
         static method callbackATKED_WEAK(unit u, real val, integer polar) {}
-        static method callbackHEAL_HOLY(unit u, real val, integer polar) {}
+        static method callbackHEAL_HOLY(unit u, real val, integer polar) {
+            EquipedHealedStackHoly(u, polar);
+        }
         static method callbackAURA_CONVIC(unit u, real val, integer polar) {}
         static method callbackAURA_MEDITA(unit u, real val, integer polar) {}
         static method callbackAURA_WARSONG(unit u, real val, integer polar) {}
@@ -766,7 +768,6 @@ thistype.create(IATTR_MCVT,253,"|cff87ceebConverts your normal attacks into magi
 thistype.create(IATTR_PL_SHOCK,256,"|cff87ceebHoly Shock always deals critical healing","|r",thistype.callbackPL_SHOCK);
 thistype.create(IATTR_PR_SHIELD,259,"|cff87ceebRemoves weakness effect of Shield","|r",thistype.callbackPR_SHIELD);
 thistype.create(IATTR_PL_LIGHT,262,"|cff87ceebFlash Light dispels one debuff from target","|r",thistype.callbackPL_LIGHT);
-thistype.create(IATTR_HEAL_HOLY,265,"|cff87ceebOn Healed: Charges 1 holy power","|r",thistype.callbackHEAL_HOLY);
 thistype.create(IATTR_DT_MREGEN,266,"|cff87ceebRegens MP from "," of the damage taken|r",thistype.callbackDT_MREGEN);
 thistype.create(IATTR_USE_TP,268,"|cff87ceebUse: Teleports to an ally","|r",thistype.callbackUSE_TP);
 thistype.create(IATTR_BM_VALOR,300,"|cff33ff33Regenerates "," more valor points|r",thistype.callbackBM_VALOR);
@@ -806,6 +807,7 @@ thistype.create(IATTR_MD_MREGEN,450,"|cff33ff33Dealing Magic Damage: 1% chance t
 thistype.create(IATTR_MD_POISON,451,"|cff33ff33Dealing Magic Damage: 10% chance to poison target, dealing "," magic damage over time|r",thistype.callbackMD_POISON);
 thistype.create(IATTR_MD_CHAIN,452,"|cff33ff33Dealing Magic Damage: 10% chance to cast Chain Lightning to target, dealing "," magic damage|r",thistype.callbackMD_CHAIN);
 thistype.create(IATTR_MDC_ARCANE,460,"|cff33ff33Magic Damage Critical: Charges with arcane power. All arcane power will be released automatically after 3 stacks, dealing "," magic damage to target|r",thistype.callbackMDC_ARCANE);
+thistype.create(IATTR_HEAL_HOLY,501,"|cff33ff33On Healed: Charges 1 holy power, stacks up to "," points|r",thistype.callbackHEAL_HOLY);
 thistype.create(IATTR_ATKED_WEAK,600,"|cff33ff33On Attacked: Decreases attacker's attack power by ","|r",thistype.callbackATKED_WEAK);
 thistype.create(IATTR_AURA_CONVIC,800,"|cff33ff33Grant Aura of Conviction: All enemies within 600 yards take "," more magic damage|r",thistype.callbackAURA_CONVIC);
 thistype.create(IATTR_AURA_MEDITA,801,"|cff33ff33Grant Aura of Meditation: All allies within 600 yards regen "," MP per second|r",thistype.callbackAURA_MEDITA);

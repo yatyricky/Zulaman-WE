@@ -19,7 +19,7 @@ constant integer DURATION = 20;
             integer i = 0;
             if (!IsUnitDead(this.ward)) {
                 while (i < MobList.n) {
-                    HealTarget(this.caster, MobList.units[i], GetUnitState(MobList.units[i], UNIT_STATE_MAX_LIFE) * 0.05, SpellData.inst(SID_HEALING_WARD, SCOPE_PREFIX).name, 0.0);
+                    HealTarget(this.caster, MobList.units[i], GetUnitState(MobList.units[i], UNIT_STATE_MAX_LIFE) * 0.05, SpellData.inst(SID_HEALING_WARD, SCOPE_PREFIX).name, 0.0, false);
                     i += 1;
                 }
             } else {

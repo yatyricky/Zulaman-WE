@@ -17,7 +17,7 @@ constant string  ART_TARGET  = "Abilities\\Spells\\NightElf\\Rejuvenation\\Rejuv
             percent = buf.bd.i0;
         }
         percent = (100.0 - percent) / (100 - buf.bd.i0) * 0.5;
-        HealTarget(buf.bd.caster, buf.bd.target, buf.bd.r0, SpellData.inst(SID_REJUVENATION, SCOPE_PREFIX).name, percent);
+        HealTarget(buf.bd.caster, buf.bd.target, buf.bd.r0, SpellData.inst(SID_REJUVENATION, SCOPE_PREFIX).name, percent, false);
         AddTimedEffect.atUnit(ART_TARGET, buf.bd.target, "origin", 0.3);
     }
 

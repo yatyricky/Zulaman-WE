@@ -4,7 +4,7 @@ constant integer BUFF_ID = 'A03X';
 constant string  ART  = "Abilities\\Spells\\Orc\\EtherealForm\\SpiritWalkerChange.mdl";
 
     function onEffect(Buff buf) {
-        HealTarget(buf.bd.caster, buf.bd.target, 2000.0, SpellData.inst(SID_HEAL_HEX, SCOPE_PREFIX).name, 0.0);
+        HealTarget(buf.bd.caster, buf.bd.target, 2000.0, SpellData.inst(SID_HEAL_HEX, SCOPE_PREFIX).name, 0.0, false);
         AddTimedEffect.atUnit(ART, buf.bd.target, "origin", 0.3);
     }
 

@@ -24,13 +24,13 @@ constant string  ART_ATTACH  = "Abilities\\Spells\\Items\\ClarityPotion\\Clarity
         if (buf != 0) {
             AddTimedEffect.atUnit(ART_TARGET, SpellEvent.TargetUnit, "origin", 0.3);
             AddTimedEffect.atUnit(ART_TARGET1, SpellEvent.TargetUnit, "overhead", 0.3);
-            HealTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, buf.bd.r0 * 5, SpellData.inst(SID_SWIFT_MEND, SCOPE_PREFIX).name, 0.0);
+            HealTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, buf.bd.r0 * 5, SpellData.inst(SID_SWIFT_MEND, SCOPE_PREFIX).name, 0.0, true);
         } else {
             buf = bs.getBuffByBid(BID_REJUVENATION);
             if (buf != 0) {
             AddTimedEffect.atUnit(ART_TARGET, SpellEvent.TargetUnit, "origin", 0.3);
             AddTimedEffect.atUnit(ART_TARGET1, SpellEvent.TargetUnit, "overhead", 0.3);
-                HealTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, buf.bd.r0 * buf.bd.i1, SpellData.inst(SID_SWIFT_MEND, SCOPE_PREFIX).name, 0.0);
+                HealTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, buf.bd.r0 * buf.bd.i1, SpellData.inst(SID_SWIFT_MEND, SCOPE_PREFIX).name, 0.0, true);
             }
         }
         if (buf != 0 && ilvl < 3) {

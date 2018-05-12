@@ -5,7 +5,7 @@ library HealScroll requires SpellEvent, DamageSystem {
         integer i = 0;
         while (i < PlayerUnits.n) {
             if (GetDistance.units2d(PlayerUnits.units[i], SpellEvent.CastingUnit) <= 950.0 && !IsUnitDead(PlayerUnits.units[i])) {
-                HealTarget(SpellEvent.CastingUnit, PlayerUnits.units[i], 750.0, SpellData.inst(SID_HEAL_SCROLL, SCOPE_PREFIX).name, 0.0);
+                HealTarget(SpellEvent.CastingUnit, PlayerUnits.units[i], 750.0, SpellData.inst(SID_HEAL_SCROLL, SCOPE_PREFIX).name, 0.0, false);
                 AddTimedEffect.atUnit(ART_HEAL, PlayerUnits.units[i], "origin", 0.2);
             }
             i += 1;

@@ -68,7 +68,7 @@ constant integer BUFF_ID = 'A04M';
     function responsedamaged() {
         if (GetUnitAbilityLevel(DamageResult.source, BUFF_ID) > 0) {
             if (DamageResult.isCritical && DamageResult.isPhyx && DamageResult.wasDodgable) {
-                HealTarget(DamageResult.source, DamageResult.source, GetUnitState(DamageResult.source, UNIT_STATE_MAX_LIFE) * 0.05, SpellData.inst(SID_VALOUR_AURA, SCOPE_PREFIX).name, -3.0);
+                HealTarget(DamageResult.source, DamageResult.source, GetUnitState(DamageResult.source, UNIT_STATE_MAX_LIFE) * 0.05, SpellData.inst(SID_VALOUR_AURA, SCOPE_PREFIX).name, -3.0, false);
             }
         }
     }

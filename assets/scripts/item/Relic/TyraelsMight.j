@@ -1,57 +1,33 @@
 //! zinc
 library TyraelsMight requires ItemAttributes, DamageSystem {
-constant string  ART_TARGET  = "Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpecialArt.mdl";
-    HandleTable ht;
-    
-    function healed() {
-        integer i;
-        item tmpi;
-        if (ht.exists(HealResult.target)) {
-            if (ht[HealResult.target] > 0) {
-                if (HealResult.abilityName != SpellData.inst(SID_ATTACK_LL, SCOPE_PREFIX).name && HealResult.abilityName != SpellData.inst(SID_TYRAELS_MIGHT, SCOPE_PREFIX).name) {
-                    i = 0;
-                    while (i < 6) {
-                        tmpi = UnitItemInSlot(HealResult.target, i);
-                        if (GetItemTypeId(tmpi) == ITID_MIGHT_OF_THE_ANGEL_OF_JUSTICE) {
-                            if (GetItemCharges(tmpi) == 0) {
-                                SetItemCharges(tmpi, 2);
-                            } else if (GetItemCharges(tmpi) < 20) {
-                                SetItemCharges(tmpi, GetItemCharges(tmpi) + 1);
-                            }
-                        }
-                        i += 1;
-                    }
-                    tmpi = null;
-                }
-            }
-        }
-    }
-
-    function action(unit u, item it, integer fac) {
-        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
-        
-        up.ModStr(20 * fac);
-        up.ModArmor(8 * fac);
-        up.damageTaken -= 0.08 * fac;
-        up.spellTaken -= 0.12 * fac;
-        up.ModSpeed(30 * fac);
-        
-        if (!ht.exists(u)) {ht[u] = 0;}
-        ht[u] = ht[u] + fac;
-    }
     
     function onCast() -> boolean {
         item it = GetManipulatedItem();
         integer charges;
         unit u;
+        integer ii;
+        item ti;
+        real amt;
         if (GetItemTypeId(it) == ITID_MIGHT_OF_THE_ANGEL_OF_JUSTICE) {
             charges = GetItemCharges(it);
             u = GetTriggerUnit();
             if (charges > 0) {
                 charges += 1;
-                HealTarget(u, u, charges * 50.0, SpellData.inst(SID_TYRAELS_MIGHT, SCOPE_PREFIX).name, 0.0);
+
+                ii = 0;
+                amt = 0;
+                while (ii < 6) {
+                    ti = UnitItemInSlot(u, ii);
+                    if (ti != null) {
+                        amt += ItemExAttributes.getAttributeValue(ti, IATTR_USE_HOLYHEAL, SCOPE_PREFIX) * (1 + ItemExAttributes.getAttributeValue(ti, IATTR_LP, SCOPE_PREFIX) * 0.5);
+                    }
+                    ii += 1;
+                }
+                ti = null;
+
+                HealTarget(u, u, charges * amt, SpellData.inst(SID_TYRAELS_MIGHT, SCOPE_PREFIX).name, 0.0, false);
                 SetItemCharges(it, 0);
-                AddTimedEffect.atUnit(ART_TARGET, u, "origin", 0.5);
+                AddTimedEffect.atUnit(ART_HOLY_BOLT_SPECIAL_ART, u, "origin", 0.5);
             }
             u = null;
         }
@@ -60,10 +36,6 @@ constant string  ART_TARGET  = "Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpec
     }
 
     function onInit() {
-        ht = HandleTable.create();
-        RegisterItemPropMod(ITID_MIGHT_OF_THE_ANGEL_OF_JUSTICE, action);
-        RegisterHealedEvent(healed);
-        //RegisterSpellEffectResponse(SID_TYRAELS_MIGHT, onCast);
         TriggerAnyUnit(EVENT_PLAYER_UNIT_USE_ITEM, function onCast);
     }
 

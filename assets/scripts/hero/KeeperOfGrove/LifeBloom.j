@@ -10,13 +10,13 @@ library LifeBloom requires BuffSystem, SpellEvent, UnitProperty, KeeperOfGroveGl
 
     function onEffect(Buff buf) {
         if (buf.bd.tick != 1) {
-            HealTarget(buf.bd.caster, buf.bd.target, buf.bd.r0, SpellData.inst(SID_LIFE_BLOOM, SCOPE_PREFIX).name, 0.0);
+            HealTarget(buf.bd.caster, buf.bd.target, buf.bd.r0, SpellData.inst(SID_LIFE_BLOOM, SCOPE_PREFIX).name, 0.0, false);
             AddTimedEffect.atUnit(ART_HEAL, buf.bd.target, "origin", 0.2);
         }
     }
 
     function onRemove(Buff buf) {
-        HealTarget(buf.bd.caster, buf.bd.target, buf.bd.r1, SpellData.inst(SID_LIFE_BLOOM, SCOPE_PREFIX).name, lbexcrit[GetPlayerId(GetOwningPlayer(buf.bd.caster))]);
+        HealTarget(buf.bd.caster, buf.bd.target, buf.bd.r1, SpellData.inst(SID_LIFE_BLOOM, SCOPE_PREFIX).name, lbexcrit[GetPlayerId(GetOwningPlayer(buf.bd.caster))], false);
         AddTimedEffect.atUnit(ART_HEAL, buf.bd.target, "origin", 0.2);
         //BJDebugMsg("����");   
         

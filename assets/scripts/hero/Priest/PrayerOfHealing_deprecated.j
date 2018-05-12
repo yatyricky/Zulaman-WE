@@ -17,7 +17,7 @@ constant string  ART  = "Abilities\\Spells\\Orc\\EtherealForm\\SpiritWalkerChang
             } else {
                 excrit = (25 + 15 * lvl - percent) / 30.0 * (0.2 + lvl * 0.1);
             }
-            HealTarget(cd.caster, PlayerUnits.units[i], 300.0 + UnitProp.inst(cd.caster, SCOPE_PREFIX).SpellPower(), SpellData.inst(SID_PRAYER_OF_HEALING, SCOPE_PREFIX).name, excrit);
+            HealTarget(cd.caster, PlayerUnits.units[i], 300.0 + UnitProp.inst(cd.caster, SCOPE_PREFIX).SpellPower(), SpellData.inst(SID_PRAYER_OF_HEALING, SCOPE_PREFIX).name, excrit, false);
             AddTimedLight.atUnits("HWSB", cd.caster, PlayerUnits.units[i], 0.25);
             i += 1;
         }

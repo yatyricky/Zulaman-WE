@@ -64,7 +64,7 @@ constant integer BUFF_ID = 'A04Q';
         buf.bd.bor = onRemove;
         buf.run();
         
-        HealTarget(cd.caster, cd.caster, heal, SpellData.inst(SID_MARROW_SQUEEZE, SCOPE_PREFIX).name, 0.0);
+        HealTarget(cd.caster, cd.caster, heal, SpellData.inst(SID_MARROW_SQUEEZE, SCOPE_PREFIX).name, 0.0, false);
     }
     
     function onChannel() {

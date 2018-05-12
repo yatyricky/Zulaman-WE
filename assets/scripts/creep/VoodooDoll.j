@@ -22,7 +22,7 @@ library VoodooDoll requires DamageSystem {
             thistype this = GetTimerData(GetExpiredTimer());
             if (this.illusion != null) {
                 DamageTarget(this.target, this.illusion, GetUnitState(this.illusion, UNIT_STATE_MAX_LIFE) * 0.1, SpellData.inst(SID_VOODOO_DOLL, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS);
-                // HealTarget(this.caster, this.illusion, GetUnitState(this.illusion, UNIT_STATE_MAX_LIFE) * 0.15, SpellData.inst(SID_VOODOO_DOLL, SCOPE_PREFIX).name, 0.0);
+                // HealTarget(this.caster, this.illusion, GetUnitState(this.illusion, UNIT_STATE_MAX_LIFE) * 0.15, SpellData.inst(SID_VOODOO_DOLL, SCOPE_PREFIX).name, 0.0, false);
             }
         }
     

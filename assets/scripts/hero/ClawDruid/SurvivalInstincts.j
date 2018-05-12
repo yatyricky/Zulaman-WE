@@ -46,7 +46,7 @@ constant string  ART  = "Abilities\\Spells\\NightElf\\BattleRoar\\RoarTarget.mdl
         buf.bd.boe = onEffect;
         buf.bd.bor = onRemove;
         buf.run();
-        HealTarget(SpellEvent.CastingUnit, SpellEvent.CastingUnit, GetUnitState(SpellEvent.CastingUnit, UNIT_STATE_MAX_LIFE) * percentage, SpellData.inst(SID_SURVIVAL_INSTINCTS, SCOPE_PREFIX).name, -3.0);
+        HealTarget(SpellEvent.CastingUnit, SpellEvent.CastingUnit, GetUnitState(SpellEvent.CastingUnit, UNIT_STATE_MAX_LIFE) * percentage, SpellData.inst(SID_SURVIVAL_INSTINCTS, SCOPE_PREFIX).name, -3.0, false);
         AddTimedEffect.atUnit(ART_HEAL, SpellEvent.CastingUnit, "origin", 0.2);
         AddTimedEffect.atUnit(ART, SpellEvent.CastingUnit, "origin", 1.0);
     }

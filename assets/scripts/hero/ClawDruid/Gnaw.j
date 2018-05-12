@@ -42,7 +42,7 @@ library Gnaw requires SpellEvent, GroupUtils, Rabies {
                 GroupRemoveUnit(ENUM_GROUP, tu);
                 tu = FirstOfGroup(ENUM_GROUP);
             }
-            HealTarget(SpellEvent.CastingUnit, SpellEvent.CastingUnit, regen, SpellData.inst(SID_FERAL_GNAW, SCOPE_PREFIX).name, -3.0);
+            HealTarget(SpellEvent.CastingUnit, SpellEvent.CastingUnit, regen, SpellData.inst(SID_FERAL_GNAW, SCOPE_PREFIX).name, -3.0, false);
             ModUnitMana(SpellEvent.CastingUnit, manaregen);
             AddTimedEffect.atUnit(ART_HEAL, SpellEvent.CastingUnit, "origin", 0.2);
             AddTimedEffect.atUnit(ART_MANA, SpellEvent.CastingUnit, "origin", 0.2);

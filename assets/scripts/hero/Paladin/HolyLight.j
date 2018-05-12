@@ -34,7 +34,7 @@ library HolyLight requires CastingBar, BeaconOfLight {
             bs.dispelByBuff(baf);
             baf.destroy();
         }
-        HealTarget(a, b, amt, SpellData.inst(SID_HOLY_LIGHT, SCOPE_PREFIX).name, exct);
+        HealTarget(a, b, amt, SpellData.inst(SID_HOLY_LIGHT, SCOPE_PREFIX).name, exct, true);
         AddTimedEffect.atUnit(ART_RESURRECT_TARGET, b, "origin", 0.2);
         
         buf = Buff.cast(a, b, BID_HOLY_LIGHT_AMP);

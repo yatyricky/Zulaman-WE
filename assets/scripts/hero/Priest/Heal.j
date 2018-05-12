@@ -10,12 +10,12 @@ constant string  ART  = "Abilities\\Spells\\Orc\\EtherealForm\\SpiritWalkerChang
 
     public function PriestCastHeal(unit caster, unit target, integer times) {
         real amt = returnHealHOT(GetUnitAbilityLevel(caster, SID_HEAL), UnitProp.inst(caster, SCOPE_PREFIX).SpellPower()) * times;
-        HealTarget(caster, target, amt, SpellData.inst(SID_HEAL, SCOPE_PREFIX).name, 0.0);
+        HealTarget(caster, target, amt, SpellData.inst(SID_HEAL, SCOPE_PREFIX).name, 0.0, false);
         AddTimedEffect.atUnit(ART, target, "origin", 0.3);
     }
 
     function onEffect(Buff buf) {
-        HealTarget(buf.bd.caster, buf.bd.target, buf.bd.r0, SpellData.inst(SID_HEAL, SCOPE_PREFIX).name, 0.0);
+        HealTarget(buf.bd.caster, buf.bd.target, buf.bd.r0, SpellData.inst(SID_HEAL, SCOPE_PREFIX).name, 0.0, false);
         AddTimedEffect.atUnit(ART, buf.bd.target, "origin", 0.3);
     }
 

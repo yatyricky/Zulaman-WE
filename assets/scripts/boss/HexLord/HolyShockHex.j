@@ -3,7 +3,7 @@ library HolyShockHex requires SpellEvent, DamageSystem {
 
     function onCast() {
         if (GetPidofu(SpellEvent.TargetUnit) == MOB_PID) {
-            HealTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, 3000.0, SpellData.inst(SID_HOLY_SHOCK_HEX, SCOPE_PREFIX).name, 0.0);
+            HealTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, 3000.0, SpellData.inst(SID_HOLY_SHOCK_HEX, SCOPE_PREFIX).name, 0.0, false);
         } else {
             DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, 300.0, SpellData.inst(SID_HOLY_SHOCK_HEX, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS);
         }

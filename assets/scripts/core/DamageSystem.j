@@ -73,12 +73,14 @@ constant string NULL_STR = "";
         static string abilityName = null;
         static real amount = 0.0;
         static real effective = 0.0;
-        static boolean isCritical = false;  
+        static boolean isCritical = false;
+        static boolean wasDirect = false;
     }
     
-    public function HealTarget(unit a, unit b, real amount, string hName, real exCrit) {
+    public function HealTarget(unit a, unit b, real amount, string hName, real exCrit, boolean direct) {
         string display;
-        integer i;        
+        integer i;
+        HealResult.wasDirect = direct;
         HealResult.isCritical = GetRandomReal(0.0, 1.0) < UnitProp.inst(a, SCOPE_PREFIX + "HealTarget 1").SpellCrit() + exCrit;
         amount = amount * UnitProp.inst(a, SCOPE_PREFIX + "HealTarget 2").DamageDealt() * UnitProp.inst(b, SCOPE_PREFIX + "HealTarget 3").HealTaken();
         if (HealResult.isCritical) {
