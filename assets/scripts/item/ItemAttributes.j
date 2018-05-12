@@ -1,5 +1,5 @@
 //! zinc
-library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying {
+library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindForce {
     public constant real AFFIX_FACTOR_BASE = 15000;
     public constant real AFFIX_FACTOR_DELTA = 2500;
     public constant real SUFIX_MULTIPLIER = 4;
@@ -659,7 +659,9 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying {
             up.ml += val * polar;
         }
         static method callbackATK_CTHUN(unit u, real val, integer polar) {}
-        static method callbackATK_WF(unit u, real val, integer polar) {}
+        static method callbackATK_WF(unit u, real val, integer polar) {
+            EquipedWindforce(u, polar);
+        }
         static method callbackATK_LION(unit u, real val, integer polar) {}
         static method callbackATK_MOONWAVE(unit u, real val, integer polar) {}
         static method callbackATK_POISNOVA(unit u, real val, integer polar) {

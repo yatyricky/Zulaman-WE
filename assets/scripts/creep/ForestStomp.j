@@ -21,7 +21,7 @@ library ForestStomp requires DamageSystem, ForcedMovement {
 
                 // move
                 dx = (GetUnitX(PlayerUnits.units[i]) - GetUnitX(SpellEvent.CastingUnit)) * 36.0 / dis;
-                dy = (GetUnitX(PlayerUnits.units[i]) - GetUnitX(SpellEvent.CastingUnit)) * 36.0 / dis;
+                dy = (GetUnitY(PlayerUnits.units[i]) - GetUnitY(SpellEvent.CastingUnit)) * 36.0 / dis;
                 ForceMoveUnitPolar(PlayerUnits.units[i], dx, dy, 20, -0.7);
 
                 // slow
