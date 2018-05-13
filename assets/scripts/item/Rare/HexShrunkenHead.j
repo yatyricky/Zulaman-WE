@@ -35,7 +35,6 @@ constant string  ART_CASTER  = "Abilities\\Spells\\Items\\AIim\\AIimTarget.mdl";
 
     function onInit() {
         //ht = HandleTable.create();
-        RegisterItemPropMod(ITID_HEX_SHRUNKEN_HEAD, action);
         RegisterSpellEffectResponse(SID_HEX_SHRUNKEN_HEAD, onCast);
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
     }

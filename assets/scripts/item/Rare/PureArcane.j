@@ -68,7 +68,6 @@ constant string  ART_TARGET  = "Objects\\Spawnmodels\\NightElf\\NEDeathSmall\\NE
 
     function onInit() {
         ht = HandleTable.create();
-        RegisterItemPropMod(ITID_PURE_ARCANE, action);
         RegisterDamagedEvent(damaged);
     }
 

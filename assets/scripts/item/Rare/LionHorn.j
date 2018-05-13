@@ -56,7 +56,6 @@ constant string  ART_TARGET  = "Abilities\\Spells\\Other\\Tornado\\Tornado_Targe
 
     function onInit() {
         ht = HandleTable.create();
-        RegisterItemPropMod(ITID_LION_HORN, action);
         RegisterDamagedEvent(damaged);
         BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_POS);
     }

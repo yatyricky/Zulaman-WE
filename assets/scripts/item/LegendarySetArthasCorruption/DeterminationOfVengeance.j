@@ -25,8 +25,6 @@ library DeterminationOfVengeance requires ItemAttributes, ArthassCorruption {
 
     function onInit() {
         //ht = HandleTable.create();
-        RegisterItemPropMod(ITID_DETERMINATION_OF_VENGEANCE, action);
-        RegisterItemPropMod(ITID_DETERMINATION_OF_VENGEANCE1, action1);
     }
 }
 //! endzinc

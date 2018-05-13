@@ -53,7 +53,6 @@ constant integer BUFF_ID = 'A06A';
 
     function onInit() {
         ht = HandleTable.create();
-        RegisterItemPropMod(ITID_KELENS_DAGGER_OF_ASSASSINATION, action);
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_NEG);
         RegisterOnDamageEvent(ondamaging);
     }

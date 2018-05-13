@@ -24,7 +24,6 @@ library HornOfCenarius requires ItemAttributes, DamageSystem {
 
     function onInit() {
         ht = HandleTable.create();
-        RegisterItemPropMod(ITID_HORN_OF_CENARIUS, action);
     }
 }
 //! endzinc

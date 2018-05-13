@@ -75,8 +75,6 @@ library StratholmeTragedy requires ItemAttributes, ArthassCorruption {
 
     function onInit() {
         ht = HandleTable.create();
-        RegisterItemPropMod(ITID_STRATHOLME_TRAGEDY, action);
-        RegisterItemPropMod(ITID_STRATHOLME_TRAGEDY1, action1);
         TriggerAnyUnit(EVENT_PLAYER_HERO_LEVEL, function lvledup);
     }
 }

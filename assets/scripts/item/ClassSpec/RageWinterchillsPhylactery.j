@@ -21,7 +21,6 @@ library RageWinterchillsPhylactery requires ItemAttributes, DamageSystem {
 
     function onInit() {
         ht = HandleTable.create();
-        RegisterItemPropMod(ITID_RAGE_WINTERCHILLS_PHYLACTERY, action);
     }
 }
 //! endzinc

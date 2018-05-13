@@ -22,7 +22,6 @@ library OrcCaptureFlag requires ItemAttributes, DamageSystem {
 
     function onInit() {
         ht = HandleTable.create();
-        RegisterItemPropMod(ITID_BANNER_OF_THE_HORDE, action);
     }
 }
 //! endzinc

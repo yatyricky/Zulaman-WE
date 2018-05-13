@@ -22,7 +22,6 @@ library RomulosExpiredPoison requires ItemAttributes {
 
     function onInit() {
         ht = HandleTable.create();
-        RegisterItemPropMod(ITID_ROMULOS_EXPIRED_POISON, action);
         RegisterDamagedEvent(damaged);
     }
 }

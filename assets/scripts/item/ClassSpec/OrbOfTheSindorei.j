@@ -22,7 +22,6 @@ library OrbOfTheSindorei requires ItemAttributes, DamageSystem {
 
     function onInit() {
         ht = HandleTable.create();
-        RegisterItemPropMod(ITID_ORB_OF_THE_SINDOREI, action);
     }
 }
 //! endzinc

@@ -39,7 +39,6 @@ library TidalLoop requires ItemAttributes {
 
     function onInit() {
         ht = HandleTable.create();
-        RegisterItemPropMod(ITID_TIDAL_LOOP, action);
         RegisterDamagedEvent(damaged);
         RegisterHealedEvent(healed);
     }

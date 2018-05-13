@@ -1,5 +1,5 @@
 //! zinc
-library DarkArrow requires SpellEvent, DamageSystem, Projectile, RhokDelar {
+library DarkArrow requires SpellEvent, DamageSystem, Projectile {
 constant string  PATH  = "Abilities\\Spells\\Other\\BlackArrow\\BlackArrowMissile.mdl";
 
     function returnDamage(integer lvl, real ap) -> real {
@@ -38,7 +38,7 @@ constant string  PATH  = "Abilities\\Spells\\Other\\BlackArrow\\BlackArrowMissil
         private static method run() {
             thistype this = GetTimerData(GetExpiredTimer());
             this.tick -= 1;
-            if (this.tick > 0) {
+            if (this.tick > 0 && !IsUnitDead(this.tar)) {
                 shootArrow(this.u, this.tar);
             } else {
                 this.destroy(); 
@@ -59,14 +59,23 @@ constant string  PATH  = "Abilities\\Spells\\Other\\BlackArrow\\BlackArrowMissil
 
     function onCast() {
         integer lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_DARK_ARROW);
-        integer arrows = 1;    
+        integer arrows = 1;
         integer rnd;
-            
+        integer ii = 0;
+        item ti;
+        real amt = 0;
         // equiped Rhok' Delar
-        if (HasRhokDelar(SpellEvent.CastingUnit)) {
-            arrows = 2;
+        while (ii < 6) {
+            ti = UnitItemInSlot(SpellEvent.CastingUnit, ii);
+            if (ti != null) {
+                amt += ItemExAttributes.getAttributeValue(ti, IATTR_DK_ARROW, SCOPE_PREFIX) + ItemExAttributes.getAttributeValue(ti, IATTR_LP, SCOPE_PREFIX);
+            }
+            ii += 1;
         }
-        
+        ti = null;
+
+        arrows += Rounding(amt);
+
         if (lvl == 2 && GetRandomInt(0, 99) < 40) {
             arrows += 1;
         } else if (lvl == 3) {

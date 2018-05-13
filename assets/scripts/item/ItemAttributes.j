@@ -69,132 +69,170 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
             thistype.ht = Table.create();
             thistype.append(ITID_CIRCLET_OF_NOBILITY,7,2,4);
             thistype.setLoreText(ITID_CIRCLET_OF_NOBILITY,"|CFF11FF11Circlet of Nobility|R","");
+
             thistype.append(ITID_HEAVY_BOOTS,8,1,3);
             thistype.setLoreText(ITID_HEAVY_BOOTS,"|CFF11FF11Heavy Boots|R","|CFF999999It's just heavy, nothing special.|R");
+
             thistype.append(ITID_HELM_OF_VALOR,4,3,5);
             thistype.append(ITID_HELM_OF_VALOR,13,3,5);
             thistype.setLoreText(ITID_HELM_OF_VALOR,"|CFF11FF11Helm of Valor|R","");
+
             thistype.append(ITID_MEDALION_OF_COURAGE,4,3,5);
             thistype.append(ITID_MEDALION_OF_COURAGE,14,3,5);
             thistype.setLoreText(ITID_MEDALION_OF_COURAGE,"|CFF11FF11Medalion of Courage|R","");
+
             thistype.append(ITID_HOOD_OF_CUNNING,13,3,5);
             thistype.append(ITID_HOOD_OF_CUNNING,14,3,5);
             thistype.setLoreText(ITID_HOOD_OF_CUNNING,"|CFF11FF11Hood of Cunning|R","");
+
             thistype.append(ITID_CLAWS_OF_ATTACK,9,4,7);
             thistype.setLoreText(ITID_CLAWS_OF_ATTACK,"|CFF11FF11Claws of Attack|R","");
+
             thistype.append(ITID_GLOVES_OF_HASTE,12,4,7);
             thistype.setLoreText(ITID_GLOVES_OF_HASTE,"|CFF11FF11Gloves of Haste|R","");
+
             thistype.append(ITID_SWORD_OF_ASSASSINATION,11,0.02,0.04);
             thistype.setLoreText(ITID_SWORD_OF_ASSASSINATION,"|CFF11FF11Sword of Assassination|R","");
+
             thistype.append(ITID_VITALITY_PERIAPT,21,80,120);
             thistype.setLoreText(ITID_VITALITY_PERIAPT,"|CFF11FF11Vitality Periapt|R","");
+
             thistype.append(ITID_RING_OF_PROTECTION,8,2,2);
             thistype.setLoreText(ITID_RING_OF_PROTECTION,"|CFF11FF11Ring of Protection|R","");
+
             thistype.append(ITID_TALISMAN_OF_EVASION,27,0.02,0.03);
             thistype.setLoreText(ITID_TALISMAN_OF_EVASION,"|CFF11FF11Talisman of Evasion|R","");
+
             thistype.append(ITID_MANA_PERIAPT,17,100,200);
             thistype.setLoreText(ITID_MANA_PERIAPT,"|CFF11FF11Mana Periapt|R","");
+
             thistype.append(ITID_SOBI_MASK,72,3,5);
             thistype.setLoreText(ITID_SOBI_MASK,"|CFF11FF11Sobi Mask|R","");
+
             thistype.append(ITID_STAFF_OF_THE_WITCH_DOCTOR,18,6,16);
             thistype.setLoreText(ITID_STAFF_OF_THE_WITCH_DOCTOR,"|CFF11FF11Staff of the Witch Doctor|R","");
+
             thistype.append(ITID_HEALTH_STONE,73,3,5);
             thistype.append(ITID_HEALTH_STONE,31,400,800);
             thistype.setLoreText(ITID_HEALTH_STONE,"|CFF11FF11Health Stone|R","");
+
             thistype.append(ITID_MANA_STONE,72,2,4);
             thistype.append(ITID_MANA_STONE,30,200,400);
             thistype.setLoreText(ITID_MANA_STONE,"|CFF11FF11Mana Stone|R","");
+
             thistype.append(ITID_ROMULOS_EXPIRED_POISON,53,80,115);
             thistype.setLoreText(ITID_ROMULOS_EXPIRED_POISON,"|CFF11FF11Romulo's Expired Poison|R","|CFF999999Still usable.|R");
+
             thistype.append(ITID_MOROES_LUCKY_GEAR,27,0.01,0.02);
             thistype.append(ITID_MOROES_LUCKY_GEAR,35,8,12);
             thistype.setLoreText(ITID_MOROES_LUCKY_GEAR,"|CFF11FF11Moroes' Lucky Gear|R","|CFF999999Disassembled from Moroes' Lucky Pocket Watch|R");
+
             thistype.append(ITID_RUNED_BELT,21,60,90);
             thistype.append(ITID_RUNED_BELT,2,0.03,0.07);
             thistype.setLoreText(ITID_RUNED_BELT,"|CFF11FF11Runed Belt|R","|CFF999999Was a bracelet of an ogre.|R");
+
             thistype.append(ITID_UNGLAZED_ICON_OF_THE_CRESCENT,14,8,10);
             thistype.append(ITID_UNGLAZED_ICON_OF_THE_CRESCENT,33,12,18);
             thistype.setLoreText(ITID_UNGLAZED_ICON_OF_THE_CRESCENT,"|CFF11FF11Unglazed Icon of the Crescent|R","|CFF999999It can be seen vaguely that this icon was once beautiful silver.|R");
 
+            // rare
             thistype.append(ITID_COLOSSUS_BLADE,9,25,40);
             thistype.append(ITID_COLOSSUS_BLADE,12,12,18);
             thistype.setLoreText(ITID_COLOSSUS_BLADE,"|CFF11FF11Colossus Blade|R","|CFF999999A rough sword, the workmanship is not very good. But it's the most popular production weapons in Harrogath.|R");
+
             thistype.append(ITID_THE_X_RING,7,9,12);
             thistype.setLoreText(ITID_THE_X_RING,"|CFF8B66FFThe X Ring|R","|CFF999999All the former 20 are trash!|R");
+
             thistype.append(ITID_GOBLIN_ROCKET_BOOTS_LIMITED_EDITION,21,100,140);
             thistype.append(ITID_GOBLIN_ROCKET_BOOTS_LIMITED_EDITION,17,75,100);
             thistype.append(ITID_GOBLIN_ROCKET_BOOTS_LIMITED_EDITION,27,0.01,0.02);
             thistype.append(ITID_GOBLIN_ROCKET_BOOTS_LIMITED_EDITION,24,15,20);
             thistype.append(ITID_GOBLIN_ROCKET_BOOTS_LIMITED_EDITION,36,8,12);
             thistype.setLoreText(ITID_GOBLIN_ROCKET_BOOTS_LIMITED_EDITION,"|CFF8B66FFGoblin Rocket Boots Limited Edition|R","|CFF999999Limited edition, but it's a goblin product after all. So use it with caution.|R");
+
             thistype.append(ITID_WARSONG_BATTLE_DRUMS,12,1,3);
             thistype.append(ITID_WARSONG_BATTLE_DRUMS,56,0.01,0.02);
             thistype.append(ITID_WARSONG_BATTLE_DRUMS,84,0.01,0.02);
             thistype.setLoreText(ITID_WARSONG_BATTLE_DRUMS,"|CFF8B66FFWarsong Battle Drums|R","|CFF999999High morale.|R");
+
             thistype.append(ITID_TROLL_BANE,4,5,8);
             thistype.append(ITID_TROLL_BANE,13,8,12);
             thistype.append(ITID_TROLL_BANE,9,10,20);
             thistype.setLoreText(ITID_TROLL_BANE,"|CFF8B66FFTroll Bane|R","|CFFFFDEAD\"You know this blade...\"|R");
+
             thistype.append(ITID_GOREHOWL,4,10,13);
             thistype.append(ITID_GOREHOWL,9,10,15);
             thistype.append(ITID_GOREHOWL,11,0.03,0.05);
             thistype.setLoreText(ITID_GOREHOWL,"|CFF8B66FFGorehowl|R","|CFFFFDEAD\"The axe of Grom Hellscream has sown terror across hundreds of battlefields.\"|R");
+
             thistype.append(ITID_CORE_HOUND_TOOTH,21,50,75);
             thistype.append(ITID_CORE_HOUND_TOOTH,9,15,22);
             thistype.append(ITID_CORE_HOUND_TOOTH,12,5,7);
             thistype.append(ITID_CORE_HOUND_TOOTH,11,0.02,0.04);
             thistype.setLoreText(ITID_CORE_HOUND_TOOTH,"|CFF8B66FFCore Hound Tooth|R","");
+
             thistype.append(ITID_VISKAG,13,8,12);
             thistype.append(ITID_VISKAG,9,12,18);
             thistype.append(ITID_VISKAG,12,7,12);
             thistype.append(ITID_VISKAG,44,0.04,0.05);
             thistype.setLoreText(ITID_VISKAG,"|CFF8B66FFVis'kag|R","|CFFFFDEAD\"The blood letter\"|R");
+
             thistype.append(ITID_LION_HORN,9,12,15);
             thistype.append(ITID_LION_HORN,3,0.01,0.02);
             thistype.append(ITID_LION_HORN,48,0.05,0.07);
             thistype.setLoreText(ITID_LION_HORN,"|CFF8B66FFLion Horn|R","|CFF999999Much better than Dragonspine Trophy.|R");
+
             thistype.append(ITID_ARMOR_OF_THE_DAMNED,8,2,3);
             thistype.append(ITID_ARMOR_OF_THE_DAMNED,4,8,12);
             thistype.append(ITID_ARMOR_OF_THE_DAMNED,15,20,45);
             thistype.append(ITID_ARMOR_OF_THE_DAMNED,74,4,8);
             thistype.append(ITID_ARMOR_OF_THE_DAMNED,41,50,75);
             thistype.setLoreText(ITID_ARMOR_OF_THE_DAMNED,"|CFF8B66FFArmor of the Damned|R","|CFFFFDEAD\"Slow, Curse, Weakness, Misfortune\"|R");
+
             thistype.append(ITID_BULWARK_OF_THE_AMANI_EMPIRE,8,1,2);
             thistype.append(ITID_BULWARK_OF_THE_AMANI_EMPIRE,4,5,7);
             thistype.append(ITID_BULWARK_OF_THE_AMANI_EMPIRE,21,150,240);
             thistype.append(ITID_BULWARK_OF_THE_AMANI_EMPIRE,15,14,28);
-            thistype.setLoreText(ITID_BULWARK_OF_THE_AMANI_EMPIRE,"|CFF8B66FFBulwark of the Amani Empire|R","|CFF999999It still seems to linger with the resentment of the first guardian warrior of the Brothers’ Guild.|R");
+            thistype.setLoreText(ITID_BULWARK_OF_THE_AMANI_EMPIRE,"|CFF8B66FFBulwark of the Amani Empire|R","|CFF999999It still seems to linger with the resentment of the first guardian warrior of the Brothers' Guild.|R");
+
             thistype.append(ITID_SIGNET_OF_THE_LAST_DEFENDER,8,1,2);
             thistype.append(ITID_SIGNET_OF_THE_LAST_DEFENDER,4,7,9);
             thistype.append(ITID_SIGNET_OF_THE_LAST_DEFENDER,27,0.01,0.01);
             thistype.append(ITID_SIGNET_OF_THE_LAST_DEFENDER,6,0.03,0.06);
             thistype.setLoreText(ITID_SIGNET_OF_THE_LAST_DEFENDER,"|CFF8B66FFSignet of the Last Defender|R","|CFF999999The signet originally belongs to a demon lord and was later stolen by an orc thief.|R");
+
             thistype.append(ITID_ARANS_SOOTHING_EMERALD,14,5,8);
             thistype.append(ITID_ARANS_SOOTHING_EMERALD,18,10,15);
             thistype.append(ITID_ARANS_SOOTHING_EMERALD,19,2,4);
             thistype.append(ITID_ARANS_SOOTHING_EMERALD,72,2,4);
             thistype.setLoreText(ITID_ARANS_SOOTHING_EMERALD,"|CFF8B66FFAran's Soothing Emerald|R","|CFF999999Aran had made all kinds of precious stones into soothing gems. It should be a sapphire that adventurers are most familiar with.|R");
+
             thistype.append(ITID_PURE_ARCANE,77,170,220);
             thistype.setLoreText(ITID_PURE_ARCANE,"|CFF8B66FFPure Arcane|R","|CFF999999Megatorque despises this, he thinks \"One simple capacitor can achieve this effect\".|R");
+
             thistype.append(ITID_HEX_SHRUNKEN_HEAD,14,8,12);
             thistype.append(ITID_HEX_SHRUNKEN_HEAD,18,10,15);
             thistype.append(ITID_HEX_SHRUNKEN_HEAD,34,35,64);
             thistype.setLoreText(ITID_HEX_SHRUNKEN_HEAD,"|CFF8B66FFHex Shrunken Head|R","|CFF999999The Hex Lord is now strong enough to no longer need such trinkets.|R");
+
             thistype.append(ITID_STAFF_OF_THE_SHADOW_FLAME,14,5,8);
             thistype.append(ITID_STAFF_OF_THE_SHADOW_FLAME,18,10,21);
             thistype.append(ITID_STAFF_OF_THE_SHADOW_FLAME,20,0.04,0.05);
             thistype.setLoreText(ITID_STAFF_OF_THE_SHADOW_FLAME,"|CFF8B66FFStaff of the Shadow Flame|R","|CFFFFDEADThe dark flame at the end of the staff is so pure and contains tremendous energy.|R");
+
             thistype.append(ITID_TIDAL_LOOP,4,7,10);
             thistype.append(ITID_TIDAL_LOOP,14,8,12);
             thistype.append(ITID_TIDAL_LOOP,72,3,5);
             thistype.append(ITID_TIDAL_LOOP,87,60,90);
             thistype.setLoreText(ITID_TIDAL_LOOP,"|CFF8B66FFTidal Loop|R","|CFF999999The ring was crafted to fight against the Lord of Fire's legion. But now its ability of fire resistance has lost.|R");
+
             thistype.append(ITID_ORB_OF_THE_SINDOREI,4,5,7);
             thistype.append(ITID_ORB_OF_THE_SINDOREI,21,60,80);
             thistype.append(ITID_ORB_OF_THE_SINDOREI,18,14,20);
             thistype.append(ITID_ORB_OF_THE_SINDOREI,16,0.04,0.06);
             thistype.append(ITID_ORB_OF_THE_SINDOREI,86,0.16,0.18);
             thistype.setLoreText(ITID_ORB_OF_THE_SINDOREI,"|CFF8B66FFOrb of the Sin'dorei|R","|CFFFFDEADThe glory sign of remarkable bloodelf defenders.|R");
+
             thistype.append(ITID_REFORGED_BADGE_OF_TENACITY,13,5,7);
             thistype.append(ITID_REFORGED_BADGE_OF_TENACITY,8,3,4);
             thistype.append(ITID_REFORGED_BADGE_OF_TENACITY,21,80,120);
@@ -202,12 +240,14 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
             thistype.append(ITID_REFORGED_BADGE_OF_TENACITY,78,0.08,0.1);
             thistype.append(ITID_REFORGED_BADGE_OF_TENACITY,92,7,9);
             thistype.setLoreText(ITID_REFORGED_BADGE_OF_TENACITY,"|CFF8B66FFReforged Badge of Tenacity|R","|CFFFFDEADOriginally forged by a demon overseer named Shartuul.|R");
+
             thistype.append(ITID_LIGHTS_JUSTICE,14,5,6);
             thistype.append(ITID_LIGHTS_JUSTICE,18,10,20);
             thistype.append(ITID_LIGHTS_JUSTICE,20,0.03,0.04);
             thistype.append(ITID_LIGHTS_JUSTICE,79,0,0);
             thistype.append(ITID_LIGHTS_JUSTICE,91,0,0);
             thistype.setLoreText(ITID_LIGHTS_JUSTICE,"|CFF8B66FFLight's Justice|R","|CFFFFDEADOpen your heart to the light.|R");
+
             thistype.append(ITID_BENEDICTION,14,6,8);
             thistype.append(ITID_BENEDICTION,21,60,75);
             thistype.append(ITID_BENEDICTION,18,8,16);
@@ -215,18 +255,21 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
             thistype.append(ITID_BENEDICTION,76,4,6);
             thistype.append(ITID_BENEDICTION,80,0,0);
             thistype.setLoreText(ITID_BENEDICTION,"|CFF8B66FFBenediction|R","|CFFFFDEADBehind the light, it's shadow.|R");
+
             thistype.append(ITID_HORN_OF_CENARIUS,7,4,5);
             thistype.append(ITID_HORN_OF_CENARIUS,21,50,80);
             thistype.append(ITID_HORN_OF_CENARIUS,17,80,130);
             thistype.append(ITID_HORN_OF_CENARIUS,18,10,14);
             thistype.append(ITID_HORN_OF_CENARIUS,69,3,4);
             thistype.setLoreText(ITID_HORN_OF_CENARIUS,"|CFF8B66FFHorn of Cenarius|R","|CFFFFDEADThis Night Elf artifact is said to be able to summon the souls of all night elves.|R");
+
             thistype.append(ITID_BANNER_OF_THE_HORDE,4,6,8);
             thistype.append(ITID_BANNER_OF_THE_HORDE,13,6,8);
             thistype.append(ITID_BANNER_OF_THE_HORDE,9,10,12);
             thistype.append(ITID_BANNER_OF_THE_HORDE,11,3,4);
             thistype.append(ITID_BANNER_OF_THE_HORDE,39,0.4,0.6);
             thistype.setLoreText(ITID_BANNER_OF_THE_HORDE,"|CFF8B66FFBanner of the Horde|R","|CFFFFDEADWith the tribal glory, the head of the enemies were left behind.|R");
+
             thistype.append(ITID_KELENS_DAGGER_OF_ASSASSINATION,13,7,8);
             thistype.append(ITID_KELENS_DAGGER_OF_ASSASSINATION,9,12,16);
             thistype.append(ITID_KELENS_DAGGER_OF_ASSASSINATION,12,7,9);
@@ -234,24 +277,28 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
             thistype.append(ITID_KELENS_DAGGER_OF_ASSASSINATION,65,0.04,0.06);
             thistype.append(ITID_KELENS_DAGGER_OF_ASSASSINATION,90,0.05,0.06);
             thistype.setLoreText(ITID_KELENS_DAGGER_OF_ASSASSINATION,"|CFF8B66FFKelen's Dagger of Assassination|R","|CFFFFDEADKelen is not just a master escaper.|R");
+
             thistype.append(ITID_RHOKDELAR,13,5,8);
             thistype.append(ITID_RHOKDELAR,9,11,13);
             thistype.append(ITID_RHOKDELAR,11,3,5);
             thistype.append(ITID_RHOKDELAR,24,10,20);
             thistype.append(ITID_RHOKDELAR,94,1,1);
-            thistype.setLoreText(ITID_RHOKDELAR,"|CFF8B66FFRhokdelar|R","|CFFFFDEADLongbow of the Ancient Keepers|R");
+            thistype.setLoreText(ITID_RHOKDELAR,"|CFF8B66FFRhok'delar|R","|CFFFFDEADLongbow of the Ancient Keepers|R");
+
             thistype.append(ITID_RAGE_WINTERCHILLS_PHYLACTERY,14,5,8);
             thistype.append(ITID_RAGE_WINTERCHILLS_PHYLACTERY,21,70,90);
             thistype.append(ITID_RAGE_WINTERCHILLS_PHYLACTERY,20,2,3);
             thistype.append(ITID_RAGE_WINTERCHILLS_PHYLACTERY,96,0.03,0.04);
             thistype.append(ITID_RAGE_WINTERCHILLS_PHYLACTERY,70,0.01,0.02);
             thistype.setLoreText(ITID_RAGE_WINTERCHILLS_PHYLACTERY,"|CFF8B66FFRage Winterchill's Phylactery|R","|CFFFFDEADFor some people, the value of his phylactery is greater than the Chronicle of Dark Secrets.|R");
+
             thistype.append(ITID_ANATHEMA,21,90,150);
             thistype.append(ITID_ANATHEMA,18,10,15);
             thistype.append(ITID_ANATHEMA,19,0.02,0.03);
             thistype.append(ITID_ANATHEMA,20,0.02,0.03);
             thistype.append(ITID_ANATHEMA,81,2,3);
             thistype.setLoreText(ITID_ANATHEMA,"|CFF8B66FFAnathema|R","|CFFFFDEADBefore the shadows, it's light.|R");
+
             thistype.append(ITID_RARE_SHIMMER_WEED,7,3,4);
             thistype.append(ITID_RARE_SHIMMER_WEED,18,10,12);
             thistype.append(ITID_RARE_SHIMMER_WEED,12,5,6);
@@ -404,12 +451,13 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
 
         static method updateUbertip(item it) {
             thistype head;
-            string str = "";
+            string str;
             string valstr;
             ItemAttributeMeta meta;
             DefaultItemAttributesData raw;
             if (thistype.ht.exists(it)) {
                 head = thistype.ht[it];
+                str = "";
                 while (head != 0) {
                     meta = ItemAttributeMeta.inst(head.id, "ItemExAttributes.updateUbertip.meta");
                     if (head.value < 1 || head.id == IATTR_USE_CTHUN) {
@@ -427,8 +475,9 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
                     }
                     head = head.next;
                 }
-                raw = DefaultItemAttributesData.inst(GetItemTypeId(it), "updateUberTip");
-                BlzSetItemExtendedTooltip(it, str);
+                // raw = DefaultItemAttributesData.inst(GetItemTypeId(it), "updateUberTip");
+                print(str);
+                // BlzSetItemExtendedTooltip(it, str);
             } else {
                 print("ItemExAttributes.updateUbertip no such item " + ID2S(GetItemTypeId(it)));
             }
@@ -568,14 +617,6 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
 
         static method onInit() {
             thistype.ht = HandleTable.create();
-        }
-    }
-    
-    public function RegisterItemPropMod(integer itid, ItemPropModType act) {
-        if (ItemAttributes.exists(itid)) {
-            BJDebugMsg(SCOPE_PREFIX+":>|cffff0000Double registering item property action.|r");
-        } else {
-            ItemAttributes[itid] = act;
         }
     }
     

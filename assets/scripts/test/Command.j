@@ -363,6 +363,23 @@ library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSys
         DestroyGroup(g);
     }
 
+    function printItemUbertip(string str) {
+        unit u; 
+        group g = CreateGroup();
+        item ti;
+        integer i = S2I(SubString(str, 3, 4));
+        GroupEnumUnitsSelected(g, Player(0), null);
+        u = FirstOfGroup(g);
+        
+        ti = UnitItemInSlot(u, i);
+        if (ti != null) {
+            ItemExAttributes.updateUbertip(ti);
+        }
+
+        DestroyGroup(g);
+        g = null;
+    }
+
     private function onInit() {
         //Console[Player(0)].add("stun", testStunUnit);
         Console[Player(0)].add("cls", screenClear);
@@ -403,8 +420,8 @@ library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSys
         // console[Player(0)].add("testwlk", testwarlock);
         // Console[Player(0)].add("angle", testgetangle);
         Console[Player(0)].add("test", testGeneral);
-        Console[Player(0)].add("zxc", testItemAttributes);
-        Console[Player(0)].add("sta", printStats);
+        Console[Player(0)].add("z", printStats);
+        Console[Player(0)].add("ii", printItemUbertip);
     }
 }
 //! endzinc

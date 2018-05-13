@@ -39,9 +39,6 @@ library Patricide requires ItemAttributes, ArthassCorruption {
     function onInit() {
         ht = HandleTable.create();
         ht2 = HandleTable.create();
-        RegisterItemPropMod(ITID_PATRICIDE, action);
-        RegisterItemPropMod(ITID_PATRICIDE1, action1);
-        RegisterItemPropMod(ITID_PATRICIDE2, action2);
     }
 }
 //! endzinc

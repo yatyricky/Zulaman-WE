@@ -33,9 +33,6 @@ library FrostMourne requires ItemAttributes, ArthassCorruption {
 
     function onInit() {
         ht2 = HandleTable.create();
-        RegisterItemPropMod(ITID_FROSTMOURNE, action);
-        RegisterItemPropMod(ITID_FROSTMOURNE1, action1);
-        RegisterItemPropMod(ITID_FROSTMOURNE2, action2);
     }
 }
 //! endzinc

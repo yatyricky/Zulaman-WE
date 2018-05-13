@@ -34,7 +34,6 @@ constant integer BUFF_ID = 'A07A';
 
     function onInit() {
         //ht = HandleTable.create();
-        RegisterItemPropMod(ITID_GOBLIN_ROCKET_BOOTS_LIMITED_EDITION, action);
         RegisterSpellEffectResponse(SID_GOBLIN_ROCKET_BOOTS_LIMITED_EDITION, onCast);
         BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
     }
