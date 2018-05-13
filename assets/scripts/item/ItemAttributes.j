@@ -895,7 +895,9 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
         static method callbackATK_WF(unit u, real val, integer polar) {
             EquipedWindforce(u, polar);
         }
-        static method callbackATK_LION(unit u, real val, integer polar) {}
+        static method callbackATK_LION(unit u, real val, integer polar) {
+            EquipedLionHorn(u, polar);
+        }
         static method callbackATK_MOONWAVE(unit u, real val, integer polar) {}
         static method callbackATK_POISNOVA(unit u, real val, integer polar) {
             EquipedBOTD(u, polar);

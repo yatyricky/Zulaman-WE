@@ -1,14 +1,12 @@
 //! zinc
-library LionHorn requires ItemAttributes {
-constant integer BUFF_ID = 'A07D';
-constant string  ART_TARGET  = "Abilities\\Spells\\Other\\Tornado\\Tornado_Target.mdl";
+library LionHorn requires DamageSystem, BuffSystem {
     HandleTable ht;
 
-    function oneffect(Buff buf) {
+    function onEffect(Buff buf) {
         UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(buf.bd.i0);
     }
 
-    function onremove(Buff buf) {
+    function onRemove(Buff buf) {
         UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(0 - buf.bd.i0);
     }
     
@@ -16,50 +14,47 @@ constant string  ART_TARGET  = "Abilities\\Spells\\Other\\Tornado\\Tornado_Targe
         Buff buf;
         location loc;
         real x, y, z;
-        if (DamageResult.isHit) {
-            if (ht.exists(DamageResult.source)) {
-                if (ht[DamageResult.source] > 0 && DamageResult.abilityName == DAMAGE_NAME_MELEE) {
-                    if (GetRandomInt(0, 99) < 10 && !IsUnitICD(DamageResult.source, BUFF_ID)) {
-                        buf = Buff.cast(DamageResult.source, DamageResult.source, BUFF_ID);
-                        buf.bd.tick = -1;
-                        buf.bd.interval = 5.0;
-                        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(0 - buf.bd.i0);
-                        buf.bd.i0 = 30;
-                        if (buf.bd.e0 == 0) {buf.bd.e0 = BuffEffect.create(ART_TARGET, buf, "weapon");}
-                        buf.bd.boe = oneffect;
-                        buf.bd.bor = onremove;
-                        buf.run();
-                        
-                        SetUnitICD(DamageResult.source, BUFF_ID, 15);
-                        
-                        x = GetUnitX(DamageResult.source);
-                        y = GetUnitY(DamageResult.source);
-                        loc = Location(x, y);
-                        z = GetLocationZ(loc);
-                        AddTimedLight.atCoords3D("CLPB", x, y, z + 4000.0, x, y, z, 0.75);
-                        AddTimedEffect.atUnit(ART_IMPACT, DamageResult.source, "origin", 0.2);
-                        RemoveLocation(loc);
-                        loc = null;
-                    }
-                }
-            }
-        }
+        if (DamageResult.isHit == false) return;
+        if (DamageResult.abilityName != DAMAGE_NAME_MELEE) return;
+        if (ht.exists(DamageResult.source) == false) return;
+        if (ht[DamageResult.source] <= 0) return;
+        if (IsUnitICD(DamageResult.source, BID_LION_HORN) == true) return;
+        if (GetRandomReal(0, 0.999) > ItemExAttributes.getUnitAttributeValue(DamageResult.source, IATTR_ATK_LION, 0.16, SCOPE_PREFIX)) return;
+
+        buf = Buff.cast(DamageResult.source, DamageResult.source, BID_LION_HORN);
+        buf.bd.tick = -1;
+        buf.bd.interval = 5.0;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAttackSpeed(0 - buf.bd.i0);
+        buf.bd.i0 = 30;
+        if (buf.bd.e0 == 0) {buf.bd.e0 = BuffEffect.create(ART_TORNADO_TARGET, buf, "weapon");}
+        buf.bd.boe = onEffect;
+        buf.bd.bor = onRemove;
+        buf.run();
+        
+        SetUnitICD(DamageResult.source, BID_LION_HORN, 15);
+        
+        x = GetUnitX(DamageResult.source);
+        y = GetUnitY(DamageResult.source);
+        loc = Location(x, y);
+        z = GetLocationZ(loc);
+        AddTimedLight.atCoords3D("CLPB", x, y, z + 4000.0, x, y, z, 0.75);
+        AddTimedEffect.atUnit(ART_IMPACT, DamageResult.source, "origin", 0.2);
+        RemoveLocation(loc);
+        loc = null;
     }
 
-    function action(unit u, item it, integer fac) {
-        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
-        up.ModAP(25 * fac);
-        up.damageDealt += 0.03 * fac;
-        if (!ht.exists(u)) {ht[u] = 0;}
-        ht[u] = ht[u] + fac;
+    public function EquipedLionHorn(unit u, integer polar) {
+        if (ht.exists(u) == false) {
+            ht[u] = 0;
+        }
+        ht[u] = ht[u] + polar;
     }
 
     function onInit() {
         ht = HandleTable.create();
         RegisterDamagedEvent(damaged);
-        BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_POS);
+        BuffType.register(BID_LION_HORN, BUFF_PHYX, BUFF_POS);
     }
-
 
 }
 //! endzinc
