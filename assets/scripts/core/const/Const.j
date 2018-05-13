@@ -611,6 +611,7 @@ public constant integer ITID_ARMOR_OF_THE_DAMNED = 'I00K';
 public constant integer ITID_WARSONG_BATTLE_DRUMS = 'I014';
 public constant integer ITID_GOBLIN_ROCKET_BOOTS_LIMITED_EDITION = 'I013';
 public constant integer SID_GOBLIN_ROCKET_BOOTS_LIMITED_EDITION = 'A079';
+public constant integer BID_GOBLIN_ROCKET_BOOTS_LIMITED_EDITION = 'A07A';
 public constant integer ITID_GOREHOWL = 'I01N';
 public constant integer ITID_HEX_SHRUNKEN_HEAD = 'I02I';
 public constant integer SID_HEX_SHRUNKEN_HEAD = 'A07F';
