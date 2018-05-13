@@ -601,6 +601,7 @@ public constant integer BID_MOROES_LUCKY_GEAR = 'A06K';
 public constant integer ITID_RUNED_BELT = 'brac';
 public constant integer ITID_UNGLAZED_ICON_OF_THE_CRESCENT = 'I01K';
 public constant integer SID_ICON_OF_THE_UNGLAZED_CRESCENT = 'A06G';
+public constant integer BID_ICON_OF_THE_UNGLAZED_CRESCENT = 'A06F';
 // origin rare gear
 public constant integer ITID_COLOSSUS_BLADE = 'I01Y';
 public constant integer ITID_ARANS_SOOTHING_EMERALD = 'I019';

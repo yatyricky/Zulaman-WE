@@ -1,7 +1,5 @@
 //! zinc
 library IconOfTheUnglazedCrescent requires ItemAttributes {
-constant integer BUFF_ID = 'A06F';
-    //HandleTable ht;
 
     function oneffect(Buff buf) {
         UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModInt(buf.bd.i0);
@@ -12,11 +10,11 @@ constant integer BUFF_ID = 'A06F';
     }
     
     function onCast() {
-        Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BUFF_ID);
+        Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BID_ICON_OF_THE_UNGLAZED_CRESCENT);
         buf.bd.tick = -1;
         buf.bd.interval = 20.0;
         UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModInt(0 - buf.bd.i0);
-        buf.bd.i0 = 15;
+        buf.bd.i0 = Rounding(ItemExAttributes.getUnitAttributeValue(SpellEvent.CastingUnit, IATTR_USE_INT, 0.16, SCOPE_PREFIX));
         buf.bd.boe = oneffect;
         buf.bd.bor = onremove;
         buf.run();
@@ -24,7 +22,7 @@ constant integer BUFF_ID = 'A06F';
 
     function onInit() {
         RegisterSpellEffectResponse(SID_ICON_OF_THE_UNGLAZED_CRESCENT, onCast);
-        BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
+        BuffType.register(BID_ICON_OF_THE_UNGLAZED_CRESCENT, BUFF_MAGE, BUFF_POS);
     }
 
 }

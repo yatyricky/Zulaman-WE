@@ -124,7 +124,7 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
             thistype.setLoreText(ITID_ROMULOS_EXPIRED_POISON,"|CFF11FF11Romulo's Expired Poison|R","|CFF999999Still usable.|R");
 
             thistype.append(ITID_MOROES_LUCKY_GEAR,27,0.01,0.02);
-            thistype.append(ITID_MOROES_LUCKY_GEAR,35,8,12);
+            thistype.append(ITID_MOROES_LUCKY_GEAR,35,4,7);
             thistype.setLoreText(ITID_MOROES_LUCKY_GEAR,"|CFF11FF11Moroes' Lucky Gear|R","|CFF999999Disassembled from Moroes' Lucky Pocket Watch|R");
 
             thistype.append(ITID_RUNED_BELT,21,60,90);
