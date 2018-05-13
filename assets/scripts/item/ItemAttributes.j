@@ -1,5 +1,5 @@
 //! zinc
-library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindForce, Infinity, ConvertAttackMagic, MagicPoison, VoodooVial {
+library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindForce, Infinity, ConvertAttackMagic, MagicPoison, VoodooVial, RomulosExpiredPoison {
     public constant real AFFIX_FACTOR_BASE = 15000;
     public constant real AFFIX_FACTOR_DELTA = 2500;
     public constant real SUFIX_MULTIPLIER = 4;
@@ -887,7 +887,9 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
         }
         static method callbackATK_COIL(unit u, real val, integer polar) {}
         static method callbackATK_BLEED(unit u, real val, integer polar) {}
-        static method callbackATK_MDC(unit u, real val, integer polar) {}
+        static method callbackATK_MDC(unit u, real val, integer polar) {
+            EquipedChanceMagicDamage(u, polar);
+        }
         static method callbackATK_STUN(unit u, real val, integer polar) {}
         static method callbackATK_CRIT(unit u, real val, integer polar) {}
         static method callbackATK_AMP(unit u, real val, integer polar) {}

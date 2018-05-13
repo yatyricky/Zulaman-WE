@@ -594,6 +594,7 @@ public constant integer SID_HEALTH_STONE = 'A06I';
 public constant integer ITID_MANA_STONE = 'mnst';
 public constant integer SID_MANA_STONE = 'A06J';
 public constant integer ITID_ROMULOS_EXPIRED_POISON = 'I00T';
+public constant integer SID_ROMULOS_EXPIRED_POISION = 'drxp';
 public constant integer ITID_MOROES_LUCKY_GEAR = 'I01H';
 public constant integer SID_MOROES_LUCKY_GEAR = 'A06L';
 public constant integer ITID_RUNED_BELT = 'brac';

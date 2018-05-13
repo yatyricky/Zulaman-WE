@@ -291,6 +291,7 @@ SpellData.create(SID_MANA_STONE,"Mana Stone",0,0,1,OrderId("channel"),1,ORDER_TY
 SpellData.create(SID_HEX_SHRUNKEN_HEAD,"Hex Shrunken Head",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_ICON_OF_THE_UNGLAZED_CRESCENT,"Icon of the Unglazed Crescent",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_LIGHTS_JUSTICE,"Lights Justice",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
+SpellData.create(SID_ROMULOS_EXPIRED_POISION,"Romulos Expired Poision",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_MOROES_LUCKY_GEAR,"Moroes Lucky Gear",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_REFORGED_BADGE_OF_TENACITY,"Reforged Badge of Tenacity",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_TYRAELS_MIGHT,"Tyraels Might",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
