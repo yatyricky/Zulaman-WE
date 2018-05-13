@@ -1,126 +1,105 @@
 //! zinc
-library Drum requires ItemAttributes {
-constant integer BUFF_ID = 'A07C';
-constant integer DEBUFF_ID = 'A07B';
-constant string  ART_DEBUFF  = "Abilities\\Spells\\Other\\Aneu\\AneuTarget.mdl";
+library Drum requires BuffSystem {
+
     HandleTable ht;
 
-    function oneffect(Buff buf) {
-        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageTaken += buf.bd.r0;
-    }
-
-    function onremove(Buff buf) {
-        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageTaken -= buf.bd.r0;
-    }
-
-    function onEffect1(Buff buf) {
-    }
-
-    function onRemove1(Buff buf) {
-        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageDealt -= 0.02;
-        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).healTaken -= 0.1;
-    }
-    
-    function damaged() {
-        Buff buf;
-        if (DamageResult.isHit) {
-            if (ht.exists(DamageResult.source)) {
-                if (ht[DamageResult.source] > 0 && DamageResult.abilityName == DAMAGE_NAME_MELEE) {
-                    buf = Buff.cast(DamageResult.source, DamageResult.target, DEBUFF_ID);
-                    buf.bd.tick = -1;
-                    buf.bd.interval = 3.0;
-                    UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageTaken -= buf.bd.r0;
-                    buf.bd.r0 = 0.02;
-                    if (buf.bd.e0 == 0) {buf.bd.e0 = BuffEffect.create(ART_DEBUFF, buf, "overhead");}
-                    buf.bd.boe = oneffect;
-                    buf.bd.bor = onremove;
-                    buf.run();
-                }
-            }
-        }
-    }
-    
-    struct DrumAura {
-        private static HandleTable caht;
+    struct WarsongAura {
+        private static HandleTable ht;
         private unit u;
         private timer tm;
+        effect eff;
         
         private method destroy() {
             ReleaseTimer(this.tm);
-            thistype.caht.flush(this.u);
+            thistype.ht.flush(this.u);
+            DestroyEffect(this.eff);
+            this.eff = null;
             this.tm = null;
             this.u = null;
             this.deallocate();
         }
+
+        static method onEffect(Buff buf) {
+        }
+
+        static method onRemove(Buff buf) {
+            UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageDealt -= buf.bd.r0;
+            UnitProp.inst(buf.bd.target, SCOPE_PREFIX).healTaken -= 0.1;
+        }
         
         private static method run() {
             thistype this = GetTimerData(GetExpiredTimer());
-            integer j = 0;
+            integer i = 0;
             Buff buf;
+            real amt;
             if (!IsUnitDead(this.u)) {
-                while (j < PlayerUnits.n) {
-                    if (GetDistance.units2d(PlayerUnits.units[j], this.u) < 600 && !IsUnitDead(PlayerUnits.units[j])) {
-                        buf = Buff.cast(this.u, PlayerUnits.units[j], BUFF_ID);
+                amt = ItemExAttributes.getUnitAttributeValue(this.u, IATTR_AURA_WARSONG, 0.07, SCOPE_PREFIX);
+                while (i < PlayerUnits.n) {
+                    if (GetDistance.units2d(PlayerUnits.units[i], this.u) < 600 && !IsUnitDead(PlayerUnits.units[i])) {
+                        buf = Buff.cast(this.u, PlayerUnits.units[i], BID_WARSONG_AURA);
                         buf.bd.tick = -1;
                         buf.bd.interval = 1.5;
                         if (buf.bd.i0 != 6) {
-                            UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageDealt += 0.02;
+                            buf.bd.r0 = amt;
                             UnitProp.inst(buf.bd.target, SCOPE_PREFIX).healTaken += 0.1;
+                            UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageDealt += amt;
                             buf.bd.i0 = 6;
+                        } else {
+                            if (amt > buf.bd.r0) {
+                                UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageDealt += (amt - buf.bd.r0);
+                            }
+                            buf.bd.r0 = amt;
                         }
-                        buf.bd.boe = onEffect1;
-                        buf.bd.bor = onRemove1;
+                        buf.bd.boe = thistype.onEffect;
+                        buf.bd.bor = thistype.onRemove;
                         buf.run();
                     }
-                    j += 1;
+                    i += 1;
                 }
             }
         }
     
         static method start(unit u, boolean flag) {
             thistype this;
-            if (!thistype.caht.exists(u)) {
+            if (!thistype.ht.exists(u)) {
                 this = thistype.allocate();
-                thistype.caht[u] = this;
+                thistype.ht[u] = this;
                 this.u = u;
                 this.tm = NewTimer();
                 SetTimerData(this.tm, this);
-                //BJDebugMsg("Registered once");
             } else {
-                this = thistype.caht[u];
+                this = thistype.ht[u];
             }
             if (flag) {
                 TimerStart(this.tm, 1.0, true, function thistype.run);
+                this.eff = AddSpecialEffectTarget(ART_DRUMS_CASTER_HEAL, u, "origin");
             } else {
-                BJDebugMsg("To destroy");
                 this.destroy();
             }
         }
         
         private static method onInit() {
-            thistype.caht = HandleTable.create();
+            thistype.ht = HandleTable.create();
         }
     }
 
-    function action(unit u, item it, integer fac) {
-        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
-        up.ModAttackSpeed(10 * fac);
-        //up.ModAP(20 * fac);
-        //up.attackCrit += 0.07 * fac;
-        if (!ht.exists(u)) {ht[u] = 0;}
-        ht[u] = ht[u] + fac;
-        
-        DrumAura.start(u, ht[u] > 0);
+    public function EquipedWarsongAura(unit u, integer polar) {
+        if (ht.exists(u) == false) {
+            ht[u] = 0;
+        }
+        if (ht[u] == 0) {
+            WarsongAura.start(u, true);
+        }
+        ht[u] = ht[u] + polar;
+        if (ht[u] == 0) {
+            WarsongAura.start(u, false);
+        }
     }
 
     function onInit() {
         ht = HandleTable.create();
-        RegisterDamagedEvent(damaged);
-        BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_POS);
-        BuffType.register(DEBUFF_ID, BUFF_PHYX, BUFF_NEG);
+        BuffType.register(BID_WARSONG_AURA, BUFF_PHYX, BUFF_POS);
     }
-
-
 
 }
 //! endzinc
