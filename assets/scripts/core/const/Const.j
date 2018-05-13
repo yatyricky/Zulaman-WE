@@ -608,6 +608,7 @@ public constant integer ITID_ARANS_SOOTHING_EMERALD = 'I019';
 public constant integer ITID_BULWARK_OF_THE_AMANI_EMPIRE = 'Iams';
 public constant integer ITID_CORE_HOUND_TOOTH = 'I015';
 public constant integer ITID_ARMOR_OF_THE_DAMNED = 'I00K';
+public constant integer BID_ARMOR_OF_THE_DAMNED = 'A06M';
 public constant integer ITID_WARSONG_BATTLE_DRUMS = 'I014';
 public constant integer BID_AMPLIFIED_DAMAGE = 'A07B';
 public constant integer BID_WARSONG_AURA = 'A07C';
@@ -904,6 +905,7 @@ public constant string ART_ARROW_MARK = "Abilities\\Spells\\Other\\Aneu\\AneuTar
 public constant string ART_BOTTLE_IMPACT = "Abilities\\Spells\\Other\\AcidBomb\\BottleImpact.mdl";
 public constant string ART_DRUMS_CASTER_HEAL = "Abilities\\Spells\\Orc\\WarDrums\\DrumsCasterHeal.mdl";
 public constant string ART_TORNADO_TARGET = "Abilities\\Spells\\Other\\Tornado\\Tornado_Target.mdl";
+public constant string ART_HOWL_TARGET = "Abilities\\Spells\\Other\\HowlOfTerror\\HowlTarget.mdl";
 
 public constant string BTNVolcano = "ReplaceableTextures\\CommandButtons\\BTNVolcano.blp";
 public constant string BTNEarthquake = "ReplaceableTextures\\CommandButtons\\BTNEarthquake.blp";

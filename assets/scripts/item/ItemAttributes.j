@@ -946,7 +946,9 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
         static method callbackDT_MREGEN(unit u, real val, integer polar) {
             UnitProp.inst(u, "ItemAttributeMeta.callback45").damageGoesMana += val * polar;
         }
-        static method callbackATKED_WEAK(unit u, real val, integer polar) {}
+        static method callbackATKED_WEAK(unit u, real val, integer polar) {
+            EquipedCursedCuirass(u, polar);
+        }
         static method callbackHEAL_HOLY(unit u, real val, integer polar) {
             EquipedHealedStackHoly(u, polar);
         }
