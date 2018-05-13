@@ -942,7 +942,9 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
         static method callbackMD_CHAIN(unit u, real val, integer polar) {
             EquipedMagicChainLightning(u, polar);
         }
-        static method callbackMDC_ARCANE(unit u, real val, integer polar) {}
+        static method callbackMDC_ARCANE(unit u, real val, integer polar) {
+            EquipedPureArcane(u, polar);
+        }
         static method callbackDT_MREGEN(unit u, real val, integer polar) {
             UnitProp.inst(u, "ItemAttributeMeta.callback45").damageGoesMana += val * polar;
         }

@@ -1,69 +1,43 @@
 //! zinc
-library PureArcane requires ItemAttributes {
-constant string  ART_TARGET  = "Objects\\Spawnmodels\\NightElf\\NEDeathSmall\\NEDeathSmall.mdl";
+library PureArcane requires DamageSystem, BuffSystem {
     HandleTable ht;
-    
-    struct PureArcaneCharges {
-        private static HandleTable ht;
-        private item it;
-        private timer tm;
-        
-        private static method run() {
-            thistype this = GetTimerData(GetExpiredTimer());
-            thistype.ht.flush(this.it);
-            ReleaseTimer(this.tm);
-            this.tm = null;
-            this.it = null;
-            this.deallocate();
-        }
-        
-        static method start(item it, unit caster, unit target) {
-            thistype this;
-            if (!thistype.ht.exists(it)) {
-                SetItemCharges(it, GetItemCharges(it) + 1);
-                if (GetItemCharges(it) == 3) {
-                    DelayedDamageTarget(caster, target, 300.0 + UnitProp.inst(caster, SCOPE_PREFIX).SpellPower(), "�����ط�", false, true, false, WEAPON_TYPE_WHOKNOWS);
-                    AddTimedLight.atUnits("MFPB", caster, target, 0.75);
-                    AddTimedEffect.atUnit(ART_TARGET, target, "origin", 1.0);
-                    SetItemCharges(it, 0);
-                }
-                this = thistype.allocate();
-                thistype.ht[it] = this;
-                this.it = it;
-                this.tm = NewTimer();
-                SetTimerData(this.tm, this);
-                TimerStart(this.tm, 1.0, false, function thistype.run);
-            }
-        }
-        
-        private static method onInit() {
-            thistype.ht = HandleTable.create();
-        }
-    }
     
     function damaged() {
         integer i;
-        item tmpi;
-        if (DamageResult.isHit && !DamageResult.isPhyx && DamageResult.isCritical) {
-            if (ht.exists(DamageResult.source)) {
-                if (ht[DamageResult.source] > 0) {
-                    i = 0;
-                    while (i < 6) {
-                        tmpi = UnitItemInSlot(DamageResult.source, i);
-                        if (GetItemTypeId(tmpi) == ITID_PURE_ARCANE) {
-                            PureArcaneCharges.start(tmpi, DamageResult.source, DamageResult.target);
-                        }
-                        i += 1;
-                    }
-                    tmpi = null;
+        item ti;
+        real amt;
+
+        if (DamageResult.isHit == false) return;
+        if (DamageResult.isPhyx == true) return;
+        if (DamageResult.isCritical == false) return;
+        if (ht.exists(DamageResult.source) == false) return;
+        if (ht[DamageResult.source] <= 0) return;
+        if (IsUnitICD(DamageResult.source, SID_PURE_ARCANE) == true) return;
+
+        amt = ItemExAttributes.getUnitAttributeValue(DamageResult.source, IATTR_MDC_ARCANE, 0.5, SCOPE_PREFIX);
+        i = 0;
+        while (i < 6) {
+            ti = UnitItemInSlot(DamageResult.source, i);
+            if (GetItemTypeId(ti) == ITID_PURE_ARCANE) {
+                SetItemCharges(ti, GetItemCharges(ti) + 1);
+                if (GetItemCharges(ti) == 3) {
+                    DelayedDamageTarget(DamageResult.source, DamageResult.target, amt + UnitProp.inst(DamageResult.source, SCOPE_PREFIX).SpellPower(), SpellData.inst(SID_PURE_ARCANE, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS);
+                    AddTimedLight.atUnits("MFPB", DamageResult.source, DamageResult.target, 0.75);
+                    AddTimedEffect.atUnit(ART_ELF_EXPLOSION, DamageResult.target, "origin", 1.0);
+                    SetItemCharges(ti, 0);
                 }
             }
+            i += 1;
         }
+        ti = null;
+        SetUnitICD(DamageResult.source, SID_PURE_ARCANE, 2);
     }
 
-    function action(unit u, item it, integer fac) {
-        if (!ht.exists(u)) {ht[u] = 0;}
-        ht[u] = ht[u] + fac;
+    public function EquipedPureArcane(unit u, integer polar) {
+        if (ht.exists(u) == false) {
+            ht[u] = 0;
+        }
+        ht[u] = ht[u] + polar;
     }
 
     function onInit() {

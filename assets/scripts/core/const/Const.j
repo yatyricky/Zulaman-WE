@@ -621,6 +621,7 @@ public constant integer SID_HEX_SHRUNKEN_HEAD = 'A07F';
 public constant integer ITID_LION_HORN = 'I018';
 public constant integer BID_LION_HORN = 'A07D';
 public constant integer ITID_PURE_ARCANE = 'I00H';
+public constant integer SID_PURE_ARCANE = 'dpan';
 public constant integer ITID_SIGNET_OF_THE_LAST_DEFENDER = 'I01A';
 public constant integer ITID_STAFF_OF_THE_SHADOW_FLAME = 'I01B';
 public constant integer ITID_THE_X_RING = 'I012';
@@ -906,6 +907,7 @@ public constant string ART_BOTTLE_IMPACT = "Abilities\\Spells\\Other\\AcidBomb\\
 public constant string ART_DRUMS_CASTER_HEAL = "Abilities\\Spells\\Orc\\WarDrums\\DrumsCasterHeal.mdl";
 public constant string ART_TORNADO_TARGET = "Abilities\\Spells\\Other\\Tornado\\Tornado_Target.mdl";
 public constant string ART_HOWL_TARGET = "Abilities\\Spells\\Other\\HowlOfTerror\\HowlTarget.mdl";
+public constant string ART_ELF_EXPLOSION = "Objects\\Spawnmodels\\NightElf\\NEDeathSmall\\NEDeathSmall.mdl";
 
 public constant string BTNVolcano = "ReplaceableTextures\\CommandButtons\\BTNVolcano.blp";
 public constant string BTNEarthquake = "ReplaceableTextures\\CommandButtons\\BTNEarthquake.blp";

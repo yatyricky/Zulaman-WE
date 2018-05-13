@@ -285,6 +285,7 @@ SpellData.create(SID_CTHUNS_DERANGEMENT,"Cthuns Derangement",0,0,1,OrderId("chan
 SpellData.create(BID_BREATH_OF_THE_DYING,"Breath of the Dying",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_INFINITY,"Infinity",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_ENIGMA,"Enigma",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
+SpellData.create(SID_PURE_ARCANE,"Pure Arcane",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_GOBLIN_ROCKET_BOOTS_LIMITED_EDITION,"Goblin Rocket Boots LIMITED EDITION",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_HEALTH_STONE,"Health Stone",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_MANA_STONE,"Mana Stone",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
