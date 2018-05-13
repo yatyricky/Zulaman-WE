@@ -441,6 +441,21 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
             }
         }
 
+        static method getUnitAttributeValue(unit u, integer id, real lpAmp, string trace) -> real {
+            item ti;
+            integer ii = 0;
+            real amt = 0;
+            while (ii < 6) {
+                ti = UnitItemInSlot(u, ii);
+                if (ti != null) {
+                    amt += ItemExAttributes.getAttributeValue(ti, id, trace + " > getUnitAttributeValue") * (1 + ItemExAttributes.getAttributeValue(ti, IATTR_LP, trace + " > getUnitAttributeValue2") * lpAmp);
+                }
+                ii += 1;
+            }
+            ti = null;
+            return amt;
+        }
+
         static method create(integer id, real val) -> thistype {
             thistype this = thistype.allocate();
             this.id = id;

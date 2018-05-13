@@ -597,6 +597,7 @@ public constant integer ITID_ROMULOS_EXPIRED_POISON = 'I00T';
 public constant integer SID_ROMULOS_EXPIRED_POISION = 'drxp';
 public constant integer ITID_MOROES_LUCKY_GEAR = 'I01H';
 public constant integer SID_MOROES_LUCKY_GEAR = 'A06L';
+public constant integer BID_MOROES_LUCKY_GEAR = 'A06K';
 public constant integer ITID_RUNED_BELT = 'brac';
 public constant integer ITID_UNGLAZED_ICON_OF_THE_CRESCENT = 'I01K';
 public constant integer SID_ICON_OF_THE_UNGLAZED_CRESCENT = 'A06G';

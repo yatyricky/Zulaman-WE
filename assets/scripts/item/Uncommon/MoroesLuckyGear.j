@@ -1,7 +1,5 @@
 //! zinc
 library MoroesLuckyGear requires ItemAttributes {
-constant integer BUFF_ID = 'A06K';
-    //HandleTable ht;
 
     function oneffect(Buff buf) {
         UnitProp.inst(buf.bd.target, SCOPE_PREFIX).dodge += buf.bd.r0;
@@ -12,9 +10,9 @@ constant integer BUFF_ID = 'A06K';
     }
     
     function onCast() {
-        Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BUFF_ID);
+        Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BID_MOROES_LUCKY_GEAR);
         buf.bd.tick = -1;
-        buf.bd.interval = 10.0;
+        buf.bd.interval = ItemExAttributes.getUnitAttributeValue(SpellEvent.CastingUnit, IATTR_USE_DODGE, 0.16, SCOPE_PREFIX);
         UnitProp.inst(buf.bd.target, SCOPE_PREFIX).dodge -= buf.bd.r0;
         buf.bd.r0 = 0.3;
         buf.bd.boe = oneffect;
@@ -23,9 +21,8 @@ constant integer BUFF_ID = 'A06K';
     }
 
     function onInit() {
-        //ht = HandleTable.create();
         RegisterSpellEffectResponse(SID_MOROES_LUCKY_GEAR, onCast);
-        BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
+        BuffType.register(BID_MOROES_LUCKY_GEAR, BUFF_MAGE, BUFF_POS);
     }
 
 }
