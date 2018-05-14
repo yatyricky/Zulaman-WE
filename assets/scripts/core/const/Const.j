@@ -618,6 +618,7 @@ public constant integer BID_GOBLIN_ROCKET_BOOTS_LIMITED_EDITION = 'A07A';
 public constant integer ITID_GOREHOWL = 'I01N';
 public constant integer ITID_HEX_SHRUNKEN_HEAD = 'I02I';
 public constant integer SID_HEX_SHRUNKEN_HEAD = 'A07F';
+public constant integer BID_HEX_SHRUNKEN_HEAD = 'A07E';
 public constant integer ITID_LION_HORN = 'I018';
 public constant integer BID_LION_HORN = 'A07D';
 public constant integer ITID_PURE_ARCANE = 'I00H';
@@ -908,6 +909,7 @@ public constant string ART_DRUMS_CASTER_HEAL = "Abilities\\Spells\\Orc\\WarDrums
 public constant string ART_TORNADO_TARGET = "Abilities\\Spells\\Other\\Tornado\\Tornado_Target.mdl";
 public constant string ART_HOWL_TARGET = "Abilities\\Spells\\Other\\HowlOfTerror\\HowlTarget.mdl";
 public constant string ART_ELF_EXPLOSION = "Objects\\Spawnmodels\\NightElf\\NEDeathSmall\\NEDeathSmall.mdl";
+public constant string ART_INTELLIGENCE = "Abilities\\Spells\\Items\\AIim\\AIimTarget.mdl";
 
 public constant string BTNVolcano = "ReplaceableTextures\\CommandButtons\\BTNVolcano.blp";
 public constant string BTNEarthquake = "ReplaceableTextures\\CommandButtons\\BTNEarthquake.blp";
