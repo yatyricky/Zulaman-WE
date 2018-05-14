@@ -31,19 +31,9 @@ library Infinity requires DamageSystem, Sounds {
             thistype this = GetTimerData(GetExpiredTimer());
             integer j = 0;
             Buff buf;
-            integer ii = 0;
-            item ti;
-            real amt = 0;
-            while (ii < 6) {
-                ti = UnitItemInSlot(this.u, ii);
-                if (ti != null) {
-                    amt += ItemExAttributes.getAttributeValue(ti, IATTR_AURA_CONVIC, SCOPE_PREFIX) * (1 + ItemExAttributes.getAttributeValue(ti, IATTR_LP, SCOPE_PREFIX) * 0.33);
-                }
-                ii += 1;
-            }
-            ti = null;
-
+            real amt;
             if (!IsUnitDead(this.u)) {
+                amt = ItemExAttributes.getUnitAttrVal(this.u, IATTR_AURA_CONVIC, SCOPE_PREFIX);
                 while (j < MobList.n) {
                     if (GetDistance.units2d(MobList.units[j], this.u) < 600 && !IsUnitDead(MobList.units[j])) {
                         buf = Buff.cast(this.u, MobList.units[j], BID_INFINITY);

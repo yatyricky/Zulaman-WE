@@ -22,19 +22,9 @@ library Insight requires DamageSystem {
             thistype this = GetTimerData(GetExpiredTimer());
             integer j = 0;
             Buff buf;
-            integer ii = 0;
-            item ti;
-            real amt = 0;
-            while (ii < 6) {
-                ti = UnitItemInSlot(this.u, ii);
-                if (ti != null) {
-                    amt += ItemExAttributes.getAttributeValue(ti, IATTR_AURA_MEDITA, SCOPE_PREFIX) * (1 + ItemExAttributes.getAttributeValue(ti, IATTR_LP, SCOPE_PREFIX) * 0.14);
-                }
-                ii += 1;
-            }
-            ti = null;
-
+            real amt;
             if (!IsUnitDead(this.u)) {
+                amt = ItemExAttributes.getUnitAttrVal(this.u, IATTR_AURA_MEDITA, SCOPE_PREFIX);
                 while (j < PlayerUnits.n) {
                     if (GetDistance.units2d(PlayerUnits.units[j], this.u) < 600 && !IsUnitDead(PlayerUnits.units[j])) {
                         ModUnitMana(PlayerUnits.units[j], amt);

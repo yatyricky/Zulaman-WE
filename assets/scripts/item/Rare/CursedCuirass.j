@@ -19,7 +19,7 @@ library CursedCuirass requires BuffSystem, DamageSystem {
         buf = Buff.cast(DamageResult.target, DamageResult.source, BID_ARMOR_OF_THE_DAMNED);
         buf.bd.tick = -1;
         buf.bd.interval = 5;
-        amt = Rounding(ItemExAttributes.getUnitAttributeValue(buf.bd.caster, IATTR_ATKED_WEAK, 0.2, SCOPE_PREFIX));
+        amt = Rounding(ItemExAttributes.getUnitAttrVal(buf.bd.caster, IATTR_ATKED_WEAK, SCOPE_PREFIX));
         if (buf.bd.e0 == 0) {buf.bd.e0 = BuffEffect.create(ART_HOWL_TARGET, buf, "overhead");}
         if (buf.bd.i0 == 0) {
             buf.bd.i0 = 17;

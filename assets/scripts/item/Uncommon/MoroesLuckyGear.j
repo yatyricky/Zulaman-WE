@@ -12,7 +12,7 @@ library MoroesLuckyGear requires ItemAttributes {
     function onCast() {
         Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BID_MOROES_LUCKY_GEAR);
         buf.bd.tick = -1;
-        buf.bd.interval = ItemExAttributes.getUnitAttributeValue(SpellEvent.CastingUnit, IATTR_USE_DODGE, 0.16, SCOPE_PREFIX);
+        buf.bd.interval = ItemExAttributes.getUnitAttrVal(SpellEvent.CastingUnit, IATTR_USE_DODGE, SCOPE_PREFIX);
         UnitProp.inst(buf.bd.target, SCOPE_PREFIX).dodge -= buf.bd.r0;
         buf.bd.r0 = 0.3;
         buf.bd.boe = oneffect;

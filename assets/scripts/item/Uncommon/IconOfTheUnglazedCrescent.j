@@ -14,7 +14,7 @@ library IconOfTheUnglazedCrescent requires ItemAttributes {
         buf.bd.tick = -1;
         buf.bd.interval = 20.0;
         UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModInt(0 - buf.bd.i0);
-        buf.bd.i0 = Rounding(ItemExAttributes.getUnitAttributeValue(SpellEvent.CastingUnit, IATTR_USE_INT, 0.16, SCOPE_PREFIX));
+        buf.bd.i0 = Rounding(ItemExAttributes.getUnitAttrVal(SpellEvent.CastingUnit, IATTR_USE_INT, SCOPE_PREFIX));
         buf.bd.boe = oneffect;
         buf.bd.bor = onremove;
         buf.run();

@@ -19,7 +19,7 @@ library AttackAmplifiedDamage requires BuffSystem, DamageSystem {
                 buf.bd.interval = 3;
                 if (buf.bd.e0 == 0) {buf.bd.e0 = BuffEffect.create(ART_BOTTLE_IMPACT, buf, "chest");}
                 UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageTaken -= buf.bd.r0;
-                buf.bd.r0 = ItemExAttributes.getUnitAttributeValue(DamageResult.source, IATTR_ATK_AMP, 0.1, SCOPE_PREFIX);
+                buf.bd.r0 = ItemExAttributes.getUnitAttrVal(DamageResult.source, IATTR_ATK_AMP, SCOPE_PREFIX);
                 buf.bd.boe = onEffect;
                 buf.bd.bor = onRemove;
                 buf.run();

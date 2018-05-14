@@ -33,7 +33,7 @@ library Drum requires BuffSystem {
             Buff buf;
             real amt;
             if (!IsUnitDead(this.u)) {
-                amt = ItemExAttributes.getUnitAttributeValue(this.u, IATTR_AURA_WARSONG, 0.07, SCOPE_PREFIX);
+                amt = ItemExAttributes.getUnitAttrVal(this.u, IATTR_AURA_WARSONG, SCOPE_PREFIX);
                 while (i < PlayerUnits.n) {
                     if (GetDistance.units2d(PlayerUnits.units[i], this.u) < 600 && !IsUnitDead(PlayerUnits.units[i])) {
                         buf = Buff.cast(this.u, PlayerUnits.units[i], BID_WARSONG_AURA);

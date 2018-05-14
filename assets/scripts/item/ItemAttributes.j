@@ -441,6 +441,23 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
             }
         }
 
+        static method getAttrVal(item it, integer id, boolean inclLP, string trace) -> real {
+            thistype attr = thistype.findAttribute(it, id);
+            thistype lp;
+            ItemAttributeMeta meta;
+            if (attr == 0) {
+                return 0.0;
+            } else {
+                lp = thistype.findAttribute(it, IATTR_LP);
+                meta = ItemAttributeMeta.inst(id, "getAttrVal");
+                if (inclLP == true) {
+                    return attr.value * (1 + lp * meta.lpAmp);
+                } else {
+                    return attr.value;
+                }
+            }
+        }
+
         static method getUnitAttrVal(unit u, integer id, string trace) -> real {
             item ti;
             integer ii = 0;
@@ -449,7 +466,7 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
             while (ii < 6) {
                 ti = UnitItemInSlot(u, ii);
                 if (ti != null) {
-                    amt += ItemExAttributes.getAttributeValue(ti, id, trace + " > getUnitAttributeValue") * (1 + ItemExAttributes.getAttributeValue(ti, IATTR_LP, trace + " > getUnitAttributeValue2") * meta.lpAmp);
+                    amt += ItemExAttributes.getAttributeValue(ti, id, trace + " > getUnitAttrVal") * (1 + ItemExAttributes.getAttributeValue(ti, IATTR_LP, trace + " > getUnitAttrVal") * meta.lpAmp);
                 }
                 ii += 1;
             }
@@ -457,19 +474,59 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
             return amt;
         }
 
-        static method getUnitAttributeValue(unit u, integer id, real lpAmp, string trace) -> real {
+        static method getUnitAttrValMax(unit u, integer id, string trace) -> real {
             item ti;
             integer ii = 0;
             real amt = 0;
+            real sel = -99999;
+            boolean found = false;
+            ItemAttributeMeta meta = ItemAttributeMeta.inst(id, "getUnitAttrVal");
             while (ii < 6) {
                 ti = UnitItemInSlot(u, ii);
                 if (ti != null) {
-                    amt += ItemExAttributes.getAttributeValue(ti, id, trace + " > getUnitAttributeValue") * (1 + ItemExAttributes.getAttributeValue(ti, IATTR_LP, trace + " > getUnitAttributeValue2") * lpAmp);
+                    amt = ItemExAttributes.getAttributeValue(ti, id, trace + " > getUnitAttrVal") * (1 + ItemExAttributes.getAttributeValue(ti, IATTR_LP, trace + " > getUnitAttrVal") * meta.lpAmp);
+                    if (sel < amt) {
+                        sel = amt;
+                        found = true;
+                    }
                 }
                 ii += 1;
             }
             ti = null;
-            return amt;
+            if (found == true) {
+                return sel;
+            } else {
+                return 0.00;
+            }
+        }
+
+        static method getUnitAttrValMin(unit u, integer id, string trace) -> real {
+            item ti;
+            integer ii = 0;
+            real amt = 0;
+            real sel = 99999;
+            boolean found = false;
+            ItemAttributeMeta meta = ItemAttributeMeta.inst(id, "getUnitAttrVal");
+            while (ii < 6) {
+                ti = UnitItemInSlot(u, ii);
+                if (ti != null) {
+                    amt = ItemExAttributes.getAttributeValue(ti, id, trace + " > getUnitAttrVal") * (1 + ItemExAttributes.getAttributeValue(ti, IATTR_LP, trace + " > getUnitAttrVal") * meta.lpAmp);
+                    if (sel > amt) {
+                        sel = amt;
+                        found = true;
+                    }
+                }
+                ii += 1;
+            }
+            ti = null;
+            if (sel < 0) {
+                sel = 0.0;
+            }
+            if (found == true) {
+                return sel;
+            } else {
+                return 0.00;
+            }
         }
 
         static method create(integer id, real val) -> thistype {

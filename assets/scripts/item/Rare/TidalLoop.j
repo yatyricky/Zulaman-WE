@@ -12,7 +12,7 @@ library TidalLoop requires BuffSystem, DamageSystem {
         if (IsUnitICD(DamageResult.source, ITID_TIDAL_LOOP) == true) return;
         if (GetRandomReal(0, 0.999) > 0.01) return;
 
-        ModUnitMana(DamageResult.source, ItemExAttributes.getUnitAttributeValue(DamageResult.source, IATTR_MD_MREGEN, 0.33, SCOPE_PREFIX));
+        ModUnitMana(DamageResult.source, ItemExAttributes.getUnitAttrVal(DamageResult.source, IATTR_MD_MREGEN, SCOPE_PREFIX));
         AddTimedEffect.atUnit(ART_MANA, DamageResult.source, "origin", 1.0);
 
         SetUnitICD(DamageResult.source, ITID_TIDAL_LOOP, 10);
@@ -25,7 +25,7 @@ library TidalLoop requires BuffSystem, DamageSystem {
         if (IsUnitICD(HealResult.source, ITID_TIDAL_LOOP) == true) return;
         if (GetRandomReal(0, 0.999) > 0.01) return;
 
-        ModUnitMana(HealResult.source, ItemExAttributes.getUnitAttributeValue(HealResult.source, IATTR_MD_MREGEN, 0.33, SCOPE_PREFIX));
+        ModUnitMana(HealResult.source, ItemExAttributes.getUnitAttrVal(HealResult.source, IATTR_MD_MREGEN, SCOPE_PREFIX));
         AddTimedEffect.atUnit(ART_MANA, HealResult.source, "origin", 1.0);
 
         SetUnitICD(HealResult.source, ITID_TIDAL_LOOP, 10);

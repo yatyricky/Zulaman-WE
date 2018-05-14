@@ -14,7 +14,7 @@ library PureArcane requires DamageSystem, BuffSystem {
         if (ht[DamageResult.source] <= 0) return;
         if (IsUnitICD(DamageResult.source, SID_PURE_ARCANE) == true) return;
 
-        amt = ItemExAttributes.getUnitAttributeValue(DamageResult.source, IATTR_MDC_ARCANE, 0.5, SCOPE_PREFIX);
+        amt = ItemExAttributes.getUnitAttrVal(DamageResult.source, IATTR_MDC_ARCANE, SCOPE_PREFIX);
         i = 0;
         while (i < 6) {
             ti = UnitItemInSlot(DamageResult.source, i);

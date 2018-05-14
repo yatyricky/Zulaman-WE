@@ -9,23 +9,13 @@ library AttackDecreaseMove requires Table, BuffSystem, DamageSystem {
     }
     
     function damaged() {
-        integer i = 0;
-        item ti;
         real amt;
         UnitProp tup;
         integer newVal;
         Buff buf;
         if (DamageResult.isHit == true && DamageResult.abilityName == DAMAGE_NAME_MELEE) {
             if (ht.exists(DamageResult.source) && ht[DamageResult.source] > 0) {
-                amt = 0;
-                while (i < 6) {
-                    ti = UnitItemInSlot(DamageResult.source, i);
-                    if (ti != null) {
-                        amt += ItemExAttributes.getAttributeValue(ti, IATTR_ATK_DMS, SCOPE_PREFIX + "damaged") * (1 + ItemExAttributes.getAttributeValue(ti, IATTR_LP, SCOPE_PREFIX + "damaged2") * 0.2);
-                    }
-                    i += 1;
-                }
-                ti = null;
+                amt = ItemExAttributes.getUnitAttrVal(DamageResult.source, IATTR_ATK_DMS, SCOPE_PREFIX);
                 // take effect
                 buf = Buff.cast(DamageResult.source, DamageResult.target, BID_DECREASE_MOVESPEED);
                 buf.bd.tick = -1;

@@ -14,7 +14,7 @@ library HexShrunkenHead requires ItemAttributes {
         buf.bd.tick = -1;
         buf.bd.interval = 15.0;
         UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellPower -= buf.bd.r0;
-        buf.bd.r0 = ItemExAttributes.getUnitAttributeValue(SpellEvent.CastingUnit, IATTR_USE_SP, 1, SCOPE_PREFIX);
+        buf.bd.r0 = ItemExAttributes.getUnitAttrVal(SpellEvent.CastingUnit, IATTR_USE_SP, SCOPE_PREFIX);
         buf.bd.boe = oneffect;
         buf.bd.bor = onremove;
         buf.run();

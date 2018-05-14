@@ -8,24 +8,15 @@ library RomulosExpiredPoison requires DamageSystem {
     }
 
     function damaged() {
-        item ti;
-        integer ii;
         real amt;
         DelayTask dt;
+        UnitProp up;
         if (DamageResult.isHit == true && DamageResult.abilityName == DAMAGE_NAME_MELEE) {
             if (ht.exists(DamageResult.source) && ht[DamageResult.source] > 0) {
                 if (GetRandomInt(0, 99) < 25) {
-                    amt = 0;
-                    ii = 0;
-                    while (ii < 6) {
-                        ti = UnitItemInSlot(SpellEvent.CastingUnit, ii);
-                        if (ti != null) {
-                            amt += ItemExAttributes.getAttributeValue(ti, IATTR_ATK_MDC, SCOPE_PREFIX) * (1 + ItemExAttributes.getAttributeValue(ti, IATTR_LP, SCOPE_PREFIX));
-                        }
-                        ii += 1;
-                    }
-                    ti = null;
-
+                    up = UnitProp.inst(DamageResult.source, SCOPE_PREFIX);
+                    amt = ItemExAttributes.getUnitAttrVal(DamageResult.source, IATTR_ATK_MDC, SCOPE_PREFIX);
+                    amt += up.AttackPower() * 0.1 + up.SpellPower() * 0.1;
                     dt = DelayTask.create(extraDamageEffect, 0.03);
                     dt.u0 = DamageResult.source;
                     dt.u1 = DamageResult.target;

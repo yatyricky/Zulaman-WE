@@ -10,22 +10,12 @@ library MagicPoison requires Table, BuffSystem {
     function onRemove(Buff buf) {}
 
     function damaged() {
-        integer ii;
-        item ti;
         real amt;
         Buff buf;
         if (DamageResult.isHit == true && DamageResult.isPhyx == false && DamageResult.wasDirect == true) {
             if (ht.exists(DamageResult.source) && ht[DamageResult.source] > 0 && GetRandomReal(0, 0.999) < 0.1) {
-                amt = 0;
-                ii = 0;
-                while (ii < 6) {
-                    ti = UnitItemInSlot(DamageResult.source, ii);
-                    if (ti != null) {
-                        amt += ItemExAttributes.getAttributeValue(ti, IATTR_MD_POISON, SCOPE_PREFIX) * (1 + ItemExAttributes.getAttributeValue(ti, IATTR_LP, SCOPE_PREFIX));
-                    }
-                    ii += 1;
-                }
-                ti = null;
+                amt = ItemExAttributes.getUnitAttrVal(DamageResult.source, IATTR_MD_POISON, SCOPE_PREFIX);
+                amt += UnitProp.inst(DamageResult.source, SCOPE_PREFIX).SpellPower() * 0.05;
                 
                 buf = Buff.cast(DamageResult.source, DamageResult.target, BID_VOODOO_VIALS);
                 buf.bd.interval = 2.0 / (1.0 + UnitProp.inst(buf.bd.caster, SCOPE_PREFIX).SpellHaste());

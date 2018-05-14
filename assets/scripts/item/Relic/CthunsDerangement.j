@@ -14,16 +14,7 @@ library CthunsDerangement requires ItemAttributes, DamageSystem {
     function onCast() {
         Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BID_CTHUNS_ACTIVE_IAS);
         real exdmg = 0;
-        integer ii = 0;
-        item ti;
-        while (ii < 6) {
-            ti = UnitItemInSlot(SpellEvent.CastingUnit, ii);
-            if (ti != null) {
-                exdmg += ItemExAttributes.getAttributeValue(ti, IATTR_USE_CTHUN, SCOPE_PREFIX + "onCast") / (ItemExAttributes.getAttributeValue(ti, IATTR_LP, "onCast") + 1);
-            }
-            ii += 1;
-        }
-        ti = null;
+        exdmg = ItemExAttributes.getUnitAttrValMin(SpellEvent.CastingUnit, IATTR_USE_CTHUN, SCOPE_PREFIX);
         
         buf.bd.tick = -1;
         buf.bd.interval = 10;

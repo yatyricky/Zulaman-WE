@@ -89,14 +89,7 @@ library BreathOfTheDying requires DamageSystem, SpellData, AggroSystem {
             SetTimerData(this.tm, this);
             this.tick = 25;
             this.damaged = HandleTable.create();
-            this.amount = 0;
-            while (j < 6) {
-                iteratorItem = UnitItemInSlot(a, j);
-                if (GetItemTypeId(iteratorItem) == ITID_BREATH_OF_THE_DYING) {
-                    this.amount += ItemExAttributes.getAttributeValue(iteratorItem, IATTR_ATK_POISNOVA, "BOTD.start") * (ItemExAttributes.getAttributeValue(iteratorItem, IATTR_LP, "BOTD.start") + 1);
-                }
-                j += 1;
-            }
+            this.amount = ItemExAttributes.getUnitAttrVal(DamageResult.source, IATTR_ATK_POISNOVA, SCOPE_PREFIX);
             this.amount += (up.AttackPower() + up.SpellPower()) / 40.0;
             while (i < NOMIS) {
                 this.mis[i] = CreateUnit(Player(0), DUMMY_ID, GetUnitX(b), GetUnitY(b), Rad2Deg(angle * i));

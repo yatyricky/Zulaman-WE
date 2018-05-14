@@ -66,6 +66,7 @@ constant integer MAX_BUGS = 10;
         private unit u;
         private real x, y;
         private integer tick;
+        private real dmg;
         
         private method destroy() {
             integer i = 0;
@@ -86,23 +87,11 @@ constant integer MAX_BUGS = 10;
             thistype this = GetTimerData(GetExpiredTimer());
             integer j, i;
             real angle, distance;
-            integer ii = 0;
-            item ti;
-            real amt = 0;
-            
             if (ModuloInteger(this.tick, 10) == 1) {
-                while (ii < 6) {
-                    ti = UnitItemInSlot(this.u, ii);
-                    if (ti != null) {
-                        amt += ItemExAttributes.getAttributeValue(ti, IATTR_USE_VOODOO, SCOPE_PREFIX) * (1 + ItemExAttributes.getAttributeValue(ti, IATTR_LP, SCOPE_PREFIX));
-                    }
-                    ii += 1;
-                }
-                ti = null;
                 j = 0;
                 while (j < MobList.n) {
                     if (GetDistance.unitCoord(MobList.units[j], this.x, this.y) < 250 && !IsUnitDead(MobList.units[j])) {
-                        DamageTarget(this.u, MobList.units[j], amt, SpellData.inst(SID_VOODOO_VIALS, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS, false);
+                        DamageTarget(this.u, MobList.units[j], this.dmg, SpellData.inst(SID_VOODOO_VIALS, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS, false);
                         AddTimedEffect.atUnit(ART_PLAGUE, MobList.units[j], "origin", 0.5);
                     }
                     j += 1;
@@ -134,6 +123,8 @@ constant integer MAX_BUGS = 10;
             this.u = caster;
             this.x = x;
             this.y = y;
+            this.dmg = ItemExAttributes.getUnitAttrVal(caster, IATTR_USE_VOODOO, SCOPE_PREFIX);
+            this.dmg += UnitProp.inst(caster, SCOPE_PREFIX).SpellPower() * 0.01;
             this.tick = 50;
             i = 0;
             while (i < MAX_BUGS) {
