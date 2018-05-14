@@ -441,6 +441,22 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
             }
         }
 
+        static method getUnitAttrVal(unit u, integer id, string trace) -> real {
+            item ti;
+            integer ii = 0;
+            real amt = 0;
+            ItemAttributeMeta meta = ItemAttributeMeta.inst(id, "getUnitAttrVal");
+            while (ii < 6) {
+                ti = UnitItemInSlot(u, ii);
+                if (ti != null) {
+                    amt += ItemExAttributes.getAttributeValue(ti, id, trace + " > getUnitAttributeValue") * (1 + ItemExAttributes.getAttributeValue(ti, IATTR_LP, trace + " > getUnitAttributeValue2") * meta.lpAmp);
+                }
+                ii += 1;
+            }
+            ti = null;
+            return amt;
+        }
+
         static method getUnitAttributeValue(unit u, integer id, real lpAmp, string trace) -> real {
             item ti;
             integer ii = 0;
@@ -468,21 +484,36 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
             thistype head;
             string str;
             string valstr;
+            real finalValue;
+            real lp = 0;
+            boolean hasLP;
             ItemAttributeMeta meta;
             DefaultItemAttributesData raw;
             if (thistype.ht.exists(it)) {
                 head = thistype.ht[it];
                 str = "";
+                hasLP = false;
                 while (head != 0) {
                     meta = ItemAttributeMeta.inst(head.id, "ItemExAttributes.updateUbertip.meta");
-                    if (head.value < 1 || head.id == IATTR_USE_CTHUN) {
-                        valstr = I2S(Rounding(head.value * 100)) + "%";
-                    } else {
-                        valstr = I2S(Rounding(head.value));
+                    if (head.id == IATTR_LP) {
+                        hasLP = true;
+                        lp = head.value;
                     }
                     if (head.value == 0) {
                         str = str + meta.str1 + meta.str2;
                     } else {
+                        finalValue = head.value;
+                        if (hasLP == true && meta.cate == 2) { // 2: improvable
+                            finalValue = head.value * (1 + lp * meta.lpAmp);
+                        }
+                        if (finalValue < 0) {
+                            finalValue = 0;
+                        }
+                        if (finalValue < 1 || head.id == IATTR_USE_CTHUN) {
+                            valstr = I2S(Rounding(finalValue * 100)) + "%";
+                        } else {
+                            valstr = I2S(Rounding(finalValue));
+                        }
                         str = str + meta.str1 + valstr + meta.str2;
                     }
                     if (head.next != 0) {
@@ -740,7 +771,9 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
     struct ItemAttributeMeta {
         static Table ht;
         integer sort;
+        integer cate;
         string str1, str2;
+        real lpAmp;
         ItemAttributeCallback callback;
 
         static method inst(integer id, string trace) -> thistype {
@@ -752,10 +785,12 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
             }
         }
 
-        static method create(integer id, integer sort, string str1, string str2, ItemAttributeCallback callback) -> thistype {
+        static method create(integer id, integer cate, integer sort, real lpAmp, string str1, string str2, ItemAttributeCallback callback) -> thistype {
             thistype this = thistype.allocate();
             thistype.ht[id] = this;
+            this.cate = cate;
             this.sort = sort;
+            this.lpAmp = lpAmp;
             this.str1 = str1;
             this.str2 = str2;
             this.callback = callback;
@@ -982,102 +1017,102 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
 
         static method onInit() {
             thistype.ht = Table.create();
-thistype.create(IATTR_STR,100,"+"," Strength",thistype.callbackSTR);
-thistype.create(IATTR_STRPL,101,"+"," Strength/level",thistype.callbackSTRPL);
-thistype.create(IATTR_AGI,102,"+"," Agility",thistype.callbackAGI);
-thistype.create(IATTR_INT,104,"+"," Intelligence",thistype.callbackINT);
-thistype.create(IATTR_ALLSTAT,106,"+"," All stats",thistype.callbackALLSTAT);
-thistype.create(IATTR_HP,110,"+"," Max HP",thistype.callbackHP);
-thistype.create(IATTR_HPPCT,111,"+"," Max HP",thistype.callbackHPPCT);
-thistype.create(IATTR_HPPL,112,"+"," Max HP/level",thistype.callbackHPPL);
-thistype.create(IATTR_MP,114,"+"," Max MP",thistype.callbackMP);
-thistype.create(IATTR_AP,120,"+"," Attack power",thistype.callbackAP);
-thistype.create(IATTR_APPL,121,"+"," Attack power/level",thistype.callbackAPPL);
-thistype.create(IATTR_CRIT,122,"+"," Attack critical",thistype.callbackCRIT);
-thistype.create(IATTR_IAS,124,"+","% Attack speed",thistype.callbackIAS);
-thistype.create(IATTR_SP,130,"+"," Spell power",thistype.callbackSP);
-thistype.create(IATTR_SCRIT,132,"+"," Spell critical",thistype.callbackSCRIT);
-thistype.create(IATTR_SHASTE,134,"+"," Spell haste",thistype.callbackSHASTE);
-thistype.create(IATTR_DEF,140,"+"," Armor",thistype.callbackDEF);
-thistype.create(IATTR_DEFPL,141,"+"," Armor/level",thistype.callbackDEFPL);
-thistype.create(IATTR_BR,142,"+"," Block chance",thistype.callbackBR);
-thistype.create(IATTR_BP,144,"+"," Block points",thistype.callbackBP);
-thistype.create(IATTR_DODGE,146,"+"," Dodge chance",thistype.callbackDODGE);
-thistype.create(IATTR_DR,150,"-"," All damage taken",thistype.callbackDR);
-thistype.create(IATTR_MDR,152,"-"," magic damage taken",thistype.callbackMDR);
-thistype.create(IATTR_AMP,154,"+"," Damage and healing dealt",thistype.callbackAMP);
-thistype.create(IATTR_HAMP,156,"+"," Healing taken",thistype.callbackHAMP);
-thistype.create(IATTR_MREG,160,"Regens "," MP per second",thistype.callbackMREG);
-thistype.create(IATTR_HREG,162,"Regens "," HP per second",thistype.callbackHREG);
-thistype.create(IATTR_HLOST,164,"Lost "," HP per second during combat",thistype.callbackHLOST);
-thistype.create(IATTR_MS,170,"+"," Movement speed",thistype.callbackMS);
-thistype.create(IATTR_MSPL,171,"+"," Movement speed/level",thistype.callbackMSPL);
-thistype.create(IATTR_LP,195,"Improve item |cff33ff33special power|r + ","",thistype.callbackLP);
-thistype.create(IATTR_ATK_ML,200,"|cff87ceeb+"," Mana stolen per hit|r",thistype.callbackATK_ML);
-thistype.create(IATTR_ATK_LL,202,"|cff87ceeb+"," Life stolen per hit|r",thistype.callbackATK_LL);
-thistype.create(IATTR_ATK_LLML,204,"|cff87ceeb+"," Life and mana stolen per hit|r",thistype.callbackATK_LLML);
-thistype.create(IATTR_ATK_MD,210,"|cff87ceebDeals "," extra magic damage per hit|r",thistype.callbackATK_MD);
-thistype.create(IATTR_ATK_MDK,211,"|cff87ceebDeals "," extra magic damage per hit, scaled up by target HP lost|r",thistype.callbackATK_MDK);
-thistype.create(IATTR_RG_ONESHOT,250,"|cff87ceebOne-shot target when it's HP is less than yours","|r",thistype.callbackRG_ONESHOT);
-thistype.create(IATTR_MCVT,253,"|cff87ceebConverts your normal attacks into magic damage","|r",thistype.callbackMCVT);
-thistype.create(IATTR_PL_SHOCK,256,"|cff87ceebHoly Shock always deals critical healing","|r",thistype.callbackPL_SHOCK);
-thistype.create(IATTR_PR_SHIELD,259,"|cff87ceebRemoves weakness effect of Shield","|r",thistype.callbackPR_SHIELD);
-thistype.create(IATTR_PL_LIGHT,262,"|cff87ceebFlash Light dispels one debuff from target","|r",thistype.callbackPL_LIGHT);
-thistype.create(IATTR_DT_MREGEN,266,"|cff87ceebRegens MP from "," of the damage taken|r",thistype.callbackDT_MREGEN);
-thistype.create(IATTR_USE_TP,268,"|cff87ceebUse: Teleports to an ally","|r",thistype.callbackUSE_TP);
-thistype.create(IATTR_BM_VALOR,300,"|cff33ff33Regenerates "," more valor points|r",thistype.callbackBM_VALOR);
-thistype.create(IATTR_RG_RUSH,302,"|cff33ff33Deals "," extra damage to target below 30% max HP|r",thistype.callbackRG_RUSH);
-thistype.create(IATTR_CRKILLER,303,"|cff33ff33Deals "," extra damage to non-hero targets|r",thistype.callbackCRKILLER);
-thistype.create(IATTR_KG_REGRCD,305,"|cff33ff33Reduce cooldown of Instant Regrowth by "," seconds|r",thistype.callbackKG_REGRCD);
-thistype.create(IATTR_LEECHAURA,307,"|cff33ff33Absorb "," HP from all enemies nearby every second|r",thistype.callbackLEECHAURA);
-thistype.create(IATTR_PR_POHDEF,308,"|cff33ff33Prayer of healing increases armor of target by ","|r",thistype.callbackPR_POHDEF);
-thistype.create(IATTR_DR_MAXHP,310,"|cff33ff33Survival Instincts provides "," extra healing and max HP|r",thistype.callbackDR_MAXHP);
-thistype.create(IATTR_CT_PAIN,313,"|cff33ff33Marrow Squeeze extends the Pain on target by "," seconds|r",thistype.callbackCT_PAIN);
-thistype.create(IATTR_BD_SHIELD,314,"|cff33ff33Shield of Sin'dorei provides "," extra damage reduction, and forces all nearby enemies to attack you|r",thistype.callbackBD_SHIELD);
-thistype.create(IATTR_RG_PARALZ,315,"|cff33ff33Sinister Strike has a "," chance to paralyze target, reduce target spell haste by 20% and gain an extra combo point|r",thistype.callbackRG_PARALZ);
-thistype.create(IATTR_DR_CDR,317,"|cff33ff33Reduce cooldown of Survival Instincts by "," seconds|r",thistype.callbackDR_CDR);
-thistype.create(IATTR_SM_LASH,318,"|cff33ff33Storm Lash has "," extra chance to cooldown Earth Shock|r",thistype.callbackSM_LASH);
-thistype.create(IATTR_DK_ARROW,319,"|cff33ff33Number of Dark Arrows increased by ","|r",thistype.callbackDK_ARROW);
-thistype.create(IATTR_MG_FDMG,320,"|cff33ff33Increase ice spell damage by ","|r",thistype.callbackMG_FDMG);
-thistype.create(IATTR_MG_BLZ,322,"|cff33ff33"," chance to cast an instant Frost Bolt to targets damaged by Blizzard|r",thistype.callbackMG_BLZ);
-thistype.create(IATTR_ATK_CTHUN,403,"|cff33ff33On Attack: Increase attack speed by 1% per attack, stacks up to ",", lasts for 3 seconds|r",thistype.callbackATK_CTHUN);
-thistype.create(IATTR_ATK_WF,404,"|cff33ff33On Attack: "," chance to knock back target|r",thistype.callbackATK_WF);
-thistype.create(IATTR_ATK_LION,405,"|cff33ff33On Attack: "," chance to increase 30% attack speed, lasts for 5 seconds|r",thistype.callbackATK_LION);
-thistype.create(IATTR_ATK_MOONWAVE,406,"|cff33ff33On Attack: 10% chance to consume 5% of max MP, deals "," magic damage to all enemies in a row|r",thistype.callbackATK_MOONWAVE);
-thistype.create(IATTR_ATK_POISNOVA,407,"|cff33ff33On Attack: 15% chance to cast poison nova, dealing "," magic damage over time to all enemies within 600 yards|r",thistype.callbackATK_POISNOVA);
-thistype.create(IATTR_ATK_COIL,408,"|cff33ff33On Attack: 15% chance to cast Death Coil, deals "," magic damage to target. Target takes 3% extra damge|r",thistype.callbackATK_COIL);
-thistype.create(IATTR_ATK_BLEED,409,"|cff33ff33On Attack: 20% chance to deal bleed effect to target. Target takes "," physical damage over time, lasts for 10 seconds|r",thistype.callbackATK_BLEED);
-thistype.create(IATTR_ATK_MDC,410,"|cff33ff33On Attack: 25% chance to deal "," magic damage to target|r",thistype.callbackATK_MDC);
-thistype.create(IATTR_ATK_STUN,411,"|cff33ff33On Attack: 5% chance to stun target for "," seconds|r",thistype.callbackATK_STUN);
-thistype.create(IATTR_ATK_CRIT,412,"|cff33ff33On Attack: 5% chance to increase "," attack critical chance, lasts for 5 seconds|r",thistype.callbackATK_CRIT);
-thistype.create(IATTR_ATK_AMP,413,"|cff33ff33On Attack: Target takes "," extra damage|r",thistype.callbackATK_AMP);
-thistype.create(IATTR_ATK_MORTAL,416,"|cff33ff33On Attack: Decrease target healing taken by ","|r",thistype.callbackATK_MORTAL);
-thistype.create(IATTR_ATK_MISS,417,"|cff33ff33On Attack: Decrease target attack hit chance by ","|r",thistype.callbackATK_MISS);
-thistype.create(IATTR_ATK_DDEF,418,"|cff33ff33On Attack: Decrease target armor by ","|r",thistype.callbackATK_DDEF);
-thistype.create(IATTR_ATK_DAS,419,"|cff33ff33On Attack: Decrease target attack speed by ","|r",thistype.callbackATK_DAS);
-thistype.create(IATTR_ATK_DMS,420,"|cff33ff33On Attack: Decrease target movement speed by ","|r",thistype.callbackATK_DMS);
-thistype.create(IATTR_ATK_WEAK,421,"|cff33ff33On Attack: Decrease target damage and healing dealt by ","|r",thistype.callbackATK_WEAK);
-thistype.create(IATTR_3ATK_MOONEXP,430,"|cff33ff33Every Third Attack: Consumes 5% of max MP, deals "," magic damage to all enemies nearby|r",thistype.callback3ATK_MOONEXP);
-thistype.create(IATTR_MD_MREGEN,450,"|cff33ff33Dealing Magic Damage or Healing: 1% chance to regen "," MP|r",thistype.callbackMD_MREGEN);
-thistype.create(IATTR_MD_POISON,451,"|cff33ff33Dealing Magic Damage: 10% chance to poison target, dealing "," magic damage over time|r",thistype.callbackMD_POISON);
-thistype.create(IATTR_MD_CHAIN,452,"|cff33ff33Dealing Magic Damage: 10% chance to cast Chain Lightning to target, dealing "," magic damage|r",thistype.callbackMD_CHAIN);
-thistype.create(IATTR_MDC_ARCANE,460,"|cff33ff33Magic Damage Critical: Charges with arcane power. All arcane power will be released automatically after 3 stacks, dealing "," magic damage to target|r",thistype.callbackMDC_ARCANE);
-thistype.create(IATTR_HEAL_HOLY,501,"|cff33ff33On Healed: Charges 1 holy power, stacks up to "," points|r",thistype.callbackHEAL_HOLY);
-thistype.create(IATTR_ATKED_WEAK,600,"|cff33ff33On Attacked: Decreases attacker's attack power by ","|r",thistype.callbackATKED_WEAK);
-thistype.create(IATTR_AURA_CONVIC,800,"|cff33ff33Grant Aura of Conviction: All enemies within 600 yards take "," more magic damage|r",thistype.callbackAURA_CONVIC);
-thistype.create(IATTR_AURA_MEDITA,801,"|cff33ff33Grant Aura of Meditation: All allies within 600 yards regen "," MP per second|r",thistype.callbackAURA_MEDITA);
-thistype.create(IATTR_AURA_WARSONG,802,"|cff33ff33Grant Aura of Warsong: All allies deal "," more damage and healing, take 10% more healing within 600 yards|r",thistype.callbackAURA_WARSONG);
-thistype.create(IATTR_AURA_UNHOLY,803,"|cff33ff33Grant Aura of Unholy: All allies within 600 yards regen "," HP per second|r",thistype.callbackAURA_UNHOLY);
-thistype.create(IATTR_USE_BATTLE,901,"|cff33ff33Use: Battle Orders, increases "," max HP to all allies within 900 yards, lasts for 75 seconds|r",thistype.callbackUSE_BATTLE);
-thistype.create(IATTR_USE_MREGEN,902,"|cff33ff33Use: Regens "," MP|r",thistype.callbackUSE_MREGEN);
-thistype.create(IATTR_USE_HREGEN,903,"|cff33ff33Use: Regens "," HP|r",thistype.callbackUSE_HREGEN);
-thistype.create(IATTR_USE_VOODOO,904,"|cff33ff33Use: Deals "," magic damage to all enemies within range over time|r",thistype.callbackUSE_VOODOO);
-thistype.create(IATTR_USE_INT,905,"|cff33ff33Use: Increase intelligence by ",", lasts for 20 seconds|r",thistype.callbackUSE_INT);
-thistype.create(IATTR_USE_SP,906,"|cff33ff33Use: Increase spell power by ",", lasts for 15 seconds|r",thistype.callbackUSE_SP);
-thistype.create(IATTR_USE_DODGE,907,"|cff33ff33Use: Increase dodge chance by 30%, lasts for "," seconds|r",thistype.callbackUSE_DODGE);
-thistype.create(IATTR_USE_MS,908,"|cff33ff33Use: Increase movement speed by 300, lasts for "," seconds. Possible failures.|r",thistype.callbackUSE_MS);
-thistype.create(IATTR_USE_CTHUN,909,"|cff33ff33Use: Increase attack speed by 100%, take "," extra damage|r",thistype.callbackUSE_CTHUN);
-thistype.create(IATTR_USE_HOLYHEAL,910,"|cff33ff33Use: Release all holy power to heal yourself, each point heals "," HP|r",thistype.callbackUSE_HOLYHEAL);
+thistype.create(IATTR_STR,1,100,0,"+"," Strength",thistype.callbackSTR);
+thistype.create(IATTR_STRPL,1,101,0,"+"," Strength/level",thistype.callbackSTRPL);
+thistype.create(IATTR_AGI,1,102,0,"+"," Agility",thistype.callbackAGI);
+thistype.create(IATTR_INT,1,104,0,"+"," Intelligence",thistype.callbackINT);
+thistype.create(IATTR_ALLSTAT,1,106,0,"+"," All stats",thistype.callbackALLSTAT);
+thistype.create(IATTR_HP,1,110,0,"+"," Max HP",thistype.callbackHP);
+thistype.create(IATTR_HPPCT,1,111,0,"+"," Max HP",thistype.callbackHPPCT);
+thistype.create(IATTR_HPPL,1,112,0,"+"," Max HP/level",thistype.callbackHPPL);
+thistype.create(IATTR_MP,1,114,0,"+"," Max MP",thistype.callbackMP);
+thistype.create(IATTR_AP,1,120,0,"+"," Attack power",thistype.callbackAP);
+thistype.create(IATTR_APPL,1,121,0,"+"," Attack power/level",thistype.callbackAPPL);
+thistype.create(IATTR_CRIT,1,122,0,"+"," Attack critical",thistype.callbackCRIT);
+thistype.create(IATTR_IAS,1,124,0,"+","% Attack speed",thistype.callbackIAS);
+thistype.create(IATTR_SP,1,130,0,"+"," Spell power",thistype.callbackSP);
+thistype.create(IATTR_SCRIT,1,132,0,"+"," Spell critical",thistype.callbackSCRIT);
+thistype.create(IATTR_SHASTE,1,134,0,"+"," Spell haste",thistype.callbackSHASTE);
+thistype.create(IATTR_DEF,1,140,0,"+"," Armor",thistype.callbackDEF);
+thistype.create(IATTR_DEFPL,1,141,0,"+"," Armor/level",thistype.callbackDEFPL);
+thistype.create(IATTR_BR,1,142,0,"+"," Block chance",thistype.callbackBR);
+thistype.create(IATTR_BP,1,144,0,"+"," Block points",thistype.callbackBP);
+thistype.create(IATTR_DODGE,1,146,0,"+"," Dodge chance",thistype.callbackDODGE);
+thistype.create(IATTR_DR,1,150,0,"-"," All damage taken",thistype.callbackDR);
+thistype.create(IATTR_MDR,1,152,0,"-"," magic damage taken",thistype.callbackMDR);
+thistype.create(IATTR_AMP,1,154,0,"+"," Damage and healing dealt",thistype.callbackAMP);
+thistype.create(IATTR_HAMP,1,156,0,"+"," Healing taken",thistype.callbackHAMP);
+thistype.create(IATTR_MREG,1,160,0,"Regens "," MP per second",thistype.callbackMREG);
+thistype.create(IATTR_HREG,1,162,0,"Regens "," HP per second",thistype.callbackHREG);
+thistype.create(IATTR_HLOST,1,164,0,"Lost "," HP per second during combat",thistype.callbackHLOST);
+thistype.create(IATTR_MS,1,170,0,"+"," Movement speed",thistype.callbackMS);
+thistype.create(IATTR_MSPL,1,171,0,"+"," Movement speed/level",thistype.callbackMSPL);
+thistype.create(IATTR_LP,1,195,0,"Improve item |cff33ff33special power|r + ","",thistype.callbackLP);
+thistype.create(IATTR_ATK_ML,3,200,0,"|cff87ceeb+"," Mana stolen per hit|r",thistype.callbackATK_ML);
+thistype.create(IATTR_ATK_LL,3,202,0,"|cff87ceeb+"," Life stolen per hit|r",thistype.callbackATK_LL);
+thistype.create(IATTR_ATK_LLML,3,204,0,"|cff87ceeb+"," Life and mana stolen per hit|r",thistype.callbackATK_LLML);
+thistype.create(IATTR_ATK_MD,3,210,0,"|cff87ceebDeals "," extra magic damage per hit|r",thistype.callbackATK_MD);
+thistype.create(IATTR_ATK_MDK,3,211,0,"|cff87ceebDeals "," extra magic damage per hit, scaled up by target HP lost|r",thistype.callbackATK_MDK);
+thistype.create(IATTR_RG_ONESHOT,3,250,0,"|cff87ceebOne-shot target when it's HP is less than yours","|r",thistype.callbackRG_ONESHOT);
+thistype.create(IATTR_MCVT,3,253,0,"|cff87ceebConverts your normal attacks into magic damage","|r",thistype.callbackMCVT);
+thistype.create(IATTR_PL_SHOCK,3,256,0,"|cff87ceebHoly Shock always deals critical healing","|r",thistype.callbackPL_SHOCK);
+thistype.create(IATTR_PR_SHIELD,3,259,0,"|cff87ceebRemoves weakness effect of Shield","|r",thistype.callbackPR_SHIELD);
+thistype.create(IATTR_PL_LIGHT,3,262,0,"|cff87ceebFlash Light dispels one debuff from target","|r",thistype.callbackPL_LIGHT);
+thistype.create(IATTR_DT_MREGEN,3,266,0,"|cff87ceebRegens MP from "," of the damage taken|r",thistype.callbackDT_MREGEN);
+thistype.create(IATTR_USE_TP,3,268,0,"|cff87ceebUse: Teleports to an ally","|r",thistype.callbackUSE_TP);
+thistype.create(IATTR_BM_VALOR,2,300,0.33,"|cff33ff33Regenerates "," more valor points|r",thistype.callbackBM_VALOR);
+thistype.create(IATTR_RG_RUSH,2,302,0.16,"|cff33ff33Deals "," extra damage to target below 30% max HP|r",thistype.callbackRG_RUSH);
+thistype.create(IATTR_CRKILLER,2,303,0.5,"|cff33ff33Deals "," extra damage to non-hero targets|r",thistype.callbackCRKILLER);
+thistype.create(IATTR_KG_REGRCD,2,305,0.33,"|cff33ff33Reduce cooldown of Instant Regrowth by "," seconds|r",thistype.callbackKG_REGRCD);
+thistype.create(IATTR_LEECHAURA,2,307,0.33,"|cff33ff33Absorb "," HP from all enemies nearby every second|r",thistype.callbackLEECHAURA);
+thistype.create(IATTR_PR_POHDEF,2,308,0.2,"|cff33ff33Prayer of healing increases armor of target by ","|r",thistype.callbackPR_POHDEF);
+thistype.create(IATTR_DR_MAXHP,2,310,0.16,"|cff33ff33Survival Instincts provides "," extra healing and max HP|r",thistype.callbackDR_MAXHP);
+thistype.create(IATTR_CT_PAIN,2,313,0.4,"|cff33ff33Marrow Squeeze extends the Pain on target by "," seconds|r",thistype.callbackCT_PAIN);
+thistype.create(IATTR_BD_SHIELD,2,314,0.33,"|cff33ff33Shield of Sin'dorei provides "," extra damage reduction, and forces all nearby enemies to attack you|r",thistype.callbackBD_SHIELD);
+thistype.create(IATTR_RG_PARALZ,2,315,0.33,"|cff33ff33Sinister Strike has a "," chance to paralyze target, reduce target spell haste by 20% and gain an extra combo point|r",thistype.callbackRG_PARALZ);
+thistype.create(IATTR_DR_CDR,2,317,0.16,"|cff33ff33Reduce cooldown of Survival Instincts by "," seconds|r",thistype.callbackDR_CDR);
+thistype.create(IATTR_SM_LASH,2,318,0.1,"|cff33ff33Storm Lash has "," extra chance to cooldown Earth Shock|r",thistype.callbackSM_LASH);
+thistype.create(IATTR_DK_ARROW,2,319,0.12,"|cff33ff33Number of Dark Arrows increased by ","|r",thistype.callbackDK_ARROW);
+thistype.create(IATTR_MG_FDMG,2,320,0.2,"|cff33ff33Increase ice spell damage by ","|r",thistype.callbackMG_FDMG);
+thistype.create(IATTR_MG_BLZ,2,322,0.16,"|cff33ff33"," chance to cast an instant Frost Bolt to targets damaged by Blizzard|r",thistype.callbackMG_BLZ);
+thistype.create(IATTR_ATK_CTHUN,2,403,0.15,"|cff33ff33On Attack: Increase attack speed by 1% per attack, stacks up to ",", lasts for 3 seconds|r",thistype.callbackATK_CTHUN);
+thistype.create(IATTR_ATK_WF,2,404,0.2,"|cff33ff33On Attack: "," chance to knock back target|r",thistype.callbackATK_WF);
+thistype.create(IATTR_ATK_LION,2,405,0.16,"|cff33ff33On Attack: "," chance to increase 30% attack speed, lasts for 5 seconds|r",thistype.callbackATK_LION);
+thistype.create(IATTR_ATK_MOONWAVE,2,406,0.7,"|cff33ff33On Attack: 10% chance to consume 5% of max MP, deals "," magic damage to all enemies in a row|r",thistype.callbackATK_MOONWAVE);
+thistype.create(IATTR_ATK_POISNOVA,2,407,0.7,"|cff33ff33On Attack: 15% chance to cast poison nova, dealing "," magic damage over time to all enemies within 600 yards|r",thistype.callbackATK_POISNOVA);
+thistype.create(IATTR_ATK_COIL,2,408,0.7,"|cff33ff33On Attack: 15% chance to cast Death Coil, deals "," magic damage to target. Target takes 3% extra damge|r",thistype.callbackATK_COIL);
+thistype.create(IATTR_ATK_BLEED,2,409,0.7,"|cff33ff33On Attack: 20% chance to deal bleed effect to target. Target takes "," physical damage over time, lasts for 10 seconds|r",thistype.callbackATK_BLEED);
+thistype.create(IATTR_ATK_MDC,2,410,0.7,"|cff33ff33On Attack: 25% chance to deal "," magic damage to target|r",thistype.callbackATK_MDC);
+thistype.create(IATTR_ATK_STUN,2,411,0.2,"|cff33ff33On Attack: 5% chance to stun target for "," seconds|r",thistype.callbackATK_STUN);
+thistype.create(IATTR_ATK_CRIT,2,412,0.2,"|cff33ff33On Attack: 5% chance to increase "," attack critical chance, lasts for 5 seconds|r",thistype.callbackATK_CRIT);
+thistype.create(IATTR_ATK_AMP,2,413,0.1,"|cff33ff33On Attack: Target takes "," extra damage|r",thistype.callbackATK_AMP);
+thistype.create(IATTR_ATK_MORTAL,2,416,0.1,"|cff33ff33On Attack: Decrease target healing taken by ","|r",thistype.callbackATK_MORTAL);
+thistype.create(IATTR_ATK_MISS,2,417,0.1,"|cff33ff33On Attack: Decrease target attack hit chance by ","|r",thistype.callbackATK_MISS);
+thistype.create(IATTR_ATK_DDEF,2,418,0.1,"|cff33ff33On Attack: Decrease target armor by ","|r",thistype.callbackATK_DDEF);
+thistype.create(IATTR_ATK_DAS,2,419,0.1,"|cff33ff33On Attack: Decrease target attack speed by ","|r",thistype.callbackATK_DAS);
+thistype.create(IATTR_ATK_DMS,2,420,0.1,"|cff33ff33On Attack: Decrease target movement speed by ","|r",thistype.callbackATK_DMS);
+thistype.create(IATTR_ATK_WEAK,2,421,0.1,"|cff33ff33On Attack: Decrease target damage and healing dealt by ","|r",thistype.callbackATK_WEAK);
+thistype.create(IATTR_3ATK_MOONEXP,2,430,0.7,"|cff33ff33Every Third Attack: Consumes 5% of max MP, deals "," magic damage to all enemies nearby|r",thistype.callback3ATK_MOONEXP);
+thistype.create(IATTR_MD_MREGEN,2,450,0.5,"|cff33ff33Dealing Magic Damage: 1% chance to regen "," MP|r",thistype.callbackMD_MREGEN);
+thistype.create(IATTR_MD_POISON,2,451,0.7,"|cff33ff33Dealing Magic Damage: 10% chance to poison target, dealing "," magic damage over time|r",thistype.callbackMD_POISON);
+thistype.create(IATTR_MD_CHAIN,2,452,0.7,"|cff33ff33Dealing Magic Damage: 10% chance to cast Chain Lightning to target, dealing "," magic damage|r",thistype.callbackMD_CHAIN);
+thistype.create(IATTR_MDC_ARCANE,2,460,0.5,"|cff33ff33Magic Damage Critical: Charges with arcane power. All arcane power will be released automatically after 3 stacks, dealing "," magic damage to target|r",thistype.callbackMDC_ARCANE);
+thistype.create(IATTR_HEAL_HOLY,2,501,0.33,"|cff33ff33On Healed: Charges 1 holy power, stacks up to "," points|r",thistype.callbackHEAL_HOLY);
+thistype.create(IATTR_ATKED_WEAK,2,600,0.33,"|cff33ff33On Attacked: Decreases attacker's attack power by ","|r",thistype.callbackATKED_WEAK);
+thistype.create(IATTR_AURA_CONVIC,2,800,0.1,"|cff33ff33Grant Aura of Conviction: All enemies within 600 yards take "," more magic damage|r",thistype.callbackAURA_CONVIC);
+thistype.create(IATTR_AURA_MEDITA,2,801,0.2,"|cff33ff33Grant Aura of Meditation: All allies within 600 yards regen "," MP per second|r",thistype.callbackAURA_MEDITA);
+thistype.create(IATTR_AURA_WARSONG,2,802,0.1,"|cff33ff33Grant Aura of Warsong: All allies deal "," more damage and healing, take 10% more healing within 600 yards|r",thistype.callbackAURA_WARSONG);
+thistype.create(IATTR_AURA_UNHOLY,2,803,0.7,"|cff33ff33Grant Aura of Unholy: All allies within 600 yards regen "," HP per second|r",thistype.callbackAURA_UNHOLY);
+thistype.create(IATTR_USE_BATTLE,2,901,0.16,"|cff33ff33Use: Battle Orders, increases "," max HP to all allies within 900 yards, lasts for 75 seconds|r",thistype.callbackUSE_BATTLE);
+thistype.create(IATTR_USE_MREGEN,2,902,0.4,"|cff33ff33Use: Regens "," MP|r",thistype.callbackUSE_MREGEN);
+thistype.create(IATTR_USE_HREGEN,2,903,0.4,"|cff33ff33Use: Regens "," HP|r",thistype.callbackUSE_HREGEN);
+thistype.create(IATTR_USE_VOODOO,2,904,0.2,"|cff33ff33Use: Deals "," magic damage to all enemies within range over time|r",thistype.callbackUSE_VOODOO);
+thistype.create(IATTR_USE_INT,2,905,0.3,"|cff33ff33Use: Increase intelligence by ",", lasts for 20 seconds|r",thistype.callbackUSE_INT);
+thistype.create(IATTR_USE_SP,2,906,0.3,"|cff33ff33Use: Increase spell power by ",", lasts for 15 seconds|r",thistype.callbackUSE_SP);
+thistype.create(IATTR_USE_DODGE,2,907,0.1,"|cff33ff33Use: Increase dodge chance by 30%, lasts for "," seconds|r",thistype.callbackUSE_DODGE);
+thistype.create(IATTR_USE_MS,2,908,0.1,"|cff33ff33Use: Increase movement speed by 300, lasts for "," seconds. Possible failures.|r",thistype.callbackUSE_MS);
+thistype.create(IATTR_USE_CTHUN,2,909,-0.33,"|cff33ff33Use: Increase attack speed by 100%, take "," extra damage|r",thistype.callbackUSE_CTHUN);
+thistype.create(IATTR_USE_HOLYHEAL,2,910,0.33,"|cff33ff33Use: Release all holy power to heal yourself, each point heals "," HP|r",thistype.callbackUSE_HOLYHEAL);
         }
     }
 

@@ -5,20 +5,9 @@ library WindForce requires ForcedMovement {
     function damaged() {
         real chance;
         real dis, dx, dy;
-        integer ii;
-        item ti;
         if (DamageResult.isHit == true && DamageResult.abilityName == DAMAGE_NAME_MELEE) {
             if (ht.exists(DamageResult.source) && ht[DamageResult.source] > 0) {
-                chance = 0;
-                ii = 0;
-                while (ii < 6) {
-                    ti = UnitItemInSlot(DamageResult.source, ii);
-                    if (ti != null) {
-                        chance += ItemExAttributes.getAttributeValue(ti, IATTR_ATK_WF, SCOPE_PREFIX + "damaged") * (1 + ItemExAttributes.getAttributeValue(ti, IATTR_LP, SCOPE_PREFIX + "damaged2") * 0.16);
-                    }
-                    ii += 1;
-                }
-                ti = null;
+                chance = ItemExAttributes.getUnitAttrVal(DamageResult.source, IATTR_ATK_WF, SCOPE_PREFIX);
                 // take effect
                 if (GetRandomReal(0.0, 0.999) < chance) {
                     dis = GetDistance.units(DamageResult.target, DamageResult.source);
