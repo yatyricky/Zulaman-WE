@@ -935,7 +935,9 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
             EquipedAttackDecreaseDamage(u, polar);
         }
         static method callback3ATK_MOONEXP(unit u, real val, integer polar) {}
-        static method callbackMD_MREGEN(unit u, real val, integer polar) {}
+        static method callbackMD_MREGEN(unit u, real val, integer polar) {
+            EquipedTidalLoop(u, polar);
+        }
         static method callbackMD_POISON(unit u, real val, integer polar) {
             EquipedMagicPoison(u, polar);
         }
@@ -1056,7 +1058,7 @@ thistype.create(IATTR_ATK_DAS,419,"|cff33ff33On Attack: Decrease target attack s
 thistype.create(IATTR_ATK_DMS,420,"|cff33ff33On Attack: Decrease target movement speed by ","|r",thistype.callbackATK_DMS);
 thistype.create(IATTR_ATK_WEAK,421,"|cff33ff33On Attack: Decrease target damage and healing dealt by ","|r",thistype.callbackATK_WEAK);
 thistype.create(IATTR_3ATK_MOONEXP,430,"|cff33ff33Every Third Attack: Consumes 5% of max MP, deals "," magic damage to all enemies nearby|r",thistype.callback3ATK_MOONEXP);
-thistype.create(IATTR_MD_MREGEN,450,"|cff33ff33Dealing Magic Damage: 1% chance to regen "," MP|r",thistype.callbackMD_MREGEN);
+thistype.create(IATTR_MD_MREGEN,450,"|cff33ff33Dealing Magic Damage or Healing: 1% chance to regen "," MP|r",thistype.callbackMD_MREGEN);
 thistype.create(IATTR_MD_POISON,451,"|cff33ff33Dealing Magic Damage: 10% chance to poison target, dealing "," magic damage over time|r",thistype.callbackMD_POISON);
 thistype.create(IATTR_MD_CHAIN,452,"|cff33ff33Dealing Magic Damage: 10% chance to cast Chain Lightning to target, dealing "," magic damage|r",thistype.callbackMD_CHAIN);
 thistype.create(IATTR_MDC_ARCANE,460,"|cff33ff33Magic Damage Critical: Charges with arcane power. All arcane power will be released automatically after 3 stacks, dealing "," magic damage to target|r",thistype.callbackMDC_ARCANE);

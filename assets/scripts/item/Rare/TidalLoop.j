@@ -1,40 +1,41 @@
 //! zinc
-library TidalLoop requires ItemAttributes {
+library TidalLoop requires BuffSystem, DamageSystem {
+
     HandleTable ht;
     
     function damaged() {
-        if (DamageResult.isHit) {
-            if (ht.exists(DamageResult.source)) {
-                if (ht[DamageResult.source] > 0 && !DamageResult.isPhyx) {
-                    if (GetRandomInt(0, 99) < 1) {
-                        ModUnitMana(DamageResult.source, 100.0);
-                        AddTimedEffect.atUnit(ART_MANA, DamageResult.source, "origin", 1.0);
-                    }
-                }
-            }
-        }
+        if (DamageResult.isHit == false) return;
+        if (DamageResult.isPhyx == true) return;
+        if (DamageResult.wasDirect == false) return;
+        if (ht.exists(DamageResult.source) == false) return;
+        if (ht[DamageResult.source] <= 0) return;
+        if (IsUnitICD(DamageResult.source, ITID_TIDAL_LOOP) == true) return;
+        if (GetRandomReal(0, 0.999) > 0.01) return;
+
+        ModUnitMana(DamageResult.source, ItemExAttributes.getUnitAttributeValue(DamageResult.source, IATTR_MD_MREGEN, 0.33, SCOPE_PREFIX));
+        AddTimedEffect.atUnit(ART_MANA, DamageResult.source, "origin", 1.0);
+
+        SetUnitICD(DamageResult.source, ITID_TIDAL_LOOP, 10);
     }
     
     function healed() {
-        if (ht.exists(HealResult.source)) {
-            if (ht[HealResult.source] > 0) {
-                if (HealResult.abilityName != SpellData.inst(SID_ATTACK_LL, SCOPE_PREFIX).name) {
-                    if (GetRandomInt(0, 99) < 1) {
-                        ModUnitMana(HealResult.source, 100.0);
-                        AddTimedEffect.atUnit(ART_MANA, HealResult.source, "origin", 1.0);
-                    }
-                }
-            }
-        }
+        if (HealResult.wasDirect == false) return;
+        if (ht.exists(HealResult.source) == false) return;
+        if (ht[HealResult.source] <= 0) return;
+        if (IsUnitICD(HealResult.source, ITID_TIDAL_LOOP) == true) return;
+        if (GetRandomReal(0, 0.999) > 0.01) return;
+
+        ModUnitMana(HealResult.source, ItemExAttributes.getUnitAttributeValue(HealResult.source, IATTR_MD_MREGEN, 0.33, SCOPE_PREFIX));
+        AddTimedEffect.atUnit(ART_MANA, HealResult.source, "origin", 1.0);
+
+        SetUnitICD(HealResult.source, ITID_TIDAL_LOOP, 10);
     }
 
-    function action(unit u, item it, integer fac) {
-        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
-        up.ModStr(10 * fac);
-        up.ModInt(15 * fac);
-        up.manaRegen += 6 * fac;
-        if (!ht.exists(u)) {ht[u] = 0;}
-        ht[u] = ht[u] + fac;
+    public function EquipedTidalLoop(unit u, integer polar) {
+        if (ht.exists(u) == false) {
+            ht[u] = 0;
+        }
+        ht[u] = ht[u] + polar;
     }
 
     function onInit() {
