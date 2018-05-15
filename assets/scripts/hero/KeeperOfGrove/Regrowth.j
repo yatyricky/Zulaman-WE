@@ -1,7 +1,5 @@
 //! zinc
-library Regrowth requires CastingBar, KeeperOfGroveGlobal, HornOfCenarius {
-constant string  ART  = "Objects\\Spawnmodels\\NightElf\\EntBirthTarget\\EntBirthTarget.mdl";
-constant integer BUFF_ID = 'A04I';
+library Regrowth requires CastingBar, KeeperOfGroveGlobal {
 
     function returnDH(integer lvl, real sp) -> real {
         return 100.0 + 100.0 * lvl + sp * 1.2;
@@ -33,30 +31,27 @@ constant integer BUFF_ID = 'A04I';
         buf.bd.bor = onRemove;
         buf.run();
         
-        AddTimedEffect.atUnit(ART, cd.target, "origin", 0.3);
+        AddTimedEffect.atUnit(ART_ENT_BIRTH_TARGET, cd.target, "origin", 0.3);
         HealTarget(cd.caster, cd.target, returnDH(lvl, sp), SpellData.inst(SID_REGROWTH, SCOPE_PREFIX).name, 0.0, true);
     }
     
     function onChannel() {
         CastingBar cb = CastingBar.create(response).setSound(castSound);
-        integer reduction = 0;
         Buff buf;
-        
-        if (HasHornOfCenarius(SpellEvent.CastingUnit)) {
-            reduction = 10;
-        }
-        
+        real icd;
         if (GetWidgetLife(SpellEvent.TargetUnit) / GetUnitState(SpellEvent.TargetUnit, UNIT_STATE_MAX_LIFE) < 0.35) {
-            buf = BuffSlot[SpellEvent.CastingUnit].getBuffByBid(BUFF_ID);
+            buf = BuffSlot[SpellEvent.CastingUnit].getBuffByBid(BID_REGROWTH_NO_INSTANT);
             if (buf == 0) {
                 cb.haste = 5.0;
-                
-                buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BUFF_ID);
-                buf.bd.interval = 45 - GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_REGROWTH) * 10 - reduction;
-                buf.bd.tick = -1;
-                buf.bd.boe = onEffect1;
-                buf.bd.bor = onRemove1;
-                buf.run();
+                icd = 50 - GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_REGROWTH) * 10 - ItemExAttributes.getUnitAttrVal(SpellEvent.CastingUnit, IATTR_KG_REGRCD, SCOPE_PREFIX);
+                if (icd > 0) {
+                    buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BID_REGROWTH_NO_INSTANT);
+                    buf.bd.interval = icd;
+                    buf.bd.tick = -1;
+                    buf.bd.boe = onEffect1;
+                    buf.bd.bor = onRemove1;
+                    buf.run();
+                }
             }
         }
         cb.launch();
@@ -80,7 +75,7 @@ constant integer BUFF_ID = 'A04I';
         castSound = DefineSound("Sound\\NAtureMissileLoop.mp3", 3639, true, false);
         RegisterSpellChannelResponse(SID_REGROWTH, onChannel);
         BuffType.register(BID_REGROWTH, BUFF_MAGE, BUFF_POS);
-        BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_NEG);
+        BuffType.register(BID_REGROWTH_NO_INSTANT, BUFF_PHYX, BUFF_NEG);
         TriggerAnyUnit(EVENT_PLAYER_HERO_SKILL, function lvlup);
     }
 

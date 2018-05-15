@@ -88,6 +88,7 @@ public constant integer SID_REJUVENATION = 'A01X';
 public constant integer BID_REJUVENATION = 'A02G';
 public constant integer SID_REGROWTH = 'A01Y';
 public constant integer BID_REGROWTH = 'A02J';
+public constant integer BID_REGROWTH_NO_INSTANT = 'A04I';
 public constant integer SID_SWIFT_MEND = 'A020';
 public constant integer SID_TRANQUILITY = 'A01Z';
 public constant integer SID_TRANQUILITY_1 = 'A04J';
@@ -917,6 +918,7 @@ public constant string ART_INTELLIGENCE = "Abilities\\Spells\\Items\\AIim\\AIimT
 public constant string ART_ROAR_TARGET = "Abilities\\Spells\\NightElf\\BattleRoar\\RoarTarget.mdl";
 public constant string ART_DARK_PORTAL_TARGET = "Abilities\\Spells\\Demon\\DarkPortal\\DarkPortalTarget.mdl";
 public constant string ART_INNER_FIRE_TARGET = "Abilities\\Spells\\Human\\InnerFire\\InnerFireTarget.mdl";
+public constant string ART_ENT_BIRTH_TARGET = "Objects\\Spawnmodels\\NightElf\\EntBirthTarget\\EntBirthTarget.mdl";
 
 public constant string BTNVolcano = "ReplaceableTextures\\CommandButtons\\BTNVolcano.blp";
 public constant string BTNEarthquake = "ReplaceableTextures\\CommandButtons\\BTNEarthquake.blp";
