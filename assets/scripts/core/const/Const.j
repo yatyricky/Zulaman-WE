@@ -114,6 +114,7 @@ public constant integer BID_SHIELD = 'A01I';
 public constant integer BID_SHIELD_SOUL_WEAK = 'A01J';
 public constant integer SID_PRAYER_OF_MENDING = 'A01D';
 public constant integer SID_PRAYER_OF_HEALING = 'A03W';
+public constant integer BID_PRAYER_OF_HEALING = 'A0CS';
 // dark ranger
 public constant integer UTID_DARK_RANGER = 'Nbrn';
 public constant integer SID_DARK_ARROW = 'A009';
@@ -914,6 +915,8 @@ public constant string ART_HOWL_TARGET = "Abilities\\Spells\\Other\\HowlOfTerror
 public constant string ART_ELF_EXPLOSION = "Objects\\Spawnmodels\\NightElf\\NEDeathSmall\\NEDeathSmall.mdl";
 public constant string ART_INTELLIGENCE = "Abilities\\Spells\\Items\\AIim\\AIimTarget.mdl";
 public constant string ART_ROAR_TARGET = "Abilities\\Spells\\NightElf\\BattleRoar\\RoarTarget.mdl";
+public constant string ART_DARK_PORTAL_TARGET = "Abilities\\Spells\\Demon\\DarkPortal\\DarkPortalTarget.mdl";
+public constant string ART_INNER_FIRE_TARGET = "Abilities\\Spells\\Human\\InnerFire\\InnerFireTarget.mdl";
 
 public constant string BTNVolcano = "ReplaceableTextures\\CommandButtons\\BTNVolcano.blp";
 public constant string BTNEarthquake = "ReplaceableTextures\\CommandButtons\\BTNEarthquake.blp";

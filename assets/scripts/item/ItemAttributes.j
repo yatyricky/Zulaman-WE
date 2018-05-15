@@ -580,8 +580,8 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
                     head = head.next;
                 }
                 // raw = DefaultItemAttributesData.inst(GetItemTypeId(it), "updateUberTip");
-                // print(str);
-                BlzSetItemExtendedTooltip(it, str);
+                print(str);
+                // BlzSetItemExtendedTooltip(it, str);
             } else {
                 print("ItemExAttributes.updateUbertip no such item " + ID2S(GetItemTypeId(it)));
             }

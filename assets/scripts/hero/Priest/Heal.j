@@ -1,5 +1,5 @@
 //! zinc
-library Heal requires BuffSystem, SpellEvent, UnitProperty, Benediction {
+library Heal requires BuffSystem, SpellEvent, UnitProperty {
 constant integer BUFF_ID = 'A03X';
 constant integer BUFF_ID1 = 'A00U';
 constant string  ART  = "Abilities\\Spells\\Orc\\EtherealForm\\SpiritWalkerChange.mdl";
@@ -39,10 +39,6 @@ constant string  ART  = "Abilities\\Spells\\Orc\\EtherealForm\\SpiritWalkerChang
         buf.bd.boe = onEffect;
         buf.bd.bor = onRemove;
         buf.run();
-        
-        if (HasBenediction(caster)) {
-            mult = 2.0;
-        }
         
         buf = Buff.cast(caster, target, BUFF_ID1);
         buf.bd.tick = -1;

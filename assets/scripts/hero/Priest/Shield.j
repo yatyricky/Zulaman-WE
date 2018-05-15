@@ -1,7 +1,5 @@
 //! zinc
-library Shield requires BuffSystem, UnitProperty, SpellEvent, UnitAbilityCD, Heal, Benediction {
-constant integer BUFF_ID = 'A01I';
-constant integer BUFF_ID1 = 'A01J';
+library Shield requires BuffSystem, UnitProperty, SpellEvent, UnitAbilityCD, Heal {
 
     function returnAbsorb(integer lvl, real sp) -> real {
         return 750.0 * lvl + sp * 4.0;
@@ -38,10 +36,10 @@ constant integer BUFF_ID1 = 'A01J';
 
     function onCast() {
         Buff buf;
-        buf = BuffSlot[SpellEvent.TargetUnit].getBuffByBid(BUFF_ID1);
+        buf = BuffSlot[SpellEvent.TargetUnit].getBuffByBid(BID_SHIELD_SOUL_WEAK);
         if (buf == 0) {
             // shield
-            buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BUFF_ID);
+            buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BID_SHIELD);
             buf.bd.tick = -1;
             buf.bd.interval = 20.0;
             buf.bd.isShield = true;
@@ -53,9 +51,9 @@ constant integer BUFF_ID1 = 'A01J';
             buf.bd.bor = onRemove;
             buf.run();
             
-            if (!HasBenediction(SpellEvent.CastingUnit)) {
+            if (UnitHasItemOfTypeBJ(SpellEvent.CastingUnit, ITID_BENEDICTION) == false) {
                 // soul weaken
-                buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BUFF_ID1);
+                buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BID_SHIELD_SOUL_WEAK);
                 buf.bd.tick = -1;
                 buf.bd.interval = 10.0;
                 buf.bd.boe = onEffect1;
@@ -75,8 +73,8 @@ constant integer BUFF_ID1 = 'A01J';
     }
 
     function onInit() {
-        BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
-        BuffType.register(BUFF_ID1, BUFF_PHYX, BUFF_NEG);
+        BuffType.register(BID_SHIELD, BUFF_MAGE, BUFF_POS);
+        BuffType.register(BID_SHIELD_SOUL_WEAK, BUFF_PHYX, BUFF_NEG);
         RegisterSpellEffectResponse(SID_SHIELD, onCast);
     }
 
