@@ -1,6 +1,6 @@
 //! zinc
-library HolyShock requires SpellEvent, UnitProperty, BeaconOfLight, LightsJustice {
-constant integer BUFF_ID = 'A02E';
+library HolyShock requires SpellEvent, UnitProperty, BeaconOfLight {
+
     struct delayedDosth1 {
         private timer tm;
         private unit sor, tar;
@@ -50,7 +50,7 @@ constant integer BUFF_ID = 'A02E';
         real excrit = 0;
         
         // equiped Justice of Light, won't consume Divine Favour
-        if (HasLightsJustice(SpellEvent.CastingUnit)) {
+        if (UnitHasItemOfTypeBJ(SpellEvent.CastingUnit, ITID_LIGHTS_JUSTICE) == true) {
             HealTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, (GetUnitState(SpellEvent.TargetUnit, UNIT_STATE_MAX_LIFE) - GetWidgetLife(SpellEvent.TargetUnit)) * 0.75, SpellData.inst(SID_HOLY_SHOCK, SCOPE_PREFIX).name, 2.0, true);
         } else {
             bs = BuffSlot[SpellEvent.CastingUnit];
@@ -64,7 +64,7 @@ constant integer BUFF_ID = 'A02E';
         }
         
         AddTimedEffect.atPos(ART_FAERIE_DRAGON_MISSILE, GetUnitX(SpellEvent.TargetUnit), GetUnitY(SpellEvent.TargetUnit), GetUnitZ(SpellEvent.TargetUnit) + 24, 0, 3);
-        buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BUFF_ID);
+        buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BID_HOLY_SHOCK);
         buf.bd.tick = -1;
         buf.bd.interval = 6.0;
         UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellHaste -= buf.bd.r0;
@@ -84,9 +84,8 @@ constant integer BUFF_ID = 'A02E';
 
     function onInit() {
         RegisterSpellEffectResponse(SID_HOLY_SHOCK, onCast);
-        BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
+        BuffType.register(BID_HOLY_SHOCK, BUFF_MAGE, BUFF_POS);
     }
-
 
 }
 //! endzinc

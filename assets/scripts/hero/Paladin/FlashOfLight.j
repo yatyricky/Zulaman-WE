@@ -13,7 +13,7 @@ library FlashOfLight requires SpellEvent, UnitProperty, BeaconOfLight, HolyLight
         real amt = returnHeal(lvl) + UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).SpellPower() * 1.4;
         real exct = returnExtraCritical(lvl);
         BuffSlot bs = BuffSlot[SpellEvent.CastingUnit];
-        Buff buf;
+        Buff buf, dispel;
         // buff amp
         buf = BuffSlot[SpellEvent.TargetUnit].getBuffByBid(BID_HOLY_LIGHT_AMP);
         if (buf != 0) {
@@ -36,6 +36,14 @@ library FlashOfLight requires SpellEvent, UnitProperty, BeaconOfLight, HolyLight
         }
         // beacon of light
         BeaconOfLight[SpellEvent.CastingUnit].healBeacons(SpellEvent.TargetUnit, HealResult.amount, ART_HOLY_BOLT_SPECIAL_ART);
+        // has lights justice
+        if (UnitHasItemOfTypeBJ(SpellEvent.CastingUnit, ITID_LIGHTS_JUSTICE) == true) {
+            dispel = BuffSlot[SpellEvent.TargetUnit].dispel(BUFF_MAGE, BUFF_NEG);
+            if (dispel != 0) {
+                dispel.destroy();
+            }
+            AddTimedEffect.atUnit(ART_DISPEL, SpellEvent.TargetUnit, "origin", 1.0);
+        }
     }
 
     function onInit() {
