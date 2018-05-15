@@ -79,6 +79,7 @@ public constant integer SID_SAVAGE_ROAR = 'A010';
 public constant integer SID_FOREST_CURE = 'A0A1';
 public constant integer SID_NATURAL_REFLEX = 'A016';
 public constant integer SID_SURVIVAL_INSTINCTS = 'A0A2';
+public constant integer BID_SURVIVAL_INSTINCTS = 'A0A3';
 // keeper of grove
 public constant integer UTID_KEEPER_OF_GROVE = 'Emfr';
 public constant integer SID_LIFE_BLOOM = 'A00D';
@@ -911,6 +912,7 @@ public constant string ART_TORNADO_TARGET = "Abilities\\Spells\\Other\\Tornado\\
 public constant string ART_HOWL_TARGET = "Abilities\\Spells\\Other\\HowlOfTerror\\HowlTarget.mdl";
 public constant string ART_ELF_EXPLOSION = "Objects\\Spawnmodels\\NightElf\\NEDeathSmall\\NEDeathSmall.mdl";
 public constant string ART_INTELLIGENCE = "Abilities\\Spells\\Items\\AIim\\AIimTarget.mdl";
+public constant string ART_ROAR_TARGET = "Abilities\\Spells\\NightElf\\BattleRoar\\RoarTarget.mdl";
 
 public constant string BTNVolcano = "ReplaceableTextures\\CommandButtons\\BTNVolcano.blp";
 public constant string BTNEarthquake = "ReplaceableTextures\\CommandButtons\\BTNEarthquake.blp";

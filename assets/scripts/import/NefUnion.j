@@ -514,18 +514,6 @@ library NefUnion requires TimerUtils {
         }
     }
 
-    public function UnitHasItemType(unit u, integer id) -> boolean {
-        integer i = 0;
-        boolean found = false;
-        while (i < 6 && found == false) {
-            if (UnitItemInSlot(u, i) != null && GetItemTypeId(UnitItemInSlot(u, i)) == id) {
-                found = true;
-            }
-            i += 1;
-        }
-        return found;
-    }
-
     public function ModUnitMana(unit u, real amt) {
         SetUnitState(u, UNIT_STATE_MANA, GetUnitState(u, UNIT_STATE_MANA) + amt);
     }

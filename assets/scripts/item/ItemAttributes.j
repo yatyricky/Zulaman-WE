@@ -238,7 +238,7 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
             thistype.append(ITID_REFORGED_BADGE_OF_TENACITY,21,80,120);
             thistype.append(ITID_REFORGED_BADGE_OF_TENACITY,27,0.02,0.04);
             thistype.append(ITID_REFORGED_BADGE_OF_TENACITY,78,0.08,0.1);
-            thistype.append(ITID_REFORGED_BADGE_OF_TENACITY,92,7,9);
+            thistype.append(ITID_REFORGED_BADGE_OF_TENACITY,92,3,7);
             thistype.setLoreText(ITID_REFORGED_BADGE_OF_TENACITY,"|CFF8B66FFReforged Badge of Tenacity|R","|CFFFFDEADOriginally forged by a demon overseer named Shartuul.|R");
 
             thistype.append(ITID_LIGHTS_JUSTICE,14,5,6);
@@ -401,6 +401,7 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
 
     public struct ItemExAttributes {
         static HandleTable ht;
+        static item droppingItem;
         integer id;
         real value;
         thistype next;
@@ -465,7 +466,7 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
             ItemAttributeMeta meta = ItemAttributeMeta.inst(id, "getUnitAttrVal");
             while (ii < 6) {
                 ti = UnitItemInSlot(u, ii);
-                if (ti != null) {
+                if (ti != null && ti != thistype.droppingItem) {
                     amt += ItemExAttributes.getAttributeValue(ti, id, trace + " > getUnitAttrVal") * (1 + ItemExAttributes.getAttributeValue(ti, IATTR_LP, trace + " > getUnitAttrVal") * meta.lpAmp);
                 }
                 ii += 1;
@@ -483,7 +484,7 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
             ItemAttributeMeta meta = ItemAttributeMeta.inst(id, "getUnitAttrVal");
             while (ii < 6) {
                 ti = UnitItemInSlot(u, ii);
-                if (ti != null) {
+                if (ti != null && ti != thistype.droppingItem) {
                     amt = ItemExAttributes.getAttributeValue(ti, id, trace + " > getUnitAttrVal") * (1 + ItemExAttributes.getAttributeValue(ti, IATTR_LP, trace + " > getUnitAttrVal") * meta.lpAmp);
                     if (sel < amt) {
                         sel = amt;
@@ -509,7 +510,7 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
             ItemAttributeMeta meta = ItemAttributeMeta.inst(id, "getUnitAttrVal");
             while (ii < 6) {
                 ti = UnitItemInSlot(u, ii);
-                if (ti != null) {
+                if (ti != null && ti != thistype.droppingItem) {
                     amt = ItemExAttributes.getAttributeValue(ti, id, trace + " > getUnitAttrVal") * (1 + ItemExAttributes.getAttributeValue(ti, IATTR_LP, trace + " > getUnitAttrVal") * meta.lpAmp);
                     if (sel > amt) {
                         sel = amt;
@@ -720,6 +721,7 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
 
         static method onInit() {
             thistype.ht = HandleTable.create();
+            thistype.droppingItem = null;
         }
     }
     
@@ -815,6 +817,7 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
         ItemExAttributes attr;
         ItemAttributeMeta meta;
         attr = ItemExAttributes.inst(GetManipulatedItem(), "itemoff");
+        ItemExAttributes.droppingItem = GetManipulatedItem();
         while (attr != 0) {
             meta = ItemAttributeMeta.inst(attr.id, "item off");
             if (meta != 0) {
@@ -822,6 +825,7 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
             }
             attr = attr.next;
         }
+        ItemExAttributes.droppingItem = null;
         return false;
     }
 
@@ -965,7 +969,9 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
         static method callbackBD_SHIELD(unit u, real val, integer polar) {}
         static method callbackRG_PARALZ(unit u, real val, integer polar) {}
         static method callbackPL_LIGHT(unit u, real val, integer polar) {}
-        static method callbackDR_CDR(unit u, real val, integer polar) {}
+        static method callbackDR_CDR(unit u, real val, integer polar) {
+            EquipedReforgedBadgeOfTenacity(u, polar);
+        }
         static method callbackSM_LASH(unit u, real val, integer polar) {}
         static method callbackDK_ARROW(unit u, real val, integer polar) {}
         static method callbackMG_FDMG(unit u, real val, integer polar) {}

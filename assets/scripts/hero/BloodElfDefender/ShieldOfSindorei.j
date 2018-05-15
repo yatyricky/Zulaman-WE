@@ -20,7 +20,7 @@ library ShieldOfSindorei requires SpellEvent, BuffSystem {
         buf.bd.r0 = 0.05 + 0.15 * GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_SHIELD_OF_SINDOREI) + ItemExAttributes.getUnitAttrVal(SpellEvent.CastingUnit, IATTR_BD_SHIELD, SCOPE_PREFIX);
         
         // equiped orb of the sindorei
-        if (UnitHasItemType(SpellEvent.CastingUnit, ITID_ORB_OF_THE_SINDOREI) == true) {
+        if (UnitHasItemOfTypeBJ(SpellEvent.CastingUnit, ITID_ORB_OF_THE_SINDOREI) == true) {
             i = 0;
             while (i < MobList.n) {
                 if (GetDistance.units2d(MobList.units[i], SpellEvent.CastingUnit) <= 900.0) {
