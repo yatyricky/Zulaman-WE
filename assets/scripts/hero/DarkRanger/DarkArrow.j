@@ -61,20 +61,8 @@ constant string  PATH  = "Abilities\\Spells\\Other\\BlackArrow\\BlackArrowMissil
         integer lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_DARK_ARROW);
         integer arrows = 1;
         integer rnd;
-        integer ii = 0;
-        item ti;
-        real amt = 0;
         // equiped Rhok' Delar
-        while (ii < 6) {
-            ti = UnitItemInSlot(SpellEvent.CastingUnit, ii);
-            if (ti != null) {
-                amt += ItemExAttributes.getAttributeValue(ti, IATTR_DK_ARROW, SCOPE_PREFIX) + ItemExAttributes.getAttributeValue(ti, IATTR_LP, SCOPE_PREFIX);
-            }
-            ii += 1;
-        }
-        ti = null;
-
-        arrows += Rounding(amt);
+        arrows += Rounding(ItemExAttributes.getUnitAttrValMax(SpellEvent.CastingUnit, IATTR_DK_ARROW, SCOPE_PREFIX));
 
         if (lvl == 2 && GetRandomInt(0, 99) < 40) {
             arrows += 1;

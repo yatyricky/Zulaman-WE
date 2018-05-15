@@ -70,6 +70,7 @@ public constant integer SID_SUN_FIRE_STORM = 'A003';
 public constant integer SID_ARCANE_SHOCK = 'A004';
 public constant integer SID_DISCORD = 'A005';
 public constant integer SID_SHIELD_OF_SINDOREI = 'A006';
+public constant integer BID_SHIELD_OF_SINDOREI = 'A031';
 // claw druid
 public constant integer UTID_CLAW_DRUID = 'Hlgr';
 public constant integer SID_LACERATE = 'A01F';

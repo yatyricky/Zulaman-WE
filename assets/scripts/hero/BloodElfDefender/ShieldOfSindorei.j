@@ -1,7 +1,6 @@
 //! zinc
-library ShieldOfSindorei requires SpellEvent, BuffSystem, OrbOfTheSindorei {
-constant integer SPELL_ID = 'A006';
-constant integer BUFF_ID = 'A031';
+library ShieldOfSindorei requires SpellEvent, BuffSystem {
+
     function onEffect(Buff buf) {
         UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageTaken -= buf.bd.r0;
     }
@@ -10,26 +9,24 @@ constant integer BUFF_ID = 'A031';
         UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageTaken += buf.bd.r0;
     }
     
-    function onCast() {   
+    function onCast() {
         integer i;
         AggroList al;
         real aggro;
-        Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BUFF_ID);
+        Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BID_SHIELD_OF_SINDOREI);
         buf.bd.tick = -1;
         buf.bd.interval = 8.0;
         UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageTaken += buf.bd.r0;
-        buf.bd.r0 = 0.2 + 0.15 * GetUnitAbilityLevel(SpellEvent.CastingUnit, SPELL_ID);
+        buf.bd.r0 = 0.05 + 0.15 * GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_SHIELD_OF_SINDOREI) + ItemExAttributes.getUnitAttrVal(SpellEvent.CastingUnit, IATTR_BD_SHIELD, SCOPE_PREFIX);
         
         // equiped orb of the sindorei
-        if (HasOrbOfTheSindorei(SpellEvent.CastingUnit)) {
-            buf.bd.r0 += 0.2;            
-            
+        if (UnitHasItemType(SpellEvent.CastingUnit, ITID_ORB_OF_THE_SINDOREI) == true) {
             i = 0;
             while (i < MobList.n) {
-                if (GetDistance.units2d(MobList.units[i], SpellEvent.CastingUnit) <= 900.0) {                    
+                if (GetDistance.units2d(MobList.units[i], SpellEvent.CastingUnit) <= 900.0) {
                     al = AggroList[MobList.units[i]];
                     aggro = al.getAggro(al.sort());
-                    al.setAggro(SpellEvent.CastingUnit, aggro + 100.0);
+                    al.setAggro(SpellEvent.CastingUnit, aggro * 1.1 + 100.0);
                 }
                 i += 1;
             }
@@ -44,10 +41,9 @@ constant integer BUFF_ID = 'A031';
     }
 
     function onInit() {
-        RegisterSpellEffectResponse(SPELL_ID, onCast);
-        BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
+        RegisterSpellEffectResponse(SID_SHIELD_OF_SINDOREI, onCast);
+        BuffType.register(BID_SHIELD_OF_SINDOREI, BUFF_MAGE, BUFF_POS);
     }
-
 
 }
 //! endzinc

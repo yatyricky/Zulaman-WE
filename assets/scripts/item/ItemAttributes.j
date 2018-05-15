@@ -230,7 +230,7 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
             thistype.append(ITID_ORB_OF_THE_SINDOREI,21,60,80);
             thistype.append(ITID_ORB_OF_THE_SINDOREI,18,14,20);
             thistype.append(ITID_ORB_OF_THE_SINDOREI,16,0.04,0.06);
-            thistype.append(ITID_ORB_OF_THE_SINDOREI,86,0.16,0.18);
+            thistype.append(ITID_ORB_OF_THE_SINDOREI,86,0.03,0.07);
             thistype.setLoreText(ITID_ORB_OF_THE_SINDOREI,"|CFF8B66FFOrb of the Sin'dorei|R","|CFFFFDEADThe glory sign of remarkable bloodelf defenders.|R");
 
             thistype.append(ITID_REFORGED_BADGE_OF_TENACITY,13,5,7);
@@ -579,8 +579,8 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
                     head = head.next;
                 }
                 // raw = DefaultItemAttributesData.inst(GetItemTypeId(it), "updateUberTip");
-                print(str);
-                // BlzSetItemExtendedTooltip(it, str);
+                // print(str);
+                BlzSetItemExtendedTooltip(it, str);
             } else {
                 print("ItemExAttributes.updateUbertip no such item " + ID2S(GetItemTypeId(it)));
             }
@@ -1118,18 +1118,18 @@ thistype.create(IATTR_PL_LIGHT,3,262,0,"|cff87ceebFlash Light dispels one debuff
 thistype.create(IATTR_DT_MREGEN,3,266,0,"|cff87ceebRegens MP from "," of the damage taken|r",thistype.callbackDT_MREGEN);
 thistype.create(IATTR_USE_TP,3,268,0,"|cff87ceebUse: Teleports to an ally","|r",thistype.callbackUSE_TP);
 thistype.create(IATTR_BM_VALOR,2,300,0.33,"|cff33ff33Regenerates "," more valor points|r",thistype.callbackBM_VALOR);
-thistype.create(IATTR_RG_RUSH,2,302,0.16,"|cff33ff33Deals "," extra damage to target below 30% max HP|r",thistype.callbackRG_RUSH);
+thistype.create(IATTR_RG_RUSH,2,302,0.16,"|cff33ff33Sinister Strike and Eviscerate deal "," extra damage to target below 30% max HP|r",thistype.callbackRG_RUSH);
 thistype.create(IATTR_CRKILLER,2,303,0.5,"|cff33ff33Deals "," extra damage to non-hero targets|r",thistype.callbackCRKILLER);
-thistype.create(IATTR_KG_REGRCD,2,305,0.33,"|cff33ff33Reduce cooldown of Instant Regrowth by "," seconds|r",thistype.callbackKG_REGRCD);
+thistype.create(IATTR_KG_REGRCD,2,305,0.33,"|cff33ff33Reduce cooldown of Instant Regrowth by "," seconds (unique)|r",thistype.callbackKG_REGRCD);
 thistype.create(IATTR_LEECHAURA,2,307,0.33,"|cff33ff33Absorb "," HP from all enemies nearby every second|r",thistype.callbackLEECHAURA);
 thistype.create(IATTR_PR_POHDEF,2,308,0.2,"|cff33ff33Prayer of healing increases armor of target by ","|r",thistype.callbackPR_POHDEF);
 thistype.create(IATTR_DR_MAXHP,2,310,0.16,"|cff33ff33Survival Instincts provides "," extra healing and max HP|r",thistype.callbackDR_MAXHP);
 thistype.create(IATTR_CT_PAIN,2,313,0.4,"|cff33ff33Marrow Squeeze extends the Pain on target by "," seconds|r",thistype.callbackCT_PAIN);
 thistype.create(IATTR_BD_SHIELD,2,314,0.33,"|cff33ff33Shield of Sin'dorei provides "," extra damage reduction, and forces all nearby enemies to attack you|r",thistype.callbackBD_SHIELD);
 thistype.create(IATTR_RG_PARALZ,2,315,0.33,"|cff33ff33Sinister Strike has a "," chance to paralyze target, reduce target spell haste by 20% and gain an extra combo point|r",thistype.callbackRG_PARALZ);
-thistype.create(IATTR_DR_CDR,2,317,0.16,"|cff33ff33Reduce cooldown of Survival Instincts by "," seconds|r",thistype.callbackDR_CDR);
-thistype.create(IATTR_SM_LASH,2,318,0.1,"|cff33ff33Storm Lash has "," extra chance to cooldown Earth Shock|r",thistype.callbackSM_LASH);
-thistype.create(IATTR_DK_ARROW,2,319,0.12,"|cff33ff33Number of Dark Arrows increased by ","|r",thistype.callbackDK_ARROW);
+thistype.create(IATTR_DR_CDR,2,317,0.16,"|cff33ff33Reduce cooldown of Survival Instincts by "," seconds (unique)|r",thistype.callbackDR_CDR);
+thistype.create(IATTR_SM_LASH,2,318,0.1,"|cff33ff33Storm Lash has "," extra chance to cooldown Earth Shock (unique)|r",thistype.callbackSM_LASH);
+thistype.create(IATTR_DK_ARROW,2,319,0.12,"|cff33ff33Number of Dark Arrows increased by "," (unique)|r",thistype.callbackDK_ARROW);
 thistype.create(IATTR_MG_FDMG,2,320,0.2,"|cff33ff33Increase ice spell damage by ","|r",thistype.callbackMG_FDMG);
 thistype.create(IATTR_MG_BLZ,2,322,0.16,"|cff33ff33"," chance to cast an instant Frost Bolt to targets damaged by Blizzard|r",thistype.callbackMG_BLZ);
 thistype.create(IATTR_ATK_CTHUN,2,403,0.15,"|cff33ff33On Attack: Increase attack speed by 1% per attack, stacks up to ",", lasts for 3 seconds|r",thistype.callbackATK_CTHUN);
@@ -1168,7 +1168,7 @@ thistype.create(IATTR_USE_INT,2,905,0.3,"|cff33ff33Use: Increase intelligence by
 thistype.create(IATTR_USE_SP,2,906,0.3,"|cff33ff33Use: Increase spell power by ",", lasts for 15 seconds|r",thistype.callbackUSE_SP);
 thistype.create(IATTR_USE_DODGE,2,907,0.1,"|cff33ff33Use: Increase dodge chance by 30%, lasts for "," seconds|r",thistype.callbackUSE_DODGE);
 thistype.create(IATTR_USE_MS,2,908,0.1,"|cff33ff33Use: Increase movement speed by 300, lasts for "," seconds. Possible failures.|r",thistype.callbackUSE_MS);
-thistype.create(IATTR_USE_CTHUN,2,909,-0.33,"|cff33ff33Use: Increase attack speed by 100%, take "," extra damage|r",thistype.callbackUSE_CTHUN);
+thistype.create(IATTR_USE_CTHUN,2,909,-0.33,"|cff33ff33Use: Increase attack speed by 100%, take "," extra damage (unique)|r",thistype.callbackUSE_CTHUN);
 thistype.create(IATTR_USE_HOLYHEAL,2,910,0.33,"|cff33ff33Use: Release all holy power to heal yourself, each point heals "," HP|r",thistype.callbackUSE_HOLYHEAL);
         }
     }
