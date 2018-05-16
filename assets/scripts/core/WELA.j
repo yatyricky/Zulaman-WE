@@ -35,16 +35,11 @@ library WELA requires CastingBar, SpellData, AggroSystem {
         wela[welaI] = R2S(GetGameTime()) /*
         2  */ + "|damage|" /*
         3  */ + GetUnitNameEx(DamageResult.source) + "|" /*
-        4  */ + GetUnitNameEx(DamageResult.target) + "|" /*
-        5  */ + DamageResult.abilityName + "|" /*
-        6  */ + R2S(DamageResult.amount) + "|" /*
-        7  */ + B2IS(DamageResult.isHit) + "|" /*
-        8  */ + B2IS(DamageResult.isBlocked) + "|" /*
-        9  */ + B2IS(DamageResult.isDodged) + "|" /*
-        10 */ + B2IS(DamageResult.isCritical) + "|" /*
-        11 */ + B2IS(DamageResult.isImmune) + "|" /*
-        12 */ + B2IS(DamageResult.isPhyx) + "|" /*
-        13 */ + B2IS(DamageResult.wasDodgable);
+        4  */ + ModelInfo.get(GetUnitTypeId(DamageResult.source), "WELA D1").Career() + "|" /*
+        5  */ + GetUnitNameEx(DamageResult.target) + "|" /*
+        6  */ + ModelInfo.get(GetUnitTypeId(DamageResult.target), "WELA D2").Career() + "|" /*
+        7  */ + DamageResult.abilityName + "|" /*
+        8  */ + R2S(DamageResult.amount);
         welaI += 1; if (welaI >= 8100) {GenerateCombatLog("AutoGen");}
     }
 
@@ -52,31 +47,39 @@ library WELA requires CastingBar, SpellData, AggroSystem {
         wela[welaI] = R2S(GetGameTime()) /*
         2  */ + "|heal|" /*
         3  */ + GetUnitNameEx(HealResult.source) + "|" /*
-        4  */ + GetUnitNameEx(HealResult.target) + "|" /*
-        5  */ + HealResult.abilityName + "|" /*
-        6  */ + R2S(HealResult.effective) + "|" /*
-        7  */ + R2S(HealResult.amount - HealResult.effective) + "|" /*
-        8  */ + B2IS(HealResult.isCritical);
+        4  */ + ModelInfo.get(GetUnitTypeId(HealResult.source), "WELA H1").Career() + "|" /*
+        5  */ + GetUnitNameEx(HealResult.target) + "|" /*
+        6  */ + ModelInfo.get(GetUnitTypeId(HealResult.target), "WELA H2").Career() + "|" /*
+        7  */ + HealResult.abilityName + "|" /*
+        8  */ + R2S(HealResult.effective) + "|" /*
+        9  */ + R2S(HealResult.amount - HealResult.effective);
         welaI += 1; if (welaI >= 8100) {GenerateCombatLog("AutoGen");}
     }
 
     function absorbRecord() {
         wela[welaI] = R2S(GetGameTime()) /*
-        2     */ + "|heal|" /*
-        3     */ + GetUnitNameEx(AbsorbResult.source) + "|" /*
-        4     */ + GetUnitNameEx(AbsorbResult.target) + "|" /*
-        5     */ + AbsorbResult.abilityName + "|" /*
-        6,7,8 */ + R2S(AbsorbResult.amount) + "|0.0|0";
+        2  */ + "|heal|" /*
+        3  */ + GetUnitNameEx(AbsorbResult.source) + "|" /*
+        4  */ + ModelInfo.get(GetUnitTypeId(AbsorbResult.source), "WELA A1").Career() + "|" /*
+        5  */ + GetUnitNameEx(AbsorbResult.target) + "|" /*
+        6  */ + ModelInfo.get(GetUnitTypeId(AbsorbResult.target), "WELA A2").Career() + "|" /*
+        7  */ + AbsorbResult.abilityName + "|" /*
+        8- */ + R2S(AbsorbResult.amount) + "|0.0";
         welaI += 1; if (welaI >= 8100) {GenerateCombatLog("AutoGen");}
     }
 
     function castLog() {
-        if (IsLastSpellSuccess(SpellEvent.CastingUnit)) {
+        integer tutid;
+        if (IsLastSpellSuccess(SpellEvent.CastingUnit) && IsUnitDummy(SpellEvent.CastingUnit) == false) {
+            tutid = GetUnitTypeId(SpellEvent.TargetUnit);
+            if (tutid == 0) {tutid = UTID_DAMAGE_DUMMY;}
             wela[welaI] = R2S(GetGameTime()) /*
-            */ + "|cast|" /*
-            */ + GetUnitNameEx(SpellEvent.CastingUnit) + "|" /*
-            */ + GetUnitNameEx(SpellEvent.TargetUnit) + "|" /*
-            */ + SpellData.inst(SpellEvent.AbilityId, SCOPE_PREFIX).name;
+        2  */ + "|cast|" /*
+        3  */ + GetUnitNameEx(SpellEvent.CastingUnit) + "|" /*
+        4  */ + ModelInfo.get(GetUnitTypeId(SpellEvent.CastingUnit), "WELA C1").Career() + "|" /*
+        5  */ + GetUnitNameEx(SpellEvent.TargetUnit) + "|" /*
+        6  */ + ModelInfo.get(tutid, "WELA C2").Career() + "|" /*
+        7  */ + SpellData.inst(SpellEvent.AbilityId, SCOPE_PREFIX).name;
             welaI += 1; if (welaI >= 8100) {GenerateCombatLog("AutoGen");}
         }
     }

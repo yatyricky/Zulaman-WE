@@ -25,7 +25,7 @@ library ModelInfo requires Table, Integer {
     
         static method get(integer uid, string source) -> thistype {
             if (!tab.exists(uid)) {
-                print(SCOPE_PREFIX+">undefined unit type id '" + ID2S(uid) + "' "+source+".");
+                print(SCOPE_PREFIX+">undefined unit type id '" + ID2S(uid) + "' ("+I2S(uid)+") "+source+".");
                 return 0;
             } else {
                 return thistype(tab[uid]);
