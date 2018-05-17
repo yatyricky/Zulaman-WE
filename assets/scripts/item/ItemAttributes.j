@@ -953,7 +953,9 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
         }
         static method callbackLP(unit u, real val, integer polar) {}
         static method callbackBM_VALOR(unit u, real val, integer polar) {}
-        static method callbackRG_ONESHOT(unit u, real val, integer polar) {}
+        static method callbackRG_ONESHOT(unit u, real val, integer polar) {
+            EquipedOneshotLowHealth(u, polar);
+        }
         static method callbackRG_RUSH(unit u, real val, integer polar) {}
         static method callbackCRKILLER(unit u, real val, integer polar) {}
         static method callbackMCVT(unit u, real val, integer polar) {

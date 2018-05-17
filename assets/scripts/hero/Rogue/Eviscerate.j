@@ -52,12 +52,12 @@ constant integer BUFF_ID = 'A047';
     
     function onCast() {
         integer cp, lvl;
-        real amt, cost, costp, max, ap;
+        real amt, cost, costp, max, ap, amp;
         Buff buf;
         cost = GetUnitMana(SpellEvent.CastingUnit);
         max = GetUnitState(SpellEvent.CastingUnit, UNIT_STATE_MAX_MANA);
         costp = cost / max;
-        if (costp >= 0.2) {        
+        if (costp >= 0.2) {
             if (ComboPoints[SpellEvent.CastingUnit].isTarget(SpellEvent.TargetUnit) && ComboPoints[SpellEvent.CastingUnit].n > 0) {                
                 if (costp > 0.25) {
                     cost = max * 0.25;
@@ -71,7 +71,11 @@ constant integer BUFF_ID = 'A047';
                 lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_EVISCERATE);
                 ap = UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).AttackPower();
                 cp = ComboPoints[SpellEvent.CastingUnit].get();
-                amt = returnDD(lvl, ap, cp) * costp;
+                amp = 1.0;
+                if (GetUnitLifePercent(SpellEvent.TargetUnit) < 30) {
+                    amp = 1.0 + ItemExAttributes.getUnitAttrVal(SpellEvent.CastingUnit, IATTR_RG_RUSH, SCOPE_PREFIX);
+                }
+                amt = returnDD(lvl, ap, cp) * costp * amp;
                 DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, amt, SpellData.inst(SID_EVISCERATE, SCOPE_PREFIX).name, true, true, true, WEAPON_TYPE_METAL_HEAVY_SLICE, false);
                 if (DamageResult.isHit) {
                     DestroyEffect(AddSpecialEffectTarget(ART_GORE, DamageResult.target, "origin"));
@@ -88,7 +92,7 @@ constant integer BUFF_ID = 'A047';
                     buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BID_EVISCERATE);
                     buf.bd.interval = 3 / (1.0 + UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).AttackSpeed() / 100.0);
                     buf.bd.tick = Rounding(18.0 / buf.bd.interval);
-                    buf.bd.r0 = returnDOT(lvl, ap, cp);
+                    buf.bd.r0 = returnDOT(lvl, ap, cp) * amp;
                     buf.bd.boe = onEffectDot;
                     buf.bd.bor = onRemoveDot;
                     buf.run();
