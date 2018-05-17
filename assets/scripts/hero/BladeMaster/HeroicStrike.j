@@ -1,5 +1,5 @@
 //! zinc
-library HeroicStrike requires DamageSystem, SpellEvent, OrcCaptureFlag {
+library HeroicStrike requires DamageSystem, SpellEvent {
     
     public function BladeMasterIsHSOn(unit u) -> boolean {
         return GetUnitAbilityLevel(u, BID_HEROIC_STRIKE) > 0;
@@ -16,9 +16,6 @@ library HeroicStrike requires DamageSystem, SpellEvent, OrcCaptureFlag {
         real scost = 10.0;
         if (BladeMasterIsHSOn(DamageResult.source) && DamageResult.abilityName == DAMAGE_NAME_MELEE) {
             DamageResult.amount += 40 + GetUnitAbilityLevel(DamageResult.source, SID_HEROIC_STRIKE) * 10;
-            if (HasOrcCaptureFlag(DamageResult.source)) {
-                scost -= 5.0;
-            }
             ModUnitMana(DamageResult.source, 0.0 - scost);
             if (GetUnitMana(DamageResult.source) < scost) {
                 dispelHeroicStrike(DamageResult.source);

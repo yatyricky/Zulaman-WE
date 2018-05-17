@@ -22,11 +22,11 @@ library Execute requires DamageSystem, AggroSystem {
         private timer tm;
         private unit u;
         integer continuous;
-        integer valour;
+        real valour;
 
         method forgeAET() -> string {
             integer lvl = GetUnitAbilityLevel(this.u, SID_EXECUTE);
-            return TXT_CN_AET1_EXECUTE_0 + I2S(R2I(returnManaRegen(lvl))) + TXT_CN_AET1_EXECUTE_1 + I2S(R2I(returnTimerInterval(lvl))) + TXT_CN_AET1_EXECUTE_2 + I2S(this.valour);
+            return TXT_CN_AET1_EXECUTE_0 + I2S(R2I(returnManaRegen(lvl))) + TXT_CN_AET1_EXECUTE_1 + I2S(R2I(returnTimerInterval(lvl))) + TXT_CN_AET1_EXECUTE_2 + I2S(R2I(this.valour));
         }
 
         static method inst(unit u, string trace) -> thistype {
@@ -38,26 +38,26 @@ library Execute requires DamageSystem, AggroSystem {
             }
         }
 
-        method flushValour() -> integer {
-            integer ret = this.valour;
+        method flushValour() -> real {
+            real ret = this.valour;
             this.valour = 0;
             NFSetPlayerAbilityIcon(GetOwningPlayer(this.u), SID_EXECUTE, BTNExecute0);
             NFSetPlayerAbilityExtendedTooltip(GetOwningPlayer(this.u), SID_EXECUTE, this.forgeAET(), GetUnitAbilityLevel(this.u, SID_EXECUTE));
             return ret;
         }
 
-        method getValour() -> integer {
+        method getValour() -> real {
             return this.valour;
         }
         
         method increaseValour(integer n) {
             integer show;
             string path;
-            this.valour += n;
+            this.valour += n * (1.0 + ItemExAttributes.getUnitAttrVal(this.u, IATTR_BM_VALOR, SCOPE_PREFIX));
             if (this.valour > BM_VALOUR_MAX) {
                 this.valour = BM_VALOUR_MAX;
             }
-            show = (this.valour + 3) / 4;
+            show = (Rounding(this.valour) + 3) / 4;
             if (show == 0) {
                 path = BTNExecute0;
             } else if (show == 1) {
@@ -130,18 +130,18 @@ library Execute requires DamageSystem, AggroSystem {
     }
     
     function onCast() {
-        integer v = ValourManager.inst(SpellEvent.CastingUnit, "onCast").flushValour();
+        real v = ValourManager.inst(SpellEvent.CastingUnit, "onCast").flushValour();
         real dmg = v * returnDamagePerPoint(GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_EXECUTE_LEARN)) + (UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).AttackPower() * v * 0.1);
         DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, dmg, SpellData.inst(SID_EXECUTE_LEARN, SCOPE_PREFIX).name, true, true, true, WEAPON_TYPE_METAL_HEAVY_SLICE, false);
         AddTimedEffect.atUnit(ART_GORE, SpellEvent.TargetUnit, "origin", 0.3);
     }
 
-    public function GetUnitValour(unit u) -> integer {
+    public function GetUnitValour(unit u) -> real {
         ValourManager vm = ValourManager.inst(u, "GetValour");
         if (vm != 0) {
             return vm.getValour();
         } else {
-            return 0;
+            return 0.0;
         }
     }
 

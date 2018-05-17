@@ -266,7 +266,7 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
             thistype.append(ITID_BANNER_OF_THE_HORDE,4,6,8);
             thistype.append(ITID_BANNER_OF_THE_HORDE,13,6,8);
             thistype.append(ITID_BANNER_OF_THE_HORDE,9,10,12);
-            thistype.append(ITID_BANNER_OF_THE_HORDE,11,3,4);
+            thistype.append(ITID_BANNER_OF_THE_HORDE,11,0.03,0.04);
             thistype.append(ITID_BANNER_OF_THE_HORDE,39,0.4,0.6);
             thistype.setLoreText(ITID_BANNER_OF_THE_HORDE,"|CFF8B66FFBanner of the Horde|R","|CFFFFDEADWith the tribal glory, the head of the enemies were left behind.|R");
 
@@ -567,7 +567,7 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
                         if (finalValue < 0) {
                             finalValue = 0;
                         }
-                        if (finalValue < 1 || head.id == IATTR_USE_CTHUN) {
+                        if (finalValue < 1 || head.id == IATTR_USE_CTHUN || head.id == IATTR_BM_VALOR) {
                             valstr = I2S(Rounding(finalValue * 100)) + "%";
                         } else {
                             valstr = I2S(Rounding(finalValue));
