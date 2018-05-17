@@ -1,5 +1,5 @@
 //! zinc
-library StormLash requires DamageSystem, CastingBar, SpellEvent, RareShimmerWeed, EarthShock {
+library StormLash requires DamageSystem, CastingBar, SpellEvent, EarthShock {
     integer castSound;
 
     function returnDamageMultiplier(integer lvl) -> real {
@@ -7,7 +7,7 @@ library StormLash requires DamageSystem, CastingBar, SpellEvent, RareShimmerWeed
     }
     
     function returnCDChance(integer lvl) -> real {
-        return lvl * 20.0;
+        return 0.1 + lvl * 0.05;
     }
 
     function response(CastingBar cd) {
@@ -23,7 +23,7 @@ library StormLash requires DamageSystem, CastingBar, SpellEvent, RareShimmerWeed
         
         // cool down Earth Shock
         if (GetUnitAbilityLevel(cd.caster, SID_EARTH_SHOCK) > 0) {
-            if (GetRandomInt(0, 100) < returnCDChance(lvl) || HasRareShimmerWeed(cd.caster)) {
+            if (GetRandomReal(0, 0.999) < returnCDChance(lvl) + ItemExAttributes.getUnitAttrVal(cd.caster, IATTR_SM_LASH, SCOPE_PREFIX)) {
                 ImproveEarthShock(cd.caster);
             }
         }

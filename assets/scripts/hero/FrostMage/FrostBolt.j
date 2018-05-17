@@ -25,12 +25,6 @@ constant string  ART_FROZEN  = "Abilities\\Spells\\Undead\\FreezingBreath\\Freez
         } else {
             DamageTarget(p.caster, p.target, p.r0, SpellData.inst(SID_FROST_BOLT, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS, true);
             
-            // equiped Rage Winterchill's Phylactery
-            if (HasRageWinterchillsPhylactery(p.caster)) {
-                StunUnit(p.caster, p.target, 1);
-                AddTimedEffect.atUnit(ART_FROZEN, p.target, "origin", 1);
-            }
-            
             buf = Buff.cast(p.caster, p.target, BUFF_ID);
             buf.bd.tick = -1;
             buf.bd.interval = 5.0;
@@ -46,17 +40,21 @@ constant string  ART_FROZEN  = "Abilities\\Spells\\Undead\\FreezingBreath\\Freez
         }
     }
 
-    function response(CastingBar cd) {
+    public function ShootFrostBolt(unit caster, unit target) {
         Projectile p = Projectile.create();
-        integer lvl = GetUnitAbilityLevel(cd.caster, SID_FROST_BOLT);
-        p.caster = cd.caster;
-        p.target = cd.target;
+        integer lvl = GetUnitAbilityLevel(caster, SID_FROST_BOLT);
+        p.caster = caster;
+        p.target = target;
         p.path = ART_MISSILE;
         p.pr = onhit;
         p.speed = 700;
-        p.r0 = returnDamage(lvl, UnitProp.inst(p.caster, SCOPE_PREFIX).SpellPower()) * returnFrostDamage(cd.caster);
+        p.r0 = (returnDamage(lvl, UnitProp.inst(p.caster, SCOPE_PREFIX).SpellPower()) * returnFrostDamage(caster));
         //BJDebugMsg("1??");
         p.launch();
+    }
+
+    function response(CastingBar cd) {
+        ShootFrostBolt(cd.caster, cd.target);
     }
     
     function onChannel() {

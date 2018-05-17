@@ -1,5 +1,5 @@
 //! zinc
-library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, FrostNova, WarlockGlobal, Execute {
+library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, FrostNova, WarlockGlobal, Execute, HeroicStrike {
 constant real AIACTION_INTERVAL = 0.33;
     
     Table unitCallBack, unitLearSkill;

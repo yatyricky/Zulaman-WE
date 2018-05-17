@@ -1,5 +1,5 @@
 //! zinc
-library Blizzard requires CastingBar, GroupUtils, FrostMageGlobal, DamageSystem, Sounds {
+library Blizzard requires CastingBar, GroupUtils, FrostBolt, DamageSystem, Sounds {
 
     function returnDamage(integer lvl, real sp) -> real {
         real app = sp * 0.4;
@@ -24,6 +24,9 @@ library Blizzard requires CastingBar, GroupUtils, FrostMageGlobal, DamageSystem,
             GroupRemoveUnit(ENUM_GROUP, tu);
             if (!IsUnitDummy(tu) && !IsUnitDead(tu) && IsUnitEnemy(tu, GetOwningPlayer(caster))) {
                 DamageTarget(caster, tu, dmg, SpellData.inst(SID_BLIZZARD, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS, true);
+                if (GetRandomReal(0, 0.999) < ItemExAttributes.getUnitAttrVal(caster, IATTR_MG_BLZ, SCOPE_PREFIX)) {
+                    ShootFrostBolt(caster, tu);
+                }
             }
             tu = FirstOfGroup(ENUM_GROUP);
         }
