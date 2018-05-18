@@ -98,7 +98,7 @@ constant integer HERO_SLCT_HIGH = 'IHS;';
         aiForce = CreateForce();
         while (i < NUMBER_OF_MAX_PLAYERS) {
             p = Player(i);
-            CreateUnit(p, 'e001', GetInitX(i), GetInitY(i), 0.0);
+            // CreateUnit(p, 'e001', GetInitX(i), GetInitY(i), 0.0);
             if (IsPlayerUserOnline(p)) {
                 ForceAddPlayer(playerForce, p);
                 ForceAddPlayer(pf, p);

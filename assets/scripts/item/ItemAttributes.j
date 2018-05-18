@@ -421,6 +421,7 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
         static item droppingItem;
         integer id;
         real value;
+        real exp;
         thistype next;
         ItemAffix affix;
 
@@ -592,6 +593,7 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
             this.id = id;
             this.value = val;
             this.next = 0;
+            this.exp = 0.0;
             return this;
         }
 
@@ -675,6 +677,7 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
                 print("Raw data does not exist ItemExAttributes 73");
             } else {
                 head = thistype.create(raw.id, GetRandomReal(raw.lo, raw.hi) * exp);
+                head.exp = exp;
                 head.affix = 0;
                 thistype.ht[it] = head;
                 raw = raw.next;
@@ -898,7 +901,7 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
         ItemExAttributes attr;
         ItemAttributeMeta meta;
         // stack charges
-        if (GetItemLevel(it) == 1) {
+        if (GetItemLevel(it) < 2) {
             if (itid == ITID_REFORGE_UNCOMMON_L1) {
                 countReforge = 0;
                 EnumItemsInRect(ApprenticeAnvil, null, function() {countReforge += 1;});
@@ -909,7 +912,8 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
                         ItemExAttributes.updateName(GetEnumItem());
                     });
                 } else {
-                    print("place exact one item in circle");
+                    SimError(GetOwningPlayer(u), "Place exact one item in circle.");
+                    AdjustPlayerStateSimpleBJ(GetOwningPlayer(u), PLAYER_STATE_RESOURCE_LUMBER, 5);
                 }
             } else if (itid == ITID_REFORGE_UNCOMMON_L2) {
             } else if (itid == ITID_REFORGE_UNCOMMON_L3) {
@@ -959,6 +963,25 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
                 attr = attr.next;
             }
             ItemExAttributes.droppingItem = null;
+        }
+        return false;
+    }
+
+    function itemSold() -> boolean {
+        real exp, rp;
+        integer ilvl = GetItemLevel(GetSoldItem());
+        integer lumber, gold;
+        if (ilvl > 1) {
+            exp = ItemExAttributes.inst(GetSoldItem(), "item sold").exp - 1;
+            rp = 1;
+            if (GetRandomReal(0, 0.999) < 0.15) {rp = GetRandomReal(1.6, 2.2);}
+            gold = 0;
+            if (ilvl == 2) {lumber = 5;}
+            else if (ilvl == 3) {lumber = 25;}
+            else {lumber = 100; gold = 1;}
+
+            AdjustPlayerStateSimpleBJ(GetOwningPlayer(GetTriggerUnit()), PLAYER_STATE_RESOURCE_LUMBER, Rounding(lumber * exp * rp));
+            AdjustPlayerStateSimpleBJ(GetOwningPlayer(GetTriggerUnit()), PLAYER_STATE_RESOURCE_GOLD, Rounding(gold * exp * rp));
         }
         return false;
     }
@@ -1323,6 +1346,7 @@ thistype.create(IATTR_USE_HOLYHEAL,2,910,0.33,"|cff33ff33Use: Release all holy p
         
         TriggerAnyUnit(EVENT_PLAYER_UNIT_PICKUP_ITEM, function itemon);
         TriggerAnyUnit(EVENT_PLAYER_UNIT_DROP_ITEM, function itemoff);
+        TriggerAnyUnit(EVENT_PLAYER_UNIT_PAWN_ITEM, function itemSold);
 
         ipPrefix1 = IntegerPool.create();
         ipPrefix2 = IntegerPool.create();
