@@ -96,18 +96,19 @@ library ItemAffix requires Table {
     }
 
     public struct ItemAffix {
-        static HandleTable ht;
         integer id;
         integer attribute[MAX_ATTRIBUTES];
         real value[MAX_ATTRIBUTES];
         integer attributeN;
         thistype next;
 
-        static method inst(item it, string trace) -> thistype {
-            if (thistype.ht.exists(it)) {
-                return thistype.ht[it];
-            } else {
-                return 0;
+        method destroy() {
+            thistype iHead = this;
+            thistype iNext;
+            while (iHead != 0) {
+                iNext = iHead.next;
+                iHead.deallocate();
+                iHead = iNext;
             }
         }
 
@@ -131,39 +132,6 @@ library ItemAffix requires Table {
             this.next = 0;
             return this;
         }
-
-        static method onInit() {
-            thistype.ht = HandleTable.create();
-        }
-    }
-
-    public function GetAllItemAffixesText(item it, integer lang) -> string {
-        ItemAffix data = ItemAffix.inst(it, "GetAllItemAffixesText");
-        AffixRawData raw;
-        string sb = BlzGetItemTooltip(it);
-        string sufix = "";
-        string prefix = "";
-        while (data != 0) {
-            raw = AffixRawData.inst(data.id, "GetAllItemAffixesText");
-            if (raw.slot == 1) {
-                prefix = prefix + raw.text[lang];
-            } else if (raw.slot == 2) {
-                sufix = sufix + raw.text[lang];
-            } else {
-                print("WTF??? GetAllItemAffixesText 155");
-            }
-            data = data.next;
-        }
-        if (lang == 0) {
-            // Chinese
-            sb = sufix + prefix + sb;
-        } else if (lang == 1) {
-            // English
-            sb = prefix + sb + sufix;
-        } else {
-            print("WTF??? GetAllItemAffixesText 166");
-        }
-        return sb;
     }
 
 }

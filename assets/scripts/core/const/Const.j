@@ -463,7 +463,13 @@ public constant integer UTID_TANK_TESTER = 'h002';
 public constant integer UTID_HEALER_TESTER = 'h003';
 
 // Items
-// Consumable
+// reforge
+public constant integer ITID_REFORGE_UNCOMMON_L1 = 'I01L';
+public constant integer ITID_REFORGE_UNCOMMON_L2 = 'I01M';
+public constant integer ITID_REFORGE_UNCOMMON_L3 = 'I01V';
+public constant integer ITID_REFORGE_RARE_L2 = 'I01R';
+public constant integer ITID_REFORGE_RARE_L3 = 'I01U';
+public constant integer ITID_REFORGE_LEGENDARY_L3 = 'I01W';
 // Scrolls
 public constant integer ITID_ARMAGEDDON_SCROLL = 'I003';
 public constant integer SID_ARMAGEDDON_SCROLL = 'A070';

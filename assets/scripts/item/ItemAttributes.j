@@ -65,6 +65,23 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
             }
         }
 
+        method findById(integer id) -> thistype {
+            thistype head = this;
+            boolean found = false;
+            while (found == false && head != 0) {
+                if (head.id == id) {
+                    found = true;
+                } else {
+                    head = head.next;
+                }
+            }
+            if (found == true) {
+                return head;
+            } else {
+                return 0;
+            }
+        }
+
         static method onInit() {
             thistype.ht = Table.create();
             thistype.append(ITID_CIRCLET_OF_NOBILITY,7,2,4);
@@ -407,6 +424,46 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
         thistype next;
         ItemAffix affix;
 
+        static method prettyPrint(item it) {
+            thistype head = thistype.inst(it, "test");
+            integer i;
+            ItemAffix ia;
+            print(" - - - - - - - - - - -");
+            print("Head: " + I2S(thistype.ht[it]));
+            while (head != 0) {
+                print("Node["+I2S(head)+"].id("+I2S(head.id)+").value("+R2S(head.value)+").next("+I2S(head.next)+")");
+                head = head.next;
+            }
+            head = thistype.inst(it, "test");
+            print("Affix: " + I2S(head.affix));
+            ia = head.affix;
+            while (ia != 0) {
+                print("Affix["+I2S(ia)+"].id("+I2S(ia.id)+").n("+I2S(ia.attributeN)+").next("+I2S(ia.next)+")");
+                i = 0;
+                while (i < ia.attributeN) {
+                    print("    item["+I2S(i)+"]:attribute["+I2S(ia.attribute[i])+"]="+R2S(ia.value[i]));
+                    i += 1;
+                }
+                ia = ia.next;
+            }
+            print(" - - - - - - - - - - -");
+        }
+
+        method destroy() {
+            this.deallocate();
+        }
+
+        static method destroyItem(item it) {
+            thistype iHead = thistype.inst(it, "destroyItem");
+            thistype iNext;
+            iHead.affix.destroy();
+            while (iHead != 0) {
+                iNext = iHead.next;
+                iHead.destroy();
+                iHead = iNext;
+            }
+        }
+
         static method inst(item it, string trace) -> thistype {
             if (thistype.ht.exists(it)) {
                 return thistype.ht[it];
@@ -719,6 +776,60 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
             }
         }
 
+        static method reforge(item it, integer level) {
+            DefaultItemAttributesData raw = DefaultItemAttributesData.inst(GetItemTypeId(it), "reforge");
+            DefaultItemAttributesData currentRaw;
+            thistype data;
+            thistype head, index, tmp, prev;
+            boolean found;
+            ItemAttributeMeta metaIndex, metaData;
+            real exp;
+            if (raw == 0) {
+                print("Raw data does not exist for item type "+ID2S(GetItemTypeId(it))+" ItemExAttributes 729");
+            } else {
+                // calculate the exp value
+                exp = level + GetRandomReal(-0.5, 0.5);
+                if (exp < 1) {exp = 1.0;}
+                // destroy previs affix and reforge default attributes
+                head = thistype.inst(it, "reforge: 745");
+                index = head;
+                if (index.affix != 0) {
+                    index.affix.destroy();
+                    index.affix = 0;
+                }
+                prev = 0;
+                while (index != 0) {
+                    currentRaw = raw.findById(index.id);
+                    if (currentRaw != 0) {
+                        index.value = GetRandomReal(currentRaw.lo, currentRaw.hi) * exp;
+                        prev = index;
+                        index = index.next;
+                    } else {
+                        tmp = index.next;
+                        // affix, should remove
+                        if (index == head) {
+                            thistype.ht[it] = tmp;
+                            head = tmp;
+                        }
+                        index.destroy();
+                        index = tmp;
+                        if (prev != 0) {
+                            prev.next = index;
+                        }
+                    }
+                }
+                // append new affixes
+                if (level == 1) {
+                    ItemExAttributes.appendAffix(it, ItemAffix.instantiate(ipPrefix1.get()));
+                } else {
+                    ItemExAttributes.appendAffix(it, ItemAffix.instantiate(ipPrefix2.get()));
+                    if (level == 3) {
+                        ItemExAttributes.appendAffix(it, ItemAffix.instantiate(ipSufix.get()));
+                    }
+                }
+            }
+        }
+
         static method onInit() {
             thistype.ht = HandleTable.create();
             thistype.droppingItem = null;
@@ -770,12 +881,13 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
         }
         ItemExAttributes.updateUbertip(it);
         ItemExAttributes.updateName(it);
-        // itemName = GetAllItemAffixesText(it, 1);
-        // BlzSetItemTooltip(it, itemName);
-        // BlzSetItemName(it, itemName);
-        // print("Set item " + I2HEX(GetHandleId(it)) + " name to: " + itemName);
         return it;
     }
+
+    rect ApprenticeAnvil;
+    rect ExpertAnvil;
+    rect MasterAnvil;
+    integer countReforge;
 
     function itemon() -> boolean {
         item it = GetManipulatedItem();
@@ -787,16 +899,35 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
         ItemAttributeMeta meta;
         // stack charges
         if (GetItemLevel(it) == 1) {
-            i = 0;
-            while (i < 6) {
-                tmpi = UnitItemInSlot(u, i);
-                if (GetItemTypeId(tmpi) == itid && GetHandleId(tmpi) != GetHandleId(it)) {
-                    SetItemCharges(tmpi, GetItemCharges(tmpi) + GetItemCharges(it));
-                    RemoveItem(it);
-                    i += 6;
+            if (itid == ITID_REFORGE_UNCOMMON_L1) {
+                countReforge = 0;
+                EnumItemsInRect(ApprenticeAnvil, null, function() {countReforge += 1;});
+                if (countReforge == 1) {
+                    EnumItemsInRect(ApprenticeAnvil, null, function() {
+                        ItemExAttributes.reforge(GetEnumItem(), 1);
+                        ItemExAttributes.updateUbertip(GetEnumItem());
+                        ItemExAttributes.updateName(GetEnumItem());
+                    });
+                } else {
+                    print("place exact one item in circle");
                 }
-                i += 1;
-                tmpi = null;
+            } else if (itid == ITID_REFORGE_UNCOMMON_L2) {
+            } else if (itid == ITID_REFORGE_UNCOMMON_L3) {
+            } else if (itid == ITID_REFORGE_RARE_L2) {
+            } else if (itid == ITID_REFORGE_RARE_L3) {
+            } else if (itid == ITID_REFORGE_LEGENDARY_L3) {
+            } else {
+                i = 0;
+                while (i < 6) {
+                    tmpi = UnitItemInSlot(u, i);
+                    if (GetItemTypeId(tmpi) == itid && GetHandleId(tmpi) != GetHandleId(it)) {
+                        SetItemCharges(tmpi, GetItemCharges(tmpi) + GetItemCharges(it));
+                        RemoveItem(it);
+                        i += 6;
+                    }
+                    i += 1;
+                    tmpi = null;
+                }
             }
         } else {
             attr = ItemExAttributes.inst(it, "item on");
@@ -1185,6 +1316,9 @@ thistype.create(IATTR_USE_HOLYHEAL,2,910,0.33,"|cff33ff33Use: Release all holy p
     }
 
     function onInit() {
+        ApprenticeAnvil = Rect(6267, -11776, 6394, -11638);
+        ExpertAnvil = Rect(6267, -11776, 6394, -11638);
+        MasterAnvil = Rect(6267, -11776, 6394, -11638);
         ItemAttributes = Table.create();
         
         TriggerAnyUnit(EVENT_PLAYER_UNIT_PICKUP_ITEM, function itemon);
