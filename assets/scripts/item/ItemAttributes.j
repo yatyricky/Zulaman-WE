@@ -785,16 +785,8 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
         unit u = GetTriggerUnit();
         ItemExAttributes attr;
         ItemAttributeMeta meta;
-        attr = ItemExAttributes.inst(it, "item on");
-        while (attr != 0) {
-            meta = ItemAttributeMeta.inst(attr.id, "item on");
-            if (meta != 0) {
-                meta.callback.evaluate(u, attr.value, 1);
-            }
-            attr = attr.next;
-        }
         // stack charges
-        if (IsItemTypeConsumable(itid)) {
+        if (GetItemLevel(it) == 1) {
             i = 0;
             while (i < 6) {
                 tmpi = UnitItemInSlot(u, i);
@@ -806,6 +798,15 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
                 i += 1;
                 tmpi = null;
             }
+        } else {
+            attr = ItemExAttributes.inst(it, "item on");
+            while (attr != 0) {
+                meta = ItemAttributeMeta.inst(attr.id, "item on");
+                if (meta != 0) {
+                    meta.callback.evaluate(u, attr.value, 1);
+                }
+                attr = attr.next;
+            }
         }
         u = null;
         it = null;
@@ -816,16 +817,18 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
         // integer itid = GetItemTypeId(GetManipulatedItem());
         ItemExAttributes attr;
         ItemAttributeMeta meta;
-        attr = ItemExAttributes.inst(GetManipulatedItem(), "itemoff");
-        ItemExAttributes.droppingItem = GetManipulatedItem();
-        while (attr != 0) {
-            meta = ItemAttributeMeta.inst(attr.id, "item off");
-            if (meta != 0) {
-                meta.callback.evaluate(GetTriggerUnit(), attr.value, -1);
+        if (GetItemLevel(GetManipulatedItem()) > 1) {
+            attr = ItemExAttributes.inst(GetManipulatedItem(), "itemoff");
+            ItemExAttributes.droppingItem = GetManipulatedItem();
+            while (attr != 0) {
+                meta = ItemAttributeMeta.inst(attr.id, "item off");
+                if (meta != 0) {
+                    meta.callback.evaluate(GetTriggerUnit(), attr.value, -1);
+                }
+                attr = attr.next;
             }
-            attr = attr.next;
+            ItemExAttributes.droppingItem = null;
         }
-        ItemExAttributes.droppingItem = null;
         return false;
     }
 

@@ -22,62 +22,45 @@ public constant real    ILVL_MAX_RATE = 0.6;
     real loot2;
     
     function minionsDrop(unit u) {
-        integer monsterDropValue;
-        real mdp, factor, rp0, rp1, rp2, rp3;
-        real roll;
-        integer itid;
-        real x, y;
-        integer dropped = 0;
-        x = GetUnitX(u); y = GetUnitY(u);
-        monsterDropValue = UnitProp.inst(u, SCOPE_PREFIX).getDropValue();
-        mdp = monsterDropValue + loot2;
-        // print("MDP = " + R2S(mdp));
-        while (mdp >= 0) {
-            factor = mdp / I2R(RP_FACTOR);
-            rp0 = factor * RP_RELIC;
-            if (monsterDropValue < 50000) {
-                rp0 = 0.0;
-            }
-            rp1 = factor * RP_RARE;
-            rp2 = factor * RP_UNCOMMON;
-            rp3 = factor * RP_COMMON;
-            roll = GetRandomReal(0, 99.0);
-            // print("Prob table: " + R2S(rp0) + ", " + R2S(rp1) + ", " + R2S(rp2) + ", " + R2S(rp3));
-            // print("Roll: " + R2S(roll));
-            if (roll < TABLE_SIZE) {
-                if (roll < rp0) {
-                    itid = relic.get();
-                    if (itid > 0) {
-                        relic.remove(itid);
-                    } else {
-                        itid = rare.get();
-                    }
-                    CreateItemEx(itid, x, y, monsterDropValue);
-                    loot2 = 0.0;
-                    dropped = 1;
-                } else if (roll < rp0 + rp1) {
-                    itid = rare.get();
-                    CreateItemEx(itid, x, y, monsterDropValue);
-                    loot2 = 0.0;
-                    dropped = 1;
-                } else if (roll < rp0 + rp1 + rp2) {
+        integer e = UnitProp.inst(u, SCOPE_PREFIX).getDropValue();
+        real iteration;
+        integer qlvl = 0;
+        real rate;
+        integer itid = 0;
+        real x = GetUnitX(u);
+        real y = GetUnitY(u);
+        if (e < ILVL_THRESHOLD[0]) {
+            qlvl = 0;
+        } else if (e < ILVL_THRESHOLD[1]) {
+            qlvl = 1;
+        } else {
+            qlvl = 2;
+        }
+        loot2 += e;
+        iteration = 1;
+        while (qlvl > -1) {
+            rate = loot2 / ILVL_THRESHOLD_VALUE[qlvl] / iteration * ILVL_MAX_RATE;
+            if (GetRandomReal(0, 0.999) < rate) {
+                print(I2S(qlvl));
+                loot2 = 0.0;
+                if (qlvl == 0) {
                     itid = uncommon.get();
-                    CreateItemEx(itid, x, y, monsterDropValue);
-                    loot2 = 0.0;
-                    dropped = 1;
-                } else if (roll < rp0 + rp1 + rp2 + rp3) {
-
+                    CreateItemEx(itid, x, y, e);
+                } else if (qlvl == 1) {
+                    itid = rare.get();
+                    CreateItemEx(itid, x, y, e);
                 } else {
-                    loot2 += monsterDropValue * 0.4;
-                    // print("Loot2.0 = " + R2S(loot2));
+                    itid = relic.get();
+                    CreateItemEx(itid, x, y, e);
                 }
             }
-            mdp -= RP_FACTOR;
+            qlvl -= 1;
+            iteration *= ILVL_MULTIPLE_REDUCTION;
         }
-        if (dropped == 0 && IsUnitChampion(u)) {
+        if (itid == 0 && IsUnitChampion(u)) {
             itid = rare.get();
-            CreateItemEx(itid, x, y, monsterDropValue);
             loot2 = 0.0;
+            CreateItemEx(itid, x, y, e);
         }
     }
     
@@ -94,11 +77,6 @@ public constant real    ILVL_MAX_RATE = 0.6;
                 // 1. 50% relic + 50% rare
                 if (GetRandomInt(0, 99) < 50) { 
                     itid = relic.get();
-                    if (itid > 0) {
-                        relic.remove(itid);
-                    } else {
-                        itid = rare.get();
-                    }
                 } else {
                     itid = rare.get();
                 }
@@ -108,9 +86,8 @@ public constant real    ILVL_MAX_RATE = 0.6;
                 if (itid > 0) {
                     classSpec.remove(itid);
                 } else {
-                    itid = relic.get();
-                    if (itid > 0) {
-                        relic.remove(itid);
+                    if (GetRandomReal(0, 0.999) < 0.2) {
+                        itid = relic.get();
                     } else {
                         itid = rare.get();
                     }
@@ -198,62 +175,39 @@ public constant real    ILVL_MAX_RATE = 0.6;
         rare.add(ITID_TIDAL_LOOP, 10);
         rare.add(ITID_TROLL_BANE, 10);
         rare.add(ITID_VISKAG, 10);
+        rare.add(ITID_COLOSSUS_BLADE, 10);
+        rare.add(ITID_ORB_OF_THE_SINDOREI, 3);
+        rare.add(ITID_REFORGED_BADGE_OF_TENACITY, 3);
+        rare.add(ITID_LIGHTS_JUSTICE, 3);
+        rare.add(ITID_BENEDICTION, 3);
+        rare.add(ITID_HORN_OF_CENARIUS, 3);
+        rare.add(ITID_BANNER_OF_THE_HORDE, 3);
+        rare.add(ITID_KELENS_DAGGER_OF_ASSASSINATION, 3);
+        rare.add(ITID_RHOKDELAR, 3);
+        rare.add(ITID_RAGE_WINTERCHILLS_PHYLACTERY, 3);
+        rare.add(ITID_ANATHEMA, 3);
+        rare.add(ITID_RARE_SHIMMER_WEED, 3);
 
-        uncommon.add(ITID_COLOSSUS_BLADE, 20);
-        uncommon.add(ITID_HEALTH_STONE, 20);
-        uncommon.add(ITID_UNGLAZED_ICON_OF_THE_CRESCENT, 20);
-        uncommon.add(ITID_MANA_STONE, 20);
-        uncommon.add(ITID_MOROES_LUCKY_GEAR, 20);
-        uncommon.add(ITID_ROMULOS_EXPIRED_POISON, 20);
-        uncommon.add(ITID_RUNED_BELT, 20);
-
-        uncommon.add(ITID_ARMAGEDDON_SCROLL, 2);
-        uncommon.add(ITID_WEAKEN_CURSE_SCROLL, 2);
-
-        uncommon.add(ITID_HEAL_SCROLL, 5);
-        uncommon.add(ITID_SLAYER_SCROLL, 5);
-        uncommon.add(ITID_SANCTUARY_SCROLL, 5);
-        // uncommon.add(ITID_BANSHEE_SCROLL, 5);
-
-        // uncommon.add(ITID_ARANS_COUNTER_SPELL_SCROLL, 10);
-        // uncommon.add(ITID_SPEED_SCROLL, 10);
-        uncommon.add(ITID_FRENZY_SCROLL, 10);
-        uncommon.add(ITID_DEFEND_SCROLL, 10);
-        uncommon.add(ITID_MANA_SCROLL, 10);
-        // uncommon.add(ITID_ROAR_SCROLL, 10);
-        uncommon.add(ITID_SPELL_REFLECTION_SCROLL, 10);
-        uncommon.add(ITID_MASS_DISPEL_SCROLL, 10);
-        // uncommon.add(ITID_MASS_TELEPORT_SCROLL, 10);
-        // uncommon.add(ITID_CORRUPTION_SCROLL, 10);
-
-        uncommon.add(ITID_MANA_SOURCE_POTION, 5);
-        // uncommon.add(ITID_ARCH_MAGE_POTION, 5);
-        // uncommon.add(ITID_COMBAT_MASTER_POTION, 5);
-        // uncommon.add(ITID_SHIELD_POTION, 5);
-        // uncommon.add(ITID_FORTRESS_POTION, 5);
-        uncommon.add(ITID_INVUL_POTION, 5);
-        // uncommon.add(ITID_UNSTABLE_POTION, 5);
-
-        // uncommon.add(ITID_LEECH_POTION, 10);
-        // uncommon.add(ITID_LIFE_REGEN_POTION, 10);
-        // uncommon.add(ITID_MANA_REGEN_POTION, 10);
-        // uncommon.add(ITID_TRANQUILITY_POTION, 10);
-        uncommon.add(ITID_BIG_LIFE_POTION, 10);
-        uncommon.add(ITID_EMPERORS_NEW_POTION, 10);
-        // uncommon.add(ITID_TRANSFER_POTION, 10);
-        // uncommon.add(ITID_DODGE_POTION, 10);
-        // uncommon.add(ITID_SMALL_INVUL_POTION, 10);
-        // uncommon.add(ITID_STONE_SKIN_POTION, 10);
-        uncommon.add(ITID_SPELL_POWER_POTION, 10);
-        // uncommon.add(ITID_SPELL_MASTER_POTION, 10);
-        uncommon.add(ITID_ARCANE_POTION, 10);
-        // uncommon.add(ITID_ANGRY_CAST_POTION, 10);
-        // uncommon.add(ITID_SPELL_PIERCE_POTION, 10);
-        // uncommon.add(ITID_AGILITY_POTION, 10);
-        // uncommon.add(ITID_ACUTE_POTION, 10);
-        // uncommon.add(ITID_DEXTERITY_POTION, 10);
-        // uncommon.add(ITID_LIFE_POTION, 10);
-        // uncommon.add(ITID_MANA_POTION, 10);
+        uncommon.add(ITID_CIRCLET_OF_NOBILITY, 10);
+        uncommon.add(ITID_HEAVY_BOOTS, 10);
+        uncommon.add(ITID_HELM_OF_VALOR, 10);
+        uncommon.add(ITID_MEDALION_OF_COURAGE, 10);
+        uncommon.add(ITID_HOOD_OF_CUNNING, 10);
+        uncommon.add(ITID_CLAWS_OF_ATTACK, 10);
+        uncommon.add(ITID_GLOVES_OF_HASTE, 10);
+        uncommon.add(ITID_SWORD_OF_ASSASSINATION, 10);
+        uncommon.add(ITID_VITALITY_PERIAPT, 10);
+        uncommon.add(ITID_RING_OF_PROTECTION, 10);
+        uncommon.add(ITID_TALISMAN_OF_EVASION, 10);
+        uncommon.add(ITID_MANA_PERIAPT, 10);
+        uncommon.add(ITID_SOBI_MASK, 10);
+        uncommon.add(ITID_STAFF_OF_THE_WITCH_DOCTOR, 10);
+        uncommon.add(ITID_HEALTH_STONE, 10);
+        uncommon.add(ITID_MANA_STONE, 10);
+        uncommon.add(ITID_ROMULOS_EXPIRED_POISON, 10);
+        uncommon.add(ITID_MOROES_LUCKY_GEAR, 10);
+        uncommon.add(ITID_RUNED_BELT, 10);
+        uncommon.add(ITID_UNGLAZED_ICON_OF_THE_CRESCENT, 10);
 
         boss1.add(ITID_THE_X_RING, 15);
         boss1.add(ITID_GOBLIN_ROCKET_BOOTS_LIMITED_EDITION, 25);

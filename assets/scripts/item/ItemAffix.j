@@ -58,7 +58,7 @@ library ItemAffix requires Table {
             thistype.ht = Table.create();
             thistype.create(SUFIX_LETHALITY, 1, 2, AFFIX_TYPE_CRIT, 0.01, 0.03, "致命之", " of Lethality");
             thistype.create(SUFIX_SNAKE, 1, 2, AFFIX_TYPE_SCRIT, 0.01, 0.03, "灵蛇之", " of Snake");
-            thistype.create(SUFIX_QUICKNESS, 1, 2, AFFIX_TYPE_AP, 5, 10, "快速之", " of Quickness");
+            thistype.create(SUFIX_QUICKNESS, 1, 2, AFFIX_TYPE_IAS, 5, 10, "快速之", " of Quickness");
             thistype.create(SUFIX_WIND_SERPENT, 1, 2, AFFIX_TYPE_SHASTE, 0.04, 0.08, "风蛇之", " of Wind Serpent");
             thistype.create(SUFIX_BRUTE, 1, 2, AFFIX_TYPE_STR, 6, 12, "蛮力之", " of Brute");
             thistype.create(SUFIX_DEXTERITY, 1, 2, AFFIX_TYPE_AGI, 6, 12, "灵巧之", " of Dexterity");
