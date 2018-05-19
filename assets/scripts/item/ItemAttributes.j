@@ -412,7 +412,6 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
             thistype.append(ITID_HOLY_MOONLIGHT_SWORD,75,75,100);
             thistype.append(ITID_HOLY_MOONLIGHT_SWORD,49,60,80);
             thistype.setLoreText(ITID_HOLY_MOONLIGHT_SWORD,"|CFFFF8C00Holy Moonlight Sword|R","|CFFFFDEAD\"Ludwig the Holy Blade\"|R");
-
         }
     }
 
@@ -981,7 +980,7 @@ library ItemAttributes requires UnitProperty, ItemAffix, BreathOfTheDying, WindF
             else {lumber = 100; gold = 1;}
 
             AdjustPlayerStateSimpleBJ(GetOwningPlayer(GetTriggerUnit()), PLAYER_STATE_RESOURCE_LUMBER, Rounding(lumber * exp * rp));
-            AdjustPlayerStateSimpleBJ(GetOwningPlayer(GetTriggerUnit()), PLAYER_STATE_RESOURCE_GOLD, Rounding(gold * exp * rp));
+            AdjustPlayerStateSimpleBJ(GetOwningPlayer(GetTriggerUnit()), PLAYER_STATE_RESOURCE_GOLD, Rounding(gold * rp));
         }
         return false;
     }
@@ -1339,8 +1338,8 @@ thistype.create(IATTR_USE_HOLYHEAL,2,910,0.33,"|cff33ff33Use: Release all holy p
     }
 
     function onInit() {
-        ApprenticeAnvil = Rect(6267, -11776, 6394, -11638);
-        ExpertAnvil = Rect(6267, -11776, 6394, -11638);
+        ApprenticeAnvil = Rect(6206, -11838, 6434, -11596);
+        ExpertAnvil = Rect(6239, 8227, 6466, 8450);
         MasterAnvil = Rect(6267, -11776, 6394, -11638);
         ItemAttributes = Table.create();
         
