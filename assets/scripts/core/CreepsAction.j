@@ -976,6 +976,30 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         }
     }
 
+    function makeOrderSkeletalMage(unit source, unit target, real combatTime) {
+        IntegerPool ip;
+        integer res;
+        unit tu;
+        if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
+            ip = IntegerPool.create();
+            ip.add(0, 10);
+            if (UnitCanUse(source, SID_CURSE_OF_THE_DEAD) && combatTime > 10.0) {
+                ip.add(SID_CURSE_OF_THE_DEAD, 30);
+            }
+            res = ip.get();
+            if (res == 0) {
+                IssueTargetOrderById(source, OID_ATTACK, target);
+            } else if (res == SID_CURSE_OF_THE_DEAD) {
+                tu = PlayerUnits.getRandomHero();
+                IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, tu);
+                tu = null;
+            } else {
+                IssueTargetOrderById(source, OID_ATTACK, target);
+            }
+            ip.destroy();
+        }
+    }
+
     function makeOrderInfernoConstruct(unit source, unit target, real combatTime) {
         IntegerPool ip;
         integer res;
@@ -1146,6 +1170,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         unitCallBack[UTID_NOXIOUS_SPIDER] = makeOrderNoxiousSpider;
         unitCallBack[UTID_PARASITICAL_ROACH] = makeOrderParasiticalRoach;    // ParasiticalRoach
         unitCallBack[UTID_ZOMBIE] = makeOrderZombie;    // zombie
+        unitCallBack[UTID_SKELETAL_MAGE] = makeOrderSkeletalMage;
         unitCallBack[UTID_DRACOLICH] = makeOrderDracoLich;    // dracolich
 
         unitCallBack[UTID_OBSIDIAN_CONSTRUCT] = makeOrderObsidianConstruct;   // 
