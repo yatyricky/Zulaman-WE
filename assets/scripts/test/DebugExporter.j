@@ -14,6 +14,13 @@ library DebugExporter requires Integer {
         list[n] = str;
         n += 1;
     }
+
+    public function loge(string str) {
+        string sb = "|cffff0000ERROR|r: " + str;
+        BJDebugMsg(sb);
+        list[n] = sb;
+        n += 1;
+    }
     
     public function ExportDebugLog() {
         string contents = "<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" /><style type=\"text/css\">body {background:#000;} span {color:#0F0;} .inv {display:none;}</style></head><body><div class=\"inv\">";
