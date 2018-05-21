@@ -300,27 +300,45 @@ library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSys
     }
 
     function testGeneral(string str) {
-        real x = 8624;
-        real y = -5439;
-        unit u = CreateUnit(Player(0), UTID_CLAW_DRUID, x, y, 0);
-        SetHeroLevel(u, GetHeroLevel(u) + 14, true);
-        u = CreateUnit(Player(0), UTID_CLAW_DRUID, x, y, 0);
-        SetHeroLevel(u, GetHeroLevel(u) + 14, true);
-        u = CreateUnit(Player(0), UTID_CLAW_DRUID, x, y, 0);
-        SetHeroLevel(u, GetHeroLevel(u) + 14, true);
-        u = CreateUnit(Player(0), UTID_CLAW_DRUID, x, y, 0);
-        SetHeroLevel(u, GetHeroLevel(u) + 14, true);
-        u = CreateUnit(Player(0), UTID_CLAW_DRUID, x, y, 0);
-        SetHeroLevel(u, GetHeroLevel(u) + 14, true);
-        u = CreateUnit(Player(0), UTID_CLAW_DRUID, x, y, 0);
-        SetHeroLevel(u, GetHeroLevel(u) + 14, true);
-        CreateItemEx(ITID_BREATH_OF_THE_DYING, x, y, 10000);
-        CreateItemEx(ITID_BREATH_OF_THE_DYING, x, y, 30000);
-        CreateItemEx(ITID_BREATH_OF_THE_DYING, x, y, 50000);
-        CreateItemEx(ITID_BREATH_OF_THE_DYING, x, y, 70000);
-        CreateItemEx(ITID_BREATH_OF_THE_DYING, x, y, 90000);
-        CreateItemEx(ITID_BREATH_OF_THE_DYING, x, y, 110000);
-        MobInitAllowArea(4);
+        ListObject list = ListObject.create();
+        ListObject list2 = ListObject.create();
+
+        list.push(7);
+        list2.push(9);
+        list.push(11);
+        list2.push(13);
+
+        list.push(71);
+        list2.push(71);
+        list.push(111);
+        list2.push(111);
+        list.prettyPrint();
+        list2.prettyPrint();
+
+        print("empty list 1");
+        list.empty();
+        list.prettyPrint();
+        list2.prettyPrint();
+
+        print("list 2 pop twice");
+        list2.pop();
+        list2.pop();
+        list.prettyPrint();
+        list2.prettyPrint();
+
+        print("list 1 added 3 values");
+        list.push(1);
+        list.push(2);
+        list.push(3);
+        list.prettyPrint();
+        list2.prettyPrint();
+
+        print("list 1 destroyed and added 777");
+        list.destroy();
+        list = ListObject.create();
+        list.push(777);
+        list.prettyPrint();
+        list2.prettyPrint();
     }
 
     function testItemAttributes(string str) {
@@ -422,6 +440,7 @@ library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSys
         Console[Player(0)].add("test", testGeneral);
         Console[Player(0)].add("z", printStats);
         Console[Player(0)].add("ii", printItemUbertip);
+
     }
 }
 //! endzinc
