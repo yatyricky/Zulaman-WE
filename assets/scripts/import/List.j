@@ -6,7 +6,7 @@ library List requires DebugExporter {
     // a and b are objects, returns integer
     public type ListSorter extends function(integer, integer) -> integer;
 
-    struct NodeObject {
+    public struct NodeObject {
         integer data;
         thistype next;
         thistype prev;
@@ -63,8 +63,46 @@ library List requires DebugExporter {
             this.deallocate();
         }
 
-        method sort(ListSorter sorter) {
+        method swap(NodeObject a) {
+            NodeObject x, b, y;
+            if (a.next != 0) {
+                x = a.prev;
+                b = a.next;
+                y = b.next;
+                a.next = y;
+                a.prev = b;
+                b.prev = x;
+                b.next = a;
+                if (x != 0) {
+                    x.next = b;
+                } else {
+                    this.head = b;
+                }
+                if (y != 0) {
+                    y.prev = a;
+                } else {
+                    this.tail = a;
+                }
+            }
+        }
 
+        method sort(ListSorter sorter) {
+            NodeObject it;
+            integer i, j;
+            i = this.n - 1;
+            while (i >= 0) {
+                it = this.head;
+                j = 0;
+                while (j < i) {
+                    if (sorter.evaluate(it.data, it.next.data) > 0) {
+                        this.swap(it);
+                    } else {
+                        it = it.next;
+                    }
+                    j += 1;
+                }
+                i -= 1;
+            }
         }
 
         method count() -> integer {
@@ -187,6 +225,10 @@ library List requires DebugExporter {
                 this.tail.next = new;
                 this.tail = new;
             }
+        }
+
+        method add(integer obj) {
+            this.push(obj);
         }
 
         static method create() -> thistype {
