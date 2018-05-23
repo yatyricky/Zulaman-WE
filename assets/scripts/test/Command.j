@@ -304,7 +304,7 @@ library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSys
     }
 
     function testGeneral(string str) {
-        ListObject list = ListObject.create();
+        ItemExAttributes.showAllItemInstances();
     }
 
     function testItemAttributes(string str) {
@@ -357,7 +357,7 @@ library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSys
         
         ti = UnitItemInSlot(u, i);
         if (ti != null) {
-            ItemExAttributes.updateUbertip(ti);
+            ItemExAttributes.inst(ti, "cmd").updateUbertip();
         }
 
         DestroyGroup(g);

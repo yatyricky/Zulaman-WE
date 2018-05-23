@@ -800,21 +800,6 @@ public constant integer IATTR_USE_CTHUN = 37;
 public constant integer IATTR_USE_HOLYHEAL = 38;
 
 // Item Affix
-public constant integer AFFIX_TYPE_STR = 1;
-public constant integer AFFIX_TYPE_AGI = 2;
-public constant integer AFFIX_TYPE_INT = 3;
-public constant integer AFFIX_TYPE_HP = 4;
-public constant integer AFFIX_TYPE_AP = 5;
-public constant integer AFFIX_TYPE_CRIT = 6;
-public constant integer AFFIX_TYPE_IAS = 7;
-public constant integer AFFIX_TYPE_SP = 8;
-public constant integer AFFIX_TYPE_SCRIT = 9;
-public constant integer AFFIX_TYPE_SHASTE = 10;
-public constant integer AFFIX_TYPE_MREGEN = 11;
-public constant integer AFFIX_TYPE_DEF = 12;
-public constant integer AFFIX_TYPE_DODGE = 13;
-public constant integer AFFIX_TYPE_SLVL = 14;
-
 public constant integer SUFIX_LETHALITY = 1;
 public constant integer SUFIX_SNAKE = 2;
 public constant integer SUFIX_QUICKNESS = 3;

@@ -11,7 +11,7 @@ library TyraelsMight requires ItemAttributes, DamageSystem {
             u = GetTriggerUnit();
             if (charges > 0) {
                 charges += 1;
-                amt = ItemExAttributes.getAttrVal(it, IATTR_USE_HOLYHEAL, true, SCOPE_PREFIX);
+                amt = ItemExAttributes.getItemAttrVal(it, IATTR_USE_HOLYHEAL, true, SCOPE_PREFIX);
                 HealTarget(u, u, charges * amt, SpellData.inst(SID_TYRAELS_MIGHT, SCOPE_PREFIX).name, 0.0, false);
                 SetItemCharges(it, 0);
                 AddTimedEffect.atUnit(ART_HOLY_BOLT_SPECIAL_ART, u, "origin", 0.5);

@@ -11,7 +11,7 @@ library HealedStackHoly requires Table, BuffSystem, DamageSystem {
                 while (i < 6) {
                     ti = UnitItemInSlot(HealResult.target, i);
                     if (ti != null && GetItemTypeId(ti) == ITID_MIGHT_OF_THE_ANGEL_OF_JUSTICE) {
-                        max = Rounding(ItemExAttributes.getAttrVal(ti, IATTR_HEAL_HOLY, true, SCOPE_PREFIX));
+                        max = Rounding(ItemExAttributes.getItemAttrVal(ti, IATTR_HEAL_HOLY, true, SCOPE_PREFIX));
                         if (GetItemCharges(ti) == 0) {
                             SetItemCharges(ti, 2);
                         } else if (GetItemCharges(ti) < max) {

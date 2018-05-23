@@ -5,6 +5,7 @@ library List requires DebugExporter {
 
     // a and b are objects, returns integer
     public type ListSorter extends function(integer, integer) -> integer;
+    public type ListFinder extends function(integer, integer) -> boolean;
 
     public struct NodeObject {
         integer data;
@@ -133,12 +134,31 @@ library List requires DebugExporter {
             }
         }
 
-        method indexOfObject(integer obj) -> integer {
+        method findObject(ListFinder finder, integer search) -> integer {
+            NodeObject it = this.head;
+            boolean found = false;
+            integer ret;
+            while (found == false && it != 0) {
+                if (finder.evaluate(it.data, search) == true) {
+                    found = true;
+                    ret = it.data;
+                } else {
+                    it = it.next;
+                }
+            }
+            if (found == true) {
+                return ret;
+            } else {
+                return 0;
+            }
+        }
+
+        method indexOfFunc(ListFinder finder, integer search) -> integer {
             NodeObject it = this.head;
             integer c = 0;
             boolean found = false;
             while (found == false && it != 0) {
-                if (it.data == obj) {
+                if (finder.evaluate(it.data, search) == true) {
                     found = true;
                 } else {
                     c += 1;
@@ -150,6 +170,14 @@ library List requires DebugExporter {
             } else {
                 return -1;
             }
+        }
+
+        static method finderRefComp(integer obj, integer search) -> boolean {
+            return obj == search;
+        }
+
+        method indexOfObject(integer obj) -> integer {
+            return this.indexOfFunc(thistype.finderRefComp, obj);
         }
 
         method removeNode(NodeObject node) -> integer {

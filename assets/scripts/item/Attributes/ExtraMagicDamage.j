@@ -7,27 +7,16 @@ library ExtraMagicDamage requires Table, DamageSystem {
     }
     
     function damaged() {
-        integer i = 0;
-        item ti;
-        real amt;
         DelayTask dt;
-        if (DamageResult.isHit == true && DamageResult.abilityName == DAMAGE_NAME_MELEE) {
-            if (ht.exists(DamageResult.source) && ht[DamageResult.source] > 0) {
-                amt = 0;
-                while (i < 6) {
-                    ti = UnitItemInSlot(DamageResult.source, i);
-                    if (ti != null) {
-                        amt += ItemExAttributes.getAttributeValue(ti, IATTR_ATK_MD, "ExtraMagicDamage_damaged");
-                    }
-                    i += 1;
-                }
-                ti = null;
-                dt = DelayTask.create(extraDamageEffect, 0.03);
-                dt.u0 = DamageResult.source;
-                dt.u1 = DamageResult.target;
-                dt.r0 = amt;
-            }
-        }
+        if (DamageResult.isHit == false) return;
+        if (DamageResult.abilityName != DAMAGE_NAME_MELEE) return;
+        if (ht.exists(DamageResult.source) == false) return;
+        if (ht[DamageResult.source] <= 0) return;
+
+        dt = DelayTask.create(extraDamageEffect, 0.03);
+        dt.u0 = DamageResult.source;
+        dt.u1 = DamageResult.target;
+        dt.r0 = ItemExAttributes.getUnitAttrVal(DamageResult.source, IATTR_ATK_MD, SCOPE_PREFIX);
     }
 
     public function EquipedExtraMagicDamage(unit u, integer polar) {
