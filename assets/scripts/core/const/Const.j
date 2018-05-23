@@ -384,7 +384,7 @@ public constant integer SID_GNAW = 'A0BK';
 public constant integer UTID_SKELETAL_MAGE = 'uskm';
 public constant integer SID_CURSE_OF_THE_DEAD = 'A0CU';
 public constant integer BID_CURSE_OF_THE_DEAD = 'A0CT';
-public constant integer SID_DEATH_ORB = 'xxxx';
+public constant integer SID_DEATH_ORB = 'A0CV';
 // Obsdian Statue
 public constant integer UTID_OBSIDIAN_CONSTRUCT = 'uobs';
 public constant integer BID_REFLECTION_AURA = 'A0BH';
@@ -915,6 +915,8 @@ public constant string ART_ENT_BIRTH_TARGET = "Objects\\Spawnmodels\\NightElf\\E
 public constant string ART_KEEPER_GROVE_MISSILE = "Abilities\\Weapons\\KeeperGroveMissile\\KeeperGroveMissile.mdl";
 public constant string ART_ANTI_MAGIC_SHELL = "Abilities\\Spells\\Undead\\AntiMagicShell\\AntiMagicShell.mdl";
 public constant string ART_SKELETAL_MAGE_MISSILE = "Abilities\\Weapons\\SkeletalMageMissile\\SkeletalMageMissile.mdl";
+public constant string ART_DEATH_COIL_MISSILE = "Abilities\\Spells\\Undead\\DeathCoil\\DeathCoilMissile.mdl";
+public constant string ART_DEATH_COIL_SPECIAL_ART = "Abilities\\Spells\\Undead\\DeathCoil\\DeathCoilSpecialArt.mdl";
 
 public constant string BTNVolcano = "ReplaceableTextures\\CommandButtons\\BTNVolcano.blp";
 public constant string BTNEarthquake = "ReplaceableTextures\\CommandButtons\\BTNEarthquake.blp";

@@ -986,6 +986,9 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
             if (UnitCanUse(source, SID_CURSE_OF_THE_DEAD) && combatTime > 10.0) {
                 ip.add(SID_CURSE_OF_THE_DEAD, 30);
             }
+            if (UnitCanUse(source, SID_DEATH_ORB) && combatTime > 7.0) {
+                ip.add(SID_DEATH_ORB, 30);
+            }
             res = ip.get();
             if (res == 0) {
                 IssueTargetOrderById(source, OID_ATTACK, target);
@@ -994,7 +997,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
                 IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, tu);
                 tu = null;
             } else {
-                IssueTargetOrderById(source, OID_ATTACK, target);
+                IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, PlayerUnits.getRandomHero());
             }
             ip.destroy();
         }
