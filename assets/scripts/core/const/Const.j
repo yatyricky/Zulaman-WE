@@ -260,14 +260,15 @@ public constant integer UTID_WRAITH = 'ushd';
 public constant integer BID_SUMMON_WRAITH = 'A0B8';
 public constant integer SID_LIFE_SIPHON = 'A0B3';
 
-// 恶魔守卫 The Felguards
+// The Felguards
 public constant integer UTID_FEL_GUARD = 'Nplh';
 public constant integer SID_FEL_EXECUTION = 'A0XX';
 public constant integer SID_STOMP = 'A0XX';
 public constant integer SID_FEL_FRENZY = 'A0XX';
 public constant integer BID_FEL_FRENZY = 'A0XX';
-public constant integer UTID_VOID_LORD = 'A0XX';
+public constant integer UTID_FEL_DEFENDER = 'Nplh';
 public constant integer SID_POWER_SHADOW_SHIFT = 'A0XX';
+public constant integer SID_SHADOW_DETONATION = 'A0XX';
 
 // hex lord
 public constant integer UTID_HEX_LORD = 'Oshd';

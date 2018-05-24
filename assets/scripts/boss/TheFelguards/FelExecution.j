@@ -15,9 +15,9 @@ library FelExecution requires SpellEvent, TimerUtils, DamageSystem {
             this.deallocate();
         }
 
-        private strike() {
+        private method strike() {
             // find target
-            unit target = PlayerUnits.getNearestWithinExclude(this.caster, 450.0, this.lastTarget);
+            unit target = PlayerUnits.getRandomHero();
 
             if (target != null) {
                 this.lastTarget = target;

@@ -631,23 +631,21 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         integer res;
         if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
             ip = IntegerPool.create();
-            if (UnitCanUse(source, SID_IMPALE) && combatTime > 15) {
-                ip.add(SID_IMPALE, 300);
-            }
-            if (UnitCanUse(source, SID_SUMMON_POISONOUS_CRAWLER) && GetUnitStatePercent(source, UNIT_STATE_LIFE, UNIT_STATE_MAX_LIFE) < 81) {
-                ip.add(SID_FRENZY_WARLOCK, 30);
-            } else if (UnitCanUse(source, SID_FLAME_BOMB) && combatTime > 20) {
-            // print("makeOrderWarlock: Time > 20 add " + ID2S(SID_FLAME_BOMB));
-                ip.add(SID_FLAME_BOMB, 30);
-            } else if (UnitCanUse(source, SID_SUMMON_LAVA_SPAWN) && combatTime > 35 && GetUnitStatePercent(source, UNIT_STATE_LIFE, UNIT_STATE_MAX_LIFE) > 25) {
-            // print("makeOrderWarlock: Time > 35 add " + ID2S(SID_SUMMON_LAVA_SPAWN));
-                ip.add(SID_SUMMON_LAVA_SPAWN, 30);
+            if (UnitCanUse(source, SID_LIFE_SIPHON) && combatTime > 40 && GetUnitStatePercent(source, UNIT_STATE_LIFE, UNIT_STATE_MAX_LIFE) < 81) {
+                ip.add(SID_LIFE_SIPHON, 100);
             } else {
-                if (UnitCanUse(source, SID_FLAME_THROW) && combatTime > 10) {
-            // print("makeOrderWarlock: Time > 10 add " + ID2S(SID_FLAME_THROW));
-                    ip.add(SID_FLAME_THROW, 50);
+                if (UnitCanUse(source, SID_IMPALE) && combatTime > 15) {
+                    ip.add(SID_IMPALE, 100);
                 }
-                ip.add(0, 20);
+                if (UnitCanUse(source, SID_SUMMON_POISONOUS_CRAWLER) && GetUnitStatePercent(source, UNIT_STATE_LIFE, UNIT_STATE_MAX_LIFE) < 81) {
+                    ip.add(SID_SUMMON_POISONOUS_CRAWLER, 50);
+                }
+                if (UnitCanUse(source, SID_SUMMON_ABOMINATION) && GetUnitStatePercent(source, UNIT_STATE_LIFE, UNIT_STATE_MAX_LIFE) < 51) {
+                    ip.add(SID_SUMMON_ABOMINATION, 50);
+                }
+                if (UnitCanUse(source, SID_SUMMON_WRAITH) && GetUnitStatePercent(source, UNIT_STATE_LIFE, UNIT_STATE_MAX_LIFE) < 21) {
+                    ip.add(SID_SUMMON_WRAITH, 50);
+                }
             }
             res = ip.get();
             if (res == 0) {
@@ -1139,6 +1137,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         
         unitCallBack[UTID_TIDE_BARON_WATER] = makeOrderTideBaronWater;   // 潮汐男爵 海元素形态
         unitCallBack[UTID_TIDE_BARON] = makeOrderTideBaron;   // 潮汐男爵 海元素形态
+
         unitCallBack[UTID_WARLOCK] = makeOrderWarlock;   // 术士
         unitCallBack[UTID_LAVA_SPAWN] = makeOrderLavaSpawn;   // Lava Spawn
 
@@ -1146,6 +1145,8 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         unitCallBack[UTID_SPIKE] = makeOrderSpike;
         unitCallBack[UTID_POISONOUS_CRAWLER] = makeOrderPoisonousCrawler;
         unitCallBack[UTID_ABOMINATION] = makeOrderAbomination;
+        unitCallBack[UTID_WRAITH] = makeOrderWraith;
+
         unitCallBack[UTID_WRAITH] = makeOrderWraith;
 
         unitCallBack[UTID_HEX_LORD] = makeOrderHexLord;   // 妖术领主
