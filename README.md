@@ -12,7 +12,7 @@ You can try other versions, but not tested.
 
 ## Build
 
-1. Set system environment variables, include JassHelper to PATH
+1. Set system environment variables, include JassHelper and Warcraft III to PATH
 2. make.bat
 3. run.bat
 
