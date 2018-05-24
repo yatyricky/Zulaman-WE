@@ -2,7 +2,7 @@
 library Parasite requires BuffSystem, DamageSystem {
 
     function onEffect(Buff buf) {
-        DamageTarget(buf.bd.caster, buf.bd.target, GetUnitState(buf.bd.target, UNIT_STATE_MAX_LIFE) * 0.2, SpellData.inst(SID_PARASITE, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS, false);
+        DummyDamageTarget(buf.bd.target, GetUnitState(buf.bd.target, UNIT_STATE_MAX_LIFE) * 0.2, SpellData.inst(SID_PARASITE, SCOPE_PREFIX).name);
         AddTimedEffect.atUnit(ART_BLEED, buf.bd.target, "origin", 1.0);
     }
 

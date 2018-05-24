@@ -917,6 +917,7 @@ public constant string ART_ANTI_MAGIC_SHELL = "Abilities\\Spells\\Undead\\AntiMa
 public constant string ART_SKELETAL_MAGE_MISSILE = "Abilities\\Weapons\\SkeletalMageMissile\\SkeletalMageMissile.mdl";
 public constant string ART_DEATH_COIL_MISSILE = "Abilities\\Spells\\Undead\\DeathCoil\\DeathCoilMissile.mdl";
 public constant string ART_DEATH_COIL_SPECIAL_ART = "Abilities\\Spells\\Undead\\DeathCoil\\DeathCoilSpecialArt.mdl";
+public constant string ART_RAISE_SKELETON = "Abilities\\Spells\\Undead\\RaiseSkeletonWarrior\\RaiseSkeleton.mdl";
 
 public constant string BTNVolcano = "ReplaceableTextures\\CommandButtons\\BTNVolcano.blp";
 public constant string BTNEarthquake = "ReplaceableTextures\\CommandButtons\\BTNEarthquake.blp";

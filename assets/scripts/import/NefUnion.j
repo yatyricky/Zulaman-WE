@@ -1,5 +1,5 @@
 //! zinc
-library NefUnion requires TimerUtils {
+library NefUnion requires TimerUtils, Math {
 
     public struct AddTimedEffect {
         private timer t;
@@ -98,6 +98,16 @@ library NefUnion requires TimerUtils {
         if (GetLocalPlayer() == whichPlayer) {
             BlzSetAbilityExtendedTooltip(abilCode, ExtendedTooltip, level);
         }
+    }
+
+    public function GetUnitFrontPoint(unit u, real distance) -> Point {
+        real x = GetUnitX(u);
+        real y = GetUnitY(u);
+        real f = GetUnitFacing(u) * bj_DEGTORAD;
+        Point p = Point.create();
+        p.x = Cos(f) * distance + x;
+        p.y = Sin(f) * distance + y;
+        return p;
     }
     
     // "CLPB" chain lightning - main
