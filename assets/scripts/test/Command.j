@@ -304,7 +304,18 @@ library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSys
     }
 
     function testGeneral(string str) {
-        ItemExAttributes.showAllItemInstances();
+        integer which = S2I(SubString(str, 5, StringLength(str)));
+        string art = ART_DEATH_COIL_MISSILE;
+        if (which == 1) {}
+        else if (which == 2) {art = ART_MORTAR_MISSILE;}
+        else if (which == 3) {art = ART_BOTTLE_MISSILE;}
+        else if (which == 4) {art = ART_KEEPER_GROVE_MISSILE;}
+        else if (which == 5) {art = ART_AVENGER_MISSILE;}
+        else if (which == 6) {art = ART_PHOENIX_MISSILE;}
+        else if (which == 7) {art = ART_ANGEL;}
+        else if (which == 8) {art = ART_BREATH_OF_FROST_MISSILE;}
+        else if (which == 9) {art = ART_FAERIE_DRAGON_MISSILE;}
+        VisualEffects.nova(art, -6616, -2057, 400, 800, 30);
     }
 
     function testItemAttributes(string str) {
@@ -364,49 +375,40 @@ library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSys
         g = null;
     }
 
+    effect testEff;
+
+    function createEffect(string str) {
+        testEff = AddSpecialEffect("units\\human\\Priest\\Priest.mdl", -6600, -1800);
+        BlzSetSpecialEffectPosition(testEff, -6600, -1800, GetLocZ(-6600, -1800) + 40);
+    }
+
+    function setEffectYaw(string str) {
+        BlzSetSpecialEffectYaw(testEff, S2R(SubString(str, 5, StringLength(str))));
+    }
+
+    function setEffectPitch(string str) {
+        BlzSetSpecialEffectPitch(testEff, S2R(SubString(str, 5, StringLength(str))));
+    }
+
+    function setEffectRoll(string str) {
+        BlzSetSpecialEffectRoll(testEff, S2R(SubString(str, 5, StringLength(str))));
+    }
+
     private function onInit() {
-        //Console[Player(0)].add("stun", testStunUnit);
         Console[Player(0)].add("cls", screenClear);
-        //Console[Player(0)].add("countunits", countAllUnitsInMap);
         Console[Player(0)].add("lvlup", levelUp);
-        Console[Player(0)].add("lvl", getunitlevel);
-        //Console[Player(0)].add("oid", seeOID);
         Console[Player(0)].add("add", addAbility);
-        //Console[Player(0)].add("ra", resetAbility);
-        //Console[Player(0)].add("alvl", abillvl);
-        //Console[Player(0)].add("rem", removeAbility);
-        //Console[Player(0)].add("atk", modUnitAttackPower);
-        //Console[Player(0)].add("get", getUnitAtt);
-        // Console[Player(0)].add("bl", printBuffList);
         Console[Player(0)].add("unit", createunit);
         Console[Player(0)].add("item", createitem);
-        // Console[Player(0)].add("anime", playanimation);
-        // Console[Player(0)].add("lifelock", lifelocker);
-        // Console[Player(0)].add("regenlock", regenlocker);
-        // Console[Player(0)].add("colourmix", colourMix);
-        // Console[Player(0)].add("dispelall", dispelall);
-        // Console[Player(0)].add("testpool", testpool);
         Console[Player(0)].add("die", die);
-        //Console[Player(0)].add("hid", gethandleidunit);
-        Console[Player(0)].add("utid", getutid);
-        //Console[Player(0)].add("seefrs", getseefrs);
-        // Console[Player(0)].add("potions", spawnpotions);
-        Console[Player(0)].add("exec", execfuncs);
-        // Console[Player(0)].add("resetlava", doresetlavas);
         Console[Player(0)].add("log", generatecombatlogs);
         Console[Player(0)].add("dlog", debuglogs);
-        // Console[Player(0)].add("prayerofhealing", testprayerofhealing);
-        //testlightning = AddLightningEx("SPLK", false, -6786, -1867, 1710, -6342, -1923, 1710);
-        // Console[Player(0)].add("ltn", testwarlock);
-        // Console[Player(0)].add("podun", poyicengdun);
-        // Console[Player(0)].add("canuse", testifunitcanuse);
-        // Console[Player(0)].add("pfb", testPrintFireBomb);
-        // console[Player(0)].add("testwlk", testwarlock);
-        // Console[Player(0)].add("angle", testgetangle);
         Console[Player(0)].add("test", testGeneral);
         Console[Player(0)].add("z", printStats);
-        Console[Player(0)].add("ii", printItemUbertip);
-
+        Console[Player(0)].add("ceff", createEffect);
+        Console[Player(0)].add("effq", setEffectYaw);
+        Console[Player(0)].add("effw", setEffectPitch);
+        Console[Player(0)].add("effe", setEffectRoll);
     }
 }
 //! endzinc

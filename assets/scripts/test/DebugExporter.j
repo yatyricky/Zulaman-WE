@@ -3,13 +3,7 @@ library DebugExporter requires Integer {
     private string list[];
     private integer n;
 
-    public function print(string str) {
-        BJDebugMsg(str);
-        list[n] = str;
-        n += 1;
-    }
-
-    public function logcat(string str) {
+    public function logi(string str) {
         BJDebugMsg(str);
         list[n] = str;
         n += 1;
@@ -20,6 +14,10 @@ library DebugExporter requires Integer {
         BJDebugMsg(sb);
         list[n] = sb;
         n += 1;
+    }
+
+    public function print(string str) {
+        logi(str);
     }
     
     public function ExportDebugLog() {

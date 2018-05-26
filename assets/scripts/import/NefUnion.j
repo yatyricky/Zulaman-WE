@@ -1,6 +1,8 @@
 //! zinc
 library NefUnion requires TimerUtils, Math {
 
+    location tmploc = Location(0, 0);
+
     public struct AddTimedEffect {
         private timer t;
         private effect e;
@@ -46,6 +48,11 @@ library NefUnion requires TimerUtils, Math {
         real ret = GetLocationZ(loc) + GetUnitFlyHeight(u);
         RemoveLocation(loc);
         return ret;
+    }
+
+    public function GetLocZ(real x, real y) -> real {
+        MoveLocation(tmploc, x, y);
+        return GetLocationZ(tmploc);
     }
 
     public struct DelayedAddTimedEffect {

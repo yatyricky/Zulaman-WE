@@ -36,10 +36,12 @@ library VisualEffects requires List {
             NodeObject iter = this.list.head;
             effect eff;
             integer i = 0;
+            real tx, ty;
             while (iter != 0) {
                 eff = IntRefEff(iter.data);
-                BlzSetSpecialEffectX(eff, BlzGetLocalSpecialEffectX(eff) + this.step * Cos(bj_PI * 2.0 / this.list.count() * i));
-                BlzSetSpecialEffectY(eff, BlzGetLocalSpecialEffectY(eff) + this.step * Sin(bj_PI * 2.0 / this.list.count() * i));
+                tx = BlzGetLocalSpecialEffectX(eff) + this.step * Cos(bj_PI * 2.0 / this.list.count() * i);
+                ty = BlzGetLocalSpecialEffectY(eff) + this.step * Sin(bj_PI * 2.0 / this.list.count() * i);
+                BlzSetSpecialEffectPosition(eff, tx, ty, GetLocZ(tx, ty) + 24.0);
                 iter = iter.next;
                 i += 1;
             }
@@ -57,7 +59,7 @@ library VisualEffects requires List {
             this.list = ListObject.create();
             while (i < num) {
                 eff = AddSpecialEffect(model, x, y);
-                BlzSetSpecialEffectYaw(eff, bj_PI * 2.0 / num * i);
+                BlzSetSpecialEffectRoll(eff, bj_PI * 2.0 / num * i);
                 list.push(Eff2Int(eff));
                 i += 1;
             }
