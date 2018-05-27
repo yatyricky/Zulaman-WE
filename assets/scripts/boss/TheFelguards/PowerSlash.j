@@ -1,5 +1,5 @@
 //! zinc
-library Stomp requires DamageSystem {
+library PowerSlash requires DamageSystem {
 
     function onCast() {
         integer i = 0;
@@ -17,7 +17,7 @@ library Stomp requires DamageSystem {
         iter = list.head;
         while (iter != 0) {
             tu = Int2Unit(iter.data);
-            DamageTarget(SpellEvent.CastingUnit, tu, GetUnitState(tu, UNIT_STATE_MAX_LIFE) * amt, SpellData.inst(SID_STOMP, SCOPE_PREFIX).name, true, false, false, WEAPON_TYPE_WHOKNOWS, true);
+            DamageTarget(SpellEvent.CastingUnit, tu, GetUnitState(tu, UNIT_STATE_MAX_LIFE) * amt, SpellData.inst(SID_POWER_SLASH, SCOPE_PREFIX).name, true, false, false, WEAPON_TYPE_WHOKNOWS, true);
             AddTimedEffect.atUnit(ART_BLEED, tu, "origin", 0.1);
             iter = iter.next;
         }
@@ -27,7 +27,7 @@ library Stomp requires DamageSystem {
     }
 
     function onInit() {
-       RegisterSpellEffectResponse(SID_STOMP, onCast);
+       RegisterSpellEffectResponse(SID_POWER_SLASH, onCast);
     }
 }
 //! endzinc

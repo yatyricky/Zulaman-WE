@@ -205,6 +205,11 @@ SpellData.create(SID_SUMMON_POISONOUS_CRAWLER,"Summon Poisonous Crawler",0,0,25,
 SpellData.create(SID_SUMMON_ABOMINATION,"Summon Abomination",0,0,15,OrderId("charm"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_SUMMON_WRAITH,"Summon Wraith",0,0,15,OrderId("invisibility"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_LIFE_SIPHON,"Life Siphon",0,5,25,OrderId("sleep"),2,ORDER_TYPE_IMMEDIATE);
+SpellData.create(SID_FEL_EXECUTION,"Fel Execution",0,0,20,OrderId("sleep"),1,ORDER_TYPE_TARGET);
+SpellData.create(SID_POWER_SLASH,"Power Slash",0,0,10,OrderId("purge"),1,ORDER_TYPE_TARGET);
+SpellData.create(SID_FEL_FRENZY,"Fel Frenzy",0,0,20,OrderId("howlofterror"),1,ORDER_TYPE_IMMEDIATE);
+SpellData.create(SID_POWER_SHADOW_SHIFT,"Power Shadow Shift",0,4,8,OrderId("slow"),1,ORDER_TYPE_TARGET);
+SpellData.create(SID_SHADOW_DETONATION,"Shadow Detonation",0,0,15,OrderId("blizzard"),1,ORDER_TYPE_POINT);
 SpellData.create(SID_SPIRIT_BOLT,"Spirit Bolt",50,10,40,OrderId("heal"),2,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_SPIRIT_HARVEST,"Spirit Harvest",0,0,35,OrderId("hex"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_SUN_FIRE_STORMHEX,"Sun fire Stormhex",100,0,10,OrderId("slow"),1,ORDER_TYPE_IMMEDIATE);

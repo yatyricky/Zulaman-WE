@@ -115,6 +115,8 @@ ModelInfo.rg(UTID_SPIKE,ATT_NON,2999,100,50,0,0,0,0,1,0,CAREER_TYPE_CREEP,"Repla
 ModelInfo.rg(UTID_POISONOUS_CRAWLER,ATT_NON,4999,100,200,0,0,0,0,1,0.05,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNCryptFiend.blp");
 ModelInfo.rg(UTID_ABOMINATION,ATT_NON,19999,300,200,0,0,0,0,1,0.15,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNAbomination.blp");
 ModelInfo.rg(UTID_WRAITH,ATT_NON,499,5,5,0,1,0,0,0,0,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNShade.blp");
+ModelInfo.rg(UTID_FEL_GUARD,ATT_STR,399899,1190,500,20,0.05,0,0,1,0.03,CAREER_TYPE_BOSS,"ReplaceableTextures\\CommandButtons\\BTNFelGuard.blp");
+ModelInfo.rg(UTID_FEL_GUARD,ATT_STR,399899,990,400,0,0,0,0,0.8,0.03,CAREER_TYPE_BOSS,"ReplaceableTextures\\CommandButtons\\BTNFelGuard.blp");
 ModelInfo.rg(UTID_HEX_LORD,ATT_INT,799899,1350,700,5,0.05,0,0,1,0.03,CAREER_TYPE_BOSS,"ReplaceableTextures\\CommandButtons\\BTNShadowHunter.blp");
 ModelInfo.rg(UTID_GOD_OF_DEATH,ATT_STR,1499499,10,40,15,0.05,0.05,100,1,0,CAREER_TYPE_BOSS,"ReplaceableTextures\\CommandButtons\\BTNForgottenOne.blp");
 ModelInfo.rg(UTID_SEA_LIZARD,ATT_NON,8499,150,100,5,0.05,0,0,1,0.05,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNSnapDragon.blp");

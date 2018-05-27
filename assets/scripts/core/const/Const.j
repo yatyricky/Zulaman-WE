@@ -262,13 +262,13 @@ public constant integer SID_LIFE_SIPHON = 'A0B3';
 
 // The Felguards
 public constant integer UTID_FEL_GUARD = 'Nplh';
-public constant integer SID_FEL_EXECUTION = 'A0XX';
-public constant integer SID_STOMP = 'A0XX';
-public constant integer SID_FEL_FRENZY = 'A0XX';
-public constant integer BID_FEL_FRENZY = 'A0XX';
-public constant integer UTID_FEL_DEFENDER = 'Nplh';
-public constant integer SID_POWER_SHADOW_SHIFT = 'A0XX';
-public constant integer SID_SHADOW_DETONATION = 'A0XX';
+public constant integer SID_FEL_EXECUTION = 'A0CW';
+public constant integer SID_POWER_SLASH = 'A0CX';
+public constant integer SID_FEL_FRENZY = 'A0CY';
+public constant integer BID_FEL_FRENZY = 'A0CZ';
+public constant integer UTID_FEL_DEFENDER = 'Opgh';
+public constant integer SID_POWER_SHADOW_SHIFT = 'A0D0';
+public constant integer SID_SHADOW_DETONATION = 'A0D1';
 
 // hex lord
 public constant integer UTID_HEX_LORD = 'Oshd';
