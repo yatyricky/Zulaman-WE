@@ -4,33 +4,6 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
     Table unitCallBack;
     HandleTable focus, pace;
     type UnitActionType extends function(unit, unit, real);
-    /*
-    struct MakeUnitNonResponsive {
-        private timer tm;
-        private unit u;
-        private static method run() {
-            thistype this = GetTimerData(GetExpiredTimer());
-            UnitProp.inst(this.u, SCOPE_PREFIX).responsive = true;
-            ReleaseTimer(this.tm);
-            this.tm = null;
-            this.u = null;
-            this.deallocate();
-        }
-        static method start(unit u) {
-            thistype this = thistype.allocate();
-            this.tm = NewTimer();
-            SetTimerData(this.tm, this);
-            this.u = u;
-            UnitProp.inst(u, SCOPE_PREFIX).responsive = false;
-            TimerStart(this.tm, 1.0, false, function thistype.run);
-        }
-    }*/
-
-    //function NotAttacking(unit u) {
-    //    focus[u] = 1;
-    //}
-
-    //function AttackTarget(unit s, unit t) {}    
     
     function makeOrderHexLord(unit source, unit target, real combatTime) {
         IntegerPool ip;
@@ -77,25 +50,6 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
                 IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, target);
             } else if (SpellData.inst(res, SCOPE_PREFIX).otp == ORDER_TYPE_IMMEDIATE) {
                 IssueImmediateOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid);
-//            } else if (SpellData.inst(res, SCOPE_PREFIX).otp == ORDER_TYPE_POINT) {
-//                x = GetUnitX(target); y = GetUnitY(target);
-//                if (res == SID_SUN_FIRE_STORMHEX) {
-//                    tar = PlayerUnits.getRandomInRange(source, 3600.0);
-//print("Sunfire storm on " + GetUnitNameEx(tar));
-//                    if (tar != null) {
-//                        x = GetUnitX(tar); y = GetUnitY(tar);
-//                    }
-                //} else if (res == SID_FREEZING_TRAP_HEX) {
-//print("lightning totem casting point: " + R2S(GetUnitX(target)) + " - " + R2S(GetUnitY(target)));
-                //    IssuePointOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, GetUnitX(target), GetUnitY(target));
-//                } else if (res == SID_LIGHTNING_TOTEM_HEX) {
-//                    RandomPoint.aroundUnit(source, 100.0, 200.0);
-//print("lightning totem casting point: " + R2S(RandomPoint.x) + " - " + R2S(RandomPoint.y));
-//                    x = RandomPoint.x; y = RandomPoint.y;
-//                }
-//print("about to make order, source = " + GetUnitNameEx(source) + ", ids = " + OrderId2String(SpellData.inst(res, SCOPE_PREFIX).oid) + ", x=" + R2S(x) + ", y=" + R2S(y));
-//                IssuePointOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, x, y);
-//print("order made");
             }
             ip.destroy();
         }
@@ -106,7 +60,6 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         IntegerPool ip;
         integer res;
         unit tu;
-        /*        print("-- - - - - - - - - - - -  -");*/
         if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
             ip = IntegerPool.create();
             if (UnitCanUse(source, 'A03O') && combatTime > 49) {
@@ -242,6 +195,36 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
             } else if (SpellData.inst(res, SCOPE_PREFIX).otp == ORDER_TYPE_TARGET) {
                 IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, tu);
             } else if (SpellData.inst(res, SCOPE_PREFIX).otp == ORDER_TYPE_IMMEDIATE) {
+                IssueImmediateOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid);
+            }
+            ip.destroy();
+        }
+    }
+
+    function makeOrderFelGuard(unit source, unit target, real combatTime) {
+        IntegerPool ip;
+        integer res;
+        if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
+            ip = IntegerPool.create();
+            if (UnitCanUse(source, SID_FEL_EXECUTION) && combatTime > 15.0) {
+                ip.add(SID_FEL_EXECUTION, 30);
+            }
+            if (UnitCanUse(source, SID_POWER_SLASH) && combatTime > 10.0) {
+                ip.add(SID_POWER_SLASH, 30);
+            }
+            if (UnitCanUse(source, SID_FEL_FRENZY) && combatTime > 15.0) {
+                ip.add(SID_FEL_FRENZY, 30);
+            }
+            ip.add(0, 10);
+            
+            res = ip.get();
+            if (res == 0) {
+                IssueTargetOrderById(source, OID_ATTACK, target);
+            } else if (res == SID_FEL_EXECUTION) {
+                IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, PlayerUnits.getRandomHero());
+            } else if (res == SID_POWER_SLASH) {
+                IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, target);
+            } else if (res == SID_FEL_FRENZY) {
                 IssueImmediateOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid);
             }
             ip.destroy();
@@ -509,7 +492,6 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
     function makeOrderTideBaron(unit source, unit target, real combatTime) {
         IntegerPool ip;
         integer res;
-        /*        print("-- - - - - - - - - - - -  -");*/
         if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
             ip = IntegerPool.create();
             if (UnitCanUse(source, SID_TIDE_BARON_MORPH) && combatTime > 34) {
@@ -542,7 +524,6 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
     function makeOrderTideBaronWater(unit source, unit target, real combatTime) {    
         IntegerPool ip;
         integer res;
-        /*        print("-- - - - - - - - - - - -  -");*/
         if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
             ip = IntegerPool.create();
             if (UnitCanUse(source, SID_TIDE_BARON_MORPH) && combatTime > 34) {
@@ -1132,13 +1113,13 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         unitCallBack['nfac'] = makeOrdernfac;   // Pocket Factory
         unitCallBack['ncgb'] = makeOrderncgb;   // Clockwork Goblin
         
-        unitCallBack['Hvsh'] = makeOrderHvsh;   // 娜迦女巫
-        unitCallBack['n003'] = makeOrdern003;   // 飞蛇,劣质的
+        unitCallBack['Hvsh'] = makeOrderHvsh;   // Naga Sea Witch
+        unitCallBack['n003'] = makeOrdern003;   // Wind Serpent Inferior
         
-        unitCallBack[UTID_TIDE_BARON_WATER] = makeOrderTideBaronWater;   // 潮汐男爵 海元素形态
-        unitCallBack[UTID_TIDE_BARON] = makeOrderTideBaron;   // 潮汐男爵 海元素形态
+        unitCallBack[UTID_TIDE_BARON_WATER] = makeOrderTideBaronWater;   // Sir Tide Water form
+        unitCallBack[UTID_TIDE_BARON] = makeOrderTideBaron;   // Sir Tide Naga form
 
-        unitCallBack[UTID_WARLOCK] = makeOrderWarlock;   // 术士
+        unitCallBack[UTID_WARLOCK] = makeOrderWarlock;   // Warlock
         unitCallBack[UTID_LAVA_SPAWN] = makeOrderLavaSpawn;   // Lava Spawn
 
         unitCallBack[UTID_PIT_ARCHON] = makeOrderAbyssArchon;
@@ -1147,10 +1128,11 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         unitCallBack[UTID_ABOMINATION] = makeOrderAbomination;
         unitCallBack[UTID_WRAITH] = makeOrderWraith;
 
-        unitCallBack[UTID_WRAITH] = makeOrderWraith;
+        unitCallBack[UTID_FEL_GUARD] = makeOrderFelGuard;
+        unitCallBack[UTID_FEL_DEFENDER] = makeOrderFelDefender;
 
-        unitCallBack[UTID_HEX_LORD] = makeOrderHexLord;   // 妖术领主
-        unitCallBack[UTID_LIGHTNING_TOTEM] = makeOrderLightningTotem;   // 闪电图腾
+        unitCallBack[UTID_HEX_LORD] = makeOrderHexLord;   // Hex Lord
+        unitCallBack[UTID_LIGHTNING_TOTEM] = makeOrderLightningTotem;   // Lightning Totem
         
         // ============= Area 1, 2 ==================
         unitCallBack[UTID_NAGA_SIREN] = makeOrderNagaSiren;   // Naga Siren
