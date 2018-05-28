@@ -319,7 +319,7 @@ library NefUnion requires TimerUtils, Math {
         private DelayedTaskExecute response;
         unit u0, u1;
         integer i0;
-        real r0;
+        real r0, r1;
         integer data;
         
         private method destroy() {
