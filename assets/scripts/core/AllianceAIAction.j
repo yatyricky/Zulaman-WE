@@ -311,6 +311,49 @@ constant real AIACTION_INTERVAL = 0.33;
         return true;
     }
 
+    function PositioningAbyssArchon(unit source) -> boolean {
+        BuffSlot bs = BuffSlot[source];
+        Buff buf = bs.getBuffByBid(BID_SUMMON_POISONOUS_CRAWLER);
+        NodeObject iter;
+        Point p;
+        Point pick = 0;
+        real near = 9999;
+        real dis;
+        unit tu;
+        // go get poisoned
+        if (buf == 0 || buf.bd.tick < 16) {
+            // logi(GetUnitNameEx(source) + " has no debuff or tick < 16");
+            // find nearest node
+            iter = AbyssArchonGlobal.poisons.head;
+            while (iter != 0) {
+                p = Point(iter.data);
+                // logi("Point["+I2S(p)+"]={"+R2S(p.x)+","+R2S(p.y)+"}");
+                dis = GetDistance.unitCoord2d(source, p.x, p.y);
+                if (dis < near) {
+                    dis = near;
+                    pick = p;
+                }
+                iter = iter.next;
+            }
+            if (pick != 0) {
+                IssuePointOrderById(source, OID_MOVE, pick.x, pick.y);
+                return false;
+            }
+        }
+        // get away from wraiths
+        iter = AbyssArchonGlobal.wraiths.head;
+        while (iter != 0) {
+            tu = IntRefUnit(iter.data);
+            if (GetDistance.units2d(source, tu) < AbyssArchonGlobal.wraithAOE * 1.5) {
+                IssuePointOrderById(source, OID_MOVE, GetUnitX(source) * 2 - GetUnitX(tu), GetUnitY(source) * 2 - GetUnitY(tu));
+                return false;
+            }
+            iter = iter.next;
+        }
+        tu = null;
+        return true;
+    }
+
     function PositioningHexLord(unit source) -> boolean {
         integer i;
         real dis, tmp;
@@ -419,6 +462,8 @@ constant real AIACTION_INTERVAL = 0.33;
             return PositioningTideBaron(source);
         } else if (bossutid == UTID_WARLOCK) {
             return PositioningWarlock(source);
+        } else if (bossutid == UTID_PIT_ARCHON) {
+            return PositioningAbyssArchon(source);
         } else if (bossutid == UTID_HEX_LORD) {
             return PositioningHexLord(source);
         } else {
@@ -457,6 +502,22 @@ constant real AIACTION_INTERVAL = 0.33;
             SelectHeroSkill(source, SID_SHIELD_BLOCK);
             SelectHeroSkill(source, SID_DISCORD);
             SelectHeroSkill(source, SID_DISCORD);
+        } else {
+            SelectHeroSkill(source, SID_SHIELD_BLOCK);
+            SelectHeroSkill(source, SID_SUN_FIRE_STORM);
+            SelectHeroSkill(source, SID_ARCANE_SHOCK);
+            SelectHeroSkill(source, SID_DISCORD);
+            SelectHeroSkill(source, SID_SHIELD_OF_SINDOREI);
+            SelectHeroSkill(source, SID_SHIELD_BLOCK);
+            SelectHeroSkill(source, SID_SUN_FIRE_STORM);
+            SelectHeroSkill(source, SID_ARCANE_SHOCK);
+            SelectHeroSkill(source, SID_DISCORD);
+            SelectHeroSkill(source, SID_SHIELD_OF_SINDOREI);
+            SelectHeroSkill(source, SID_SHIELD_BLOCK);
+            SelectHeroSkill(source, SID_SUN_FIRE_STORM);
+            SelectHeroSkill(source, SID_ARCANE_SHOCK);
+            SelectHeroSkill(source, SID_DISCORD);
+            SelectHeroSkill(source, SID_SHIELD_OF_SINDOREI);
         }
     }
     
@@ -491,6 +552,22 @@ constant real AIACTION_INTERVAL = 0.33;
             SelectHeroSkill(source, SID_SAVAGE_ROAR);
             SelectHeroSkill(source, SID_SAVAGE_ROAR);
             SelectHeroSkill(source, SID_NATURAL_REFLEX);
+        } else {
+            SelectHeroSkill(source, SID_LACERATE);
+            SelectHeroSkill(source, SID_SAVAGE_ROAR);
+            SelectHeroSkill(source, SID_FOREST_CURE);
+            SelectHeroSkill(source, SID_NATURAL_REFLEX);
+            SelectHeroSkill(source, SID_SURVIVAL_INSTINCTS);
+            SelectHeroSkill(source, SID_LACERATE);
+            SelectHeroSkill(source, SID_SAVAGE_ROAR);
+            SelectHeroSkill(source, SID_FOREST_CURE);
+            SelectHeroSkill(source, SID_NATURAL_REFLEX);
+            SelectHeroSkill(source, SID_SURVIVAL_INSTINCTS);
+            SelectHeroSkill(source, SID_LACERATE);
+            SelectHeroSkill(source, SID_SAVAGE_ROAR);
+            SelectHeroSkill(source, SID_FOREST_CURE);
+            SelectHeroSkill(source, SID_NATURAL_REFLEX);
+            SelectHeroSkill(source, SID_SURVIVAL_INSTINCTS);
         }
     }
     
@@ -524,6 +601,22 @@ constant real AIACTION_INTERVAL = 0.33;
             SelectHeroSkill(source, SID_SWIFT_MEND);
             SelectHeroSkill(source, SID_TRANQUILITY);
             SelectHeroSkill(source, SID_TRANQUILITY);
+        } else {
+            SelectHeroSkill(source, SID_LIFE_BLOOM);
+            SelectHeroSkill(source, SID_REJUVENATION);
+            SelectHeroSkill(source, SID_REGROWTH);
+            SelectHeroSkill(source, SID_SWIFT_MEND);
+            SelectHeroSkill(source, SID_TRANQUILITY);
+            SelectHeroSkill(source, SID_LIFE_BLOOM);
+            SelectHeroSkill(source, SID_REJUVENATION);
+            SelectHeroSkill(source, SID_REGROWTH);
+            SelectHeroSkill(source, SID_SWIFT_MEND);
+            SelectHeroSkill(source, SID_TRANQUILITY);
+            SelectHeroSkill(source, SID_LIFE_BLOOM);
+            SelectHeroSkill(source, SID_REJUVENATION);
+            SelectHeroSkill(source, SID_REGROWTH);
+            SelectHeroSkill(source, SID_SWIFT_MEND);
+            SelectHeroSkill(source, SID_TRANQUILITY);
         }
     }
     
@@ -548,6 +641,22 @@ constant real AIACTION_INTERVAL = 0.33;
         } else if (GetHeroLevel(source) == 5) {
             SelectHeroSkill(source, SID_HOLY_SHOCK);
             SelectHeroSkill(source, SID_BEACON_OF_LIGHT);
+            SelectHeroSkill(source, SID_BEACON_OF_LIGHT);
+        } else {
+            SelectHeroSkill(source, SID_FLASH_LIGHT);
+            SelectHeroSkill(source, SID_HOLY_LIGHT);
+            SelectHeroSkill(source, SID_HOLY_SHOCK);
+            SelectHeroSkill(source, SID_DIVINE_FAVOR);
+            SelectHeroSkill(source, SID_BEACON_OF_LIGHT);
+            SelectHeroSkill(source, SID_FLASH_LIGHT);
+            SelectHeroSkill(source, SID_HOLY_LIGHT);
+            SelectHeroSkill(source, SID_HOLY_SHOCK);
+            SelectHeroSkill(source, SID_DIVINE_FAVOR);
+            SelectHeroSkill(source, SID_BEACON_OF_LIGHT);
+            SelectHeroSkill(source, SID_FLASH_LIGHT);
+            SelectHeroSkill(source, SID_HOLY_LIGHT);
+            SelectHeroSkill(source, SID_HOLY_SHOCK);
+            SelectHeroSkill(source, SID_DIVINE_FAVOR);
             SelectHeroSkill(source, SID_BEACON_OF_LIGHT);
         }
     }
@@ -574,6 +683,22 @@ constant real AIACTION_INTERVAL = 0.33;
             SelectHeroSkill(source, SID_PRAYER_OF_HEALING);
             SelectHeroSkill(source, SID_DISPEL);
             SelectHeroSkill(source, SID_DISPEL);
+        } else {
+            SelectHeroSkill(source, SID_HEAL);
+            SelectHeroSkill(source, SID_PRAYER_OF_HEALING);
+            SelectHeroSkill(source, SID_SHIELD);
+            SelectHeroSkill(source, SID_PRAYER_OF_MENDING);
+            SelectHeroSkill(source, SID_DISPEL);
+            SelectHeroSkill(source, SID_HEAL);
+            SelectHeroSkill(source, SID_PRAYER_OF_HEALING);
+            SelectHeroSkill(source, SID_SHIELD);
+            SelectHeroSkill(source, SID_PRAYER_OF_MENDING);
+            SelectHeroSkill(source, SID_DISPEL);
+            SelectHeroSkill(source, SID_HEAL);
+            SelectHeroSkill(source, SID_PRAYER_OF_HEALING);
+            SelectHeroSkill(source, SID_SHIELD);
+            SelectHeroSkill(source, SID_PRAYER_OF_MENDING);
+            SelectHeroSkill(source, SID_DISPEL);
         }
     }
     
@@ -597,6 +722,22 @@ constant real AIACTION_INTERVAL = 0.33;
             SelectHeroSkill(source, SID_DEATH_PACT);
         } else if (GetHeroLevel(source) == 5) {
             SelectHeroSkill(source, SID_CONCERNTRATION);
+            SelectHeroSkill(source, SID_POWER_OF_BANSHEE);
+            SelectHeroSkill(source, SID_DEATH_PACT);
+        } else {
+            SelectHeroSkill(source, SID_DARK_ARROW);
+            SelectHeroSkill(source, SID_CONCERNTRATION);
+            SelectHeroSkill(source, SID_FREEZING_TRAP);
+            SelectHeroSkill(source, SID_POWER_OF_BANSHEE);
+            SelectHeroSkill(source, SID_DEATH_PACT);
+            SelectHeroSkill(source, SID_DARK_ARROW);
+            SelectHeroSkill(source, SID_CONCERNTRATION);
+            SelectHeroSkill(source, SID_FREEZING_TRAP);
+            SelectHeroSkill(source, SID_POWER_OF_BANSHEE);
+            SelectHeroSkill(source, SID_DEATH_PACT);
+            SelectHeroSkill(source, SID_DARK_ARROW);
+            SelectHeroSkill(source, SID_CONCERNTRATION);
+            SelectHeroSkill(source, SID_FREEZING_TRAP);
             SelectHeroSkill(source, SID_POWER_OF_BANSHEE);
             SelectHeroSkill(source, SID_DEATH_PACT);
         }
@@ -624,6 +765,22 @@ constant real AIACTION_INTERVAL = 0.33;
             SelectHeroSkill(source, SID_REND);    
             SelectHeroSkill(source, SID_REND);            
             SelectHeroSkill(source, SID_EXECUTE_LEARN);
+        } else {
+            SelectHeroSkill(source, SID_HEROIC_STRIKE);
+            SelectHeroSkill(source, SID_REND);
+            SelectHeroSkill(source, SID_OVER_POWER);
+            SelectHeroSkill(source, SID_MORTAL_STRIKE);    
+            SelectHeroSkill(source, SID_EXECUTE_LEARN);
+            SelectHeroSkill(source, SID_HEROIC_STRIKE);
+            SelectHeroSkill(source, SID_REND);
+            SelectHeroSkill(source, SID_OVER_POWER);
+            SelectHeroSkill(source, SID_MORTAL_STRIKE);    
+            SelectHeroSkill(source, SID_EXECUTE_LEARN);
+            SelectHeroSkill(source, SID_HEROIC_STRIKE);
+            SelectHeroSkill(source, SID_REND);
+            SelectHeroSkill(source, SID_OVER_POWER);
+            SelectHeroSkill(source, SID_MORTAL_STRIKE);    
+            SelectHeroSkill(source, SID_EXECUTE_LEARN);
         }
     }
     
@@ -649,6 +806,22 @@ constant real AIACTION_INTERVAL = 0.33;
             SelectHeroSkill(source, SID_FROST_NOVA);    
             SelectHeroSkill(source, SID_FROST_NOVA);    
             SelectHeroSkill(source, SID_POLYMORPH);
+        } else {
+            SelectHeroSkill(source, SID_FROST_BOLT);
+            SelectHeroSkill(source, SID_BLIZZARD);
+            SelectHeroSkill(source, SID_FROST_NOVA);
+            SelectHeroSkill(source, SID_POLYMORPH);    
+            SelectHeroSkill(source, SID_SPELL_TRANSFER);
+            SelectHeroSkill(source, SID_FROST_BOLT);
+            SelectHeroSkill(source, SID_BLIZZARD);
+            SelectHeroSkill(source, SID_FROST_NOVA);
+            SelectHeroSkill(source, SID_POLYMORPH);    
+            SelectHeroSkill(source, SID_SPELL_TRANSFER);
+            SelectHeroSkill(source, SID_FROST_BOLT);
+            SelectHeroSkill(source, SID_BLIZZARD);
+            SelectHeroSkill(source, SID_FROST_NOVA);
+            SelectHeroSkill(source, SID_POLYMORPH);    
+            SelectHeroSkill(source, SID_SPELL_TRANSFER);
         }
     }
     
@@ -674,6 +847,22 @@ constant real AIACTION_INTERVAL = 0.33;
             SelectHeroSkill(source, SID_STORM_LASH);        
             SelectHeroSkill(source, SID_PURGE);
             SelectHeroSkill(source, SID_PURGE);
+        } else {
+            SelectHeroSkill(source, SID_STORM_LASH);
+            SelectHeroSkill(source, SID_EARTH_SHOCK);
+            SelectHeroSkill(source, SID_ENCHANTED_TOTEM);
+            SelectHeroSkill(source, SID_ASCENDANCE);
+            SelectHeroSkill(source, SID_PURGE);    
+            SelectHeroSkill(source, SID_STORM_LASH);
+            SelectHeroSkill(source, SID_EARTH_SHOCK);
+            SelectHeroSkill(source, SID_ENCHANTED_TOTEM);
+            SelectHeroSkill(source, SID_ASCENDANCE);
+            SelectHeroSkill(source, SID_PURGE);    
+            SelectHeroSkill(source, SID_STORM_LASH);
+            SelectHeroSkill(source, SID_EARTH_SHOCK);
+            SelectHeroSkill(source, SID_ENCHANTED_TOTEM);
+            SelectHeroSkill(source, SID_ASCENDANCE);
+            SelectHeroSkill(source, SID_PURGE);    
         }
     }
     
@@ -699,6 +888,22 @@ constant real AIACTION_INTERVAL = 0.33;
             SelectHeroSkill(source, SID_BLADE_FLURRY);    
             SelectHeroSkill(source, SID_STEALTH);
             SelectHeroSkill(source, SID_STEALTH);
+        } else {
+            SelectHeroSkill(source, SID_SINISTER_STRIKE);
+            SelectHeroSkill(source, SID_EVISCERATE);
+            SelectHeroSkill(source, SID_ASSAULT);
+            SelectHeroSkill(source, SID_BLADE_FLURRY);    
+            SelectHeroSkill(source, SID_STEALTH);
+            SelectHeroSkill(source, SID_SINISTER_STRIKE);
+            SelectHeroSkill(source, SID_EVISCERATE);
+            SelectHeroSkill(source, SID_ASSAULT);
+            SelectHeroSkill(source, SID_BLADE_FLURRY);    
+            SelectHeroSkill(source, SID_STEALTH);
+            SelectHeroSkill(source, SID_SINISTER_STRIKE);
+            SelectHeroSkill(source, SID_EVISCERATE);
+            SelectHeroSkill(source, SID_ASSAULT);
+            SelectHeroSkill(source, SID_BLADE_FLURRY);    
+            SelectHeroSkill(source, SID_STEALTH);
         }
     }
     
@@ -722,6 +927,22 @@ constant real AIACTION_INTERVAL = 0.33;
             SelectHeroSkill(source, SID_TERROR);
         } else if (GetHeroLevel(source) == 5) {
             SelectHeroSkill(source, SID_MARROW_SQUEEZE);        
+            SelectHeroSkill(source, SID_DEATH);    
+            SelectHeroSkill(source, SID_TERROR);
+        } else {
+            SelectHeroSkill(source, SID_PAIN);
+            SelectHeroSkill(source, SID_MARROW_SQUEEZE);
+            SelectHeroSkill(source, SID_MIND_FLAY);
+            SelectHeroSkill(source, SID_DEATH);    
+            SelectHeroSkill(source, SID_TERROR);
+            SelectHeroSkill(source, SID_PAIN);
+            SelectHeroSkill(source, SID_MARROW_SQUEEZE);
+            SelectHeroSkill(source, SID_MIND_FLAY);
+            SelectHeroSkill(source, SID_DEATH);    
+            SelectHeroSkill(source, SID_TERROR);
+            SelectHeroSkill(source, SID_PAIN);
+            SelectHeroSkill(source, SID_MARROW_SQUEEZE);
+            SelectHeroSkill(source, SID_MIND_FLAY);
             SelectHeroSkill(source, SID_DEATH);    
             SelectHeroSkill(source, SID_TERROR);
         }

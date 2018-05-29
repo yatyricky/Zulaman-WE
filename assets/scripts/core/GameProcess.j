@@ -47,6 +47,10 @@ library GameProcess requires PlayerUnitList, MobInit {
         if (utid == UTID_WARLOCK) {
             MobInitAllowArea(5);
         }
+        if (utid == UTID_PIT_ARCHON) {
+            // MobInitAllowArea(5);
+            AbyssArchonGlobal.wipeWraiths();
+        }
     }
 
     function onInit() {

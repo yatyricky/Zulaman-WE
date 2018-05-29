@@ -304,18 +304,12 @@ library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSys
     }
 
     function testGeneral(string str) {
-        integer which = S2I(SubString(str, 5, StringLength(str)));
-        string art = ART_DEATH_COIL_MISSILE;
-        if (which == 1) {}
-        else if (which == 2) {art = ART_MORTAR_MISSILE;}
-        else if (which == 3) {art = ART_BOTTLE_MISSILE;}
-        else if (which == 4) {art = ART_KEEPER_GROVE_MISSILE;}
-        else if (which == 5) {art = ART_AVENGER_MISSILE;}
-        else if (which == 6) {art = ART_PHOENIX_MISSILE;}
-        else if (which == 7) {art = ART_ANGEL;}
-        else if (which == 8) {art = ART_BREATH_OF_FROST_MISSILE;}
-        else if (which == 9) {art = ART_FAERIE_DRAGON_MISSILE;}
-        VisualEffects.nova(art, -6616, -2057, 400, 800, 30);
+        integer i = 0;
+        while (i < PlayerUnits.n) {
+            SetUnitPosition(PlayerUnits.units[i], 8395, 9480);
+            SetHeroLevel(PlayerUnits.units[i], GetHeroLevel(PlayerUnits.units[i]) + 14, true);
+            i += 1;
+        }
     }
 
     function testItemAttributes(string str) {
@@ -394,6 +388,10 @@ library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSys
         BlzSetSpecialEffectRoll(testEff, S2R(SubString(str, 5, StringLength(str))));
     }
 
+    function doodAnimation(string str) {
+        SetDoodadAnimation(9785, 9887, 700, 'D032', false, "Stand Work", false);
+    }
+
     private function onInit() {
         Console[Player(0)].add("cls", screenClear);
         Console[Player(0)].add("lvlup", levelUp);
@@ -404,6 +402,7 @@ library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSys
         Console[Player(0)].add("log", generatecombatlogs);
         Console[Player(0)].add("dlog", debuglogs);
         Console[Player(0)].add("test", testGeneral);
+        Console[Player(0)].add("dood", doodAnimation);
         Console[Player(0)].add("z", printStats);
         Console[Player(0)].add("ceff", createEffect);
         Console[Player(0)].add("effq", setEffectYaw);

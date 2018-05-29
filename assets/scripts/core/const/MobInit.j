@@ -32,6 +32,10 @@ constant integer MOBINIT_RESPAWN_H = 72;
         if (GetUnitTypeId(u) == UTID_WARLOCK) {
             ResetFireRunes();
         }
+
+        if (GetUnitTypeId(u) == UTID_PIT_ARCHON) {
+            AbyssArchonGlobal.reset();
+        }
         
         IssueImmediateOrderById(u, OID_STOP);
         PauseUnit(u, true);

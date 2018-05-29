@@ -920,6 +920,7 @@ public constant string ART_DEATH_COIL_MISSILE = "Abilities\\Spells\\Undead\\Deat
 public constant string ART_DEATH_COIL_SPECIAL_ART = "Abilities\\Spells\\Undead\\DeathCoil\\DeathCoilSpecialArt.mdl";
 public constant string ART_RAISE_SKELETON = "Abilities\\Spells\\Undead\\RaiseSkeletonWarrior\\RaiseSkeleton.mdl";
 public constant string ART_FLAME_STRIKE_TARGET = "Abilities\\Spells\\Human\\FlameStrike\\FlameStrikeTarget.mdl";
+public constant string ART_DarkSummonTarget = "Abilities\\Spells\\Undead\\Darksummoning\\DarkSummonTarget.mdl";
 
 public constant string BTNVolcano = "ReplaceableTextures\\CommandButtons\\BTNVolcano.blp";
 public constant string BTNEarthquake = "ReplaceableTextures\\CommandButtons\\BTNEarthquake.blp";

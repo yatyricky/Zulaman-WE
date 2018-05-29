@@ -1,6 +1,5 @@
 //! zinc
-library Wraith requires UnitProperty {
-constant real WRAITH_CHECK_INTERVAL = 0.34;
+library Wraith requires UnitProperty, AggroSystem {
 
     timer wraithCheck;
 
@@ -13,14 +12,18 @@ constant real WRAITH_CHECK_INTERVAL = 0.34;
     }
 
     function checkRun() {
-        integer i, j;
+        NodeObject iter;
+        unit wraith;
+        integer j;
         Buff buf;
-        for (0 <= i < SummonedWraiths.size()) {
+        iter = AbyssArchonGlobal.wraiths.head;
+        while (iter != 0) {
+            wraith = IntRefUnit(iter.data);
             for (0 <= j < PlayerUnits.n) {
-                if (GetDistance.units(SummonedWraiths.get(i), PlayerUnits.units[j]) <= AbyssArchonGlobal.wraithAOE) {
-                    buf = Buff.cast(SummonedWraiths.get(i), PlayerUnits.units[j], BID_SUMMON_WRAITH);
+                if (GetDistance.units(wraith, PlayerUnits.units[j]) <= AbyssArchonGlobal.wraithAOE) {
+                    buf = Buff.cast(wraith, PlayerUnits.units[j], BID_SUMMON_WRAITH);
                     buf.bd.tick = -1;
-                    buf.bd.interval = WRAITH_CHECK_INTERVAL + 0.1;
+                    buf.bd.interval = 0.4;
                     UnitProp.inst(buf.bd.target, SCOPE_PREFIX).healTaken += buf.bd.r0;
                     buf.bd.r0 = 1.0;
                     buf.bd.boe = onEffect;
@@ -28,14 +31,32 @@ constant real WRAITH_CHECK_INTERVAL = 0.34;
                     buf.run();
                 }
             }
+            iter = iter.next;
         }
+        wraith = null;
     }
 
     function wraithDeath(unit u) {
+        integer ref;
+        NodeObject iter;
         if (GetUnitTypeId(u) == UTID_WRAITH) {
-            SummonedWraiths.remove(u);
-            if (SummonedWraiths.size() == 0) {
-                PauseTimer(wraithCheck);
+            ref = -1;
+            iter = AbyssArchonGlobal.wraiths.head;
+            while (iter != 0) {
+                if (u == IntRefUnit(iter.data)) {
+                    ref = iter.data;
+                } else {
+                    iter = iter.next;
+                }
+            }
+            if (ref == -1) {
+                loge("wraith dead but was not pushed into list");
+            } else {
+                AbyssArchonGlobal.wraiths.removeNode(iter);
+                Int2Unit(ref);
+                if (AbyssArchonGlobal.wraiths.count() == 0) {
+                    PauseTimer(wraithCheck);
+                }
             }
         }
     }
@@ -45,16 +66,24 @@ constant real WRAITH_CHECK_INTERVAL = 0.34;
         UnitProp.inst(dt.u0, SCOPE_PREFIX).spellTaken = -5.0;
     }
 
-    function onCast() {
+    function doSummonWraith(DelayTask dt) {
         unit u;
-        Point p = AbyssArchonGlobal.getSummonPoint();
-        if (SummonedWraiths.size() == 0) {
-            TimerStart(wraithCheck, WRAITH_CHECK_INTERVAL, true, function checkRun);
+        if (IsInCombat() == true) {
+            u = CreateUnit(Player(MOB_PID), UTID_WRAITH, 9788, 9467, 180);
+            AddTimedEffect.atUnit(ART_DarkSummonTarget, u, "origin", 0.2);
+            if (AbyssArchonGlobal.wraiths.count() == 0) {
+                TimerStart(wraithCheck, 0.34, true, function checkRun);
+            }
+            DelayTask.create(AddInvul, 0.09).u0 = u;
+            AbyssArchonGlobal.wraiths.push(Unit2Int(u));
+            u = null;
         }
-        u = CreateUnit(Player(MOB_PID), UTID_WRAITH, p.x, p.y, GetRandomReal(0, 359));
-        DelayTask.create(AddInvul, 0.09).u0 = u;
-        SummonedWraiths.add(u);
-        p.destroy();
+        SetDoodadAnimation(9788, 9467, 200, 'D032', false, "Stand", false);
+    }
+
+    function onCast() {
+        DelayTask dt = DelayTask.create(doSummonWraith, 5.0);
+        SetDoodadAnimation(9788, 9467, 200, 'D032', false, "Stand Work", false);
     }
 
     function onInit() {
@@ -62,6 +91,7 @@ constant real WRAITH_CHECK_INTERVAL = 0.34;
         BuffType.register(BID_SUMMON_WRAITH, BUFF_PHYX, BUFF_NEG);
         RegisterUnitDeath(wraithDeath);
         wraithCheck = CreateTimer();
+        AbyssArchonGlobal.wraiths = ListObject.create();
     }
 
 }

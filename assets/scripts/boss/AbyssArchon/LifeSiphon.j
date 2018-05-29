@@ -21,16 +21,18 @@ library LifeSiphon requires DamageSystem, BuffSystem {
             this.ctr -= 1;
             if (ModuloInteger(this.ctr, 10) == 0) {
                 for (0 <= i < PlayerUnits.n) {
-                    StunUnit(this.caster, PlayerUnits.units[i], 1.1);
+                    if (IsUnitType(PlayerUnits.units[i], UNIT_TYPE_HERO) == true) {
+                        StunUnit(this.caster, PlayerUnits.units[i], 1.1);
 
-                    if (GetUnitAbilityLevel(PlayerUnits.units[i], BID_SUMMON_POISONOUS_CRAWLER) > 0) {
-                        AddTimedLight.atUnits("DRAL", this.caster, PlayerUnits.units[i], 1.0);
-                    } else {
-                        AddTimedLight.atUnits("DRAL", this.caster, PlayerUnits.units[i], 1.0).setColour(1,0.2,0.2,1);
-                        amt = GetUnitState(PlayerUnits.units[i], UNIT_STATE_MAX_LIFE) * 0.16;
-                        DamageTarget(this.caster, PlayerUnits.units[i], amt, SpellData.inst(SID_LIFE_SIPHON, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS, false);
-                        HealTarget(this.caster, this.caster, amt * 30.0, SpellData.inst(SID_LIFE_SIPHON, SCOPE_PREFIX).name, 0.0, false);
-                        AddTimedEffect.atUnit(ART_HEAL, this.caster, "origin", 0.2);
+                        if (GetUnitAbilityLevel(PlayerUnits.units[i], BID_SUMMON_POISONOUS_CRAWLER) > 0) {
+                            AddTimedLight.atUnits("DRAL", this.caster, PlayerUnits.units[i], 1.0);
+                        } else {
+                            AddTimedLight.atUnits("DRAL", this.caster, PlayerUnits.units[i], 1.0).setColour(1,0.2,0.2,1);
+                            amt = GetUnitState(PlayerUnits.units[i], UNIT_STATE_MAX_LIFE) * 0.16;
+                            DamageTarget(this.caster, PlayerUnits.units[i], amt, SpellData.inst(SID_LIFE_SIPHON, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS, false);
+                            HealTarget(this.caster, this.caster, amt * 30.0, SpellData.inst(SID_LIFE_SIPHON, SCOPE_PREFIX).name, 0.0, false);
+                            AddTimedEffect.atUnit(ART_HEAL, this.caster, "origin", 0.2);
+                        }
                     }
                 }
             }

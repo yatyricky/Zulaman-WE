@@ -1,24 +1,31 @@
 //! zinc
-library AbyssArchonGlobal {
-
-    //! runtextmacro WriteArrayList("SummonedWraiths", "unit", "null")
+library AbyssArchonGlobal requires Handle2Integer {
 
     public struct AbyssArchonGlobal {
         private static boolean flip = true;
         static real poisonAOE = 400;
         static real abominationAOE = 300;
         static real wraithAOE = 250;
+        static boolean summonedCrawler = false;
+        static ListObject/*Point*/ poisons;
+        static ListObject/*Ref<unit>*/ wraiths;
 
-        static method getSummonPoint() -> Point {
-            if (thistype.flip) {
-                thistype.flip = !thistype.flip;
-                return Point.new(5757, 9981);
-            } else {
-                thistype.flip = !thistype.flip;
-                return Point.new(5976, 7600);
+        static method reset() {
+            thistype.summonedCrawler = false;
+        }
+
+        static method onInit() {
+            thistype.poisons = ListObject.create();
+        }
+
+        static method wipeWraiths() {
+            NodeObject iter = thistype.wraiths;
+            while (iter != 0) {
+                KillUnit(IntRefUnit(iter.data));
+                iter = iter.next;
             }
         }
-        
+
     }
 
 }

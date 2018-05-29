@@ -1,5 +1,5 @@
 //! zinc
-library Abomination requires DamageSystem {
+library Abomination requires DamageSystem, AggroSystem {
 
     function onEffect(Buff buf) {
         UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageTaken += buf.bd.r0;
@@ -51,10 +51,19 @@ library Abomination requires DamageSystem {
         }
     }
 
+    function doSummonAbomination(DelayTask dt) {
+        unit u;
+        if (IsInCombat() == true) {
+            u = CreateUnit(Player(MOB_PID), UTID_ABOMINATION, 9772, 10029, 270);
+            AddTimedEffect.atUnit(ART_DarkSummonTarget, u, "origin", 0.2);
+            u = null;
+        }
+        SetDoodadAnimation(9769, 10396, 200, 'D031', false, "Stand", false);
+    }
+
     function onCast() {
-        Point p = AbyssArchonGlobal.getSummonPoint();
-        CreateUnit(Player(MOB_PID), UTID_ABOMINATION, p.x, p.y, GetRandomReal(0, 359));
-        p.destroy();
+        DelayTask dt = DelayTask.create(doSummonAbomination, 5.0);
+        SetDoodadAnimation(9769, 10396, 200, 'D031', false, "Stand Work", false);
     }
 
     function onInit() {

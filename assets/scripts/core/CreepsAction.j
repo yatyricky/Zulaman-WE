@@ -230,6 +230,34 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
             ip.destroy();
         }
     }
+
+    function makeOrderFelDefender(unit source, unit target, real combatTime) {
+        IntegerPool ip;
+        integer res;
+        unit tu;
+        if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
+            ip = IntegerPool.create();
+            if (UnitCanUse(source, SID_POWER_SHADOW_SHIFT) && combatTime > 15.0) {
+                ip.add(SID_POWER_SHADOW_SHIFT, 20);
+            }
+            if (UnitCanUse(source, SID_SHADOW_DETONATION) && combatTime > 10.0) {
+                ip.add(SID_SHADOW_DETONATION, 50);
+            }
+            ip.add(0, 10);
+            
+            res = ip.get();
+            if (res == 0) {
+                IssueTargetOrderById(source, OID_ATTACK, target);
+            } else if (res == SID_POWER_SHADOW_SHIFT) {
+                IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, PlayerUnits.getRandomHero());
+            } else if (res == SID_SHADOW_DETONATION) {
+                tu = PlayerUnits.getRandomHero();
+                IssuePointOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, GetUnitX(tu), GetUnitY(tu));
+                tu = null;
+            }
+            ip.destroy();
+        }
+    }
     
     // target
     function makeOrderh000(unit source, unit target, real combatTime) {}
@@ -612,20 +640,22 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         integer res;
         if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
             ip = IntegerPool.create();
-            if (UnitCanUse(source, SID_LIFE_SIPHON) && combatTime > 40 && GetUnitStatePercent(source, UNIT_STATE_LIFE, UNIT_STATE_MAX_LIFE) < 81) {
-                ip.add(SID_LIFE_SIPHON, 100);
+            ip.add(0, 1);
+            if (UnitCanUse(source, SID_SUMMON_POISONOUS_CRAWLER) && combatTime > 20) {
+                ip.add(SID_SUMMON_POISONOUS_CRAWLER, 50);
             } else {
-                if (UnitCanUse(source, SID_IMPALE) && combatTime > 15) {
-                    ip.add(SID_IMPALE, 100);
-                }
-                if (UnitCanUse(source, SID_SUMMON_POISONOUS_CRAWLER) && GetUnitStatePercent(source, UNIT_STATE_LIFE, UNIT_STATE_MAX_LIFE) < 81) {
-                    ip.add(SID_SUMMON_POISONOUS_CRAWLER, 50);
-                }
-                if (UnitCanUse(source, SID_SUMMON_ABOMINATION) && GetUnitStatePercent(source, UNIT_STATE_LIFE, UNIT_STATE_MAX_LIFE) < 51) {
-                    ip.add(SID_SUMMON_ABOMINATION, 50);
-                }
-                if (UnitCanUse(source, SID_SUMMON_WRAITH) && GetUnitStatePercent(source, UNIT_STATE_LIFE, UNIT_STATE_MAX_LIFE) < 21) {
-                    ip.add(SID_SUMMON_WRAITH, 50);
+                if (UnitCanUse(source, SID_LIFE_SIPHON) && combatTime > 40 && GetUnitStatePercent(source, UNIT_STATE_LIFE, UNIT_STATE_MAX_LIFE) < 81) {
+                    ip.add(SID_LIFE_SIPHON, 100);
+                } else {
+                    if (UnitCanUse(source, SID_IMPALE) && combatTime > 15) {
+                        ip.add(SID_IMPALE, 100);
+                    }
+                    if (UnitCanUse(source, SID_SUMMON_ABOMINATION) && GetUnitStatePercent(source, UNIT_STATE_LIFE, UNIT_STATE_MAX_LIFE) < 51) {
+                        ip.add(SID_SUMMON_ABOMINATION, 50);
+                    }
+                    if (UnitCanUse(source, SID_SUMMON_WRAITH) && GetUnitStatePercent(source, UNIT_STATE_LIFE, UNIT_STATE_MAX_LIFE) < 21) {
+                        ip.add(SID_SUMMON_WRAITH, 50);
+                    }
                 }
             }
             res = ip.get();
@@ -634,6 +664,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
             } else if (SpellData.inst(res, SCOPE_PREFIX).otp == ORDER_TYPE_TARGET) {
                 IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, PlayerUnits.getRandomHero());
             } else if (SpellData.inst(res, SCOPE_PREFIX).otp == ORDER_TYPE_IMMEDIATE) {
+                logi("issued order " + ID2S(res));
                 IssueImmediateOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid);
             }
             ip.destroy();

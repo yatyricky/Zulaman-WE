@@ -200,11 +200,11 @@ SpellData.create(SID_FLAME_THROW,"Flame Throw",100,0,5,OrderId("sleep"),1,ORDER_
 SpellData.create(SID_FLAME_BOMB,"Flame Bomb",100,10,40,OrderId("slow"),2,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_SUMMON_LAVA_SPAWN,"Summon Lava Spawn",100,10,30,OrderId("soulburn"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_FRENZY_WARLOCK,"Frenzy Warlock",0,0,200,OrderId("stomp"),1,ORDER_TYPE_IMMEDIATE);
-SpellData.create(SID_IMPALE,"Impale",0,0,15,OrderId("impale"),1,ORDER_TYPE_TARGET);
+SpellData.create(SID_IMPALE,"Impale",0,0,20,OrderId("impale"),1,ORDER_TYPE_TARGET);
 SpellData.create(SID_SUMMON_POISONOUS_CRAWLER,"Summon Poisonous Crawler",0,0,25,OrderId("slow"),1,ORDER_TYPE_IMMEDIATE);
-SpellData.create(SID_SUMMON_ABOMINATION,"Summon Abomination",0,0,15,OrderId("charm"),1,ORDER_TYPE_IMMEDIATE);
-SpellData.create(SID_SUMMON_WRAITH,"Summon Wraith",0,0,15,OrderId("invisibility"),1,ORDER_TYPE_IMMEDIATE);
-SpellData.create(SID_LIFE_SIPHON,"Life Siphon",0,5,25,OrderId("sleep"),2,ORDER_TYPE_IMMEDIATE);
+SpellData.create(SID_SUMMON_ABOMINATION,"Summon Abomination",0,0,20,OrderId("charm"),1,ORDER_TYPE_IMMEDIATE);
+SpellData.create(SID_SUMMON_WRAITH,"Summon Wraith",0,0,20,OrderId("invisibility"),1,ORDER_TYPE_IMMEDIATE);
+SpellData.create(SID_LIFE_SIPHON,"Life Siphon",0,5,30,OrderId("sleep"),2,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_FEL_EXECUTION,"Fel Execution",0,0,20,OrderId("sleep"),1,ORDER_TYPE_TARGET);
 SpellData.create(SID_POWER_SLASH,"Power Slash",0,0,10,OrderId("purge"),1,ORDER_TYPE_TARGET);
 SpellData.create(SID_FEL_FRENZY,"Fel Frenzy",0,0,20,OrderId("howlofterror"),1,ORDER_TYPE_IMMEDIATE);
