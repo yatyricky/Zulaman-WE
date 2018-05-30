@@ -142,7 +142,7 @@ library NefUnion requires TimerUtils, Math {
         private real za;
         private real zb;
         
-        private method destroy() {
+        method destroy() {
             ReleaseTimer(this.t);
             DestroyLightning(this.l);
             RemoveLocation(this.la);

@@ -71,7 +71,5 @@ constant string  STUN_OSTR  = "thunderbolt";
         StunUtils.terminate(t);
     }
 
-
-
 }
 //! endzinc

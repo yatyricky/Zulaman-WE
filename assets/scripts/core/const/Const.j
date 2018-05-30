@@ -269,6 +269,9 @@ public constant integer BID_FEL_FRENZY = 'A0CZ';
 public constant integer UTID_FEL_DEFENDER = 'Opgh';
 public constant integer SID_POWER_SHADOW_SHIFT = 'A0D0';
 public constant integer SID_SHADOW_DETONATION = 'A0D1';
+public constant integer SID_SOUL_LINK = 'A0D3';
+public constant integer BID_SOUL_LINK = 'A0D2';
+public constant integer BID_PORTAL_INVULNERABLE = 'A0D4';
 
 // hex lord
 public constant integer UTID_HEX_LORD = 'Oshd';

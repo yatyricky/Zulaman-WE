@@ -38,14 +38,6 @@ Should be deprecated, all constants go [Boss]Global library
         static real fireBombRadius = 150.0;
     }
     
-    public struct DBMAbyssArchon {
-    
-    }
-    
-    public struct DBMTheFelguards {
-    
-    }
-    
     public struct DBMHexLord {
         static integer absorb = 0;
         static integer spell1 = 0;
@@ -53,8 +45,5 @@ Should be deprecated, all constants go [Boss]Global library
         static boolean canOverpower = false;
     }
     
-    public struct DBMHighWarlord {
-    
-    }
 }
 //! endzinc

@@ -210,6 +210,7 @@ SpellData.create(SID_POWER_SLASH,"Power Slash",0,0,10,OrderId("purge"),1,ORDER_T
 SpellData.create(SID_FEL_FRENZY,"Fel Frenzy",0,0,20,OrderId("howlofterror"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_POWER_SHADOW_SHIFT,"Power Shadow Shift",0,4,8,OrderId("slow"),1,ORDER_TYPE_TARGET);
 SpellData.create(SID_SHADOW_DETONATION,"Shadow Detonation",0,0,15,OrderId("blizzard"),1,ORDER_TYPE_POINT);
+SpellData.create(SID_SOUL_LINK,"Soul Link",0,0,1,OrderId("charm"),1,ORDER_TYPE_TARGET);
 SpellData.create(SID_SPIRIT_BOLT,"Spirit Bolt",50,10,40,OrderId("heal"),2,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_SPIRIT_HARVEST,"Spirit Harvest",0,0,35,OrderId("hex"),1,ORDER_TYPE_IMMEDIATE);
 SpellData.create(SID_SUN_FIRE_STORMHEX,"Sun fire Stormhex",100,0,10,OrderId("slow"),1,ORDER_TYPE_IMMEDIATE);

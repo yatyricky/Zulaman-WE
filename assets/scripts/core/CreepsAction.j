@@ -4,6 +4,12 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
     Table unitCallBack;
     HandleTable focus, pace;
     type UnitActionType extends function(unit, unit, real);
+
+    function makeOrderDoNothing(unit source, unit target, real combatTime) {}
+
+    function makeOrderJustAttack(unit source, unit target, real combatTime) {
+        IssueTargetOrderById(source, OID_ATTACK, target);
+    }
     
     function makeOrderHexLord(unit source, unit target, real combatTime) {
         IntegerPool ip;
@@ -28,7 +34,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
                 }
             }
             res = ip.get();
-// print("选取技能"+SpellData.inst(res, SCOPE_PREFIX).name);
+            // print("选取技能"+SpellData.inst(res, SCOPE_PREFIX).name);
             if (res == 0) {
                 IssueTargetOrderById(source, OID_ATTACK, target);
             } else if (SpellData.inst(res, SCOPE_PREFIX).otp == ORDER_TYPE_TARGET) {
@@ -46,7 +52,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
                     }
                 }
                 if (tar != null) {target = tar;}
-//print("Going to " + SpellData.inst(res, SCOPE_PREFIX).name + " on " + GetUnitNameEx(target));
+                //print("Going to " + SpellData.inst(res, SCOPE_PREFIX).name + " on " + GetUnitNameEx(target));
                 IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, target);
             } else if (SpellData.inst(res, SCOPE_PREFIX).otp == ORDER_TYPE_IMMEDIATE) {
                 IssueImmediateOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid);
@@ -201,22 +207,81 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         }
     }
 
+    function onEffectFelPortalInvulnerable(Buff buf) {
+        StunBoss(buf.bd.target, buf.bd.target, 999);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageTaken -= buf.bd.r0;
+    }
+
+    function onRemoveFelPortalInvulnerable(Buff buf) {
+        RemoveStun(buf.bd.target);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageTaken += buf.bd.r0;
+    }
+
+    function lockFelGuards(unit lock, unit unlock) {
+        Buff buf;
+        BuffSlot bs;
+        if (GetUnitStatePercent(lock, UNIT_STATE_LIFE, UNIT_STATE_MAX_LIFE) > 20) {
+            SetUnitPosition(lock, 100, 100);
+            AddTimedEffect.atUnit(ART_MASS_TELEPORT_TARGET, lock, "origin", 1.0);
+            buf = Buff.cast(lock, lock, BID_PORTAL_INVULNERABLE);
+            buf.bd.tick = -1;
+            buf.bd.interval = 120;
+            UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageTaken += buf.bd.r0;
+            buf.bd.r0 = 5.0;
+            buf.bd.boe = onEffectFelPortalInvulnerable;
+            buf.bd.bor = onRemoveFelPortalInvulnerable;
+            buf.run();
+        } else {
+            bs = BuffSlot[lock];
+            buf = bs.getBuffByBid(BID_PORTAL_INVULNERABLE);
+            if (buf != 0) {
+                bs.dispelByBuff(buf);
+                buf.destroy();
+            }
+        }
+        bs = BuffSlot[unlock];
+        buf = bs.getBuffByBid(BID_PORTAL_INVULNERABLE);
+        if (buf != 0) {
+            bs.dispelByBuff(buf);
+            buf.destroy();
+        }
+    }
+
     function makeOrderFelGuard(unit source, unit target, real combatTime) {
         IntegerPool ip;
         integer res;
+        integer state = 0;
+        if (combatTime >= FelGuardsGlobals.stage * 40) {
+            FelGuardsGlobals.stage += 1;
+            if (ModuloInteger(FelGuardsGlobals.stage, 2) == 1) {
+                lockFelGuards(FelGuardsGlobals.bossGuard, FelGuardsGlobals.bossDefender);
+            } else {
+                lockFelGuards(FelGuardsGlobals.bossDefender, FelGuardsGlobals.bossGuard);
+            }
+        }
         if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
             ip = IntegerPool.create();
-            if (UnitCanUse(source, SID_FEL_EXECUTION) && combatTime > 15.0) {
-                ip.add(SID_FEL_EXECUTION, 30);
+            if (GetUnitStatePercent(source, UNIT_STATE_LIFE, UNIT_STATE_MAX_LIFE) < 4) {
+                if (GetUnitStatePercent(FelGuardsGlobals.bossDefender, UNIT_STATE_LIFE, UNIT_STATE_MAX_LIFE) >= 4) {
+                    ip.add(SID_SOUL_LINK, 100);
+                    state = 1;
+                } else {
+                    KillUnit(source);
+                    KillUnit(FelGuardsGlobals.bossDefender);
+                }
             }
-            if (UnitCanUse(source, SID_POWER_SLASH) && combatTime > 10.0) {
-                ip.add(SID_POWER_SLASH, 30);
+            if (state == 0) {
+                if (UnitCanUse(source, SID_FEL_EXECUTION) && combatTime > 15.0) {
+                    ip.add(SID_FEL_EXECUTION, 30);
+                }
+                if (UnitCanUse(source, SID_POWER_SLASH) && combatTime > 10.0) {
+                    ip.add(SID_POWER_SLASH, 30);
+                }
+                if (UnitCanUse(source, SID_FEL_FRENZY) && combatTime > 15.0) {
+                    ip.add(SID_FEL_FRENZY, 30);
+                }
+                ip.add(0, 10);
             }
-            if (UnitCanUse(source, SID_FEL_FRENZY) && combatTime > 15.0) {
-                ip.add(SID_FEL_FRENZY, 30);
-            }
-            ip.add(0, 10);
-            
             res = ip.get();
             if (res == 0) {
                 IssueTargetOrderById(source, OID_ATTACK, target);
@@ -226,6 +291,8 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
                 IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, target);
             } else if (res == SID_FEL_FRENZY) {
                 IssueImmediateOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid);
+            } else if (res == SID_SOUL_LINK) {
+                IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, FelGuardsGlobals.bossDefender);
             }
             ip.destroy();
         }
@@ -235,15 +302,27 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         IntegerPool ip;
         integer res;
         unit tu;
+        integer state = 0;
         if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
             ip = IntegerPool.create();
-            if (UnitCanUse(source, SID_POWER_SHADOW_SHIFT) && combatTime > 15.0) {
-                ip.add(SID_POWER_SHADOW_SHIFT, 20);
+            if (GetUnitStatePercent(source, UNIT_STATE_LIFE, UNIT_STATE_MAX_LIFE) < 4) {
+                if (GetUnitStatePercent(FelGuardsGlobals.bossGuard, UNIT_STATE_LIFE, UNIT_STATE_MAX_LIFE) >= 4) {
+                    ip.add(SID_SOUL_LINK, 100);
+                    state = 1;
+                } else {
+                    KillUnit(source);
+                    KillUnit(FelGuardsGlobals.bossGuard);
+                }
             }
-            if (UnitCanUse(source, SID_SHADOW_DETONATION) && combatTime > 10.0) {
-                ip.add(SID_SHADOW_DETONATION, 50);
+            if (state == 0) {
+                if (UnitCanUse(source, SID_POWER_SHADOW_SHIFT) && combatTime > 15.0) {
+                    ip.add(SID_POWER_SHADOW_SHIFT, 20);
+                }
+                if (UnitCanUse(source, SID_SHADOW_DETONATION) && combatTime > 10.0) {
+                    ip.add(SID_SHADOW_DETONATION, 50);
+                }
+                ip.add(0, 10);
             }
-            ip.add(0, 10);
             
             res = ip.get();
             if (res == 0) {
@@ -254,26 +333,12 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
                 tu = PlayerUnits.getRandomHero();
                 IssuePointOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, GetUnitX(tu), GetUnitY(tu));
                 tu = null;
+            } else if (res == SID_SOUL_LINK) {
+                IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, FelGuardsGlobals.bossGuard);
             }
             ip.destroy();
         }
     }
-    
-    // target
-    function makeOrderh000(unit source, unit target, real combatTime) {}
-    
-    // healing ward
-    function makeOrderNTPHealingWard(unit source, unit target, real combatTime) {}
-    
-    // protection ward
-    function makeOrderNTPProtectionWard(unit source, unit target, real combatTime) {}
-    
-    // tank tester
-    function makeOrderh002(unit source, unit target, real combatTime) {
-        IssueTargetOrderById(source, OID_ATTACK, target);
-    }
-    
-    function makeOrderLightningTotem(unit source, unit target, real combatTime) {}
     
     // nage siren
     function makeOrderNagaSiren(unit source, unit target, real combatTime) {
@@ -346,11 +411,6 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
             ip.destroy();
         }
         tu = null;
-    }
-    
-    // serpent inferior
-    function makeOrdern003(unit source, unit target, real combatTime) {
-        IssueTargetOrderById(source, OID_ATTACK, target);
     }
     
     // nage myrmidon
@@ -438,25 +498,6 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         tu = null;
     }
     
-    // sea lizard
-    function makeOrderSeaLizard(unit source, unit target, real combatTime) {
-        IssueTargetOrderById(source, OID_ATTACK, target);
-    }
-    
-    // murloc slave
-    function makeOrderMurlocSlave(unit source, unit target, real combatTime) {
-        IssueTargetOrderById(source, OID_ATTACK, target);
-    }
-
-    // Noxious Spider
-    function makeOrderNoxiousSpider(unit source, unit target, real combatTime) {
-        IssueTargetOrderById(source, OID_ATTACK, target);
-    }
-
-    function makeOrderJustAttack(unit source, unit target, real combatTime) {
-        IssueTargetOrderById(source, OID_ATTACK, target);
-    }
-
     // wind serpent        
     function makeOrderWindSerpent(unit source, unit target, real combatTime) {
         IntegerPool ip;
@@ -578,7 +619,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
                 }
             } else if (SpellData.inst(res, SCOPE_PREFIX).otp == ORDER_TYPE_IMMEDIATE) {
                 if (res == SID_TIDE_BARON_MORPH) {
-//print("wanna be slardar");
+                    //print("wanna be slardar");
                     IssueImmediateOrderById(source, OID_UNBEARFORM);
                 }
             }
@@ -630,10 +671,6 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
             ip.destroy();
         }    
     }
-    
-    function makeOrderLavaSpawn(unit source, unit target, real combatTime) {
-        IssueTargetOrderById(source, OID_ATTACK, target);
-    }
 
     function makeOrderAbyssArchon(unit source, unit target, real combatTime) {
         IntegerPool ip;
@@ -671,20 +708,6 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         }
     }
 
-    function makeOrderSpike(unit source, unit target, real combatTime) {}
-
-    function makeOrderPoisonousCrawler(unit source, unit target, real combatTime) {
-        IssueTargetOrderById(source, OID_ATTACK, target);   
-    }
-
-    function makeOrderAbomination(unit source, unit target, real combatTime) {
-        IssueTargetOrderById(source, OID_ATTACK, target);   
-    }
-
-    function makeOrderWraith(unit source, unit target, real combatTime) {
-        IssueTargetOrderById(source, OID_ATTACK, target);   
-    }
-
     function makeOrderFelGrunt(unit source, unit target, real combatTime) {
         IntegerPool ip;
         integer res;
@@ -704,10 +727,6 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
             ip.destroy();
         }
         tu = null;
-    }
-
-    function makeOrderCursedHunter(unit source, unit target, real combatTime) {
-        IssueTargetOrderById(source, OID_ATTACK, target);   
     }
 
     function makeOrderNetherHatchling(unit source, unit target, real combatTime) {
@@ -1087,8 +1106,6 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         }
     }
 
-    function makeOrderGrimTotem(unit source, unit target, real combatTime) {}
-
     function makeOrderTwilightWitchDoctor(unit source, unit target, real combatTime) {
         IntegerPool ip;
         integer res;
@@ -1138,43 +1155,43 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         //print(GetUnitName(source) + " wants to attack " + GetUnitName(target));
     }
     
-    function register() {
+    function registerUnitCallback() {
         unitCallBack['Ntin'] = makeOrderNtin;   // Arch Tinker
         unitCallBack['Nrob'] = makeOrderNrob;   // Arch Tinker Morph
         unitCallBack['nfac'] = makeOrdernfac;   // Pocket Factory
         unitCallBack['ncgb'] = makeOrderncgb;   // Clockwork Goblin
         
         unitCallBack['Hvsh'] = makeOrderHvsh;   // Naga Sea Witch
-        unitCallBack['n003'] = makeOrdern003;   // Wind Serpent Inferior
+        unitCallBack[UTID_FLYING_SERPENT] = makeOrderJustAttack;
         
         unitCallBack[UTID_TIDE_BARON_WATER] = makeOrderTideBaronWater;   // Sir Tide Water form
         unitCallBack[UTID_TIDE_BARON] = makeOrderTideBaron;   // Sir Tide Naga form
 
         unitCallBack[UTID_WARLOCK] = makeOrderWarlock;   // Warlock
-        unitCallBack[UTID_LAVA_SPAWN] = makeOrderLavaSpawn;   // Lava Spawn
+        unitCallBack[UTID_LAVA_SPAWN] = makeOrderJustAttack;
 
         unitCallBack[UTID_PIT_ARCHON] = makeOrderAbyssArchon;
-        unitCallBack[UTID_SPIKE] = makeOrderSpike;
-        unitCallBack[UTID_POISONOUS_CRAWLER] = makeOrderPoisonousCrawler;
-        unitCallBack[UTID_ABOMINATION] = makeOrderAbomination;
-        unitCallBack[UTID_WRAITH] = makeOrderWraith;
+        unitCallBack[UTID_SPIKE] = makeOrderDoNothing;
+        unitCallBack[UTID_POISONOUS_CRAWLER] = makeOrderJustAttack;
+        unitCallBack[UTID_ABOMINATION] = makeOrderJustAttack;
+        unitCallBack[UTID_WRAITH] = makeOrderJustAttack;
 
         unitCallBack[UTID_FEL_GUARD] = makeOrderFelGuard;
         unitCallBack[UTID_FEL_DEFENDER] = makeOrderFelDefender;
 
         unitCallBack[UTID_HEX_LORD] = makeOrderHexLord;   // Hex Lord
-        unitCallBack[UTID_LIGHTNING_TOTEM] = makeOrderLightningTotem;   // Lightning Totem
+        unitCallBack[UTID_LIGHTNING_TOTEM] = makeOrderDoNothing;
         
         // ============= Area 1, 2 ==================
         unitCallBack[UTID_NAGA_SIREN] = makeOrderNagaSiren;   // Naga Siren
         unitCallBack[UTID_NAGA_TIDE_PRIEST] = makeOrderNagaTidePriest;   // Naga Tide Priest
-        unitCallBack[UTID_NTR_HEALING_WARD] = makeOrderNTPHealingWard;   // NTP Healing Ward
-        unitCallBack[UTID_NTR_PROTECTION_WARD] = makeOrderNTPProtectionWard;   // NTP Protection Ward
+        unitCallBack[UTID_NTR_HEALING_WARD] = makeOrderDoNothing;   // NTP Healing Ward
+        unitCallBack[UTID_NTR_PROTECTION_WARD] = makeOrderDoNothing;   // NTP Protection Ward
         unitCallBack[UTID_NAGA_MYRMIDON] = makeOrderNagaMyrmidon;   // Naga Myrmidon
         unitCallBack[UTID_CHMP_NAGA_MYRMIDON] = makeOrderNagaMyrmidon;
         unitCallBack[UTID_NAGA_ROYAL_GUARD] = makeOrderNagaRoyalGuard;   // Naga Royal Guard
-        unitCallBack[UTID_SEA_LIZARD] = makeOrderSeaLizard;   // Sea Lizard
-        unitCallBack[UTID_MURLOC_SLAVE] = makeOrderMurlocSlave;   // Murloc Slave
+        unitCallBack[UTID_SEA_LIZARD] = makeOrderJustAttack;
+        unitCallBack[UTID_MURLOC_SLAVE] = makeOrderJustAttack;
         unitCallBack[UTID_WIND_SERPENT] = makeOrderWindSerpent;   // Wind Serpent
 
         // ============= Area 3 ==================
@@ -1184,7 +1201,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         unitCallBack[UTID_DEMONIC_WITCH] = makeOrderDemonicWitch;   // 
 
         // ============= Area 4 ==================
-        unitCallBack[UTID_NOXIOUS_SPIDER] = makeOrderNoxiousSpider;
+        unitCallBack[UTID_NOXIOUS_SPIDER] = makeOrderJustAttack;
         unitCallBack[UTID_PARASITICAL_ROACH] = makeOrderParasiticalRoach;    // ParasiticalRoach
         unitCallBack[UTID_ZOMBIE] = makeOrderZombie;    // zombie
         unitCallBack[UTID_SKELETAL_MAGE] = makeOrderSkeletalMage;
@@ -1202,23 +1219,26 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
 
         // ============= Area 6 ==================
         unitCallBack[UTID_FOREST_TROLL] = makeOrderForestTroll;
-        unitCallBack[UTID_CURSED_HUNTER] = makeOrderCursedHunter;
+        unitCallBack[UTID_CURSED_HUNTER] = makeOrderJustAttack;
         unitCallBack[UTID_DERANGED_PRIEST] = makeOrderDerangedPriest;
         unitCallBack[UTID_GARGANTUAN] = makeOrderGargantuan;
         unitCallBack[UTID_VOMIT_MAGGOT] = makeOrderJustAttack;
         unitCallBack[UTID_TWILIGHT_WITCH_DOCTOR] = makeOrderTwilightWitchDoctor;
-        unitCallBack[UTID_GRIM_TOTEM] = makeOrderGrimTotem;
+        unitCallBack[UTID_GRIM_TOTEM] = makeOrderDoNothing;
         unitCallBack[UTID_FACELESS_ONE] = makeOrderFacelessOne;
 
-        unitCallBack['h000'] = makeOrderh000;   //
-        unitCallBack['h002'] = makeOrderh002;   //
+        // dummies
+        unitCallBack[UTID_STATIC_TARGET] = makeOrderDoNothing;
+        unitCallBack[UTID_TANK_TESTER] = makeOrderJustAttack;
     }
     
     function onInit() {
         focus = HandleTable.create();
         pace = HandleTable.create();
         unitCallBack = Table.create();
-        register();
+        registerUnitCallback();
+
+        BuffType.register(BID_PORTAL_INVULNERABLE, BUFF_PHYX, BUFF_POS);
     }
 }
 //! endzinc

@@ -36,6 +36,10 @@ constant integer MOBINIT_RESPAWN_H = 72;
         if (GetUnitTypeId(u) == UTID_PIT_ARCHON) {
             AbyssArchonGlobal.reset();
         }
+
+        if (GetUnitTypeId(u) == UTID_FEL_GUARD) {
+            FelGuardsGlobals.reset();
+        }
         
         IssueImmediateOrderById(u, OID_STOP);
         PauseUnit(u, true);
@@ -65,6 +69,13 @@ constant integer MOBINIT_RESPAWN_H = 72;
             mi = mobInfo[allCreepData[a - 1][i]];
             mi.u = CreateUnit(Player(MOB_PID), mi.utid, mi.x, mi.y, mi.f);
             idTable[mi.u] = mi;
+
+            if (mi.utid == UTID_FEL_GUARD) {
+                FelGuardsGlobals.bossGuard = mi.u;
+            }
+            if (mi.utid == UTID_FEL_DEFENDER) {
+                FelGuardsGlobals.bossDefender = mi.u;
+            }
             i += 1;
         }
         allowArea = a;
