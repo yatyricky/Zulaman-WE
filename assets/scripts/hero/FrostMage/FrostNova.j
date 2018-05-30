@@ -1,59 +1,8 @@
 //! zinc
 library FrostNova requires SpellEvent, StunUtils, UnitProperty, DamageSystem, FrostMageGlobal {
-constant integer BUFF_ID = 'A03I';
-constant integer MISSILE = 'e000';
-constant string  ART  = "Abilities\\Spells\\Undead\\FreezingBreath\\FreezingBreathTargetArt.mdl";
 
     public function FrostMageGetFrostNovaAOE(integer lvl) -> real {
         return 200.0 + 100 * lvl;
-    }
-
-    struct NovaEffect {
-        private timer tm;
-        private unit missiles[32];
-        private integer n;
-        private real step;
-        private integer c;
-        
-        private method destroy() {
-            ReleaseTimer(this.tm);
-            while (this.n > 0) {
-                this.n -= 1;
-                KillUnit(this.missiles[this.n]);
-                this.missiles[this.n] = null;
-            }
-            this.tm = null;
-            this.deallocate();
-        }
-        
-        private static method run() {
-            thistype this = GetTimerData(GetExpiredTimer());
-            real ang = 6.283 / this.n;
-            integer n = this.n;
-            while (n > 0) {
-                n -= 1;
-                SetUnitX(this.missiles[n], GetUnitX(this.missiles[n]) + Cos(ang * n) * this.step);
-                SetUnitY(this.missiles[n], GetUnitY(this.missiles[n]) + Sin(ang * n) * this.step);
-            }
-            this.c -= 1;
-            if (this.c < 1) {
-                this.destroy();
-            }
-        }
-        
-        static method start(integer mid, real x, real y, real r, real speed, integer n) {
-            thistype this = thistype.allocate();
-            this.tm = NewTimer();
-            SetTimerData(this.tm, this);
-            this.n = n;
-            while (n > 0) {
-                n -= 1;
-                this.missiles[n] = CreateUnit(Player(0), mid, x, y, 360.0 / this.n * n);                
-            }
-            this.step = speed / 25.0;
-            this.c = R2I(r / this.step);
-            TimerStart(this.tm, 0.04, true, function thistype.run);
-        }
     }
 
     function oneffect(Buff buf) {
@@ -65,7 +14,6 @@ constant string  ART  = "Abilities\\Spells\\Undead\\FreezingBreath\\FreezingBrea
     }
 
     function onCast() {
-        //AddTimedEffect.atUnit("Abilities\\Spells\\Undead\\FreezingBreath\\FreezingBreathMissile.mdl", SpellEvent.CastingUnit, "origin", 0.0);
         integer lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_FROST_NOVA);
         unit tu;
         real dmg = (25 + 25 * lvl + UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).SpellPower() * 1.5) * returnFrostDamage(SpellEvent.CastingUnit);
@@ -79,9 +27,9 @@ constant string  ART  = "Abilities\\Spells\\Undead\\FreezingBreath\\FreezingBrea
                 DamageTarget(SpellEvent.CastingUnit, tu, dmg, SpellData.inst(SID_FROST_NOVA, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS, true);
                 // stun
                 StunUnit(SpellEvent.CastingUnit, tu, 3 + lvl);
-                AddTimedEffect.atUnit(ART, tu, "origin", 3 + lvl);
+                AddTimedEffect.atUnit(ART_FREEZING_BREATH, tu, "origin", 3 + lvl);
                 // spell taken amp
-                buf = Buff.cast(SpellEvent.CastingUnit, tu, BUFF_ID);
+                buf = Buff.cast(SpellEvent.CastingUnit, tu, BID_FROST_NOVA);
                 buf.bd.tick = -1;
                 buf.bd.interval = 12.0;
                 UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellTaken -= buf.bd.r0;
@@ -93,15 +41,13 @@ constant string  ART  = "Abilities\\Spells\\Undead\\FreezingBreath\\FreezingBrea
             tu = FirstOfGroup(ENUM_GROUP);
         }
         tu = null;
-        NovaEffect.start(MISSILE, GetUnitX(SpellEvent.CastingUnit), GetUnitY(SpellEvent.CastingUnit), FrostMageGetFrostNovaAOE(lvl), 800.0, 12);
+        VisualEffects.nova(ART_BREATH_OF_FROST_MISSILE, GetUnitX(SpellEvent.CastingUnit), GetUnitY(SpellEvent.CastingUnit), FrostMageGetFrostNovaAOE(lvl), 800.0, 18);
     }
 
     function onInit() {
         RegisterSpellEffectResponse(SID_FROST_NOVA, onCast);
-        BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_NEG);
+        BuffType.register(BID_FROST_NOVA, BUFF_MAGE, BUFF_NEG);
     }
-
-
 
 }
 //! endzinc

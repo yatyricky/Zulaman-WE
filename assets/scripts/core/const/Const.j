@@ -144,12 +144,13 @@ public constant integer UTID_FROST_MAGE = 'Hjai';
 public constant integer SID_FROST_BOLT = 'A01S';
 public constant integer SID_BLIZZARD = 'A03H';
 public constant integer SID_FROST_NOVA = 'A01U';
+public constant integer BID_FROST_NOVA = 'A03I';
 public constant integer SID_POLYMORPH = 'A01W';
 public constant integer SID_POLYMORPH_1 = 'A03F';
 public constant integer BID_POLYMORPH = 'A03E';
 public constant integer SID_POLYMORPH_DUMMY = 'A02F';
 public constant integer SID_SPELL_TRANSFER = 'A00V';
-public constant integer SID_INTELLIGENCE_CHANNEL = 'A00Q';
+public constant integer SID_SPELL_CHANNEL = 'A00Q';
 // earth binder
 public constant integer UTID_EARTH_BINDER = 'Hapm';
 public constant integer UTID_EARTH_BINDER_ASC = 'H006';
@@ -924,6 +925,7 @@ public constant string ART_DEATH_COIL_SPECIAL_ART = "Abilities\\Spells\\Undead\\
 public constant string ART_RAISE_SKELETON = "Abilities\\Spells\\Undead\\RaiseSkeletonWarrior\\RaiseSkeleton.mdl";
 public constant string ART_FLAME_STRIKE_TARGET = "Abilities\\Spells\\Human\\FlameStrike\\FlameStrikeTarget.mdl";
 public constant string ART_DarkSummonTarget = "Abilities\\Spells\\Undead\\Darksummoning\\DarkSummonTarget.mdl";
+public constant string ART_SpellStealMissile = "Abilities\\Spells\\Human\\SpellSteal\\SpellStealMissile.mdl";
 
 public constant string BTNVolcano = "ReplaceableTextures\\CommandButtons\\BTNVolcano.blp";
 public constant string BTNEarthquake = "ReplaceableTextures\\CommandButtons\\BTNEarthquake.blp";

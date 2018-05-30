@@ -143,6 +143,8 @@ library BuffSystem requires TimerUtils, Table, Integer, ZAMCore {
         Buff next;
         BuffData bd;
         timer tm;
+
+        static method noEffect(Buff buf) {}
         
         method destroy() {
             ReleaseTimer(this.tm);
