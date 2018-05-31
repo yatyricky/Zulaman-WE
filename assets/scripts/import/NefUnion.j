@@ -344,6 +344,47 @@ library NefUnion requires TimerUtils, Math {
             return this;
         }
     }
+
+    public type RepeatedTaskExecute extends function(RepeatTask);
+    public struct RepeatTask {
+        private timer tm;
+        private integer ctr;
+        integer current;
+        private RepeatedTaskExecute response;
+        unit u0, u1;
+        integer i0;
+        real r0, r1;
+        integer data;
+        
+        private method destroy() {
+            ReleaseTimer(this.tm);
+            this.tm = null;
+            this.u0 = null;
+            this.deallocate();
+        }
+        
+        private static method run() {
+            thistype this = GetTimerData(GetExpiredTimer());
+            this.ctr -= 1;
+            if (this.ctr <= -1) {
+                this.destroy();
+            } else {
+                this.response.evaluate(this);
+                this.current += 1;
+            }
+        }
+    
+        static method create(RepeatedTaskExecute response, real interval, integer count) -> thistype {
+            thistype this = thistype.allocate();
+            this.response = response;
+            this.tm = NewTimer();
+            this.ctr = count;
+            this.current = 0;
+            SetTimerData(this.tm, this);
+            TimerStart(this.tm, interval, true, function thistype.run);
+            return this;
+        }
+    }
     
     public constant integer DUMMY_ID = 'e01B';
     public function DummyCast(unit a, integer aid, string oid, unit tar) {
