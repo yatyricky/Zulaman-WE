@@ -228,7 +228,7 @@ library Command requires Console, StunUtils, UnitProperty, BuffSystem, DamageSys
     }
     
     function generatecombatlogs(string str) {
-        GenerateCombatLog(SubString(str, 4, StringLength(str)));
+        GenerateCombatLog();
     }
     
     function debuglogs(string str) {

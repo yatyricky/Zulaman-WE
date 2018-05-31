@@ -20,11 +20,11 @@ library DamageSystem requires ZAMCore, UnitProperty, BuffSystem {
 //     real exCrit
 // )
 // - - - - - - - - - - - - - - - - - - - -
-constant string MISS = "|cffffcc00miss|r";
-constant string DODGE = "|cffffcc00dodge|r";
-constant string BLOCK = "|cffffcc00parry|r";
-constant string ABSORB = "|cffffcc00absorb|r";
-constant string IMMUNE = "|cffffcc00immune|r";
+constant string MISS = "|cffffcc00Miss|r";
+constant string DODGE = "|cffffcc00Dodge|r";
+constant string BLOCK = "|cffffcc00Parry|r";
+constant string ABSORB = "|cffffcc00Absorb|r";
+constant string IMMUNE = "|cffffcc00Immune|r";
 constant string NULL_STR = "";
     unit damageDummy;
     
@@ -94,7 +94,11 @@ constant string NULL_STR = "";
         }
         SetWidgetLife(b, GetWidgetLife(b) + amount);
         if (amount >= 0.0) {
-            display = "";
+            if (GetLocalPlayer() == GetOwningPlayer(a) || GetLocalPlayer() == GetOwningPlayer(b)) {
+                display = I2S(R2I(amount));
+            } else {
+                display = NULL_STR;
+            }
             HealResult.source = a;
             HealResult.target = b;
             HealResult.abilityName = hName;
@@ -199,7 +203,7 @@ public boolean lifelock = false;
                         } else {
                             display = I2S(R2I(DamageResult.amount));
                             UnitDamageTarget(a, b, DamageResult.amount, true, true, ATTACK_TYPE_CHAOS, DAMAGE_TYPE_DIVINE, wtype);
-if (GetWidgetLife(b) < GetUnitState(b, UNIT_STATE_MAX_LIFE) * 0.5 && lifelock) {SetWidgetLife(b, GetUnitState(b, UNIT_STATE_MAX_LIFE));}
+                            if (GetWidgetLife(b) < GetUnitState(b, UNIT_STATE_MAX_LIFE) * 0.5 && lifelock) {SetWidgetLife(b, GetUnitState(b, UNIT_STATE_MAX_LIFE));}
                         }
                     }
                 }
@@ -213,7 +217,9 @@ if (GetWidgetLife(b) < GetUnitState(b, UNIT_STATE_MAX_LIFE) * 0.5 && lifelock) {
         if (DamageResult.isCritical) {
             display += "!";
         }
-        display = NULL_STR;
+        if (GetLocalPlayer() != GetOwningPlayer(a) && GetLocalPlayer() != GetOwningPlayer(b)) {
+            display = NULL_STR;
+        }
         TextTag_Damage(b, display, DamageResult.isCritical);
     }
 

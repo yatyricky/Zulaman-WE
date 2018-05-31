@@ -1,19 +1,16 @@
 //! zinc
 library WELA requires CastingBar, SpellData, AggroSystem {
-    private string sessionName;
+    constant integer MAX_LOG_SIZE = 4000;
+
     private boolean combatState = false;
 
     private string wela[];
     private integer welaI = 0;
     private integer welaN = 0;
     
-    public function GenerateCombatLog(string name) {
+    public function GenerateCombatLog() {
         integer i;
-        string filePath;
-        if (name == null || name == "") {
-            name = "Auto";
-        }
-        filePath = sessionName + "-" + I2S(welaN) + "-" + name + ".pld";
+        string filePath = "combatLog-" + I2S(welaN) + ".pld";
         // print("WELA generate, Name = "+name+", size = "+I2S(welaI)+", path = "+filePath);
         PreloadGenClear();
         PreloadGenStart();
@@ -25,10 +22,17 @@ library WELA requires CastingBar, SpellData, AggroSystem {
         welaN += 1;
     }
 
+    function commit() {
+        welaI += 1;
+        if (welaI >= MAX_LOG_SIZE) {
+            GenerateCombatLog();
+        }
+    }
+
     function combatStatusLog() {
         combatState = !combatState;
         wela[welaI] = R2S(GetGameTime()) + "|combat";
-        welaI += 1; if (welaI >= 8100) {GenerateCombatLog("AutoGen");}
+        commit();
     }
 
     function damageRecord() {
@@ -40,7 +44,7 @@ library WELA requires CastingBar, SpellData, AggroSystem {
         6  */ + ModelInfo.get(GetUnitTypeId(DamageResult.target), "WELA D2").Career() + "|" /*
         7  */ + DamageResult.abilityName + "|" /*
         8  */ + R2S(DamageResult.amount);
-        welaI += 1; if (welaI >= 8100) {GenerateCombatLog("AutoGen");}
+        commit();
     }
 
     function healedRecord() {
@@ -53,7 +57,7 @@ library WELA requires CastingBar, SpellData, AggroSystem {
         7  */ + HealResult.abilityName + "|" /*
         8  */ + R2S(HealResult.effective) + "|" /*
         9  */ + R2S(HealResult.amount - HealResult.effective);
-        welaI += 1; if (welaI >= 8100) {GenerateCombatLog("AutoGen");}
+        commit();
     }
 
     function absorbRecord() {
@@ -65,7 +69,7 @@ library WELA requires CastingBar, SpellData, AggroSystem {
         6  */ + ModelInfo.get(GetUnitTypeId(AbsorbResult.target), "WELA A2").Career() + "|" /*
         7  */ + AbsorbResult.abilityName + "|" /*
         8- */ + R2S(AbsorbResult.amount) + "|0.0";
-        welaI += 1; if (welaI >= 8100) {GenerateCombatLog("AutoGen");}
+        commit();
     }
 
     function castLog() {
@@ -80,7 +84,7 @@ library WELA requires CastingBar, SpellData, AggroSystem {
         5  */ + GetUnitNameEx(SpellEvent.TargetUnit) + "|" /*
         6  */ + ModelInfo.get(tutid, "WELA C2").Career() + "|" /*
         7  */ + SpellData.inst(SpellEvent.AbilityId, SCOPE_PREFIX).name;
-            welaI += 1; if (welaI >= 8100) {GenerateCombatLog("AutoGen");}
+            commit();
         }
     }
 
@@ -94,14 +98,13 @@ library WELA requires CastingBar, SpellData, AggroSystem {
                     */ + GetUnitNameEx(PlayerUnits.units[i]) + "|" /*
                     */ + R2S(GetUnitState(PlayerUnits.units[i], UNIT_STATE_MANA)) + "|" /*
                     */ + R2S(GetUnitState(PlayerUnits.units[i], UNIT_STATE_MAX_MANA));
-                    welaI += 1; if (welaI >= 8100) {GenerateCombatLog("AutoGen");}
+                    commit();
                 }
             }
         }
     }
 
     private function onInit() {
-        sessionName = I2HEX(GetRandomInt(0, 0x7FFFFFFF));
         TimerStart(CreateTimer(), 0.1, false, function() {
             DestroyTimer(GetExpiredTimer());
 
