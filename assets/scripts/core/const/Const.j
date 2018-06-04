@@ -593,8 +593,11 @@ public constant integer ITID_STRANGE_WAND = 'I023';
 public constant integer SID_STRANGE_WAND = 'A0AC';
 
 // origin uncommon gear
+public constant integer ITID_BELT_OF_GIANT = 'I02B';
+public constant integer ITID_BOOTS_OF_QUELTHALAS = 'I02E';
+public constant integer ITID_ROBE_OF_MAGI = 'I02C';
 public constant integer ITID_CIRCLET_OF_NOBILITY = 'Igh0';
-public constant integer ITID_HEAVY_BOOTS = 'I000';
+public constant integer ITID_BOOTS_OF_SPEED = 'I000';
 public constant integer ITID_HELM_OF_VALOR = 'hval';
 public constant integer ITID_MEDALION_OF_COURAGE = 'mcou';
 public constant integer ITID_HOOD_OF_CUNNING = 'hcun';
@@ -606,7 +609,9 @@ public constant integer ITID_RING_OF_PROTECTION = 'Ish0';
 public constant integer ITID_TALISMAN_OF_EVASION = 'Isb0';
 public constant integer ITID_MANA_PERIAPT = 'Inl0';
 public constant integer ITID_SOBI_MASK = 'Imz0';
-public constant integer ITID_STAFF_OF_THE_WITCH_DOCTOR = 'Iwz0';
+public constant integer ITID_MAGIC_BOOK = 'Iwz0';
+public constant integer ITID_CRYSTAL_BALL = 'I02D';
+public constant integer ITID_LONG_STAFF = 'I02F';
 public constant integer ITID_HEALTH_STONE = 'hlst';
 public constant integer SID_HEALTH_STONE = 'A06I';
 public constant integer ITID_MANA_STONE = 'mnst';

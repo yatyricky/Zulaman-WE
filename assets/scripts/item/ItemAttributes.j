@@ -8,6 +8,10 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
     public constant real PREFIX_MAX_PROB = 0.9;
     public constant real SUFIX_MAX_PROB = 0.75;
 
+    public struct ItemColors {
+
+    }
+
     public type ItemPropModType extends function(unit, item, integer);
 
     IntegerPool ipPrefix1;
@@ -349,7 +353,7 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
             TimerStart(CreateTimer(), 0.7, false, function() {
                 DestroyTimer(GetExpiredTimer());
                 thistype.create(ITID_CIRCLET_OF_NOBILITY,"|CFF11FF11Circlet of Nobility|R","").append(7,2,4);
-                thistype.create(ITID_HEAVY_BOOTS,"|CFF11FF11Heavy Boots|R","|CFF999999It's just heavy, nothing special.|R").append(8,1,3);
+                thistype.create(ITID_BOOTS_OF_SPEED,"|CFF11FF11Heavy Boots|R","|CFF999999It's just heavy, nothing special.|R").append(8,1,3);
                 thistype.create(ITID_HELM_OF_VALOR,"|CFF11FF11Helm of Valor|R","").append(4,3,5).append(13,3,5);
                 thistype.create(ITID_MEDALION_OF_COURAGE,"|CFF11FF11Medalion of Courage|R","").append(4,3,5).append(14,3,5);
                 thistype.create(ITID_HOOD_OF_CUNNING,"|CFF11FF11Hood of Cunning|R","").append(13,3,5).append(14,3,5);
@@ -361,7 +365,7 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
                 thistype.create(ITID_TALISMAN_OF_EVASION,"|CFF11FF11Talisman of Evasion|R","").append(27,0.02,0.03);
                 thistype.create(ITID_MANA_PERIAPT,"|CFF11FF11Mana Periapt|R","").append(17,100,200);
                 thistype.create(ITID_SOBI_MASK,"|CFF11FF11Sobi Mask|R","").append(72,3,5);
-                thistype.create(ITID_STAFF_OF_THE_WITCH_DOCTOR,"|CFF11FF11Staff of the Witch Doctor|R","").append(18,6,16);
+                thistype.create(ITID_MAGIC_BOOK,"|CFF11FF11Staff of the Witch Doctor|R","").append(18,6,16);
                 thistype.create(ITID_HEALTH_STONE,"|CFF11FF11Health Stone|R","").append(73,3,5).append(31,400,800);
                 thistype.create(ITID_MANA_STONE,"|CFF11FF11Mana Stone|R","").append(72,2,4).append(30,200,400);
                 thistype.create(ITID_ROMULOS_EXPIRED_POISON,"|CFF11FF11Romulo's Expired Poison|R","|CFF999999Still usable.|R").append(53,80,115);
@@ -508,42 +512,42 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
         }
 
         static method onInit() {
-            thistype.put(SUFIX_LETHALITY, 1, 2, IATTR_CRIT, 0.01, 0.03, " of Lethality");
-            thistype.put(SUFIX_SNAKE, 1, 2, IATTR_SCRIT, 0.01, 0.03, " of Snake");
-            thistype.put(SUFIX_QUICKNESS, 1, 2, IATTR_IAS, 5, 10, " of Quickness");
-            thistype.put(SUFIX_WIND_SERPENT, 1, 2, IATTR_SHASTE, 0.04, 0.08, " of Wind Serpent");
-            thistype.put(SUFIX_BRUTE, 1, 2, IATTR_STR, 6, 12, " of Brute");
-            thistype.put(SUFIX_DEXTERITY, 1, 2, IATTR_AGI, 6, 12, " of Dexterity");
-            thistype.put(SUFIX_WISDOM, 1, 2, IATTR_INT, 6, 12, " of Wisdom");
-            thistype.put(SUFIX_VITALITY, 1, 2, IATTR_HP, 90, 180, " of Vitality");
-            thistype.put(SUFIX_CHAMPION, 1, 2, IATTR_STR, 5, 7, " of Champion").addAttribute(IATTR_AP, 8, 11);
-            thistype.put(SUFIX_BUTCHER, 1, 2, IATTR_STR, 5, 7, " of Butcher").addAttribute(IATTR_CRIT, 0.01, 0.02);
-            thistype.put(SUFIX_ASSASSIN, 1, 2, IATTR_AGI, 5, 7, " of Assassin").addAttribute(IATTR_CRIT, 0.01, 0.02);
-            thistype.put(SUFIX_RANGER, 1, 2, IATTR_AGI, 5, 7, " of Ranger").addAttribute(IATTR_AP, 8, 11);
-            thistype.put(SUFIX_WIZARD, 1, 2, IATTR_INT, 5, 7, " of Wizard").addAttribute(IATTR_SHASTE, 0.02, 0.04);
-            thistype.put(SUFIX_PRIEST, 1, 2, IATTR_INT, 5, 7, " of Priest").addAttribute(IATTR_MREG, 2, 3);
-            thistype.put(SUFIX_GUARDIAN, 1, 2, IATTR_HP, 70, 100, " of Guardian").addAttribute(IATTR_DODGE, 0.01, 0.02);
+            thistype.put(SUFIX_LETHALITY, 1, 2, IATTR_CRIT, 0.03, 0.07, " of Lethality");
+            thistype.put(SUFIX_SNAKE, 1, 2, IATTR_SCRIT, 0.03, 0.07, " of Snake");
+            thistype.put(SUFIX_QUICKNESS, 1, 2, IATTR_IAS, 3, 7, " of Quickness");
+            thistype.put(SUFIX_WIND_SERPENT, 1, 2, IATTR_SHASTE, 0.03, 0.07, " of Wind Serpent");
+            thistype.put(SUFIX_BRUTE, 1, 2, IATTR_STR, 8, 15, " of Brute");
+            thistype.put(SUFIX_DEXTERITY, 1, 2, IATTR_AGI, 8, 15, " of Dexterity");
+            thistype.put(SUFIX_WISDOM, 1, 2, IATTR_INT, 8, 15, " of Wisdom");
+            thistype.put(SUFIX_VITALITY, 1, 2, IATTR_HP, 113, 225, " of Vitality");
+            thistype.put(SUFIX_CHAMPION, 1, 2, IATTR_STR, 5, 9, " of Champion").addAttribute(IATTR_AP, 6, 11);
+            thistype.put(SUFIX_BUTCHER, 1, 2, IATTR_STR, 5, 9, " of Butcher").addAttribute(IATTR_CRIT, 0.02, 0.05);
+            thistype.put(SUFIX_ASSASSIN, 1, 2, IATTR_AGI, 5, 9, " of Assassin").addAttribute(IATTR_CRIT, 0.02, 0.05);
+            thistype.put(SUFIX_RANGER, 1, 2, IATTR_AGI, 5, 9, " of Ranger").addAttribute(IATTR_AP, 6, 11);
+            thistype.put(SUFIX_WIZARD, 1, 2, IATTR_INT, 5, 9, " of Wizard").addAttribute(IATTR_SHASTE, 0.02, 0.05);
+            thistype.put(SUFIX_PRIEST, 1, 2, IATTR_INT, 5, 9, " of Priest").addAttribute(IATTR_MREG, 1, 2);
+            thistype.put(SUFIX_GUARDIAN, 1, 2, IATTR_HP, 68, 135, " of Guardian").addAttribute(IATTR_DODGE, 0.02, 0.03);
             thistype.put(SUFIX_MASTERY, 1, 2, IATTR_LP, 1, 3, " of Mastery");
-            thistype.put(SUFIX_BLUR, 1, 2, IATTR_DODGE, 0.01, 0.03, " of Blur");
-            thistype.put(SUFIX_STRONGHOLD, 1, 2, IATTR_DEF, 5, 10, " of Stronghold");
-            thistype.put(SUFIX_DEEP_SEA, 1, 2, IATTR_MREG, 3, 6, " of Deep Sea");
-            thistype.put(SUFIX_VOID, 1, 2, IATTR_SP, 12, 24, " of Void");
-            thistype.put(PREFIX_HEAVY, 1, 1, IATTR_STR, 4, 6, "Heavy ");
-            thistype.put(PREFIX_STRONG, 2, 1, IATTR_STR, 7, 10, "Strong ");
-            thistype.put(PREFIX_SHARP, 1, 1, IATTR_AGI, 4, 6, "Sharp ");
-            thistype.put(PREFIX_AGILE, 2, 1, IATTR_AGI, 7, 10, "Agile ");
-            thistype.put(PREFIX_SHIMERING, 1, 1, IATTR_INT, 4, 6, "Shimering ");
-            thistype.put(PREFIX_INTELLIGENT, 2, 1, IATTR_INT, 7, 10, "Intelligent ");
-            thistype.put(PREFIX_ENDURABLE, 1, 1, IATTR_HP, 60, 90, "Endurable ");
-            thistype.put(PREFIX_VIBRANT, 2, 1, IATTR_HP, 91, 150, "Vibrant ");
-            thistype.put(PREFIX_SKILLED, 1, 1, IATTR_AP, 7, 11, "Skilled ");
-            thistype.put(PREFIX_CRUEL, 2, 1, IATTR_AP, 12, 18, "Cruel ");
+            thistype.put(SUFIX_BLUR, 1, 2, IATTR_DODGE, 0.02, 0.05, " of Blur");
+            thistype.put(SUFIX_STRONGHOLD, 1, 2, IATTR_DEF, 2, 5, " of Stronghold");
+            thistype.put(SUFIX_DEEP_SEA, 1, 2, IATTR_MREG, 2, 3, " of Deep Sea");
+            thistype.put(SUFIX_VOID, 1, 2, IATTR_SP, 10, 20, " of Void");
+            thistype.put(PREFIX_HEAVY, 1, 1, IATTR_STR, 4, 7, "Heavy ");
+            thistype.put(PREFIX_STRONG, 2, 1, IATTR_STR, 8, 15, "Strong ");
+            thistype.put(PREFIX_SHARP, 1, 1, IATTR_AGI, 4, 7, "Sharp ");
+            thistype.put(PREFIX_AGILE, 2, 1, IATTR_AGI, 8, 15, "Agile ");
+            thistype.put(PREFIX_SHIMERING, 1, 1, IATTR_INT, 4, 7, "Shimering ");
+            thistype.put(PREFIX_INTELLIGENT, 2, 1, IATTR_INT, 8, 15, "Intelligent ");
+            thistype.put(PREFIX_ENDURABLE, 1, 1, IATTR_HP, 57, 112, "Endurable ");
+            thistype.put(PREFIX_VIBRANT, 2, 1, IATTR_HP, 113, 225, "Vibrant ");
+            thistype.put(PREFIX_SKILLED, 1, 1, IATTR_AP, 5, 10, "Skilled ");
+            thistype.put(PREFIX_CRUEL, 2, 1, IATTR_AP, 10, 20, "Cruel ");
             thistype.put(PREFIX_ENCHANTED, 1, 1, IATTR_SP, 8, 12, "Enchanted ");
             thistype.put(PREFIX_SORCEROUS, 2, 1, IATTR_SP, 13, 20, "Sorcerous ");
-            thistype.put(PREFIX_MYSTERIOUS, 1, 1, IATTR_MREG, 2, 3, "Mysterious ");
-            thistype.put(PREFIX_ETERNAL, 2, 1, IATTR_MREG, 4, 5, "Eternal ");
-            thistype.put(PREFIX_STEADY, 1, 1, IATTR_DEF, 3, 5, "Steady ");
-            thistype.put(PREFIX_TOUGH, 2, 1, IATTR_DEF, 6, 8, "Tough ");
+            thistype.put(PREFIX_MYSTERIOUS, 1, 1, IATTR_MREG, 1, 1, "Mysterious ");
+            thistype.put(PREFIX_ETERNAL, 2, 1, IATTR_MREG, 2, 3, "Eternal ");
+            thistype.put(PREFIX_STEADY, 1, 1, IATTR_DEF, 1, 2, "Steady ");
+            thistype.put(PREFIX_TOUGH, 2, 1, IATTR_DEF, 3, 5, "Tough ");
         }
     }
 
@@ -866,10 +870,10 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
             thistype.put(IATTR_ATK_DMS,2,420,0.1,"|cff33ff33On Attack: Decrease target movement speed by ","|r",thistype.callbackATK_DMS);
             thistype.put(IATTR_ATK_WEAK,2,421,0.1,"|cff33ff33On Attack: Decrease target damage and healing dealt by ","|r",thistype.callbackATK_WEAK);
             thistype.put(IATTR_3ATK_MOONEXP,2,430,0.7,"|cff33ff33Every Third Attack: Consumes 5% of max MP, deals "," magic damage to all enemies nearby|r",thistype.callback3ATK_MOONEXP);
-            thistype.put(IATTR_MD_MREGEN,2,450,0.5,"|cff33ff33Dealing Magic Damage: 1% chance to regen "," MP|r",thistype.callbackMD_MREGEN);
-            thistype.put(IATTR_MD_POISON,2,451,0.7,"|cff33ff33Dealing Magic Damage: 10% chance to poison target, dealing "," magic damage over time|r",thistype.callbackMD_POISON);
-            thistype.put(IATTR_MD_CHAIN,2,452,0.7,"|cff33ff33Dealing Magic Damage: 10% chance to cast Chain Lightning to target, dealing "," magic damage|r",thistype.callbackMD_CHAIN);
-            thistype.put(IATTR_MDC_ARCANE,2,460,0.5,"|cff33ff33Magic Damage Critical: Charges with arcane power. All arcane power will be released automatically after 3 stacks, dealing "," magic damage to target|r",thistype.callbackMDC_ARCANE);
+            thistype.put(IATTR_MD_MREGEN,2,450,0.5,"|cff33ff33Dealing Magical Damage or Healing: 1% chance to regen "," MP|r",thistype.callbackMD_MREGEN);
+            thistype.put(IATTR_MD_POISON,2,451,0.7,"|cff33ff33Dealing Magical Damage: 10% chance to poison target, dealing "," magic damage over time|r",thistype.callbackMD_POISON);
+            thistype.put(IATTR_MD_CHAIN,2,452,0.7,"|cff33ff33Dealing Magical Damage: 10% chance to cast Chain Lightning to target, dealing "," magic damage|r",thistype.callbackMD_CHAIN);
+            thistype.put(IATTR_MDC_ARCANE,2,460,0.5,"|cff33ff33Magical Damage Critical: Charges with arcane power. All arcane power will be released automatically after 3 stacks, dealing "," magic damage to target|r",thistype.callbackMDC_ARCANE);
             thistype.put(IATTR_HEAL_HOLY,2,501,0.33,"|cff33ff33On Healed: Charges 1 holy power, stacks up to "," points|r",thistype.callbackHEAL_HOLY);
             thistype.put(IATTR_ATKED_WEAK,2,600,0.33,"|cff33ff33On Attacked: Decreases attacker's attack power by ","|r",thistype.callbackATKED_WEAK);
             thistype.put(IATTR_AURA_CONVIC,2,800,0.1,"|cff33ff33Grant Aura of Conviction: All enemies within 600 yards take "," more magic damage|r",thistype.callbackAURA_CONVIC);
