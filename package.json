@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/yatyricky/Zulaman-WE#readme",
   "dependencies": {
+    "node-xlsx": "^0.12.0",
     "wc3maptranslator": "^0.5.4"
   }
 }

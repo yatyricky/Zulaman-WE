@@ -696,7 +696,7 @@ public constant integer BID_DECREASE_ARMOR = 'A0CN';
 public constant integer BID_DECREASE_ATTACKRATE = 'A0CO';
 public constant integer BID_DECREASE_DAMAGEDEALT = 'A0CP';
 public constant integer BID_DECREASE_HEALTAKEN = 'A0CQ';
-public constant integer ITID_HOLY_MOONLIGHT_SWORD = 'I02A';
+public constant integer ITID_MOONLIGHT_GREATSWORD = 'I02A';
 public constant integer ITID_WINDFORCE = 'Iwf0';
 // relic set
 // Athas's Corruption
