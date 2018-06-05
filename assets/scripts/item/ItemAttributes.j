@@ -352,6 +352,8 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
             thistype.ht = Table.create();
             TimerStart(CreateTimer(), 0.7, false, function() {
                 DestroyTimer(GetExpiredTimer());
+                //:template.id = itemmeta
+                //:template.indentation = 4
                 thistype.create(ITID_BELT_OF_GIANT,"|cff11ff11Belt of Giant|r","").append(4,5,10);
                 thistype.create(ITID_BOOTS_OF_QUELTHALAS,"|cff11ff11Boots of Quel'Thalas|r","").append(13,5,10);
                 thistype.create(ITID_ROBE_OF_MAGI,"|cff11ff11Robe of Magi|r","").append(14,5,10);
@@ -416,6 +418,7 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
                 thistype.create(ITID_INSIGHT,"|cffff8c00Insight|r","|cffffdeadIn the fight against the forest trolls, the Blood Elf Rangers used this enchanted orb from Kirin Tor and eventually succeeded in establishing Quel'Thalas.|r").append(14,5,10).append(18,5,10).append(19,0.03,0.05).append(68,0,0).append(83,2,4);
                 thistype.create(ITID_VOODOO_VIALS,"|cffff8c00Voodoo Vials|r","|cffffdeadZanzil *makes* friends by these small vials.|r").append(14,5,10).append(20,0.03,0.05).append(19,0.03,0.05).append(88,12,20).append(32,15,30);
                 thistype.create(ITID_MOONLIGHT_GREATSWORD,"|cffff8c00Moonlight Greatsword|r","|cffffdeadLudwig the Holy Blade.|r").append(4,5,10).append(21,75,150).append(57,10,20).append(43,0.02,0.04).append(75,75,100).append(49,60,80);
+                //:template.end
             });
         }
     }
