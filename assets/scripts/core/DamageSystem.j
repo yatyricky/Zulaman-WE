@@ -1,5 +1,5 @@
 //! zinc
-library DamageSystem requires ZAMCore, UnitProperty, BuffSystem {
+library DamageSystem requires ZAMCore, UnitProperty, BuffSystem, FloatingNumbers {
 // - - - - - - - - - - - - - - - - - - - -
 // public function DamageTarget(
 //     unit source
@@ -20,11 +20,11 @@ library DamageSystem requires ZAMCore, UnitProperty, BuffSystem {
 //     real exCrit
 // )
 // - - - - - - - - - - - - - - - - - - - -
-constant string MISS = "|cffffcc00Miss|r";
-constant string DODGE = "|cffffcc00Dodge|r";
-constant string BLOCK = "|cffffcc00Parry|r";
-constant string ABSORB = "|cffffcc00Absorb|r";
-constant string IMMUNE = "|cffffcc00Immune|r";
+constant string MISS = "Miss";
+constant string DODGE = "Dodge";
+constant string BLOCK = "Parry";
+constant string ABSORB = "Absorb";
+constant string IMMUNE = "Immune";
 constant string NULL_STR = "";
     unit damageDummy;
     
@@ -107,8 +107,8 @@ constant string NULL_STR = "";
             while (i < responseHealedN) {
                 responseHealedCallList[i].evaluate();
                 i += 1;
-            }            
-            TextTag_Heal(b, display, HealResult.isCritical);
+            }
+            FloatingNumbers.create(display, COLOR_HEAL, GetUnitX(b), GetUnitY(b), 1.3, false);
         }
     }
     
@@ -117,6 +117,9 @@ public boolean lifelock = false;
     public function DamageTarget(unit a, unit b, real amount, string dmgName, boolean isPhyx, boolean criticable, boolean dodgable, weapontype wtype, boolean direct) {
         integer i;
         string display;
+        string color;
+        boolean isTop;
+        real displaySize;
         real absorbAmt;
         real factor = GetRandomReal(0.0, 1.0);
         real desk = 0.0;
@@ -214,13 +217,27 @@ public boolean lifelock = false;
             responseDamagedCallList[i].evaluate();
             i += 1;
         }
-        if (DamageResult.isCritical) {
-            display += "!";
-        }
-        if (GetLocalPlayer() != GetOwningPlayer(a) && GetLocalPlayer() != GetOwningPlayer(b)) {
+        if (GetLocalPlayer() == GetOwningPlayer(a)) {
+            if (DamageResult.isCritical == true) {
+                color = COLOR_DAMAGE_CRITICAL;
+                isTop = true;
+                displaySize = 2.2;
+            } else {
+                color = COLOR_DAMAGE_MOB;
+                isTop = true;
+                displaySize = 1.3;
+            }
+        } else if (GetLocalPlayer() == GetOwningPlayer(b)) {
+            color = COLOR_DAMAGE_PLAYER;
+            isTop = false;
+            displaySize = 1.3;
+        } else {
             display = NULL_STR;
+            color = COLOR_DAMAGE_MOB;
+            isTop = true;
+            displaySize = 1.0;
         }
-        TextTag_Damage(b, display, DamageResult.isCritical);
+        FloatingNumbers.create(display, color, GetUnitX(b), GetUnitY(b), displaySize, isTop);
     }
 
     public function DummyDamageTarget(unit target, real amount, string dmgName) {

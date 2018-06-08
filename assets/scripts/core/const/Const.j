@@ -40,6 +40,19 @@ public constant integer ITID_PORTAL_5 = 'I029';
 public constant integer DUMMY_X = -8500;
 public constant integer DUMMY_Y = -11000;
 
+public constant string COLOR_CFF = "|cff";
+public constant string COLOR_R = "|r";
+public constant string COLOR_ITEM_UNCOMMON = "11ff11";
+public constant string COLOR_ITEM_RARE = "8b66ff";
+public constant string COLOR_ITEM_LEGENDARY = "ff8c00";
+public constant string COLOR_ITEM_RELIC = "ffcc00";
+public constant string COLOR_ITEM_LORE_TRIVIA = "999999";
+public constant string COLOR_ITEM_LORE_SIGNIFICANT = "ffdead";
+public constant string COLOR_DAMAGE_MOB = "ffffff";
+public constant string COLOR_DAMAGE_PLAYER = "ff3300";
+public constant string COLOR_HEAL = "33cc00";
+public constant string COLOR_DAMAGE_CRITICAL = "ff9900";
+
 public constant integer OID_ATTACK = 851983;
 public constant integer OID_MOVE = 851986;
 public constant integer OID_SMART = 851971;
