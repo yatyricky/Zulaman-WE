@@ -3,7 +3,6 @@ const path = require("path");
 
 const workbook = xlsx.parse(path.join("design", "Items.xlsm"));
 
-let counter = 0;
 for (let i = 0; i < workbook.length; i++) {
     const element = workbook[i];
     const all = [];
@@ -33,7 +32,7 @@ for (let i = 0; i < workbook.length; i++) {
                             color = "ffcc00";
                             break;
                         default:
-                            color = "[BAD NAME COLOR]"
+                            color = "[BAD NAME COLOR]";
                             break;
                     }
                     entry = {
@@ -59,7 +58,7 @@ for (let i = 0; i < workbook.length; i++) {
                             color = "ffdead";
                             break;
                         default:
-                            color = "[BAD LORE COLOR]"
+                            color = "[BAD LORE COLOR]";
                             break;
                     }
                     entry.lore = `|cff${color}${row[6]}|r`;
