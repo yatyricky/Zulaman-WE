@@ -20,7 +20,7 @@ constant string  ART  = "Abilities\\Spells\\NightElf\\shadowstrike\\shadowstrike
         buf.bd.bor = onRemove;
         buf.run();
         
-        ComboPoints[SpellEvent.CastingUnit].add(SpellEvent.TargetUnit, 2);
+        ComboPoints[SpellEvent.CastingUnit].add(2);
     }
 
     function onInit() {

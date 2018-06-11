@@ -4,7 +4,7 @@ constant string  ART  = "Abilities\\Spells\\Other\\TalkToMe\\TalkToMe.mdl";
     
     function onCast() { 
         DamageTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, 300.0 + UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).AttackPower(), SpellData.inst(SID_AMBUSH, SCOPE_PREFIX).name, true, true, false, WEAPON_TYPE_METAL_HEAVY_SLICE, false);
-        ComboPoints[SpellEvent.CastingUnit].add(SpellEvent.TargetUnit, 5);
+        ComboPoints[SpellEvent.CastingUnit].add(5);
         AddTimedEffect.atUnit(ART, SpellEvent.TargetUnit, "overhead", 1.0);
         StunUnit(SpellEvent.CastingUnit, SpellEvent.TargetUnit, 4.0);
     }

@@ -2,30 +2,6 @@
 library Eviscerate requires DamageSystem, SpellEvent, RogueGlobal {
 constant integer BUFF_ID = 'A047'; 
     
-    /*struct delayedDosth1 {
-        private timer tm;
-        private unit u;
-        private real amt;
-    
-        private static method run() {
-            thistype this = GetTimerData(GetExpiredTimer());
-            ModUnitMana(this.u, this.amt);
-            ReleaseTimer(this.tm);
-            this.tm = null;
-            this.u = null;
-            this.deallocate();
-        }
-    
-        static method start(unit u) {
-            thistype this = thistype.allocate();
-            this.u = u;
-            this.tm = NewTimer();
-            this.amt = 50;
-            SetTimerData(this.tm, this);
-            TimerStart(this.tm, 0.01, false, function thistype.run);
-        }
-    }*/
-    
     function returnDD(integer lvl, real ap, integer cb) -> real {
         return ap * (0.4 * cb * lvl);
     }
@@ -58,7 +34,7 @@ constant integer BUFF_ID = 'A047';
         max = GetUnitState(SpellEvent.CastingUnit, UNIT_STATE_MAX_MANA);
         costp = cost / max;
         if (costp >= 0.2) {
-            if (ComboPoints[SpellEvent.CastingUnit].isTarget(SpellEvent.TargetUnit) && ComboPoints[SpellEvent.CastingUnit].n > 0) {                
+            if (ComboPoints[SpellEvent.CastingUnit].n > 0) {
                 if (costp > 0.25) {
                     cost = max * 0.25;
                     costp = 1.0;

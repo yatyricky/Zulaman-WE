@@ -64,10 +64,10 @@ library SinisterStrike requires DamageSystem, SpellEvent, RogueGlobal {
                 // equiped dagger of assassination
                 if (UnitHasItemOfTypeBJ(SpellEvent.CastingUnit, ITID_KELENS_DAGGER_OF_ASSASSINATION) && GetRandomReal(0, 0.999) < ItemExAttributes.getUnitAttrVal(SpellEvent.CastingUnit, IATTR_RG_PARALZ, SCOPE_PREFIX)) {
                     CastParalysisPoison(SpellEvent.CastingUnit, SpellEvent.TargetUnit);
-                    ComboPoints[SpellEvent.CastingUnit].add(DamageResult.target, 2);
+                    ComboPoints[SpellEvent.CastingUnit].add(2);
                     AddTimedEffect.atUnit(ART_POISON, DamageResult.target, "origin", 1.0);
                 } else {
-                    ComboPoints[SpellEvent.CastingUnit].add(DamageResult.target, 1);
+                    ComboPoints[SpellEvent.CastingUnit].add(1);
                 }
             }
         }
