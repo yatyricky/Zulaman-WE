@@ -11,9 +11,8 @@ library CastingBar requires SpellEvent, TimerUtils, SpellData, UnitAbilityCD, ZA
 //
 //  CastingBar.create(response).channel([nodes]);
 //==============================================================================
-constant integer PROGRESS_BAR_ID = 'e009';
 constant integer PROGRESS_BAR_X = -10;
-constant integer PROGRESS_BAR_Y = (-100);
+constant integer PROGRESS_BAR_Y = -100;
 constant integer PROGRESS_BAR_Z = 30;
 constant real PROGRESS_BAR_SX = 1.0;
 constant real PROGRESS_BAR_SY = 0.45;
@@ -22,10 +21,6 @@ constant integer CAST_MODE_CAST = 0x23459214;
 constant integer CAST_MODE_CHANNEL = 0x32148520;
     
     public type CastBarFinishCast extends function(CastingBar);
-    
-    //public group CastingTargets;
-    
-    //public real extraHasteHolyLight[NUMBER_OF_MAX_PLAYERS];
     
     //Table responseTable;
     HandleTable lastChannelSuccess;
@@ -106,13 +101,12 @@ constant integer CAST_MODE_CHANNEL = 0x32148520;
         CastBarFinishCast finishResponse;
         unit caster, target;
         real targetX, targetY;
-        unit bar;
+        effect bar;
         timer tm;
         real haste, cost, cast;
         boolean success;
         integer channeling; // 0 not channeling; 1 normal; 2 uncounterable
         integer lvl;
-        texttag tt;
         integer nodes;
         integer castMode;
         
@@ -125,15 +119,13 @@ constant integer CAST_MODE_CHANNEL = 0x32148520;
         
         method destroy() {
             ReleaseTimer(this.tm);
-            ShowUnit(this.bar, false);
-            KillUnit(this.bar);
-            DestroyTextTag(this.tt);
+            BlzSetSpecialEffectScale(this.bar, 0);
+            DestroyEffect(this.bar);
             if (this.e0 != null) {DestroyEffect(this.e0); this.e0 = null;}
             if (this.e1 != null) {DestroyEffect(this.e1); this.e1 = null;}
             if (this.l0 != 0) {this.l0.destroy(); this.l0 = 0;}
             thistype.ht.flush(this.caster);
             this.tm = null;
-            this.tt = null;
             this.bar = null;
             this.caster = null;
             this.target = null;
@@ -175,7 +167,6 @@ constant integer CAST_MODE_CHANNEL = 0x32148520;
                     this.success = false;
                 }
             }
-            //BJDebugMsg("Target = " + GetUnitNameEx(this.target));
             IssueImmediateOrderById(this.caster, OID_STOP);
         }
         
@@ -186,24 +177,19 @@ constant integer CAST_MODE_CHANNEL = 0x32148520;
         
         method launch() {
             real mscale = ModelInfo.get(GetUnitTypeId(this.caster), "CastingBar: 188").scale;
-            //print(R2S(mscale));
             thistype.ht[this.caster] = this;
             this.channeling = this.sd.level;
             this.castMode = CAST_MODE_CAST;
-            this.tt = CreateTextTag();
-            //SetTextTagText(this.tt, this.sd.name, 0.023);
-            //SetTextTagColor(this.tt, 255, 255, 255, 255);
             this.success = false;
-            this.bar = CreateUnit(GetOwningPlayer(this.caster), PROGRESS_BAR_ID, GetUnitX(this.caster) + PROGRESS_BAR_X, GetUnitY(this.caster) + PROGRESS_BAR_Y, 0);
-            SetUnitScale(this.bar, PROGRESS_BAR_SX * mscale, PROGRESS_BAR_SY * mscale, PROGRESS_BAR_SZ * mscale);
-            SetUnitFlyable(this.bar);
-            SetUnitFlyHeight(this.bar, PROGRESS_BAR_Z, 0.0);
-            //BJDebugMsg(R2S(this.haste));
+            this.bar = AddSpecialEffect(ART_Progressbar, GetUnitX(this.caster) + PROGRESS_BAR_X, GetUnitY(this.caster) + PROGRESS_BAR_Y * mscale);
+            BlzSetSpecialEffectZ(this.bar, GetUnitZ(this.caster) + 40);
+            BlzSetSpecialEffectColorByPlayer(this.bar, GetOwningPlayer(this.caster));
+            BlzSetSpecialEffectScale(this.bar, mscale);
             this.cast = (this.cast - this.haste) / (1.0 + UnitProp.inst(this.caster, SCOPE_PREFIX).SpellHaste());
             if (this.cast <= 0.01) {this.cast = 0.01;}
-            SetUnitTimeScale(this.bar, 1.0 / this.cast);
+            BlzSetSpecialEffectTimeScale(this.bar, 1.0 / this.cast);
             this.tm = NewTimer();
-            SetTimerData(this.tm, this);            
+            SetTimerData(this.tm, this);
             TimerStart(this.tm, this.cast, false, function thistype.castingRunning);
         }
         
@@ -219,24 +205,19 @@ constant integer CAST_MODE_CHANNEL = 0x32148520;
         
         method channel(integer nodes) {
             real mscale = ModelInfo.get(GetUnitTypeId(this.caster), "CastingBar: 221").scale;
-            //print(R2S(mscale));
             thistype.ht[this.caster] = this;
             this.channeling = this.sd.level;
             this.castMode = CAST_MODE_CHANNEL;
-            this.tt = CreateTextTag();
-            //SetTextTagText(this.tt, this.sd.name, 0.023);
-            //SetTextTagColor(this.tt, 255, 255, 255, 255);
             this.success = false;
-            this.bar = CreateUnit(GetOwningPlayer(this.caster), PROGRESS_BAR_ID, GetUnitX(this.caster) + PROGRESS_BAR_X, GetUnitY(this.caster) + PROGRESS_BAR_Y, 0);
-            SetUnitScale(this.bar, PROGRESS_BAR_SX * mscale, PROGRESS_BAR_SY * mscale, PROGRESS_BAR_SZ * mscale);
-            SetUnitFlyable(this.bar);
-            SetUnitFlyHeight(this.bar, PROGRESS_BAR_Z, 0.0);
-            //BJDebugMsg(R2S(this.haste));
-            DelayedModUnitMana.new(SpellEvent.CastingUnit, 0 - this.cost);            
-            this.cast = (this.cast - this.haste);// * (1.0 - UnitProp.inst(this.caster, SCOPE_PREFIX).SpellHaste());
+            this.bar = AddSpecialEffect(ART_Progressbar, GetUnitX(this.caster) + PROGRESS_BAR_X, GetUnitY(this.caster) + PROGRESS_BAR_Y * mscale);
+            BlzSetSpecialEffectZ(this.bar, GetUnitZ(this.caster) + 40);
+            BlzSetSpecialEffectColorByPlayer(this.bar, GetOwningPlayer(this.caster));
+            BlzSetSpecialEffectScale(this.bar, mscale);
+            BlzSetSpecialEffectTime(this.bar, 1.0);
+            DelayedModUnitMana.new(SpellEvent.CastingUnit, 0 - this.cost);
+            this.cast = (this.cast - this.haste);
             if (this.cast <= 0.01) {this.cast = 0.01;}
-            SetUnitTimeScale(this.bar, 1.0 / this.cast);
-            //BJDebugMsg(R2S(1.0 / this.cast) + ":" + R2S(this.cast / nodes));
+            BlzSetSpecialEffectTimeScale(this.bar, -1.0 / this.cast);
             this.nodes = nodes;
             this.tm = NewTimer();
             SetTimerData(this.tm, this);
@@ -251,8 +232,6 @@ constant integer CAST_MODE_CHANNEL = 0x32148520;
     function endcast() {
         CastingBar cb = CastingBar.ht[SpellEvent.CastingUnit];
         if (cb != 0) {
-        //BJDebugMsg("cast bar end cast");
-            //CastingBar.ht.flush(SpellEvent.CastingUnit);
             cb.channeling = 0;
             
             // stop sound if any
@@ -271,9 +250,7 @@ constant integer CAST_MODE_CHANNEL = 0x32148520;
                     lastChannelSuccess[SpellEvent.CastingUnit] = 1;
                     UnitAbilityCD.start(SpellEvent.CastingUnit, SpellEvent.AbilityId);
                     SetUnitState(SpellEvent.CastingUnit, UNIT_STATE_MANA, GetUnitState(SpellEvent.CastingUnit, UNIT_STATE_MANA) - cb.cost);
-                    //debug BJDebugMsg("1");
                     cb.finishResponse.evaluate(cb);
-                    //debug BJDebugMsg("2");
                 }
             } else if (cb.castMode == CAST_MODE_CHANNEL) {
                 lastChannelSuccess[SpellEvent.CastingUnit] = 1;
@@ -330,18 +307,8 @@ constant integer CAST_MODE_CHANNEL = 0x32148520;
     function onInit() {
         RegisterSpellEffectResponse(0, spellEffect);
         RegisterSpellEndCastResponse(0, endcast);
-        
-        //responseTable = Table.create();
         lastChannelSuccess = HandleTable.create();
     }
-
-
-
-
-
-
-
-
 
 }
 //! endzinc
