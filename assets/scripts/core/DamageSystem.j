@@ -20,12 +20,11 @@ library DamageSystem requires ZAMCore, UnitProperty, BuffSystem, FloatingNumbers
 //     real exCrit
 // )
 // - - - - - - - - - - - - - - - - - - - -
-constant string MISS = "Miss";
-constant string DODGE = "Dodge";
-constant string BLOCK = "Parry";
-constant string ABSORB = "Absorb";
-constant string IMMUNE = "Immune";
-constant string NULL_STR = "";
+    constant string MISS = "Miss";
+    constant string DODGE = "Dodge";
+    constant string BLOCK = "Parry";
+    constant string ABSORB = "Absorb";
+    constant string IMMUNE = "Immune";
     unit damageDummy;
     
     public type ResponseDamaged extends function();       

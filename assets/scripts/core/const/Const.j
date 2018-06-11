@@ -10,6 +10,7 @@ public constant real INIT_X = 5902.0;
 public constant real INIT_Y = -12016.0;
 
 public constant string DAMAGE_NAME_MELEE = "Normal Attack";
+public constant string NULL_STR = "";
 
 public constant integer ATT_STR = 1;
 public constant integer ATT_AGI = 2;

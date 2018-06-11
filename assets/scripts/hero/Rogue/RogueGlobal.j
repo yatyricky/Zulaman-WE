@@ -21,7 +21,11 @@ library RogueGlobal requires Table, ZAMCore, FloatingNumbers {
             if (this.n > 5) {
                 this.n = 5;
             }
-            FloatingNumbers.create(I2S(this.n) + " combo", COLOR_DAMAGE_CRITICAL, GetUnitX(this.u), GetUnitY(this.u), 1.7, false);
+            if (GetLocalPlayer() == GetOwningPlayer(this.u)) {
+                FloatingNumbers.create(I2S(this.n) + " combo", COLOR_DAMAGE_CRITICAL, GetUnitX(this.u), GetUnitY(this.u), 1.7, false);
+            } else {
+                FloatingNumbers.create(NULL_STR, COLOR_DAMAGE_CRITICAL, GetUnitX(this.u), GetUnitY(this.u), 1.7, false);
+            }
         }
         
         method get() -> integer {
