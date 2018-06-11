@@ -70,7 +70,7 @@ constant integer BUFF_ID = 'A04Q';
     }
     
     function onChannel() {
-        CastingBar.create(response).setSound(castSound).launch();
+        CastingBar.create(response).setVisuals(ART_IllidanMissile).setSound(castSound).launch();
     }
     
     integer castSound;

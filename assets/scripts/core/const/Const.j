@@ -946,6 +946,9 @@ public constant string ART_FLAME_STRIKE_TARGET = "Abilities\\Spells\\Human\\Flam
 public constant string ART_DarkSummonTarget = "Abilities\\Spells\\Undead\\Darksummoning\\DarkSummonTarget.mdl";
 public constant string ART_SpellStealMissile = "Abilities\\Spells\\Human\\SpellSteal\\SpellStealMissile.mdl";
 public constant string ART_Progressbar = "Progressbar.mdl";
+public constant string ART_SpiritOfVengeanceMissile = "Abilities\\Weapons\\SpiritOfVengeanceMissile\\SpiritOfVengeanceMissile.mdl";
+public constant string ART_IllidanMissile = "Abilities\\Weapons\\IllidanMissile\\IllidanMissile.mdl";
+public constant string ART_FarseerMissile = "Abilities\\Weapons\\FarseerMissile\\FarseerMissile.mdl";
 
 public constant string BTNVolcano = "ReplaceableTextures\\CommandButtons\\BTNVolcano.blp";
 public constant string BTNEarthquake = "ReplaceableTextures\\CommandButtons\\BTNEarthquake.blp";

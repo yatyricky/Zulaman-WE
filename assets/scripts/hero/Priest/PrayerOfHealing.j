@@ -81,7 +81,7 @@ library PrayerOfHealing requires CastingBar, UnitProperty, PlayerUnitList, Sound
     }
     
     function onChannel() {
-        CastingBar.create(response).setSound(castSound).launch();
+        CastingBar.create(response).setSound(castSound).setVisuals(ART_FAERIE_DRAGON_MISSILE).launch();
     }
 
     function onInit() {

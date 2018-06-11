@@ -42,6 +42,7 @@ constant string  ART_TARGET  = "Abilities\\Spells\\Other\\Drain\\ManaDrainTarget
     
     function onChannel() {
         CastingBar cb = CastingBar.create(response).setSound(castSound);
+        cb.setVisuals(ART_IllidanMissile);
         cb.e0 = AddSpecialEffectTarget(ART_CASTER, SpellEvent.CastingUnit, "chest");
         cb.e1 = AddSpecialEffectTarget(ART_TARGET, SpellEvent.TargetUnit, "chest");
         cb.l0 = CastAttachLightning.atUnits("DRAM", SpellEvent.CastingUnit, SpellEvent.TargetUnit);

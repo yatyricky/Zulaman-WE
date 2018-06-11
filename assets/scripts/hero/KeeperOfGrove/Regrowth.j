@@ -36,7 +36,7 @@ library Regrowth requires CastingBar, KeeperOfGroveGlobal {
     }
     
     function onChannel() {
-        CastingBar cb = CastingBar.create(response).setSound(castSound);
+        CastingBar cb = CastingBar.create(response).setVisuals(ART_KEEPER_GROVE_MISSILE).setSound(castSound);
         Buff buf;
         real icd;
         if (GetWidgetLife(SpellEvent.TargetUnit) / GetUnitState(SpellEvent.TargetUnit, UNIT_STATE_MAX_LIFE) < 0.35) {

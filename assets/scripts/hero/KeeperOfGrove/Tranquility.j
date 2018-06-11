@@ -31,7 +31,7 @@ constant integer BUFF_ID = 'A04K';
     }
     
     function onChannel() {
-        CastingBar cb = CastingBar.create(response);
+        CastingBar cb = CastingBar.create(response).setVisuals(ART_KEEPER_GROVE_MISSILE);
         Buff buf;
         cb.cost = 150 + GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_TRANQUILITY) * 50;
         cb.channel(Rounding(8.0 * (1.0 + UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).SpellHaste())));

@@ -11,14 +11,15 @@ library CastingBar requires SpellEvent, TimerUtils, SpellData, UnitAbilityCD, ZA
 //
 //  CastingBar.create(response).channel([nodes]);
 //==============================================================================
-constant integer PROGRESS_BAR_X = -10;
-constant integer PROGRESS_BAR_Y = -100;
-constant integer PROGRESS_BAR_Z = 30;
-constant real PROGRESS_BAR_SX = 1.0;
-constant real PROGRESS_BAR_SY = 0.45;
-constant real PROGRESS_BAR_SZ = 0.45;
-constant integer CAST_MODE_CAST = 0x23459214;
-constant integer CAST_MODE_CHANNEL = 0x32148520;
+    constant integer PROGRESS_BAR_X = -10;
+    constant integer PROGRESS_BAR_Y = -100;
+    constant integer PROGRESS_BAR_Z = 30;
+    constant real PROGRESS_BAR_SX = 1.0;
+    constant real PROGRESS_BAR_SY = 0.45;
+    constant real PROGRESS_BAR_SZ = 0.45;
+    constant integer CAST_MODE_CAST = 0x23459214;
+    constant integer CAST_MODE_CHANNEL = 0x32148520;
+    constant real UNIT_SIZE = 128.0;
     
     public type CastBarFinishCast extends function(CastingBar);
     
@@ -102,7 +103,9 @@ constant integer CAST_MODE_CHANNEL = 0x32148520;
         unit caster, target;
         real targetX, targetY;
         effect bar;
-        timer tm;
+        timer tm, visualTimer;
+        ListObject/*<int* effect>*/ visuals;
+        real visualElapsed;
         real haste, cost, cast;
         boolean success;
         integer channeling; // 0 not channeling; 1 normal; 2 uncounterable
@@ -118,7 +121,14 @@ constant integer CAST_MODE_CHANNEL = 0x32148520;
         integer extraData;
         
         method destroy() {
+            NodeObject iter = this.visuals.head;
+            while (iter != 0) {
+                DestroyEffect(Int2Eff(iter.data));
+                iter = iter.next;
+            }
+            this.visuals.destroy();
             ReleaseTimer(this.tm);
+            ReleaseTimer(this.visualTimer);
             BlzSetSpecialEffectScale(this.bar, 0);
             DestroyEffect(this.bar);
             if (this.e0 != null) {DestroyEffect(this.e0); this.e0 = null;}
@@ -155,6 +165,8 @@ constant integer CAST_MODE_CHANNEL = 0x32148520;
             this.l0 = 0;
             
             this.castingSound = null;
+            this.visuals = ListObject.create();
+            this.visualElapsed = 0.0;
             
             return this;
         }
@@ -174,6 +186,43 @@ constant integer CAST_MODE_CHANNEL = 0x32148520;
             this.castingSound = RunSoundAtPoint2d(sndType, GetUnitX(this.caster), GetUnitY(this.caster));
             return this;
         }
+
+        method setVisuals(string path) -> thistype {
+            integer i = 0;
+            real step = bj_PI * 2.0 / (this.lvl + 1);
+            effect eff;
+            while (i < this.lvl + 1) {
+                eff = AddSpecialEffect(path, GetUnitX(this.caster) + UNIT_SIZE * Cos(step * i), GetUnitY(this.caster) + UNIT_SIZE * Sin(step * i));
+                BlzSetSpecialEffectRoll(eff, step * i + bj_PI * 0.5);
+                this.visuals.push(Eff2Int(eff));
+                i += 1;
+            }
+            eff = null;
+            return this;
+        }
+
+        static method visualRunning() {
+            thistype this = GetTimerData(GetExpiredTimer());
+            integer i = 0;
+            real step = bj_PI * 2.0 / (this.lvl + 1);
+            real aoff;
+            real dis;
+            NodeObject iter;
+            effect eff;
+            this.visualElapsed += 0.04;
+            aoff = bj_PI * this.visualElapsed;
+            dis = (this.cast - this.visualElapsed) / this.cast * UNIT_SIZE * 0.5 + UNIT_SIZE * 0.5;
+            if (dis < 0) {dis = 0;}
+            iter = this.visuals.head;
+            while (iter != 0) {
+                eff = IntRefEff(iter.data);
+                BlzSetSpecialEffectRoll(eff, step * i + aoff + bj_PI * 0.5);
+                BlzSetSpecialEffectPosition(eff, GetUnitX(this.caster) + dis * Cos(step * i + aoff), GetUnitY(this.caster) + dis * Sin(step * i + aoff), GetUnitZ(this.caster) + 40);
+                iter = iter.next;
+                i += 1;
+            }
+            eff = null;
+        }
         
         method launch() {
             real mscale = ModelInfo.get(GetUnitTypeId(this.caster), "CastingBar: 188").scale;
@@ -191,6 +240,10 @@ constant integer CAST_MODE_CHANNEL = 0x32148520;
             this.tm = NewTimer();
             SetTimerData(this.tm, this);
             TimerStart(this.tm, this.cast, false, function thistype.castingRunning);
+
+            this.visualTimer = NewTimer();
+            SetTimerData(this.visualTimer, this);
+            TimerStart(this.visualTimer, 0.04, true, function thistype.visualRunning);
         }
         
         private static method channelRunning() {
@@ -222,6 +275,10 @@ constant integer CAST_MODE_CHANNEL = 0x32148520;
             this.tm = NewTimer();
             SetTimerData(this.tm, this);
             TimerStart(this.tm, this.cast / this.nodes, true, function thistype.channelRunning);
+
+            this.visualTimer = NewTimer();
+            SetTimerData(this.visualTimer, this);
+            TimerStart(this.visualTimer, 0.04, true, function thistype.visualRunning);
         }
         
         private static method onInit() {

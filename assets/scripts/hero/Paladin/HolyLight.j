@@ -68,7 +68,7 @@ library HolyLight requires CastingBar, BeaconOfLight {
     }
     
     function onChannel() {
-        CastingBar cb = CastingBar.create(response).setSound(castSound);
+        CastingBar cb = CastingBar.create(response).setSound(castSound).setVisuals(ART_FAERIE_DRAGON_MISSILE);
         BuffSlot bs;
         Buff buf;
         if (GetUnitAbilityLevel(SpellEvent.CastingUnit, BID_DIVINE_FAVOR) > 0) {
