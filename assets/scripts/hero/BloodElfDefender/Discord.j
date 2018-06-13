@@ -19,13 +19,18 @@ constant integer BUFF_ID = 'A030';
 
     function onCast() {
         AggroList al = AggroList[SpellEvent.TargetUnit];
-        unit target = al.sort();
-        real aggro = al.getAggro(target);
+        unit target;
+        real aggro;
         integer lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_DISCORD);
         Buff buf;
-        if (!IsUnit(target, SpellEvent.CastingUnit)) {
-            al.setAggro(SpellEvent.CastingUnit, aggro * 1.1);
-        }        
+        if (al != 0) {
+            target = al.sort();
+            aggro = al.getAggro(target);
+            if (!IsUnit(target, SpellEvent.CastingUnit)) {
+                al.setAggro(SpellEvent.CastingUnit, aggro * 1.1);
+            }
+        }
+
         buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BUFF_ID);
         buf.bd.tick = -1;
         buf.bd.interval = 5.0;
@@ -41,7 +46,8 @@ constant integer BUFF_ID = 'A030';
         }
         buf.bd.boe = onEffect;
         buf.bd.bor = onRemove;
-        buf.run();              
+        buf.run();
+        target = null;
     }
 
     function onInit() {

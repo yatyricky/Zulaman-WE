@@ -1,16 +1,17 @@
 //! zinc
-library DebugExporter requires Integer {
+library DebugExporter requires Integer, Clock {
     private string list[];
     private integer n;
 
     public function logi(string str) {
-        BJDebugMsg(str);
-        list[n] = str;
+        string sb = "[" + R2S(GetGameTime()) + "]" + str;
+        BJDebugMsg(sb);
+        list[n] = sb;
         n += 1;
     }
 
     public function loge(string str) {
-        string sb = "|cffff0000ERROR|r: " + str;
+        string sb = "[" + R2S(GetGameTime()) + "]" + "|cffff0000ERROR|r: " + str;
         BJDebugMsg(sb);
         list[n] = sb;
         n += 1;
@@ -21,16 +22,14 @@ library DebugExporter requires Integer {
     }
     
     public function ExportDebugLog() {
-        string contents = "<html><head><meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" /><style type=\"text/css\">body {background:#000;} span {color:#0F0;} .inv {display:none;}</style></head><body><div class=\"inv\">";
-        string filename = I2HEX(GetRandomInt(0, 0x7FFFFFFF)) + ".pld";
+        string contents = "";
+        string filename = "debugLog.pld";
         integer i = 0;
         PreloadGenStart();
-        Preload(contents);
         while (i < n) {
-            Preload("</div><br/><span>" + list[i] + "</span><div class=\"inv\">");
+            Preload(list[i]);
             i += 1;
         }
-        Preload("</div><br/></body></html>");
         PreloadGenEnd(filename);
         PreloadGenClear();
         n = 0;

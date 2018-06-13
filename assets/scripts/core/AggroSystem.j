@@ -179,7 +179,7 @@ constant integer MAX_PLAYER_UNITS = 50;
             //    }
             //    i += 1;
             //}
-            //tmpu = null;
+            tmpu = null;
             return this.aggros[0];
         }
         
@@ -221,7 +221,6 @@ constant integer MAX_PLAYER_UNITS = 50;
     
         static method operator[](unit u) -> thistype {
             if (!thistype.ht.exists(u)) {
-                //print(SCOPE_PREFIX+">|cffff0000Error:|r " + GetUnitName(u) + " has not been engaged in combat yet.");
                 return 0;
             } else {
                 return thistype(thistype.ht[u]);
@@ -385,6 +384,7 @@ constant integer MAX_PLAYER_UNITS = 50;
                 OrderCreeps(thistype.units[i], target, combatTime);
                 i += 1;
             }
+            target = null;
         }
         
         static method newCombat() {
@@ -413,11 +413,11 @@ constant integer MAX_PLAYER_UNITS = 50;
         }
         
         static method getLowestHPPercent() -> unit {
-            unit ret;
+            unit ret = null;
             real dis, td;
             integer i;
             if (thistype.n == 0) {
-                return null;
+                return ret;
             } else {
                 ret = thistype.units[0];
                 dis = GetUnitStatePercent(thistype.units[0], UNIT_STATE_LIFE, UNIT_STATE_MAX_LIFE);
