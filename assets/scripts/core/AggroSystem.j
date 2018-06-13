@@ -558,7 +558,7 @@ constant integer MAX_PLAYER_UNITS = 50;
         static method clearForAll(unit u) {
             integer i = 0;
             while (i < thistype.n) {
-                AggroList[thistype.units[i]].delete(u);
+                AggroList[thistype.units[i]].setAggro(u, 0.1);
                 i += 1;
             }
             if (AggroList[thistype.units[0]].aggrosN < 1) {

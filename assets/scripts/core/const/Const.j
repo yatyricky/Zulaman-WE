@@ -184,6 +184,7 @@ public constant integer SID_ASCENDANCE = 'A0A0';
 public constant integer BID_EARTH_BIND_TOTEM = 'A03A';
 // rogue
 public constant integer UTID_ROGUE = 'Edem';
+public constant integer UTID_NON_STEALTH = 'e003';
 public constant integer SID_APIV = 'Apiv';
 public constant integer SID_SINISTER_STRIKE = 'A00W';
 public constant integer BID_SINISTER_STRIKE = 'A046';
@@ -192,6 +193,7 @@ public constant integer BID_EVISCERATE = 'A0AT';
 public constant integer SID_ASSAULT = 'A00Z';
 public constant integer SID_BLADE_FLURRY = 'A013';
 public constant integer SID_STEALTH = 'A017';
+public constant integer BID_STEALTH_AMP = 'A049';
 public constant integer SID_GARROTE = 'A04N';
 public constant integer SID_AMBUSH = 'A04O';
 // Heretic
@@ -949,6 +951,7 @@ public constant string ART_Progressbar = "Progressbar.mdl";
 public constant string ART_SpiritOfVengeanceMissile = "Abilities\\Weapons\\SpiritOfVengeanceMissile\\SpiritOfVengeanceMissile.mdl";
 public constant string ART_IllidanMissile = "Abilities\\Weapons\\IllidanMissile\\IllidanMissile.mdl";
 public constant string ART_FarseerMissile = "Abilities\\Weapons\\FarseerMissile\\FarseerMissile.mdl";
+public constant string ART_CloudOfFog = "Abilities\\Spells\\Human\\CloudOfFog\\CloudOfFog.mdl";
 
 public constant string BTNVolcano = "ReplaceableTextures\\CommandButtons\\BTNVolcano.blp";
 public constant string BTNEarthquake = "ReplaceableTextures\\CommandButtons\\BTNEarthquake.blp";
