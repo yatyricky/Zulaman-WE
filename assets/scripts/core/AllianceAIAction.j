@@ -750,37 +750,37 @@ constant real AIACTION_INTERVAL = 0.33;
             SelectHeroSkill(source, SID_REND);
             SelectHeroSkill(source, SID_OVER_POWER);
         } else if (GetHeroLevel(source) == 2) {
-            SelectHeroSkill(source, SID_OVER_POWER);    
-            SelectHeroSkill(source, SID_MORTAL_STRIKE);    
-            SelectHeroSkill(source, SID_EXECUTE_LEARN);
+            SelectHeroSkill(source, SID_OVER_POWER);
+            SelectHeroSkill(source, SID_MORTAL_STRIKE);
+            SelectHeroSkill(source, SID_EXECUTE);
         } else if (GetHeroLevel(source) == 3) {
-            SelectHeroSkill(source, SID_OVER_POWER);    
-            SelectHeroSkill(source, SID_MORTAL_STRIKE);    
-            SelectHeroSkill(source, SID_EXECUTE_LEARN);
+            SelectHeroSkill(source, SID_OVER_POWER);
+            SelectHeroSkill(source, SID_MORTAL_STRIKE);
+            SelectHeroSkill(source, SID_EXECUTE);
         } else if (GetHeroLevel(source) == 4) {
-            SelectHeroSkill(source, SID_HEROIC_STRIKE);    
-            SelectHeroSkill(source, SID_HEROIC_STRIKE);            
+            SelectHeroSkill(source, SID_HEROIC_STRIKE);
+            SelectHeroSkill(source, SID_HEROIC_STRIKE);
             SelectHeroSkill(source, SID_MORTAL_STRIKE);
         } else if (GetHeroLevel(source) == 5) {
-            SelectHeroSkill(source, SID_REND);    
-            SelectHeroSkill(source, SID_REND);            
-            SelectHeroSkill(source, SID_EXECUTE_LEARN);
+            SelectHeroSkill(source, SID_REND);
+            SelectHeroSkill(source, SID_REND);
+            SelectHeroSkill(source, SID_EXECUTE);
         } else {
             SelectHeroSkill(source, SID_HEROIC_STRIKE);
             SelectHeroSkill(source, SID_REND);
             SelectHeroSkill(source, SID_OVER_POWER);
-            SelectHeroSkill(source, SID_MORTAL_STRIKE);    
-            SelectHeroSkill(source, SID_EXECUTE_LEARN);
+            SelectHeroSkill(source, SID_MORTAL_STRIKE);
+            SelectHeroSkill(source, SID_EXECUTE);
             SelectHeroSkill(source, SID_HEROIC_STRIKE);
             SelectHeroSkill(source, SID_REND);
             SelectHeroSkill(source, SID_OVER_POWER);
-            SelectHeroSkill(source, SID_MORTAL_STRIKE);    
-            SelectHeroSkill(source, SID_EXECUTE_LEARN);
+            SelectHeroSkill(source, SID_MORTAL_STRIKE);
+            SelectHeroSkill(source, SID_EXECUTE);
             SelectHeroSkill(source, SID_HEROIC_STRIKE);
             SelectHeroSkill(source, SID_REND);
             SelectHeroSkill(source, SID_OVER_POWER);
-            SelectHeroSkill(source, SID_MORTAL_STRIKE);    
-            SelectHeroSkill(source, SID_EXECUTE_LEARN);
+            SelectHeroSkill(source, SID_MORTAL_STRIKE);
+            SelectHeroSkill(source, SID_EXECUTE);
         }
     }
     

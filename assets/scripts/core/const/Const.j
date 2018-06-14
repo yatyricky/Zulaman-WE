@@ -152,8 +152,7 @@ public constant integer SID_REND = 'A00B';
 public constant integer BID_REND = 'A008';
 public constant integer SID_OVER_POWER = 'A027';
 public constant integer SID_MORTAL_STRIKE = 'A00E';
-public constant integer SID_EXECUTE_LEARN = 'A00I';
-public constant integer SID_EXECUTE = 'A02S';
+public constant integer SID_EXECUTE = 'A00I';
 // frost mage
 public constant integer UTID_FROST_MAGE = 'Hjai';
 public constant integer SID_FROST_BOLT = 'A01S';

@@ -147,7 +147,6 @@ library SpellData requires Table, Integer {
             SpellData.create(SID_REND,"Rend",0,0,6,OrderId("whirlwind"),1,ORDER_TYPE_TARGET);
             SpellData.create(SID_OVER_POWER,"Over Power",0,0,3.5,OrderId("windwalk"),1,ORDER_TYPE_TARGET);
             SpellData.create(SID_MORTAL_STRIKE,"Mortal Strike",15,0,9,OrderId("drunkenhaze"),1,ORDER_TYPE_TARGET).setCCC2(25,0,8).setCCC3(35,0,7);
-            SpellData.create(SID_EXECUTE_LEARN,"Execute Learn",0,0,1,OrderId("massteleport"),1,ORDER_TYPE_TARGET);
             SpellData.create(SID_EXECUTE,"Execute",0,0,1,OrderId("slow"),1,ORDER_TYPE_TARGET);
             SpellData.create(SID_FROST_BOLT,"Frost Bolt",15,2,0,OrderId("heal"),1,ORDER_TYPE_TARGET).setCCC2(30,2,0).setCCC3(45,2,0);
             SpellData.create(SID_BLIZZARD,"Blizzard",100,0,10,OrderId("blizzard"),1,ORDER_TYPE_POINT).setCCC2(135,0,10).setCCC3(170,0,10);
