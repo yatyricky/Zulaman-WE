@@ -1,4 +1,5 @@
-const workbook = require("./node-xlsx-helper")("./Abilities.xlsm");
+const path = require("path");
+const workbook = require("./node-xlsx-helper")(path.join(__dirname, "Abilities.xlsm"));
 const assert = require("assert");
 const fs = require("fs");
 
@@ -26,16 +27,172 @@ const ci = {
     cd: sheet.indexOfHeader("CD"),
     cast: sheet.indexOfHeader("Cast"),
     channel: sheet.indexOfHeader("Channel"),
+    duration: sheet.indexOfHeader("Duration"),
     cost: sheet.indexOfHeader("Cost"),
     name: sheet.indexOfHeader("name"),
-    researchUber: sheet.indexOfHeader("research_uber_tip"),
-    uber: sheet.indexOfHeader("uber_tip")
+    description: sheet.indexOfHeader("description"),
+    levelTemplate: sheet.indexOfHeader("level_description_template"),
+    tooltipTemplate: sheet.indexOfHeader("tooltip_template"),
+    var1: sheet.indexOfHeader("var1"),
+    var2: sheet.indexOfHeader("var2"),
+    var3: sheet.indexOfHeader("var3")
 };
 
 const objs = [];
 
+const arrayAllEqual = (arr) => {
+    if (arr.length < 2) {
+        return true;
+    } else {
+        const elem0 = arr[0];
+        for (let i = 1; i < arr.length; i++) {
+            if (elem0 != arr[i]) {
+                return false;
+            }
+        }
+        return true;
+    }
+};
+
+const fillTemplateWithData = (template, data) => {
+    const regex = /{(\d[#%])}/g;
+    let ret = template;
+    let match = regex.exec(ret);
+    let i = 0;
+    while (match != null) {
+        if (match[1][1] === "%") {
+            ret = ret.replace(`{${match[1]}}`, (data[i] * 100).toFixed(0) + "%");
+        } else {
+            ret = ret.replace(`{${match[1]}}`, data[i]);
+        }
+        i ++;
+        match = regex.exec(template);
+    }
+    return ret;
+};
+
+const forgeResearchUberTip = (desc, data, levelDesc) => {
+    let ret = `${desc}|n|n`;
+    let hasData = false;
+    if (data.cast.length != 0) {
+        ret = ret + "|cff99ccffCast:|r ";
+        if (arrayAllEqual(data.cast)) {
+            ret = ret + data.cast[0];
+        } else {
+            ret = ret + data.cast.join("/");
+        }
+        ret = ret + "|n";
+        hasData = true;
+    }
+    if (data.channel.length != 0) {
+        ret = ret + "|cff99ccffChannel:|r ";
+        if (arrayAllEqual(data.channel)) {
+            ret = ret + data.channel[0];
+        } else {
+            ret = ret + data.channel.join("/");
+        }
+        ret = ret + "|n";
+        hasData = true;
+    }
+    if (data.range.length != 0) {
+        if (arrayAllEqual(data.range)) {
+            if (data.range[0] > 128) {
+                ret = ret + "|cff99ccffRange:|r ";
+                ret = ret + data.range[0];
+                ret = ret + "|n";
+                hasData = true;
+            }
+        } else {
+            ret = ret + "|cff99ccffRange:|r ";
+            ret = ret + data.range.join("/");
+            ret = ret + "|n";
+            hasData = true;
+        }
+    }
+    if (data.aoe.length != 0) {
+        ret = ret + "|cff99ccffAOE:|r ";
+        if (arrayAllEqual(data.aoe)) {
+            ret = ret + data.aoe[0];
+        } else {
+            ret = ret + data.aoe.join("/");
+        }
+        ret = ret + "|n";
+        hasData = true;
+    }
+    if (data.cost.length != 0) {
+        ret = ret + "|cff99ccffCost:|r ";
+        if (arrayAllEqual(data.cost)) {
+            ret = ret + (data.cost[0] < 1 ? data.cost[0] * 100 + "%" : data.cost[0]);
+        } else {
+            ret = ret + data.cost.map(x => (x < 1 ? x * 100 : x)).join("/") + (data.cost[0] < 1 ? "%" : "");
+        }
+        ret = ret + "|n";
+        hasData = true;
+    }
+    if (data.duration.length != 0) {
+        ret = ret + "|cff99ccffDuration:|r ";
+        if (arrayAllEqual(data.duration)) {
+            ret = ret + data.duration[0];
+        } else {
+            ret = ret + data.duration.join("/");
+        }
+        ret = ret + "|n";
+        hasData = true;
+    }
+    if (data.cd.length != 0) {
+        if (arrayAllEqual(data.cd)) {
+            if (data.cd[0] > 1) {
+                ret = ret + "|cff99ccffCooldown:|r ";
+                ret = ret + data.cd[0];
+                ret = ret + "|n";
+                hasData = true;
+            }
+        } else {
+            ret = ret + "|cff99ccffCooldown:|r ";
+            ret = ret + data.cd.join("/");
+            ret = ret + "|n";
+            hasData = true;
+        }
+    }
+    if (hasData === true) {
+        ret = ret + "|n";
+    }
+    const levelDescs = levelDesc.map((str, i) => {
+        const replaced = fillTemplateWithData(str, [data.var1[i], data.var2[i], data.var3[i]]);
+        return `|cffffcc00Level ${i + 1}|r - ${replaced}`;
+    });
+    ret = ret + levelDescs.join("|n");
+    return ret;
+};
+
+const forgeUberTip = (template, vars, dataSet) => {
+    let ret = fillTemplateWithData(template, vars);
+    ret += "|n";
+    if (dataSet.cast !== undefined) {
+        ret += `|n|cff99ccffCast:|r ${dataSet.cast}`;
+    }
+    if (dataSet.channel !== undefined) {
+        ret += `|n|cff99ccffChannel:|r ${dataSet.channel}`;
+    }
+    if (dataSet.range !== undefined && dataSet.range > 128) {
+        ret += `|n|cff99ccffRange:|r ${dataSet.range}`;
+    }
+    if (dataSet.aoe !== undefined) {
+        ret += `|n|cff99ccffAOE:|r ${dataSet.aoe}`;
+    }
+    if (dataSet.cost !== undefined) {
+        ret += `|n|cff99ccffCost:|r ${dataSet.cost < 1 ? dataSet.cost * 100 + "%" : dataSet.cost}`;
+    }
+    if (dataSet.duration !== undefined) {
+        ret += `|n|cff99ccffDuration:|r ${dataSet.duration}`;
+    }
+    if (dataSet.cd !== undefined && dataSet.cd > 1) {
+        ret += `|n|cff99ccffCooldown:|r ${dataSet.cd}`;
+    }
+    return ret;
+};
+
 for (let i = 1; i < sheet.data.length + 1; i++) {
-    const row = sheet.data[i];
     let obj = { id: "", fields: [] };
     if (sheet.cell(`${ci.paid}${i}`) === "ANcl") {
         // start
@@ -163,6 +320,45 @@ for (let i = 1; i < sheet.data.length + 1; i++) {
             }
         }
 
+        // data
+        const dataSet = {
+            cast: [],
+            channel: [],
+            range: [],
+            aoe: [],
+            cost: [],
+            duration: [],
+            cd: [],
+            var1: [],
+            var2: [],
+            var3: []
+        };
+        const dataSetKeys = Object.keys(dataSet);
+        for (let j = 0; j < dataSetKeys.length; j++) {
+            for (let k = 0; k < lvl; k++) {
+                dataSet[dataSetKeys[j]].push(sheet.cell(`${ci[dataSetKeys[j]]}${i + k}`, true));
+            }
+            let allZero = true;
+            for (let k = 0; k < dataSet[dataSetKeys[j]].length && allZero === true; k++) {
+                if (dataSet[dataSetKeys[j]][k] != 0) {
+                    allZero = false;
+                }
+            }
+            if (allZero === true) {
+                dataSet[dataSetKeys[j]] = [];
+            }
+            const setLength = dataSet[dataSetKeys[j]].length;
+            assert.strictEqual(setLength == 0 || setLength == 1 || setLength == 3, true);
+        }
+        const levelDesc = [];
+        for (let j = 0; j < lvl; j++) {
+            levelDesc.push(sheet.cell(`${ci.levelTemplate}${i + j}`));
+        }
+        const tooltipDesc = [];
+        for (let j = 0; j < lvl; j++) {
+            tooltipDesc.push(sheet.cell(`${ci.tooltipTemplate}${i + j}`));
+        }
+
         // texts
         // anam	文本 - 名字
         let name = sheet.cell(`${ci.name}${i}`);
@@ -170,42 +366,72 @@ for (let i = 1; i < sheet.data.length + 1; i++) {
         // aret	文本 - 提示工具 - 学习
         obj.fields.push({ id: "aret", type: "string", level: 0, column: 0, value: `Learn ${name}(|cffffcc00${hotkey}|r) - [|cffffcc00Level %d|r]` });
         // arut	文本 - 提示工具 - 学习 - 扩展
-        obj.fields.push({ id: "arut", type: "string", level: 0, column: 0, value: sheet.cell(`${ci.researchUber}${i}`) });
+        obj.fields.push({
+            id: "arut",
+            type: "string",
+            level: 0,
+            column: 0,
+            value: forgeResearchUberTip(sheet.cell(`${ci.description}${i}`), dataSet, levelDesc)
+        });
         // atp1	文本 - 提示工具 - 普通
         for (let j = 0; j < lvl; j++) {
             obj.fields.push({ id: "atp1", type: "string", level: j + 1, column: 0, value: `${name}(|cffffcc00${hotkey}|r) - [|cffffcc00Level ${j + 1}|r]` });
         }
         // aub1	文本 - 提示工具 - 普通 - 扩展
         for (let j = 0; j < lvl; j++) {
-            obj.fields.push({ id: "aub1", type: "string", level: j + 1, column: 0, value: sheet.cell(`${ci.uber}${i + j}`) });
+            obj.fields.push({
+                id: "aub1",
+                type: "string",
+                level: j + 1,
+                column: 0,
+                value: forgeUberTip(tooltipDesc[j], [dataSet.var1[j], dataSet.var2[j], dataSet.var3[j]], {
+                    cast: dataSet.cast[j],
+                    channel: dataSet.channel[j],
+                    range: dataSet.range[j],
+                    aoe: dataSet.aoe[j],
+                    cost: dataSet.cost[j],
+                    duration: dataSet.duration[j],
+                    cd: dataSet.cd[j],
+                })
+            });
         }
     }
 }
 
-// merge with default abilities.json
-const defaultData = JSON.parse(fs.readFileSync("./abilities.json"));
-
+// temporal solution, copy and paste
+let dump = "";
 for (let i = 0; i < objs.length; i++) {
-    const elem = objs[i];
-    assert.strictEqual(defaultData.custom.hasOwnProperty(elem.id), true);
-    defaultData.custom[elem.id] = elem.fields;
-}
-
-// build war3map.w3a
-const Translator = require("wc3maptranslator");
-const objTrans = new Translator.Objects.jsonToWar("abilities", defaultData);
-const fis = fs.openSync("./war3map.w3a", "w+");
-fs.writeSync(fis, objTrans.buffer, 0, objTrans.buffer.length);
-fs.closeSync(fis);
-
-// inject w3a into map
-const cmd = require("child_process").exec;
-cmd("MPQEditor.exe add ..\\..\\ZAM_ruins.w3x .\\war3map.w3a \"war3map.w3a\"", (err, stdout, stderr) => {
-    if (err) {
-        console.log("unable to run cmd");
-        return;
+    for (let j = 0; j < objs[i].fields.length; j++) {
+        const element = objs[i].fields[j];
+        if (element.id == "aret" || element.id == "arut" || element.id == "atp1" || element.id == "aub1") {
+            dump += element.value + "\n";
+        }
     }
+    dump += "\n";
+}
+fs.writeFileSync("./tmp.txt", dump);
 
-    console.log(`stdout: ${stdout}`);
-    console.log(`stderr: ${stderr}`);
-});
+// // merge with default abilities.json
+// const defaultData = JSON.parse(fs.readFileSync("./abilities.json"));
+
+// for (let i = 0; i < objs.length; i++) {
+//     const elem = objs[i];
+//     assert.strictEqual(defaultData.custom.hasOwnProperty(elem.id), true);
+//     defaultData.custom[elem.id] = elem.fields;
+// }
+
+// // build war3map.w3a
+// const Translator = require("wc3maptranslator");
+// const objTrans = new Translator.Objects.jsonToWar("abilities", defaultData);
+// const fis = fs.openSync("./war3map.w3a", "w+");
+// fs.writeSync(fis, objTrans.buffer, 0, objTrans.buffer.length);
+// fs.closeSync(fis);
+
+// // inject w3a into map
+// const cmd = require("child_process").exec;
+// cmd("MPQEditor.exe add ..\\..\\ZAM_ruins.w3x .\\war3map.w3a \"war3map.w3a\"", (err, stdout, stderr) => {
+//     if (err) {
+//         return;
+//     }
+
+// });
