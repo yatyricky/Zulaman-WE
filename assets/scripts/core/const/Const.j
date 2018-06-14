@@ -82,6 +82,7 @@ public constant integer UTID_BLOOD_ELF_DEFENDER = 'Hmkg';
 public constant integer SID_SHIELD_BLOCK = 'A002';
 public constant integer SID_SUN_FIRE_STORM = 'A003';
 public constant integer SID_ARCANE_SHOCK = 'A004';
+public constant integer BID_ARCANE_SHOCK = 'A025';
 public constant integer SID_DISCORD = 'A005';
 public constant integer SID_SHIELD_OF_SINDOREI = 'A006';
 public constant integer BID_SHIELD_OF_SINDOREI = 'A031';
@@ -952,6 +953,7 @@ public constant string ART_SpiritOfVengeanceMissile = "Abilities\\Weapons\\Spiri
 public constant string ART_IllidanMissile = "Abilities\\Weapons\\IllidanMissile\\IllidanMissile.mdl";
 public constant string ART_FarseerMissile = "Abilities\\Weapons\\FarseerMissile\\FarseerMissile.mdl";
 public constant string ART_CloudOfFog = "Abilities\\Spells\\Human\\CloudOfFog\\CloudOfFog.mdl";
+public constant string ART_ManaFlareBoltImpact = "Abilities\\Spells\\Human\\ManaFlare\\ManaFlareBoltImpact.mdl";
 
 public constant string BTNVolcano = "ReplaceableTextures\\CommandButtons\\BTNVolcano.blp";
 public constant string BTNEarthquake = "ReplaceableTextures\\CommandButtons\\BTNEarthquake.blp";

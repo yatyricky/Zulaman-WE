@@ -35,10 +35,17 @@ const ci = {
     tooltipTemplate: sheet.indexOfHeader("tooltip_template"),
     var1: sheet.indexOfHeader("var1"),
     var2: sheet.indexOfHeader("var2"),
-    var3: sheet.indexOfHeader("var3")
+    var3: sheet.indexOfHeader("var3"),
+    buffAid: sheet.indexOfHeader("buffaid"),
+    buffBid: sheet.indexOfHeader("buffbid"),
+    buffPolar: sheet.indexOfHeader("buffpolar"),
+    buffType: sheet.indexOfHeader("bufftype"),
+    buffTip: sheet.indexOfHeader("bufftip"),
+    buffUber: sheet.indexOfHeader("buffuber"),
 };
 
 const objs = [];
+const buffs = [];
 
 const arrayAllEqual = (arr) => {
     if (arr.length < 2) {
@@ -396,6 +403,24 @@ for (let i = 1; i < sheet.data.length + 1; i++) {
             });
         }
     }
+    if (sheet.cell(`${ci.buffAid}${i}`) !== "" && sheet.cell(`${ci.buffAid}${i}`)[0] == "A") {
+        let tip = sheet.cell(`${ci.buffTip}${i}`);
+        if (sheet.cell(`${ci.buffPolar}${i}`) == "P") {
+            tip = `|cff00ff00${tip}|r`;
+        }
+        let prefix;
+        if (sheet.cell(`${ci.buffType}${i}`) == "P") {
+            prefix = "Physical: ";
+        } else {
+            prefix = "|cff6666ffMagical|r: ";
+        }
+        const uber = prefix + sheet.cell(`${ci.buffUber}${i}`);
+        buffs.push({
+            id: `${sheet.cell(`${ci.buffAid}${i}`)}:${sheet.cell(`${ci.buffBid}${i}`)}`,
+            tip: tip,
+            uber: uber
+        });
+    }
 }
 
 // temporal solution, copy and paste
@@ -408,6 +433,12 @@ for (let i = 0; i < objs.length; i++) {
         }
     }
     dump += "\n";
+}
+for (let i = 0; i < buffs.length; i++) {
+    const element = buffs[i];
+    dump += element.id + "\n";
+    dump += element.tip + "\n";
+    dump += element.uber + "\n\n";
 }
 fs.writeFileSync("./tmp.txt", dump);
 
