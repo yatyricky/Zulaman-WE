@@ -1,28 +1,13 @@
 //! zinc
 library SunField requires SpellEvent, TimerUtils, AggroSystem {
-constant string  ART_CASTER  = "Abilities\\Weapons\\DemolisherFireMissile\\DemolisherFireMissile.mdl";
-constant string  ART_EFFECT  = "Abilities\\Spells\\Orc\\LiquidFire\\Liquidfire.mdl";
-//constant integer BUFF_ID = 'A04F';
 
     function returnDamage(integer lvl) -> real {
         return 50.0 * lvl;
     }
     
-    //function returnDamageGoesMana(integer lvl) -> real {
-    //    return 0.02 + 0.01 * lvl;
-    //}
-    
     function returnDuration(integer lvl) -> integer {
         return 8;
     }
-
-    //function onEffect(Buff buf) {
-    //    UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageGoesMana += buf.bd.r0;
-    //}
-
-    //function onRemove(Buff buf) {
-    //    UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageGoesMana -= buf.bd.r0;
-    //}
 
     struct SunField {
         real dmg;
@@ -30,7 +15,6 @@ constant string  ART_EFFECT  = "Abilities\\Spells\\Orc\\LiquidFire\\Liquidfire.m
         unit caster;
         real aoe;
         timer tm;
-        //real x, y;
         
         method destroy() {
             ReleaseTimer(this.tm);
@@ -77,39 +61,22 @@ constant string  ART_EFFECT  = "Abilities\\Spells\\Orc\\LiquidFire\\Liquidfire.m
             this.aoe = 250.0;
             this.count = Rounding(returnDuration(lvl) * hst);
             this.dmg = returnDamage(lvl) + UnitProp.inst(u, SCOPE_PREFIX).SpellPower() * 0.33;
-            //this.x = GetUnitX(u);
-            //this.y = GetUnitY(u);
             this.damageNearBy();
             this.tm = NewTimer();
             SetTimerData(this.tm, this);
             TimerStart(this.tm, 1.0 / hst, true, function thistype.run);
-            AddTimedEffect.atCoord(ART_CASTER, GetUnitX(this.caster), GetUnitY(this.caster), 0.0);
-            AddTimedEffect.atUnit(ART_EFFECT, this.caster, "origin", returnDuration(lvl));
+            AddTimedEffect.atCoord(ART_DemolisherFireMissile, GetUnitX(this.caster), GetUnitY(this.caster), 0.0);
+            AddTimedEffect.atUnit(ART_Liquidfire, this.caster, "origin", returnDuration(lvl));
         }
     }
 
     function onCast() {
-        //Buff buf;
-        //integer lvl;
         SunField.new(SpellEvent.CastingUnit);
-        
-        //lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_SUN_FIRE_STORM);
-        //buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BUFF_ID);
-        //buf.bd.tick = -1;
-        //buf.bd.interval = returnDuration(lvl);
-        //UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageGoesMana -= buf.bd.r0;
-        //buf.bd.r0 = returnDamageGoesMana(lvl);
-        //buf.bd.boe = onEffect;
-        //buf.bd.bor = onRemove;
-        //buf.run();    
     }
 
     function onInit() {
         RegisterSpellEffectResponse(SID_SUN_FIRE_STORM, onCast);
-        //BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_POS);
     }
-//
-
 
 }
 //! endzinc

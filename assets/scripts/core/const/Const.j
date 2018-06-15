@@ -957,6 +957,8 @@ public constant string ART_ManaFlareBoltImpact = "Abilities\\Spells\\Human\\Mana
 public constant string ART_PurgeBuffTarget = "Abilities\\Spells\\Orc\\Purge\\PurgeBuffTarget.mdl";
 public constant string ART_SpellShieldCaster = "Abilities\\Spells\\Items\\SpellShieldAmulet\\SpellShieldCaster.mdl";
 public constant string ART_ThornsAuraDamage = "Abilities\\Spells\\NightElf\\ThornsAura\\ThornsAuraDamage.mdl";
+public constant string ART_DemolisherFireMissile = "Abilities\\Weapons\\DemolisherFireMissile\\DemolisherFireMissile.mdl";
+public constant string ART_Liquidfire = "Abilities\\Spells\\Orc\\LiquidFire\\Liquidfire.mdl";
 
 public constant string BTNVolcano = "ReplaceableTextures\\CommandButtons\\BTNVolcano.blp";
 public constant string BTNEarthquake = "ReplaceableTextures\\CommandButtons\\BTNEarthquake.blp";
