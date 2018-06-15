@@ -179,8 +179,8 @@ public constant integer SID_ENCHANTED_TOTEM = 'A01M';
 public constant integer SID_LIGHTNING_TOTEM = 'A036';
 public constant integer SID_EARTH_BIND_TOTEM = 'A038';
 public constant integer SID_TORRENT_TOTEM = 'A037';
-public constant integer SID_CHARGE = 'A01P';
 public constant integer SID_ASCENDANCE = 'A0A0';
+public constant integer BID_ELEMENTAL_ENPOWER = 'A03C';
 public constant integer BID_EARTH_BIND_TOTEM = 'A03A';
 // rogue
 public constant integer UTID_ROGUE = 'Edem';
@@ -953,6 +953,7 @@ public constant string ART_IllidanMissile = "Abilities\\Weapons\\IllidanMissile\
 public constant string ART_FarseerMissile = "Abilities\\Weapons\\FarseerMissile\\FarseerMissile.mdl";
 public constant string ART_CloudOfFog = "Abilities\\Spells\\Human\\CloudOfFog\\CloudOfFog.mdl";
 public constant string ART_ManaFlareBoltImpact = "Abilities\\Spells\\Human\\ManaFlare\\ManaFlareBoltImpact.mdl";
+public constant string ART_PurgeBuffTarget = "Abilities\\Spells\\Orc\\Purge\\PurgeBuffTarget.mdl";
 
 public constant string BTNVolcano = "ReplaceableTextures\\CommandButtons\\BTNVolcano.blp";
 public constant string BTNEarthquake = "ReplaceableTextures\\CommandButtons\\BTNEarthquake.blp";

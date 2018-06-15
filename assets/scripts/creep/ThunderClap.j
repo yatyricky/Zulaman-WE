@@ -1,7 +1,6 @@
 //! zinc
 library ThunderClap requires SpellEvent, DamageSystem {
 constant string  ART_CASTER  = "Abilities\\Spells\\Human\\Thunderclap\\ThunderClapCaster.mdl";
-constant string  ART_TARGET  = "Abilities\\Spells\\Orc\\Purge\\PurgeBuffTarget.mdl";
 constant integer BUFF_ID = 'A09Y';
     
     function onEffect(Buff buf) {
@@ -22,7 +21,7 @@ constant integer BUFF_ID = 'A09Y';
                     buf.bd.tick = 6;
                     buf.bd.interval = 1.0;
                     buf.bd.r0 = 100.0;
-                    if (buf.bd.e0 == 0) {buf.bd.e0 = BuffEffect.create(ART_TARGET, buf, "origin");}
+                    if (buf.bd.e0 == 0) {buf.bd.e0 = BuffEffect.create(ART_PurgeBuffTarget, buf, "origin");}
                     //if (buf.bd.e1 == 0) {buf.bd.e1 = BuffEffect.create(ART_RIGHT, buf, "hand, right");}
                     buf.bd.boe = onEffect;
                     buf.bd.bor = onRemove;

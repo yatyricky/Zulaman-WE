@@ -2,7 +2,6 @@
 library LightningShield requires DamageSystem, AggroSystem {
 constant integer HEIGHT = 600;
 constant integer RADIUS = 200;
-constant string  ART_TARGET  = "Abilities\\Spells\\Orc\\Purge\\PurgeBuffTarget.mdl";
 
     function onEffectNeg(Buff buf) {
         UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageTaken += buf.bd.r0;
@@ -141,7 +140,7 @@ constant string  ART_TARGET  = "Abilities\\Spells\\Orc\\Purge\\PurgeBuffTarget.m
                 buf.bd.tick = -1;
                 UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageTaken -= buf.bd.r0;
                 buf.bd.r0 = 5.0;
-                if (buf.bd.e0 == 0) {buf.bd.e0 = BuffEffect.create(ART_TARGET, buf, "origin");}
+                if (buf.bd.e0 == 0) {buf.bd.e0 = BuffEffect.create(ART_PurgeBuffTarget, buf, "origin");}
                 buf.bd.boe = onEffectNeg;
                 buf.bd.bor = onRemoveNeg;
                 buf.run();

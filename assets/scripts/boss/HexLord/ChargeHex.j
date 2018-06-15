@@ -1,7 +1,6 @@
 //! zinc
 library ChargeHex requires SpellEvent, BuffSystem {
-constant integer BUFF_ID = 'A03C';
-constant string  ART  = "Abilities\\Spells\\Orc\\Purge\\PurgeBuffTarget.mdl";
+
     function onEffect(Buff buf) {
         UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageDealt += buf.bd.r0;
     }
@@ -11,13 +10,13 @@ constant string  ART  = "Abilities\\Spells\\Orc\\Purge\\PurgeBuffTarget.mdl";
     }
     
     function onCast() {       
-        Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BUFF_ID);
+        Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BID_ELEMENTAL_ENPOWER);
         buf.bd.tick = -1;
         buf.bd.interval = 7;
         UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageDealt -= buf.bd.r0;
         buf.bd.r0 = 0.5;
         if (buf.bd.e0 == 0) {
-            buf.bd.e0 = BuffEffect.create(ART, buf, "origin");
+            buf.bd.e0 = BuffEffect.create(ART_PurgeBuffTarget, buf, "origin");
         }
         buf.bd.boe = onEffect;
         buf.bd.bor = onRemove;
@@ -26,9 +25,7 @@ constant string  ART  = "Abilities\\Spells\\Orc\\Purge\\PurgeBuffTarget.mdl";
 
     function onInit() {
         RegisterSpellEffectResponse(SID_CHARGE_HEX, onCast);
-        //BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
     }
-
 
 }
 //! endzinc

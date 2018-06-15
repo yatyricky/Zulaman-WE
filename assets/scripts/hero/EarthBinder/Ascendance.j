@@ -1,7 +1,6 @@
 //! zinc
 library Ascendance requires SpellEvent, BuffSystem, DamageSystem {
-constant integer BUFF_ID = 'A03C';
-constant string  ART  = "Abilities\\Spells\\Orc\\Purge\\PurgeBuffTarget.mdl";
+
     function onEffect(Buff buf) {
         UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageDealt += buf.bd.r0;
         UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModArmor(buf.bd.i0);
@@ -15,7 +14,7 @@ constant string  ART  = "Abilities\\Spells\\Orc\\Purge\\PurgeBuffTarget.mdl";
     function ondamaging() {
         real dur;
         if (DamageResult.abilityName == DAMAGE_NAME_MELEE) {
-            if (GetUnitAbilityLevel(DamageResult.source, BUFF_ID) > 0) {
+            if (GetUnitAbilityLevel(DamageResult.source, BID_ELEMENTAL_ENPOWER) > 0) {
                 DamageResult.wasDodgable = false;
                 DamageResult.isPhyx = false;
                 dur = 1.0 / (1.0 + UnitProp.inst(DamageResult.source, SCOPE_PREFIX).AttackSpeed() / 100.0);
@@ -43,7 +42,7 @@ constant string  ART  = "Abilities\\Spells\\Orc\\Purge\\PurgeBuffTarget.mdl";
 
             
             if (iid == SpellData.inst(SID_ASCENDANCE, SCOPE_PREFIX).oid) {
-                buf = Buff.cast(u, u, BUFF_ID);
+                buf = Buff.cast(u, u, BID_ELEMENTAL_ENPOWER);
                 buf.bd.tick = -1;
                 buf.bd.interval = 8.0 + 4.0 * GetUnitAbilityLevel(u, SID_ASCENDANCE);
                 UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageDealt -= buf.bd.r0;
@@ -51,7 +50,7 @@ constant string  ART  = "Abilities\\Spells\\Orc\\Purge\\PurgeBuffTarget.mdl";
                 UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModArmor(0 - buf.bd.i0);
                 buf.bd.i0 = 75;
                 if (buf.bd.e0 == 0) {
-                    buf.bd.e0 = BuffEffect.create(ART, buf, "origin");
+                    buf.bd.e0 = BuffEffect.create(ART_PurgeBuffTarget, buf, "origin");
                 }
                 buf.bd.boe = onEffect;
                 buf.bd.bor = onRemove;
@@ -67,7 +66,7 @@ constant string  ART  = "Abilities\\Spells\\Orc\\Purge\\PurgeBuffTarget.mdl";
 
     function onInit() {
         TriggerAnyUnit(EVENT_PLAYER_UNIT_ISSUED_ORDER, function onCast);
-        BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_POS);
+        BuffType.register(BID_ELEMENTAL_ENPOWER, BUFF_PHYX, BUFF_POS);
         RegisterOnDamageEvent(ondamaging);
     }
 
