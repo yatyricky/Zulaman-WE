@@ -6,42 +6,42 @@ const fs = require("fs");
 const sheet = workbook.sheets["PlayerAbilities"];
 
 const ci = {
-    paid: sheet.indexOfHeader("paid"),
-    aid: sheet.indexOfHeader("aid"),
-    isHero: sheet.indexOfHeader("is_hero"),
-    requirement: sheet.indexOfHeader("requirement"),
-    button: sheet.indexOfHeader("button"),
-    buttonnx: sheet.indexOfHeader("button_position_normal_x"),
-    buttonny: sheet.indexOfHeader("button_position_normal_y"),
-    buttonrx: sheet.indexOfHeader("button_position_research_x"),
-    buttonry: sheet.indexOfHeader("button_position_research_y"),
-    animName: sheet.indexOfHeader("anim_names"),
-    oid: sheet.indexOfHeader("order_id"),
-    hotkey: sheet.indexOfHeader("Hotkey"),
-    targetsAllowed: sheet.indexOfHeader("targets_allowed"),
-    followTime: sheet.indexOfHeader("follow_through_time"),
-    targetType: sheet.indexOfHeader("target_type"),
-    options: sheet.indexOfHeader("options"),
-    aoe: sheet.indexOfHeader("AOE"),
-    range: sheet.indexOfHeader("Range"),
-    cd: sheet.indexOfHeader("CD"),
-    cast: sheet.indexOfHeader("Cast"),
-    channel: sheet.indexOfHeader("Channel"),
-    duration: sheet.indexOfHeader("Duration"),
-    cost: sheet.indexOfHeader("Cost"),
-    name: sheet.indexOfHeader("name"),
-    description: sheet.indexOfHeader("description"),
-    levelTemplate: sheet.indexOfHeader("level_description_template"),
-    tooltipTemplate: sheet.indexOfHeader("tooltip_template"),
-    var1: sheet.indexOfHeader("var1"),
-    var2: sheet.indexOfHeader("var2"),
-    var3: sheet.indexOfHeader("var3"),
-    buffAid: sheet.indexOfHeader("buffaid"),
-    buffBid: sheet.indexOfHeader("buffbid"),
-    buffPolar: sheet.indexOfHeader("buffpolar"),
-    buffType: sheet.indexOfHeader("bufftype"),
-    buffTip: sheet.indexOfHeader("bufftip"),
-    buffUber: sheet.indexOfHeader("buffuber"),
+    paid: sheet.matchCol(1, "paid"),
+    aid: sheet.matchCol(1, "aid"),
+    isHero: sheet.matchCol(1, "is_hero"),
+    requirement: sheet.matchCol(1, "requirement"),
+    button: sheet.matchCol(1, "button"),
+    buttonnx: sheet.matchCol(1, "button_position_normal_x"),
+    buttonny: sheet.matchCol(1, "button_position_normal_y"),
+    buttonrx: sheet.matchCol(1, "button_position_research_x"),
+    buttonry: sheet.matchCol(1, "button_position_research_y"),
+    animName: sheet.matchCol(1, "anim_names"),
+    oid: sheet.matchCol(1, "order_id"),
+    hotkey: sheet.matchCol(1, "Hotkey"),
+    targetsAllowed: sheet.matchCol(1, "targets_allowed"),
+    followTime: sheet.matchCol(1, "follow_through_time"),
+    targetType: sheet.matchCol(1, "target_type"),
+    options: sheet.matchCol(1, "options"),
+    aoe: sheet.matchCol(1, "AOE"),
+    range: sheet.matchCol(1, "Range"),
+    cd: sheet.matchCol(1, "CD"),
+    cast: sheet.matchCol(1, "Cast"),
+    channel: sheet.matchCol(1, "Channel"),
+    duration: sheet.matchCol(1, "Duration"),
+    cost: sheet.matchCol(1, "Cost"),
+    name: sheet.matchCol(1, "name"),
+    description: sheet.matchCol(1, "description"),
+    levelTemplate: sheet.matchCol(1, "level_description_template"),
+    tooltipTemplate: sheet.matchCol(1, "tooltip_template"),
+    var1: sheet.matchCol(1, "var1"),
+    var2: sheet.matchCol(1, "var2"),
+    var3: sheet.matchCol(1, "var3"),
+    buffAid: sheet.matchCol(1, "buffaid"),
+    buffBid: sheet.matchCol(1, "buffbid"),
+    buffPolar: sheet.matchCol(1, "buffpolar"),
+    buffType: sheet.matchCol(1, "bufftype"),
+    buffTip: sheet.matchCol(1, "bufftip"),
+    buffUber: sheet.matchCol(1, "buffuber"),
 };
 
 const objs = [];
@@ -262,10 +262,10 @@ for (let i = 1; i < sheet.data.length + 1; i++) {
         // abpy	显示 - 按钮位置 - 普通Y
         // arpx	显示 - 按钮位置 - 研究X
         // arpy	显示 - 按钮位置 - 研究Y
-        obj.fields.push({ id: "abpx", type: "int", level: 0, column: 0, value: sheet.cell(`${ci.buttonnx}${i}`, true) });
-        obj.fields.push({ id: "abpy", type: "int", level: 0, column: 0, value: sheet.cell(`${ci.buttonny}${i}`, true) });
-        obj.fields.push({ id: "arpx", type: "int", level: 0, column: 0, value: sheet.cell(`${ci.buttonrx}${i}`, true) });
-        obj.fields.push({ id: "arpy", type: "int", level: 0, column: 0, value: sheet.cell(`${ci.buttonry}${i}`, true) });
+        obj.fields.push({ id: "abpx", type: "int", level: 0, column: 0, value: sheet.cell(`${ci.buttonnx}${i}`, "number") });
+        obj.fields.push({ id: "abpy", type: "int", level: 0, column: 0, value: sheet.cell(`${ci.buttonny}${i}`, "number") });
+        obj.fields.push({ id: "arpx", type: "int", level: 0, column: 0, value: sheet.cell(`${ci.buttonrx}${i}`, "number") });
+        obj.fields.push({ id: "arpy", type: "int", level: 0, column: 0, value: sheet.cell(`${ci.buttonry}${i}`, "number") });
         // aani	显示 - 效果 - 施法动作
         obj.fields.push({ id: "aani", type: "string", level: 0, column: 0, value: sheet.cell(`${ci.animName}${i}`) });
 
@@ -282,15 +282,15 @@ for (let i = 1; i < sheet.data.length + 1; i++) {
         }
         // Ncl1	数据 - 施法持续时间
         for (let j = 0; j < lvl; j++) {
-            obj.fields.push({ id: "Ncl1", type: "unreal", level: j + 1, column: 1, value: sheet.cell(`${ci.followTime}${i}`, true) });
+            obj.fields.push({ id: "Ncl1", type: "unreal", level: j + 1, column: 1, value: sheet.cell(`${ci.followTime}${i}`, "number") });
         }
         // Ncl2	数据 - 目标类型
         for (let j = 0; j < lvl; j++) {
-            obj.fields.push({ id: "Ncl2", type: "int", level: j + 1, column: 2, value: sheet.cell(`${ci.targetType}${i}`, true) });
+            obj.fields.push({ id: "Ncl2", type: "int", level: j + 1, column: 2, value: sheet.cell(`${ci.targetType}${i}`, "number") });
         }
         // Ncl3	数据 - 选项
         for (let j = 0; j < lvl; j++) {
-            obj.fields.push({ id: "Ncl3", type: "int", level: j + 1, column: 3, value: sheet.cell(`${ci.options}${i}`, true) });
+            obj.fields.push({ id: "Ncl3", type: "int", level: j + 1, column: 3, value: sheet.cell(`${ci.options}${i}`, "number") });
         }
         // aord	文本 - 命令串 - 使用/打开
         obj.fields.push({ id: "aord", type: "string", level: 0, column: 0, value: sheet.cell(`${ci.oid}${i}`) });
@@ -299,19 +299,19 @@ for (let i = 1; i < sheet.data.length + 1; i++) {
         // aare	状态 - 影响区域
         for (let j = 0; j < lvl; j++) {
             if (sheet.cell(`${ci.aoe}${i + j}`) != "") {
-                obj.fields.push({ id: "aare", type: "unreal", level: j + 1, column: 0, value: sheet.cell(`${ci.aoe}${i + j}`, true) });
+                obj.fields.push({ id: "aare", type: "unreal", level: j + 1, column: 0, value: sheet.cell(`${ci.aoe}${i + j}`, "number") });
             }
         }
         // aran	状态 - 施法距离
         for (let j = 0; j < lvl; j++) {
             if (sheet.cell(`${ci.range}${i + j}`) != "") {
-                obj.fields.push({ id: "aran", type: "unreal", level: j + 1, column: 0, value: sheet.cell(`${ci.range}${i + j}`, true) });
+                obj.fields.push({ id: "aran", type: "unreal", level: j + 1, column: 0, value: sheet.cell(`${ci.range}${i + j}`, "number") });
             }
         }
         // acdn	状态 - 魔法冷却时间
         for (let j = 0; j < lvl; j++) {
             if (sheet.cell(`${ci.cd}${i + j}`) != "") {
-                obj.fields.push({ id: "acdn", type: "unreal", level: j + 1, column: 0, value: sheet.cell(`${ci.cd}${i + j}`, true) });
+                obj.fields.push({ id: "acdn", type: "unreal", level: j + 1, column: 0, value: sheet.cell(`${ci.cd}${i + j}`, "number") });
             }
         }
         // acas	状态 - 魔法施放时间 // if cast or channel != 0, then 10
@@ -322,8 +322,8 @@ for (let i = 1; i < sheet.data.length + 1; i++) {
         }
         // amcs	状态 - 魔法消耗 // if < 1, then 0
         for (let j = 0; j < lvl; j++) {
-            if (sheet.cell(`${ci.cost}${i + j}`, true) >= 1) {
-                obj.fields.push({ id: "amcs", type: "int", level: j + 1, column: 0, value: sheet.cell(`${ci.cost}${i + j}`, true) });
+            if (sheet.cell(`${ci.cost}${i + j}`, "number") >= 1) {
+                obj.fields.push({ id: "amcs", type: "int", level: j + 1, column: 0, value: sheet.cell(`${ci.cost}${i + j}`, "number") });
             }
         }
 
@@ -343,7 +343,7 @@ for (let i = 1; i < sheet.data.length + 1; i++) {
         const dataSetKeys = Object.keys(dataSet);
         for (let j = 0; j < dataSetKeys.length; j++) {
             for (let k = 0; k < lvl; k++) {
-                dataSet[dataSetKeys[j]].push(sheet.cell(`${ci[dataSetKeys[j]]}${i + k}`, true));
+                dataSet[dataSetKeys[j]].push(sheet.cell(`${ci[dataSetKeys[j]]}${i + k}`, "number"));
             }
             let allZero = true;
             for (let k = 0; k < dataSet[dataSetKeys[j]].length && allZero === true; k++) {
