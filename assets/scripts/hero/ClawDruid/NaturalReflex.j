@@ -1,7 +1,5 @@
 //! zinc
 library NaturalReflex requires BuffSystem, SpellEvent, UnitProperty {
-constant integer BUFF_ID = 'A02M';
-constant string  ART  = "Abilities\\Spells\\Human\\Invisibility\\InvisibilityTarget.mdl";
 
     function returnHealPercent(integer lvl) -> real {
         return 0.02 * lvl;
@@ -23,7 +21,7 @@ constant string  ART  = "Abilities\\Spells\\Human\\Invisibility\\InvisibilityTar
     }
 
     function onCast() {
-        Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BUFF_ID);
+        Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BID_NATURAL_REFLEX);
         buf.bd.tick = -1;
         buf.bd.interval = 5.0;
         UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).dodge -= buf.bd.r0;
@@ -33,7 +31,7 @@ constant string  ART  = "Abilities\\Spells\\Human\\Invisibility\\InvisibilityTar
         buf.bd.bor = onRemove;
         buf.run();
 
-        AddTimedEffect.atUnit(ART, SpellEvent.CastingUnit, "origin", 1.0);
+        AddTimedEffect.atUnit(ART_InvisibilityTarget, SpellEvent.CastingUnit, "origin", 1.0);
     }
     
     function clawDruidHitted() {
@@ -49,7 +47,7 @@ constant string  ART  = "Abilities\\Spells\\Human\\Invisibility\\InvisibilityTar
                 amt = (returnHealPercent(ilvl) * GetUnitState(DamageResult.target, UNIT_STATE_MAX_LIFE)) * (cost / 0.1);
                 HealTarget(DamageResult.target, DamageResult.target, amt, SpellData.inst(SID_NATURAL_REFLEX, SCOPE_PREFIX).name, -3.0, false);
                 AddTimedEffect.atUnit(ART_HEAL, DamageResult.target, "origin", 0.2);
-                if (GetUnitAbilityLevel(DamageResult.target, BUFF_ID) <= 0) {
+                if (GetUnitAbilityLevel(DamageResult.target, BID_NATURAL_REFLEX) <= 0) {
                     ModUnitMana(DamageResult.target, 0.0 - GetUnitState(DamageResult.target, UNIT_STATE_MAX_MANA) * cost);
                 }
             }
@@ -57,11 +55,10 @@ constant string  ART  = "Abilities\\Spells\\Human\\Invisibility\\InvisibilityTar
     }
 
     function onInit() {
-        BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_POS);
+        BuffType.register(BID_NATURAL_REFLEX, BUFF_PHYX, BUFF_POS);
         RegisterSpellEffectResponse(SID_NATURAL_REFLEX, onCast);
         RegisterDamagedEvent(clawDruidHitted);
     }
-
 
 }
 //! endzinc

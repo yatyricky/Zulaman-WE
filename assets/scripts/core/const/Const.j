@@ -93,8 +93,10 @@ public constant integer UTID_CLAW_DRUID = 'Hlgr';
 public constant integer SID_LACERATE = 'A01F';
 public constant integer BID_LACERATE = 'A02K';
 public constant integer SID_SAVAGE_ROAR = 'A010';
+public constant integer BID_SAVAGE_ROAR = 'A02L';
 public constant integer SID_FOREST_CURE = 'A0A1';
 public constant integer SID_NATURAL_REFLEX = 'A016';
+public constant integer BID_NATURAL_REFLEX = 'A02M';
 public constant integer SID_SURVIVAL_INSTINCTS = 'A0A2';
 public constant integer BID_SURVIVAL_INSTINCTS = 'A0A3';
 // keeper of grove
@@ -960,6 +962,8 @@ public constant string ART_SpellShieldCaster = "Abilities\\Spells\\Items\\SpellS
 public constant string ART_ThornsAuraDamage = "Abilities\\Spells\\NightElf\\ThornsAura\\ThornsAuraDamage.mdl";
 public constant string ART_DemolisherFireMissile = "Abilities\\Weapons\\DemolisherFireMissile\\DemolisherFireMissile.mdl";
 public constant string ART_Liquidfire = "Abilities\\Spells\\Orc\\LiquidFire\\Liquidfire.mdl";
+public constant string ART_Owl = "Units\\NightElf\\Owl\\Owl.mdl";
+public constant string ART_InvisibilityTarget = "Abilities\\Spells\\Human\\Invisibility\\InvisibilityTarget.mdl";
 
 public constant string BTNVolcano = "ReplaceableTextures\\CommandButtons\\BTNVolcano.blp";
 public constant string BTNEarthquake = "ReplaceableTextures\\CommandButtons\\BTNEarthquake.blp";

@@ -1,7 +1,5 @@
 //! zinc
 library SavageRoar requires BuffSystem, SpellEvent, UnitProperty, AggroSystem, Lacerate {
-constant string  ART_DEBUFF  = "Abilities\\Spells\\Other\\HowlOfTerror\\HowlTarget.mdl";
-constant string  ART_CASTER  = "Abilities\\Spells\\NightElf\\BattleRoar\\RoarCaster.mdl";
 
     function returnAPDec(integer lvl) -> real {
         return 0.05 * lvl;
@@ -31,12 +29,12 @@ constant string  ART_CASTER  = "Abilities\\Spells\\NightElf\\BattleRoar\\RoarCas
         
         while (i < MobList.n) {
             if (GetDistance.units2d(MobList.units[i], SpellEvent.CastingUnit) <= 600.0) {
-                buf = Buff.cast(SpellEvent.CastingUnit, MobList.units[i], SAVAGE_ROAR_BUFF_ID);
+                buf = Buff.cast(SpellEvent.CastingUnit, MobList.units[i], BID_SAVAGE_ROAR);
                 buf.bd.tick = -1;
                 buf.bd.interval = returnDuration(lvl);
                 UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModAP(buf.bd.i0);
                 buf.bd.i0 = Rounding(returnAPDec(lvl) * UnitProp.inst(buf.bd.target, SCOPE_PREFIX).AttackPower());
-                if (buf.bd.e0 == 0) {buf.bd.e0 = BuffEffect.create(ART_DEBUFF, buf, "overhead");}
+                if (buf.bd.e0 == 0) {buf.bd.e0 = BuffEffect.create(ART_HOWL_TARGET, buf, "overhead");}
                 buf.bd.r0 = returnDmgAmp(lvl);
                 buf.bd.boe = onEffect;
                 buf.bd.bor = onRemove;
@@ -44,23 +42,22 @@ constant string  ART_CASTER  = "Abilities\\Spells\\NightElf\\BattleRoar\\RoarCas
                 
                 count += 0.01;
                 
-                buf = BuffSlot[MobList.units[i]].getBuffByBid(LACERATE_BUFF_ID);
+                buf = BuffSlot[MobList.units[i]].getBuffByBid(BID_LACERATE);
                 if (buf != 0) {
                     RabiesOnEffect(buf);
                 }
             }
             i += 1;
         }
-        AddTimedEffect.atUnit(ART_CASTER, SpellEvent.CastingUnit, "origin", 0.5);
+        AddTimedEffect.atUnit(ART_ROAR_CASTER, SpellEvent.CastingUnit, "origin", 0.5);
         
         ModUnitMana(SpellEvent.CastingUnit, GetUnitState(SpellEvent.CastingUnit, UNIT_STATE_MAX_MANA) * (0.25 + count));
     }
 
     function onInit() {
-        BuffType.register(SAVAGE_ROAR_BUFF_ID, BUFF_PHYX, BUFF_NEG);
+        BuffType.register(BID_SAVAGE_ROAR, BUFF_PHYX, BUFF_NEG);
         RegisterSpellEffectResponse(SID_SAVAGE_ROAR, onCast);
     }
-
 
 }
 //! endzinc

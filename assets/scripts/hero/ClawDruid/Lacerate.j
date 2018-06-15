@@ -1,5 +1,5 @@
 //! zinc
-library Lacerate requires BuffSystem, SpellEvent, UnitProperty, ClawDruidGlobal, AggroSystem {
+library Lacerate requires BuffSystem, SpellEvent, UnitProperty, AggroSystem {
     function returnDD(integer lvl) -> real {
         return 50.0 * lvl;
     }
@@ -10,11 +10,6 @@ library Lacerate requires BuffSystem, SpellEvent, UnitProperty, ClawDruidGlobal,
 
     public function RabiesOnEffect(Buff buf) {
         real dmg = buf.bd.r0;
-        Buff debuff = BuffSlot[buf.bd.target].getBuffByBid(SAVAGE_ROAR_BUFF_ID);
-        if (debuff != 0) {
-        //BJDebugMsg("dmg amp> " + R2S(debuff.bd.r0));
-            dmg *= (1.0 + debuff.bd.r0);
-        }
         DamageTarget(buf.bd.caster, buf.bd.target, dmg, SpellData.inst(SID_LACERATE, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS, false);
         if (!IsUnitDead(buf.bd.caster)) {
             AggroTarget(buf.bd.caster, buf.bd.target, dmg * 10.0, SCOPE_PREFIX);
@@ -22,19 +17,14 @@ library Lacerate requires BuffSystem, SpellEvent, UnitProperty, ClawDruidGlobal,
         AddTimedEffect.atUnit(ART_BLEED, buf.bd.target, "origin", 0.2);
     }
 
-    public function RabiesOnRemove(Buff buf) {
-    }
+    public function RabiesOnRemove(Buff buf) {}
 
     function onCast() {
-        Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, LACERATE_BUFF_ID);
+        Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BID_LACERATE);
         integer lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_LACERATE);
         real dmg = returnDD(lvl) + UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).AttackPower() * 0.3;
-        Buff debuff = BuffSlot[SpellEvent.TargetUnit].getBuffByBid(SAVAGE_ROAR_BUFF_ID);
-        if (debuff != 0) {
-            dmg *= (1.0 + debuff.bd.r0);
-        }
         AddTimedEffect.atUnit(ART_BLEED, SpellEvent.TargetUnit, "origin", 0.2);
-        DamageTarget(buf.bd.caster, buf.bd.target, dmg, SpellData.inst(SID_LACERATE, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS, false);
+        DamageTarget(buf.bd.caster, buf.bd.target, dmg, SpellData.inst(SID_LACERATE, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS, true);
         AggroTarget(buf.bd.caster, buf.bd.target, dmg * 5.0, SCOPE_PREFIX);
         
         buf.bd.interval = 2.0 / (1.0 + UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).AttackSpeed() / 100.0);
@@ -42,13 +32,13 @@ library Lacerate requires BuffSystem, SpellEvent, UnitProperty, ClawDruidGlobal,
         buf.bd.r0 = UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).AttackPower() * 0.25 + returnDOT(lvl);
         buf.bd.boe = RabiesOnEffect;
         buf.bd.bor = RabiesOnRemove;
-        buf.run();        
-        // print("手贱");
+        buf.run();
     }
 
     function onInit() {
-        BuffType.register(LACERATE_BUFF_ID, BUFF_PHYX, BUFF_NEG);
+        BuffType.register(BID_LACERATE, BUFF_PHYX, BUFF_NEG);
         RegisterSpellEffectResponse(SID_LACERATE, onCast);
     }
+
 }
 //! endzinc
