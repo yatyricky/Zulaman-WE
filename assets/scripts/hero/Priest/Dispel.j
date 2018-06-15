@@ -1,6 +1,5 @@
 //! zinc
 library Dispel requires BuffSystem, SpellEvent, UnitProperty {
-constant integer BUFF_ID1 = 'A03U';
 
     function onEffect1(Buff buf) {
         UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellHaste += buf.bd.r0;
@@ -18,7 +17,7 @@ constant integer BUFF_ID1 = 'A03U';
                 buf.destroy();
             }
             if (GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_DISPEL) > 1) {
-                buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BUFF_ID1);
+                buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BID_DISPEL);
                 buf.bd.tick = -1;
                 buf.bd.interval = 3.0;
                 UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellHaste -= buf.bd.r0;
@@ -38,7 +37,7 @@ constant integer BUFF_ID1 = 'A03U';
 
     function onInit() {
         RegisterSpellEffectResponse(SID_DISPEL, onCast);
-        BuffType.register(BUFF_ID1, BUFF_MAGE, BUFF_POS);
+        BuffType.register(BID_DISPEL, BUFF_MAGE, BUFF_POS);
     }
 
 }

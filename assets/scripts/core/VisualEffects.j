@@ -19,6 +19,11 @@ library VisualEffects requires List {
             this.deallocate();
         }
 
+        static method destroySimple() {
+            thistype this = GetTimerData(GetExpiredTimer());
+            this.destroy();
+        }
+
         static method orbit() {
 
         }
@@ -60,7 +65,7 @@ library VisualEffects requires List {
             while (i < num) {
                 eff = AddSpecialEffect(model, x, y);
                 BlzSetSpecialEffectRoll(eff, bj_PI * 2.0 / num * i);
-                list.push(Eff2Int(eff));
+                this.list.push(Eff2Int(eff));
                 i += 1;
             }
             this.tm = NewTimer();
@@ -70,6 +75,23 @@ library VisualEffects requires List {
             TimerStart(this.tm, 0.04, true, function thistype.runNova);
             eff = null;
             return this;
+        }
+
+        static method circle(string model, real x, real y, real r, integer num, integer interval) {
+            thistype this = thistype.allocate();
+            integer i = 0;
+            real rad = bj_PI * 2.0 / num;
+            effect eff;
+            this.tm = NewTimer();
+            this.list = ListObject.create();
+            while (i < num) {
+                eff = AddSpecialEffect(model, x + Cos(rad * i) * r, y + Sin(rad * i) * r);
+                BlzSetSpecialEffectRoll(eff, rad * i);
+                this.list.push(Eff2Int(eff));
+                i += 1;
+            }
+            SetTimerData(this.tm, this);
+            TimerStart(this.tm, interval, false, function thistype.destroySimple);
         }
 
     }

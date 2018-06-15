@@ -17,17 +17,6 @@ library PrayerOfHealing requires CastingBar, UnitProperty, PlayerUnitList, Sound
         UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModArmor(0 - buf.bd.i1);
     }
 
-    struct POHVisualEffect {
-        static method start(real x, real y, real r, integer num, integer tick) {
-            integer i = 0;
-            real rad = 6.2832 / num;
-            while (i < num) {
-                AddTimedEffect.atCoord(ART_DARK_PORTAL_TARGET, x + Cos(rad * i) * r, y + Sin(rad * i) * r, tick * 0.04);
-                i += 1;
-            }
-        }
-    }
-
     function response(CastingBar cd) {
         integer i = 0;
         integer lvl = GetUnitAbilityLevel(cd.caster, SID_PRAYER_OF_HEALING);
@@ -77,11 +66,11 @@ library PrayerOfHealing requires CastingBar, UnitProperty, PlayerUnitList, Sound
                 i += 1;
             }
         }
-        POHVisualEffect.start(cd.targetX, cd.targetY, 200 + 50 * lvl, 15, 20);
     }
     
     function onChannel() {
         CastingBar.create(response).setSound(castSound).setVisuals(ART_FAERIE_DRAGON_MISSILE).launch();
+        VisualEffects.circle(ART_GlowingRunes8, SpellEvent.TargetX, SpellEvent.TargetY, 200 + 50 * GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_PRAYER_OF_HEALING), 15, 1);
     }
 
     function onInit() {

@@ -60,12 +60,6 @@ library Shield requires BuffSystem, UnitProperty, SpellEvent, UnitAbilityCD, Hea
                 buf.bd.bor = onRemove1;
                 buf.run();
             }
-            
-            if (GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_SHIELD) > 1) {
-                if (GetRandomInt(0, 99) < 35 && GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_HEAL) > 0) {
-                    PriestCastHeal(SpellEvent.CastingUnit, SpellEvent.TargetUnit, 2 * GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_SHIELD) - 1);
-                }
-            }
         } else {
             delayedDosth1.start(SpellEvent.CastingUnit);
             CoolDown(SpellEvent.CastingUnit, SID_SHIELD);
@@ -77,7 +71,6 @@ library Shield requires BuffSystem, UnitProperty, SpellEvent, UnitAbilityCD, Hea
         BuffType.register(BID_SHIELD_SOUL_WEAK, BUFF_PHYX, BUFF_NEG);
         RegisterSpellEffectResponse(SID_SHIELD, onCast);
     }
-
 
 }
 //! endzinc

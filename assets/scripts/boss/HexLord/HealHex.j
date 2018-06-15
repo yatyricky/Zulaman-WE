@@ -1,6 +1,5 @@
 //! zinc
 library HealHex requires BuffSystem, SpellEvent, UnitProperty {
-constant integer BUFF_ID = 'A03X';
 constant string  ART  = "Abilities\\Spells\\Orc\\EtherealForm\\SpiritWalkerChange.mdl";
 
     function onEffect(Buff buf) {
@@ -11,7 +10,7 @@ constant string  ART  = "Abilities\\Spells\\Orc\\EtherealForm\\SpiritWalkerChang
     function onRemove(Buff buf) {}
 
     function onCast() {
-        Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BUFF_ID);
+        Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BID_HEAL);
         buf.bd.tick = 4;
         buf.bd.interval = 2.0 * (1.0 - UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).SpellHaste());
         buf.bd.boe = onEffect;
@@ -22,10 +21,8 @@ constant string  ART  = "Abilities\\Spells\\Orc\\EtherealForm\\SpiritWalkerChang
     }
 
     function onInit() {
-        //BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
         RegisterSpellEffectResponse(SID_HEAL_HEX, onCast);
     }
-
 
 }
 //! endzinc
