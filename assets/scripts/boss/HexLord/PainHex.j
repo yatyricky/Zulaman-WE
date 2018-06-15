@@ -1,6 +1,5 @@
 //! zinc
 library PainHex requires BuffSystem, SpellEvent, UnitProperty, SpellReflection {
-constant integer BUFF_ID = 'A01V';
 constant integer BUFF_ID1 = 'A021';
 
     function onEffect1(Buff buf) { 
@@ -26,7 +25,7 @@ constant integer BUFF_ID1 = 'A021';
             SpellEvent.CastingUnit = SpellEvent.TargetUnit;
             SpellEvent.TargetUnit = tmp;
         }
-        buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BUFF_ID);
+        buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BID_PAIN);
         buf.bd.tick = 4;
         buf.bd.interval = 2.0 * (1.0 - UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).SpellHaste());
         buf.bd.boe = onEffect;
@@ -45,11 +44,8 @@ constant integer BUFF_ID1 = 'A021';
     }
 
     function onInit() {
-        //BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_NEG);
-        //BuffType.register(BUFF_ID1, BUFF_MAGE, BUFF_NEG);
         RegisterSpellEffectResponse(SID_PAIN_HEX, onCast);
     }
-
 
 }
 //! endzinc

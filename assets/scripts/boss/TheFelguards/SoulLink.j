@@ -25,7 +25,7 @@ library SoulLink requires BuffSystem {
     }
 
     function onInit() {
-        BuffType.register(BID_PAIN, BUFF_PHYX, BUFF_POS);
+        BuffType.register(BID_SOUL_LINK, BUFF_PHYX, BUFF_POS);
         RegisterSpellEffectResponse(SID_SOUL_LINK, onCast);
     }
 

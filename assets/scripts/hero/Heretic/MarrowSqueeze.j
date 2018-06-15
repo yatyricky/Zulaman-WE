@@ -1,5 +1,5 @@
 //! zinc
-library MarrowSqueeze requires CastingBar, UnitProperty, HeathenGlobal {
+library MarrowSqueeze requires CastingBar, UnitProperty {
 constant string  ART  = "Abilities\\Spells\\Undead\\DeathandDecay\\DeathandDecayTarget.mdl";
 constant integer BUFF_ID = 'A04Q';
 
@@ -33,7 +33,7 @@ constant integer BUFF_ID = 'A04Q';
         
         // equiped Anathema
         if (UnitHasItemOfTypeBJ(cd.caster, ITID_ANATHEMA) == true) {
-            swpain = BuffSlot[cd.target].getBuffByBid(PAIN_DEBUFF_ID);
+            swpain = BuffSlot[cd.target].getBuffByBid(BID_PAIN);
             if (swpain != 0) {
                 lengthen = ItemExAttributes.getUnitAttrVal(cd.caster, IATTR_CT_PAIN, SCOPE_PREFIX);
                 swpain.bd.tick += R2I(lengthen / swpain.bd.interval) + 1;
