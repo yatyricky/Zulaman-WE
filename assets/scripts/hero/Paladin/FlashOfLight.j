@@ -1,5 +1,6 @@
 //! zinc
 library FlashOfLight requires SpellEvent, UnitProperty, BeaconOfLight, HolyLight {
+
     function returnHeal(integer lvl) -> real {
         return 200.0;
     }
@@ -14,11 +15,6 @@ library FlashOfLight requires SpellEvent, UnitProperty, BeaconOfLight, HolyLight
         real exct = returnExtraCritical(lvl);
         BuffSlot bs = BuffSlot[SpellEvent.CastingUnit];
         Buff buf, dispel;
-        // buff amp
-        buf = BuffSlot[SpellEvent.TargetUnit].getBuffByBid(BID_HOLY_LIGHT_AMP);
-        if (buf != 0) {
-            exct += buf.bd.r0;
-        }
         // must crit
         buf = bs.getBuffByBid(BID_DIVINE_FAVOR_CRIT);
         if (buf != 0) {
@@ -26,6 +22,7 @@ library FlashOfLight requires SpellEvent, UnitProperty, BeaconOfLight, HolyLight
             bs.dispelByBuff(buf);
             buf.destroy();
         }
+        // heal
         HealTarget(SpellEvent.CastingUnit, SpellEvent.TargetUnit, amt, SpellData.inst(SID_FLASH_LIGHT, SCOPE_PREFIX).name, exct, true);
         AddTimedEffect.atUnit(ART_HOLY_BOLT_SPECIAL_ART, SpellEvent.TargetUnit, "origin", 0.2);
         // instant holy light

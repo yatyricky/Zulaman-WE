@@ -1,6 +1,6 @@
 //! zinc
 library BeaconOfLight requires BuffSystem, GroupUtils, DamageSystem {
-constant integer BUFF_ID = 'A03D';
+
     public struct BeaconOfLight {
         private static HandleTable ht;
         private static thistype current;
@@ -16,7 +16,7 @@ constant integer BUFF_ID = 'A03D';
                 //print(SCOPE_PREFIX+"already has a primary beacon");
                 if (!IsUnitDead(this.primary) && !IsUnit(this.primary, np)) {
                     //print(SCOPE_PREFIX+"and he's alive");
-                    buf = BuffSlot[this.primary].getBuffByBid(BUFF_ID);
+                    buf = BuffSlot[this.primary].getBuffByBid(BID_BEACON_OF_LIGHT);
                     if (buf == 0) {
                         print(SCOPE_PREFIX+">|cffff0000logical error|r, should have the buff");
                     } else {
@@ -110,9 +110,9 @@ constant integer BUFF_ID = 'A03D';
     
     function ondamageresponse() {
         Buff buf;
-        if (GetUnitAbilityLevel(DamageResult.target, BUFF_ID) > 0) {
+        if (GetUnitAbilityLevel(DamageResult.target, BID_BEACON_OF_LIGHT) > 0) {
             if (DamageResult.amount > GetWidgetLife(DamageResult.target)) {
-                buf = BuffSlot[DamageResult.target].getBuffByBid(BUFF_ID);
+                buf = BuffSlot[DamageResult.target].getBuffByBid(BID_BEACON_OF_LIGHT);
                 BuffSlot[DamageResult.target].dispelByBuff(buf);
                 buf.destroy();
                 DamageResult.amount = 0.0;
@@ -122,7 +122,7 @@ constant integer BUFF_ID = 'A03D';
     }
 
     function onCast() {        
-        Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BUFF_ID);
+        Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.TargetUnit, BID_BEACON_OF_LIGHT);
         buf.bd.interval = 10 + 5 * GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_BEACON_OF_LIGHT);
         buf.bd.tick = -1;
         buf.bd.boe = onEffect;
@@ -134,7 +134,7 @@ constant integer BUFF_ID = 'A03D';
     function onInit() {
         RegisterSpellEffectResponse(SID_BEACON_OF_LIGHT, onCast);
         RegisterOnDamageEvent(ondamageresponse);
-        BuffType.register(BUFF_ID, BUFF_MAGE, BUFF_POS);
+        BuffType.register(BID_BEACON_OF_LIGHT, BUFF_MAGE, BUFF_POS);
     }
 
 }

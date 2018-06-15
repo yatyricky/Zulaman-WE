@@ -126,7 +126,6 @@ library SpellData requires Table, Integer {
             SpellData.create(SID_TRANQUILITY_1,"Tranquility 1",200,8,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
             SpellData.create(SID_FLASH_LIGHT,"Flash Light",50,0,3.5,OrderId("innerfire"),1,ORDER_TYPE_TARGET);
             SpellData.create(SID_HOLY_LIGHT,"Holy Light",100,2.6,0,OrderId("holybolt"),1,ORDER_TYPE_TARGET).setCCC2(115,2.6,0).setCCC3(130,2.6,0);
-            SpellData.create(BID_HOLY_LIGHT_SHIELD,"Holy Light Shield",0,0,0,0,1,ORDER_TYPE_IMMEDIATE);
             SpellData.create(SID_HOLY_SHOCK,"Holy Shock",100,0,15,OrderId("resurrection"),1,ORDER_TYPE_TARGET).setCCC2(150,0,15).setCCC3(200,0,15);
             SpellData.create(SID_DIVINE_FAVOR,"Divine Favor",50,0,40,OrderId("massteleport"),1,ORDER_TYPE_IMMEDIATE).setCCC2(50,0,40).setCCC3(50,0,40);
             SpellData.create(SID_BEACON_OF_LIGHT,"Beacon of Light",10,0,10,OrderId("summonphoenix"),1,ORDER_TYPE_TARGET);

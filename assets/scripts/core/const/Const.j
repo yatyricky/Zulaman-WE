@@ -117,8 +117,6 @@ public constant integer BID_TRANQUILITY = 'A04K';
 public constant integer UTID_PALADIN = 'Hart';
 public constant integer SID_FLASH_LIGHT = 'A00K';
 public constant integer SID_HOLY_LIGHT = 'A00L';
-public constant integer BID_HOLY_LIGHT_AMP = 'A024';
-public constant integer BID_HOLY_LIGHT_SHIELD = 'A029';
 public constant integer BID_HOLY_LIGHT_IMPROVED = 'A0CH';
 public constant integer SID_HOLY_SHOCK = 'A00M';
 public constant integer BID_HOLY_SHOCK = 'A02E';
@@ -126,6 +124,7 @@ public constant integer SID_DIVINE_FAVOR = 'A00N';
 public constant integer BID_DIVINE_FAVOR = 'A02A';
 public constant integer BID_DIVINE_FAVOR_CRIT = 'A0CI';
 public constant integer SID_BEACON_OF_LIGHT = 'A00O';
+public constant integer BID_BEACON_OF_LIGHT = 'A03D';
 // priest
 public constant integer UTID_PRIEST = 'Ofar';
 public constant integer SID_HEAL = 'A03V';
