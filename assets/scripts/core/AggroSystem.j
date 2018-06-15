@@ -629,9 +629,13 @@ constant integer MAX_PLAYER_UNITS = 50;
     // player unit death
     function playerDeath(unit u) {
         if (GetPlayerId(GetOwningPlayer(u)) < NUMBER_OF_MAX_PLAYERS) {
-            PlayerUnits.delete(u);
+            if (IsUnitUseless(u) == false) {
+                PlayerUnits.delete(u);
+            }
             if (IsInCombat()) {
-                MobList.clearForAll(u);
+                if (IsUnitUseless(u) == false) {
+                    MobList.clearForAll(u);
+                }
             }
         }
     }
@@ -685,7 +689,7 @@ constant integer MAX_PLAYER_UNITS = 50;
         
         acqtrg = CreateTrigger();
         TriggerAddCondition(acqtrg, Condition(function acquired));
-        RegisterUnitEnterMap(register);   
+        RegisterUnitEnterMap(register);
         
         RegisterUnitDeath(playerDeath);
         RegisterDamagedEvent(setAggros);
