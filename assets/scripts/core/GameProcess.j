@@ -39,7 +39,15 @@ library GameProcess requires PlayerUnitList, MobInit {
         }
         if (utid == UTID_NAGA_SEA_WITCH) {
             MobInitAllowArea(3);
-            ModifyGateBJ(bj_GATEOPERATION_OPEN, gg_dest_ZTsx_0031);
+            // open the gay!
+            EnumDestructablesInRect(gg_rct_MainGate, null, function() {
+                destructable iter = GetEnumDestructable();
+                if (GetDestructableTypeId(iter) == 'ZTsx') {
+                    KillDestructable(iter);
+                    SetDestructableAnimation(iter, "Death Alternate");
+                }
+                iter = null;
+            });
         }
         if (utid == UTID_TIDE_BARON || utid == UTID_TIDE_BARON_WATER) {
             MobInitAllowArea(4);
