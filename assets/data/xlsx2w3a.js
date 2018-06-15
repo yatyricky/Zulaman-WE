@@ -1,5 +1,5 @@
 const path = require("path");
-const workbook = require("./node-xlsx-helper")(path.join(__dirname, "Abilities.xlsm"));
+const workbook = require("./node-xlsx-helper/index")(path.join(__dirname, "Abilities.xlsm"));
 const assert = require("assert");
 const fs = require("fs");
 
