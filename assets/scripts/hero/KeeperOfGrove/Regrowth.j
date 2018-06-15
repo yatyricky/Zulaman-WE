@@ -1,5 +1,5 @@
 //! zinc
-library Regrowth requires CastingBar, KeeperOfGroveGlobal {
+library Regrowth requires CastingBar {
 
     function returnDH(integer lvl, real sp) -> real {
         return 100.0 + 100.0 * lvl + sp * 1.2;
@@ -57,18 +57,6 @@ library Regrowth requires CastingBar, KeeperOfGroveGlobal {
         cb.launch();
     }
     
-    function lvlup() -> boolean {
-        if (GetLearnedSkill() == SID_REGROWTH) {
-            if (GetUnitAbilityLevel(GetTriggerUnit(), SID_REGROWTH) == 2) {
-                lbtick[GetPlayerId(GetOwningPlayer(GetTriggerUnit()))] = 10;
-            }
-            if (GetUnitAbilityLevel(GetTriggerUnit(), SID_REGROWTH) == 3) {
-                rejuvtick[GetPlayerId(GetOwningPlayer(GetTriggerUnit()))] = 6;
-            }
-        }
-        return false;
-    }
-    
     integer castSound;
 
     function onInit() {
@@ -76,9 +64,7 @@ library Regrowth requires CastingBar, KeeperOfGroveGlobal {
         RegisterSpellChannelResponse(SID_REGROWTH, onChannel);
         BuffType.register(BID_REGROWTH, BUFF_MAGE, BUFF_POS);
         BuffType.register(BID_REGROWTH_NO_INSTANT, BUFF_PHYX, BUFF_NEG);
-        TriggerAnyUnit(EVENT_PLAYER_HERO_SKILL, function lvlup);
     }
-
 
 }
 //! endzinc

@@ -1,5 +1,5 @@
 //! zinc
-library TranquilityHex requires CastingBar, KeeperOfGroveGlobal, ZAMCore {
+library TranquilityHex requires CastingBar, ZAMCore {
 constant string  ART  = "Abilities\\Spells\\NightElf\\Tranquility\\Tranquility.mdl";
 
     function response(CastingBar cd) {

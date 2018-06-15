@@ -1,5 +1,5 @@
 //! zinc
-library LifeBloomHex requires BuffSystem, SpellEvent, UnitProperty, KeeperOfGroveGlobal {
+library LifeBloomHex requires BuffSystem, SpellEvent, UnitProperty {
 constant integer BUFF_ID = 'A011';
 
     function onEffect(Buff buf) {

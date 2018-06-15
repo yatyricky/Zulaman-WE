@@ -109,8 +109,10 @@ public constant integer SID_REGROWTH = 'A01Y';
 public constant integer BID_REGROWTH = 'A02J';
 public constant integer BID_REGROWTH_NO_INSTANT = 'A04I';
 public constant integer SID_SWIFT_MEND = 'A020';
+public constant integer BID_SWIFT_MEND = 'A02N';
 public constant integer SID_TRANQUILITY = 'A01Z';
 public constant integer SID_TRANQUILITY_1 = 'A04J';
+public constant integer BID_TRANQUILITY = 'A04K';
 // paladin
 public constant integer UTID_PALADIN = 'Hart';
 public constant integer SID_FLASH_LIGHT = 'A00K';
@@ -964,6 +966,10 @@ public constant string ART_DemolisherFireMissile = "Abilities\\Weapons\\Demolish
 public constant string ART_Liquidfire = "Abilities\\Spells\\Orc\\LiquidFire\\Liquidfire.mdl";
 public constant string ART_Owl = "Units\\NightElf\\Owl\\Owl.mdl";
 public constant string ART_InvisibilityTarget = "Abilities\\Spells\\Human\\Invisibility\\InvisibilityTarget.mdl";
+public constant string ART_RejuvenationTarget = "Abilities\\Spells\\NightElf\\Rejuvenation\\RejuvenationTarget.mdl";
+public constant string ART_ReplenishHealthCasterOverhead = "Abilities\\Spells\\Undead\\ReplenishHealth\\ReplenishHealthCasterOverhead.mdl";
+public constant string ART_ClarityTarget = "Abilities\\Spells\\Items\\ClarityPotion\\ClarityTarget.mdl";
+public constant string ART_Tranquility = "Abilities\\Spells\\NightElf\\Tranquility\\Tranquility.mdl";
 
 public constant string BTNVolcano = "ReplaceableTextures\\CommandButtons\\BTNVolcano.blp";
 public constant string BTNEarthquake = "ReplaceableTextures\\CommandButtons\\BTNEarthquake.blp";

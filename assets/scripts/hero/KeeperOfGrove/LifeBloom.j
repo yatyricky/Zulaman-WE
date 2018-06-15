@@ -1,5 +1,6 @@
 //! zinc
-library LifeBloom requires BuffSystem, SpellEvent, UnitProperty, KeeperOfGroveGlobal {
+library LifeBloom requires BuffSystem, SpellEvent, UnitProperty {
+
     function returnHOT(integer lvl, real sp) -> real {
         return 20.0 * lvl + sp * 0.2;
     }
@@ -16,17 +17,8 @@ library LifeBloom requires BuffSystem, SpellEvent, UnitProperty, KeeperOfGroveGl
     }
 
     function onRemove(Buff buf) {
-        HealTarget(buf.bd.caster, buf.bd.target, buf.bd.r1, SpellData.inst(SID_LIFE_BLOOM, SCOPE_PREFIX).name, lbexcrit[GetPlayerId(GetOwningPlayer(buf.bd.caster))], false);
+        HealTarget(buf.bd.caster, buf.bd.target, buf.bd.r1, SpellData.inst(SID_LIFE_BLOOM, SCOPE_PREFIX).name, 0.0, false);
         AddTimedEffect.atUnit(ART_HEAL, buf.bd.target, "origin", 0.2);
-        //BJDebugMsg("����");   
-        
-        // equiped benediction
-        //if (HasHornOfCenarius(buf.bd.caster)) {
-        //    rejuv = BuffSlot[buf.bd.target].getBuffByBid(REJUVENATION_BUFF_ID);
-        //    if (rejuv != 0) {
-        //        rejuv.bd.tick = rejuvtick[GetPidofu(buf.bd.caster)];
-        //    }
-        //}
     }
 
     function onCast() {
@@ -36,7 +28,7 @@ library LifeBloom requires BuffSystem, SpellEvent, UnitProperty, KeeperOfGroveGl
         buf.bd.r0 = returnHOT(lvl, sp);
         buf.bd.r1 = returnDH(lvl, sp);
         buf.bd.interval = 1.0 / (1.0 + UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).SpellHaste());
-        buf.bd.tick = Rounding(lbtick[GetPlayerId(GetOwningPlayer(SpellEvent.CastingUnit))] / buf.bd.interval);
+        buf.bd.tick = Rounding(7.0 / buf.bd.interval);
         buf.bd.boe = onEffect;
         buf.bd.bor = onRemove;
         buf.run();
@@ -46,5 +38,6 @@ library LifeBloom requires BuffSystem, SpellEvent, UnitProperty, KeeperOfGroveGl
         BuffType.register(BID_LIFE_BLOOM, BUFF_MAGE, BUFF_POS);
         RegisterSpellEffectResponse(SID_LIFE_BLOOM, onCast);
     }
+    
 }
 //! endzinc

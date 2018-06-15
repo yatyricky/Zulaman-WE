@@ -1,7 +1,5 @@
 //! zinc
-library Tranquility requires CastingBar, KeeperOfGroveGlobal, ZAMCore {
-constant string  ART  = "Abilities\\Spells\\NightElf\\Tranquility\\Tranquility.mdl";
-constant integer BUFF_ID = 'A04K';
+library Tranquility requires CastingBar, ZAMCore {
 
     function returnHeal(integer lvl, real sp) -> real {
         return 100 + lvl * 100 + sp * 2.0;
@@ -23,8 +21,6 @@ constant integer BUFF_ID = 'A04K';
                 HealTarget(cd.caster, PlayerUnits.units[i], amt, SpellData.inst(SID_TRANQUILITY, SCOPE_PREFIX).name, 0.0, false);
                 ModUnitMana(PlayerUnits.units[i], GetUnitState(PlayerUnits.units[i], UNIT_STATE_MAX_MANA) * 0.0375);
                 AddTimedEffect.atUnit(ART_HEAL, PlayerUnits.units[i], "origin", 0.5);
-                //AddTimedEffect.atUnit(ART_MANA, PlayerUnits.units[i], "origin", 0.5);
-                //AddTimedLight.atUnits("HWSB", cd.caster, PlayerUnits.units[i], 0.25);
             }
             i += 1;
         }
@@ -36,9 +32,9 @@ constant integer BUFF_ID = 'A04K';
         cb.cost = 150 + GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_TRANQUILITY) * 50;
         cb.channel(Rounding(8.0 * (1.0 + UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).SpellHaste())));
         
-        AddTimedEffect.atCoord(ART, GetUnitX(SpellEvent.CastingUnit), GetUnitY(SpellEvent.CastingUnit), 4.75);
+        AddTimedEffect.atCoord(ART_Tranquility, GetUnitX(SpellEvent.CastingUnit), GetUnitY(SpellEvent.CastingUnit), 4.75);
         
-        buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BUFF_ID);
+        buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BID_TRANQUILITY);
         buf.bd.tick = -1;
         buf.bd.interval = 8.0;
         UnitProp.inst(SpellEvent.TargetUnit, SCOPE_PREFIX).aggroRate += buf.bd.r0;
@@ -95,11 +91,10 @@ constant integer BUFF_ID = 'A04K';
     function onInit() {
         RegisterSpellChannelResponse(SID_TRANQUILITY, onChannel);
         RegisterSpellEndCastResponse(SID_TRANQUILITY, onEndCast);
-        BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_POS);
+        BuffType.register(BID_TRANQUILITY, BUFF_PHYX, BUFF_POS);
         RegisterUnitEnterMap(registered);
         TriggerAnyUnit(EVENT_PLAYER_HERO_SKILL, function lvlup);
     }
-
 
 }
 //! endzinc
