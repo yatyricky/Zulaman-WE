@@ -80,6 +80,7 @@ public constant integer SID_HEAL_TESTER = 'A04H';
 // blood elf defender
 public constant integer UTID_BLOOD_ELF_DEFENDER = 'Hmkg';
 public constant integer SID_SHIELD_BLOCK = 'A002';
+public constant integer BID_SHIELD_BLOCK = 'A023';
 public constant integer SID_SUN_FIRE_STORM = 'A003';
 public constant integer SID_ARCANE_SHOCK = 'A004';
 public constant integer BID_ARCANE_SHOCK = 'A025';
@@ -954,6 +955,8 @@ public constant string ART_FarseerMissile = "Abilities\\Weapons\\FarseerMissile\
 public constant string ART_CloudOfFog = "Abilities\\Spells\\Human\\CloudOfFog\\CloudOfFog.mdl";
 public constant string ART_ManaFlareBoltImpact = "Abilities\\Spells\\Human\\ManaFlare\\ManaFlareBoltImpact.mdl";
 public constant string ART_PurgeBuffTarget = "Abilities\\Spells\\Orc\\Purge\\PurgeBuffTarget.mdl";
+public constant string ART_SpellShieldCaster = "Abilities\\Spells\\Items\\SpellShieldAmulet\\SpellShieldCaster.mdl";
+public constant string ART_ThornsAuraDamage = "Abilities\\Spells\\NightElf\\ThornsAura\\ThornsAuraDamage.mdl";
 
 public constant string BTNVolcano = "ReplaceableTextures\\CommandButtons\\BTNVolcano.blp";
 public constant string BTNEarthquake = "ReplaceableTextures\\CommandButtons\\BTNEarthquake.blp";

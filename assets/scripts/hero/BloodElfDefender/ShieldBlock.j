@@ -1,17 +1,9 @@
 //! zinc
 library ShieldBlock requires BuffSystem, DamageSystem, SpellEvent, UnitProperty, AggroSystem {
-constant integer BUFF_ID = 'A023';
-constant string  ART_CASTER  = "Abilities\\Spells\\Items\\SpellShieldAmulet\\SpellShieldCaster.mdl";
-constant string  ART_REFLECTION  = "Abilities\\Spells\\NightElf\\ThornsAura\\ThornsAuraDamage.mdl";
 
     // 0.0~1.0
     function returnBlockRate(integer lvl) -> real {
         return 0.3 + lvl * 0.15;
-    }
-
-    // multiply with block points
-    function returnBlockPointsAmp(integer lvl) -> real {
-        return 1.5 + lvl * 0.5;
     }
 
     function onEffect(Buff buf) {
@@ -28,36 +20,32 @@ constant string  ART_REFLECTION  = "Abilities\\Spells\\NightElf\\ThornsAura\\Tho
     }
     
     function paladinHitted() {
-        Buff buf = BuffSlot[DamageResult.target].getBuffByBid(BUFF_ID);
+        Buff buf = BuffSlot[DamageResult.target].getBuffByBid(BID_SHIELD_BLOCK);
         if (buf != 0 && DamageResult.isBlocked) {
             if (GetDistance.units2d(DamageResult.source, DamageResult.target) < 200.0) {
-                //BJDebugMsg("Exe once!!!");
                 DelayedDamageTarget(DamageResult.target, DamageResult.source, buf.bd.r1, SpellData.inst(SID_SHIELD_BLOCK, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS);
-                AddTimedEffect.atUnit(ART_REFLECTION, DamageResult.source, "origin", 0.5);   
+                AddTimedEffect.atUnit(ART_ThornsAuraDamage, DamageResult.source, "origin", 0.5);   
                 AggroTarget(DamageResult.target, DamageResult.source, buf.bd.r1 * 7.0, SCOPE_PREFIX);
-            } else {
-                //BJDebugMsg("Too far away");
             }
         }
-        //DamageResult.display();
     }
 
     function onCast() {
-        Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BUFF_ID);
+        Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BID_SHIELD_BLOCK);
         buf.bd.tick = -1;
         buf.bd.interval = 5.0;
         buf.bd.i0 = GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_SHIELD_BLOCK);
         UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).blockRate -= buf.bd.r0;
         buf.bd.r0 = returnBlockRate(buf.bd.i0);
-        buf.bd.r1 = UnitProp.inst(buf.bd.target, SCOPE_PREFIX).BlockPoint() * returnBlockPointsAmp(buf.bd.i0);
+        buf.bd.r1 = UnitProp.inst(buf.bd.target, SCOPE_PREFIX).BlockPoint();
         buf.bd.boe = onEffect;
         buf.bd.bor = onRemove;
         buf.run();
-        AddTimedEffect.atUnit(ART_CASTER, SpellEvent.CastingUnit, "origin", 0.1);   
+        AddTimedEffect.atUnit(ART_SpellShieldCaster, SpellEvent.CastingUnit, "origin", 0.1);
     }
     
     function onInit() {
-        BuffType.register(BUFF_ID, BUFF_PHYX, BUFF_POS);
+        BuffType.register(BID_SHIELD_BLOCK, BUFF_PHYX, BUFF_POS);
         RegisterSpellEffectResponse(SID_SHIELD_BLOCK, onCast);
         RegisterDamagedEvent(paladinHitted);
     }
