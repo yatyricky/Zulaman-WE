@@ -17,7 +17,7 @@ library ArcaneShock requires DamageSystem, BuffSystem, UnitProperty, AggroSystem
         UnitProp.inst(buf.bd.target, SCOPE_PREFIX).attackRate += buf.bd.r0;
     }
     
-    function paladinDamaged() {
+    function arcaneShockDamaged() {
         real amt;
         if (DamageResult.isHit) {
             if (GetUnitAbilityLevel(DamageResult.source, BID_ARCANE_SHOCK) > 0) {
@@ -55,7 +55,7 @@ library ArcaneShock requires DamageSystem, BuffSystem, UnitProperty, AggroSystem
     function onInit() {
         BuffType.register(BID_ARCANE_SHOCK, BUFF_MAGE, BUFF_NEG);
         RegisterSpellEffectResponse(SID_ARCANE_SHOCK, onCast);
-        RegisterDamagedEvent(paladinDamaged);
+        RegisterDamagedEvent(arcaneShockDamaged);
     }
 
 }
