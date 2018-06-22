@@ -16,6 +16,21 @@ library NefUnion requires TimerUtils, Math {
             this.destroy();
         }
 
+        method setRoll(real roll) -> thistype {
+            BlzSetSpecialEffectRoll(this.e, roll);
+            return this;
+        }
+
+        method setPitch(real pitch) -> thistype {
+            BlzSetSpecialEffectPitch(this.e, pitch);
+            return this;
+        }
+
+        method setYaw(real yaw) -> thistype {
+            BlzSetSpecialEffectYaw(this.e, yaw);
+            return this;
+        }
+
         static method atUnit(string se, unit a, string ap, real et) {
             thistype this = thistype.allocate();
             this.t = NewTimer();
@@ -24,22 +39,24 @@ library NefUnion requires TimerUtils, Math {
             TimerStart(this.t, et, false, function thistype.execute);
         }
 
-        static method atCoord(string se, real x, real y, real et) {
+        static method atCoord(string se, real x, real y, real et) -> thistype {
             thistype this = thistype.allocate();
             this.t = NewTimer();
             this.e = AddSpecialEffect(se, x, y);
             SetTimerData(this.t, this);
             TimerStart(this.t, et, false, function thistype.execute);
+            return this;
         }
         
-        static method atPos(string se, real x, real y, real z, real et, real scale) {
-            thistype this = thistype.allocate();
+        static method atPos(string se, real x, real y, real z, real et, real scale) -> thistype {
+            thistype this = thistype.allocate(); 
             this.t = NewTimer();
             this.e = AddSpecialEffect(se, x, y);
             BlzSetSpecialEffectPosition(this.e, x, y, z);
             BlzSetSpecialEffectScale(this.e, scale);
             SetTimerData(this.t, this);
             TimerStart(this.t, et, false, function thistype.execute);
+            return this;
         }
     }
 

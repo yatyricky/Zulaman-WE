@@ -1,5 +1,5 @@
 //! zinc
-library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce, Infinity, ConvertAttackMagic, MagicPoison, VoodooVial, RomulosExpiredPoison, Drum {
+library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce, Infinity, ConvertAttackMagic, MagicPoison, VoodooVial, RomulosExpiredPoison, Drum, MoonlightExplosion {
     public constant real AFFIX_FACTOR_BASE = 15000;
     public constant real AFFIX_FACTOR_DELTA = 2500;
     public constant real SUFIX_MULTIPLIER = 4;
@@ -717,7 +717,9 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
         static method callbackATK_LION(unit u, real val, integer polar) {
             EquipedLionHorn(u, polar);
         }
-        static method callbackATK_MOONWAVE(unit u, real val, integer polar) {}
+        static method callbackATK_MOONWAVE(unit u, real val, integer polar) {
+            EquipedMoonlightBurst(u, polar);
+        }
         static method callbackATK_POISNOVA(unit u, real val, integer polar) {
             EquipedBOTD(u, polar);
         }
@@ -753,7 +755,9 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
         static method callbackATK_WEAK(unit u, real val, integer polar) {
             EquipedAttackDecreaseDamage(u, polar);
         }
-        static method callback3ATK_MOONEXP(unit u, real val, integer polar) {}
+        static method callback3ATK_MOONEXP(unit u, real val, integer polar) {
+            EquipedMoonlightExplosion(u, polar);
+        }
         static method callbackMD_MREGEN(unit u, real val, integer polar) {
             EquipedTidalLoop(u, polar);
         }

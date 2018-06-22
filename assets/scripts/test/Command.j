@@ -387,8 +387,8 @@ library Command requires Console, Assertion, StunUtils, UnitProperty, BuffSystem
     effect testEff;
 
     function createEffect(string str) {
-        testEff = AddSpecialEffect("units\\human\\Priest\\Priest.mdl", -6600, -1800);
-        BlzSetSpecialEffectPosition(testEff, -6600, -1800, GetLocZ(-6600, -1800) + 40);
+        testEff = AddSpecialEffect(ART_StarfallCaster, -6600, -1800);
+        BlzSetSpecialEffectPosition(testEff, -6600, -1800, GetLocZ(-6600, -1800) + 140);
     }
 
     function setEffectYaw(string str) {

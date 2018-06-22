@@ -93,5 +93,25 @@ library Math requires Vector {
         }
         return dis;
     }
+
+    public function IsPointInLinearShooter(real mx, real my, real ox, real oy, real angle, real width, real distance) -> boolean {
+        real angleOffset = angle - bj_PI * 0.5;
+        real refOffX = Cos(angleOffset) * width * 0.5;
+        real refOffY = Sin(angleOffset) * width * 0.5;
+        real ax = ox + refOffX;
+        real ay = oy + refOffY;
+        real abx = Cos(angle) * distance + ox + refOffX - ax;
+        real aby = Sin(angle) * distance + oy + refOffY - ay;
+        real adx = ox - refOffX - ax;
+        real ady = oy - refOffY - ay;
+        real amx = mx - ax;
+        real amy = my - ay;
+        real projAMonAB = amx * abx + amy * aby;
+        real projAMonAD = amx * adx + amy * ady;
+        real magAB = abx * abx + aby * aby;
+        real magAD = adx * adx + ady * ady;
+        return (projAMonAB >= 0 && projAMonAB <= magAB && projAMonAD >= 0 && projAMonAD <= magAD);
+    }
+
 }
 //! endzinc
