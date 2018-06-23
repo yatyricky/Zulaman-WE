@@ -2,11 +2,20 @@
 library MoonlightExplosion requires DamageSystem {
     HandleTable ht;
     HandleTable counter;
+
+    function moonlightExp(DelayTask dt) {
+        integer i = 0;
+        while (i < MobList.n) {
+            if (GetDistance.units2d(MobList.units[i], dt.u1) <= 250.0) {
+                DamageTarget(dt.u0, MobList.units[i], dt.r0, SpellData.inst(SID_MOONLIGHT_GREATSWORD_EXPLOSION, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS, true);
+            }
+            i += 1;
+        }
+    }
     
     function damaged() {
         integer i;
-        real dmg;
-        unit target;
+        DelayTask dt;
         if (DamageResult.isHit == false) return;
         if (DamageResult.abilityName != DAMAGE_NAME_MELEE) return;
         if (ht.exists(DamageResult.source) == false) return;
@@ -25,16 +34,11 @@ library MoonlightExplosion requires DamageSystem {
                 // visual
                 AddTimedEffect.atUnit(ART_WISP_EXPLODE, DamageResult.target, "origin", 1.0);
                 // damage
-                dmg = ItemExAttributes.getUnitAttrVal(DamageResult.source, IATTR_3ATK_MOONEXP, SCOPE_PREFIX);
-                dmg += UnitProp.inst(DamageResult.source, SCOPE_PREFIX).SpellPower() * 0.25;
-                target = DamageResult.target;
-                i = 0;
-                while (i < MobList.n) {
-                    if (GetDistance.units2d(MobList.units[i], target) <= 250.0) {
-                        DamageTarget(DamageResult.source, MobList.units[i], dmg, SpellData.inst(SID_MOONLIGHT_GREATSWORD_EXPLOSION, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS, true);
-                    }
-                    i += 1;
-                }
+                dt = DelayTask.create(moonlightExp, 0.01);
+                dt.r0 = ItemExAttributes.getUnitAttrVal(DamageResult.source, IATTR_3ATK_MOONEXP, SCOPE_PREFIX);
+                dt.r0 += UnitProp.inst(DamageResult.source, SCOPE_PREFIX).SpellPower() * 0.1;
+                dt.u0 = DamageResult.source;
+                dt.u1 = DamageResult.target;
             }
         }
     }

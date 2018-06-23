@@ -106,10 +106,10 @@ library Math requires Vector {
         real ady = oy - refOffY - ay;
         real amx = mx - ax;
         real amy = my - ay;
-        real projAMonAB = amx * abx + amy * aby;
-        real projAMonAD = amx * adx + amy * ady;
-        real magAB = abx * abx + aby * aby;
-        real magAD = adx * adx + ady * ady;
+        real magAB = SquareRoot(abx * abx + aby * aby);
+        real magAD = SquareRoot(adx * adx + ady * ady);
+        real projAMonAB = (amx * abx + amy * aby) / magAB;
+        real projAMonAD = (amx * adx + amy * ady) / magAD;
         return (projAMonAB >= 0 && projAMonAB <= magAB && projAMonAD >= 0 && projAMonAD <= magAD);
     }
 

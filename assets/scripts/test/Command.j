@@ -387,7 +387,7 @@ library Command requires Console, Assertion, StunUtils, UnitProperty, BuffSystem
     effect testEff;
 
     function createEffect(string str) {
-        testEff = AddSpecialEffect(ART_StarfallCaster, -6600, -1800);
+        testEff = AddSpecialEffect(ART_GargoyleMissile, -6600, -1800);
         BlzSetSpecialEffectPosition(testEff, -6600, -1800, GetLocZ(-6600, -1800) + 140);
     }
 
@@ -401,6 +401,13 @@ library Command requires Console, Assertion, StunUtils, UnitProperty, BuffSystem
 
     function setEffectRoll(string str) {
         BlzSetSpecialEffectRoll(testEff, S2R(SubString(str, 5, StringLength(str))));
+    }
+
+    function setEffectColor(string str) {
+        integer r = S2I(SubString(str, 5, 8));
+        integer g = S2I(SubString(str, 8, 11));
+        integer b = S2I(SubString(str, 11, 14));
+        BlzSetSpecialEffectColor(testEff, r, g, b);
     }
 
     function doodAnimation(string str) {
@@ -423,6 +430,7 @@ library Command requires Console, Assertion, StunUtils, UnitProperty, BuffSystem
         Console[Player(0)].add("effq", setEffectYaw);
         Console[Player(0)].add("effw", setEffectPitch);
         Console[Player(0)].add("effe", setEffectRoll);
+        Console[Player(0)].add("effc", setEffectColor);
     }
 }
 //! endzinc

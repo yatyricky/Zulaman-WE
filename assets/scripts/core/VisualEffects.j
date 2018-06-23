@@ -4,8 +4,9 @@ library VisualEffects requires List {
     public struct VisualEffects {
         ListObject list;
         timer tm;
-        real step;
+        real step, dx, dy;
         integer c;
+        effect eff;
 
         method destroy() {
             NodeObject iter = this.list.head;
@@ -28,8 +29,30 @@ library VisualEffects requires List {
 
         }
 
-        static method pierce() {
-
+        static method pierce(string model, real x, real y, real angle, real distance, real speed, real scale) {
+            thistype this = thistype.allocate();
+            this.dx = speed * 0.04 * Cos(angle);
+            this.dy = speed * 0.04 * Sin(angle);
+            this.c = R2I(distance / speed * 25.0);
+            this.eff = AddSpecialEffect(model, x, y);
+            BlzSetSpecialEffectScale(this.eff, scale);
+            BlzSetSpecialEffectRoll(this.eff, angle);
+            this.tm = NewTimer();
+            SetTimerData(this.tm, this);
+            TimerStart(this.tm, 0.04, true, function() {
+                thistype this = GetTimerData(GetExpiredTimer());
+                real cx = BlzGetLocalSpecialEffectX(this.eff);
+                real cy = BlzGetLocalSpecialEffectY(this.eff);
+                BlzSetSpecialEffectPosition(this.eff, cx + this.dx, cy + this.dy, GetLocZ(cx, cy) + 30.0);
+                this.c -= 1;
+                if (this.c <= 0) {
+                    DestroyEffect(this.eff);
+                    ReleaseTimer(this.tm);
+                    this.eff = null;
+                    this.tm = null;
+                    this.deallocate();
+                }
+            });
         }
 
         static method nova3d(string model, real x, real y, real z, real r, real speed, integer num) {

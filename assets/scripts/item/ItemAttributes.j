@@ -417,7 +417,7 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
                 thistype.create(ITID_INFINITY,"|cffff8c00Infinity|r","|cffffdeadInfinity is the essence of the Will o'wisps. The energy of lightning contained in it excites the prophet Drexel. It is said that the soul of the bleak soul with a green cloud-like halo is a nightmare for all adventurers.|r").append(14,5,10).append(21,100,200).append(18,5,10).append(82,0.01,0.02).append(89,60,100);
                 thistype.create(ITID_INSIGHT,"|cffff8c00Insight|r","|cffffdeadIn the fight against the forest trolls, the Blood Elf Rangers used this enchanted orb from Kirin Tor and eventually succeeded in establishing Quel'Thalas.|r").append(14,5,10).append(18,5,10).append(19,0.03,0.05).append(68,0,0).append(83,2,4);
                 thistype.create(ITID_VOODOO_VIALS,"|cffff8c00Voodoo Vials|r","|cffffdeadZanzil *makes* friends by these small vials.|r").append(14,5,10).append(20,0.03,0.05).append(19,0.03,0.05).append(88,12,20).append(32,15,30);
-                thistype.create(ITID_MOONLIGHT_GREATSWORD,"|cffff8c00Moonlight Greatsword|r","|cffffdeadLudwig the Holy Blade.|r").append(4,5,10).append(21,75,150).append(57,10,20).append(43,0.02,0.04).append(75,75,100).append(49,60,80);
+                thistype.create(ITID_MOONLIGHT_GREATSWORD,"|cffff8c00Moonlight Greatsword|r","|cffffdeadLudwig the Holy Blade.|r").append(4,5,10).append(21,75,150).append(57,10,20).append(43,0.02,0.04).append(75,30,60).append(49,100,250);
                 //:template.end
             });
         }

@@ -976,6 +976,7 @@ public constant string ART_Tranquility = "Abilities\\Spells\\NightElf\\Tranquili
 public constant string ART_SpiritWalkerChange = "Abilities\\Spells\\Orc\\EtherealForm\\SpiritWalkerChange.mdl";
 public constant string ART_GlowingRunes8 = "Doodads\\Cinematic\\GlowingRunes\\GlowingRunes8.mdl";
 public constant string ART_StarfallCaster = "Abilities\\Spells\\NightElf\\Starfall\\StarfallCaster.mdl";
+public constant string ART_GargoyleMissile = "Abilities\\Weapons\\GargoyleMissile\\GargoyleMissile.mdl";
 
 public constant string BTNVolcano = "ReplaceableTextures\\CommandButtons\\BTNVolcano.blp";
 public constant string BTNEarthquake = "ReplaceableTextures\\CommandButtons\\BTNEarthquake.blp";
