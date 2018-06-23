@@ -15,7 +15,7 @@ library Projectile requires TimerUtils, Table, ZAMCore {
         integer i0;
         unit u0;
 
-        real angle, distance, dx, dy;
+        real angle, distance, dx, dy, step;
         integer count;
         
         method destroy() {
@@ -98,7 +98,31 @@ library Projectile requires TimerUtils, Table, ZAMCore {
             this.dy = Sin(this.angle) * this.speed * 0.04;
             TimerStart(this.tm, 0.04, true, function thistype.runPierce);
         }
+
+        method homingMissile() {
+            this.tm = NewTimer();
+            SetTimerData(this.tm, this);
+            this.eff = AddSpecialEffect(this.path, GetUnitX(this.caster), GetUnitY(this.caster));
+            this.angle = GetAngle(GetUnitX(this.caster), GetUnitY(this.caster), GetUnitX(this.target), GetUnitY(this.target)) + GetRandomReal(1.745329, 4.537856); // plus 100 - 260 degs
+            this.step = this.speed * 0.04;
+            BlzSetSpecialEffectRoll(this.eff, this.angle);
+            TimerStart(this.tm, 0.04, true, function() {
+                thistype this = GetTimerData(GetExpiredTimer());
+                real desiredAngle, diff;
+                real cx = BlzGetLocalSpecialEffectX(this.eff);
+                real cy = BlzGetLocalSpecialEffectY(this.eff);
+                this.dx = Cos(this.angle) * this.step;
+                this.dy = Sin(this.angle) * this.step;
+                BlzSetSpecialEffectPosition(this.eff, cx + this.dx, cy + this.dy, GetLocZ(cx + this.dx, cy + this.dy) + 30.0);
+                desiredAngle = GetAngle(cx + this.dx, cy + this.dy, GetUnitX(this.target), GetUnitY(this.target));
+                diff = desiredAngle - this.angle;
+                if (diff < bj_PI) {
+                } else {
+
+                }
+            });
+        }
     }
-    
+
 }
 //! endzinc

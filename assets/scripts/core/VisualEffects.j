@@ -43,7 +43,7 @@ library VisualEffects requires List {
                 thistype this = GetTimerData(GetExpiredTimer());
                 real cx = BlzGetLocalSpecialEffectX(this.eff);
                 real cy = BlzGetLocalSpecialEffectY(this.eff);
-                BlzSetSpecialEffectPosition(this.eff, cx + this.dx, cy + this.dy, GetLocZ(cx, cy) + 30.0);
+                BlzSetSpecialEffectPosition(this.eff, cx + this.dx, cy + this.dy, GetLocZ(cx + this.dx, cy + this.dy) + 30.0);
                 this.c -= 1;
                 if (this.c <= 0) {
                     DestroyEffect(this.eff);

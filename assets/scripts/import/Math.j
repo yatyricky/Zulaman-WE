@@ -113,5 +113,19 @@ library Math requires Vector {
         return (projAMonAB >= 0 && projAMonAB <= magAB && projAMonAD >= 0 && projAMonAD <= magAD);
     }
 
+    public function AngleBetweenAngles(real b, real a) -> real {
+        real d = ModuloReal(RAbsBJ(a - b), bj_PI * 2);
+        real sign = -1; 
+        real r = d;
+        if (d > bj_PI) {
+            r = bj_PI * 2 - d;
+        }
+        if ((a - b >= 0 && a - b <= bj_PI) || (a - b <= -1.0 * bj_PI && a - b >= -2 * bj_PI)) {
+            sign = 1;
+        }
+        r *= sign;
+        return r;
+    }
+
 }
 //! endzinc
