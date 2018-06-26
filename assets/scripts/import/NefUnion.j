@@ -371,6 +371,7 @@ library NefUnion requires TimerUtils, Math {
         unit u0, u1;
         integer i0;
         real r0, r1;
+        string s0;
         integer data;
         
         private method destroy() {

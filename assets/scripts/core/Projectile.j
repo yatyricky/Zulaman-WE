@@ -31,6 +31,16 @@ library Projectile requires TimerUtils, Table, ZAMCore {
             this.deallocate();
         }
         
+        method destroyEffect() {
+            ReleaseTimer(this.tm);
+            DestroyEffect(this.eff);
+            this.caster = null;
+            this.target = null;
+            this.tm = null;
+            this.eff = null;
+            this.deallocate();
+        }
+        
         method reverse() {
             unit tmp = this.caster;
             this.caster = this.target;
@@ -105,20 +115,36 @@ library Projectile requires TimerUtils, Table, ZAMCore {
             this.eff = AddSpecialEffect(this.path, GetUnitX(this.caster), GetUnitY(this.caster));
             this.angle = GetAngle(GetUnitX(this.caster), GetUnitY(this.caster), GetUnitX(this.target), GetUnitY(this.target)) + GetRandomReal(1.745329, 4.537856); // plus 100 - 260 degs
             this.step = this.speed * 0.04;
+            this.count = 0;
             BlzSetSpecialEffectRoll(this.eff, this.angle);
             TimerStart(this.tm, 0.04, true, function() {
                 thistype this = GetTimerData(GetExpiredTimer());
                 real desiredAngle, diff;
-                real cx = BlzGetLocalSpecialEffectX(this.eff);
-                real cy = BlzGetLocalSpecialEffectY(this.eff);
-                this.dx = Cos(this.angle) * this.step;
-                this.dy = Sin(this.angle) * this.step;
-                BlzSetSpecialEffectPosition(this.eff, cx + this.dx, cy + this.dy, GetLocZ(cx + this.dx, cy + this.dy) + 30.0);
-                desiredAngle = GetAngle(cx + this.dx, cy + this.dy, GetUnitX(this.target), GetUnitY(this.target));
-                diff = desiredAngle - this.angle;
-                if (diff < bj_PI) {
-                } else {
+                real cx, cy;
+                real dist;
+                if (!IsUnitDead(this.target)) {
+                    this.count += 1;
+                    cx = BlzGetLocalSpecialEffectX(this.eff);
+                    cy = BlzGetLocalSpecialEffectY(this.eff);
+                    this.dx = Cos(this.angle) * this.step;
+                    this.dy = Sin(this.angle) * this.step;
+                    BlzSetSpecialEffectPosition(this.eff, cx + this.dx, cy + this.dy, GetLocZ(cx + this.dx, cy + this.dy) + 30.0);
+                    BlzSetSpecialEffectRoll(this.eff, this.angle);
+                    desiredAngle = GetAngle(cx + this.dx, cy + this.dy, GetUnitX(this.target), GetUnitY(this.target));
+                    diff = AngleBetweenAngles(desiredAngle, this.angle);
+                    if (RAbsBJ(diff) > 0.261799 && this.count < 50) {
+                        diff = diff / RAbsBJ(diff) * 0.261799;
+                    }
+                    this.angle -= diff;
 
+                    dist = GetDistance.unitCoord(this.target, BlzGetLocalSpecialEffectX(this.eff), BlzGetLocalSpecialEffectY(this.eff));
+                    if (dist < this.step) {
+                        if (this.pr.evaluate(this)) {
+                            this.destroyEffect();
+                        }
+                    }
+                } else {
+                    this.destroyEffect();
                 }
             });
         }
