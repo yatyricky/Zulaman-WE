@@ -19,7 +19,7 @@ library MoonlightBurst requires DamageSystem, Math {
         if (DamageResult.abilityName != DAMAGE_NAME_MELEE) return;
         if (ht.exists(DamageResult.source) == false) return;
         if (ht[DamageResult.source] <= 0) return;
-        if (GetRandomReal(0, 0.99999) < 0.1) return;
+        if (GetRandomReal(0, 0.99999) > 0.1) return;
         if (IsUnitICD(DamageResult.source, SID_MOONLIGHT_GREATSWORD_BURST) == true) return;
         if (GetUnitStatePercent(DamageResult.source, UNIT_STATE_MANA, UNIT_STATE_MAX_MANA) < 5) return;
 

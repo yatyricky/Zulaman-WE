@@ -118,6 +118,14 @@ ModelInfo.rg(UTID_WRAITH,ATT_NON,499,5,5,0,1,0,0,0,0,CAREER_TYPE_CREEP,"Replacea
 ModelInfo.rg(UTID_FEL_GUARD,ATT_STR,399899,1190,500,20,0.05,0,0,1,0.03,CAREER_TYPE_BOSS,"ReplaceableTextures\\CommandButtons\\BTNFelGuard.blp");
 ModelInfo.rg(UTID_FEL_DEFENDER,ATT_STR,399899,990,400,0,0,0,0,0.8,0.03,CAREER_TYPE_BOSS,"ReplaceableTextures\\CommandButtons\\BTNFelGuard.blp");
 ModelInfo.rg(UTID_HEX_LORD,ATT_INT,799899,1350,700,5,0.05,0,0,1,0.03,CAREER_TYPE_BOSS,"ReplaceableTextures\\CommandButtons\\BTNShadowHunter.blp");
+ModelInfo.rg(UTID_THURG,ATT_NON,39999,500,200,10,0.05,0.35,200,1,0.05,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNOneHeadedOgre.blp");
+ModelInfo.rg(UTID_GAZAKROTH,ATT_NON,19999,100,100,0,0.05,0,0,0.4,0,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNLavaSpawn.blp");
+ModelInfo.rg(UTID_LORD_RAADAN,ATT_NON,34999,400,400,5,0.05,0,0,0.6,0.15,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNBlueDragonSpawn.blp");
+ModelInfo.rg(UTID_DARKHEART,ATT_NON,24999,300,300,0,0.5,0,0,1,0.3,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNBanshee.blp");
+ModelInfo.rg(UTID_ALYSON_ANTILLE,ATT_NON,24999,200,300,0,0.2,0,0,0.8,0,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNSorceress.blp");
+ModelInfo.rg(UTID_SLITHER,ATT_NON,29999,200,400,0,0.4,0,0,1,0.25,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNSkink.blp");
+ModelInfo.rg(UTID_FENSTALKER,ATT_NON,34999,400,100,10,0.05,0.2,150,1,0,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNSasquatch.blp");
+ModelInfo.rg(UTID_KORAGG,ATT_NON,24999,300,200,5,0.05,0,0,0.9,0.15,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNGhoul.blp");
 ModelInfo.rg(UTID_GOD_OF_DEATH,ATT_STR,1499499,10,40,15,0.05,0.05,100,1,0,CAREER_TYPE_BOSS,"ReplaceableTextures\\CommandButtons\\BTNForgottenOne.blp");
 ModelInfo.rg(UTID_SEA_LIZARD,ATT_NON,8499,150,100,5,0.05,0,0,1,0.05,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNSnapDragon.blp");
 ModelInfo.rg(UTID_MURLOC_SLAVE,ATT_NON,5499,100,50,2,0,0.05,20,1,0.02,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNMurgalSlave.blp");

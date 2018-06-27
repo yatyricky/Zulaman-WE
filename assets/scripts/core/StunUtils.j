@@ -1,8 +1,8 @@
 //! zinc
 library StunUtils requires NefUnion, Table, TimerUtils, UnitProperty {
-constant integer STUN_ID = 'A001';
-constant integer STUN_DEBUFF_ID = 'BPSE';
-constant string  STUN_OSTR  = "thunderbolt";
+    constant integer STUN_ID = 'A001';
+    constant integer STUN_DEBUFF_ID = 'BPSE';
+    constant string  STUN_OSTR  = "thunderbolt";
     
     private struct StunUtils {
         private static HandleTable ht;

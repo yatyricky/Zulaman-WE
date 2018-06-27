@@ -19,7 +19,7 @@ library LionHorn requires DamageSystem, BuffSystem {
         if (ht.exists(DamageResult.source) == false) return;
         if (ht[DamageResult.source] <= 0) return;
         if (IsUnitICD(DamageResult.source, BID_LION_HORN) == true) return;
-        if (GetRandomReal(0, 0.999) < ItemExAttributes.getUnitAttrVal(DamageResult.source, IATTR_ATK_LION, SCOPE_PREFIX)) return;
+        if (GetRandomReal(0, 0.999) > ItemExAttributes.getUnitAttrVal(DamageResult.source, IATTR_ATK_LION, SCOPE_PREFIX)) return;
 
         buf = Buff.cast(DamageResult.source, DamageResult.source, BID_LION_HORN);
         buf.bd.tick = -1;

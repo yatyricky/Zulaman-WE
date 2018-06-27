@@ -326,6 +326,25 @@ public constant integer SID_STEALTH_AMBUSH_HEX = 'A05W';
 public constant integer SID_BLADE_FLURRY_HEX = 'A05N';
 public constant integer SID_PAIN_HEX = 'A05O';
 public constant integer SID_TERROR_HEX = 'A05P';
+public constant integer UTID_THURG = 'XXXX';
+public constant integer UTID_GAZAKROTH = 'XXXX';
+public constant integer SID_FIRE_BOLT = 'A01B';
+public constant integer UTID_LORD_RAADAN = 'XXXX';
+public constant integer SID_FIRE_NOVA = 'A01E';
+public constant integer BID_FireNova = 'dfnv';
+public constant integer UTID_DARKHEART = 'XXXX';
+public constant integer SID_PSYCHIC_WAIL = 'A01P';
+public constant integer BID_PsychicWail = 'dfnv';
+public constant integer UTID_ALYSON_ANTILLE = 'XXXX';
+public constant integer SID_FAST_HEAL = 'A01T';
+public constant integer UTID_SLITHER = 'XXXX';
+public constant integer SID_SLUG = 'A026';
+public constant integer BID_Slug = 'dslg';
+public constant integer UTID_FENSTALKER = 'XXXX';
+public constant integer BID_BreakLeg = 'dslg';
+public constant integer UTID_KORAGG = 'XXXX';
+public constant integer SID_COLD_GAZE = 'A028';
+public constant integer BID_ColdGaze = 'dcgz';
 
 // God of Death
 public constant integer UTID_GOD_OF_DEATH = 'Uear';
@@ -977,6 +996,11 @@ public constant string ART_SpiritWalkerChange = "Abilities\\Spells\\Orc\\Etherea
 public constant string ART_GlowingRunes8 = "Doodads\\Cinematic\\GlowingRunes\\GlowingRunes8.mdl";
 public constant string ART_StarfallCaster = "Abilities\\Spells\\NightElf\\Starfall\\StarfallCaster.mdl";
 public constant string ART_GargoyleMissile = "Abilities\\Weapons\\GargoyleMissile\\GargoyleMissile.mdl";
+public constant string ART_FireBallMissile = "Abilities\\Weapons\\FireBallMissile\\FireBallMissile.mdl";
+public constant string ART_BreathOfFireMissile = "Abilities\\Spells\\Other\\BreathOfFire\\BreathOfFireMissile.mdl";
+public constant string ART_SleepTarget = "Abilities\\Spells\\Undead\\Sleep\\SleepTarget.mdl";
+public constant string ART_SilenceAreaBirth = "Abilities\\Spells\\Other\\Silence\\SilenceAreaBirth.mdl";
+public constant string ART_SOUL_ORBIT = "Abilities\\Spells\\Items\\AIso\\BIsvTarget.mdl";
 
 public constant string BTNVolcano = "ReplaceableTextures\\CommandButtons\\BTNVolcano.blp";
 public constant string BTNEarthquake = "ReplaceableTextures\\CommandButtons\\BTNEarthquake.blp";

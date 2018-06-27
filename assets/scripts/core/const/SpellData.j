@@ -236,6 +236,12 @@ library SpellData requires Table, Integer {
             SpellData.create(SID_BLADE_FLURRY_HEX,"Blade Flurry hex",0,0,10,OrderId("sleep"),1,ORDER_TYPE_IMMEDIATE);
             SpellData.create(SID_PAIN_HEX,"Pain hex",100,0,15,OrderId("slow"),1,ORDER_TYPE_TARGET);
             SpellData.create(SID_TERROR_HEX,"Terror hex",100,0,10,OrderId("sleep"),1,ORDER_TYPE_IMMEDIATE);
+            SpellData.create(SID_FIRE_BOLT,"Fire Bolt",0,0.5,0.5,OrderId("roar"),1,ORDER_TYPE_IMMEDIATE);
+            SpellData.create(SID_FIRE_NOVA,"Fire Nova",0,2,10,OrderId("roar"),1,ORDER_TYPE_IMMEDIATE);
+            SpellData.create(SID_PSYCHIC_WAIL,"Psychic Wail",0,0,1,OrderId("roar"),1,ORDER_TYPE_IMMEDIATE);
+            SpellData.create(SID_FAST_HEAL,"Fast Heal",0,1.5,1,OrderId("slow"),1,ORDER_TYPE_TARGET);
+            SpellData.create(SID_SLUG,"Slug",0,0,0,OrderId("roar"),1,ORDER_TYPE_IMMEDIATE);
+            SpellData.create(SID_COLD_GAZE,"Cold Gaze",0,0,10,OrderId("slow"),1,ORDER_TYPE_TARGET);
             SpellData.create(SID_STING,"Sting",0,0,1,0,1,ORDER_TYPE_IMMEDIATE);
             SpellData.create(SID_LIGHTNING_BOLT,"Lightning Bolt",75,3,2,OrderId("heal"),1,ORDER_TYPE_TARGET);
             SpellData.create(SID_FROST_SHOCK,"Frost Shock",0,0,8,OrderId("freezingbreath"),1,ORDER_TYPE_TARGET);

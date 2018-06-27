@@ -4,6 +4,7 @@ const assert = require("assert");
 const fs = require("fs");
 
 const sheet = workbook.sheets["PlayerAbilities"];
+const bossSheet = workbook.sheets["BossAbilities"];
 
 const ci = {
     paid: sheet.matchCol(1, "paid"),
@@ -42,6 +43,15 @@ const ci = {
     buffType: sheet.matchCol(1, "bufftype"),
     buffTip: sheet.matchCol(1, "bufftip"),
     buffUber: sheet.matchCol(1, "buffuber"),
+};
+
+const bossCi = {
+    buffAid: bossSheet.matchCol(1, "buffaid"),
+    buffBid: bossSheet.matchCol(1, "buffbid"),
+    buffPolar: bossSheet.matchCol(1, "buffpolar"),
+    buffType: bossSheet.matchCol(1, "bufftype"),
+    buffTip: bossSheet.matchCol(1, "bufftip"),
+    buffUber: bossSheet.matchCol(1, "buffuber"),
 };
 
 const objs = [];
@@ -197,6 +207,24 @@ const forgeUberTip = (template, vars, dataSet) => {
         ret += `|n|cff99ccffCooldown:|r ${dataSet.cd}`;
     }
     return ret;
+};
+
+const forgeBuffData = (aid, bid, buffType, buffPolar, tip, ubertip) => {
+    if (buffPolar == "P") {
+        tip = `|cff00ff00${tip}|r`;
+    }
+    let prefix;
+    if (buffType == "P") {
+        prefix = "Physical: ";
+    } else {
+        prefix = "|cff6666ffMagical|r: ";
+    }
+    const uber = prefix + ubertip;
+    return {
+        id: `${aid}:${bid}`,
+        tip: tip,
+        uber: uber
+    };
 };
 
 for (let i = 1; i < sheet.data.length + 1; i++) {
@@ -404,22 +432,29 @@ for (let i = 1; i < sheet.data.length + 1; i++) {
         }
     }
     if (sheet.cell(`${ci.buffAid}${i}`) !== "" && sheet.cell(`${ci.buffAid}${i}`)[0] == "A") {
-        let tip = sheet.cell(`${ci.buffTip}${i}`);
-        if (sheet.cell(`${ci.buffPolar}${i}`) == "P") {
-            tip = `|cff00ff00${tip}|r`;
-        }
-        let prefix;
-        if (sheet.cell(`${ci.buffType}${i}`) == "P") {
-            prefix = "Physical: ";
-        } else {
-            prefix = "|cff6666ffMagical|r: ";
-        }
-        const uber = prefix + sheet.cell(`${ci.buffUber}${i}`);
-        buffs.push({
-            id: `${sheet.cell(`${ci.buffAid}${i}`)}:${sheet.cell(`${ci.buffBid}${i}`)}`,
-            tip: tip,
-            uber: uber
-        });
+        buffs.push(forgeBuffData(
+            sheet.cell(`${ci.buffAid}${i}`), 
+            sheet.cell(`${ci.buffBid}${i}`),
+            sheet.cell(`${ci.buffType}${i}`),
+            sheet.cell(`${ci.buffPolar}${i}`),
+            sheet.cell(`${ci.buffTip}${i}`),
+            sheet.cell(`${ci.buffUber}${i}`)
+        ));
+    }
+}
+
+const bossBuffs = [];
+
+for (let i = 2; i < bossSheet.data.length + 1; i++) {
+    if (bossSheet.cell(`${bossCi.buffAid}${i}`) !== "") {
+        bossBuffs.push(forgeBuffData(
+            bossSheet.cell(`${bossCi.buffAid}${i}`), 
+            bossSheet.cell(`${bossCi.buffBid}${i}`),
+            bossSheet.cell(`${bossCi.buffType}${i}`),
+            bossSheet.cell(`${bossCi.buffPolar}${i}`),
+            bossSheet.cell(`${bossCi.buffTip}${i}`),
+            bossSheet.cell(`${bossCi.buffUber}${i}`)
+        ));
     }
 }
 
@@ -436,6 +471,12 @@ for (let i = 0; i < objs.length; i++) {
 }
 for (let i = 0; i < buffs.length; i++) {
     const element = buffs[i];
+    dump += element.id + "\n";
+    dump += element.tip + "\n";
+    dump += element.uber + "\n\n";
+}
+for (let i = 0; i < bossBuffs.length; i++) {
+    const element = bossBuffs[i];
     dump += element.id + "\n";
     dump += element.tip + "\n";
     dump += element.uber + "\n\n";
