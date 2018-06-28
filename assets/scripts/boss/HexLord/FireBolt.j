@@ -14,7 +14,7 @@ library FireBolt requires DamageSystem {
     function response(CastingBar cd) {
         Projectile p = Projectile.create();
         p.caster = cd.caster;
-        p.target = cd.target;
+        p.target = PlayerUnits.getRandomHero();
         p.path = ART_FireBallMissile;
         p.pr = onHit;
         p.speed = 1200;

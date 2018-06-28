@@ -10,7 +10,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
     function makeOrderJustAttack(unit source, unit target, real combatTime) {
         IssueTargetOrderById(source, OID_ATTACK, target);
     }
-    
+
     function makeOrderHexLord(unit source, unit target, real combatTime) {
         IntegerPool ip;
         integer res;
@@ -23,10 +23,10 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
             } else {
                 if (UnitCanUse(source, SID_SPIRIT_HARVEST) && GetUnitStatePercent(source, UNIT_STATE_LIFE, UNIT_STATE_MAX_LIFE) < 80) {
                     ip.add(SID_SPIRIT_HARVEST, 30);
-                } else {                    
+                } else {
                     if (UnitCanUse(source, DBMHexLord.spell1)) {
                         ip.add(DBMHexLord.spell1, 30);
-                    }         
+                    }
                     if (UnitCanUse(source, DBMHexLord.spell2)) {
                         ip.add(DBMHexLord.spell2, 30);
                     }
@@ -1130,6 +1130,119 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         }
     }
 
+    function makeOrderGazakroth(unit source, unit target, real combatTime) {
+        IntegerPool ip;
+        integer res;
+        if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
+            ip = IntegerPool.create();
+            ip.add(0, 10);
+            if (UnitCanUse(source, SID_FIRE_BOLT)) {
+                ip.add(SID_FIRE_BOLT, 100);
+            }
+            res = ip.get();
+            if (res == 0) {
+                IssueTargetOrderById(source, OID_ATTACK, target);
+            } else {
+                IssueImmediateOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid);
+            }
+            ip.destroy();
+        }
+    }
+
+    function makeOrderLordRaadan(unit source, unit target, real combatTime) {
+        IntegerPool ip;
+        integer res;
+        if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
+            ip = IntegerPool.create();
+            ip.add(0, 10);
+            if (UnitCanUse(source, SID_FIRE_NOVA)) {
+                ip.add(SID_FIRE_NOVA, 50);
+            }
+            res = ip.get();
+            if (res == 0) {
+                IssueTargetOrderById(source, OID_ATTACK, target);
+            } else {
+                IssueImmediateOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid);
+            }
+            ip.destroy();
+        }
+    }
+
+    function makeOrderDarkheart(unit source, unit target, real combatTime) {
+        IntegerPool ip;
+        integer res;
+        if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
+            ip = IntegerPool.create();
+            ip.add(0, 30);
+            if (UnitCanUse(source, SID_PSYCHIC_WAIL)) {
+                ip.add(SID_PSYCHIC_WAIL, 50);
+            }
+            res = ip.get();
+            if (res == 0) {
+                IssueTargetOrderById(source, OID_ATTACK, PlayerUnits.getRandomHero());
+            } else {
+                IssueImmediateOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid);
+            }
+            ip.destroy();
+        }
+    }
+
+    function makeOrderAlysonAntille(unit source, unit target, real combatTime) {
+        IntegerPool ip;
+        integer res;
+        if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
+            ip = IntegerPool.create();
+            ip.add(0, 5);
+            if (UnitCanUse(source, SID_FAST_HEAL)) {
+                ip.add(SID_FAST_HEAL, 100);
+            }
+            res = ip.get();
+            if (res == 0) {
+                IssueTargetOrderById(source, OID_ATTACK, target);
+            } else {
+                IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, MobList.getLowestHPPercent());
+            }
+            ip.destroy();
+        }
+    }
+
+    Point slitherTargets[];
+    integer slitherTargetsN;
+    integer slitherCurrent;
+
+    function makeOrderSlither(unit source, unit target, real combatTime) {
+        if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
+            if (GetUnitAbilityLevel(source, BID_Slug) == 0) {
+                IssueImmediateOrderById(source, SpellData.inst(SID_SLUG, SCOPE_PREFIX).oid);
+            } else {
+                if (GetDistance.unitCoord2d(source, slitherTargets[slitherCurrent].x, slitherTargets[slitherCurrent].y) > 150) {
+                    IssuePointOrderById(source, OID_MOVE, slitherTargets[slitherCurrent].x, slitherTargets[slitherCurrent].y);
+                } else {
+                    slitherCurrent = GetRandomInt(0, slitherTargetsN - 1);
+                }
+            }
+        }
+    }
+
+    function makeOrderKoragg(unit source, unit target, real combatTime) {
+        IntegerPool ip;
+        integer res;
+        if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
+            ip = IntegerPool.create();
+            ip.add(0, 30);
+            if (UnitCanUse(source, SID_COLD_GAZE)) {
+                ip.add(SID_COLD_GAZE, 60);
+            }
+            res = ip.get();
+            if (res == 0) {
+                IssueTargetOrderById(source, OID_ATTACK, target);
+            } else {
+                IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, PlayerUnits.getRandomHero());
+            }
+            ip.destroy();
+        }
+    }
+
     public function OrderCreeps(unit s, unit t, real c) {
         integer utid = GetUnitTypeId(s);
         //print(I2S(R2I(c)));
@@ -1179,8 +1292,16 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         unitCallBack[UTID_FEL_GUARD] = makeOrderFelGuard;
         unitCallBack[UTID_FEL_DEFENDER] = makeOrderFelDefender;
 
-        unitCallBack[UTID_HEX_LORD] = makeOrderHexLord;   // Hex Lord
+        unitCallBack[UTID_HEX_LORD] = makeOrderHexLord;
         unitCallBack[UTID_LIGHTNING_TOTEM] = makeOrderDoNothing;
+        unitCallBack[UTID_THURG] = makeOrderJustAttack;
+        unitCallBack[UTID_GAZAKROTH] = makeOrderGazakroth;
+        unitCallBack[UTID_LORD_RAADAN] = makeOrderLordRaadan;
+        unitCallBack[UTID_DARKHEART] = makeOrderDarkheart;
+        unitCallBack[UTID_ALYSON_ANTILLE] = makeOrderAlysonAntille;
+        unitCallBack[UTID_SLITHER] = makeOrderSlither;
+        unitCallBack[UTID_FENSTALKER] = makeOrderJustAttack;
+        unitCallBack[UTID_KORAGG] = makeOrderKoragg;
         
         // ============= Area 1, 2 ==================
         unitCallBack[UTID_NAGA_SIREN] = makeOrderNagaSiren;   // Naga Siren
@@ -1239,6 +1360,17 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         registerUnitCallback();
 
         BuffType.register(BID_PORTAL_INVULNERABLE, BUFF_PHYX, BUFF_POS);
+
+        slitherTargets[0] = Point.new(252, 5378);
+        slitherTargets[1] = Point.new(868, 5378);
+        slitherTargets[2] = Point.new(-260, 4792);
+        slitherTargets[3] = Point.new(-206, 4103);
+        slitherTargets[4] = Point.new(1298, 4820);
+        slitherTargets[5] = Point.new(1159, 4110);
+        slitherTargets[6] = Point.new(242, 3618);
+        slitherTargets[7] = Point.new(932, 3647);
+        slitherTargetsN = 8;
+        slitherCurrent = 0;
     }
 }
 //! endzinc

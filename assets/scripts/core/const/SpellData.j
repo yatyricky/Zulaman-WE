@@ -236,7 +236,7 @@ library SpellData requires Table, Integer {
             SpellData.create(SID_BLADE_FLURRY_HEX,"Blade Flurry hex",0,0,10,OrderId("sleep"),1,ORDER_TYPE_IMMEDIATE);
             SpellData.create(SID_PAIN_HEX,"Pain hex",100,0,15,OrderId("slow"),1,ORDER_TYPE_TARGET);
             SpellData.create(SID_TERROR_HEX,"Terror hex",100,0,10,OrderId("sleep"),1,ORDER_TYPE_IMMEDIATE);
-            SpellData.create(SID_FIRE_BOLT,"Fire Bolt",0,0.5,0.5,OrderId("roar"),1,ORDER_TYPE_IMMEDIATE);
+            SpellData.create(SID_FIRE_BOLT,"Fire Bolt",0,1,1,OrderId("roar"),1,ORDER_TYPE_IMMEDIATE);
             SpellData.create(SID_FIRE_NOVA,"Fire Nova",0,2,10,OrderId("roar"),1,ORDER_TYPE_IMMEDIATE);
             SpellData.create(SID_PSYCHIC_WAIL,"Psychic Wail",0,0,1,OrderId("roar"),1,ORDER_TYPE_IMMEDIATE);
             SpellData.create(SID_FAST_HEAL,"Fast Heal",0,1.5,1,OrderId("slow"),1,ORDER_TYPE_TARGET);

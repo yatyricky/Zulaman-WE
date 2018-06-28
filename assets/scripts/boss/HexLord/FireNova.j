@@ -9,16 +9,16 @@ library FireNova requires DamageSystem {
         UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModArmor(buf.bd.i0);
     }
 
-    function onCast() {
+    function response(CastingBar cd) {
         integer i;
         Buff buf;
         i = 0;
         while (i < PlayerUnits.n) {
-            if (GetDistance.units2d(PlayerUnits.units[i], SpellEvent.CastingUnit) <= 350.0) {
+            if (GetDistance.units2d(PlayerUnits.units[i], cd.caster) <= 350.0) {
                 // damage
-                DamageTarget(SpellEvent.CastingUnit, PlayerUnits.units[i], 800, SpellData.inst(SID_FIRE_NOVA, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS, true);
+                DamageTarget(cd.caster, PlayerUnits.units[i], 800, SpellData.inst(SID_FIRE_NOVA, SCOPE_PREFIX).name, false, true, false, WEAPON_TYPE_WHOKNOWS, true);
                 // decrease armor
-                buf = Buff.cast(SpellEvent.CastingUnit, PlayerUnits.units[i], BID_FireNova);
+                buf = Buff.cast(cd.caster, PlayerUnits.units[i], BID_FireNova);
                 buf.bd.tick = -1;
                 buf.bd.interval = 10.0;
                 onRemove(buf);
@@ -29,11 +29,15 @@ library FireNova requires DamageSystem {
             }
             i += 1;
         }
-        VisualEffects.nova(ART_BreathOfFireMissile, GetUnitX(SpellEvent.CastingUnit), GetUnitY(SpellEvent.CastingUnit), 350, 700.0, 15);
+        VisualEffects.nova(ART_BreathOfFireMissile, GetUnitX(cd.caster), GetUnitY(cd.caster), 350, 700.0, 15);
+    }
+
+    function onChannel() {
+        CastingBar.create(response).setVisuals(ART_FireBallMissile).launch();
     }
 
     function onInit() {
-        RegisterSpellEffectResponse(SID_FIRE_NOVA, onCast);
+        RegisterSpellChannelResponse(SID_FIRE_NOVA, onChannel);
         BuffType.register(BID_FireNova, BUFF_MAGE, BUFF_NEG);
     }
 
