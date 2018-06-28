@@ -292,7 +292,7 @@ public boolean lifelock = false;
         } else if (dmg > 1.0) {
             a = null; b = null; return false;
         } else {
-            DamageTarget(a, b, UnitProp.inst(a, SCOPE_PREFIX + "damaged 1").AttackPower(), DAMAGE_NAME_MELEE, true, true, true, null, false);
+            DamageTarget(a, b, UnitProp.inst(a, SCOPE_PREFIX + "damaged 1").AttackPower(), DAMAGE_NAME_MELEE, true, true, true, null, true);
         }
         a = null; b = null; return false;
     }

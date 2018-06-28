@@ -108,6 +108,7 @@ library SpellData requires Table, Integer {
             SpellData.create(SID_GENERAL_STUN,"General Stun",0,0,1,0,1,ORDER_TYPE_TARGET);
             SpellData.create(SID_HAUNT,"Haunt",0,0,5,852581,1,ORDER_TYPE_IMMEDIATE);
             SpellData.create(SID_HEAL_TESTER,"Heal Tester",0,0,5,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
+            SpellData.create(SID_CHAMPION_THORNS,"Champion Thorns",0,0,0,0,1,ORDER_TYPE_IMMEDIATE);
             SpellData.create(SID_SHIELD_BLOCK,"Shield Block",30,0,7,852055,1,ORDER_TYPE_IMMEDIATE);
             SpellData.create(SID_SUN_FIRE_STORM,"Sun Fire Storm",20,0,8,852488,1,ORDER_TYPE_IMMEDIATE);
             SpellData.create(SID_ARCANE_SHOCK,"Arcane Shock",10,0,2,852480,1,ORDER_TYPE_TARGET).setCCC2(17,0,2).setCCC3(24,0,2);

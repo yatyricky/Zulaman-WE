@@ -24,7 +24,7 @@ library ShieldBlock requires BuffSystem, DamageSystem, SpellEvent, UnitProperty,
         if (buf != 0 && DamageResult.isBlocked) {
             if (GetDistance.units2d(DamageResult.source, DamageResult.target) < 200.0) {
                 DelayedDamageTarget(DamageResult.target, DamageResult.source, buf.bd.r1, SpellData.inst(SID_SHIELD_BLOCK, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS);
-                AddTimedEffect.atUnit(ART_ThornsAuraDamage, DamageResult.source, "origin", 0.5);   
+                AddTimedEffect.atUnit(ART_ThornsAuraDamage, DamageResult.source, "origin", 0.5);
                 AggroTarget(DamageResult.target, DamageResult.source, buf.bd.r1 * 7.0, SCOPE_PREFIX);
             }
         }

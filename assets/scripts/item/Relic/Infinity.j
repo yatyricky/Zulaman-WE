@@ -72,7 +72,7 @@ library Infinity requires DamageSystem, Sounds {
             if (flag) {
                 TimerStart(this.tm, 1.0, true, function thistype.run);
                 RunSoundOnUnit(SND_CONVICTION_AURA, u);
-                this.eff = AddSpecialEffectTarget(ART_VAMPIRIC_AURA, u, "origin");
+                this.eff = AddSpecialEffectTarget(ART_ObsidianRegenAura, u, "origin");
             } else {
                 this.destroy();
             }

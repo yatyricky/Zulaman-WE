@@ -76,6 +76,7 @@ public constant integer SID_EXTRA_MAGIC_DAMAGE = 2;
 public constant integer SID_GENERAL_STUN = 'A001';
 public constant integer SID_HAUNT = 'A04A';
 public constant integer SID_HEAL_TESTER = 'A04H';
+public constant integer SID_CHAMPION_THORNS = 'dcth';
 
 // blood elf defender
 public constant integer UTID_BLOOD_ELF_DEFENDER = 'Hmkg';
@@ -376,6 +377,7 @@ public constant integer SID_NAGA_FRENZY = 'A09C';
 public constant integer SID_ARMOR_CRUSHING = 'A09D';
 // naga royal guard
 public constant integer UTID_NAGA_ROYAL_GUARD = 'n00E';
+public constant integer UTID_CHMP_NAGA_ROYAL_GUARD = 'n00T';
 public constant integer SID_THUNDER_CLAP = 'A09E';
 public constant integer SID_RAGE_ROAR = 'A09F';
 // sea lizard
@@ -1001,6 +1003,11 @@ public constant string ART_BreathOfFireMissile = "Abilities\\Spells\\Other\\Brea
 public constant string ART_SleepTarget = "Abilities\\Spells\\Undead\\Sleep\\SleepTarget.mdl";
 public constant string ART_SilenceAreaBirth = "Abilities\\Spells\\Other\\Silence\\SilenceAreaBirth.mdl";
 public constant string ART_SOUL_ORBIT = "Abilities\\Spells\\Items\\AIso\\BIsvTarget.mdl";
+public constant string ART_ObsidianRegenAura = "Abilities\\Spells\\Undead\\RegenerationAura\\ObsidianRegenAura.mdl";
+public constant string ART_DevotionAura = "Abilities\\Spells\\Human\\DevotionAura\\DevotionAura.mdl";
+public constant string ART_CommandAura = "Abilities\\Spells\\Orc\\CommandAura\\CommandAura.mdl";
+public constant string ART_ThornsAura = "Abilities\\Spells\\NightElf\\ThornsAura\\ThornsAura.mdl";
+public constant string ART_FanOfKnivesMissile = "Abilities\\Spells\\NightElf\\FanOfKnives\\FanOfKnivesMissile.mdl";
 
 public constant string BTNVolcano = "ReplaceableTextures\\CommandButtons\\BTNVolcano.blp";
 public constant string BTNEarthquake = "ReplaceableTextures\\CommandButtons\\BTNEarthquake.blp";

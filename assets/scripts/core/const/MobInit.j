@@ -1,5 +1,5 @@
 //! zinc
-library MobInit requires Table, BuffSystem, Patrol, NefUnion, WarlockGlobal, StunUtils, TownPortal {
+library MobInit requires Table, BuffSystem, Patrol, NefUnion, WarlockGlobal, StunUtils, TownPortal, ChampionMonster {
 constant integer MOBINIT_RESPAWN_L = 600;
 constant integer MOBINIT_RESPAWN_H = 720;
 
@@ -62,13 +62,22 @@ constant integer MOBINIT_RESPAWN_H = 720;
         Patroller p;
     }
 
+    function championizeUnit(DelayTask dt) {
+        ChampionizeRandom(dt.u0);
+    }
+
     public function MobInitAllowArea(integer a) {
         integer i = 0;
         mobInfo mi;
+        DelayTask dt;
         while (i < allCreepDataN[a - 1]) {
             mi = mobInfo[allCreepData[a - 1][i]];
             mi.u = CreateUnit(Player(MOB_PID), mi.utid, mi.x, mi.y, mi.f);
             idTable[mi.u] = mi;
+
+            if (IsUnitChampion(mi.u) == true) {
+                DelayTask.create(championizeUnit, 0.9).u0 = mi.u;
+            }
 
             if (mi.utid == UTID_FEL_GUARD) {
                 FelGuardsGlobals.bossGuard = mi.u;
