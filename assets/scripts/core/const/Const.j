@@ -1008,6 +1008,7 @@ public constant string ART_DevotionAura = "Abilities\\Spells\\Human\\DevotionAur
 public constant string ART_CommandAura = "Abilities\\Spells\\Orc\\CommandAura\\CommandAura.mdl";
 public constant string ART_ThornsAura = "Abilities\\Spells\\NightElf\\ThornsAura\\ThornsAura.mdl";
 public constant string ART_FanOfKnivesMissile = "Abilities\\Spells\\NightElf\\FanOfKnives\\FanOfKnivesMissile.mdl";
+public constant string ART_HeroTinkerFactoryMissle = "Units\\Creeps\\HeroTinkerFactory\\HeroTinkerFactoryMissle.mdl";
 
 public constant string BTNVolcano = "ReplaceableTextures\\CommandButtons\\BTNVolcano.blp";
 public constant string BTNEarthquake = "ReplaceableTextures\\CommandButtons\\BTNEarthquake.blp";

@@ -5,8 +5,9 @@ library Projectile requires TimerUtils, Table, ZAMCore {
     
     public struct Projectile {
         unit caster, target;
+        real targetX, targetY, targetZ;
         ProjectileReaches pr;
-        real speed;
+        real speed, scale;
         string path;
         timer tm;
         unit pro;
@@ -15,7 +16,8 @@ library Projectile requires TimerUtils, Table, ZAMCore {
         integer i0;
         unit u0;
 
-        real angle, distance, dx, dy, step;
+        real angle, distance, dx, dy, step, travelled;
+        real height, heightA, heightB, originalHeight;
         integer count;
         
         method destroy() {
@@ -145,6 +147,43 @@ library Projectile requires TimerUtils, Table, ZAMCore {
                     }
                 } else {
                     this.destroyEffect();
+                }
+            });
+        }
+
+        method spill(real maxHeight) {
+            real heightDiff;
+            this.tm = NewTimer();
+            SetTimerData(this.tm, this);
+
+            // h = height, d = distance, s = target z level difference from origin, s can't be greater than h
+            // b = 2 * h / d * (1 + √(1 - s / h))
+            // a = -1 * b * b / 4 / h
+            this.distance = GetDistance.unitCoord2d(this.caster, this.targetX, this.targetY);
+            this.originalHeight = GetUnitZ(this.caster);
+            heightDiff = this.targetZ - this.originalHeight;
+            if (heightDiff > this.height) {this.height = heightDiff + 1;}
+            this.heightB = 2.0 * this.height / this.distance * (1 + SquareRoot(1.0 - heightDiff / this.height));
+            this.heightA = -1.0 * this.heightB * this.heightB / 4.0 / this.height;
+
+            this.eff = AddSpecialEffect(this.path, GetUnitX(this.caster), GetUnitY(this.caster));
+            if (this.scale != 0.0) {BlzSetSpecialEffectScale(this.eff, this.scale);}
+            this.angle = GetAngle(GetUnitX(this.caster), GetUnitY(this.caster), this.targetX, this.targetY);
+            BlzSetSpecialEffectRoll(this.eff, this.angle);
+            this.step = this.speed * 0.04;
+            this.travelled = 0;
+            this.dx = Cos(this.angle) * this.step;
+            this.dy = Sin(this.angle) * this.step;
+            TimerStart(this.tm, 0.04, true, function() {
+                thistype this = GetTimerData(GetExpiredTimer());
+                real h;
+                this.travelled += this.step;
+                h = this.heightA * this.travelled * this.travelled + this.heightB * this.travelled;
+                BlzSetSpecialEffectPosition(this.eff, BlzGetLocalSpecialEffectX(this.eff) + this.dx, BlzGetLocalSpecialEffectY(this.eff) + this.dy, h + this.originalHeight);
+                if (RAbsBJ(this.travelled - this.distance) < this.step) {
+                    if (this.pr.evaluate(this)) {
+                        this.destroyEffect();
+                    }
                 }
             });
         }
