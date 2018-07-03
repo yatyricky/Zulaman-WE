@@ -750,6 +750,7 @@ public constant integer ITID_DETERMINATION_OF_VENGEANCE = 'I01S';
 public constant integer ITID_STRATHOLME_TRAGEDY = 'I01T';
 public constant integer ITID_PATRICIDE = 'I01X';
 public constant integer ITID_FROSTMOURNE = 'I01O';
+public constant integer BID_CRITICAL = 'A02D';
 
 // Item Attributes
 public constant integer IATTR_STR = 4;

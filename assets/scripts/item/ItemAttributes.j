@@ -1,5 +1,5 @@
 //! zinc
-library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce, Infinity, ConvertAttackMagic, MagicPoison, VoodooVial, RomulosExpiredPoison, Drum, MoonlightExplosion, NonHeroExtraDamage {
+library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce, Infinity, ConvertAttackMagic, MagicPoison, VoodooVial, RomulosExpiredPoison, Drum, MoonlightExplosion, NonHeroExtraDamage, AttackChanceICC {
     public constant real AFFIX_FACTOR_BASE = 15000;
     public constant real AFFIX_FACTOR_DELTA = 2500;
     public constant real SUFIX_MULTIPLIER = 4;
@@ -420,7 +420,7 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
                 thistype.create(ITID_MOONLIGHT_GREATSWORD,"|cffff8c00Moonlight Greatsword|r","|cffffdeadLudwig the Holy Blade.|r").append(4,5,10).append(21,75,150).append(57,10,20).append(43,0.02,0.04).append(75,30,60).append(49,100,250);
                 thistype.create(ITID_DETERMINATION_OF_VENGEANCE,"|cffffcc00Determination of Vengeance|r","|cffffdeadThe determination to revenge Mal'Ganis is unshakeable.|r").append(13,5,8).append(21,50,75).append(1,0.01,0.02).append(16,0.02,0.04);
                 thistype.create(ITID_STRATHOLME_TRAGEDY,"|cffffcc00Stratholme Tragedy|r","|cffffdeadIn disregard of Jaina's advice, Stratholme became a hell on earth in merely one night.|r").append(9,9,12).append(12,4,6).append(67,0.05,0.09).append(24,12,18);
-                thistype.create(ITID_PATRICIDE,"|cffffcc00Patricide|r","|cffffdeadOne last step!|r").append(9,12,16).append(52,26,48).append(55,0.02,0.04).append(12,3,4).append(54,1,1);
+                thistype.create(ITID_PATRICIDE,"|cffffcc00Patricide|r","|cffffdeadOne last step!|r").append(9,12,16).append(52,26,48).append(55,0.05,0.1).append(12,3,4).append(54,1,1);
                 thistype.create(ITID_FROSTMOURNE,"|cffffcc00FrostMourne|r","|cffffdeadA gift from the Lich King.|r").append(4,4,6).append(44,0.02,0.04).append(71,7,12).append(43,0.02,0.03).append(58,24,55);
                 //:template.end
             });
@@ -735,7 +735,9 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
             EquipedChanceMagicDamage(u, polar);
         }
         static method callbackATK_STUN(unit u, real val, integer polar) {}
-        static method callbackATK_CRIT(unit u, real val, integer polar) {}
+        static method callbackATK_CRIT(unit u, real val, integer polar) {
+            EquipedAttackChanceICC(u, polar);
+        }
         static method callbackATK_AMP(unit u, real val, integer polar) {
             EquipedAttackAmplifiedDamage(u, polar);
         }
@@ -810,6 +812,8 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
         static method callbackUSE_HOLYHEAL(unit u, real val, integer polar) {}
 
         static method onInit() {
+            //:template.id = attributeMeta
+            //:template.indentation = 3
             thistype.put(IATTR_STR,1,100,0,"+"," Strength",thistype.callbackSTR);
             thistype.put(IATTR_STRPL,1,101,0,"+"," Strength/level",thistype.callbackSTRPL);
             thistype.put(IATTR_AGI,1,102,0,"+"," Agility",thistype.callbackAGI);
@@ -877,10 +881,10 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
             thistype.put(IATTR_ATK_BLEED,2,409,0.7,"|cff33ff33On Attack: 20% chance to deal bleed effect to target. Target takes "," physical damage over time, lasts for 10 seconds|r",thistype.callbackATK_BLEED);
             thistype.put(IATTR_ATK_MDC,2,410,0.7,"|cff33ff33On Attack: 25% chance to deal "," magic damage to target|r",thistype.callbackATK_MDC);
             thistype.put(IATTR_ATK_STUN,2,411,0.2,"|cff33ff33On Attack: 5% chance to stun target for "," seconds|r",thistype.callbackATK_STUN);
-            thistype.put(IATTR_ATK_CRIT,2,412,0.2,"|cff33ff33On Attack: 5% chance to increase "," attack critical chance, lasts for 5 seconds|r",thistype.callbackATK_CRIT);
+            thistype.put(IATTR_ATK_CRIT,2,412,0.16,"|cff33ff33On Attack: "," chance to increase 100% attack critical chance, lasts for 5 seconds|r",thistype.callbackATK_CRIT);
             thistype.put(IATTR_ATK_AMP,2,413,0.1,"|cff33ff33On Attack: Target takes "," extra damage|r",thistype.callbackATK_AMP);
             thistype.put(IATTR_ATK_MORTAL,2,416,0.1,"|cff33ff33On Attack: Decrease target healing taken by ","|r",thistype.callbackATK_MORTAL);
-            thistype.put(IATTR_ATK_MISS,2,417,0.1,"|cff33ff33On Attack: Decrease target attack hit chance by ","|r",thistype.callbackATK_MISS);
+            thistype.put(IATTR_ATK_MISS,2,417,0.1,"|cff33ff33On Attack: Decrease target attack accuracy by ","|r",thistype.callbackATK_MISS);
             thistype.put(IATTR_ATK_DDEF,2,418,0.1,"|cff33ff33On Attack: Decrease target armor by ","|r",thistype.callbackATK_DDEF);
             thistype.put(IATTR_ATK_DAS,2,419,0.1,"|cff33ff33On Attack: Decrease target attack speed by ","|r",thistype.callbackATK_DAS);
             thistype.put(IATTR_ATK_DMS,2,420,0.1,"|cff33ff33On Attack: Decrease target movement speed by ","|r",thistype.callbackATK_DMS);
@@ -906,6 +910,7 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
             thistype.put(IATTR_USE_MS,2,908,0.1,"|cff33ff33Use: Increase movement speed by 300, lasts for "," seconds. Possible failures.|r",thistype.callbackUSE_MS);
             thistype.put(IATTR_USE_CTHUN,2,909,-0.33,"|cff33ff33Use: Increase attack speed by 100%, take "," extra damage (unique)|r",thistype.callbackUSE_CTHUN);
             thistype.put(IATTR_USE_HOLYHEAL,2,910,0.33,"|cff33ff33Use: Release all holy power to heal yourself, each point heals "," HP|r",thistype.callbackUSE_HOLYHEAL);
+            //:template.end
         }
     }
 

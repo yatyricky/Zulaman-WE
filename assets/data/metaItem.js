@@ -2,9 +2,10 @@ const path = require("path");
 const fs = require("fs");
 const assert = require("assert");
 const workbook = require("./node-xlsx-helper/index")(path.join(__dirname, "Items.xlsm"));
+const forges = require("./forges");
 
+// working on items
 const all = [];
-
 function parseSheet(sheet) {
     let entry = {
         itid: "",
@@ -68,6 +69,44 @@ parseSheet(workbook.sheets["Rare"]);
 parseSheet(workbook.sheets["Legendary"]);
 parseSheet(workbook.sheets["Relic"]);
 
+// working on Attributes
+let sheet = workbook.sheets["Attributes"];
+let dump = "";
+const allAttributes = [];
+for (let i = 2; i <= sheet.data.length; i++) {
+    let id = `IATTR_${sheet.cell("G" + i)}`;
+    let cate = sheet.cell("B" + i, "number");
+    let sort = sheet.cell("C" + i, "number");
+    let lpf = sheet.cell("D" + i, "number");
+
+    let strs = sheet.cell("F" + i).split("#");
+    assert.strictEqual(strs.length === 1 || strs.length === 2, true);
+    let str1, str2;
+    if (cate == 2) {
+        str1 = "|cff33ff33" + strs[0];
+    } else if (cate == 3) {
+        str1 = "|cff87ceeb" + strs[0];
+    } else {
+        str1 = strs[0];
+    }
+    if (strs.length === 2) {
+        str2 = strs[1];
+    } else {
+        str2 = "";
+    }
+    if (cate !== 1) {
+        str2 += "|r";
+    }
+    let callback = `thistype.callback${sheet.cell("G" + i)}`;
+    allAttributes.push(`thistype.put(${id},${cate},${sort},${lpf},"${str1}","${str2}",${callback});`);
+
+    // buff text
+    if (sheet.cell("H" + i) !== "") {
+        let result = forges.forgeBuffData(sheet.cell("H" + i), sheet.cell("I" + i), sheet.cell("K" + i), sheet.cell("J" + i), sheet.cell("L" + i), sheet.cell("M" + i));
+        dump += `${result.id}\n${result.tip}\n${result.uber}\n\n`;
+    }
+}
+
 const fpath = path.join("assets", "scripts", "item", "ItemAttributes.j");
 
 const lineReader = require("readline").createInterface({
@@ -108,6 +147,14 @@ lineReader.on("line", function(line) {
                     }
                     outBuffer += `${indentation}thistype.create(${all[i].itid},"${all[i].name}","${all[i].lore}")${attrs};\n`;
                 }
+            } else if (templateId === "attributeMeta") {
+                let indentation = "";
+                for (let i = 0; i < templateIndentation; i++) {
+                    indentation += "    ";
+                }
+                for (let i = 0; i < allAttributes.length; i++) {
+                    outBuffer += indentation + allAttributes[i] + "\n";
+                }
             }
             outBuffer += line + "\n";
         } else {
@@ -129,7 +176,7 @@ lineReader.on("line", function(line) {
         if (stateStack[stateStack.length - 1] === TEMPLATE_HEADER) {
             stateStack.push(TEMPLATE_BODY);
         } else if (stateStack[stateStack.length - 1] === TEMPLATE_BODY) {
-            if (templateId === "itemmeta") {
+            if (templateId === "itemmeta" || templateId === "attributeMeta") {
                 // skip if itemmeta
             } else {
                 outBuffer += line + "\n";
@@ -142,3 +189,5 @@ lineReader.on("line", function(line) {
     console.log("success");
     fs.writeFileSync(fpath, outBuffer);
 });
+
+fs.writeFileSync("tmp.txt", dump);
