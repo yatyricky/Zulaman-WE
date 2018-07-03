@@ -312,6 +312,7 @@ library SpellData requires Table, Integer {
             SpellData.create(SID_VOODOO_VIALS,"Voodoo Vials",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
             SpellData.create(SID_MOONLIGHT_GREATSWORD_EXPLOSION,"Moonlight Greatsword Explosion",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
             SpellData.create(SID_MOONLIGHT_GREATSWORD_BURST,"Moonlight Greatsword Burst",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
+            SpellData.create(BID_BLEED,"Bleed",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
             SpellData.create(SID_ARMAGEDDON_SCROLL,"Armageddon Scroll",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
             SpellData.create(SID_ARANS_COUNTER_SPELL_SCROLL,"Arans Counter Spell Scroll",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
             SpellData.create(SID_BANSHEE_SCROLL,"Banshee Scroll",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);

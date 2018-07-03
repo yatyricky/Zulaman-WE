@@ -751,6 +751,7 @@ public constant integer ITID_STRATHOLME_TRAGEDY = 'I01T';
 public constant integer ITID_PATRICIDE = 'I01X';
 public constant integer ITID_FROSTMOURNE = 'I01O';
 public constant integer BID_CRITICAL = 'A02D';
+public constant integer BID_BLEED = 'A02C';
 
 // Item Attributes
 public constant integer IATTR_STR = 4;
