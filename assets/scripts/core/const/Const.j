@@ -752,6 +752,7 @@ public constant integer ITID_PATRICIDE = 'I01X';
 public constant integer ITID_FROSTMOURNE = 'I01O';
 public constant integer BID_CRITICAL = 'A02D';
 public constant integer BID_BLEED = 'A02C';
+public constant integer DUMMY_ATTACK_STUN = 'dast';
 
 // Item Attributes
 public constant integer IATTR_STR = 4;

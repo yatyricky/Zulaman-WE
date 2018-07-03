@@ -1,5 +1,5 @@
 //! zinc
-library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce, Infinity, ConvertAttackMagic, MagicPoison, VoodooVial, RomulosExpiredPoison, Drum, MoonlightExplosion, NonHeroExtraDamage, AttackChanceICC, AttackBleed {
+library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce, Infinity, ConvertAttackMagic, MagicPoison, VoodooVial, RomulosExpiredPoison, Drum, MoonlightExplosion, NonHeroExtraDamage, AttackChanceICC, AttackBleed, AttackStun {
     public constant real AFFIX_FACTOR_BASE = 15000;
     public constant real AFFIX_FACTOR_DELTA = 2500;
     public constant real SUFIX_MULTIPLIER = 4;
@@ -736,7 +736,9 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
         static method callbackATK_MDC(unit u, real val, integer polar) {
             EquipedChanceMagicDamage(u, polar);
         }
-        static method callbackATK_STUN(unit u, real val, integer polar) {}
+        static method callbackATK_STUN(unit u, real val, integer polar) {
+            EquipedAttackStun(u, polar);
+        }
         static method callbackATK_CRIT(unit u, real val, integer polar) {
             EquipedAttackChanceICC(u, polar);
         }
@@ -882,7 +884,7 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
             thistype.put(IATTR_ATK_COIL,2,408,0.7,"|cff33ff33On Attack: 15% chance to cast Death Coil, deals "," magic damage to target. Target takes 3% extra damge|r",thistype.callbackATK_COIL);
             thistype.put(IATTR_ATK_BLEED,2,409,0.7,"|cff33ff33On Attack: 20% chance to deal bleed effect to target. Target takes "," physical damage over time, lasts for 10 seconds|r",thistype.callbackATK_BLEED);
             thistype.put(IATTR_ATK_MDC,2,410,0.7,"|cff33ff33On Attack: 25% chance to deal "," magic damage to target|r",thistype.callbackATK_MDC);
-            thistype.put(IATTR_ATK_STUN,2,411,0.2,"|cff33ff33On Attack: 5% chance to stun target for "," seconds|r",thistype.callbackATK_STUN);
+            thistype.put(IATTR_ATK_STUN,2,411,0.2,"|cff33ff33On Attack: 10% chance to stun target for "," seconds|r",thistype.callbackATK_STUN);
             thistype.put(IATTR_ATK_CRIT,2,412,0.16,"|cff33ff33On Attack: "," chance to increase 100% attack critical chance, lasts for 5 seconds|r",thistype.callbackATK_CRIT);
             thistype.put(IATTR_ATK_AMP,2,413,0.1,"|cff33ff33On Attack: Target takes "," extra damage|r",thistype.callbackATK_AMP);
             thistype.put(IATTR_ATK_MORTAL,2,416,0.1,"|cff33ff33On Attack: Decrease target healing taken by ","|r",thistype.callbackATK_MORTAL);
