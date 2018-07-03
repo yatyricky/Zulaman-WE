@@ -184,7 +184,7 @@ library SpellData requires Table, Integer {
             SpellData.create(SID_LIGHTNING_SHIELD,"Lightning Shield",0,0,1,OrderId("lightningshield"),1,ORDER_TYPE_IMMEDIATE);
             SpellData.create(SID_POCKET_FACTORY,"Pocket Factory",0,0,10,OrderId("summonfactory"),1,ORDER_TYPE_IMMEDIATE);
             SpellData.create(SID_SUMMON_CLOCKWORK_GOBLIN,"Summon Clockwork Goblin",0,4,1,OrderId("summonfactory"),2,ORDER_TYPE_IMMEDIATE);
-            SpellData.create(SID_SELF_DESTRUCT,"Self Destruct",0,3,1,OrderId("selfdestruct"),2,ORDER_TYPE_TARGET);
+            SpellData.create(SID_SELF_DESTRUCT,"Self Destruct",0,3,1,OrderId("slow"),2,ORDER_TYPE_TARGET);
             SpellData.create(SID_CLUSTER_ROCKETS,"Cluster Rockets",0,1,1,OrderId("clusterrockets"),2,ORDER_TYPE_IMMEDIATE);
             SpellData.create(SID_FUCKED_LIGHTNING,"Fucked Lightning",100,0,7,852063,1,ORDER_TYPE_TARGET);
             SpellData.create(SID_STRONG_BREEZE,"Strong Breeze",100,0,14,852555,1,ORDER_TYPE_TARGET);
@@ -313,6 +313,7 @@ library SpellData requires Table, Integer {
             SpellData.create(SID_MOONLIGHT_GREATSWORD_EXPLOSION,"Moonlight Greatsword Explosion",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
             SpellData.create(SID_MOONLIGHT_GREATSWORD_BURST,"Moonlight Greatsword Burst",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
             SpellData.create(BID_BLEED,"Bleed",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
+            SpellData.create(SID_LEECH_AURA,"Leech Aura",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
             SpellData.create(SID_ARMAGEDDON_SCROLL,"Armageddon Scroll",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
             SpellData.create(SID_ARANS_COUNTER_SPELL_SCROLL,"Arans Counter Spell Scroll",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);
             SpellData.create(SID_BANSHEE_SCROLL,"Banshee Scroll",0,0,1,OrderId("channel"),1,ORDER_TYPE_IMMEDIATE);

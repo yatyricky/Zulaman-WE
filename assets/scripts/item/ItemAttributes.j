@@ -687,7 +687,9 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
             EquipedConvertAttackMagic(u, polar);
         }
         static method callbackKG_REGRCD(unit u, real val, integer polar) {}
-        static method callbackLEECHAURA(unit u, real val, integer polar) {}
+        static method callbackLEECHAURA(unit u, real val, integer polar) {
+            EquipedLeechAura(u, polar);
+        }
         static method callbackPR_POHDEF(unit u, real val, integer polar) {}
         static method callbackDR_MAXHP(unit u, real val, integer polar) {}
         static method callbackPL_SHOCK(unit u, real val, integer polar) {}

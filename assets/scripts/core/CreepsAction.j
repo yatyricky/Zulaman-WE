@@ -546,7 +546,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         tu = null;
     }
     
-    function makeOrderncgb(unit source, unit target, real combatTime) {
+    function makeOrderClockwerkGoblin(unit source, unit target, real combatTime) {
         if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
             IssueTargetOrderById(source, SpellData.inst(SID_SELF_DESTRUCT, SCOPE_PREFIX).oid, PlayerUnits.getRandomHero());
         }
@@ -1272,7 +1272,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         unitCallBack['Ntin'] = makeOrderNtin;   // Arch Tinker
         unitCallBack['Nrob'] = makeOrderNrob;   // Arch Tinker Morph
         unitCallBack['nfac'] = makeOrdernfac;   // Pocket Factory
-        unitCallBack['ncgb'] = makeOrderncgb;   // Clockwork Goblin
+        unitCallBack[UTID_CLOCKWORK_GOBLIN] = makeOrderClockwerkGoblin;
         
         unitCallBack['Hvsh'] = makeOrderHvsh;   // Naga Sea Witch
         unitCallBack[UTID_FLYING_SERPENT] = makeOrderJustAttack;

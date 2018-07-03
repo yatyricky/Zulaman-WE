@@ -93,16 +93,16 @@ constant integer MAX_PLAYER_UNITS = 50;
                 return this.aps[index];
             }
         }
-        /*
-        static method print(unit u) {
+
+        static method prettyPrint(unit u) {
             integer i = 0;
-            thistype this = thistype(thistype.inst[u]);
+            thistype this = AggroList[u];
             print(GetUnitName(u) + "'s threat list:");
             while (i < this.aggrosN) {
-                print(I2S(this.aggrosIndex[this.aggros[i]]) + ". " + GetUnitName(this.aggros[i]) + " - " + R2S(this.tp[i]));
+                print(I2S(i) + ". " + GetUnitNameEx(this.aggros[i]) + " - " + R2S(this.aps[i]));
                 i += 1;
             }
-        }*/
+        }
         /*
         method addAggro(unit ag) {
             this.aggros[this.aggrosN] = ag;
@@ -561,6 +561,8 @@ constant integer MAX_PLAYER_UNITS = 50;
                 AggroList[thistype.units[i]].setAggro(u, 0.1);
                 i += 1;
             }
+            logi("- - - - print first monster aggros");
+            AggroList.prettyPrint(thistype.units[0]);
             if (AggroList[thistype.units[0]].aggrosN < 1) {
                 MobList.endCombat();
             }
@@ -606,7 +608,7 @@ constant integer MAX_PLAYER_UNITS = 50;
     
     // any unit enter map
     function register(unit u) {
-        if (!IsUnitDummy(u) && !IsUnitIllusion(u) && !IsUnitUseless(u)) {
+        if (!IsUnitDummy(u) && !IsUnitIllusion(u)) {
             if (GetPlayerId(GetOwningPlayer(u)) == MOB_PID) {
                 if (IsInCombat()) {
                     if (GetDistance.units2d(PlayerUnits.units[0], u) < 1500) {
@@ -616,7 +618,7 @@ constant integer MAX_PLAYER_UNITS = 50;
                 if (CanUnitAttack(u)) {
                     TriggerRegisterUnitEvent(acqtrg, u, EVENT_UNIT_ACQUIRED_TARGET);
                 }
-            } else if (GetPlayerId(GetOwningPlayer(u)) < NUMBER_OF_MAX_PLAYERS) {
+            } else if (GetPlayerId(GetOwningPlayer(u)) < NUMBER_OF_MAX_PLAYERS && !IsUnitUseless(u)) {
                 PlayerUnits.add(u);
                 if (IsInCombat()) {
                     RegisterUnitProperty(u);

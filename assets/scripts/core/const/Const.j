@@ -753,6 +753,7 @@ public constant integer ITID_FROSTMOURNE = 'I01O';
 public constant integer BID_CRITICAL = 'A02D';
 public constant integer BID_BLEED = 'A02C';
 public constant integer DUMMY_ATTACK_STUN = 'dast';
+public constant integer SID_LEECH_AURA = 'dlcr';
 
 // Item Attributes
 public constant integer IATTR_STR = 4;
@@ -1006,6 +1007,7 @@ public constant string ART_CommandAura = "Abilities\\Spells\\Orc\\CommandAura\\C
 public constant string ART_ThornsAura = "Abilities\\Spells\\NightElf\\ThornsAura\\ThornsAura.mdl";
 public constant string ART_FanOfKnivesMissile = "Abilities\\Spells\\NightElf\\FanOfKnives\\FanOfKnivesMissile.mdl";
 public constant string ART_HeroTinkerFactoryMissle = "Units\\Creeps\\HeroTinkerFactory\\HeroTinkerFactoryMissle.mdl";
+public constant string ART_ZigguratMissile = "Abilities\\Weapons\\ZigguratMissile\\ZigguratMissile.mdl";
 
 public constant string BTNVolcano = "ReplaceableTextures\\CommandButtons\\BTNVolcano.blp";
 public constant string BTNEarthquake = "ReplaceableTextures\\CommandButtons\\BTNEarthquake.blp";
