@@ -747,15 +747,9 @@ public constant integer ITID_WINDFORCE = 'Iwf0';
 // relic set
 // Athas's Corruption
 public constant integer ITID_DETERMINATION_OF_VENGEANCE = 'I01S';
-public constant integer ITID_DETERMINATION_OF_VENGEANCE1 = 'I01R';
 public constant integer ITID_STRATHOLME_TRAGEDY = 'I01T';
-public constant integer ITID_STRATHOLME_TRAGEDY1 = 'I01U';
 public constant integer ITID_PATRICIDE = 'I01X';
-public constant integer ITID_PATRICIDE1 = 'I01W';
-public constant integer ITID_PATRICIDE2 = 'I01V';
 public constant integer ITID_FROSTMOURNE = 'I01O';
-public constant integer ITID_FROSTMOURNE1 = 'I01L';
-public constant integer ITID_FROSTMOURNE2 = 'I01M';
 
 // Item Attributes
 public constant integer IATTR_STR = 4;

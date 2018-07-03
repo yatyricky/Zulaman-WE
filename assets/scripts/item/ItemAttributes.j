@@ -1,5 +1,5 @@
 //! zinc
-library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce, Infinity, ConvertAttackMagic, MagicPoison, VoodooVial, RomulosExpiredPoison, Drum, MoonlightExplosion {
+library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce, Infinity, ConvertAttackMagic, MagicPoison, VoodooVial, RomulosExpiredPoison, Drum, MoonlightExplosion, NonHeroExtraDamage {
     public constant real AFFIX_FACTOR_BASE = 15000;
     public constant real AFFIX_FACTOR_DELTA = 2500;
     public constant real SUFIX_MULTIPLIER = 4;
@@ -389,7 +389,7 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
                 thistype.create(ITID_VISKAG,"|cff8b66ffVis'kag|r","|cffffdeadThe blood letter.|r").append(13,5,10).append(9,5,10).append(12,3,5).append(44,0.03,0.06);
                 thistype.create(ITID_LION_HORN,"|cff8b66ffLion Horn|r","|cffffdeadMuch better than Dragonspine Trophy.|r").append(9,5,10).append(3,0.01,0.01).append(48,0.05,0.07);
                 thistype.create(ITID_ARMOR_OF_THE_DAMNED,"|cff8b66ffArmor of the Damned|r","|cffffdeadSlow, Curse, Weakness, Misfortune|r").append(8,2,3).append(21,120,240).append(74,4,8).append(41,50,100);
-                thistype.create(ITID_BULWARK_OF_THE_AMANI_EMPIRE,"|cff8b66ffBulwark of the Amani Empire|r","|cffffdeadIt still seems to linger with the resentment of the first guardian warrior of the Brothers鈥?Guild.|r").append(8,2,3).append(4,5,10).append(15,14,28);
+                thistype.create(ITID_BULWARK_OF_THE_AMANI_EMPIRE,"|cff8b66ffBulwark of the Amani Empire|r","|cff999999It still seems to linger with the resentment of the first guardian warrior of the Brothers Guild.|r").append(8,2,3).append(4,5,10).append(15,14,28);
                 thistype.create(ITID_SIGNET_OF_THE_LAST_DEFENDER,"|cff8b66ffSignet of the Last Defender|r","|cffffdeadThe signet originally belongs to a demon lord and was later stolen by an orc thief.|r").append(21,100,200).append(27,0.02,0.03).append(6,0.03,0.06);
                 thistype.create(ITID_ARANS_SOOTHING_EMERALD,"|cff8b66ffAran's Soothing Emerald|r","|cffffdeadAran had made all kinds of precious stones into soothing gems. It should be a sapphire that adventurers are most familiar with.|r").append(14,5,10).append(18,5,10).append(72,1,2);
                 thistype.create(ITID_PURE_ARCANE,"|cff8b66ffPure Arcane|r","|cffffdeadMegatorque despises this, he thinks that one simple capacitor can achieve this effect.|r").append(77,170,340);
@@ -418,6 +418,10 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
                 thistype.create(ITID_INSIGHT,"|cffff8c00Insight|r","|cffffdeadIn the fight against the forest trolls, the Blood Elf Rangers used this enchanted orb from Kirin Tor and eventually succeeded in establishing Quel'Thalas.|r").append(14,5,10).append(18,5,10).append(19,0.03,0.05).append(68,0,0).append(83,2,4);
                 thistype.create(ITID_VOODOO_VIALS,"|cffff8c00Voodoo Vials|r","|cffffdeadZanzil *makes* friends by these small vials.|r").append(14,5,10).append(20,0.03,0.05).append(19,0.03,0.05).append(88,12,20).append(32,15,30);
                 thistype.create(ITID_MOONLIGHT_GREATSWORD,"|cffff8c00Moonlight Greatsword|r","|cffffdeadLudwig the Holy Blade.|r").append(4,5,10).append(21,75,150).append(57,10,20).append(43,0.02,0.04).append(75,30,60).append(49,100,250);
+                thistype.create(ITID_DETERMINATION_OF_VENGEANCE,"|cffffcc00Determination of Vengeance|r","|cffffdeadThe determination to revenge Mal'Ganis is unshakeable.|r").append(13,5,8).append(21,50,75).append(1,0.01,0.02).append(16,0.02,0.04);
+                thistype.create(ITID_STRATHOLME_TRAGEDY,"|cffffcc00Stratholme Tragedy|r","|cffffdeadIn disregard of Jaina's advice, Stratholme became a hell on earth in merely one night.|r").append(9,9,12).append(12,4,6).append(67,0.05,0.09).append(24,12,18);
+                thistype.create(ITID_PATRICIDE,"|cffffcc00Patricide|r","|cffffdeadOne last step!|r").append(9,12,16).append(52,26,48).append(55,0.02,0.04).append(12,3,4).append(54,1,1);
+                thistype.create(ITID_FROSTMOURNE,"|cffffcc00FrostMourne|r","|cffffdeadA gift from the Lich King.|r").append(4,4,6).append(44,0.02,0.04).append(71,7,12).append(43,0.02,0.03).append(58,24,55);
                 //:template.end
             });
         }
@@ -676,7 +680,9 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
             EquipedOneshotLowHealth(u, polar);
         }
         static method callbackRG_RUSH(unit u, real val, integer polar) {}
-        static method callbackCRKILLER(unit u, real val, integer polar) {}
+        static method callbackCRKILLER(unit u, real val, integer polar) {
+            EquipedNonHeroExtraDamage(u, polar);
+        }
         static method callbackMCVT(unit u, real val, integer polar) {
             EquipedConvertAttackMagic(u, polar);
         }
@@ -911,8 +917,8 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
         unit u = GetTriggerUnit();
         NodeObject attrIt;
         AttributeEntry ae;
-        // stack charges
         if (GetItemLevel(it) < 2) {
+            // reforge
             if (itid == ITID_REFORGE_UNCOMMON_L1) {
                 countReforge = 0;
                 EnumItemsInRect(ApprenticeAnvil, null, function() {countReforge += 1;});
@@ -933,6 +939,7 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
             } else if (itid == ITID_REFORGE_RARE_L3) {
             } else if (itid == ITID_REFORGE_LEGENDARY_L3) {
             } else {
+                // stack charges
                 i = 0;
                 while (i < 6) {
                     tmpi = UnitItemInSlot(u, i);
