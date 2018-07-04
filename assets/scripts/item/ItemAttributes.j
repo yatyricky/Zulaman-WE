@@ -1,5 +1,5 @@
 //! zinc
-library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce, Infinity, ConvertAttackMagic, MagicPoison, VoodooVial, RomulosExpiredPoison, Drum, MoonlightExplosion, NonHeroExtraDamage, AttackChanceICC, AttackBleed, AttackStun {
+library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce, Infinity, ConvertAttackMagic, MagicPoison, VoodooVial, RomulosExpiredPoison, Drum, MoonlightExplosion, NonHeroExtraDamage, AttackChanceICC, AttackBleed, AttackStun, LethalMagicalDamage {
     public constant real AFFIX_FACTOR_BASE = 15000;
     public constant real AFFIX_FACTOR_DELTA = 2500;
     public constant real SUFIX_MULTIPLIER = 4;
@@ -750,7 +750,9 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
         static method callbackATK_MD(unit u, real val, integer polar) {
             EquipedExtraMagicDamage(u, polar);
         }
-        static method callbackATK_MDK(unit u, real val, integer polar) {}
+        static method callbackATK_MDK(unit u, real val, integer polar) {
+            EquipedLethalMagicalDamage(u, polar);
+        }
         static method callbackATK_MORTAL(unit u, real val, integer polar) {
             EquipedAttackDecreaseHealed(u, polar);
         }
