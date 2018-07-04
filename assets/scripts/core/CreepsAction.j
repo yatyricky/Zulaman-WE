@@ -1243,6 +1243,25 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         }
     }
 
+    function makeOrderGodOfDeath(unit source, unit target, real combatTime) {
+        IntegerPool ip;
+        integer res;
+        if (!IsUnitChanneling(source)) {
+            ip = IntegerPool.create();
+            if (GetUnitMana(source) > 999) {
+                ip.add(SID_ANNIHILATION, 100);
+            } else {
+
+            }
+
+            res = ip.get();
+            if (res == SID_ANNIHILATION) {
+                IssueImmediateOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid);
+            }
+            ip.destroy();
+        }
+    }
+
     public function OrderCreeps(unit s, unit t, real c) {
         integer utid = GetUnitTypeId(s);
         //print(I2S(R2I(c)));
@@ -1302,6 +1321,8 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         unitCallBack[UTID_SLITHER] = makeOrderSlither;
         unitCallBack[UTID_FENSTALKER] = makeOrderJustAttack;
         unitCallBack[UTID_KORAGG] = makeOrderKoragg;
+
+        unitCallBack[UTID_GOD_OF_DEATH] = makeOrderGodOfDeath;
         
         // ============= Area 1, 2 ==================
         unitCallBack[UTID_NAGA_SIREN] = makeOrderNagaSiren;   // Naga Siren

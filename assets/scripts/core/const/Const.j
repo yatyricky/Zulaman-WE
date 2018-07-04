@@ -349,12 +349,27 @@ public constant integer BID_ColdGaze = 'A019';
 
 // God of Death
 public constant integer UTID_GOD_OF_DEATH = 'Uear';
-public constant integer SID_ANNIHILATION = 'XXXX';
-public constant integer SID_MIND_BLAST = 'XXXX';
-public constant integer SID_ETERNAL_GUARDIAN = 'XXXX';
-public constant integer UTID_ETERNAL_GUARDIAN = 'XXXX';
-public constant integer SID_ETERNAL_GUARDIAN_FRENZY = 'XXXX';
-public constant integer BID_ETERNAL_GUARDIAN_FRENZY = 'XXXX';
+public constant integer SID_ANNIHILATION = 'A02H';
+public constant integer SID_MIND_BLAST = 'A02Q';
+public constant integer SID_SUMMON_UNHOLY_TENTACLES = 'A02R';
+public constant integer SID_TELEPORT_PLAYERS = 'A02S';
+public constant integer SID_SUMMON_FILTHY_TENTACLES = 'A02T';
+public constant integer SID_PSYCHIC_LINK = 'A02U';
+public constant integer SID_SUMMON_VICIOUS_TENTACLES = 'A02V';
+public constant integer SID_EYE_BEAM = 'A033';
+public constant integer SID_SUMMON_FOUL_TENTACLES = 'A0D8';
+public constant integer SID_LUNATIC_GAZE = 'A0D9';
+public constant integer SID_SUMMON_ETERNAL_GUARDIAN = 'A0DA';
+public constant integer UTID_UNHOLY_TENTACLE = 'nfgt';
+public constant integer UTID_FILTHY_TENTACLE = 'n00V';
+public constant integer UTID_VICIOUS_TENTACLE = 'n00W';
+public constant integer UTID_FOUL_TENTACLE = 'n00X';
+public constant integer UTID_ROOT_OF_FILTH = 'n00Y';
+public constant integer UTID_ROOT_OF_VICIOUSNESS = 'n010';
+public constant integer UTID_ROOT_OF_FOULNESS = 'n00Z';
+public constant integer UTID_ETERNAL_GUARDIAN = 'n00U';
+public constant integer SID_ETERNAL_GUARDIAN_FRENZY = 'A0DB';
+public constant integer BID_ETERNAL_GUARDIAN_FRENZY = 'A0DC';
 
 // # All creeps
 

@@ -1,5 +1,5 @@
 //! zinc
-library Annihilation {
+library Annihilation requires DamageSystem {
 
     function onCast() {
         integer i;
