@@ -754,6 +754,8 @@ public constant integer BID_CRITICAL = 'A02D';
 public constant integer BID_BLEED = 'A02C';
 public constant integer DUMMY_ATTACK_STUN = 'dast';
 public constant integer SID_LEECH_AURA = 'dlcr';
+public constant integer BID_ATK_DEATH_COIL = 'A02B';
+public constant integer SID_UNHOLY_AURA = 'duha';
 
 // Item Attributes
 public constant integer IATTR_STR = 4;
@@ -852,6 +854,7 @@ public constant integer IATTR_USE_DODGE = 35;
 public constant integer IATTR_USE_MS = 36;
 public constant integer IATTR_USE_CTHUN = 37;
 public constant integer IATTR_USE_HOLYHEAL = 38;
+public constant integer IATTR_SET_ARTHAS = 97;
 
 // Item Affix
 public constant integer SUFIX_LETHALITY = 1;
@@ -923,7 +926,7 @@ public constant string ART_MANA = "Abilities\\Spells\\Items\\AIma\\AImaTarget.md
 public constant string ART_MANA_DRAIN_TARGET = "Abilities\\Spells\\Other\\Drain\\ManaDrainTarget.mdl";
 public constant string ART_MASS_TELEPORT_TARGET = "Abilities\\Spells\\Human\\MassTeleport\\MassTeleportTarget.mdl";
 public constant string ART_MEATWAGON_MISSILE = "Abilities\\Weapons\\MeatwagonMissile\\MeatwagonMissile.mdl";
-public constant string ART_OBSIDIAN_REGEN_AURA = "Abilities\\Spells\\Undead\\UnholyAura\\UnholyAura.mdl";
+public constant string ART_UnholyAura = "Abilities\\Spells\\Undead\\UnholyAura\\UnholyAura.mdl";
 public constant string ART_PARASITE_TARGET = "Abilities\\Spells\\Other\\Parasite\\ParasiteTarget.mdl";
 public constant string ART_PHOENIX_MISSILE = "Abilities\\Weapons\\PhoenixMissile\\Phoenix_Missile.mdl";
 public constant string ART_PLAGUE = "units\\undead\\PlagueCloud\\PlagueCloud.mdl";

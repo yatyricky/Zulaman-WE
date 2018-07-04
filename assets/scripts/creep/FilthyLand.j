@@ -58,7 +58,7 @@ library FilthyLand requires DamageSystem {
             this.count = 0;
 
             this.art = CreateUnit(Player(MOB_PID), DUMMY_ID, x - 20, y + 50, 0.0);
-            this.eff = AddSpecialEffectTarget(ART_OBSIDIAN_REGEN_AURA, this.art, "origin");
+            this.eff = AddSpecialEffectTarget(ART_UnholyAura, this.art, "origin");
 
             this.resizeEffect();
 
