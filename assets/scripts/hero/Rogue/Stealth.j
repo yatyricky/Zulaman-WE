@@ -44,8 +44,8 @@ library Stealth requires AggroSystem, SpellEvent, UnitProperty, DamageSystem {
     function stealth(unit u) {
         player p = GetOwningPlayer(u);
         if (IsInCombat()) {
-            MobList.clearForAll(u);
-        }        
+            MobList.setForAll(u, 0.1);
+        }
 
         SetPlayerAbilityAvailable(p, SID_EVISCERATE, false);
         SetPlayerAbilityAvailable(p, SID_ASSAULT, false);

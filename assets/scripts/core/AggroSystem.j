@@ -558,13 +558,19 @@ constant integer MAX_PLAYER_UNITS = 50;
         static method clearForAll(unit u) {
             integer i = 0;
             while (i < thistype.n) {
-                AggroList[thistype.units[i]].setAggro(u, 0.1);
+                AggroList[thistype.units[i]].delete(u);
                 i += 1;
             }
-            logi("- - - - print first monster aggros");
-            AggroList.prettyPrint(thistype.units[0]);
             if (AggroList[thistype.units[0]].aggrosN < 1) {
                 MobList.endCombat();
+            }
+        }
+        
+        static method setForAll(unit u, real value) {
+            integer i = 0;
+            while (i < thistype.n) {
+                AggroList[thistype.units[i]].setAggro(u, value);
+                i += 1;
             }
         }
         
