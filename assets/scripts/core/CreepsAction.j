@@ -1246,6 +1246,8 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
     function makeOrderGodOfDeath(unit source, unit target, real combatTime) {
         IntegerPool ip;
         integer res;
+        integer accu, i;
+        unit tu;
         if (GodOfDeathPlatform.setup == false) {
             GodOfDeathPlatform.start(source);
         }
@@ -1255,14 +1257,75 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
                 // wipe
                 ip.add(SID_ANNIHILATION, 100);
             } else {
-                if (UnitCanUse(source, SID_SUMMON_UNHOLY_TENTACLES) && combatTime > 10) {
+                ip.add(0, 30);
+                if (UnitCanUse(source, SID_SUMMON_UNHOLY_TENTACLES)) {
                     ip.add(SID_SUMMON_UNHOLY_TENTACLES, 60);
+                }
+                if (UnitCanUse(source, SID_MIND_BLAST) && combatTime > 5) {
+                    ip.add(SID_MIND_BLAST, 60);
+                }
+                if (UnitCanUse(source, SID_TELEPORT_PLAYERS) && combatTime > 10) {
+                    ip.add(SID_TELEPORT_PLAYERS, 60);
+                }
+                // 3 kinds of tentacles
+                if (GodOfDeathPlatform.rootOfFilth == null) {
+                    if (UnitCanUse(source, SID_PSYCHIC_LINK)) {
+                        ip.add(SID_PSYCHIC_LINK, 60);
+                    }
+                } else {
+                    if (UnitCanUse(source, SID_SUMMON_FILTHY_TENTACLE)) {
+                        ip.add(SID_SUMMON_FILTHY_TENTACLE, 60);
+                    }
+                }
+                if (GodOfDeathPlatform.rootOfViciousness == null) {
+                    if (UnitCanUse(source, SID_EYE_BEAM)) {
+                        ip.add(SID_EYE_BEAM, 60);
+                    }
+                } else {
+                    if (UnitCanUse(source, SID_SUMMON_VICIOUS_TENTACLE)) {
+                        ip.add(SID_SUMMON_VICIOUS_TENTACLE, 60);
+                    }
+                }
+                if (GodOfDeathPlatform.rootOfFoulness == null) {
+                    if (UnitCanUse(source, SID_LUNATIC_GAZE)) {
+                        ip.add(SID_LUNATIC_GAZE, 60);
+                    }
+                } else {
+                    if (UnitCanUse(source, SID_SUMMON_FOUL_TENTACLE)) {
+                        ip.add(SID_SUMMON_FOUL_TENTACLE, 60);
+                    }
+                }
+                // 30% hp
+                if (GetUnitStatePercent(source, UNIT_STATE_LIFE, UNIT_STATE_MAX_LIFE) <= 30) {
+                    if (UnitCanUse(source, SID_SUMMON_ETERNAL_GUARDIAN)) {
+                        ip.add(SID_SUMMON_ETERNAL_GUARDIAN, 60);
+                    }
                 }
             }
 
             res = ip.get();
-            if (res == SID_ANNIHILATION) {
+            if (res == 0) {
+                // do nothing
+            } else if (SpellData.inst(res, SCOPE_PREFIX).otp == ORDER_TYPE_IMMEDIATE) {
                 IssueImmediateOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid);
+            } else {
+                // only possible ability is Mind Blast
+                // find a player that not on the platform
+                accu = 0;
+                i = 0;
+                tu = null;
+                while (i < PlayerUnits.n) {
+                    if (GodOfDeathPlatform.isUnitInPlatform(PlayerUnits.units[i]) == true) {
+                        accu += 1;
+                        if (GetRandomInt(1, accu) == 1) {
+                            tu = PlayerUnits.units[i];
+                        }
+                    }
+                    i += 1;
+                }
+                if (tu != null) {
+                    IssuePointOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, GetUnitX(tu), GetUnitY(tu));
+                }
             }
             ip.destroy();
         }

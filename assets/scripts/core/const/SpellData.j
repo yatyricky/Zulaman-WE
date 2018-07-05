@@ -243,8 +243,17 @@ library SpellData requires Table, Integer {
             SpellData.create(SID_FAST_HEAL,"Fast Heal",0,1.5,1,OrderId("slow"),1,ORDER_TYPE_TARGET);
             SpellData.create(SID_SLUG,"Slug",0,0,0,OrderId("roar"),1,ORDER_TYPE_IMMEDIATE);
             SpellData.create(SID_COLD_GAZE,"Cold Gaze",0,0,10,OrderId("slow"),1,ORDER_TYPE_TARGET);
+            SpellData.create(SID_ANNIHILATION,"annihilation",0,0,0,OrderId("roar"),1,ORDER_TYPE_IMMEDIATE);
             SpellData.create(SID_MIND_BLAST,"mind blast",0,0,15,OrderId("blizzard"),1,ORDER_TYPE_POINT);
+            SpellData.create(SID_SUMMON_UNHOLY_TENTACLES,"summon unholy tentacles",0,0,40,OrderId("howlofterror"),1,ORDER_TYPE_IMMEDIATE);
             SpellData.create(SID_TELEPORT_PLAYERS,"teleport players",0,0,20,OrderId("divineshield"),1,ORDER_TYPE_IMMEDIATE);
+            SpellData.create(SID_SUMMON_FILTHY_TENTACLE,"summon filthy tentacle",0,0,40,OrderId("resurrection"),1,ORDER_TYPE_IMMEDIATE);
+            SpellData.create(SID_PSYCHIC_LINK,"psychic link",0,0,40,OrderId("thunderclap"),1,ORDER_TYPE_IMMEDIATE);
+            SpellData.create(SID_SUMMON_VICIOUS_TENTACLE,"summon vicious tentacle",0,0,40,OrderId("stomp"),1,ORDER_TYPE_IMMEDIATE);
+            SpellData.create(SID_EYE_BEAM,"eye beam",0,18,50,OrderId("tranquility"),2,ORDER_TYPE_IMMEDIATE);
+            SpellData.create(SID_SUMMON_FOUL_TENTACLE,"summon foul tentacle",0,0,40,OrderId("fanofknives"),1,ORDER_TYPE_IMMEDIATE);
+            SpellData.create(SID_LUNATIC_GAZE,"lunatic gaze",0,8,30,OrderId("starfall"),2,ORDER_TYPE_IMMEDIATE);
+            SpellData.create(SID_SUMMON_ETERNAL_GUARDIAN,"summon eternal guardian",0,0,20,OrderId("summonphoenix"),1,ORDER_TYPE_IMMEDIATE);
             SpellData.create(SID_STING,"Sting",0,0,1,0,1,ORDER_TYPE_IMMEDIATE);
             SpellData.create(SID_LIGHTNING_BOLT,"Lightning Bolt",75,3,2,OrderId("heal"),1,ORDER_TYPE_TARGET);
             SpellData.create(SID_FROST_SHOCK,"Frost Shock",0,0,8,OrderId("freezingbreath"),1,ORDER_TYPE_TARGET);

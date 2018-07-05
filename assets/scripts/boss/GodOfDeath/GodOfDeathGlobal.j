@@ -15,13 +15,17 @@ library GodOfDeathGlobal requires DamageSystem {
         static ListObject/*<Point>*/ eternalGuardianSpawnPts;
         static timer tm;
 
+        static method isUnitInPlatform(unit u) -> boolean {
+            return (RectContainsUnit(gg_rct_PlatformFilth, u) || RectContainsUnit(gg_rct_PlatformViciousness, u) || RectContainsUnit(gg_rct_PlatformFoulness, u));
+        }
+
         static method platformDamage() {
             integer i;
             if (IsUnitDead(thistype.boss) == true) return;
 
             i = 0;
             while (i < PlayerUnits.n) {
-                if (RectContainsUnit(gg_rct_PlatformFilth, PlayerUnits.units[i]) || RectContainsUnit(gg_rct_PlatformViciousness, PlayerUnits.units[i]) || RectContainsUnit(gg_rct_PlatformFoulness, PlayerUnits.units[i])) {
+                if (thistype.isUnitInPlatform(PlayerUnits.units[i])) {
                     DamageTarget(thistype.boss, PlayerUnits.units[i], GetUnitState(PlayerUnits.units[i], UNIT_STATE_MAX_LIFE) * 0.05, SpellData.inst(SID_TELEPORT_PLAYERS, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS, false);
                 }
                 i += 1;
