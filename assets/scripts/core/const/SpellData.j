@@ -243,6 +243,8 @@ library SpellData requires Table, Integer {
             SpellData.create(SID_FAST_HEAL,"Fast Heal",0,1.5,1,OrderId("slow"),1,ORDER_TYPE_TARGET);
             SpellData.create(SID_SLUG,"Slug",0,0,0,OrderId("roar"),1,ORDER_TYPE_IMMEDIATE);
             SpellData.create(SID_COLD_GAZE,"Cold Gaze",0,0,10,OrderId("slow"),1,ORDER_TYPE_TARGET);
+            SpellData.create(SID_MIND_BLAST,"mind blast",0,0,15,OrderId("blizzard"),1,ORDER_TYPE_POINT);
+            SpellData.create(SID_TELEPORT_PLAYERS,"teleport players",0,0,20,OrderId("divineshield"),1,ORDER_TYPE_IMMEDIATE);
             SpellData.create(SID_STING,"Sting",0,0,1,0,1,ORDER_TYPE_IMMEDIATE);
             SpellData.create(SID_LIGHTNING_BOLT,"Lightning Bolt",75,3,2,OrderId("heal"),1,ORDER_TYPE_TARGET);
             SpellData.create(SID_FROST_SHOCK,"Frost Shock",0,0,8,OrderId("freezingbreath"),1,ORDER_TYPE_TARGET);

@@ -1,5 +1,5 @@
 //! zinc
-library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitList, IntegerPool, UnitProperty, CombatFacts, RandomPoint, Parasite {
+library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitList, IntegerPool, UnitProperty, CombatFacts, RandomPoint, Parasite, GodOfDeathGlobal {
 
     Table unitCallBack;
     HandleTable focus, pace;
@@ -1246,12 +1246,18 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
     function makeOrderGodOfDeath(unit source, unit target, real combatTime) {
         IntegerPool ip;
         integer res;
+        if (GodOfDeathPlatform.setup == false) {
+            GodOfDeathPlatform.start(source);
+        }
         if (!IsUnitChanneling(source)) {
             ip = IntegerPool.create();
             if (GetUnitMana(source) > 999) {
+                // wipe
                 ip.add(SID_ANNIHILATION, 100);
             } else {
-
+                if (UnitCanUse(source, SID_SUMMON_UNHOLY_TENTACLES) && combatTime > 10) {
+                    ip.add(SID_SUMMON_UNHOLY_TENTACLES, 60);
+                }
             }
 
             res = ip.get();
