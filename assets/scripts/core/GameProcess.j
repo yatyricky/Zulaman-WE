@@ -32,6 +32,10 @@ library GameProcess requires PlayerUnitList, MobInit {
         }
     }
 
+    function enableOutOfCatacombAfterAnime(DelayTask dt) {
+        isOutOfTheCatacombOpen = true;
+    }
+
     function openNewArea(unit u) {
         integer utid = GetUnitTypeId(u);
         if (utid == UTID_ARCH_TINKER || utid == UTID_ARCH_TINKER_MORPH) {
@@ -57,8 +61,21 @@ library GameProcess requires PlayerUnitList, MobInit {
         }
         if (utid == UTID_PIT_ARCHON) {
             // MobInitAllowArea(5);
+            DelayTask.create(enableOutOfCatacombAfterAnime, 9.0);
+            BlzSetSpecialEffectRoll(AddSpecialEffect(ART_ShimmeringPortal, 10897, 9536), bj_PI);
             AbyssArchonGlobal.wipeWraiths();
         }
+    }
+
+    trigger outOfTheCrypt;
+    boolean isOutOfTheCatacombOpen;
+
+    function outOfTheCryptAction() -> boolean {
+        if (isOutOfTheCatacombOpen == true) {
+            SetUnitPosition(GetTriggerUnit(), 3327, 12812);
+            PanCameraToTimedForPlayer(GetOwningPlayer(GetTriggerUnit()), 3327, 12812, 1.00);
+        }
+        return false;
     }
 
     function onInit() {
@@ -66,6 +83,11 @@ library GameProcess requires PlayerUnitList, MobInit {
             MobInitAllowArea(1);
         });
         RegisterUnitDeath(openNewArea);
+
+        isOutOfTheCatacombOpen = false;
+        outOfTheCrypt = CreateTrigger();
+        TriggerRegisterEnterRectSimple(outOfTheCrypt, gg_rct_OutOfCatacomb);
+        TriggerAddCondition(outOfTheCrypt, Condition(function outOfTheCryptAction));
     }
 }
 //! endzinc

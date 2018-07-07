@@ -2,7 +2,7 @@
 library ChargedBreath requires SpellEvent, DamageSystem {
 
     function returnRange() -> real {
-        return 600.0 + 197.0;
+        return 300.0 + 197.0;
     }
     
     function onCast() {

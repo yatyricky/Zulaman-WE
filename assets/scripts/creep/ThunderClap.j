@@ -14,7 +14,7 @@ constant integer BUFF_ID = 'A09Y';
         integer i = 0;
         Buff buf;
         while (i < PlayerUnits.n) {
-            if (GetDistance.units2d(PlayerUnits.units[i], SpellEvent.CastingUnit) <= 400.0 + 197.0 && !IsUnitDead(PlayerUnits.units[i])) {                
+            if (GetDistance.units2d(PlayerUnits.units[i], SpellEvent.CastingUnit) <= 300.0 + 197.0 && !IsUnitDead(PlayerUnits.units[i])) {                
                 DamageTarget(SpellEvent.CastingUnit, PlayerUnits.units[i], 400, SpellData.inst(SID_THUNDER_CLAP, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS, false);
                 if (GetUnitAbilityLevel(PlayerUnits.units[i], 'A09X') > 0) {
                     buf = Buff.cast(SpellEvent.CastingUnit, PlayerUnits.units[i], BUFF_ID);

@@ -422,6 +422,7 @@ public constant integer SID_CHAOS_LEAP = 'A09I';
 public constant integer BID_CHAOS_LEAP = 'A0BA';
 // fel war bringer
 public constant integer UTID_FEL_WAR_BRINGER = 'n00D';
+public constant integer UTID_CHMP_FEL_WAR_BRINGER = 'n011';
 public constant integer SID_WAR_STOMP = 'A0BB';
 public constant integer SID_BATTLE_COMMAND = 'A0BC';
 public constant integer BID_BATTLE_COMMAND = 'A0BD';
@@ -459,6 +460,7 @@ public constant integer SID_MANA_TAP = 'A0BI';
 public constant integer BID_MANA_TAP = 'A0BJ';
 // Dracolich
 public constant integer UTID_DRACOLICH = 'ufro';
+public constant integer UTID_CHMP_DRACOLICH = 'u006';
 public constant integer SID_DEATH_AND_DECAY = 'A0BF';
 public constant integer SID_FROST_GRAVE = 'A0BG';
 
@@ -487,6 +489,7 @@ public constant integer SID_NETHER_SLOW = 'A0BZ';
 public constant integer BID_NETHER_SLOW = 'A0C0';
 // Inferno Construct
 public constant integer UTID_INFERNO_CONSTRUCT = 'ninf';
+public constant integer UTID_CHMP_INFERNO_CONSTRUCT = 'n012';
 public constant integer SID_METEOR = 'A0BN';
 public constant integer SID_BURNING = 'A0C2';
 public constant integer BID_BURNING = 'A0C1';
@@ -507,6 +510,7 @@ public constant integer SID_VOODOO_DOLL = 'A0C8';
 public constant integer SID_VOODOO_DOLL_ILLUSION = 'A0C9';
 // Gargantuan
 public constant integer UTID_GARGANTUAN = 'u004';
+public constant integer UTID_CHMP_GARGANTUAN = 'u007';
 public constant integer SID_SLAM_STRIKE = 'A0CA';
 public constant integer SID_VOMIT = 'A0CB';
 public constant integer UTID_VOMIT_MAGGOT = 'n00R';
@@ -1037,6 +1041,8 @@ public constant string ART_ThornsAura = "Abilities\\Spells\\NightElf\\ThornsAura
 public constant string ART_FanOfKnivesMissile = "Abilities\\Spells\\NightElf\\FanOfKnives\\FanOfKnivesMissile.mdl";
 public constant string ART_HeroTinkerFactoryMissle = "Units\\Creeps\\HeroTinkerFactory\\HeroTinkerFactoryMissle.mdl";
 public constant string ART_ZigguratMissile = "Abilities\\Weapons\\ZigguratMissile\\ZigguratMissile.mdl";
+public constant string ART_ShimmeringPortal = "Doodads\\Cinematic\\ShimmeringPortal\\ShimmeringPortal.mdl";
+public constant string ART_VoodooAura = "Abilities\\Spells\\Orc\\Voodoo\\VoodooAura.mdl";
 
 public constant string BTNVolcano = "ReplaceableTextures\\CommandButtons\\BTNVolcano.blp";
 public constant string BTNEarthquake = "ReplaceableTextures\\CommandButtons\\BTNEarthquake.blp";

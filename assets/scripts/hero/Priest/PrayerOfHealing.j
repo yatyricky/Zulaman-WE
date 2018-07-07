@@ -69,7 +69,7 @@ library PrayerOfHealing requires CastingBar, UnitProperty, PlayerUnitList, Sound
     }
     
     function onChannel() {
-        CastingBar.create(response).setSound(castSound).setVisuals(ART_FAERIE_DRAGON_MISSILE).launch();
+        CastingBar.create(response).setVisuals(ART_FAERIE_DRAGON_MISSILE).launch();
         VisualEffects.circle(ART_GlowingRunes8, SpellEvent.TargetX, SpellEvent.TargetY, 200 + 50 * GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_PRAYER_OF_HEALING), 15, 1);
     }
 

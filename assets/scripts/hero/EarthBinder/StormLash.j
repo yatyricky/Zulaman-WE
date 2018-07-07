@@ -40,7 +40,7 @@ library StormLash requires DamageSystem, CastingBar, SpellEvent, EarthShock {
     }
     
     function onChannel() {
-        CastingBar cb = CastingBar.create(response).setVisuals(ART_FarseerMissile).setSound(castSound);
+        CastingBar cb = CastingBar.create(response).setVisuals(ART_FarseerMissile);
         real hst = 2.0 - 2.0 / (1.0 + UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).AttackSpeed() / 100.0);
         if (GetUnitTypeId(SpellEvent.CastingUnit) == UTID_EARTH_BINDER) {
             cb.haste = hst;

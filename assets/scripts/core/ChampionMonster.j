@@ -5,9 +5,18 @@ library ChampionMonster requires UnitProperty, DamageSystem {
     public constant integer CHMP_FANATIC = 2;
     public constant integer CHMP_BRAMBLE = 3;
     public constant integer CHMP_VAMPIRE = 4;
+    public constant integer CHMP_LESSER = 5;
 
     HandleTable ht;
     HandleTable effectTable;
+
+    public function ChampionizeLesser(unit u) {
+        UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);
+        up.ModLife(R2I(GetUnitState(u, UNIT_STATE_MAX_LIFE) * 0.25));
+        effectTable[u] = 0;
+        SetUnitScale(u, 1.5, 1.5, 1.5);
+        ht[u] = CHMP_LESSER;
+    }
 
     public function ChampionizeRock(unit u) {
         UnitProp up = UnitProp.inst(u, SCOPE_PREFIX);

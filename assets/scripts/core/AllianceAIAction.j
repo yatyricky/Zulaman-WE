@@ -152,7 +152,7 @@ constant real AIACTION_INTERVAL = 0.33;
         unit tar;
         if (DBMNagaSeaWitch.isStorm) {
             // storm
-            if (GetDistance.units2d(source, DBMNagaSeaWitch.stormTarget) > DBMNagaSeaWitch.safeRange) {
+            if (GetDistance.units2d(source, DBMNagaSeaWitch.stormTarget) > DBMNagaSeaWitch.safeRange - 130.0) {
                 if (IsUnitChanneling(source)) {
                     IssueImmediateOrderById(source, OID_STOP);
                 }

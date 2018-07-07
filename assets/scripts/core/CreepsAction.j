@@ -1394,31 +1394,34 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         unitCallBack[UTID_GOD_OF_DEATH] = makeOrderGodOfDeath;
         
         // ============= Area 1, 2 ==================
-        unitCallBack[UTID_NAGA_SIREN] = makeOrderNagaSiren;   // Naga Siren
-        unitCallBack[UTID_NAGA_TIDE_PRIEST] = makeOrderNagaTidePriest;   // Naga Tide Priest
-        unitCallBack[UTID_NTR_HEALING_WARD] = makeOrderDoNothing;   // NTP Healing Ward
-        unitCallBack[UTID_NTR_PROTECTION_WARD] = makeOrderDoNothing;   // NTP Protection Ward
-        unitCallBack[UTID_NAGA_MYRMIDON] = makeOrderNagaMyrmidon;   // Naga Myrmidon
+        unitCallBack[UTID_NAGA_SIREN] = makeOrderNagaSiren;
+        unitCallBack[UTID_NAGA_TIDE_PRIEST] = makeOrderNagaTidePriest;
+        unitCallBack[UTID_NTR_HEALING_WARD] = makeOrderDoNothing;
+        unitCallBack[UTID_NTR_PROTECTION_WARD] = makeOrderDoNothing;
+        unitCallBack[UTID_NAGA_MYRMIDON] = makeOrderNagaMyrmidon;
         unitCallBack[UTID_CHMP_NAGA_MYRMIDON] = makeOrderNagaMyrmidon;
-        unitCallBack[UTID_NAGA_ROYAL_GUARD] = makeOrderNagaRoyalGuard;   // Naga Royal Guard
+        unitCallBack[UTID_NAGA_ROYAL_GUARD] = makeOrderNagaRoyalGuard;
+        unitCallBack[UTID_CHMP_NAGA_ROYAL_GUARD] = makeOrderNagaRoyalGuard;
         unitCallBack[UTID_SEA_LIZARD] = makeOrderJustAttack;
         unitCallBack[UTID_MURLOC_SLAVE] = makeOrderJustAttack;
-        unitCallBack[UTID_WIND_SERPENT] = makeOrderWindSerpent;   // Wind Serpent
+        unitCallBack[UTID_WIND_SERPENT] = makeOrderWindSerpent;
 
         // ============= Area 3 ==================
-        unitCallBack[UTID_FEL_GRUNT] = makeOrderFelGrunt;   // Fel Grunt
-        unitCallBack[UTID_FEL_RIDER] = makeOrderFelRider;   // Fel Rider
-        unitCallBack[UTID_FEL_WAR_BRINGER] = makeOrderFelWarBringer; // Fel war bringer
-        unitCallBack[UTID_DEMONIC_WITCH] = makeOrderDemonicWitch;   // 
+        unitCallBack[UTID_FEL_GRUNT] = makeOrderFelGrunt;
+        unitCallBack[UTID_FEL_RIDER] = makeOrderFelRider;
+        unitCallBack[UTID_FEL_WAR_BRINGER] = makeOrderFelWarBringer;
+        unitCallBack[UTID_CHMP_FEL_WAR_BRINGER] = makeOrderFelWarBringer;
+        unitCallBack[UTID_DEMONIC_WITCH] = makeOrderDemonicWitch;
 
         // ============= Area 4 ==================
         unitCallBack[UTID_NOXIOUS_SPIDER] = makeOrderJustAttack;
-        unitCallBack[UTID_PARASITICAL_ROACH] = makeOrderParasiticalRoach;    // ParasiticalRoach
-        unitCallBack[UTID_ZOMBIE] = makeOrderZombie;    // zombie
+        unitCallBack[UTID_PARASITICAL_ROACH] = makeOrderParasiticalRoach;
+        unitCallBack[UTID_ZOMBIE] = makeOrderZombie;
         unitCallBack[UTID_SKELETAL_MAGE] = makeOrderSkeletalMage;
-        unitCallBack[UTID_DRACOLICH] = makeOrderDracoLich;    // dracolich
+        unitCallBack[UTID_DRACOLICH] = makeOrderDracoLich;
+        unitCallBack[UTID_CHMP_DRACOLICH] = makeOrderDracoLich;
 
-        unitCallBack[UTID_OBSIDIAN_CONSTRUCT] = makeOrderObsidianConstruct;   // 
+        unitCallBack[UTID_OBSIDIAN_CONSTRUCT] = makeOrderObsidianConstruct;
 
         // ============= Area 5 ==================
         unitCallBack[UTID_VOID_WALKER] = makeOrderVoidWalker;
@@ -1426,7 +1429,8 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         unitCallBack[UTID_MAID_OF_AGONY] = makeOrderMaidOfAgony;
         unitCallBack[UTID_NETHER_DRAKE] = makeOrderNetherDrake;
         unitCallBack[UTID_NETHER_HATCHLING] = makeOrderNetherHatchling;
-        unitCallBack[UTID_INFERNO_CONSTRUCT] = makeOrderInfernoConstruct;   // inferno construct
+        unitCallBack[UTID_INFERNO_CONSTRUCT] = makeOrderInfernoConstruct;
+        unitCallBack[UTID_CHMP_INFERNO_CONSTRUCT] = makeOrderInfernoConstruct;
 
         // ============= Area 6 ==================
         unitCallBack[UTID_FOREST_TROLL] = makeOrderForestTroll;

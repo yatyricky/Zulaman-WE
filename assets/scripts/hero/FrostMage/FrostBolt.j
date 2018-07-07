@@ -58,7 +58,7 @@ constant string  ART_FROZEN  = "Abilities\\Spells\\Undead\\FreezingBreath\\Freez
     }
     
     function onChannel() {
-        CastingBar.create(response).setVisuals(ART_SpiritOfVengeanceMissile).setSound(castSound).launch();
+        CastingBar.create(response).setVisuals(ART_SpiritOfVengeanceMissile).launch();
     }
 
     integer castSound;

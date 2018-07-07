@@ -13,11 +13,14 @@ constant integer BUFF_ID = 'A09B';
         private timer tm;
         private unit caster, ward;
         private integer c;
+        effect eff;
         
         private method destroy() {
+            DestroyEffect(this.eff);
             ReleaseTimer(this.tm);
             this.caster = null;
             this.ward = null;
+            this.eff = null;
             this.deallocate();
         }
         
@@ -54,6 +57,7 @@ constant integer BUFF_ID = 'A09B';
             thistype this = thistype.allocate();
             this.caster = u;
             this.ward = CreateUnit(Player(MOB_PID), UTID_NTR_PROTECTION_WARD, GetUnitX(this.caster) + GetRandomInt(-200, 200), GetUnitY(this.caster) + GetRandomInt(-200, 200), GetRandomInt(0, 359));
+            this.eff = AddSpecialEffectTarget(ART_VoodooAura, this.ward, "origin");
             this.c = DURATION;
             this.tm = NewTimer();
             SetTimerData(this.tm, this);
@@ -62,7 +66,7 @@ constant integer BUFF_ID = 'A09B';
     }
 
     function onCast() {
-        ProtectionWard.start(SpellEvent.CastingUnit);        
+        ProtectionWard.start(SpellEvent.CastingUnit);
     }
 
     function onInit() {

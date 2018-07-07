@@ -63,7 +63,11 @@ constant integer MOBINIT_RESPAWN_H = 720;
     }
 
     function championizeUnit(DelayTask dt) {
-        ChampionizeRandom(dt.u0);
+        if (RectContainsUnit(gg_rct_FirstChampion, dt.u0) == true) {
+            ChampionizeLesser(dt.u0);
+        } else {
+            ChampionizeRandom(dt.u0);
+        }
     }
 
     public function MobInitAllowArea(integer a) {

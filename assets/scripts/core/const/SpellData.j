@@ -272,7 +272,7 @@ library SpellData requires Table, Integer {
             SpellData.create(SID_WAR_STOMP,"War Stomp",0,4,8,OrderId("sleep"),1,ORDER_TYPE_IMMEDIATE);
             SpellData.create(SID_BATTLE_COMMAND,"Battle Command",0,0,6,OrderId("slow"),1,ORDER_TYPE_TARGET);
             SpellData.create(SID_BLAZING_HASTE,"Blazing Haste",75,0,5,OrderId("heal"),1,ORDER_TYPE_TARGET);
-            SpellData.create(SID_FIRE_BALL,"Fire Ball",100,3,1,OrderId("sleep"),1,ORDER_TYPE_IMMEDIATE);
+            SpellData.create(SID_FIRE_BALL,"Fire Ball",100,3,5,OrderId("sleep"),1,ORDER_TYPE_IMMEDIATE);
             SpellData.create(SID_FLAME_SHOCK,"Flame Shock",50,0,5,OrderId("slow"),1,ORDER_TYPE_TARGET);
             SpellData.create(SID_SMOLDER,"Smolder",0,1,0,OrderId("howlofterror"),1,ORDER_TYPE_IMMEDIATE);
             SpellData.create(SID_SUMMON_PARASITICAL_ROACH,"Summon Parasitical Roach",0,0,15,OrderId("howlofterror"),1,ORDER_TYPE_IMMEDIATE);

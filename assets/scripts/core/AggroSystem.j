@@ -617,7 +617,7 @@ constant integer MAX_PLAYER_UNITS = 50;
         if (!IsUnitDummy(u) && !IsUnitIllusion(u)) {
             if (GetPlayerId(GetOwningPlayer(u)) == MOB_PID) {
                 if (IsInCombat()) {
-                    if (GetDistance.units2d(PlayerUnits.units[0], u) < 1500) {
+                    if (GetDistance.units2d(PlayerUnits.units[0], u) < 1500 && IsUnitSummoned(u) == true) {
                         MobList.add(u);
                     }
                 }
