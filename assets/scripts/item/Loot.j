@@ -41,7 +41,6 @@ public constant real    ILVL_MAX_RATE = 0.6;
         while (qlvl > -1) {
             rate = loot2 / ILVL_THRESHOLD_VALUE[qlvl] / iteration * ILVL_MAX_RATE;
             if (GetRandomReal(0, 0.999) < rate) {
-                print(I2S(qlvl));
                 loot2 = 0.0;
                 if (qlvl == 0) {
                     itid = uncommon.get();

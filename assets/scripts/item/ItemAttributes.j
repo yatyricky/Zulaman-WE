@@ -223,7 +223,7 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
             return AttributeBehaviourMeta[AttributeEntry(a).attrId].sort - AttributeBehaviourMeta[AttributeEntry(b).attrId].sort;
         }
 
-        method updateUbertip() {
+        method forgeUbertip() -> string {
             NodeObject it;
             string str;
             string valstr;
@@ -240,34 +240,41 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
             while (it != 0) {
                 ae = AttributeEntry(it.data);
                 abm = AttributeBehaviourMeta[ae.attrId];
-                if (ae.attrId == IATTR_LP) {
-                    hasLP = true;
-                    lp = ae.value;
-                }
-                if (ae.value == 0) {
-                    str = str + abm.str1 + abm.str2;
+                if (abm.cate == 4) {
+                    // is set item
                 } else {
-                    finalValue = ae.value;
-                    if (hasLP == true && abm.cate == 2) { // 2: improvable
-                        finalValue = ae.value * (1 + lp * abm.lpAmp);
+                    if (ae.attrId == IATTR_LP) {
+                        hasLP = true;
+                        lp = ae.value;
                     }
-                    if (finalValue < 0) {
-                        finalValue = 0;
-                    }
-                    if (finalValue < 1 || ae.attrId == IATTR_USE_CTHUN || ae.attrId == IATTR_BM_VALOR) {
-                        valstr = I2S(Rounding(finalValue * 100)) + "%";
+                    if (ae.value == 0) {
+                        str = str + abm.str1 + abm.str2;
                     } else {
-                        valstr = I2S(Rounding(finalValue));
+                        finalValue = ae.value;
+                        if (hasLP == true && abm.cate == 2) { // 2: improvable
+                            finalValue = ae.value * (1 + lp * abm.lpAmp);
+                        }
+                        if (finalValue < 0) {
+                            finalValue = 0;
+                        }
+                        if (finalValue < 1 || ae.attrId == IATTR_USE_CTHUN || ae.attrId == IATTR_BM_VALOR) {
+                            valstr = I2S(Rounding(finalValue * 100)) + "%";
+                        } else {
+                            valstr = I2S(Rounding(finalValue));
+                        }
+                        str = str + abm.str1 + valstr + abm.str2;
                     }
-                    str = str + abm.str1 + valstr + abm.str2;
                 }
                 if (it.next != 0) {
                     str = str + "|N";
                 }
                 it = it.next;
             }
-            print(str);
-            // BlzSetItemExtendedTooltip(it, str);
+            return str;
+        }
+
+        method updateUbertip() {
+            // BlzSetItemExtendedTooltip(this.theItem, this.forgeUbertip());
         }
 
         method updateName() {
@@ -418,10 +425,10 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
                 thistype.create(ITID_INSIGHT,"|cffff8c00Insight|r","|cffffdeadIn the fight against the forest trolls, the Blood Elf Rangers used this enchanted orb from Kirin Tor and eventually succeeded in establishing Quel'Thalas.|r").append(14,5,10).append(18,5,10).append(19,0.03,0.05).append(68,0,0).append(83,2,4);
                 thistype.create(ITID_VOODOO_VIALS,"|cffff8c00Voodoo Vials|r","|cffffdeadZanzil *makes* friends by these small vials.|r").append(14,5,10).append(20,0.03,0.05).append(19,0.03,0.05).append(88,12,20).append(32,15,30);
                 thistype.create(ITID_MOONLIGHT_GREATSWORD,"|cffff8c00Moonlight Greatsword|r","|cffffdeadLudwig the Holy Blade.|r").append(4,5,10).append(21,75,150).append(57,10,20).append(43,0.02,0.04).append(75,30,60).append(49,100,250);
-                thistype.create(ITID_DETERMINATION_OF_VENGEANCE,"|cffffcc00Determination of Vengeance|r","|cffffdeadThe determination to revenge Mal'Ganis is unshakeable.|r").append(13,5,8).append(21,50,75).append(1,0.01,0.02).append(16,0.02,0.04).append(97,0,0);
-                thistype.create(ITID_STRATHOLME_TRAGEDY,"|cffffcc00Stratholme Tragedy|r","|cffffdeadIn disregard of Jaina's advice, Stratholme became a hell on earth in merely one night.|r").append(9,9,12).append(12,4,6).append(67,0.05,0.09).append(24,12,18).append(97,0,0);
-                thistype.create(ITID_PATRICIDE,"|cffffcc00Patricide|r","|cffffdeadOne last step!|r").append(9,12,16).append(52,26,48).append(55,0.05,0.1).append(12,3,4).append(54,1,1).append(97,0,0);
-                thistype.create(ITID_FROSTMOURNE,"|cffffcc00FrostMourne|r","|cffffdeadA gift from the Lich King.|r").append(4,4,6).append(44,0.02,0.04).append(71,7,12).append(43,0.02,0.03).append(58,24,55).append(97,0,0);
+                thistype.create(ITID_DETERMINATION_OF_VENGEANCE,"|cffffcc00Determination of Vengeance|r","|cffffdeadThe determination to revenge Mal'Ganis is unshakeable.|r").append(17,100,200).append(21,100,200).append(1,0.01,0.02).append(97,0,0);
+                thistype.create(ITID_STRATHOLME_TRAGEDY,"|cffffcc00Stratholme Tragedy|r","|cffffdeadIn disregard of Jaina's advice, Stratholme became a hell on earth in merely one night.|r").append(9,5,10).append(24,11,17).append(67,0.05,0.09).append(97,0,0);
+                thistype.create(ITID_PATRICIDE,"|cffffcc00Patricide|r","|cffffdeadOne last step!|r").append(9,5,10).append(52,26,48).append(55,0.05,0.1).append(12,3,5).append(97,0,0);
+                thistype.create(ITID_FROSTMOURNE,"|cffffcc00FrostMourne|r","|cffffdeadA gift from the Lich King.|r").append(4,5,10).append(71,7,12).append(43,0.01,0.025).append(58,24,55).append(97,0,0);
                 //:template.end
             });
         }
@@ -562,7 +569,7 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
     }
 
     public type AttributeBehaviourMetaCallback extends function(unit, real, integer);
-    struct AttributeBehaviourMeta[] {
+    public struct AttributeBehaviourMeta[] {
         integer sort;
         integer cate;
         string str1, str2;
@@ -847,7 +854,7 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
             thistype.put(IATTR_BP,1,144,0,"+"," Block points",thistype.callbackBP);
             thistype.put(IATTR_DODGE,1,146,0,"+"," Dodge chance",thistype.callbackDODGE);
             thistype.put(IATTR_DR,1,150,0,"-"," All damage taken",thistype.callbackDR);
-            thistype.put(IATTR_MDR,1,152,0,"-"," magic damage taken",thistype.callbackMDR);
+            thistype.put(IATTR_MDR,1,152,0,"-"," magical damage taken",thistype.callbackMDR);
             thistype.put(IATTR_AMP,1,154,0,"+"," Damage and healing dealt",thistype.callbackAMP);
             thistype.put(IATTR_HAMP,1,156,0,"+"," Healing taken",thistype.callbackHAMP);
             thistype.put(IATTR_MREG,1,160,0,"Regens "," MP per second",thistype.callbackMREG);
@@ -859,10 +866,10 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
             thistype.put(IATTR_ATK_ML,3,200,0,"|cff87ceeb+"," Mana stolen per hit|r",thistype.callbackATK_ML);
             thistype.put(IATTR_ATK_LL,3,202,0,"|cff87ceeb+"," Life stolen per hit|r",thistype.callbackATK_LL);
             thistype.put(IATTR_ATK_LLML,3,204,0,"|cff87ceeb+"," Life and mana stolen per hit|r",thistype.callbackATK_LLML);
-            thistype.put(IATTR_ATK_MD,3,210,0,"|cff87ceebDeals "," extra magic damage per hit|r",thistype.callbackATK_MD);
-            thistype.put(IATTR_ATK_MDK,3,211,0,"|cff87ceebDeals "," extra magic damage per hit, scaled up by target HP lost|r",thistype.callbackATK_MDK);
+            thistype.put(IATTR_ATK_MD,3,210,0,"|cff87ceebDeals "," extra magical damage per hit|r",thistype.callbackATK_MD);
+            thistype.put(IATTR_ATK_MDK,3,211,0,"|cff87ceebDeals "," extra magical damage per hit, scaled up by target HP lost|r",thistype.callbackATK_MDK);
             thistype.put(IATTR_RG_ONESHOT,3,250,0,"|cff87ceebOne-shot target when it's HP is less than yours","|r",thistype.callbackRG_ONESHOT);
-            thistype.put(IATTR_MCVT,3,253,0,"|cff87ceebConverts your normal attacks into magic damage","|r",thistype.callbackMCVT);
+            thistype.put(IATTR_MCVT,3,253,0,"|cff87ceebConverts your normal attacks into magical damage","|r",thistype.callbackMCVT);
             thistype.put(IATTR_PL_SHOCK,3,256,0,"|cff87ceebHoly Shock always deals critical healing","|r",thistype.callbackPL_SHOCK);
             thistype.put(IATTR_PR_SHIELD,3,259,0,"|cff87ceebRemoves weakness effect of Shield","|r",thistype.callbackPR_SHIELD);
             thistype.put(IATTR_PL_LIGHT,3,262,0,"|cff87ceebFlash Light dispels one debuff from target","|r",thistype.callbackPL_LIGHT);
@@ -886,13 +893,13 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
             thistype.put(IATTR_ATK_CTHUN,2,403,0.15,"|cff33ff33On Attack: Increase attack speed by 1% per attack, stacks up to ",", lasts for 3 seconds|r",thistype.callbackATK_CTHUN);
             thistype.put(IATTR_ATK_WF,2,404,0.2,"|cff33ff33On Attack: "," chance to knock back target|r",thistype.callbackATK_WF);
             thistype.put(IATTR_ATK_LION,2,405,0.16,"|cff33ff33On Attack: "," chance to increase 30% attack speed, lasts for 5 seconds|r",thistype.callbackATK_LION);
-            thistype.put(IATTR_ATK_MOONWAVE,2,406,0.7,"|cff33ff33On Attack: 10% chance to consume 5% of max MP, deals "," magic damage to all enemies in a row|r",thistype.callbackATK_MOONWAVE);
-            thistype.put(IATTR_ATK_POISNOVA,2,407,0.7,"|cff33ff33On Attack: 15% chance to cast poison nova, dealing "," magic damage over time to all enemies within 600 yards|r",thistype.callbackATK_POISNOVA);
-            thistype.put(IATTR_ATK_COIL,2,408,0.7,"|cff33ff33On Attack: 15% chance to cast Death Coil, deals "," magic damage to target. Target takes 3% extra damge|r",thistype.callbackATK_COIL);
-            thistype.put(IATTR_ATK_BLEED,2,409,0.7,"|cff33ff33On Attack: 20% chance to deal bleed effect to target. Target takes "," physical damage over time, lasts for 10 seconds|r",thistype.callbackATK_BLEED);
-            thistype.put(IATTR_ATK_MDC,2,410,0.7,"|cff33ff33On Attack: 25% chance to deal "," magic damage to target|r",thistype.callbackATK_MDC);
+            thistype.put(IATTR_ATK_MOONWAVE,2,406,0.7,"|cff33ff33On Attack: 10% chance to consume 5% of max MP, deals "," magical damage to all enemies in a row|r",thistype.callbackATK_MOONWAVE);
+            thistype.put(IATTR_ATK_POISNOVA,2,407,0.7,"|cff33ff33On Attack: 15% chance to cast poison nova, dealing "," magical damage over time to all enemies within 600 yards|r",thistype.callbackATK_POISNOVA);
+            thistype.put(IATTR_ATK_COIL,2,408,0.7,"|cff33ff33On Attack: 15% chance to cast Death Coil","|r",thistype.callbackATK_COIL);
+            thistype.put(IATTR_ATK_BLEED,2,409,0.7,"|cff33ff33On Attack: 20% chance to deal "," bleed damage|r",thistype.callbackATK_BLEED);
+            thistype.put(IATTR_ATK_MDC,2,410,0.7,"|cff33ff33On Attack: 25% chance to deal "," magical damage to target|r",thistype.callbackATK_MDC);
             thistype.put(IATTR_ATK_STUN,2,411,0.2,"|cff33ff33On Attack: 10% chance to stun target for "," seconds|r",thistype.callbackATK_STUN);
-            thistype.put(IATTR_ATK_CRIT,2,412,0.16,"|cff33ff33On Attack: "," chance to increase 100% attack critical chance, lasts for 5 seconds|r",thistype.callbackATK_CRIT);
+            thistype.put(IATTR_ATK_CRIT,2,412,0.16,"|cff33ff33On Attack: "," chance to increase 100% attack critical chance|r",thistype.callbackATK_CRIT);
             thistype.put(IATTR_ATK_AMP,2,413,0.1,"|cff33ff33On Attack: Target takes "," extra damage|r",thistype.callbackATK_AMP);
             thistype.put(IATTR_ATK_MORTAL,2,416,0.1,"|cff33ff33On Attack: Decrease target healing taken by ","|r",thistype.callbackATK_MORTAL);
             thistype.put(IATTR_ATK_MISS,2,417,0.1,"|cff33ff33On Attack: Decrease target attack accuracy by ","|r",thistype.callbackATK_MISS);
@@ -900,21 +907,21 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
             thistype.put(IATTR_ATK_DAS,2,419,0.1,"|cff33ff33On Attack: Decrease target attack speed by ","|r",thistype.callbackATK_DAS);
             thistype.put(IATTR_ATK_DMS,2,420,0.1,"|cff33ff33On Attack: Decrease target movement speed by ","|r",thistype.callbackATK_DMS);
             thistype.put(IATTR_ATK_WEAK,2,421,0.1,"|cff33ff33On Attack: Decrease target damage and healing dealt by ","|r",thistype.callbackATK_WEAK);
-            thistype.put(IATTR_3ATK_MOONEXP,2,430,0.7,"|cff33ff33Every Third Attack: Consumes 5% of max MP, deals "," magic damage to all enemies nearby|r",thistype.callback3ATK_MOONEXP);
+            thistype.put(IATTR_3ATK_MOONEXP,2,430,0.7,"|cff33ff33Every Third Attack: Consumes 5% of max MP, deals "," magical damage to all enemies nearby|r",thistype.callback3ATK_MOONEXP);
             thistype.put(IATTR_MD_MREGEN,2,450,0.5,"|cff33ff33Dealing Magical Damage or Healing: 1% chance to regen "," MP|r",thistype.callbackMD_MREGEN);
-            thistype.put(IATTR_MD_POISON,2,451,0.7,"|cff33ff33Dealing Magical Damage: 10% chance to poison target, dealing "," magic damage over time|r",thistype.callbackMD_POISON);
-            thistype.put(IATTR_MD_CHAIN,2,452,0.7,"|cff33ff33Dealing Magical Damage: 10% chance to cast Chain Lightning to target, dealing "," magic damage|r",thistype.callbackMD_CHAIN);
-            thistype.put(IATTR_MDC_ARCANE,2,460,0.5,"|cff33ff33Magical Damage Critical: Charges with arcane power. All arcane power will be released automatically after 3 stacks, dealing "," magic damage to target|r",thistype.callbackMDC_ARCANE);
+            thistype.put(IATTR_MD_POISON,2,451,0.7,"|cff33ff33Dealing Magical Damage: 10% chance to poison target, dealing "," magical damage over time|r",thistype.callbackMD_POISON);
+            thistype.put(IATTR_MD_CHAIN,2,452,0.7,"|cff33ff33Dealing Magical Damage: 10% chance to cast Chain Lightning to target, dealing "," magical damage|r",thistype.callbackMD_CHAIN);
+            thistype.put(IATTR_MDC_ARCANE,2,460,0.5,"|cff33ff33Magical Damage Critical: Charges with arcane power. All arcane power will be released automatically after 3 stacks, dealing "," magical damage to target|r",thistype.callbackMDC_ARCANE);
             thistype.put(IATTR_HEAL_HOLY,2,501,0.33,"|cff33ff33On Healed: Charges 1 holy power, stacks up to "," points|r",thistype.callbackHEAL_HOLY);
             thistype.put(IATTR_ATKED_WEAK,2,600,0.33,"|cff33ff33On Attacked: Decreases attacker's attack power by ","|r",thistype.callbackATKED_WEAK);
-            thistype.put(IATTR_AURA_CONVIC,2,800,0.1,"|cff33ff33Grant Aura of Conviction: All enemies within 600 yards take "," more magic damage|r",thistype.callbackAURA_CONVIC);
+            thistype.put(IATTR_AURA_CONVIC,2,800,0.1,"|cff33ff33Grant Aura of Conviction: All enemies within 600 yards take "," more magical damage|r",thistype.callbackAURA_CONVIC);
             thistype.put(IATTR_AURA_MEDITA,2,801,0.2,"|cff33ff33Grant Aura of Meditation: All allies within 600 yards regen "," MP per second|r",thistype.callbackAURA_MEDITA);
             thistype.put(IATTR_AURA_WARSONG,2,802,0.1,"|cff33ff33Grant Aura of Warsong: All allies deal "," more damage and healing, take 10% more healing within 600 yards|r",thistype.callbackAURA_WARSONG);
             thistype.put(IATTR_AURA_UNHOLY,2,803,0.7,"|cff33ff33Grant Aura of Unholy: All allies within 600 yards regen "," HP per second|r",thistype.callbackAURA_UNHOLY);
             thistype.put(IATTR_USE_BATTLE,2,901,0.16,"|cff33ff33Use: Battle Orders, increases "," max HP to all allies within 900 yards, lasts for 75 seconds|r",thistype.callbackUSE_BATTLE);
             thistype.put(IATTR_USE_MREGEN,2,902,0.4,"|cff33ff33Use: Regens "," MP|r",thistype.callbackUSE_MREGEN);
             thistype.put(IATTR_USE_HREGEN,2,903,0.4,"|cff33ff33Use: Regens "," HP|r",thistype.callbackUSE_HREGEN);
-            thistype.put(IATTR_USE_VOODOO,2,904,0.2,"|cff33ff33Use: Deals "," magic damage to all enemies within range over time|r",thistype.callbackUSE_VOODOO);
+            thistype.put(IATTR_USE_VOODOO,2,904,0.2,"|cff33ff33Use: Deals "," magical damage to all enemies within range over time|r",thistype.callbackUSE_VOODOO);
             thistype.put(IATTR_USE_INT,2,905,0.3,"|cff33ff33Use: Increase intelligence by ",", lasts for 20 seconds|r",thistype.callbackUSE_INT);
             thistype.put(IATTR_USE_SP,2,906,0.3,"|cff33ff33Use: Increase spell power by ",", lasts for 15 seconds|r",thistype.callbackUSE_SP);
             thistype.put(IATTR_USE_DODGE,2,907,0.1,"|cff33ff33Use: Increase dodge chance by 30%, lasts for "," seconds|r",thistype.callbackUSE_DODGE);
