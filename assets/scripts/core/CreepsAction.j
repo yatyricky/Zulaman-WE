@@ -940,6 +940,25 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         }
     }
 
+    function makeOrderNoxiousSpider(unit source, unit target, real combatTime) {
+        IntegerPool ip;
+        integer res;
+        if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
+            ip = IntegerPool.create();
+            ip.add(0, 10);
+            if (UnitCanUse(source, SID_SUMMON_PARASITICAL_ROACH) && combatTime > 30.0) {
+                ip.add(SID_SUMMON_PARASITICAL_ROACH, 50);
+            }
+            res = ip.get();
+            if (res == 0) {
+                IssueTargetOrderById(source, OID_ATTACK, target);
+            } else {
+                IssueImmediateOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid);
+            }
+            ip.destroy();
+        }
+    }
+
     function makeOrderFelHound(unit source, unit target, real combatTime) {
         IntegerPool ip;
         integer res;
@@ -1414,7 +1433,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         unitCallBack[UTID_DEMONIC_WITCH] = makeOrderDemonicWitch;
 
         // ============= Area 4 ==================
-        unitCallBack[UTID_NOXIOUS_SPIDER] = makeOrderJustAttack;
+        unitCallBack[UTID_NOXIOUS_SPIDER] = makeOrderNoxiousSpider;
         unitCallBack[UTID_PARASITICAL_ROACH] = makeOrderParasiticalRoach;
         unitCallBack[UTID_ZOMBIE] = makeOrderZombie;
         unitCallBack[UTID_SKELETAL_MAGE] = makeOrderSkeletalMage;

@@ -441,7 +441,7 @@ public constant integer SID_SMOLDER = 'A0CK';
 // ## Area 4
 // Noxious Spider
 public constant integer UTID_NOXIOUS_SPIDER = 'u003';
-public constant integer SID_SUMMON_PARASITICAL_ROACH = 'xxxx';
+public constant integer SID_SUMMON_PARASITICAL_ROACH = 'A0DF';
 // Parasitical Roach
 public constant integer UTID_PARASITICAL_ROACH = 'ucs1';
 public constant integer SID_PARASITE = 'A0BL';
