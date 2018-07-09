@@ -266,7 +266,7 @@ library SpellData requires Table, Integer {
             SpellData.create(SID_ARMOR_CRUSHING,"Armor Crushing",0,0,20,OrderId("sleep"),1,ORDER_TYPE_TARGET);
             SpellData.create(SID_THUNDER_CLAP,"Thunder Clap",0,0,12,OrderId("thunderclap"),1,ORDER_TYPE_IMMEDIATE);
             SpellData.create(SID_RAGE_ROAR,"Rage Roar",0,0,20,OrderId("slow"),1,ORDER_TYPE_IMMEDIATE);
-            SpellData.create(SID_BLOOD_BOIL,"Blood Boil",0,0,20,OrderId("howlofterror"),1,ORDER_TYPE_IMMEDIATE);
+            SpellData.create(SID_BLOOD_BOIL,"Blood Boil",0,0,20,OrderId("roar"),1,ORDER_TYPE_IMMEDIATE);
             SpellData.create(SID_UNHOLY_FRENZY,"Unholy Frenzy",0,0,12,OrderId("sleep"),1,ORDER_TYPE_IMMEDIATE);
             SpellData.create(SID_CHAOS_LEAP,"Chaos Leap",0,0,20,OrderId("sleep"),1,ORDER_TYPE_TARGET);
             SpellData.create(SID_WAR_STOMP,"War Stomp",0,4,8,OrderId("sleep"),1,ORDER_TYPE_IMMEDIATE);

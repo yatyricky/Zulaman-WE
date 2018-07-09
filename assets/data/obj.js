@@ -5,6 +5,7 @@ const fs = require("fs");
 
 const sheet = workbook.sheets["PlayerAbilities"];
 const bossSheet = workbook.sheets["BossAbilities"];
+const creepSheet = workbook.sheets["CreepAbilities"];
 
 const ci = {
     paid: sheet.matchCol(1, "paid"),
@@ -52,6 +53,15 @@ const bossCi = {
     buffType: bossSheet.matchCol(1, "bufftype"),
     buffTip: bossSheet.matchCol(1, "bufftip"),
     buffUber: bossSheet.matchCol(1, "buffuber"),
+};
+
+const creepCi = {
+    buffAid: creepSheet.matchCol(1, "buffaid"),
+    buffBid: creepSheet.matchCol(1, "buffbid"),
+    buffPolar: creepSheet.matchCol(1, "buffpolar"),
+    buffType: creepSheet.matchCol(1, "bufftype"),
+    buffTip: creepSheet.matchCol(1, "bufftip"),
+    buffUber: creepSheet.matchCol(1, "buffuber"),
 };
 
 const objs = [];
@@ -458,6 +468,21 @@ for (let i = 2; i < bossSheet.data.length + 1; i++) {
     }
 }
 
+const creepBuffs = [];
+
+for (let i = 2; i < creepSheet.data.length + 1; i++) {
+    if (creepSheet.cell(`${creepCi.buffAid}${i}`) !== "") {
+        bossBuffs.push(forgeBuffData(
+            creepSheet.cell(`${creepCi.buffAid}${i}`), 
+            creepSheet.cell(`${creepCi.buffBid}${i}`),
+            creepSheet.cell(`${creepCi.buffType}${i}`),
+            creepSheet.cell(`${creepCi.buffPolar}${i}`),
+            creepSheet.cell(`${creepCi.buffTip}${i}`),
+            creepSheet.cell(`${creepCi.buffUber}${i}`)
+        ));
+    }
+}
+
 // temporal solution, copy and paste
 let dump = "";
 for (let i = 0; i < objs.length; i++) {
@@ -477,6 +502,12 @@ for (let i = 0; i < buffs.length; i++) {
 }
 for (let i = 0; i < bossBuffs.length; i++) {
     const element = bossBuffs[i];
+    dump += element.id + "\n";
+    dump += element.tip + "\n";
+    dump += element.uber + "\n\n";
+}
+for (let i = 0; i < creepBuffs.length; i++) {
+    const element = creepBuffs[i];
     dump += element.id + "\n";
     dump += element.tip + "\n";
     dump += element.uber + "\n\n";

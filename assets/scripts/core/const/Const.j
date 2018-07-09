@@ -410,8 +410,9 @@ public constant integer SID_MANA_LEECH = 'A0AV';
 
 // ## Area 3
 // fel peon
-public constant integer UTID_FEL_PEON = 'xxxx';
-public constant integer SID_BLOOD_BOIL = 'xxxx';
+public constant integer UTID_FEL_PEON = 'ncpn';
+public constant integer SID_BLOOD_BOIL = 'A0DE';
+public constant integer BID_BLOOD_BOIL = 'A0DD';
 // fel grunt
 public constant integer UTID_FEL_GRUNT = 'n00C';
 public constant integer SID_UNHOLY_FRENZY = 'A09H';
