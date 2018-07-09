@@ -31,12 +31,18 @@ library NefUnion requires TimerUtils, Math {
             return this;
         }
 
-        static method atUnit(string se, unit a, string ap, real et) {
+        method setColor(integer r, integer g, integer b) -> thistype {
+            BlzSetSpecialEffectColor(this.e, r, g, b);
+            return this;
+        }
+
+        static method atUnit(string se, unit a, string ap, real et) -> thistype {
             thistype this = thistype.allocate();
             this.t = NewTimer();
             this.e = AddSpecialEffectTarget(se, a, ap);
             SetTimerData(this.t, this);
             TimerStart(this.t, et, false, function thistype.execute);
+            return this;
         }
 
         static method atCoord(string se, real x, real y, real et) -> thistype {
@@ -336,7 +342,7 @@ library NefUnion requires TimerUtils, Math {
         private DelayedTaskExecute response;
         unit u0, u1;
         integer i0;
-        real r0, r1;
+        real r0, r1, r2, r3;
         integer data;
         
         private method destroy() {

@@ -1262,6 +1262,25 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         }
     }
 
+    function makeOrderWindSerpentServant(unit source, unit target, real combatTime) {
+        IntegerPool ip;
+        integer res;
+        if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
+            ip = IntegerPool.create();
+            ip.add(0, 30);
+            if (UnitCanUse(source, SID_DIVE)) {
+                ip.add(SID_DIVE, 60);
+            }
+            res = ip.get();
+            if (res == 0) {
+                IssueTargetOrderById(source, OID_ATTACK, target);
+            } else {
+                IssueImmediateOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid);
+            }
+            ip.destroy();
+        }
+    }
+
     function makeOrderGodOfDeath(unit source, unit target, real combatTime) {
         IntegerPool ip;
         integer res;
@@ -1382,7 +1401,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         unitCallBack[UTID_CLOCKWORK_GOBLIN] = makeOrderClockwerkGoblin;
         
         unitCallBack['Hvsh'] = makeOrderHvsh;   // Naga Sea Witch
-        unitCallBack[UTID_FLYING_SERPENT] = makeOrderJustAttack;
+        unitCallBack[UTID_FLYING_SERPENT] = makeOrderWindSerpentServant;
         
         unitCallBack[UTID_TIDE_BARON_WATER] = makeOrderTideBaronWater;   // Sir Tide Water form
         unitCallBack[UTID_TIDE_BARON] = makeOrderTideBaron;   // Sir Tide Naga form

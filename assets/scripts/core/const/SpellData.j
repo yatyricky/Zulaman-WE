@@ -190,6 +190,7 @@ library SpellData requires Table, Integer {
             SpellData.create(SID_STRONG_BREEZE,"Strong Breeze",100,0,14,852555,1,ORDER_TYPE_TARGET);
             SpellData.create(SID_SUMMON_SERPENTS,"Summon Serpents",100,0,30,852066,1,ORDER_TYPE_IMMEDIATE);
             SpellData.create(SID_THUNDER_STORM,"Thunder Storm",0,10,40,852069,2,ORDER_TYPE_TARGET);
+            SpellData.create(SID_DIVE,"Dive",0,0,30,OrderId("roar"),1,ORDER_TYPE_IMMEDIATE);
             SpellData.create(SID_ALKALINE_WATER,"Alkaline Water",0,3.5,5,OrderId("heal"),1,ORDER_TYPE_TARGET);
             SpellData.create(SID_TIDE,"Tide",0,0,12,OrderId("slow"),1,ORDER_TYPE_TARGET);
             SpellData.create(SID_TIDE_BARON_MORPH,"Tide Baron Morph",0,0,35,OID_BEARFORM,1,ORDER_TYPE_IMMEDIATE);

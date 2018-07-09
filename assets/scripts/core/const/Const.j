@@ -248,6 +248,7 @@ public constant integer UTID_FLYING_SERPENT = 'n003';
 public constant integer SID_STRONG_BREEZE = 'A03M';
 public constant integer SID_SUMMON_SERPENTS = 'A03N';
 public constant integer SID_THUNDER_STORM = 'A03O';
+public constant integer SID_DIVE = 'A0DG';
 
 // 潮汐男爵
 public constant integer UTID_TIDE_BARON = 'Udea';
@@ -1044,6 +1045,8 @@ public constant string ART_HeroTinkerFactoryMissle = "Units\\Creeps\\HeroTinkerF
 public constant string ART_ZigguratMissile = "Abilities\\Weapons\\ZigguratMissile\\ZigguratMissile.mdl";
 public constant string ART_ShimmeringPortal = "Doodads\\Cinematic\\ShimmeringPortal\\ShimmeringPortal.mdl";
 public constant string ART_VoodooAura = "Abilities\\Spells\\Orc\\Voodoo\\VoodooAura.mdl";
+public constant string ART_PriestMissile = "Abilities\\Weapons\\PriestMissile\\PriestMissile.mdl";
+public constant string ART_Phoenix_Missile_mini = "Abilities\\Weapons\\PhoenixMissile\\Phoenix_Missile_mini.mdl";
 
 public constant string BTNVolcano = "ReplaceableTextures\\CommandButtons\\BTNVolcano.blp";
 public constant string BTNEarthquake = "ReplaceableTextures\\CommandButtons\\BTNEarthquake.blp";
