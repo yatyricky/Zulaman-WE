@@ -190,4 +190,13 @@ lineReader.on("line", function(line) {
     fs.writeFileSync(fpath, outBuffer);
 });
 
+// work on consumables
+let consumSheet = workbook.sheets["Consumable"];
+for (let i = 2; i <= consumSheet.data.length; i++) {
+    if (consumSheet.cell("I"+i) !== "") {
+        let result = forges.forgeBuffData(consumSheet.cell("I" + i), consumSheet.cell("J" + i), consumSheet.cell("L" + i), consumSheet.cell("K" + i), consumSheet.cell("M" + i), consumSheet.cell("N" + i));
+        dump += `${result.id}\n${result.tip}\n${result.uber}\n\n`;
+    }
+}
+
 fs.writeFileSync("tmp.txt", dump);
