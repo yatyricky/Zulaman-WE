@@ -1,5 +1,5 @@
 //! zinc
-library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce, Infinity, ConvertAttackMagic, MagicPoison, VoodooVial, RomulosExpiredPoison, Drum, MoonlightExplosion, NonHeroExtraDamage, AttackChanceICC, AttackBleed, AttackStun, LethalMagicalDamage, ArthassCorruption {
+library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce, Infinity, ConvertAttackMagic, MagicPoison, VoodooVial, RomulosExpiredPoison, Drum, MoonlightExplosion, NonHeroExtraDamage, AttackChanceICC, AttackBleed, AttackStun, LethalMagicalDamage, ArthassCorruption, IconOfTheUnglazedCrescent {
     public constant real AFFIX_FACTOR_BASE = 15000;
     public constant real AFFIX_FACTOR_DELTA = 2500;
     public constant real SUFIX_MULTIPLIER = 4;
@@ -383,17 +383,20 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
                 thistype.create(ITID_HEALTH_STONE,"|cff11ff11Health Stone|r","").append(73,2,4).append(31,400,800);
                 thistype.create(ITID_MANA_STONE,"|cff11ff11Mana Stone|r","").append(72,1,1).append(30,200,400);
                 thistype.create(ITID_ROMULOS_EXPIRED_POISON,"|cff11ff11Romulo's Expired Poison|r","|cff999999Still usable.|r").append(53,25,100);
-                thistype.create(ITID_MOROES_LUCKY_GEAR,"|cff11ff11Moroes' Lucky Gear|r","|cff999999Disassembled from Moroes' Lucky Pocket Watch.|r").append(27,0.01,0.02).append(35,8,12);
-                thistype.create(ITID_RUNED_BELT,"|cff11ff11Runed Belt|r","|cff999999A bracelet belongs to an ogre.|r").append(21,57,113).append(2,0.03,0.05);
-                thistype.create(ITID_UNGLAZED_ICON_OF_THE_CRESCENT,"|cff11ff11Unglazed Icon of the Crescent|r","|cff999999It can be seen vaguely that this icon was once beautiful silver.|r").append(14,4,7).append(33,13,25);
+                thistype.create(ITID_MOROES_LUCKY_GEAR,"|cff11ff11Moroes' Lucky Gear|r","|cff999999Disassembled from Moroes' Lucky Pocket Watch.|r").append(35,8,12);
+                thistype.create(ITID_RUNED_BELT,"|cff11ff11Runed Belt|r","|cff999999A bracelet belongs to an ogre.|r").append(2,0.03,0.05);
+                thistype.create(ITID_UNGLAZED_ICON_OF_THE_CRESCENT,"|cff11ff11Unglazed Icon of the Crescent|r","|cff999999It can be seen vaguely that this icon was once beautiful silver.|r").append(33,15,45);
+                thistype.create(ITID_MAUL,"|cff8b66ffMaul|r","").append(4,10,20).append(21,75,150);
+                thistype.create(ITID_CLOAK,"|cff8b66ffCloak|r","").append(13,10,20).append(21,75,150);
+                thistype.create(ITID_SCEPTER,"|cff8b66ffScepter|r","").append(14,10,20).append(21,75,150);
                 thistype.create(ITID_COLOSSUS_BLADE,"|cff11ff11Colossus Blade|r","|cff999999A rough sword, the workmanship is not very good. But it's the most popular production weapons in Harrogath.|r").append(9,8,15).append(12,4,8);
                 thistype.create(ITID_THE_X_RING,"|cff8b66ffThe X Ring|r","|cffffdeadAll the former 20 are trash!|r").append(7,12,21);
                 thistype.create(ITID_GOBLIN_ROCKET_BOOTS_LIMITED_EDITION,"|cff8b66ffGoblin Rocket Boots Limited Edition|r","|cffffdeadLimited edition, but it's a goblin product after all. So use it with caution.|r").append(21,100,200).append(17,100,200).append(24,13,25).append(36,8,12);
-                thistype.create(ITID_WARSONG_BATTLE_DRUMS,"|cff8b66ffWarsong Battle Drums|r","|cffffdeadHigh morale.|r").append(11,0.02,0.04).append(56,0.01,0.02).append(84,0.01,0.02);
+                thistype.create(ITID_WARSONG_BATTLE_DRUMS,"|cff8b66ffWarsong Battle Drums|r","|cffffdeadHigh morale.|r").append(56,0.01,0.02).append(84,0.01,0.02);
                 thistype.create(ITID_TROLL_BANE,"|cff8b66ffTroll Bane|r","|cffffdeadYou know this blade...|r").append(4,5,10).append(12,3,5).append(9,5,10);
                 thistype.create(ITID_GOREHOWL,"|cff8b66ffGorehowl|r","|cffffdeadThe axe of Grom Hellscream has sown terror across hundreds of battlefields.|r").append(4,6,12).append(21,75,150).append(11,0.03,0.05);
                 thistype.create(ITID_CORE_HOUND_TOOTH,"|cff8b66ffCore Hound Tooth|r","").append(21,75,150).append(12,3,5).append(11,0.03,0.05);
-                thistype.create(ITID_VISKAG,"|cff8b66ffVis'kag|r","|cffffdeadThe blood letter.|r").append(13,5,10).append(9,5,10).append(12,3,5).append(44,0.03,0.06);
+                thistype.create(ITID_VISKAG,"|cff8b66ffVis'kag|r","|cffffdeadThe blood letter.|r").append(13,5,10).append(9,5,10).append(12,3,5);
                 thistype.create(ITID_LION_HORN,"|cff8b66ffLion Horn|r","|cffffdeadMuch better than Dragonspine Trophy.|r").append(9,5,10).append(3,0.01,0.01).append(48,0.05,0.07);
                 thistype.create(ITID_ARMOR_OF_THE_DAMNED,"|cff8b66ffArmor of the Damned|r","|cffffdeadSlow, Curse, Weakness, Misfortune|r").append(8,2,3).append(21,120,240).append(74,4,8).append(41,50,100);
                 thistype.create(ITID_BULWARK_OF_THE_AMANI_EMPIRE,"|cff8b66ffBulwark of the Amani Empire|r","|cff999999It still seems to linger with the resentment of the first guardian warrior of the Brothers Guild.|r").append(8,2,3).append(4,5,10).append(15,14,28);
@@ -403,13 +406,16 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
                 thistype.create(ITID_HEX_SHRUNKEN_HEAD,"|cff8b66ffHex Shrunken Head|r","|cffffdeadThe Hex Lord is now strong enough to no longer need such trinkets.|r").append(14,5,10).append(18,5,10).append(34,40,80);
                 thistype.create(ITID_STAFF_OF_THE_SHADOW_FLAME,"|cff8b66ffStaff of the Shadow Flame|r","|cffffdeadThe dark flame at the end of the staff is so pure and contains tremendous energy.|r").append(14,5,10).append(18,5,10).append(20,0.03,0.05);
                 thistype.create(ITID_TIDAL_LOOP,"|cff8b66ffTidal Loop|r","|cffffdeadThe ring was crafted to fight against the Lord of Fire's legion. But now its ability of fire resistance has lost.|r").append(4,5,10).append(72,2,4).append(87,60,90);
+                thistype.create(ITID_EAGLE_GOD_GAUNTLETS,"|cff8b66ffEagle God Gauntlets|r","").append(13,5,10).append(21,75,150).append(11,0.03,0.05);
+                thistype.create(ITID_MOONSTONE,"|cff8b66ffMoonstone|r","").append(14,5,10).append(72,1,2).append(19,0.03,0.05);
+                thistype.create(ITID_SHADOW_ORB,"|cff8b66ffShadow Orb|r","").append(18,5,10).append(19,0.03,0.05).append(21,75,150);
                 thistype.create(ITID_ORB_OF_THE_SINDOREI,"|cff8b66ffOrb of the Sin'dorei|r","|cffffdeadThe glory sign of remarkable bloodelf defenders.|r").append(4,4,7).append(18,8,15).append(16,0.04,0.06).append(86,0.03,0.07);
-                thistype.create(ITID_REFORGED_BADGE_OF_TENACITY,"|cff8b66ffReforged Badge of Tenacity|r","|cffffdeadOriginally forged by a demon overseer named Shartuul.|r").append(13,4,7).append(21,120,240).append(27,0.02,0.03).append(78,0.08,0.1).append(92,3,7);
-                thistype.create(ITID_LIGHTS_JUSTICE,"|cff8b66ffLight's Justice|r","|cffffdeadOpen your heart to the light.|r").append(14,4,7).append(18,5,10).append(20,0.03,0.05).append(79,0,0).append(91,0,0);
-                thistype.create(ITID_BENEDICTION,"|cff8b66ffBenediction|r","|cffffdeadBehind the light, it's shadow.|r").append(14,4,7).append(18,5,10).append(72,2,4).append(76,4,6).append(80,0,0);
+                thistype.create(ITID_REFORGED_BADGE_OF_TENACITY,"|cff8b66ffReforged Badge of Tenacity|r","|cffffdeadOriginally forged by a demon overseer named Shartuul.|r").append(13,4,7).append(21,120,240).append(78,0.08,0.1).append(92,3,7);
+                thistype.create(ITID_LIGHTS_JUSTICE,"|cff8b66ffLight's Justice|r","|cffffdeadOpen your heart to the light.|r").append(14,4,7).append(20,0.03,0.05).append(79,0,0).append(91,0,0);
+                thistype.create(ITID_BENEDICTION,"|cff8b66ffBenediction|r","|cffffdeadBehind the light, it's shadow.|r").append(14,4,7).append(72,2,4).append(76,4,6).append(80,0,0);
                 thistype.create(ITID_HORN_OF_CENARIUS,"|cff8b66ffHorn of Cenarius|r","|cffffdeadThis Night Elf artifact is said to be able to summon the souls of all night elves.|r").append(7,4,7).append(21,100,200).append(17,100,200).append(69,3,4.7);
                 thistype.create(ITID_BANNER_OF_THE_HORDE,"|cff8b66ffBanner of the Horde|r","|cffffdeadWith the tribal glory, the head of the enemies were left behind.|r").append(4,5,10).append(9,5,10).append(11,0.03,0.05).append(39,0.4,0.6);
-                thistype.create(ITID_KELENS_DAGGER_OF_ASSASSINATION,"|cff8b66ffKelen's Dagger of Assassination|r","|cffffdeadKelen is not just a master escaper.|r").append(13,5,10).append(9,5,10).append(12,3,5).append(66,0,0).append(65,0.04,0.06).append(90,0.03,0.06);
+                thistype.create(ITID_KELENS_DAGGER_OF_ASSASSINATION,"|cff8b66ffKelen's Dagger of Assassination|r","|cffffdeadKelen is not just a master escaper.|r").append(13,5,10).append(12,3,5).append(66,0,0).append(65,0.04,0.06).append(90,0.03,0.06);
                 thistype.create(ITID_RHOKDELAR,"|cff8b66ffRhokdelar|r","|cffffdeadLongbow of the Ancient Keepers|r").append(13,5,8).append(12,3,5).append(11,0.03,0.05).append(24,10,20).append(94,0.7,1);
                 thistype.create(ITID_RAGE_WINTERCHILLS_PHYLACTERY,"|cff8b66ffRage Winterchill's Phylactery|r","|cffffdeadFor some people, the value of his phylactery is greater than the Chronicle of Dark Secrets.|r").append(14,5,10).append(19,0.03,0.05).append(96,0.02,0.04).append(70,0.01,0.02);
                 thistype.create(ITID_ANATHEMA,"|cff8b66ffAnathema|r","|cffffdeadBefore the shadows, it's light.|r").append(21,125,250).append(18,5,10).append(20,0.03,0.05).append(81,1.5,2);
@@ -417,14 +423,14 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
                 thistype.create(ITID_CALL_TO_ARMS,"|cffff8c00Call To Arms|r","|cffffdeadWhen Zakarum was exiled, he led a mercenary team. It is this very battle axe and his Holy Shield that lead his brothers through the bodies of countless enemies.|r").append(9,5,10).append(18,5,10).append(73,10,17).append(57,10,20).append(29,0.06,0.12);
                 thistype.create(ITID_WOESTAVE,"|cffff8c00Woestave|r","|cffffdeadCause of the great plague.|r").append(9,5,15).append(63,0.01,0.03).append(62,0.02,0.04).append(61,1,2).append(60,0.03,0.04).append(64,0.01,0.01).append(59,0.11,0.17);
                 thistype.create(ITID_ENIGMA,"|cffff8c00Enigma|r","|cffffdeadNot recorded.|r").append(1,0.01,0.02).append(3,0.01,0.02).append(24,12,20).append(4,5,10).append(40,0.01,0.02).append(28,0,0);
-                thistype.create(ITID_BREATH_OF_THE_DYING,"|cffff8c00Breath of the Dying|r","|cffffdeadThe master piece by Griswold the Undead. On the unglazed handle six obscure runes glow: Vex-Hel-El-Eld-Zod-Eth.|r").append(7,4,7).append(9,5,10).append(12,5,10).append(45,0.02,0.04).append(50,18,23);
+                thistype.create(ITID_DYING_BREATH,"|cffff8c00Dying Breath|r","|cffffdeadThe master piece by Griswold the Undead. On the unglazed handle six obscure runes glow: Vex-Hel-El-Eld-Zod-Eth.|r").append(13,5,10).append(9,5,10).append(12,5,10).append(44,0.02,0.04).append(50,18,23);
                 thistype.create(ITID_WINDFORCE,"|cffff8c00Windforce|r","|cffffdeadThe wind carries life for those enveloped in its flow, and death for those arrayed against it.|r").append(13,5,10).append(9,5,10).append(12,3,5).append(11,0.03,0.05).append(47,0.05,0.1);
                 thistype.create(ITID_DERANGEMENT_OF_CTHUN,"|cffff8c00Derangement of C'Thun|r","|cffffdeadAlthough the main body of the Old God C'Thun was eliminated, the faceless one formed by his degraded tentacles was everywhere in the abyss of the earth.|r").append(4,6,12).append(9,6,12).append(11,0.03,0.05).append(74,3,30).append(44,0.03,0.06).append(46,0.04,0.06).append(37,0.05,0.5);
                 thistype.create(ITID_MIGHT_OF_THE_ANGEL_OF_JUSTICE,"|cffff8c00Might of the Angel of Justice|r","|cffffdeadThe armor used by Tyrael, the Archangel of Wisdom when he was once the incarnation of justice.|r").append(8,2,3).append(1,0.01,0.02).append(2,0.02,0.04).append(24,12,24).append(42,2,5).append(38,25,35);
                 thistype.create(ITID_INFINITY,"|cffff8c00Infinity|r","|cffffdeadInfinity is the essence of the Will o'wisps. The energy of lightning contained in it excites the prophet Drexel. It is said that the soul of the bleak soul with a green cloud-like halo is a nightmare for all adventurers.|r").append(14,5,10).append(21,100,200).append(18,5,10).append(82,0.01,0.02).append(89,60,100);
                 thistype.create(ITID_INSIGHT,"|cffff8c00Insight|r","|cffffdeadIn the fight against the forest trolls, the Blood Elf Rangers used this enchanted orb from Kirin Tor and eventually succeeded in establishing Quel'Thalas.|r").append(14,5,10).append(18,5,10).append(19,0.03,0.05).append(68,0,0).append(83,2,4);
                 thistype.create(ITID_VOODOO_VIALS,"|cffff8c00Voodoo Vials|r","|cffffdeadZanzil *makes* friends by these small vials.|r").append(14,5,10).append(20,0.03,0.05).append(19,0.03,0.05).append(88,12,20).append(32,15,30);
-                thistype.create(ITID_MOONLIGHT_GREATSWORD,"|cffff8c00Moonlight Greatsword|r","|cffffdeadLudwig the Holy Blade.|r").append(4,5,10).append(21,75,150).append(57,10,20).append(43,0.02,0.04).append(75,30,60).append(49,100,250);
+                thistype.create(ITID_MOONLIGHT_GREATSWORD,"|cffff8c00Moonlight Greatsword|r","|cffffdeadLudwig the Holy Blade.|r").append(4,5,10).append(57,10,20).append(43,0.02,0.04).append(75,30,60).append(49,100,250);
                 thistype.create(ITID_DETERMINATION_OF_VENGEANCE,"|cffffcc00Determination of Vengeance|r","|cffffdeadThe determination to revenge Mal'Ganis is unshakeable.|r").append(17,100,200).append(21,100,200).append(1,0.01,0.02).append(97,0,0);
                 thistype.create(ITID_STRATHOLME_TRAGEDY,"|cffffcc00Stratholme Tragedy|r","|cffffdeadIn disregard of Jaina's advice, Stratholme became a hell on earth in merely one night.|r").append(9,5,10).append(24,11,17).append(67,0.05,0.09).append(97,0,0);
                 thistype.create(ITID_PATRICIDE,"|cffffcc00Patricide|r","|cffffdeadOne last step!|r").append(9,5,10).append(52,26,48).append(55,0.05,0.1).append(12,3,5).append(97,0,0);
@@ -549,6 +555,8 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
             thistype.put(SUFIX_STRONGHOLD, 1, 2, IATTR_DEF, 2, 5, " of Stronghold");
             thistype.put(SUFIX_DEEP_SEA, 1, 2, IATTR_MREG, 2, 3, " of Deep Sea");
             thistype.put(SUFIX_VOID, 1, 2, IATTR_SP, 10, 20, " of Void");
+            thistype.put(SUFIX_VAMPIRE, 1, 2, IATTR_ATK_LL, 0.01, 0.02, " of Vampire");
+            thistype.put(SUFIX_SUCCUBUS, 1, 2, IATTR_ATK_ML, 0.01, 0.02, " of Succubus");
             thistype.put(PREFIX_HEAVY, 1, 1, IATTR_STR, 4, 7, "Heavy ");
             thistype.put(PREFIX_STRONG, 2, 1, IATTR_STR, 8, 15, "Strong ");
             thistype.put(PREFIX_SHARP, 1, 1, IATTR_AGI, 4, 7, "Sharp ");
@@ -565,6 +573,8 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
             thistype.put(PREFIX_ETERNAL, 2, 1, IATTR_MREG, 2, 3, "Eternal ");
             thistype.put(PREFIX_STEADY, 1, 1, IATTR_DEF, 1, 2, "Steady ");
             thistype.put(PREFIX_TOUGH, 2, 1, IATTR_DEF, 3, 5, "Tough ");
+            thistype.put(PREFIX_HEALTHY, 1, 1, IATTR_HREG, 2, 4, "Healthy ");
+            thistype.put(PREFIX_EVERLASTING, 2, 1, IATTR_HREG, 4, 8, "Everlasting ");
         }
     }
 
@@ -819,7 +829,9 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
         static method callbackUSE_VOODOO(unit u, real val, integer polar) {
             EquipedVoodooVials(u, polar);
         }
-        static method callbackUSE_INT(unit u, real val, integer polar) {}
+        static method callbackUSE_INT(unit u, real val, integer polar) {
+            EquipedUnglazedCrescent(u, polar);
+        }
         static method callbackUSE_SP(unit u, real val, integer polar) {}
         static method callbackUSE_DODGE(unit u, real val, integer polar) {}
         static method callbackUSE_MS(unit u, real val, integer polar) {}
@@ -897,7 +909,7 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
             thistype.put(IATTR_ATK_POISNOVA,2,407,0.7,"|cff33ff33On Attack: 15% chance to cast poison nova, dealing "," magical damage over time to all enemies within 600 yards|r",thistype.callbackATK_POISNOVA);
             thistype.put(IATTR_ATK_COIL,2,408,0.7,"|cff33ff33On Attack: 15% chance to cast Death Coil","|r",thistype.callbackATK_COIL);
             thistype.put(IATTR_ATK_BLEED,2,409,0.7,"|cff33ff33On Attack: 20% chance to deal "," bleed damage|r",thistype.callbackATK_BLEED);
-            thistype.put(IATTR_ATK_MDC,2,410,0.7,"|cff33ff33On Attack: 25% chance to deal "," magical damage to target|r",thistype.callbackATK_MDC);
+            thistype.put(IATTR_ATK_MDC,2,410,0.7,"|cff33ff33On Attack: 25% chance to deal "," physical damage|r",thistype.callbackATK_MDC);
             thistype.put(IATTR_ATK_STUN,2,411,0.2,"|cff33ff33On Attack: 10% chance to stun target for "," seconds|r",thistype.callbackATK_STUN);
             thistype.put(IATTR_ATK_CRIT,2,412,0.16,"|cff33ff33On Attack: "," chance to increase 100% attack critical chance|r",thistype.callbackATK_CRIT);
             thistype.put(IATTR_ATK_AMP,2,413,0.1,"|cff33ff33On Attack: Target takes "," extra damage|r",thistype.callbackATK_AMP);
@@ -911,6 +923,7 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
             thistype.put(IATTR_MD_MREGEN,2,450,0.5,"|cff33ff33Dealing Magical Damage or Healing: 1% chance to regen "," MP|r",thistype.callbackMD_MREGEN);
             thistype.put(IATTR_MD_POISON,2,451,0.7,"|cff33ff33Dealing Magical Damage: 10% chance to poison target, dealing "," magical damage over time|r",thistype.callbackMD_POISON);
             thistype.put(IATTR_MD_CHAIN,2,452,0.7,"|cff33ff33Dealing Magical Damage: 10% chance to cast Chain Lightning to target, dealing "," magical damage|r",thistype.callbackMD_CHAIN);
+            thistype.put(IATTR_USE_INT,2,453,0.3,"|cff33ff33Dealing Magical Damage: 15% chance to increase intelligence by ",", lasts for 15 seconds|r",thistype.callbackUSE_INT);
             thistype.put(IATTR_MDC_ARCANE,2,460,0.5,"|cff33ff33Magical Damage Critical: Charges with arcane power. All arcane power will be released automatically after 3 stacks, dealing "," magical damage to target|r",thistype.callbackMDC_ARCANE);
             thistype.put(IATTR_HEAL_HOLY,2,501,0.33,"|cff33ff33On Healed: Charges 1 holy power, stacks up to "," points|r",thistype.callbackHEAL_HOLY);
             thistype.put(IATTR_ATKED_WEAK,2,600,0.33,"|cff33ff33On Attacked: Decreases attacker's attack power by ","|r",thistype.callbackATKED_WEAK);
@@ -922,7 +935,6 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
             thistype.put(IATTR_USE_MREGEN,2,902,0.4,"|cff33ff33Use: Regens "," MP|r",thistype.callbackUSE_MREGEN);
             thistype.put(IATTR_USE_HREGEN,2,903,0.4,"|cff33ff33Use: Regens "," HP|r",thistype.callbackUSE_HREGEN);
             thistype.put(IATTR_USE_VOODOO,2,904,0.2,"|cff33ff33Use: Deals "," magical damage to all enemies within range over time|r",thistype.callbackUSE_VOODOO);
-            thistype.put(IATTR_USE_INT,2,905,0.3,"|cff33ff33Use: Increase intelligence by ",", lasts for 20 seconds|r",thistype.callbackUSE_INT);
             thistype.put(IATTR_USE_SP,2,906,0.3,"|cff33ff33Use: Increase spell power by ",", lasts for 15 seconds|r",thistype.callbackUSE_SP);
             thistype.put(IATTR_USE_DODGE,2,907,0.1,"|cff33ff33Use: Increase dodge chance by 30%, lasts for "," seconds|r",thistype.callbackUSE_DODGE);
             thistype.put(IATTR_USE_MS,2,908,0.1,"|cff33ff33Use: Increase movement speed by 300, lasts for "," seconds. Possible failures.|r",thistype.callbackUSE_MS);
@@ -1105,6 +1117,7 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
         ipPrefix1.add(PREFIX_ENCHANTED, 10);
         ipPrefix1.add(PREFIX_MYSTERIOUS, 10);
         ipPrefix1.add(PREFIX_STEADY, 10);
+        ipPrefix1.add(PREFIX_HEALTHY, 10);
 
         ipPrefix2.add(PREFIX_STRONG, 10);
         ipPrefix2.add(PREFIX_AGILE, 10);
@@ -1114,6 +1127,7 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
         ipPrefix2.add(PREFIX_SORCEROUS, 10);
         ipPrefix2.add(PREFIX_ETERNAL, 10);
         ipPrefix2.add(PREFIX_TOUGH, 10);
+        ipPrefix2.add(PREFIX_EVERLASTING, 10);
 
         ipSufix.add(SUFIX_LETHALITY, 10);
         ipSufix.add(SUFIX_SNAKE, 10);
@@ -1135,6 +1149,8 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
         ipSufix.add(SUFIX_STRONGHOLD, 10);
         ipSufix.add(SUFIX_DEEP_SEA, 10);
         ipSufix.add(SUFIX_VOID, 10);
+        ipSufix.add(SUFIX_VAMPIRE, 10);
+        ipSufix.add(SUFIX_SUCCUBUS, 10);
     }
 
 }

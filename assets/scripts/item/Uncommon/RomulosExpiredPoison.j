@@ -3,7 +3,7 @@ library RomulosExpiredPoison requires DamageSystem {
     HandleTable ht;
 
     function extraDamageEffect(DelayTask dt) {
-        DamageTarget(dt.u0, dt.u1, dt.r0, SpellData.inst(SID_ROMULOS_EXPIRED_POISION, SCOPE_PREFIX + "damaged").name, false, false, false, WEAPON_TYPE_WHOKNOWS, false);
+        DamageTarget(dt.u0, dt.u1, dt.r0, SpellData.inst(SID_ROMULOS_EXPIRED_POISION, SCOPE_PREFIX + "damaged").name, true, true, false, WEAPON_TYPE_WHOKNOWS, false);
         AddTimedEffect.atUnit(ART_POISON, DamageResult.target, "origin", 0.5);
     }
 
@@ -16,7 +16,7 @@ library RomulosExpiredPoison requires DamageSystem {
                 if (GetRandomInt(0, 99) < 25) {
                     up = UnitProp.inst(DamageResult.source, SCOPE_PREFIX);
                     amt = ItemExAttributes.getUnitAttrVal(DamageResult.source, IATTR_ATK_MDC, SCOPE_PREFIX);
-                    amt += up.AttackPower() * 0.1 + up.SpellPower() * 0.1;
+                    amt += up.AttackPower() * 0.5;
                     dt = DelayTask.create(extraDamageEffect, 0.03);
                     dt.u0 = DamageResult.source;
                     dt.u1 = DamageResult.target;

@@ -329,7 +329,7 @@ library Command requires Console, Assertion, StunUtils, UnitProperty, BuffSystem
 
     function testItemAttributes(string str) {
         real rnd = GetRandomReal(150000, 220000);
-        CreateItemEx(ITID_BREATH_OF_THE_DYING, INIT_X, INIT_Y, rnd);
+        CreateItemEx(ITID_DYING_BREATH, INIT_X, INIT_Y, rnd);
     }
 
     function getunitlevel(string str) {

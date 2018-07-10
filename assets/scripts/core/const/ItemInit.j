@@ -10,7 +10,7 @@ library ItemInit requires ItemAttributes {
         CreateItemEx(ITID_PATRICIDE, -571, 11905, 0);
         CreateItemEx(ITID_FROSTMOURNE, -6389, 368, 0);
         CreateItemEx(ITID_ENIGMA, -4215, 3903, 0);
-        CreateItemEx(ITID_BREATH_OF_THE_DYING, -130, 1150, 0);
+        CreateItemEx(ITID_DYING_BREATH, -130, 1150, 0);
     }
 
     function onInit() {
