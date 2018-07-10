@@ -33,12 +33,7 @@ library FloatingNumbers requires TimerUtils {
             if (this.c < shrinkPoint) {
                 size = this.maxSize - this.sizeReduce * (this.c + 1);
                 SetTextTagText(this.tt, this.text, FONT_SIZE * size);
-            } else {
-                this.cx += this.dx;
-                this.cy += this.dy;
-                SetTextTagPos(this.tt, this.cx, this.cy, DEFAULT_HEIGHT);
             }
-
             this.c += 1;
             if (this.c > lifeSpan) {
                 this.destroy();
@@ -67,6 +62,7 @@ library FloatingNumbers requires TimerUtils {
             this.dy = Sin(angle) * speed;
             SetTextTagText(this.tt, this.text, FONT_SIZE * maxSize);
             SetTextTagPos(this.tt, this.cx, this.cy, DEFAULT_HEIGHT);
+            SetTextTagVelocity(this.tt, this.dx * 0.01, this.dy * 0.01);
             SetTextTagVisibility(this.tt, true);
             SetTextTagFadepoint(this.tt, fadePoint * 0.04);
             SetTextTagLifespan(this.tt, lifeSpan * 0.04);

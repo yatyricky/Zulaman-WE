@@ -107,7 +107,7 @@ library DamageSystem requires ZAMCore, UnitProperty, BuffSystem, FloatingNumbers
                 responseHealedCallList[i].evaluate();
                 i += 1;
             }
-            FloatingNumbers.create(display, COLOR_HEAL, GetUnitX(b), GetUnitY(b), 1.3, false);
+            FloatingNumbers.create(display, COLOR_HEAL, GetUnitX(b), GetUnitY(b), 1.5, false);
         }
     }
     
@@ -220,16 +220,16 @@ public boolean lifelock = false;
             if (DamageResult.isCritical == true) {
                 color = COLOR_DAMAGE_CRITICAL;
                 isTop = true;
-                displaySize = 2.2;
+                displaySize = 2.6;
             } else {
                 color = COLOR_DAMAGE_MOB;
                 isTop = true;
-                displaySize = 1.3;
+                displaySize = 1.5;
             }
         } else if (GetLocalPlayer() == GetOwningPlayer(b)) {
             color = COLOR_DAMAGE_PLAYER;
             isTop = false;
-            displaySize = 1.3;
+            displaySize = 1.5;
         } else {
             display = NULL_STR;
             color = COLOR_DAMAGE_MOB;
