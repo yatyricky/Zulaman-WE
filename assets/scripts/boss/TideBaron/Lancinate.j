@@ -2,7 +2,7 @@
 library Lancinate requires BuffSystem, SpellEvent, UnitProperty, DamageSystem, TideBaronGlobal {
 constant integer BUFF_ID = 'A050';
     function onEffect(Buff buf) {
-        real amt = 225.0 + GetRandomReal(0.0, 50.0);
+        real amt = 250;
         if (GetUnitAbilityLevel(buf.bd.target, BUFF_ID_ALKALINE_WATER) > 0) {
             amt *= 3.0;
         }

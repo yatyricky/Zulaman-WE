@@ -1060,6 +1060,8 @@ public constant string ART_Phoenix_Missile_mini = "Abilities\\Weapons\\PhoenixMi
 public constant string ART_CrushingWaveDamage = "Abilities\\Spells\\Other\\CrushingWave\\CrushingWaveDamage.mdl";
 public constant string ART_CIRCLE = "UI\\Feedback\\TargetPreSelected\\TargetPreSelected.mdl";
 public constant string ART_SWIRL_RED = "UI\\Feedback\\SelectionCircleEnemy\\SelectionCircleEnemy.mdl";
+public constant string ART_SeaElementalMissile = "Abilities\\Weapons\\SeaElementalMissile\\SeaElementalMissile.mdl";
+public constant string ART_SteamBubble = "Doodads\\Icecrown\\Water\\BubbleGeyserSteam\\BubbleGeyserSteam.mdl";
 
 public constant string BTNVolcano = "ReplaceableTextures\\CommandButtons\\BTNVolcano.blp";
 public constant string BTNEarthquake = "ReplaceableTextures\\CommandButtons\\BTNEarthquake.blp";

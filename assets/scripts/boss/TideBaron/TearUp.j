@@ -2,9 +2,9 @@
 library TearUp requires BuffSystem, SpellEvent, UnitProperty, DamageSystem, TideBaronGlobal {
 constant integer BUFF_ID = 'A04Z';
     function onEffect(Buff buf) {
-        real amt = 180.0 + GetRandomReal(0.0, 40.0);
+        real amt = 400;
         if (GetUnitAbilityLevel(buf.bd.target, BUFF_ID_ALKALINE_WATER) > 0) {
-            amt += amt;
+            amt *= 3;
         }
         DamageTarget(buf.bd.caster, buf.bd.target, amt, SpellData.inst(SID_TEAR_UP, SCOPE_PREFIX).name, true, false, false, WEAPON_TYPE_WHOKNOWS, false);
         AddTimedEffect.atUnit(ART_BLEED, buf.bd.target, "origin", 0.2);

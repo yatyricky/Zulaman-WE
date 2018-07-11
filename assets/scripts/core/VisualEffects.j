@@ -100,7 +100,7 @@ library VisualEffects requires List {
             return this;
         }
 
-        static method circle(string model, real x, real y, real r, integer num, integer interval) {
+        static method circle(string model, real x, real y, real r, integer num, real interval) {
             thistype this = thistype.allocate();
             integer i = 0;
             real rad = bj_PI * 2.0 / num;
@@ -115,6 +115,36 @@ library VisualEffects requires List {
             }
             SetTimerData(this.tm, this);
             TimerStart(this.tm, interval, false, function thistype.destroySimple);
+        }
+
+        static method line(string model, real x1, real y1, real x2, real y2, real step, real et) {
+            thistype this = thistype.allocate();
+            integer i;
+            real dx, dy;
+            real num = Rounding(GetDistance.coords2d(x1, y1, x2, y2) / step + 1);
+            if (num < 2) {num = 2;}
+            dx = (x2 - x1) / (num - 1);
+            dy = (y2 - y1) / (num - 1);
+            this.list = ListObject.create();
+            i = 0;
+            while (i < num) {
+                this.list.push(Eff2Int(AddSpecialEffect(model, x1 + i * dx, y1 + i * dy)));
+                i += 1;
+            }
+            this.tm = NewTimer();
+            SetTimerData(this.tm, this);
+            TimerStart(this.tm, et, false, function() {
+                thistype this = GetTimerData(GetExpiredTimer());
+                NodeObject iter = this.list.head;
+                while (iter != 0) {
+                    DestroyEffect(Int2Eff(iter.data));
+                    iter = iter.next;
+                }
+                this.list.destroy();
+                ReleaseTimer(this.tm);
+                this.tm = null;
+                this.deallocate();
+            });
         }
 
     }

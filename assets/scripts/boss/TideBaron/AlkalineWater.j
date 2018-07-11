@@ -22,7 +22,7 @@ library AlkalineWater requires CastingBar, UnitProperty, PlayerUnitList, DamageS
     }
     
     function onChannel() {
-        CastingBar.create(response).launch();
+        CastingBar.create(response).setVisuals(ART_SeaElementalMissile).launch();
         AddTimedEffect.followUnit(ART_CIRCLE, SpellEvent.TargetUnit, 3).setColor(255, 0, 0).setScale(4);
     }
 

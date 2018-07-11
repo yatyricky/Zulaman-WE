@@ -41,7 +41,7 @@ library Tide requires BuffSystem, SpellEvent, UnitProperty, DamageSystem, GroupU
                 
                 while (i < PlayerUnits.n) {
                     if (GetDistance.units2d(PlayerUnits.units[i], this.a) < 200 && !IsUnitDead(PlayerUnits.units[i]) && !IsUnitInGroup(PlayerUnits.units[i], this.damaged)) {
-                        DamageTarget(this.a, PlayerUnits.units[i], 180.0 + GetRandomReal(0.0, 40.0), SpellData.inst(SID_TIDE, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS, false);
+                        DamageTarget(this.a, PlayerUnits.units[i], 700, SpellData.inst(SID_TIDE, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS, false);
                         GroupAddUnit(this.damaged, PlayerUnits.units[i]);
                     }
                     i += 1;
@@ -73,12 +73,32 @@ library Tide requires BuffSystem, SpellEvent, UnitProperty, DamageSystem, GroupU
         }
     }
 
-    function onCast() {
-        Tide.start(SpellEvent.CastingUnit, SpellEvent.TargetUnit);
+    function delayedCast(DelayTask dt) {
+        Tide.start(dt.u0, dt.u1);
+    }
+
+    function response(CastingBar cd) {
+        DelayTask dt = DelayTask.create(delayedCast, 0.03);
+        dt.u0 = cd.caster;
+        dt.u1 = cd.target;
+    }
+
+    function onChannel() {
+        real angle;
+        real x1, y1, x2, y2;
+        CastingBar.create(response).setVisuals(ART_SeaElementalMissile).launch();
+        x1 = GetUnitX(SpellEvent.CastingUnit);
+        y1 = GetUnitY(SpellEvent.CastingUnit);
+        x2 = GetUnitX(SpellEvent.TargetUnit);
+        y2 = GetUnitY(SpellEvent.TargetUnit);
+        angle = GetAngle(x1, y1, x2, y2);
+        x2 = Cos(angle) * 940 + x1;
+        y2 = Sin(angle) * 940 + y1;
+        VisualEffects.line(ART_GlowingRunes4, x1, y1, x2, y2, 128, 2);
     }
 
     function onInit() {
-        RegisterSpellEffectResponse(SID_TIDE, onCast);
+        RegisterSpellChannelResponse(SID_TIDE, onChannel);
     }
 }
 //! endzinc
