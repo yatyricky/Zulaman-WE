@@ -386,9 +386,9 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
                 thistype.create(ITID_MOROES_LUCKY_GEAR,"|cff11ff11Moroes' Lucky Gear|r","|cff999999Disassembled from Moroes' Lucky Pocket Watch.|r").append(35,8,12);
                 thistype.create(ITID_RUNED_BELT,"|cff11ff11Runed Belt|r","|cff999999A bracelet belongs to an ogre.|r").append(2,0.03,0.05);
                 thistype.create(ITID_UNGLAZED_ICON_OF_THE_CRESCENT,"|cff11ff11Unglazed Icon of the Crescent|r","|cff999999It can be seen vaguely that this icon was once beautiful silver.|r").append(33,15,45);
-                thistype.create(ITID_MAUL,"|cff8b66ffMaul|r","").append(4,10,20).append(21,75,150);
-                thistype.create(ITID_CLOAK,"|cff8b66ffCloak|r","").append(13,10,20).append(21,75,150);
-                thistype.create(ITID_SCEPTER,"|cff8b66ffScepter|r","").append(14,10,20).append(21,75,150);
+                thistype.create(ITID_MAUL_OF_WARLORD,"|cff8b66ffMaul of Warlord|r","").append(4,10,20).append(21,75,150);
+                thistype.create(ITID_CLOAK_OF_STEALTH,"|cff8b66ffCloak of Stealth|r","").append(13,10,20).append(21,75,150);
+                thistype.create(ITID_SCEPTER_OF_ARCHON,"|cff8b66ffScepter of Archon|r","").append(14,10,20).append(21,75,150);
                 thistype.create(ITID_COLOSSUS_BLADE,"|cff11ff11Colossus Blade|r","|cff999999A rough sword, the workmanship is not very good. But it's the most popular production weapons in Harrogath.|r").append(9,8,15).append(12,4,8);
                 thistype.create(ITID_THE_X_RING,"|cff8b66ffThe X Ring|r","|cffffdeadAll the former 20 are trash!|r").append(7,12,21);
                 thistype.create(ITID_GOBLIN_ROCKET_BOOTS_LIMITED_EDITION,"|cff8b66ffGoblin Rocket Boots Limited Edition|r","|cffffdeadLimited edition, but it's a goblin product after all. So use it with caution.|r").append(21,100,200).append(17,100,200).append(24,13,25).append(36,8,12);

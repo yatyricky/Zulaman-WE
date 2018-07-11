@@ -694,9 +694,9 @@ public constant integer ITID_RUNED_BELT = 'brac';
 public constant integer ITID_UNGLAZED_ICON_OF_THE_CRESCENT = 'I01K';
 public constant integer BID_ICON_OF_THE_UNGLAZED_CRESCENT = 'A06F';
 // origin rare gear
-public constant integer ITID_MAUL = 'I02G';
-public constant integer ITID_CLOAK = 'I02H';
-public constant integer ITID_SCEPTER = 'I02J';
+public constant integer ITID_MAUL_OF_WARLORD = 'I02G';
+public constant integer ITID_CLOAK_OF_STEALTH = 'I02H';
+public constant integer ITID_SCEPTER_OF_ARCHON = 'I02J';
 public constant integer ITID_EAGLE_GOD_GAUNTLETS = 'I02K';
 public constant integer ITID_MOONSTONE = 'I02L';
 public constant integer ITID_SHADOW_ORB = 'I02M';

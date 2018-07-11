@@ -160,9 +160,9 @@ public constant real    ILVL_MAX_RATE = 0.6;
         relic.add(ITID_MOONLIGHT_GREATSWORD, 10);
         relic.add(ITID_ZULS_STAFF, 8);
 
-        rare.add(ITID_MAUL, 30);
-        rare.add(ITID_CLOAK, 30);
-        rare.add(ITID_SCEPTER, 30);
+        rare.add(ITID_MAUL_OF_WARLORD, 30);
+        rare.add(ITID_CLOAK_OF_STEALTH, 30);
+        rare.add(ITID_SCEPTER_OF_ARCHON, 30);
         rare.add(ITID_EAGLE_GOD_GAUNTLETS, 20);
         rare.add(ITID_MOONSTONE, 28);
         rare.add(ITID_SHADOW_ORB, 24);
@@ -223,9 +223,9 @@ public constant real    ILVL_MAX_RATE = 0.6;
         uncommon.add(ITID_RUNED_BELT, 8);
         uncommon.add(ITID_UNGLAZED_ICON_OF_THE_CRESCENT, 15);
 
-        boss1.add(ITID_MAUL, 10);
-        boss1.add(ITID_CLOAK, 10);
-        boss1.add(ITID_SCEPTER, 10);
+        boss1.add(ITID_MAUL_OF_WARLORD, 10);
+        boss1.add(ITID_CLOAK_OF_STEALTH, 10);
+        boss1.add(ITID_SCEPTER_OF_ARCHON, 10);
         boss1.add(ITID_COLOSSUS_BLADE, 10);
         boss1.add(ITID_THE_X_RING, 5);
         boss1.add(ITID_GOBLIN_ROCKET_BOOTS_LIMITED_EDITION, 15);
@@ -234,7 +234,7 @@ public constant real    ILVL_MAX_RATE = 0.6;
         boss1.add(ITID_STAFF_OF_THE_SHADOW_FLAME, 10);
         boss1.add(ITID_EAGLE_GOD_GAUNTLETS, 10);
 
-        boss2.add(ITID_CLOAK, 10);
+        boss2.add(ITID_CLOAK_OF_STEALTH, 10);
         boss2.add(ITID_TROLL_BANE, 10);
         boss2.add(ITID_LION_HORN, 15);
         boss2.add(ITID_ARMOR_OF_THE_DAMNED, 5);
@@ -243,7 +243,7 @@ public constant real    ILVL_MAX_RATE = 0.6;
         boss2.add(ITID_TIDAL_LOOP, 10);
         boss2.add(ITID_MOONSTONE, 10);
 
-        boss3.add(ITID_MAUL, 10);
+        boss3.add(ITID_MAUL_OF_WARLORD, 10);
         boss3.add(ITID_GOBLIN_ROCKET_BOOTS_LIMITED_EDITION, 10);
         boss3.add(ITID_CORE_HOUND_TOOTH, 10);
         boss3.add(ITID_VISKAG, 10);
@@ -253,7 +253,7 @@ public constant real    ILVL_MAX_RATE = 0.6;
         boss3.add(ITID_EAGLE_GOD_GAUNTLETS, 10);
         boss3.add(ITID_MOONSTONE, 10);
 
-        boss4.add(ITID_SCEPTER, 15);
+        boss4.add(ITID_SCEPTER_OF_ARCHON, 15);
         boss4.add(ITID_ARANS_SOOTHING_EMERALD, 5);
         boss4.add(ITID_PURE_ARCANE, 15);
         boss4.add(ITID_HEX_SHRUNKEN_HEAD, 10);
@@ -261,7 +261,7 @@ public constant real    ILVL_MAX_RATE = 0.6;
         boss4.add(ITID_SHADOW_ORB, 25);
         boss4.add(ITID_SHINING_JEWEL_OF_TANARIS, 15);
 
-        boss5.add(ITID_MAUL, 5);
+        boss5.add(ITID_MAUL_OF_WARLORD, 5);
         boss5.add(ITID_COLOSSUS_BLADE, 10);
         boss5.add(ITID_WARSONG_BATTLE_DRUMS, 15);
         boss5.add(ITID_TROLL_BANE, 10);
@@ -272,7 +272,7 @@ public constant real    ILVL_MAX_RATE = 0.6;
         boss5.add(ITID_BULWARK_OF_THE_AMANI_EMPIRE, 15);
         boss5.add(ITID_SIGNET_OF_THE_LAST_DEFENDER, 5);
 
-        boss6.add(ITID_CLOAK, 8);
+        boss6.add(ITID_CLOAK_OF_STEALTH, 8);
         boss6.add(ITID_COLOSSUS_BLADE, 8);
         boss6.add(ITID_THE_X_RING, 15);
         boss6.add(ITID_WARSONG_BATTLE_DRUMS, 10);
@@ -283,8 +283,8 @@ public constant real    ILVL_MAX_RATE = 0.6;
         boss6.add(ITID_SIGNET_OF_THE_LAST_DEFENDER, 10);
         boss6.add(ITID_HEX_SHRUNKEN_HEAD, 7);
 
-        boss7.add(ITID_MAUL, 3);
-        boss7.add(ITID_SCEPTER, 3);
+        boss7.add(ITID_MAUL_OF_WARLORD, 3);
+        boss7.add(ITID_SCEPTER_OF_ARCHON, 3);
         boss7.add(ITID_THE_X_RING, 8);
         boss7.add(ITID_GOBLIN_ROCKET_BOOTS_LIMITED_EDITION, 3);
         boss7.add(ITID_WARSONG_BATTLE_DRUMS, 3);
