@@ -594,6 +594,7 @@ public constant integer ITID_FORTRESS_POTION = 'I00V';
 public constant integer SID_FORTRESS_POTION = 'A08Q';
 public constant integer ITID_INVUL_POTION = 'pnvu';
 public constant integer SID_INVUL_POTION = 'A08T';
+public constant integer BID_INVUL_POTION = 'A085';
 public constant integer ITID_UNSTABLE_POTION = 'I010';
 public constant integer SID_UNSTABLE_POTION = 'A090';
 
