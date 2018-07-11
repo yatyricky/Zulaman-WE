@@ -53,19 +53,22 @@ library ArthassCorruption requires DamageDeathCoil {
             } else {
                 this.pieces = pieces;
                 if (this.pieces == 4) {
-                    this.equipAttributes(true);
                     if (this.hasUnholyAura == false) {
                         EquipedUnholyAura(this.u, 1);
                         this.hasUnholyAura = true;
                     }
                 } else {
-                    this.equipAttributes(false);
                     if (this.hasUnholyAura == true) {
                         EquipedUnholyAura(this.u, -1);
                         this.hasUnholyAura = false;
                     }
                 }
                 if (this.pieces >= 3) {
+                    this.equipAttributes(true);
+                } else {
+                    this.equipAttributes(false);
+                }
+                if (this.pieces >= 2) {
                     if (this.hasDeathCoil == false) {
                         EquipedDamageDeathCoil(this.u, 1);
                         this.hasDeathCoil = true;
@@ -131,21 +134,24 @@ library ArthassCorruption requires DamageDeathCoil {
         //     setInfo += COLOR_CFF + COLOR_ITEM_SET_ACQUIRED;
         // }
         // setInfo += "FrostMourne" + COLOR_R + "|n";
+        if (list.count() >= 2) {
+            setInfo += COLOR_CFF + COLOR_ITEM_SET_NAME;
+        } else {
+            setInfo += COLOR_CFF + COLOR_ITEM_SET_MISSING;
+        }
+        setInfo += "(2 Set) On Attack: 15% chance to cast Death Coil|r|n";
         if (list.count() >= 3) {
             setInfo += COLOR_CFF + COLOR_ITEM_SET_NAME;
         } else {
             setInfo += COLOR_CFF + COLOR_ITEM_SET_MISSING;
         }
-        setInfo += "(3) Set:|n";
-        setInfo += "On Attack: 15% chance to cast Death Coil|r|n";
+        setInfo += "(3 Set) +20 All stats|r|n";
         if (list.count() >= 4) {
             setInfo += COLOR_CFF + COLOR_ITEM_SET_NAME;
         } else {
             setInfo += COLOR_CFF + COLOR_ITEM_SET_MISSING;
         }
-        setInfo += "(4) Set:|n";
-        setInfo += "+20 All stats|n";
-        setInfo += "Grant Aura of Unholy: All allies within 600 yards regen 20 HP per second|r";
+        setInfo += "(4 Set) Grant Aura of Unholy: All allies within 600 yards regen 20 HP per second|r";
         ii = 0;
         while (ii < 6) {
             ti = UnitItemInSlot(dt.u0, ii);

@@ -27,7 +27,7 @@ function parseSheet(sheet) {
                     color = "ff8c00";
                     break;
                 case -4:
-                    color = "ffcc00";
+                    color = "ff8c00";
                     break;
                 default:
                     color = "[BAD NAME COLOR]";

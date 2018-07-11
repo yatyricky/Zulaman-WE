@@ -24,7 +24,7 @@ library VoodooVial requires DamageSystem {
             integer current;
             while (ii < 6) {
                 ti = UnitItemInSlot(this.u, ii);
-                if (ti != null && GetItemTypeId(ti) == ITID_VOODOO_VIALS) {
+                if (ti != null && GetItemTypeId(ti) == ITID_GURUBASHI_VOODOO_VIALS) {
                     current = GetItemCharges(ti);
                     if (current < 5) {
                         SetItemCharges(ti, current + 1);

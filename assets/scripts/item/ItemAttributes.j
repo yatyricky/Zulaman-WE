@@ -1,5 +1,5 @@
 //! zinc
-library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce, Infinity, ConvertAttackMagic, MagicPoison, VoodooVial, RomulosExpiredPoison, Drum, MoonlightExplosion, NonHeroExtraDamage, AttackChanceICC, AttackBleed, AttackStun, LethalMagicalDamage, ArthassCorruption, IconOfTheUnglazedCrescent {
+library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce, Infinity, ConvertAttackMagic, MagicPoison, VoodooVial, RomulosExpiredPoison, Drum, MoonlightExplosion, NonHeroExtraDamage, AttackChanceICC, AttackBleed, AttackStun, LethalMagicalDamage, ArthassCorruption, IconOfTheUnglazedCrescent, ArcanePotion {
     public constant real AFFIX_FACTOR_BASE = 15000;
     public constant real AFFIX_FACTOR_DELTA = 2500;
     public constant real SUFIX_MULTIPLIER = 4;
@@ -399,7 +399,9 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
                 thistype.create(ITID_VISKAG,"|cff8b66ffVis'kag|r","|cffffdeadThe blood letter.|r").append(13,5,10).append(9,5,10).append(12,3,5);
                 thistype.create(ITID_LION_HORN,"|cff8b66ffLion Horn|r","|cffffdeadMuch better than Dragonspine Trophy.|r").append(9,5,10).append(3,0.01,0.01).append(48,0.05,0.07);
                 thistype.create(ITID_ARMOR_OF_THE_DAMNED,"|cff8b66ffArmor of the Damned|r","|cffffdeadSlow, Curse, Weakness, Misfortune|r").append(8,2,3).append(21,120,240).append(74,4,8).append(41,50,100);
-                thistype.create(ITID_BULWARK_OF_THE_AMANI_EMPIRE,"|cff8b66ffBulwark of the Amani Empire|r","|cff999999It still seems to linger with the resentment of the first guardian warrior of the Brothers Guild.|r").append(8,2,3).append(4,5,10).append(15,14,28);
+                thistype.create(ITID_BULWARK_OF_THE_AMANI_EMPIRE,"|cff8b66ffBulwark of the Amani Empire|r","|cff999999It still seems to linger with the resentment of the first guardian warrior of the Brothers Guild.|r").append(8,2,3).append(4,5,10).append(15,14,28).append(98,0,0);
+                thistype.create(ITID_SHINING_JEWEL_OF_TANARIS,"|cff8b66ffShining Jewel of Tanaris|r","").append(14,5,10).append(73,6,12).append(20,0.03,0.05).append(98,0,0);
+                thistype.create(ITID_DRAKKARI_DECAPITATOR,"|cff8b66ffDrakkari Decapitator|r","").append(21,75,150).append(11,0.03,0.05).append(54,0.35,0.7).append(98,0,0);
                 thistype.create(ITID_SIGNET_OF_THE_LAST_DEFENDER,"|cff8b66ffSignet of the Last Defender|r","|cffffdeadThe signet originally belongs to a demon lord and was later stolen by an orc thief.|r").append(21,100,200).append(27,0.02,0.03).append(6,0.03,0.06);
                 thistype.create(ITID_ARANS_SOOTHING_EMERALD,"|cff8b66ffAran's Soothing Emerald|r","|cffffdeadAran had made all kinds of precious stones into soothing gems. It should be a sapphire that adventurers are most familiar with.|r").append(14,5,10).append(18,5,10).append(72,1,2);
                 thistype.create(ITID_PURE_ARCANE,"|cff8b66ffPure Arcane|r","|cffffdeadMegatorque despises this, he thinks that one simple capacitor can achieve this effect.|r").append(77,170,340);
@@ -429,12 +431,13 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
                 thistype.create(ITID_MIGHT_OF_THE_ANGEL_OF_JUSTICE,"|cffff8c00Might of the Angel of Justice|r","|cffffdeadThe armor used by Tyrael, the Archangel of Wisdom when he was once the incarnation of justice.|r").append(8,2,3).append(1,0.01,0.02).append(2,0.02,0.04).append(24,12,24).append(42,2,5).append(38,25,35);
                 thistype.create(ITID_INFINITY,"|cffff8c00Infinity|r","|cffffdeadInfinity is the essence of the Will o'wisps. The energy of lightning contained in it excites the prophet Drexel. It is said that the soul of the bleak soul with a green cloud-like halo is a nightmare for all adventurers.|r").append(14,5,10).append(21,100,200).append(18,5,10).append(82,0.01,0.02).append(89,60,100);
                 thistype.create(ITID_INSIGHT,"|cffff8c00Insight|r","|cffffdeadIn the fight against the forest trolls, the Blood Elf Rangers used this enchanted orb from Kirin Tor and eventually succeeded in establishing Quel'Thalas.|r").append(14,5,10).append(18,5,10).append(19,0.03,0.05).append(68,0,0).append(83,2,4);
-                thistype.create(ITID_VOODOO_VIALS,"|cffff8c00Voodoo Vials|r","|cffffdeadZanzil *makes* friends by these small vials.|r").append(14,5,10).append(20,0.03,0.05).append(19,0.03,0.05).append(88,12,20).append(32,15,30);
+                thistype.create(ITID_GURUBASHI_VOODOO_VIALS,"|cffff8c00Gurubashi Voodoo Vials|r","|cffffdeadZanzil *makes* friends by these small vials.|r").append(14,5,10).append(19,0.03,0.05).append(88,12,20).append(32,15,30).append(98,0,0);
                 thistype.create(ITID_MOONLIGHT_GREATSWORD,"|cffff8c00Moonlight Greatsword|r","|cffffdeadLudwig the Holy Blade.|r").append(4,5,10).append(57,10,20).append(43,0.02,0.04).append(75,30,60).append(49,100,250);
-                thistype.create(ITID_DETERMINATION_OF_VENGEANCE,"|cffffcc00Determination of Vengeance|r","|cffffdeadThe determination to revenge Mal'Ganis is unshakeable.|r").append(17,100,200).append(21,100,200).append(1,0.01,0.02).append(97,0,0);
-                thistype.create(ITID_STRATHOLME_TRAGEDY,"|cffffcc00Stratholme Tragedy|r","|cffffdeadIn disregard of Jaina's advice, Stratholme became a hell on earth in merely one night.|r").append(9,5,10).append(24,11,17).append(67,0.05,0.09).append(97,0,0);
-                thistype.create(ITID_PATRICIDE,"|cffffcc00Patricide|r","|cffffdeadOne last step!|r").append(9,5,10).append(52,26,48).append(55,0.05,0.1).append(12,3,5).append(97,0,0);
-                thistype.create(ITID_FROSTMOURNE,"|cffffcc00FrostMourne|r","|cffffdeadA gift from the Lich King.|r").append(4,5,10).append(71,7,12).append(43,0.01,0.025).append(58,24,55).append(97,0,0);
+                thistype.create(ITID_ZULS_STAFF,"|cffff8c00Zul's Staff|r","").append(21,100,200).append(14,5,10).append(20,0.03,0.05).append(99,120,270).append(98,0,0);
+                thistype.create(ITID_DETERMINATION_OF_VENGEANCE,"|cffff8c00Determination of Vengeance|r","|cffffdeadThe determination to revenge Mal'Ganis is unshakeable.|r").append(17,100,200).append(21,100,200).append(1,0.01,0.02).append(97,0,0);
+                thistype.create(ITID_STRATHOLME_TRAGEDY,"|cffff8c00Stratholme Tragedy|r","|cffffdeadIn disregard of Jaina's advice, Stratholme became a hell on earth in merely one night.|r").append(9,5,10).append(24,11,17).append(67,0.05,0.09).append(97,0,0);
+                thistype.create(ITID_PATRICIDE,"|cffff8c00Patricide|r","|cffffdeadOne last step!|r").append(9,5,10).append(52,26,48).append(55,0.05,0.1).append(12,3,5).append(97,0,0);
+                thistype.create(ITID_FROSTMOURNE,"|cffff8c00FrostMourne|r","|cffffdeadA gift from the Lich King.|r").append(4,5,10).append(71,7,12).append(43,0.01,0.025).append(58,24,55).append(97,0,0).append(73,20,20).append(21,150,166.66666666666666).append(2,0.05,0.05);
                 //:template.end
             });
         }
@@ -832,6 +835,9 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
         static method callbackUSE_INT(unit u, real val, integer polar) {
             EquipedUnglazedCrescent(u, polar);
         }
+        static method callbackMD_ARCANE(unit u, real val, integer polar) {
+            EquipedArcanePotion(u, polar);
+        }
         static method callbackUSE_SP(unit u, real val, integer polar) {}
         static method callbackUSE_DODGE(unit u, real val, integer polar) {}
         static method callbackUSE_MS(unit u, real val, integer polar) {}
@@ -839,6 +845,9 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
         static method callbackUSE_HOLYHEAL(unit u, real val, integer polar) {}
         static method callbackSET_ARTHAS(unit u, real val, integer polar) {
             EquipedArthassCorruption(u, polar);
+        }
+        static method callbackSET_ZANDALARI(unit u, real val, integer polar) {
+            EquipedRiseOfZandalari(u, polar);
         }
 
         static method onInit() {
@@ -924,6 +933,7 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
             thistype.put(IATTR_MD_POISON,2,451,0.7,"|cff33ff33Dealing Magical Damage: 10% chance to poison target, dealing "," magical damage over time|r",thistype.callbackMD_POISON);
             thistype.put(IATTR_MD_CHAIN,2,452,0.7,"|cff33ff33Dealing Magical Damage: 10% chance to cast Chain Lightning to target, dealing "," magical damage|r",thistype.callbackMD_CHAIN);
             thistype.put(IATTR_USE_INT,2,453,0.3,"|cff33ff33Dealing Magical Damage: 15% chance to increase intelligence by ",", lasts for 15 seconds|r",thistype.callbackUSE_INT);
+            thistype.put(IATTR_MD_ARCANE,2,454,0.7,"|cff33ff33Dealing Magical Damage: 10% chance to cast Arcane Missile, dealing "," magical damage|r",thistype.callbackMD_ARCANE);
             thistype.put(IATTR_MDC_ARCANE,2,460,0.5,"|cff33ff33Magical Damage Critical: Charges with arcane power. All arcane power will be released automatically after 3 stacks, dealing "," magical damage to target|r",thistype.callbackMDC_ARCANE);
             thistype.put(IATTR_HEAL_HOLY,2,501,0.33,"|cff33ff33On Healed: Charges 1 holy power, stacks up to "," points|r",thistype.callbackHEAL_HOLY);
             thistype.put(IATTR_ATKED_WEAK,2,600,0.33,"|cff33ff33On Attacked: Decreases attacker's attack power by ","|r",thistype.callbackATKED_WEAK);
@@ -941,6 +951,7 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
             thistype.put(IATTR_USE_CTHUN,2,909,-0.33,"|cff33ff33Use: Increase attack speed by 100%, take "," extra damage (unique)|r",thistype.callbackUSE_CTHUN);
             thistype.put(IATTR_USE_HOLYHEAL,2,910,0.33,"|cff33ff33Use: Release all holy power to heal yourself, each point heals "," HP|r",thistype.callbackUSE_HOLYHEAL);
             thistype.put(IATTR_SET_ARTHAS,4,2000,0,"Arthas Corruption set","|r",thistype.callbackSET_ARTHAS);
+            thistype.put(IATTR_SET_ZANDALARI,4,2001,0,"Rise of Zandalari set","|r",thistype.callbackSET_ZANDALARI);
             //:template.end
         }
     }
