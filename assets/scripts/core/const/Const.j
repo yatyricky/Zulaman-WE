@@ -1058,6 +1058,8 @@ public constant string ART_VoodooAura = "Abilities\\Spells\\Orc\\Voodoo\\VoodooA
 public constant string ART_PriestMissile = "Abilities\\Weapons\\PriestMissile\\PriestMissile.mdl";
 public constant string ART_Phoenix_Missile_mini = "Abilities\\Weapons\\PhoenixMissile\\Phoenix_Missile_mini.mdl";
 public constant string ART_CrushingWaveDamage = "Abilities\\Spells\\Other\\CrushingWave\\CrushingWaveDamage.mdl";
+public constant string ART_CIRCLE = "UI\\Feedback\\TargetPreSelected\\TargetPreSelected.mdl";
+public constant string ART_SWIRL_RED = "UI\\Feedback\\SelectionCircleEnemy\\SelectionCircleEnemy.mdl";
 
 public constant string BTNVolcano = "ReplaceableTextures\\CommandButtons\\BTNVolcano.blp";
 public constant string BTNEarthquake = "ReplaceableTextures\\CommandButtons\\BTNEarthquake.blp";

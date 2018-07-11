@@ -1,7 +1,5 @@
 //! zinc
 library AlkalineWater requires CastingBar, UnitProperty, PlayerUnitList, DamageSystem, TideBaronGlobal {
-    function onEffect(Buff buf) {}
-    function onRemove(Buff buf) {}
 
     function response(CastingBar cd) {
         integer i = 0;
@@ -13,8 +11,8 @@ library AlkalineWater requires CastingBar, UnitProperty, PlayerUnitList, DamageS
                 buf = Buff.cast(cd.caster, PlayerUnits.units[i], BUFF_ID_ALKALINE_WATER);
                 buf.bd.tick = -1;
                 buf.bd.interval = 60.0;
-                buf.bd.boe = onEffect;
-                buf.bd.bor = onRemove;
+                buf.bd.boe = Buff.noEffect;
+                buf.bd.bor = Buff.noEffect;
                 buf.run();
             }
             i += 1;
@@ -25,6 +23,7 @@ library AlkalineWater requires CastingBar, UnitProperty, PlayerUnitList, DamageS
     
     function onChannel() {
         CastingBar.create(response).launch();
+        AddTimedEffect.followUnit(ART_CIRCLE, SpellEvent.TargetUnit, 3).setColor(255, 0, 0).setScale(4);
     }
 
     function onInit() {

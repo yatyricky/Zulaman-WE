@@ -2,10 +2,28 @@
 library NefUnion requires TimerUtils, Math {
 
     location tmploc = Location(0, 0);
+    
+    public function Rounding(real r) -> integer {
+        integer i;
+        integer tmp = R2I(r);
+        i = R2I(r * 2) - tmp * 2;
+        if (i == 0) {
+            return tmp;
+        } else {
+            return tmp + 1;
+        }
+    }
+
+    public function GetUnitZ(unit u) -> real {
+        MoveLocation(tmploc, GetUnitX(u), GetUnitY(u));
+        return GetLocationZ(tmploc) + GetUnitFlyHeight(u);
+    }
 
     public struct AddTimedEffect {
         private timer t;
         private effect e;
+        private unit target;
+        private integer count;
         
         private static method execute() {
             thistype this = GetTimerData(GetExpiredTimer());
@@ -13,7 +31,17 @@ library NefUnion requires TimerUtils, Math {
             ReleaseTimer(this.t);
             this.t = null;
             this.e = null;
-            this.destroy();
+            this.deallocate();
+        }
+
+        method destroy() {
+            BlzSetSpecialEffectAlpha(this.e, 0);
+            DestroyEffect(this.e);
+            ReleaseTimer(this.t);
+            this.t = null;
+            this.e = null;
+            this.target = null;
+            this.deallocate();
         }
 
         method setRoll(real roll) -> thistype {
@@ -36,12 +64,35 @@ library NefUnion requires TimerUtils, Math {
             return this;
         }
 
+        method setScale(real scale) -> thistype {
+            BlzSetSpecialEffectScale(this.e, scale);
+            return this;
+        }
+
         static method atUnit(string se, unit a, string ap, real et) -> thistype {
             thistype this = thistype.allocate();
             this.t = NewTimer();
             this.e = AddSpecialEffectTarget(se, a, ap);
             SetTimerData(this.t, this);
             TimerStart(this.t, et, false, function thistype.execute);
+            return this;
+        }
+
+        static method followUnit(string se, unit tar, real et) -> thistype {
+            thistype this = thistype.allocate();
+            this.t = NewTimer();
+            this.e = AddSpecialEffect(se, GetUnitX(tar), GetUnitY(tar));
+            this.target = tar;
+            this.count = Rounding(et * 25);
+            SetTimerData(this.t, this);
+            TimerStart(this.t, 0.04, true, function() {
+                thistype this = GetTimerData(GetExpiredTimer());
+                BlzSetSpecialEffectPosition(this.e, GetUnitX(this.target), GetUnitY(this.target), GetUnitZ(this.target));
+                this.count -= 1;
+                if (this.count < 1) {
+                    this.destroy();
+                }
+            });
             return this;
         }
 
@@ -64,13 +115,6 @@ library NefUnion requires TimerUtils, Math {
             TimerStart(this.t, et, false, function thistype.execute);
             return this;
         }
-    }
-
-    public function GetUnitZ(unit u) -> real {
-        location loc = GetUnitLoc(u);
-        real ret = GetLocationZ(loc) + GetUnitFlyHeight(u);
-        RemoveLocation(loc);
-        return ret;
     }
 
     public function GetLocZ(real x, real y) -> real {
@@ -540,17 +584,6 @@ library NefUnion requires TimerUtils, Math {
             return GetUnitName(u);
         }
     }
-    
-    public function Rounding(real r) -> integer {
-        integer i;
-        integer tmp = R2I(r);
-        i = R2I(r * 2) - tmp * 2;
-        if (i == 0) {
-            return tmp;
-        } else {
-            return tmp + 1;
-        }
-    }    
     
     public function SetUnitFlyable(unit a) {
         UnitAddAbility(a, 'Amrf');
