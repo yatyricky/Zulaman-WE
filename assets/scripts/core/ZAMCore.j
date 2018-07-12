@@ -74,10 +74,10 @@ library ZAMCore requires NefUnion {
         return (id == UTID_DARK_RANGER || id == UTID_BLADE_MASTER || id == UTID_FROST_MAGE || id == UTID_EARTH_BINDER || id == UTID_EARTH_BINDER_ASC || id == UTID_ROGUE || id == UTID_HEATHEN);
     }
     
-    /*
-    public function IsUnitDruid(unit u) -> boolean {
-        return GetUnitAbilityLevel(u, 'A00B') > 0;
-    }*/
+    public function IsUnitMelee(unit u) -> boolean {
+        integer id = GetUnitTypeId(u);
+        return (id == UTID_BLOOD_ELF_DEFENDER || id == UTID_CLAW_DRUID || id == UTID_BLADE_MASTER || id == UTID_ROGUE);
+    }
     
     public function DummyFilter() -> boolean {
         return (ModuloInteger(GetUnitPointValue(GetFilterUnit()), 2) != 0);

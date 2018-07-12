@@ -1,7 +1,7 @@
 //! zinc
 library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, FrostNova, WarlockGlobal, Execute, HeroicStrike {
-constant real AIACTION_INTERVAL = 0.33;
-    
+    constant real AIACTION_INTERVAL = 0.33;
+
     Table unitCallBack, unitLearSkill;
     type UnitActionType extends function(unit);
 
@@ -9,24 +9,14 @@ constant real AIACTION_INTERVAL = 0.33;
     boolean flip;
     unit aiu[];
     integer ain;
-    //real positionX[];
-    //real positionY[];
-    //real positionR[];
-    
+
     function ShouldIGiveWay(unit source, unit tar) -> boolean {
         ModelInfo ms = ModelInfo.get(GetUnitTypeId(source), "AllianceAIAction: 16");
-        //ModelInfo mt = ModelInfo[GetUnitTypeId(tar)];
         if (ms.career == CAREER_TYPE_TANK) {
             return false;
         } else {
             return true;
-        }/* else {
-            if (mt.career == CAREER_TYPE_DPS) {
-                return false;
-            } else {
-                return true;
-            }
-        }*/
+        }
     }
 
     function IssueNormalAttackOrder(unit source, unit target) {
@@ -36,7 +26,7 @@ constant real AIACTION_INTERVAL = 0.33;
             IssueTargetOrderById(source, OID_ATTACK, target);
         }
     }
-    
+
     // true: i'm good / false: hang on, i've got business
     function PositioningArchTinker(unit source) -> boolean {
         unit tar;
@@ -226,27 +216,6 @@ constant real AIACTION_INTERVAL = 0.33;
                     return true;
                 }
             }
-            /*else {
-            // separate allies in angular way
-                tar = PlayerUnits.getNearestAngular(source, whichBoss);
-                if (tar != null && GetDistance.units2dAngular(tar, source, whichBoss) <= DBMTideBaron.safeAngle && ShouldIGiveWay(source, tar)) {
-                    //     - don't line up
-                    vm = vector.create(0,0,0);
-                    vo = vector.create(0,0,0);
-                    vc = vector.create(0,0,0);
-                    vm.pointToUnit(source);
-                    vo.pointToUnit(tar);
-                    vc.pointToUnit(whichBoss);
-                    vm.subtract(vc);
-                    vo.subtract(vc);
-                    vo.setLength(vm.getLength());
-                    vm.subtract(vo);
-                    IssuePointOrderById(source, OID_MOVE, GetUnitX(source) + vm.x, GetUnitY(source) + vm.y);
-                    return false;
-                } else {
-
-                }
-            }*/
         }
     }
 
@@ -452,11 +421,15 @@ constant real AIACTION_INTERVAL = 0.33;
     }
 
     function PositioningKeepDistance(unit pc, real tx, real ty, real dist) -> boolean {
-        if (GetDistance.unitCoord2d(pc, tx, ty) <= dist) {
-            IssuePointOrderById(pc, OID_MOVE, GetUnitX(pc) * 2 - tx, GetUnitY(pc) * 2 - ty);
-            return false;
-        } else {
+        if (IsUnitMelee(pc) == true) {
             return true;
+        } else {
+            if (GetDistance.unitCoord2d(pc, tx, ty) <= dist) {
+                IssuePointOrderById(pc, OID_MOVE, GetUnitX(pc) * 2 - tx, GetUnitY(pc) * 2 - ty);
+                return false;
+            } else {
+                return true;
+            }
         }
     }
 
@@ -1036,6 +1009,9 @@ constant real AIACTION_INTERVAL = 0.33;
                 } else if (UnitCanUse(source, SID_ARCANE_SHOCK)) {
                     // shock
                     IssueTargetOrderById(source, SpellData.inst(SID_ARCANE_SHOCK, SCOPE_PREFIX).oid, MobList.units[i]);
+                } else if (UnitCanUse(source, SID_SUN_FIRE_STORM) && GetDistance.units2d(source, MobList.units[i]) <= 300) {
+                    // sunfire
+                    IssueImmediateOrderById(source, SpellData.inst(SID_SUN_FIRE_STORM, SCOPE_PREFIX).oid);
                 } else {
                     // attack
                     IssueNormalAttackOrder(source, MobList.units[i]);
