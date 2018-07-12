@@ -363,6 +363,18 @@ constant integer MAX_PLAYER_UNITS = 50;
             }
             HeroResurrection.start();
         }
+
+        static method findUnitByUTID(integer utid) -> unit {
+            integer i = 0;
+            unit ret = null;
+            while (i < thistype.n && ret == null) {
+                if (GetUnitTypeId(thistype.units[i]) == utid) {
+                    ret = thistype.units[i];
+                }
+                i += 1;
+            }
+            return ret;
+        }
         
         static method remove(integer i) {
             AggroList[thistype.units[i]].destroy();

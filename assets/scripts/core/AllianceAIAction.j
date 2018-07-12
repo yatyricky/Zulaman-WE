@@ -450,11 +450,45 @@ constant real AIACTION_INTERVAL = 0.33;
             return true;
         }
     }
-    
+
+    function PositioningKeepDistance(unit pc, real tx, real ty, real dist) -> boolean {
+        if (GetDistance.unitCoord2d(pc, tx, ty) <= dist) {
+            IssuePointOrderById(pc, OID_MOVE, GetUnitX(pc) * 2 - tx, GetUnitY(pc) * 2 - ty);
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    function PositioningSkeletalMage(unit source) -> boolean {
+        integer i = 0;
+        unit tar = null;
+        while (i < PlayerUnits.n && tar == null) {
+            if (GetUnitAbilityLevel(PlayerUnits.units[i], BID_CURSE_OF_THE_DEAD) > 0) {
+                tar = PlayerUnits.units[i];
+            }
+            i += 1;
+        }
+        if (tar != null) {
+            return PositioningKeepDistance(source, GetUnitX(tar), GetUnitY(tar), 300);
+        } else {
+            return true;
+        }
+    }
+
+    function PositioningDracoLich(unit source) -> boolean {
+        Point p;
+        if (deathAndDecayPoints.head != 0) {
+            p = Point(deathAndDecayPoints.head);
+            return PositioningKeepDistance(source, p.x, p.y, 300);
+        }
+        return true;
+    }
+
     function PositioningDone(unit source) -> boolean {
         unit tar;
         integer bossutid = GetUnitTypeId(whichBoss);
-        if (bossutid == UTID_ARCH_TINKER || bossutid == UTID_ARCH_TINKER_MORPH) {           
+        if (bossutid == UTID_ARCH_TINKER || bossutid == UTID_ARCH_TINKER_MORPH) {
             return PositioningArchTinker(source);
         } else if (GetUnitTypeId(whichBoss) == UTID_NAGA_SEA_WITCH) {
             return PositioningNagaSeaWitch(source);
@@ -467,10 +501,34 @@ constant real AIACTION_INTERVAL = 0.33;
         } else if (bossutid == UTID_HEX_LORD) {
             return PositioningHexLord(source);
         } else {
+            tar = MobList.findUnitByUTID(UTID_WIND_SERPENT);
+            if (tar != null) {
+                return PositioningKeepDistance(source, GetUnitX(tar), GetUnitY(tar), 497);
+            }
+            tar = MobList.findUnitByUTID(UTID_NAGA_ROYAL_GUARD);
+            if (tar != null) {
+                return PositioningKeepDistance(source, GetUnitX(tar), GetUnitY(tar), 497);
+            }
+            tar = MobList.findUnitByUTID(UTID_CHMP_NAGA_ROYAL_GUARD);
+            if (tar != null) {
+                return PositioningKeepDistance(source, GetUnitX(tar), GetUnitY(tar), 497);
+            }
+            tar = MobList.findUnitByUTID(UTID_SKELETAL_MAGE);
+            if (tar != null) {
+                return PositioningSkeletalMage(source);
+            }
+            tar = MobList.findUnitByUTID(UTID_DRACOLICH);
+            if (tar != null) {
+                return PositioningDracoLich(source);
+            }
+            tar = MobList.findUnitByUTID(UTID_NETHER_DRAKE);
+            if (tar != null) {
+                return PositioningKeepDistance(source, GetUnitX(tar), GetUnitY(tar), 300);
+            }
             return true;
         }
     }
-    
+
     // 1
     function learnSkillHmkg(unit source) {
         if (GetHeroLevel(source) == 1) {
@@ -1842,29 +1900,29 @@ constant real AIACTION_INTERVAL = 0.33;
     }
     
     function register() {
-        unitCallBack['Hmkg'] = makeOrderHmkg;   // Ѫ���������
-        unitCallBack['Hlgr'] = makeOrderHlgr;   // ��צ��³�� 
-        unitCallBack['Emfr'] = makeOrderEmfr;   // �����ػ���
-        unitCallBack['Hart'] = makeOrderHart;   // ʥ��ʿ
-        unitCallBack['Ofar'] = makeOrderOfar;   // ��ʦ
-        unitCallBack['Obla'] = makeOrderObla;   // ��ʥ
-        unitCallBack['Nbrn'] = makeOrderNbrn;   // �ڰ�����
-        unitCallBack['Hjai'] = makeOrderHjai;   // ������ʦ
-        unitCallBack['Hapm'] = makeOrderHapm;   // �ظ���
-        unitCallBack['H006'] = makeOrderHapm;   // �ظ���
-        unitCallBack['Edem'] = makeOrderEdem;   // ���˽���
-        unitCallBack['Hblm'] = makeOrderHblm;   // ���ͽ
-        unitLearSkill['Hmkg'] = learnSkillHmkg;   // 
-        unitLearSkill['Hlgr'] = learnSkillHlgr;   // ��צ��³�� 
-        unitLearSkill['Emfr'] = learnSkillEmfr;   // �����ػ���
-        unitLearSkill['Hart'] = learnSkillHart;   // ʥ��ʿ
-        unitLearSkill['Ofar'] = learnSkillOfar;   // ��ʦ
-        unitLearSkill['Obla'] = learnSkillObla;   // ��ʥ
-        unitLearSkill['Nbrn'] = learnSkillNbrn;   // �ڰ�����
-        unitLearSkill['Hjai'] = learnSkillHjai;   // ������ʦ
-        unitLearSkill['Hapm'] = learnSkillHapm;   // �ظ���
-        unitLearSkill['Edem'] = learnSkillEdem;   // ���˽���
-        unitLearSkill['Hblm'] = learnSkillHblm;   // ���ͽ
+        unitCallBack['Hmkg'] = makeOrderHmkg;
+        unitCallBack['Hlgr'] = makeOrderHlgr;
+        unitCallBack['Emfr'] = makeOrderEmfr;
+        unitCallBack['Hart'] = makeOrderHart;
+        unitCallBack['Ofar'] = makeOrderOfar;
+        unitCallBack['Obla'] = makeOrderObla;
+        unitCallBack['Nbrn'] = makeOrderNbrn;
+        unitCallBack['Hjai'] = makeOrderHjai;
+        unitCallBack['Hapm'] = makeOrderHapm;
+        unitCallBack['H006'] = makeOrderHapm;
+        unitCallBack['Edem'] = makeOrderEdem;
+        unitCallBack['Hblm'] = makeOrderHblm;
+        unitLearSkill['Hmkg'] = learnSkillHmkg;
+        unitLearSkill['Hlgr'] = learnSkillHlgr;
+        unitLearSkill['Emfr'] = learnSkillEmfr;
+        unitLearSkill['Hart'] = learnSkillHart;
+        unitLearSkill['Ofar'] = learnSkillOfar;
+        unitLearSkill['Obla'] = learnSkillObla;
+        unitLearSkill['Nbrn'] = learnSkillNbrn;
+        unitLearSkill['Hjai'] = learnSkillHjai;
+        unitLearSkill['Hapm'] = learnSkillHapm;
+        unitLearSkill['Edem'] = learnSkillEdem;
+        unitLearSkill['Hblm'] = learnSkillHblm;
     }
     
     // learn skills once
@@ -1909,7 +1967,7 @@ constant real AIACTION_INTERVAL = 0.33;
     public function RegisterAIAlliance(unit u) {
         aiu[ain] = u;
         ain += 1;
-        delayedDosth1.start(u);        
+        delayedDosth1.start(u);
     }
     
     // if not in combat, AI will do nothing
