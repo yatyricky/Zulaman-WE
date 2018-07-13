@@ -434,6 +434,7 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
                 thistype.create(ITID_GURUBASHI_VOODOO_VIALS,"|cffff8c00Gurubashi Voodoo Vials|r","|cffffdeadZanzil *makes* friends by these small vials.|r").append(14,5,10).append(19,0.03,0.05).append(88,12,20).append(32,15,30).append(98,0,0);
                 thistype.create(ITID_MOONLIGHT_GREATSWORD,"|cffff8c00Moonlight Greatsword|r","|cffffdeadLudwig the Holy Blade.|r").append(4,5,10).append(57,10,20).append(43,0.02,0.04).append(75,30,60).append(49,100,250);
                 thistype.create(ITID_ZULS_STAFF,"|cffff8c00Zul's Staff|r","").append(21,100,200).append(14,5,10).append(20,0.03,0.05).append(99,120,270).append(98,0,0);
+                thistype.create(ITID_MC_SWORD,"|cffff8c00MC Sword|r","").append(24,100,100).append(71,3000,3000);
                 thistype.create(ITID_DETERMINATION_OF_VENGEANCE,"|cffff8c00Determination of Vengeance|r","|cffffdeadThe determination to revenge Mal'Ganis is unshakeable.|r").append(17,100,200).append(21,100,200).append(1,0.01,0.02).append(97,0,0);
                 thistype.create(ITID_STRATHOLME_TRAGEDY,"|cffff8c00Stratholme Tragedy|r","|cffffdeadIn disregard of Jaina's advice, Stratholme became a hell on earth in merely one night.|r").append(9,10,20).append(24,11,17).append(67,0.05,0.09).append(97,0,0);
                 thistype.create(ITID_PATRICIDE,"|cffff8c00Patricide|r","|cffffdeadOne last step!|r").append(9,5,10).append(52,26,48).append(55,0.05,0.1).append(12,3,5).append(97,0,0);
