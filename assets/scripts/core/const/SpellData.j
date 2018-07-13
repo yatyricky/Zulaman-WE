@@ -163,13 +163,11 @@ library SpellData requires Table, Integer {
             SpellData.create(SID_TORRENT_TOTEM,"Torrent Totem",0,0,10,OrderId("flamestrike"),1,ORDER_TYPE_POINT);
             SpellData.create(SID_EARTH_BIND_TOTEM,"Earth Bind Totem",0,0,10,OrderId("dispel"),1,ORDER_TYPE_POINT);
             SpellData.create(SID_ASCENDANCE,"Ascendance",25,0,40,OrderId("metamorphosis"),1,ORDER_TYPE_IMMEDIATE);
-            SpellData.create(SID_SINISTER_STRIKE,"Sinister Strike",0,0,2,OrderId("slow"),1,ORDER_TYPE_TARGET);
+            SpellData.create(SID_SINISTER_STRIKE,"Sinister Strike",400,0,1,OrderId("slow"),1,ORDER_TYPE_TARGET);
             SpellData.create(SID_EVISCERATE,"Eviscerate",0,0,2,OrderId("impale"),1,ORDER_TYPE_TARGET);
             SpellData.create(SID_ASSAULT,"Assault",0,0,16,OrderId("deathcoil"),1,ORDER_TYPE_TARGET);
             SpellData.create(SID_BLADE_FLURRY,"Blade Flurry",0,0,30,OrderId("starfall"),1,ORDER_TYPE_IMMEDIATE).setCCC2(0,0,26).setCCC2(0,0,22);
             SpellData.create(SID_STEALTH,"Stealth",0,0,45,OrderId("cyclone"),1,ORDER_TYPE_IMMEDIATE).setCCC2(0,0,35).setCCC2(0,0,25);
-            SpellData.create(SID_GARROTE,"Garrote",0,0,1,OrderId("shadowstrike"),1,ORDER_TYPE_TARGET);
-            SpellData.create(SID_AMBUSH,"Ambush",0,0,1,OrderId("thunderbolt"),1,ORDER_TYPE_TARGET);
             SpellData.create(SID_PAIN,"Pain",100,0,2,OrderId("slow"),1,ORDER_TYPE_TARGET).setCCC2(115,0,2).setCCC3(130,0,2);
             SpellData.create(SID_MARROW_SQUEEZE,"Marrow Squeeze",70,2.3,0,OrderId("dispel"),1,ORDER_TYPE_TARGET).setCCC2(130,2.0,0).setCCC3(190,1.7,0);
             SpellData.create(SID_MIND_FLAY,"Mind Flay",50,3,0,OrderId("heal"),1,ORDER_TYPE_TARGET);

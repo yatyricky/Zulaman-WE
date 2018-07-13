@@ -1735,13 +1735,9 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, FrostNov
                 state = 1;
             }
             // stealth abilities
-            if (state == 0 && IsUnitStealth(source) && !HexLordGlobalConst.normalAttackForbid) {
+            if (state == 0 && IsUnitStealth(source) && UnitCanUse(source, SID_SINISTER_STRIKE) && !HexLordGlobalConst.normalAttackForbid) {
                 tar = MobList.getLowestHP();
-                if (GetUnitMana(tar) == 0) {
-                    IssueTargetOrderById(source, SpellData.inst(SID_AMBUSH, SCOPE_PREFIX).oid, tar);
-                } else {
-                    IssueTargetOrderById(source, SpellData.inst(SID_GARROTE, SCOPE_PREFIX).oid, tar);
-                }
+                IssueTargetOrderById(source, SpellData.inst(SID_SINISTER_STRIKE, SCOPE_PREFIX).oid, tar);
                 state = 1;
             }
             // assault: counter spell
