@@ -17,6 +17,7 @@ library Stealth requires AggroSystem, SpellEvent, UnitProperty, DamageSystem {
         Buff buf;
         DelayTask.create(removeAPIV, 0.001).u0 = u;
         UnitProp.inst(u, SCOPE_PREFIX).ModSpeed(-120);
+        NFSetPlayerAbilityIcon(GetOwningPlayer(u), SID_SINISTER_STRIKE, BTNSacrifice);
         
         if (!IsUnitDead(u)) {
             buf = Buff.cast(u, u, BID_STEALTH_AMP);
@@ -40,6 +41,7 @@ library Stealth requires AggroSystem, SpellEvent, UnitProperty, DamageSystem {
         if (GetUnitAbilityLevel(u, SID_APIV) == 0) {
             UnitAddAbility(u, SID_APIV);
             UnitProp.inst(u, SCOPE_PREFIX).ModSpeed(120);
+            NFSetPlayerAbilityIcon(GetOwningPlayer(u), SID_SINISTER_STRIKE, BTNImprovedSinisterStrike);
             AddTimedEffect.atCoord(ART_CloudOfFog, GetUnitX(u), GetUnitY(u), 1.0);
         }
     }

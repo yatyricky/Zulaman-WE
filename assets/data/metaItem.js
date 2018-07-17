@@ -34,7 +34,7 @@ function parseSheet(sheet) {
                     break;
             }
             entry = {
-                itid: `ITID_${sheet.cell(`G${j}`).replace(/'/g, "").replace(/ /g, "_").toUpperCase()}`,
+                itid: `ITID_${sheet.cell(`G${j}`).replace(/[',]/g, "").replace(/ /g, "_").toUpperCase()}`,
                 name: `|cff${color}${sheet.cell(`G${j}`)}|r`,
                 lore: "",
                 attrs: []

@@ -147,7 +147,7 @@ public constant real    ILVL_MAX_RATE = 0.6;
         bossPools[UTID_FEL_GUARD] = boss6;
         bossPools[UTID_HEX_LORD] = boss7;
         
-        relic.add(ITID_DYING_BREATH, 12);
+        relic.add(ITID_BREATH_OF_THE_DYING, 14);
         relic.add(ITID_CALL_TO_ARMS, 13);
         relic.add(ITID_DERANGEMENT_OF_CTHUN, 6);
         relic.add(ITID_ENIGMA, 2);
@@ -159,6 +159,7 @@ public constant real    ILVL_MAX_RATE = 0.6;
         relic.add(ITID_WINDFORCE, 6);
         relic.add(ITID_MOONLIGHT_GREATSWORD, 10);
         relic.add(ITID_ZULS_STAFF, 8);
+        relic.add(ITID_THUNDERFURY_BLESSED_BLADE_OF_THE_WINDSEEKER, 8);
 
         rare.add(ITID_MAUL_OF_WARLORD, 30);
         rare.add(ITID_CLOAK_OF_STEALTH, 30);

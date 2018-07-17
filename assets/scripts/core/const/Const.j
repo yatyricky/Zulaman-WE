@@ -745,7 +745,7 @@ public constant integer ITID_RAGE_WINTERCHILLS_PHYLACTERY = 'Ifro';
 public constant integer ITID_ANATHEMA = 'Iana';
 public constant integer ITID_RARE_SHIMMER_WEED = 'Ithu';
 // legendary
-public constant integer ITID_DYING_BREATH = 'I001';
+public constant integer ITID_BREATH_OF_THE_DYING = 'I001';
 public constant integer BID_BREATH_OF_THE_DYING = 'A063';
 public constant integer ITID_CALL_TO_ARMS = 'Icta';
 public constant integer SID_CALL_TO_ARMS = 'A069';
@@ -1085,5 +1085,7 @@ public constant string BTNExecute4 = "ReplaceableTextures\\CommandButtons\\BTNEx
 public constant string BTNCleavingAttack = "ReplaceableTextures\\CommandButtons\\BTNCleavingAttack.blp";
 public constant string BTNPossession = "ReplaceableTextures\\CommandButtons\\BTNPossession.blp";
 public constant string BTNUnholyFrenzy = "ReplaceableTextures\\CommandButtons\\BTNUnholyFrenzy.blp";
+public constant string BTNImprovedSinisterStrike = "ReplaceableTextures\\CommandButtons\\BTNImprovedSinisterStrike.blp";
+public constant string BTNSacrifice = "ReplaceableTextures\\CommandButtons\\BTNSacrifice.blp";
 }
 //! endzinc

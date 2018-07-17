@@ -9,16 +9,23 @@ library MagicChainLightning requires Table, ChainLightning {
     function damaged() {
         real amt;
         DelayTask dt;
-        if (DamageResult.isHit == true && DamageResult.isPhyx == false && DamageResult.wasDirect == true) {
-            if (ht.exists(DamageResult.source) && ht[DamageResult.source] > 0 && GetRandomReal(0, 0.999) < 0.1) {
-                amt = ItemExAttributes.getUnitAttrVal(DamageResult.source, IATTR_MD_CHAIN, SCOPE_PREFIX);
-                amt += UnitProp.inst(DamageResult.source, SCOPE_PREFIX).SpellPower() * 0.2;
-                dt = DelayTask.create(extraDamageEffect, 0.03);
-                dt.u0 = DamageResult.source;
-                dt.u1 = DamageResult.target;
-                dt.r0 = amt;
-            }
-        }
+
+        if (DamageResult.isHit == false) return;
+        if (DamageResult.wasDirect == false) return;
+        if (ht.exists(DamageResult.source) == false) return;
+        if (ht[DamageResult.source] <= 0) return;
+        if (GetRandomReal(0, 0.999) >= 0.1) return;
+        if (IsUnitICD(DamageResult.source, SID_INFINITY) == true) return;
+
+        amt = ItemExAttributes.getUnitAttrVal(DamageResult.source, IATTR_MD_CHAIN, SCOPE_PREFIX);
+        amt += UnitProp.inst(DamageResult.source, SCOPE_PREFIX).SpellPower() * 0.2;
+
+        dt = DelayTask.create(extraDamageEffect, 0.03);
+        dt.u0 = DamageResult.source;
+        dt.u1 = DamageResult.target;
+        dt.r0 = amt;
+
+        SetUnitICD(DamageResult.source, SID_INFINITY, 3);
     }
 
     public function EquipedMagicChainLightning(unit u, integer polar) {
