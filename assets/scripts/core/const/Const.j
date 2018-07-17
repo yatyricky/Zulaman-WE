@@ -778,6 +778,7 @@ public constant integer SID_MOONLIGHT_GREATSWORD_EXPLOSION = 'dmge';
 public constant integer SID_MOONLIGHT_GREATSWORD_BURST = 'dmgb';
 public constant integer ITID_WINDFORCE = 'Iwf0';
 public constant integer ITID_MC_SWORD = 'I02S';
+public constant integer ITID_THUNDERFURY_BLESSED_BLADE_OF_THE_WINDSEEKER = 'I02T';
 // relic set
 // Athas's Corruption
 public constant integer ITID_DETERMINATION_OF_VENGEANCE = 'I01S';
