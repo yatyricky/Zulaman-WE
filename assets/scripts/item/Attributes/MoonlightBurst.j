@@ -26,7 +26,7 @@ library MoonlightBurst requires DamageSystem, Math {
         // consumes mana
         ModUnitMana(DamageResult.source, 0.0 - GetUnitState(DamageResult.source, UNIT_STATE_MAX_MANA) * 0.05);
         // internal CD
-        SetUnitICD(DamageResult.source, SID_MOONLIGHT_GREATSWORD_BURST, 10);
+        SetUnitICD(DamageResult.source, SID_MOONLIGHT_GREATSWORD_BURST, 3);
         // visual effect
         angle = GetAngle(GetUnitX(DamageResult.source), GetUnitY(DamageResult.source), GetUnitX(DamageResult.target), GetUnitY(DamageResult.target));
         VisualEffects.pierce(ART_GargoyleMissile, GetUnitX(DamageResult.source), GetUnitY(DamageResult.source), angle, 900, 1500, 2.2);

@@ -55,9 +55,9 @@ library Tide requires BuffSystem, SpellEvent, UnitProperty, DamageSystem, GroupU
             }
         }
         
-        static method start(unit a, unit b) {
+        static method start(unit a, real tx, real ty) {
             thistype this = thistype.allocate();
-            real angle = GetAngle(GetUnitX(a), GetUnitY(a), GetUnitX(b), GetUnitY(b));
+            real angle = GetAngle(GetUnitX(a), GetUnitY(a), tx, ty);
             this.a = a;
             this.tm = NewTimer();
             SetTimerData(this.tm, this);
@@ -74,13 +74,14 @@ library Tide requires BuffSystem, SpellEvent, UnitProperty, DamageSystem, GroupU
     }
 
     function delayedCast(DelayTask dt) {
-        Tide.start(dt.u0, dt.u1);
+        Tide.start(dt.u0, dt.r0, dt.r1);
     }
 
     function response(CastingBar cd) {
         DelayTask dt = DelayTask.create(delayedCast, 0.03);
         dt.u0 = cd.caster;
-        dt.u1 = cd.target;
+        dt.r0 = cd.targetX;
+        dt.r1 = cd.targetY;
     }
 
     function onChannel() {
@@ -89,8 +90,8 @@ library Tide requires BuffSystem, SpellEvent, UnitProperty, DamageSystem, GroupU
         CastingBar.create(response).setVisuals(ART_SeaElementalMissile).launch();
         x1 = GetUnitX(SpellEvent.CastingUnit);
         y1 = GetUnitY(SpellEvent.CastingUnit);
-        x2 = GetUnitX(SpellEvent.TargetUnit);
-        y2 = GetUnitY(SpellEvent.TargetUnit);
+        x2 = SpellEvent.TargetX;
+        y2 = SpellEvent.TargetY;
         angle = GetAngle(x1, y1, x2, y2);
         x2 = Cos(angle) * 940 + x1;
         y2 = Sin(angle) * 940 + y1;

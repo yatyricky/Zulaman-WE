@@ -590,9 +590,10 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         }    
     }
     
-    function makeOrderTideBaronWater(unit source, unit target, real combatTime) {    
+    function makeOrderTideBaronWater(unit source, unit target, real combatTime) {
         IntegerPool ip;
         integer res;
+        unit tu;
         if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
             ip = IntegerPool.create();
             if (UnitCanUse(source, SID_TIDE_BARON_MORPH) && combatTime > 34) {
@@ -602,26 +603,21 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
                     ip.add(SID_ALKALINE_WATER, 30);
                 }
                 if (UnitCanUse(source, SID_TIDE) && combatTime > 20) {
-                    //print("1");
-                    ip.add(SID_TIDE, 15);
+                    ip.add(SID_TIDE, 30);
                 }
-                ip.add(0, 30);
+                ip.add(0, 20);
             }
             res = ip.get();
             if (res == 0) {
                 IssueTargetOrderById(source, OID_ATTACK, target);
-            } else if (SpellData.inst(res, SCOPE_PREFIX).otp == ORDER_TYPE_TARGET) {
-                //NotAttacking(source);
-                if (res == SID_ALKALINE_WATER) {
-                    IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, AggroList[source].getFirst());
-                } else {
-                    IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, PlayerUnits.getRandomHero());
-                }
-            } else if (SpellData.inst(res, SCOPE_PREFIX).otp == ORDER_TYPE_IMMEDIATE) {
-                if (res == SID_TIDE_BARON_MORPH) {
-                    //print("wanna be slardar");
-                    IssueImmediateOrderById(source, OID_UNBEARFORM);
-                }
+            } else if (res == SID_ALKALINE_WATER) {
+                IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, AggroList[source].getFirst());
+            } else if (res == SID_TIDE) {
+                tu = PlayerUnits.getRandomHero();
+                IssuePointOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, GetUnitX(tu), GetUnitY(tu));
+                tu = null;
+            } else {
+                IssueImmediateOrderById(source, OID_UNBEARFORM);
             }
             ip.destroy();
         }    
