@@ -303,28 +303,8 @@ library Command requires Console, Assertion, StunUtils, UnitProperty, BuffSystem
         return a - b;
     }
 
-    function generatorCallback(RepeatTask rt) {
-        if (rt.current == 0) {
-            rt.u0 = CreateUnit(Player(0), UTID_BLADE_MASTER, -6814, -1798, 0);
-        } else if (rt.current == 1) {
-            AssertInt(R2I(UnitProp.inst(rt.u0, "TEST").Armor()), 10);
-        } else if (rt.current == 2) {
-            UnitProp.inst(rt.u0, "test").ModArmor(5);
-            AssertInt(R2I(UnitProp.inst(rt.u0, "TEST").Armor()), 15);
-        } else if (rt.current == 3) {
-            UnitProp.inst(rt.u0, "test").ModArmor(-10);
-            AssertInt(R2I(UnitProp.inst(rt.u0, "TEST").Armor()), 5);
-        } else if (rt.current == 4) {
-            UnitProp.inst(rt.u0, "test").ModArmor(-500);
-            AssertInt(R2I(UnitProp.inst(rt.u0, "TEST").Armor()), -495);
-        } else if (rt.current == 5) {
-            UnitProp.inst(rt.u0, "test").ModArmor(500);
-            AssertInt(R2I(UnitProp.inst(rt.u0, "TEST").Armor()), 5);
-        }
-    }
-
     function testGeneral(string str) {
-        RepeatTask.create(generatorCallback, 1.0, 10);
+        
     }
 
     function testItemAttributes(string str) {

@@ -439,7 +439,7 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
                 thistype.create(ITID_DETERMINATION_OF_VENGEANCE,"|cffff8c00Determination of Vengeance|r","|cffffdeadThe determination to revenge Mal'Ganis is unshakeable.|r").append(17,100,200).append(21,100,200).append(1,0.01,0.02).append(97,0,0);
                 thistype.create(ITID_STRATHOLME_TRAGEDY,"|cffff8c00Stratholme Tragedy|r","|cffffdeadIn disregard of Jaina's advice, Stratholme became a hell on earth in merely one night.|r").append(9,10,20).append(24,11,17).append(67,0.05,0.09).append(97,0,0);
                 thistype.create(ITID_PATRICIDE,"|cffff8c00Patricide|r","|cffffdeadOne last step!|r").append(9,5,10).append(52,26,48).append(55,0.05,0.1).append(12,3,5).append(97,0,0);
-                thistype.create(ITID_FROSTMOURNE,"|cffff8c00FrostMourne|r","|cffffdeadA gift from the Lich King.|r").append(4,5,10).append(71,7,12).append(43,0.01,0.025).append(58,24,55).append(97,0,0).append(73,20,20).append(21,150,166.66666666666666).append(2,0.05,0.05);
+                thistype.create(ITID_FROSTMOURNE,"|cffff8c00Frostmourne|r","|cffffdeadA gift from the Lich King.|r").append(4,5,10).append(71,7,12).append(43,0.01,0.025).append(58,24,55).append(97,0,0).append(73,20,20).append(21,150,166.66666666666666).append(2,0.05,0.05);
                 //:template.end
             });
         }
