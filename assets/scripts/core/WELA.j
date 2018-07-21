@@ -29,7 +29,7 @@ library WELA requires CastingBar, SpellData, AggroSystem {
         }
     }
 
-    function combatStatusLog() {
+    function combatStatusLog(boolean state) {
         combatState = !combatState;
         wela[welaI] = R2S(GetGameTime()) + "|combat";
         commit();

@@ -15,6 +15,7 @@ library ForceSight requires RegionalFog {
         fogData fdJungle, fdFire, fdNecro, fdDarkness;
         SetSkyModel("Environment\\Sky\\LordaeronSummerSky\\LordaeronSummerSky.mdl");
         FogEnable(false);
+        FogMaskEnable(false);
 
         fdJungle = fogData.create();
         fdJungle.red = 0.9;
@@ -25,8 +26,8 @@ library ForceSight requires RegionalFog {
 
         fdFire = fogData.create();
         fdFire.red = 1;
-        fdFire.green = 0.5;
-        fdFire.blue = 0.5;
+        fdFire.green = 0.3;
+        fdFire.blue = 0.3;
         fdFire.zStart = -1000;
         fdFire.zEnd = 10000;
 

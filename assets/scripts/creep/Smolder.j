@@ -49,7 +49,6 @@ library Smolder requires DamageSystem {
             towersN += 1;
             if (towersN == 1) {
                 tm = NewTimer();
-                print("timer start");
                 TimerStart(tm, 1.0, true, function check);
             }
         }

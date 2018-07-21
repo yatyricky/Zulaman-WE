@@ -1943,8 +1943,8 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, FrostNov
     }
     
     // if not in combat, AI will do nothing
-    function changeState() {
-        if (flip) {
+    function changeState(boolean state) {
+        if (state == false) {
             PauseTimer(globalTimer);
         } else {
             TimerStart(globalTimer, AIACTION_INTERVAL, true, function AIActions);

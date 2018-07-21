@@ -49,7 +49,7 @@ library DamageDeathCoil requires DamageSystem, BuffSystem {
         p.r0 = UnitProp.inst(p.caster, SCOPE_PREFIX).SpellPower() + 400;
         p.launch();
         
-        SetUnitICD(DamageResult.source, BID_ATK_DEATH_COIL, 10);
+        SetUnitICD(DamageResult.source, BID_ATK_DEATH_COIL, 3);
     }
 
     public function EquipedDamageDeathCoil(unit u, integer polar) {

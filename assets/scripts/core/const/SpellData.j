@@ -279,7 +279,7 @@ library SpellData requires Table, Integer {
             SpellData.create(SID_GNAW,"Gnaw",0,5,0,OrderId("sleep"),2,ORDER_TYPE_TARGET);
             SpellData.create(SID_CURSE_OF_THE_DEAD,"Curse of the Dead",0,0,15,OrderId("sleep"),1,ORDER_TYPE_TARGET);
             SpellData.create(SID_DEATH_ORB,"Death Orb",0,3,0,OrderId("slow"),1,ORDER_TYPE_TARGET);
-            SpellData.create(SID_MANA_TAP,"Mana Tap",0,0,13,OrderId("sleep"),1,ORDER_TYPE_POINT);
+            SpellData.create(SID_MANA_TAP,"Mana Tap",0,0,13,OrderId("blizzard"),1,ORDER_TYPE_POINT);
             SpellData.create(SID_FROST_GRAVE,"Frost Grave",0,0,8,OrderId("sleep"),1,ORDER_TYPE_TARGET);
             SpellData.create(SID_DEATH_AND_DECAY,"Death and Decay",0,0,8,OrderId("heal"),1,ORDER_TYPE_TARGET);
             SpellData.create(SID_NETHER_BOLT,"Nether Bolt",0,0,7,OrderId("sleep"),1,ORDER_TYPE_TARGET);

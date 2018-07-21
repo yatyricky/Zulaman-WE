@@ -239,10 +239,10 @@ const forgeBuffData = (aid, bid, buffType, buffPolar, tip, ubertip) => {
 
 for (let i = 1; i < sheet.data.length + 1; i++) {
     let obj = { id: "", fields: [] };
-    if (sheet.cell(`${ci.paid}${i}`) === "ANcl") {
+    if (sheet.cell(`${ci.paid}${i}`) !== "") {
         // start
         obj = {
-            id: sheet.cell(`${ci.aid}${i}`) + ":ANcl",
+            id: sheet.cell(`${ci.aid}${i}`) + ":" + sheet.cell(`${ci.paid}${i}`),
             fields: []
         };
         objs.push(obj);

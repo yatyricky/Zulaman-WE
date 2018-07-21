@@ -936,6 +936,10 @@ public constant integer PREFIX_TOUGH = 36;
 public constant integer PREFIX_HEALTHY = 37;
 public constant integer PREFIX_EVERLASTING = 38;
 
+public constant integer DOOD_BLOCKER = 'YTpc';
+public constant integer DOOD_ROCK = 'LTrc';
+public constant integer DOOD_POWER_WALL = 'B003';
+
 public constant string ART_ANGEL = "Abilities\\Spells\\Human\\Resurrect\\ResurrectCaster.mdl";
 public constant string ART_ANNIHILATION_MISSILE = "Abilities\\Spells\\Undead\\OrbOfDeath\\AnnihilationMissile.mdl";
 public constant string ART_ARCANE_TOWER_ATTACK = "Abilities\\Spells\\Human\\Feedback\\ArcaneTowerAttack.mdl";

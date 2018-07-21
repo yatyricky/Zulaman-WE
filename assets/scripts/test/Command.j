@@ -394,6 +394,17 @@ library Command requires Console, Assertion, StunUtils, UnitProperty, BuffSystem
         SetDoodadAnimation(9785, 9887, 700, 'D032', false, "Stand Work", false);
     }
 
+    function teleportUnit(string str) {
+        unit u; 
+        group g = CreateGroup();
+        GroupEnumUnitsSelected(g, Player(0), null);
+        u = FirstOfGroup(g);
+        
+        SetUnitPosition(u, GetCameraTargetPositionX(), GetCameraTargetPositionY());
+        
+        DestroyGroup(g);
+    }
+
     private function onInit() {
         Console[Player(0)].add("cls", screenClear);
         Console[Player(0)].add("lvlup", levelUp);
@@ -406,6 +417,7 @@ library Command requires Console, Assertion, StunUtils, UnitProperty, BuffSystem
         Console[Player(0)].add("test", testGeneral);
         Console[Player(0)].add("dood", doodAnimation);
         Console[Player(0)].add("z", printStats);
+        Console[Player(0)].add("t", teleportUnit);
         Console[Player(0)].add("ceff", createEffect);
         Console[Player(0)].add("effq", setEffectYaw);
         Console[Player(0)].add("effw", setEffectPitch);

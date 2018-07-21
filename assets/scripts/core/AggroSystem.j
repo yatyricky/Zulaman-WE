@@ -24,12 +24,20 @@ library AggroSystem requires MobInit, UnitProperty, Clock, DamageSystem, PlayerU
 constant real TIME_TICK = 0.15;
 constant integer MAX_PLAYER_UNITS = 50;
     
-    public type CombatStateNotify extends function();
+    public type CombatStateNotify extends function(boolean);
     private CombatStateNotify combatStateNotifyCallList[];
-    private integer combatStateNotifyN = 0;        
+    private integer combatStateNotifyN = 0;
     public function RegisterCombatStateNotify(CombatStateNotify combatStateNotify) {
         combatStateNotifyCallList[combatStateNotifyN] = combatStateNotify;
         combatStateNotifyN += 1;
+    }
+
+    public type ResponseAggro extends function(unit);
+    private ResponseAggro responseAggroCallList[];
+    private integer responseAggroN = 0;
+    public function RegisterAggroEvent(ResponseAggro responseAggro) {
+        responseAggroCallList[responseAggroN] = responseAggro;
+        responseAggroN += 1;
     }
     
     public function IsInCombat() -> boolean {
@@ -345,7 +353,7 @@ constant integer MAX_PLAYER_UNITS = 50;
         static method endCombat() {
             integer i = 0;
             while (i < combatStateNotifyN) {
-                combatStateNotifyCallList[i].evaluate();
+                combatStateNotifyCallList[i].evaluate(false);
                 i += 1;
             }
             ClearTextMessages();
@@ -402,7 +410,7 @@ constant integer MAX_PLAYER_UNITS = 50;
         static method newCombat() {
             integer i = 0;
             while (i < combatStateNotifyN) {
-                combatStateNotifyCallList[i].evaluate();
+                combatStateNotifyCallList[i].evaluate(true);
                 i += 1;
             }
             ClearTextMessages();
@@ -412,6 +420,7 @@ constant integer MAX_PLAYER_UNITS = 50;
         }
         
         static method add(unit u) {
+            integer ii;
             if (thistype.n == 0) {
                 thistype.newCombat();
             }
@@ -420,7 +429,12 @@ constant integer MAX_PLAYER_UNITS = 50;
                 thistype.units[thistype.n] = u;
                 thistype.n += 1;
             } else {
-                //print(SCOPE_PREFIX+">|cffff0000Error|r, unit already in mob list");
+                // print(SCOPE_PREFIX+">|cffff0000Error|r, unit already in mob list");
+            }
+            ii = 0;
+            while (ii < responseAggroN) {
+                responseAggroCallList[ii].evaluate(u);
+                ii += 1;
             }
         }
         
@@ -662,15 +676,19 @@ constant integer MAX_PLAYER_UNITS = 50;
     
     // any enermy unit damaged
     function setAggros() {
-        if ((GetPlayerId(GetOwningPlayer(DamageResult.target)) == MOB_PID) && (!IsUnitDead(DamageResult.target)) && (!IsUnitDead(DamageResult.source)) && !IsUnit(DamageResult.source, DamageResult.target) && !IsUnitUseless(DamageResult.target)) {
-            //print("To aggro target");
-            if (!CanUnitAttack(DamageResult.target) && DamageResult.amount < GetUnitState(DamageResult.target, UNIT_STATE_MAX_LIFE)) {
-                MobList.add(DamageResult.target);
-            }
-            AggroTarget(DamageResult.source, DamageResult.target, DamageResult.amount, SCOPE_PREFIX + "setAggros");
+        if (IsUnitUseless(DamageResult.target) == true) return;
+        if (GetPidofu(DamageResult.target) != MOB_PID) return;
+        if (IsUnitDead(DamageResult.target) == true) return;
+        if (IsUnitDead(DamageResult.source) == true) return;
+        if (IsUnit(DamageResult.source, DamageResult.target) == true) return;
+        if (GetPidofu(DamageResult.target) == GetPidofu(DamageResult.source)) return;
+
+        if (!CanUnitAttack(DamageResult.target) && DamageResult.amount < GetUnitState(DamageResult.target, UNIT_STATE_MAX_LIFE)) {
+            MobList.add(DamageResult.target);
         }
+        AggroTarget(DamageResult.source, DamageResult.target, DamageResult.amount, SCOPE_PREFIX + "setAggros");
     }
-    
+
     public function AggroAll(unit a, real amt) {
         integer i = 0;
         while (i < MobList.n) {

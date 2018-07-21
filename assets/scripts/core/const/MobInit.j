@@ -98,29 +98,6 @@ constant integer MOBINIT_RESPAWN_H = 720;
         numMobs = 0;
         idTable = HandleTable.create();
 
-        // Mob respawn
-        TimerStart(CreateTimer(), 5.0, true, function() {
-            integer i;
-            for (0 <= i < numMobs) {
-                if (mobInfo[i].u != null && !IsUnitType(mobInfo[i].u, UNIT_TYPE_HERO) && IsUnitDead(mobInfo[i].u) && mobInfo[i].utid != UTID_SMOLDERING_TOWER) {
-                    if (mobInfo[i].respawning == -1) {
-                        mobInfo[i].respawning = 1;
-                        mobInfo[i].respawnCounter = GetRandomInt(mobInfo[i].respawnTime, mobInfo[i].respawnTimeVar);
-                    } else {
-                        mobInfo[i].respawnCounter -= 5;
-                        if (mobInfo[i].respawnCounter <= 0) {
-                            mobInfo[i].respawning = -1;
-                            mobInfo[i].u = CreateUnit(Player(MOB_PID), mobInfo[i].utid, mobInfo[i].x, mobInfo[i].y, mobInfo[i].f);
-                            if (mobInfo[i].p != 0) {
-                                mobInfo[i].p.update(mobInfo[i].u);
-                            }
-                            idTable[mobInfo[i].u] = i;
-                        }
-                    }
-                }
-            }
-        });
-
         // Mob init
         TimerStart(CreateTimer(), 0.15, false, function() {
             group g;

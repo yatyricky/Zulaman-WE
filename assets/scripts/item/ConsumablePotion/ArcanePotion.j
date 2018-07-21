@@ -31,7 +31,7 @@ library ArcanePotion requires SpellEvent, BuffSystem, DamageSystem, Projectile {
         p.speed = 900;
         p.launch();
 
-        SetUnitICD(DamageResult.source, BID_LION_HORN, 3);
+        SetUnitICD(DamageResult.source, SID_ARCANE_POTION, 3);
     }
 
     public function EquipedArcanePotion(unit u, integer polar) {

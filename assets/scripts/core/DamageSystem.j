@@ -236,6 +236,9 @@ public boolean lifelock = false;
             isTop = true;
             displaySize = 1.0;
         }
+        if (GetUnitTypeId(DamageResult.source) == UTID_DAMAGE_DUMMY) {
+            display = NULL_STR;
+        }
         FloatingNumbers.create(display, color, GetUnitX(b), GetUnitY(b), displaySize, isTop);
     }
 
