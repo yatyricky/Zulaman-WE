@@ -1,34 +1,59 @@
 //! zinc
 library HeroSelection requires NefUnion, Table, ZAMCore, Loot, AllianceAIAction {
-constant integer HERO_SLCT_LOW = 'IHS0';
-constant integer HERO_SLCT_HIGH = 'IHS;';
 
-    Table heroRefTab;
-    force playerForce, pf, aiForce;
+    force playerForce, aiForce;
     integer tank, heal, dps;
     IntegerPool tankpool, healpool, dpspool;
-    Table classSpecRefTab;
+    Table classSpecRefTab, actualRef;
+    boolean alreadySelected[];
+
+    struct DoubleClick[] {
+        timer tm;
+        integer prev;
+        boolean running;
+
+        method click(integer id) {
+            TimerStart(this.tm, 0.5, false, function() {
+                thistype this = GetTimerData(GetExpiredTimer());
+                PauseTimer(this.tm);
+                this.reset();
+            });
+            this.prev = id;
+            this.running = true;
+        }
+
+        method reset() {
+            this.prev = 0;
+            this.running = false;
+        }
+
+        method init() {
+            this.tm = NewTimer();
+            SetTimerData(this.tm, this);
+            this.reset();
+        }
+    }
     
     function aiforcecb() {
         player p = GetEnumPlayer();
-        integer id;
+        integer utid;
         unit aipu;
         if (tank == 0) {
-            id = tankpool.get();
-            tankpool.remove(id);
+            utid = tankpool.get();
+            tankpool.remove(utid);
             tank += 1;
         } else if (heal < 2) {
-            id = healpool.get();
-            healpool.remove(id);
+            utid = healpool.get();
+            healpool.remove(utid);
             heal += 1;
         } else {
-            id = dpspool.get();
-            dpspool.remove(id);
+            utid = dpspool.get();
+            dpspool.remove(utid);
             dps += 1;
         }
-        aipu = CreateUnit(p, heroRefTab[id], GetInitX(GetPlayerId(p)), GetInitY(GetPlayerId(p)), 270);
+        aipu = CreateUnit(p, utid, GetInitX(GetPlayerId(p)), GetInitY(GetPlayerId(p)), 270);
         GroupAddUnit(PlayerUnits.g, aipu);
-        classSpec.add(classSpecRefTab[heroRefTab[id]], 10);
+        classSpec.add(classSpecRefTab[utid], 10);
         RegisterAIAlliance(aipu);
         SetPlayerAlliance(p, Player(0), ALLIANCE_SHARED_CONTROL, true);
         SetPlayerAlliance(p, Player(1), ALLIANCE_SHARED_CONTROL, true);
@@ -41,44 +66,53 @@ constant integer HERO_SLCT_HIGH = 'IHS;';
     }
 
     function heroSelected() -> boolean {
-        integer aid = GetItemTypeId(GetManipulatedItem());
-        unit u;
-        player p = GetOwningPlayer(GetTriggerUnit());
+        player p = GetTriggerPlayer();
+        integer pid = GetPlayerId(p);
         integer i;
-        if (aid >= HERO_SLCT_LOW && aid <= HERO_SLCT_HIGH) {
-            u = CreateUnit(p, heroRefTab[aid], GetInitX(GetPlayerId(p)), GetInitY(GetPlayerId(p)), 270);
-            PanCameraToTimedForPlayer(p, GetInitX(GetPlayerId(p)), GetInitY(GetPlayerId(p)), 1.00);
+        unit u;
+        unit selectUnit = GetTriggerUnit();
+        integer utid;
+        integer selUTID = GetUnitTypeId(selectUnit);
+        if (actualRef.exists(selUTID) == false) {p = null; u = null; selectUnit = null; return false;}
+        if (alreadySelected[pid] == true) {p = null; u = null; selectUnit = null; return false;}
+
+        if (DoubleClick[pid].prev == selUTID && DoubleClick[pid].running == true) {
+            utid = actualRef[GetUnitTypeId(selectUnit)];
+
+            alreadySelected[pid] = true;
+            u = CreateUnit(p, utid, GetUnitX(selectUnit) - 64, GetUnitY(selectUnit) - 64, 270);
             SelectUnitForPlayerSingle(u, p);
             GroupAddUnit(PlayerUnits.g, u);
-            classSpec.add(classSpecRefTab[heroRefTab[aid]], 10);
-            RemoveItem(GetManipulatedItem());
-            KillUnit(GetTriggerUnit());
-            
-            if (aid == 'IHS0' || aid == 'IHS1') {
+            classSpec.add(classSpecRefTab[utid], 10);
+
+            if (utid == UTID_BLOOD_ELF_DEFENDER || utid == UTID_CLAW_DRUID) {
                 tank += 1;
-                tankpool.remove(aid);
+                tankpool.remove(utid);
             }
-            if (aid == 'IHS2' || aid == 'IHS3' || aid == 'IHS4') {
+            if (utid == UTID_PALADIN || utid == UTID_PRIEST || utid == UTID_KEEPER_OF_GROVE) {
                 heal += 1;
-                healpool.remove(aid);
+                healpool.remove(utid);
             }
-            if (aid >= 'IHS5' && aid <= 'IHS:') {
+            if (utid == UTID_BLADE_MASTER || utid == UTID_ROGUE || utid == UTID_DARK_RANGER || utid == UTID_FROST_MAGE || utid == UTID_EARTH_BINDER || utid == UTID_HEATHEN) {
                 dps += 1;
-                dpspool.remove(aid);
+                dpspool.remove(utid);
             }
             
-            ForceRemovePlayer(pf, p);
+            ForceRemovePlayer(playerForce, p);
             // done with hero selection
-            if (CountPlayersInForceBJ(pf) == 0) {
+            if (CountPlayersInForceBJ(playerForce) == 0) {
                 ForForce(aiForce, function aiforcecb);
                 tankpool.destroy();
                 healpool.destroy();
                 dpspool.destroy();
-                
             }
+            p = null;
+            u = null;
+            selectUnit = null;
+        } else {
+            DoubleClick[pid].click(selUTID);
         }
-        p = null;
-        u = null;
+
         return false;
     }
     
@@ -94,15 +128,13 @@ constant integer HERO_SLCT_HIGH = 'IHS;';
         integer i = 0;
         player p;
         playerForce = CreateForce();
-        pf = CreateForce();
         aiForce = CreateForce();
         while (i < NUMBER_OF_MAX_PLAYERS) {
+            alreadySelected[i] = false;
             p = Player(i);
-            // CreateUnit(p, 'e001', GetInitX(i), GetInitY(i), 0.0);
             if (IsPlayerUserOnline(p)) {
                 ForceAddPlayer(playerForce, p);
-                ForceAddPlayer(pf, p);
-                CreateUnit(p, 'ncop', -6784 - 128 * i, -1856, 0.0);
+                DoubleClick[GetPlayerId(p)].init();
             } else {
                 ForceAddPlayer(aiForce, p);
             }
@@ -115,34 +147,22 @@ constant integer HERO_SLCT_HIGH = 'IHS;';
         tankpool = IntegerPool.create();
         healpool = IntegerPool.create();
         dpspool = IntegerPool.create();
-        tankpool.add('IHS0', 10);
-        tankpool.add('IHS1', 10);
-        healpool.add('IHS2', 10);
-        healpool.add('IHS3', 10);
-        healpool.add('IHS4', 10);
-        dpspool.add('IHS5', 10);
-        dpspool.add('IHS6', 10);
-        dpspool.add('IHS7', 10);
-        dpspool.add('IHS8', 10);
-        dpspool.add('IHS9', 10);
-        dpspool.add('IHS:', 10);
-        
+        tankpool.add(UTID_BLOOD_ELF_DEFENDER, 10);
+        tankpool.add(UTID_CLAW_DRUID, 10);
+        healpool.add(UTID_PRIEST, 10);
+        healpool.add(UTID_PALADIN, 10);
+        healpool.add(UTID_KEEPER_OF_GROVE, 10);
+        dpspool.add(UTID_FROST_MAGE, 10);
+        dpspool.add(UTID_EARTH_BINDER, 10);
+        dpspool.add(UTID_HEATHEN, 10);
+        dpspool.add(UTID_BLADE_MASTER, 10);
+        dpspool.add(UTID_DARK_RANGER, 10);
+        dpspool.add(UTID_ROGUE, 10);
+
+        TriggerAnyUnit(EVENT_PLAYER_UNIT_SELECTED, function heroSelected);
         RegisterUnitEnterMap(grantSkillPoints);
-        
-        TriggerAnyUnit(EVENT_PLAYER_UNIT_PICKUP_ITEM, function heroSelected);
-        heroRefTab = Table.create();
-        heroRefTab['IHS0'] = 'Hmkg';
-        heroRefTab['IHS1'] = 'Hlgr';
-        heroRefTab['IHS2'] = 'Emfr';
-        heroRefTab['IHS3'] = 'Hart';
-        heroRefTab['IHS4'] = 'Ofar';
-        heroRefTab['IHS5'] = 'Obla';
-        heroRefTab['IHS6'] = 'Nbrn';
-        heroRefTab['IHS7'] = 'Hjai';
-        heroRefTab['IHS8'] = 'Hapm';
-        heroRefTab['IHS9'] = 'Edem';
-        heroRefTab['IHS:'] = 'Hblm';
-        
+
+        // class spec item reference table
         classSpecRefTab = Table.create();
         classSpecRefTab[UTID_BLOOD_ELF_DEFENDER] = ITID_ORB_OF_THE_SINDOREI;
         classSpecRefTab[UTID_CLAW_DRUID] = ITID_REFORGED_BADGE_OF_TENACITY;
@@ -155,18 +175,21 @@ constant integer HERO_SLCT_HIGH = 'IHS;';
         classSpecRefTab[UTID_FROST_MAGE] = ITID_RAGE_WINTERCHILLS_PHYLACTERY;
         classSpecRefTab[UTID_HEATHEN] = ITID_ANATHEMA;
         classSpecRefTab[UTID_EARTH_BINDER] = ITID_RARE_SHIMMER_WEED;
+
+        actualRef = Table.create();
+        actualRef['H008'] = UTID_BLOOD_ELF_DEFENDER;
+        actualRef['H00A'] = UTID_CLAW_DRUID;
+        actualRef['H00D'] = UTID_PALADIN;
+        actualRef['O001'] = UTID_PRIEST;
+        actualRef['E00O'] = UTID_KEEPER_OF_GROVE;
+        actualRef['O000'] = UTID_BLADE_MASTER;
+        actualRef['E00N'] = UTID_ROGUE;
+        actualRef['N013'] = UTID_DARK_RANGER;
+        actualRef['H00C'] = UTID_FROST_MAGE;
+        actualRef['H009'] = UTID_HEATHEN;
+        actualRef['H00B'] = UTID_EARTH_BINDER;
         
         p = null;
-        
-        //SetPlayerAlliance(Player(9), Player(0), ALLIANCE_SHARED_CONTROL, true);
-        //SetPlayerAlliance(Player(8), Player(0), ALLIANCE_SHARED_CONTROL, true);
-        //SetPlayerAlliance(Player(7), Player(0), ALLIANCE_SHARED_CONTROL, true);
-        //SetPlayerAlliance(Player(6), Player(0), ALLIANCE_SHARED_CONTROL, true);
-        //SetPlayerAlliance(Player(5), Player(0), ALLIANCE_SHARED_CONTROL, true);
-        //SetPlayerAlliance(Player(4), Player(0), ALLIANCE_SHARED_CONTROL, true);
-        //SetPlayerAlliance(Player(3), Player(0), ALLIANCE_SHARED_CONTROL, true);
-        //SetPlayerAlliance(Player(2), Player(0), ALLIANCE_SHARED_CONTROL, true);
-        //SetPlayerAlliance(Player(1), Player(0), ALLIANCE_SHARED_CONTROL, true);
     }
 
 

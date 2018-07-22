@@ -1,5 +1,5 @@
 //! zinc
-library TownPortal requires DebugExporter {
+library TownPortal requires DebugExporter, AggroSystem {
     public constant integer NUM_PORTALS = 8;
     unit portals[];
     boolean activated[];
@@ -41,58 +41,74 @@ library TownPortal requires DebugExporter {
         unit u = GetTriggerUnit();
         player p = GetOwningPlayer(u);
         if (itid == ITID_PORTAL_0) {
-            SetUnitPosition(u, 5300, -12266);
-            PanCameraToTimedForPlayer(p, 5300, -12266, 1.00);
-            AddTimedEffect.atUnit(ART_MASS_TELEPORT_TARGET, u, "origin", 0.5);
+            if (IsInCombat() == false) {
+                SetUnitPosition(u, 5300, -12266);
+                PanCameraToTimedForPlayer(p, 5300, -12266, 1.00);
+                AddTimedEffect.atUnit(ART_MASS_TELEPORT_TARGET, u, "origin", 0.5);
+            }
             SelectUnitForPlayerSingle(u, p);
             RemoveItem(it);
         }
         if (itid == ITID_PORTAL_1) {
-            SetUnitPosition(u, -5989, -12197);
-            PanCameraToTimedForPlayer(p, -5989, -12197, 1.00);
-            AddTimedEffect.atUnit(ART_MASS_TELEPORT_TARGET, u, "origin", 0.5);
+            if (IsInCombat() == false) {
+                SetUnitPosition(u, -5989, -12197);
+                PanCameraToTimedForPlayer(p, -5989, -12197, 1.00);
+                AddTimedEffect.atUnit(ART_MASS_TELEPORT_TARGET, u, "origin", 0.5);
+            }
             SelectUnitForPlayerSingle(u, p);
             RemoveItem(it);
         }
         if (itid == ITID_PORTAL_2) {
-            SetUnitPosition(u, -1210, -5429);
-            PanCameraToTimedForPlayer(p, -1210, -5429, 1.00);
-            AddTimedEffect.atUnit(ART_MASS_TELEPORT_TARGET, u, "origin", 0.5);
+            if (IsInCombat() == false) {
+                SetUnitPosition(u, -1210, -5429);
+                PanCameraToTimedForPlayer(p, -1210, -5429, 1.00);
+                AddTimedEffect.atUnit(ART_MASS_TELEPORT_TARGET, u, "origin", 0.5);
+            }
             SelectUnitForPlayerSingle(u, p);
             RemoveItem(it);
         }
         if (itid == ITID_PORTAL_3) {
-            SetUnitPosition(u, 3074, -4825);
-            PanCameraToTimedForPlayer(p, 3074, -4825, 1.00);
-            AddTimedEffect.atUnit(ART_MASS_TELEPORT_TARGET, u, "origin", 0.5);
+            if (IsInCombat() == false) {
+                SetUnitPosition(u, 3074, -4825);
+                PanCameraToTimedForPlayer(p, 3074, -4825, 1.00);
+                AddTimedEffect.atUnit(ART_MASS_TELEPORT_TARGET, u, "origin", 0.5);
+            }
             SelectUnitForPlayerSingle(u, p);
             RemoveItem(it);
         }
         if (itid == ITID_PORTAL_4) {
-            SetUnitPosition(u, 6479, -1116);
-            PanCameraToTimedForPlayer(p, 6479, -1116, 1.00);
-            AddTimedEffect.atUnit(ART_MASS_TELEPORT_TARGET, u, "origin", 0.5);
+            if (IsInCombat() == false) {
+                SetUnitPosition(u, 6479, -1116);
+                PanCameraToTimedForPlayer(p, 6479, -1116, 1.00);
+                AddTimedEffect.atUnit(ART_MASS_TELEPORT_TARGET, u, "origin", 0.5);
+            }
             SelectUnitForPlayerSingle(u, p);
             RemoveItem(it);
         }
         if (itid == ITID_PORTAL_5) {
-            SetUnitPosition(u, 7275, 8812);
-            PanCameraToTimedForPlayer(p, 7275, 8812, 1.00);
-            AddTimedEffect.atUnit(ART_MASS_TELEPORT_TARGET, u, "origin", 0.5);
+            if (IsInCombat() == false) {
+                SetUnitPosition(u, 7275, 8812);
+                PanCameraToTimedForPlayer(p, 7275, 8812, 1.00);
+                AddTimedEffect.atUnit(ART_MASS_TELEPORT_TARGET, u, "origin", 0.5);
+            }
             SelectUnitForPlayerSingle(u, p);
             RemoveItem(it);
         }
         if (itid == ITID_PORTAL_6) {
-            SetUnitPosition(u, -7211, 8782);
-            PanCameraToTimedForPlayer(p, -7211, 8782, 1.00);
-            AddTimedEffect.atUnit(ART_MASS_TELEPORT_TARGET, u, "origin", 0.5);
+            if (IsInCombat() == false) {
+                SetUnitPosition(u, -7211, 8782);
+                PanCameraToTimedForPlayer(p, -7211, 8782, 1.00);
+                AddTimedEffect.atUnit(ART_MASS_TELEPORT_TARGET, u, "origin", 0.5);
+            }
             SelectUnitForPlayerSingle(u, p);
             RemoveItem(it);
         }
         if (itid == ITID_PORTAL_7) {
-            SetUnitPosition(u, -2195, 3644);
-            PanCameraToTimedForPlayer(p, -2195, 3644, 1.00);
-            AddTimedEffect.atUnit(ART_MASS_TELEPORT_TARGET, u, "origin", 0.5);
+            if (IsInCombat() == false) {
+                SetUnitPosition(u, -2195, 3644);
+                PanCameraToTimedForPlayer(p, -2195, 3644, 1.00);
+                AddTimedEffect.atUnit(ART_MASS_TELEPORT_TARGET, u, "origin", 0.5);
+            }
             SelectUnitForPlayerSingle(u, p);
             RemoveItem(it);
         }
@@ -189,6 +205,26 @@ library TownPortal requires DebugExporter {
         trg5 = null;
         trg6 = null;
         trg7 = null;
+
+        TimerStart(CreateTimer(), 0.13, false, function() {
+            group g;
+            unit tu;
+            DestroyTimer(GetExpiredTimer());
+
+            g = NewGroup();
+            GroupEnumUnitsInRect(g, bj_mapInitialPlayableArea, null);
+            tu = FirstOfGroup(g);
+            while (tu != null) {
+                if (GetUnitTypeId(tu) == UTID_TOWN_PORTAL) {
+                    AddPortal(tu);
+                }
+                GroupRemoveUnit(g, tu);
+                tu = FirstOfGroup(g);
+            }
+            ReleaseGroup(g);
+            g = null;
+            tu = null;
+        });
     }
 }
 //! endzinc

@@ -22,7 +22,6 @@ library GameProcess requires PlayerUnitList, MobInit, AggroSystem {
                     i += 1;
                 }
                 this.wall = CreateDestructable(DOOD_POWER_WALL, this.wallPoint.x, this.wallPoint.y, this.wallFace, 1.2, 0);
-                logi("wall created at " + R2S(this.wallPoint.x) + ", " + R2S(this.wallPoint.y));
             }
         }
 

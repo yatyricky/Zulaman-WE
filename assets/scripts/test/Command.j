@@ -20,12 +20,11 @@ library Command requires Console, Assertion, StunUtils, UnitProperty, BuffSystem
     }
     
     function levelUp(string str) {
-        unit u; 
-        group g = CreateGroup();
-        GroupEnumUnitsSelected(g, Player(0), null);
-        u = FirstOfGroup(g);
-        SetHeroLevel(u, GetHeroLevel(u) + 14, true);
-        DestroyGroup(g);
+        integer i = 0;
+        while (i < PlayerUnits.n) {
+            SetHeroLevel(PlayerUnits.units[i], GetHeroLevel(PlayerUnits.units[i]) + 1, true);
+            i += 1;
+        }
     }
     
     function addAbility(string str) {
@@ -407,7 +406,7 @@ library Command requires Console, Assertion, StunUtils, UnitProperty, BuffSystem
 
     private function onInit() {
         Console[Player(0)].add("cls", screenClear);
-        Console[Player(0)].add("lvlup", levelUp);
+        Console[Player(0)].add("l", levelUp);
         Console[Player(0)].add("add", addAbility);
         Console[Player(0)].add("unit", createunit);
         Console[Player(0)].add("item", createitem);

@@ -1,5 +1,5 @@
 //! zinc
-library MobInit requires Table, BuffSystem, Patrol, NefUnion, WarlockGlobal, StunUtils, TownPortal, ChampionMonster {
+library MobInit requires Table, BuffSystem, Patrol, NefUnion, WarlockGlobal, StunUtils, ChampionMonster {
 constant integer MOBINIT_RESPAWN_L = 600;
 constant integer MOBINIT_RESPAWN_H = 720;
 
@@ -135,10 +135,6 @@ constant integer MOBINIT_RESPAWN_H = 720;
                     allCreepDataN[pid] += 1;
 
                     numMobs = numMobs + 1;
-                }
-                // Add portals
-                if (GetUnitTypeId(tu) == UTID_TOWN_PORTAL) {
-                    AddPortal(tu);
                 }
 
                 GroupRemoveUnit(g, tu);
