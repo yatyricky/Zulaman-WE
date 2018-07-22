@@ -1365,6 +1365,25 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         }
     }
 
+    function makeOrderFelPeon(unit source, unit target, real combatTime) {
+        IntegerPool ip;
+        integer res;
+        if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
+            ip = IntegerPool.create();
+            ip.add(0, 30);
+            if (UnitCanUse(source, SID_BLOOD_BOIL)) {
+                ip.add(SID_BLOOD_BOIL, 50);
+            }
+            res = ip.get();
+            if (res == 0) {
+                IssueTargetOrderById(source, OID_ATTACK, target);
+            } else {
+                IssueImmediateOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid);
+            }
+            ip.destroy();
+        }
+    }
+
     public function OrderCreeps(unit s, unit t, real c) {
         integer utid = GetUnitTypeId(s);
         //print(I2S(R2I(c)));
@@ -1441,6 +1460,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         unitCallBack[UTID_WIND_SERPENT] = makeOrderWindSerpent;
 
         // ============= Area 3 ==================
+        unitCallBack[UTID_FEL_PEON] = makeOrderFelPeon;
         unitCallBack[UTID_FEL_GRUNT] = makeOrderFelGrunt;
         unitCallBack[UTID_FEL_RIDER] = makeOrderFelRider;
         unitCallBack[UTID_FEL_WAR_BRINGER] = makeOrderFelWarBringer;
