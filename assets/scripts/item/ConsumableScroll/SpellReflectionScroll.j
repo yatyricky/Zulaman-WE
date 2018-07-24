@@ -4,7 +4,7 @@ constant integer FIELD_DUMMY_ID = 'e00F';
 constant integer BUFF_ID = 'A077';
 constant string  ART_EXPLOSION  = "Objects\\Spawnmodels\\NightElf\\NEDeathSmall\\NEDeathSmall.mdl";
 constant integer DURATION = 10;
-constant integer MAX_REFL = 20;
+constant integer MAX_REFL = 99;
     
     function onEffect(Buff buf) {
         UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModSpellReflect(buf.bd.i0);

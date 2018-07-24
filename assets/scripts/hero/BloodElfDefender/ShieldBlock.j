@@ -8,12 +8,12 @@ library ShieldBlock requires BuffSystem, DamageSystem, SpellEvent, UnitProperty,
 
     function onEffect(Buff buf) {
         UnitProp.inst(buf.bd.target, SCOPE_PREFIX).blockRate += buf.bd.r0;
-        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModSpellReflect(1);
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModSpellReflect(buf.bd.i0);
     }
 
     function onRemove(Buff buf) {
         UnitProp.inst(buf.bd.target, SCOPE_PREFIX).blockRate -= buf.bd.r0;
-        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellReflect -= 1;
+        UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellReflect -= buf.bd.i0;
         if (UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellReflect < 0) {
             UnitProp.inst(buf.bd.target, SCOPE_PREFIX).spellReflect = 0;
         }
@@ -34,8 +34,8 @@ library ShieldBlock requires BuffSystem, DamageSystem, SpellEvent, UnitProperty,
         Buff buf = Buff.cast(SpellEvent.CastingUnit, SpellEvent.CastingUnit, BID_SHIELD_BLOCK);
         buf.bd.tick = -1;
         buf.bd.interval = 5.0;
+        onRemove(buf);
         buf.bd.i0 = GetUnitAbilityLevel(SpellEvent.CastingUnit, SID_SHIELD_BLOCK);
-        UnitProp.inst(SpellEvent.CastingUnit, SCOPE_PREFIX).blockRate -= buf.bd.r0;
         buf.bd.r0 = returnBlockRate(buf.bd.i0);
         buf.bd.r1 = UnitProp.inst(buf.bd.target, SCOPE_PREFIX).BlockPoint();
         buf.bd.boe = onEffect;
@@ -49,9 +49,6 @@ library ShieldBlock requires BuffSystem, DamageSystem, SpellEvent, UnitProperty,
         RegisterSpellEffectResponse(SID_SHIELD_BLOCK, onCast);
         RegisterDamagedEvent(paladinHitted);
     }
-    
-
-
 
 }
 //! endzinc

@@ -6,13 +6,8 @@ library Smolder requires DamageSystem {
     timer tm;
 
     function onhit(Projectile p) -> boolean {
-        if (TryReflect(p.target)) {
-            p.reverse();
-            return false;
-        } else {
-            DummyDamageTarget(p.target, p.r0, SpellData.inst(SID_SMOLDER, SCOPE_PREFIX).name);
-            return true;
-        }
+        DummyDamageTarget(p.target, p.r0, SpellData.inst(SID_SMOLDER, SCOPE_PREFIX).name);
+        return true;
     }
 
     function check() {

@@ -157,7 +157,7 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
             real amt = 0;
             while (ii < 6) {
                 ti = UnitItemInSlot(u, ii);
-                if (ti != null && ti != thistype.droppingItem) {
+                if (ti != null && ti != thistype.droppingItem && GetItemLevel(ti) > 1) {
                     amt += thistype.getItemAttrVal(ti, id, true, trace + ">getUnitAttrVal");
                 }
                 ii += 1;
