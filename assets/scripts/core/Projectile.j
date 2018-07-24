@@ -16,7 +16,8 @@ library Projectile requires TimerUtils, Table, ZAMCore {
         integer i0;
         unit u0;
 
-        real angle, distance, dx, dy, step, travelled;
+        boolean overrideXY;
+        real angle, distance, dx, dy, step, travelled, overrideX, overrideY;
         real height, heightA, heightB, originalHeight;
         integer count;
         
@@ -31,6 +32,24 @@ library Projectile requires TimerUtils, Table, ZAMCore {
             this.pro = null;
             this.eff = null;
             this.deallocate();
+        }
+
+        static method create() -> thistype {
+            thistype this = thistype.allocate();
+            this.caster = null; this.target = null;
+            this.path = null;
+            this.tm = null;
+            this.pro = null;
+            this.eff = null;
+            this.u0 = null;
+            this.overrideXY = false;
+            return this;
+        }
+
+        method overrideStartXY(real x, real y) {
+            this.overrideXY = true;
+            this.overrideX = x;
+            this.overrideY = y;
         }
         
         method destroyEffect() {
@@ -114,7 +133,11 @@ library Projectile requires TimerUtils, Table, ZAMCore {
         method homingMissile() {
             this.tm = NewTimer();
             SetTimerData(this.tm, this);
-            this.eff = AddSpecialEffect(this.path, GetUnitX(this.caster), GetUnitY(this.caster));
+            if (this.overrideXY == true) {
+                this.eff = AddSpecialEffect(this.path, this.overrideX, this.overrideY);
+            } else {
+                this.eff = AddSpecialEffect(this.path, GetUnitX(this.caster), GetUnitY(this.caster));
+            }
             this.angle = GetAngle(GetUnitX(this.caster), GetUnitY(this.caster), GetUnitX(this.target), GetUnitY(this.target)) + GetRandomReal(1.745329, 4.537856); // plus 100 - 260 degs
             this.step = this.speed * 0.04;
             this.count = 0;

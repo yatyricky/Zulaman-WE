@@ -1,73 +1,78 @@
 //! zinc
 library FlameThrow requires SpellEvent, DamageSystem, GroupUtils {
-constant string  MISSILE  = "Abilities\\Weapons\\RedDragonBreath\\RedDragonMissile.mdl";
-constant string  IMPACT  = "Abilities\\Weapons\\FireBallMissile\\FireBallMissile.mdl";
 
     struct FlameThrow {
-        private timer tm;
-        private unit a, mis;
-        private integer tick;
-        private real x, y;
-        private group damaged;
-        private effect eff;
-        
-        private method destroy() {
-            DestroyEffect(this.eff);
-            KillUnit(this.mis);
-            ReleaseGroup(this.damaged);
+        timer tm;
+        unit caster;
+        integer tick;
+        real dx, dy;
+        effect eff;
+
+        method destroy() {
             ReleaseTimer(this.tm);
+            DestroyEffect(this.eff);
             this.tm = null;
-            this.damaged = null;
-            this.a = null;
-            this.mis = null;
+            this.caster = null;
+            this.eff = null;
             this.deallocate();
 
             FlameThrowAux.theBolt = null;
         }
-        
-        private static method run() {
-            thistype this = GetTimerData(GetExpiredTimer());
-            real nextx;
-            real nexty;
-            integer i = 0;
-            nextx = GetUnitX(this.mis) + this.x;
-            nexty = GetUnitY(this.mis) + this.y;
-            if (this.tick < 75) {
-                SetUnitX(this.mis, nextx);
-                SetUnitY(this.mis, nexty);
-                this.tick += 1;
-                
-                while (i < PlayerUnits.n) {
-                    if (GetDistance.units2d(PlayerUnits.units[i], this.mis) < FlameThrowAux.radius && !IsUnitDead(PlayerUnits.units[i]) && !IsUnitInGroup(PlayerUnits.units[i], this.damaged)) {
-                        DamageTarget(this.a, PlayerUnits.units[i], 750.0, SpellData.inst(SID_FLAME_THROW, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS, false);
-                        AddTimedEffect.atUnit(IMPACT, PlayerUnits.units[i], "origin", 0.0);
-                        GroupAddUnit(this.damaged, PlayerUnits.units[i]);
-                    }
-                    i += 1;
-                }
+
+        static method onHit(Projectile p) -> boolean {
+            if (TryReflect(p.target)) {
+                p.reverse();
+                return false;
             } else {
-                this.destroy();
+                DamageTarget(p.caster, p.target, p.r0, SpellData.inst(SID_FLAME_THROW, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS, true);
+                return true;
             }
         }
         
-        static method start(unit a, unit b) {
+        static method start(unit caster, unit target) {
             thistype this = thistype.allocate();
-            real angle = GetAngle(GetUnitX(a), GetUnitY(a), GetUnitX(b), GetUnitY(b));
-            this.a = a;
+            real angle = GetAngle(GetUnitX(caster), GetUnitY(caster), GetUnitX(target), GetUnitY(target));
+            this.caster = caster;
             this.tm = NewTimer();
             SetTimerData(this.tm, this);
-            this.x = Cos(angle) * 20.0;
-            this.y = Sin(angle) * 20.0;
+            this.dx = Cos(angle) * 6.0;
+            this.dy = Sin(angle) * 6.0;
             this.tick = 0;
-            this.damaged = NewGroup();
-            this.mis = CreateUnit(Player(0), DUMMY_ID, GetUnitX(a), GetUnitY(a), Rad2Deg(angle));
-            SetUnitFlyable(this.mis);
-            SetUnitFlyHeight(this.mis, 50.0, 0.0);
-            //SetUnitScale(this.mis, 2.0, 2.0, 2.0);
-            this.eff = AddSpecialEffectTarget(MISSILE, this.mis, "origin");
-            TimerStart(this.tm, 0.04, true, function thistype.run);
-
-            FlameThrowAux.theBolt = this.mis;
+            this.eff = AddSpecialEffect(ART_RedDragonMissile, GetUnitX(caster), GetUnitY(caster));
+            BlzSetSpecialEffectRoll(this.eff, angle);
+            BlzSetSpecialEffectScale(this.eff, 2.0);
+            TimerStart(this.tm, 0.04, true, function() {
+                thistype this = GetTimerData(GetExpiredTimer());
+                real nx;
+                real ny;
+                Projectile p;
+                unit tar;
+                if (this.tick < 257) {
+                    nx = BlzGetLocalSpecialEffectX(this.eff) + this.dx;
+                    ny = BlzGetLocalSpecialEffectY(this.eff) + this.dy;
+                    BlzSetSpecialEffectPosition(this.eff, nx, ny, GetLocZ(nx, ny) + 40.0);
+                    this.tick += 1;
+                    
+                    if (ModuloInteger(this.tick, 8) == 0) {
+                        tar = PlayerUnits.getRandomInRangeCoord(nx, ny, 200);
+                        if (tar != null) {
+                            p = Projectile.create();
+                            p.caster = this.caster;
+                            p.target = tar;
+                            p.path = ART_FireBallMissile;
+                            p.pr = thistype.onHit;
+                            p.speed = 600.0;
+                            p.r0 = 250.0;
+                            p.overrideStartXY(nx, ny);
+                            p.homingMissile();
+                        }
+                    }
+                } else {
+                    this.destroy();
+                }
+            });
+            // DBM
+            FlameThrowAux.theBolt = this.eff;
         }
     }
 
@@ -78,7 +83,6 @@ constant string  IMPACT  = "Abilities\\Weapons\\FireBallMissile\\FireBallMissile
     function onInit() {
         RegisterSpellEffectResponse(SID_FLAME_THROW, onCast);
     }
-
 
 }
 //! endzinc

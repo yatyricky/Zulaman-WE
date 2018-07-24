@@ -23,15 +23,12 @@ constant real DURATION = 3.0;
     }
 
     function onChannel() {
-        CastingBar.create(response).launch();
+        CastingBar.create(response).setVisuals(ART_FireBallMissile).launch();
     }
 
     function onInit() {
         RegisterSpellChannelResponse(SID_WAR_STOMP, onChannel);
     }
-
-
-
 
 }
 //! endzinc

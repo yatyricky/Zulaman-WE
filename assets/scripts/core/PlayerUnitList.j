@@ -78,6 +78,26 @@ library PlayerUnitList requires NefUnion, GroupUtils, ZAMCore {
             }
         }
         
+        static method getRandomInRangeCoord(real x, real y, real r) -> unit {
+            integer considered = 0;
+            integer i = 0;
+            unit ret = null;
+            if (thistype.n == 0) {
+                return null;
+            } else {
+                while (i < thistype.n) {
+                    if (GetDistance.unitCoord2d(thistype.units[i], x, y) <= r && !IsUnitUseless(thistype.units[i])) {
+                        considered += 1;
+                        if (GetRandomInt(1, considered) == 1) {
+                            ret = thistype.units[i];
+                        }
+                    }
+                    i += 1;
+                }
+                return ret;
+            }
+        }
+        
         static method sortByRule(UnitListSortRule rule) {
             integer i, j, mi;
             unit tmp;

@@ -25,7 +25,7 @@ constant string  PATH  = "Abilities\\Weapons\\FarseerMissile\\FarseerMissile.mdl
     }
     
     function onChannel() {
-        CastingBar.create(response).launch();
+        CastingBar.create(response).setVisuals(ART_FarseerMissile).launch();
     }
 
     function onInit() {

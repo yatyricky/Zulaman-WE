@@ -1077,6 +1077,7 @@ public constant string ART_SteamBubble = "Doodads\\Icecrown\\Water\\BubbleGeyser
 public constant string ART_OrbCorruptionMissile = "Abilities\\Spells\\Items\\OrbCorruption\\OrbCorruptionMissile.mdl";
 public constant string ART_BallistaMissileTarget = "Abilities\\Weapons\\BallistaMissile\\BallistaMissileTarget.mdl";
 public constant string ART_VolcanoDeath = "Abilities\\Spells\\Other\\Volcano\\VolcanoDeath.mdl";
+public constant string ART_RedDragonMissile = "Abilities\\Weapons\\RedDragonBreath\\RedDragonMissile.mdl";
 
 public constant string BTNVolcano = "ReplaceableTextures\\CommandButtons\\BTNVolcano.blp";
 public constant string BTNEarthquake = "ReplaceableTextures\\CommandButtons\\BTNEarthquake.blp";

@@ -255,9 +255,9 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, FrostNov
             if (FlameThrowAux.theBolt == null) {
                 return true;
             } else {
-                if (GetDistance.units2d(source, FlameThrowAux.theBolt) <= FlameThrowAux.radius * 1.7) {
-                    ym = GetUnitY(FlameThrowAux.theBolt);
-                    xm = GetUnitX(FlameThrowAux.theBolt);
+                if (GetDistance.unitCoord2d(source, BlzGetLocalSpecialEffectX(FlameThrowAux.theBolt), BlzGetLocalSpecialEffectY(FlameThrowAux.theBolt)) <= FlameThrowAux.radius * 1.7) {
+                    ym = BlzGetLocalSpecialEffectY(FlameThrowAux.theBolt);
+                    xm = BlzGetLocalSpecialEffectX(FlameThrowAux.theBolt);
                     yo = GetUnitY(whichBoss);
                     xo = GetUnitX(whichBoss);
                     yt = GetUnitY(source);

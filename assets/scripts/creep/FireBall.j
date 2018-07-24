@@ -1,7 +1,5 @@
 //! zinc
 library FireBall requires DamageSystem {
-constant string  PATH  = "Abilities\\Weapons\\FireBallMissile\\FireBallMissile.mdl";
-constant real DAMAGE = 500.0;
 
     function onhit(Projectile p) -> boolean {
         if (TryReflect(p.target)) {
@@ -20,22 +18,21 @@ constant real DAMAGE = 500.0;
             p = Projectile.create();
             p.caster = cd.caster;
             p.target = PlayerUnits.units[i];
-            p.path = PATH;
+            p.path = ART_FireBallMissile;
             p.pr = onhit;
             p.speed = 900;
-            p.r0 = DAMAGE;
+            p.r0 = 500.0;
             p.launch();
         }
     }
     
     function onChannel() {
-        CastingBar.create(response).launch();
+        CastingBar.create(response).setVisuals(ART_FireBallMissile).launch();
     }
 
     function onInit() {
         RegisterSpellChannelResponse(SID_FIRE_BALL, onChannel);
     }
-
 
 }
 //! endzinc

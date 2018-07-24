@@ -55,7 +55,7 @@ constant integer INIT_AMT = 1000;
                 count -= 1;
             } else {
                 count -= MAX_TARGETS;
-            }            
+            }
         }
         
         next = null;
@@ -64,17 +64,12 @@ constant integer INIT_AMT = 1000;
     }
     
     function onChannel() {
-        CastingBar.create(response).launch();
+        CastingBar.create(response).setVisuals(ART_FAERIE_DRAGON_MISSILE).launch();
     }
 
     function onInit() {
         RegisterSpellChannelResponse(SID_CHAIN_HEALING, onChannel);
     }
-    
-
-
-
-
 
 }
 //! endzinc
