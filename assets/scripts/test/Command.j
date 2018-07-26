@@ -399,7 +399,11 @@ library Command requires Console, Assertion, StunUtils, UnitProperty, BuffSystem
         GroupEnumUnitsSelected(g, Player(0), null);
         u = FirstOfGroup(g);
         
-        SetUnitPosition(u, GetCameraTargetPositionX(), GetCameraTargetPositionY());
+        while (u != null) {
+            SetUnitPosition(u, GetCameraTargetPositionX(), GetCameraTargetPositionY());
+            GroupRemoveUnit(g, u);
+            u = FirstOfGroup(g);
+        }
         
         DestroyGroup(g);
     }

@@ -643,7 +643,7 @@ constant integer MAX_PLAYER_UNITS = 50;
         if (!IsUnitDummy(u) && !IsUnitIllusion(u)) {
             if (GetPlayerId(GetOwningPlayer(u)) == MOB_PID) {
                 if (IsInCombat()) {
-                    if (GetDistance.units2d(PlayerUnits.units[0], u) < 1500 && IsUnitSummoned(u) == true) {
+                    if (IsUnitSummoned(u) == true) {
                         MobList.add(u);
                     }
                 }
@@ -721,6 +721,23 @@ constant integer MAX_PLAYER_UNITS = 50;
             AggroAll(HealResult.source, HealResult.effective);
         }
     }
+
+    function killInThread(DelayTask dt) {
+        KillUnit(dt.u0);
+    }
+
+    function bossDeathSaki(unit u) {
+        integer i;
+        if (IsUnitBoss(u)) {
+            i = 0;
+            while (i < MobList.n) {
+                if (IsUnitSummoned(MobList.units[i]) == true) {
+                    DelayTask.create(killInThread, 0.01 * i).u0 = MobList.units[i];
+                }
+                i += 1;
+            }
+        }
+    }
     
     private function onInit() {
         MobList.combatTime = -1.0;
@@ -730,6 +747,7 @@ constant integer MAX_PLAYER_UNITS = 50;
         RegisterUnitEnterMap(register);
         
         RegisterUnitDeath(playerDeath);
+        RegisterUnitDeath(bossDeathSaki);
         RegisterDamagedEvent(setAggros);
         RegisterHealedEvent(setAggrosHealed);
     }
