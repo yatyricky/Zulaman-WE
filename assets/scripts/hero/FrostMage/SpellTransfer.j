@@ -10,17 +10,21 @@ library SpellTransfer requires BuffSystem, SpellEvent, UnitProperty {
             // cast on ally
             buf = BuffSlot[SpellEvent.TargetUnit].dispel(BUFF_MAGE, BUFF_NEG);
             if (buf != 0) {
-                bl = BuffSlot[buf.bd.caster];
-                tmp = bl.getBuffByBid(buf.bd.bt.bid);
-                if (tmp != 0) {
-                    //print("removing duplicated buff");
-                    tmp.onRemove();
-                    tmp.destroy();
+                if (IsUnitDead(buf.bd.caster) == false) {
+                    bl = BuffSlot[buf.bd.caster];
+                    tmp = bl.getBuffByBid(buf.bd.bt.bid);
+                    if (tmp != 0) {
+                        //print("removing duplicated buff");
+                        tmp.onRemove();
+                        tmp.destroy();
+                    }
+                    buf.bd.target = buf.bd.caster;
+                    buf.bd.caster = SpellEvent.CastingUnit;
+                    buf.refresh();
+                    bl.push(buf);
+                } else {
+                    buf.destroy();
                 }
-                buf.bd.target = buf.bd.caster;
-                buf.bd.caster = SpellEvent.CastingUnit;
-                buf.refresh();
-                bl.push(buf);
             }
         } else {
             buf = BuffSlot[SpellEvent.TargetUnit].dispel(BUFF_MAGE, BUFF_POS);

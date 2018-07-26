@@ -420,7 +420,7 @@ library NefUnion requires TimerUtils, Math {
         private RepeatedTaskExecute response;
         unit u0, u1;
         integer i0;
-        real r0, r1;
+        real r0, r1, r2, r3, r4;
         string s0;
         integer data;
         

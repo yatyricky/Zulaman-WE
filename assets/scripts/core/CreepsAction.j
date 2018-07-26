@@ -1384,6 +1384,28 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         }
     }
 
+    function makeOrderLavaSpawn(unit source, unit target, real combatTime) {
+        IntegerPool ip;
+        integer res;
+        unit tu;
+        if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
+            ip = IntegerPool.create();
+            ip.add(0, 30);
+            if (UnitCanUse(source, SID_FIRE_SHIFT)) {
+                ip.add(SID_FIRE_SHIFT, 30);
+            }
+            res = ip.get();
+            if (res == 0) {
+                IssueTargetOrderById(source, OID_ATTACK, target);
+            } else {
+                tu = PlayerUnits.getRandomHero();
+                IssuePointOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, GetUnitX(tu), GetUnitY(tu));
+                tu = null;
+            }
+            ip.destroy();
+        }
+    }
+
     public function OrderCreeps(unit s, unit t, real c) {
         integer utid = GetUnitTypeId(s);
         //print(I2S(R2I(c)));
@@ -1422,7 +1444,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         unitCallBack[UTID_TIDE_BARON] = makeOrderTideBaron;   // Sir Tide Naga form
 
         unitCallBack[UTID_WARLOCK] = makeOrderWarlock;   // Warlock
-        unitCallBack[UTID_LAVA_SPAWN] = makeOrderJustAttack;
+        unitCallBack[UTID_LAVA_SPAWN] = makeOrderLavaSpawn;
 
         unitCallBack[UTID_PIT_ARCHON] = makeOrderAbyssArchon;
         unitCallBack[UTID_SPIKE] = makeOrderDoNothing;

@@ -12,6 +12,11 @@ library WarlockGlobal requires NefUnion, ZAMCore, Table {
     real heroBodySize = 60.0;
     public real platformRadius = 950;
 
+    public struct FireShiftConsts {
+        static real AOE = 200.0;
+        static real selfDamageRatio = 0.2;
+    }
+
     public struct FireBombGroup {
         static unit bombs[];
         static integer size = 0;

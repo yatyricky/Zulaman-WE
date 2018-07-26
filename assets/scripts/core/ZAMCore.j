@@ -57,6 +57,7 @@ library ZAMCore requires NefUnion {
     }
 
     public function IsUnitDead(unit u) -> boolean {
+        if (u == null) return true;
         return GetWidgetLife(u) < 0.405 || IsUnitType(u, UNIT_TYPE_DEAD);
     }
 

@@ -262,7 +262,7 @@ public constant integer SID_LANCINATE = 'A04X';
 public constant integer SID_RASPY_ROAR = 'A04Y';
 public constant integer SID_RASPY_ROAR_DUMMY = 'A051';
 
-// 术士
+// Warlock
 public constant real WLK_SQR_CENTRE_X = 4608.00;
 public constant real WLK_SQR_CENTRE_Y = 768.00;
 public constant integer UTID_WARLOCK = 'Ulic';
@@ -274,6 +274,8 @@ public constant integer SID_FLAME_BOMB = 'A060';
 public constant integer SID_SUMMON_LAVA_SPAWN = 'A061';
 public constant integer SID_FRENZY_WARLOCK = 'A062';
 public constant integer BID_FRENZY_WARLOCK = 'A0AW';
+public constant integer SID_FIRE_SHIFT = 'A0FE';
+public constant integer BID_FIRE_SHIFT = 'A0FF';
 
 // Abyss Archon
 public constant integer UTID_PIT_ARCHON = 'Ucrl';
@@ -1078,6 +1080,9 @@ public constant string ART_OrbCorruptionMissile = "Abilities\\Spells\\Items\\Orb
 public constant string ART_BallistaMissileTarget = "Abilities\\Weapons\\BallistaMissile\\BallistaMissileTarget.mdl";
 public constant string ART_VolcanoDeath = "Abilities\\Spells\\Other\\Volcano\\VolcanoDeath.mdl";
 public constant string ART_RedDragonMissile = "Abilities\\Weapons\\RedDragonBreath\\RedDragonMissile.mdl";
+public constant string ART_FireTrapUp = "Doodads\\Cinematic\\FireTrapUp\\FireTrapUp.mdl";
+public constant string ART_VolcanoMissile = "Abilities\\Spells\\Other\\Volcano\\VolcanoMissile.mdl";
+public constant string ART_FaerieFireTarget = "Abilities\\Spells\\NightElf\\FaerieFire\\FaerieFireTarget.mdl";
 
 public constant string BTNVolcano = "ReplaceableTextures\\CommandButtons\\BTNVolcano.blp";
 public constant string BTNEarthquake = "ReplaceableTextures\\CommandButtons\\BTNEarthquake.blp";

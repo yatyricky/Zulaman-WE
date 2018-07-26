@@ -200,6 +200,7 @@ library SpellData requires Table, Integer {
             SpellData.create(SID_FLAME_BOMB,"Flame Bomb",100,10,40,OrderId("slow"),2,ORDER_TYPE_IMMEDIATE);
             SpellData.create(SID_SUMMON_LAVA_SPAWN,"Summon Lava Spawn",100,10,30,OrderId("soulburn"),1,ORDER_TYPE_IMMEDIATE);
             SpellData.create(SID_FRENZY_WARLOCK,"Frenzy Warlock",0,0,200,OrderId("stomp"),1,ORDER_TYPE_IMMEDIATE);
+            SpellData.create(SID_FIRE_SHIFT,"Fire Shift",0,4,10,OrderId("blizzard"),1,ORDER_TYPE_POINT);
             SpellData.create(SID_IMPALE,"Impale",0,0,20,OrderId("impale"),1,ORDER_TYPE_TARGET);
             SpellData.create(SID_SUMMON_POISONOUS_CRAWLER,"Summon Poisonous Crawler",0,0,25,OrderId("slow"),1,ORDER_TYPE_IMMEDIATE);
             SpellData.create(SID_SUMMON_ABOMINATION,"Summon Abomination",0,0,20,OrderId("charm"),1,ORDER_TYPE_IMMEDIATE);

@@ -1,12 +1,13 @@
 //! zinc
-library VisualEffects requires List {
+library VisualEffects requires List, NefUnion {
 
     public struct VisualEffects {
         ListObject list;
         timer tm;
-        real step, dx, dy;
+        real step, dx, dy, r;
         integer c;
         effect eff;
+        string model;
 
         method destroy() {
             NodeObject iter = this.list.head;
@@ -115,6 +116,22 @@ library VisualEffects requires List {
             }
             SetTimerData(this.tm, this);
             TimerStart(this.tm, interval, false, function thistype.destroySimple);
+        }
+
+        static method drawCircleCallback(RepeatTask rt) {
+            real x = rt.r0 + Cos(rt.r2 * rt.current) * rt.r3;
+            real y = rt.r1 + Sin(rt.r2 * rt.current) * rt.r3;
+            AddTimedEffect.atCoord(rt.s0, x, y, rt.r4).setRoll(rt.r2 * rt.current);
+        }
+
+        static method drawCircle(string model, real x, real y, real r, integer num, real interval, real life) {
+            RepeatTask rt = RepeatTask.create(thistype.drawCircleCallback, interval, num);
+            rt.r0 = x;
+            rt.r1 = y;
+            rt.r2 = bj_PI * 2.0 / num;
+            rt.r3 = r;
+            rt.r4 = life;
+            rt.s0 = model;
         }
 
         static method line(string model, real x1, real y1, real x2, real y2, real step, real et) {

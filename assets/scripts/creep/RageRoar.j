@@ -1,7 +1,6 @@
 //! zinc
 library RageRoar requires SpellEvent, BuffSystem {
 constant string  ART_CASTER  = "Abilities\\Spells\\Other\\HowlOfTerror\\HowlCaster.mdl";
-constant string  ART_TARGET  = "Abilities\\Spells\\NightElf\\FaerieFire\\FaerieFireTarget.mdl";
 constant integer BUFF_ID = 'A09X';
     
     function onEffect(Buff buf) {
@@ -22,7 +21,7 @@ constant integer BUFF_ID = 'A09X';
                 buf.bd.interval = 10.0;
                 UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageTaken -= buf.bd.r0;
                 buf.bd.r0 = 0.5;
-                if (buf.bd.e0 == 0) {buf.bd.e0 = BuffEffect.create(ART_TARGET, buf, "head");}
+                if (buf.bd.e0 == 0) {buf.bd.e0 = BuffEffect.create(ART_FaerieFireTarget, buf, "head");}
                 //if (buf.bd.e1 == 0) {buf.bd.e1 = BuffEffect.create(ART_RIGHT, buf, "hand, right");}
                 buf.bd.boe = onEffect;
                 buf.bd.bor = onRemove;
