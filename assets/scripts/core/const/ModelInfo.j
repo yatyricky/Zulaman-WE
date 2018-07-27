@@ -108,7 +108,7 @@ ModelInfo.rg(UTID_NAGA_SEA_WITCH,ATT_AGI,154899,490,300,5,0.05,0,0,1,0.03,CAREER
 ModelInfo.rg(UTID_FLYING_SERPENT,ATT_NON,7999,21,59,5,0.05,0,0,1,0.1,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNWindSerpent.blp");
 ModelInfo.rg(UTID_TIDE_BARON,ATT_STR,209599,660,400,5,0.05,0,0,1,0.03,CAREER_TYPE_BOSS,"ReplaceableTextures\\CommandButtons\\BTNNagaMyrmidonRoyalGuard.blp");
 ModelInfo.rg(UTID_TIDE_BARON_WATER,ATT_STR,209599,310,150,40,0.1,0,0,1,0.03,CAREER_TYPE_BOSS,"ReplaceableTextures\\CommandButtons\\BTNSeaElemental.blp");
-ModelInfo.rg(UTID_WARLOCK,ATT_INT,399899,970,500,5,0.05,0,0,1,0.03,CAREER_TYPE_BOSS,"ReplaceableTextures\\CommandButtons\\BTNOrcWarlock.blp");
+ModelInfo.rg(UTID_WARLOCK,ATT_INT,399899,470,400,5,0.05,0,0,1,0,CAREER_TYPE_BOSS,"ReplaceableTextures\\CommandButtons\\BTNOrcWarlock.blp");
 ModelInfo.rg(UTID_LAVA_SPAWN,ATT_NON,49999,50,0,0,0.05,0,0,1,0.05,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNLavaSpawn.blp");
 ModelInfo.rg(UTID_PIT_ARCHON,ATT_STR,449899,740,500,5,0.05,0,0,1,0.03,CAREER_TYPE_BOSS,"ReplaceableTextures\\CommandButtons\\BTNHeroCryptLord.blp").setScale(1.7);
 ModelInfo.rg(UTID_SPIKE,ATT_NON,2999,100,50,0,0,0,0,1,0,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNImpale.blp");

@@ -21,7 +21,7 @@ library FlameThrow requires SpellEvent, DamageSystem, GroupUtils {
 
         static method onHit(Projectile p) -> boolean {
             if (TryReflect(p.target)) {
-                p.reverse();
+                p.reverseHoming();
                 return false;
             } else {
                 DamageTarget(p.caster, p.target, p.r0, SpellData.inst(SID_FLAME_THROW, SCOPE_PREFIX).name, false, false, false, WEAPON_TYPE_WHOKNOWS, true);
@@ -54,7 +54,7 @@ library FlameThrow requires SpellEvent, DamageSystem, GroupUtils {
                     this.tick += 1;
                     
                     if (ModuloInteger(this.tick, 8) == 0) {
-                        tar = PlayerUnits.getRandomInRangeCoord(nx, ny, 200);
+                        tar = PlayerUnits.getRandomInRangeCoord(nx, ny, FlameThrowAux.radius);
                         if (tar != null) {
                             p = Projectile.create();
                             p.caster = this.caster;

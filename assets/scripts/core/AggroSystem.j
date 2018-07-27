@@ -492,6 +492,12 @@ constant integer MAX_PLAYER_UNITS = 50;
                         if (damageReduc < 0.01) {damageReduc = 0.01;}
                         if (damageReduc > 2.5) {damageReduc = 999999.0;} // tinker priority
                         td = GetWidgetLife(thistype.units[i]) / damageReduc;
+                        // hardcode for lava spawn
+                        if (GetUnitTypeId(thistype.units[i]) == UTID_LAVA_SPAWN) {
+                            if (GetUnitStatePercent(thistype.units[i], UNIT_STATE_LIFE, UNIT_STATE_MAX_LIFE) >= 30) {
+                                td *= 100000;
+                            }
+                        }
                         if (td < dis) {
                             dis = td;
                             ret = thistype.units[i];

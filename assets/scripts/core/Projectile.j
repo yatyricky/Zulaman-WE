@@ -75,6 +75,12 @@ library Projectile requires TimerUtils, Table, ZAMCore {
             
         }
         
+        method reverseHoming() {
+            unit tmp = this.caster;
+            this.caster = this.target;
+            this.target = tmp;
+        }
+        
         static method run() {
             thistype this = GetTimerData(GetExpiredTimer());
             real dist;

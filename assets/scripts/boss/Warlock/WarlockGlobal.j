@@ -15,6 +15,11 @@ library WarlockGlobal requires NefUnion, ZAMCore, Table {
     public struct FireShiftConsts {
         static real AOE = 200.0;
         static real selfDamageRatio = 0.2;
+        static ListObject ps;
+
+        static method onInit() {
+            thistype.ps = ListObject.create();
+        }
     }
 
     public struct FireBombGroup {
@@ -32,7 +37,7 @@ library WarlockGlobal requires NefUnion, ZAMCore, Table {
     }
 
     public struct FlameThrowAux {
-        static real radius = 150.0;
+        static real radius = 200.0;
         static effect theBolt = null;
     }
 

@@ -578,6 +578,7 @@ library NefUnion requires TimerUtils, Math {
     }
     
     public function GetUnitNameEx(unit u) -> string {
+        if (u == null) return "NULL";
         if (IsUnitType(u, UNIT_TYPE_HERO)) {
             return GetHeroProperName(u);
         } else {

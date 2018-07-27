@@ -637,9 +637,8 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         integer res;
         if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
             ip = IntegerPool.create();
-            if (UnitCanUse(source, SID_RAGE_CREEP) && combatTime > 300) {
-            // print("makeOrderWarlock: Time > 300 add " + ID2S(SID_RAGE_CREEP));
-                ip.add(SID_RAGE_CREEP, 30);
+            if (UnitCanUse(source, SID_DANCE_MAT) && GetUnitStatePercent(source, UNIT_STATE_LIFE, UNIT_STATE_MAX_LIFE) < 26) {
+                ip.add(SID_DANCE_MAT, 30);
             } else if (UnitCanUse(source, SID_FRENZY_WARLOCK) && GetUnitStatePercent(source, UNIT_STATE_LIFE, UNIT_STATE_MAX_LIFE) < 26) {
             // print("makeOrderWarlock: HP < 25 add " + ID2S(SID_FRENZY_WARLOCK));
                 ip.add(SID_FRENZY_WARLOCK, 30);
@@ -1391,7 +1390,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
             ip = IntegerPool.create();
             ip.add(0, 30);
-            if (UnitCanUse(source, SID_FIRE_SHIFT)) {
+            if (UnitCanUse(source, SID_FIRE_SHIFT) && GetUnitStatePercent(source, UNIT_STATE_LIFE, UNIT_STATE_MAX_LIFE) >= FireShiftConsts.selfDamageRatio * 150) {
                 ip.add(SID_FIRE_SHIFT, 30);
             }
             res = ip.get();

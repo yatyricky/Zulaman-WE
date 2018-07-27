@@ -220,16 +220,16 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, FrostNov
     }
 
     function PositioningWarlock(unit source) -> boolean {
-        // vector v;
-        // real tx, ty;
         boolean safe;
         real dis, dx, dy;
         unit danger;
         integer i;
-
         real k1, b1, k2, b2, sx, sy, ym, xm, yo, xo, yt, xt;
+        NodeObject iter;
+        Point p;
+        
+        // position on firebomb
         if (DBMWarlock.isFireBomb) {
-            // position on firebomb
             safe = true;
             for (0 <= i < FireBombGroup.size) {
                 dis = GetDistance.units2d(source, FireBombGroup.bombs[i]);
@@ -240,41 +240,51 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, FrostNov
                 }
             }
 
-            if (safe) {
-                // IssueImmediateOrderById(source, OID_HOLD);
-                return true;   
-            } else {
+            if (safe == false) {
                 dx = 200 * (GetUnitX(source) - GetUnitX(danger)) / dis;
                 dy = 200 * (GetUnitY(source) - GetUnitY(danger)) / dis;
                 IssuePointOrderById(source, OID_MOVE, GetUnitX(source) + dx, GetUnitY(source) + dy);
                 return false;
             }
 
-        } else {
-            // dodge flame throw
-            if (FlameThrowAux.theBolt == null) {
-                return true;
-            } else {
-                if (GetDistance.unitCoord2d(source, BlzGetLocalSpecialEffectX(FlameThrowAux.theBolt), BlzGetLocalSpecialEffectY(FlameThrowAux.theBolt)) <= FlameThrowAux.radius * 1.7) {
-                    ym = BlzGetLocalSpecialEffectY(FlameThrowAux.theBolt);
-                    xm = BlzGetLocalSpecialEffectX(FlameThrowAux.theBolt);
-                    yo = GetUnitY(whichBoss);
-                    xo = GetUnitX(whichBoss);
-                    yt = GetUnitY(source);
-                    xt = GetUnitX(source);
-                    k1 = (ym - yo) / (xm - xo);
-                    b1 = (xm * yo - ym * xo) / (xm - xo);
-                    k2 = -1.0 / k1;
-                    b2 = yt - k2 * xt;
-                    sx = (b2 - b1) / (k1 - k2);
-                    sy = k1 * sx + b1;
-                    dis = GetDistance.unitCoord(source, sx, sy);
-                    dx = 200 * (xt - sx) / dis;
-                    dy = 200 * (yt - sy) / dis;
-                    IssuePointOrderById(source, OID_MOVE, xt + dx, yt + dy);
-                    return false;
+        }
+        // dodge flame throw
+        if (FlameThrowAux.theBolt != null) {
+            if (GetDistance.unitCoord2d(source, BlzGetLocalSpecialEffectX(FlameThrowAux.theBolt), BlzGetLocalSpecialEffectY(FlameThrowAux.theBolt)) <= FlameThrowAux.radius * 1.7) {
+                ym = BlzGetLocalSpecialEffectY(FlameThrowAux.theBolt);
+                xm = BlzGetLocalSpecialEffectX(FlameThrowAux.theBolt);
+                yo = GetUnitY(whichBoss);
+                xo = GetUnitX(whichBoss);
+                yt = GetUnitY(source);
+                xt = GetUnitX(source);
+                k1 = (ym - yo) / (xm - xo);
+                b1 = (xm * yo - ym * xo) / (xm - xo);
+                k2 = -1.0 / k1;
+                b2 = yt - k2 * xt;
+                sx = (b2 - b1) / (k1 - k2);
+                sy = k1 * sx + b1;
+                dis = GetDistance.unitCoord(source, sx, sy);
+                dx = 200 * (xt - sx) / dis;
+                dy = 200 * (yt - sy) / dis;
+                IssuePointOrderById(source, OID_MOVE, xt + dx, yt + dy);
+                return false;
+            }
+        }
+        // dodge fire shift
+        if (FireShiftConsts.ps.count() > 0) {
+            safe = true;
+            iter = FireShiftConsts.ps.head;
+            while (iter != 0 && safe == true) {
+                p = Point(iter.data);
+                dis = GetDistance.unitCoord2d(source, p.x, p.y);
+                if (dis < FireShiftConsts.AOE) {
+                    safe = false;
                 }
-                return true;
+                iter = iter.next;
+            }
+            if (safe == false) {
+                IssuePointOrderById(source, OID_MOVE, 2 * GetUnitX(source) - p.x, 2 * GetUnitY(source) - p.y);
+                return false;
             }
         }
         return true;

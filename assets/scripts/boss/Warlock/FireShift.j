@@ -12,6 +12,7 @@ library FireShift requires WarlockGlobal {
     function response(CastingBar cd) {
         integer i;
         Buff buf;
+        Point p;
         // AOE damage & debuff
         i = 0;
         while (i < PlayerUnits.n) {
@@ -37,11 +38,19 @@ library FireShift requires WarlockGlobal {
         SetUnitPosition(cd.caster, cd.targetX, cd.targetY);
         // visual effect
         AddTimedEffect.atCoord(ART_VolcanoMissile, cd.targetX, cd.targetY, 0).setScale(2.0);
+        // remove DBM
+        p = Point(cd.extraData);
+        p.destroy();
+        FireShiftConsts.ps.remove(p);
     }
 
     function onChannel() {
-        CastingBar.create(response).setVisuals(ART_FireBallMissile).launch();
+        CastingBar cb = CastingBar.create(response);
+        cb.extraData = Point.new(SpellEvent.TargetX, SpellEvent.TargetY);
+        cb.setVisuals(ART_FireBallMissile);
+        cb.launch();
         VisualEffects.drawCircle(ART_FireTrapUp, SpellEvent.TargetX, SpellEvent.TargetY, FireShiftConsts.AOE, 15, 0.15, 2.0);
+        FireShiftConsts.ps.push(cb.extraData);
     }
 
     function onInit() {
