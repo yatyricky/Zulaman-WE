@@ -637,7 +637,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         integer res;
         if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
             ip = IntegerPool.create();
-            if (UnitCanUse(source, SID_DANCE_MAT) && GetUnitStatePercent(source, UNIT_STATE_LIFE, UNIT_STATE_MAX_LIFE) < 26) {
+            if (UnitCanUse(source, SID_DANCE_MAT) && GetFireRune() == null) {
                 ip.add(SID_DANCE_MAT, 30);
             } else if (UnitCanUse(source, SID_FRENZY_WARLOCK) && GetUnitStatePercent(source, UNIT_STATE_LIFE, UNIT_STATE_MAX_LIFE) < 26) {
             // print("makeOrderWarlock: HP < 25 add " + ID2S(SID_FRENZY_WARLOCK));

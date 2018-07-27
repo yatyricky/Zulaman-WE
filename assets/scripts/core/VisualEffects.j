@@ -164,6 +164,28 @@ library VisualEffects requires List, NefUnion {
             });
         }
 
+        static method spamEffectsInTriangle(string model, real ox, real oy, real ax, real ay, real bx, real by, integer num, real life) {
+            integer i = 0;
+            real oax = ax - ox;
+            real oay = ay - oy;
+            real obx = bx - ox;
+            real oby = by - oy;
+            real oar, obr;
+            real tx, ty;
+            while (i < num) {
+                oar = GetRandomReal(0.0, 1.0);
+                obr = GetRandomReal(0.0, 1.0);
+                if (oar + obr > 1) {
+                    oar = 1 - oar;
+                    obr = 1 - obr;
+                }
+                tx = oax * oar + obx * obr + ox;
+                ty = oay * oar + oby * obr + oy;
+                AddTimedEffect.atCoord(model, tx, ty, life);
+                i += 1;
+            }
+        }
+
     }
 
 }

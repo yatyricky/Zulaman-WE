@@ -204,6 +204,7 @@ library GameProcess requires PlayerUnitList, MobInit, AggroSystem {
                 }
                 if (utid == UTID_WARLOCK) {
                     BossFightCloseGate[4].close();
+                    DanceMatConst.reset();
                 }
                 if (utid == UTID_PIT_ARCHON) {
                     BossFightCloseGate[5].close();

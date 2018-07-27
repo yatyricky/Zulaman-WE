@@ -276,6 +276,7 @@ public constant integer SID_FRENZY_WARLOCK = 'A062';
 public constant integer BID_FRENZY_WARLOCK = 'A0AW';
 public constant integer SID_FIRE_SHIFT = 'A0FE';
 public constant integer BID_FIRE_SHIFT = 'A0FF';
+public constant integer SID_DANCE_MAT = 'A0FG';
 
 // Abyss Archon
 public constant integer UTID_PIT_ARCHON = 'Ucrl';
@@ -1083,6 +1084,7 @@ public constant string ART_RedDragonMissile = "Abilities\\Weapons\\RedDragonBrea
 public constant string ART_FireTrapUp = "Doodads\\Cinematic\\FireTrapUp\\FireTrapUp.mdl";
 public constant string ART_VolcanoMissile = "Abilities\\Spells\\Other\\Volcano\\VolcanoMissile.mdl";
 public constant string ART_FaerieFireTarget = "Abilities\\Spells\\NightElf\\FaerieFire\\FaerieFireTarget.mdl";
+public constant string ART_LavaSpawnMissile = "Abilities\\Weapons\\LavaSpawnMissile\\LavaSpawnMissile.mdl";
 
 public constant string BTNVolcano = "ReplaceableTextures\\CommandButtons\\BTNVolcano.blp";
 public constant string BTNEarthquake = "ReplaceableTextures\\CommandButtons\\BTNEarthquake.blp";

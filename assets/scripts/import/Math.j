@@ -113,6 +113,17 @@ library Math requires Vector {
         return (projAMonAB >= 0 && projAMonAB <= magAB && projAMonAD >= 0 && projAMonAD <= magAD);
     }
 
+    // https://jsfiddle.net/PerroAZUL/zdaY8/1/
+    public function IsPointInTriangle(real px, real py, real p0x, real p0y, real p1x, real p1y, real p2x, real p2y) -> boolean {
+        real A = 0.5 * (-p1y * p2x + p0y * (-p1x + p2x) + p0x * (p1y - p2y) + p1x * p2y);
+        real sign = 1;
+        real s, t;
+        if (A < 0) {sign = -1;}
+        s = (p0y * p2x - p0x * p2y + (p2y - p0y) * px + (p0x - p2x) * py) * sign;
+        t = (p0x * p1y - p0y * p1x + (p0y - p1y) * px + (p1x - p0x) * py) * sign;
+        return ((s > 0) && (t > 0) && ((s + t) < 2 * A * sign));
+    }
+
     public function AngleBetweenAngles(real b, real a) -> real {
         real d = ModuloReal(RAbsBJ(a - b), bj_PI * 2);
         real sign = -1; 

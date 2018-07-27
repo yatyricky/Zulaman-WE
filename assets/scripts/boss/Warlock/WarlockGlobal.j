@@ -12,6 +12,44 @@ library WarlockGlobal requires NefUnion, ZAMCore, Table {
     real heroBodySize = 60.0;
     public real platformRadius = 950;
 
+    public struct DanceMatConst {
+        static real destX[];
+        static real destY[];
+        static integer current;
+        static real p1x, p1y, p2x, p2y;
+        static real currentCD;
+
+        static method getCurrent() {
+            integer other = thistype.current + 1;
+            if (other > 4) {other = 0;}
+            thistype.p1x = thistype.destX[thistype.current];
+            thistype.p1y = thistype.destY[thistype.current];
+            thistype.p2x = thistype.destX[other];
+            thistype.p2y = thistype.destY[other];
+        }
+
+        static method nextSector() {
+            thistype.current += 1;
+            if (thistype.current > 4) {thistype.current = 0;}
+            thistype.currentCD -= 0.15;
+            if (thistype.currentCD < 1) {thistype.currentCD = 1;}
+        }
+
+        static method reset() {
+            thistype.currentCD = 8.0;
+            thistype.current = 0;
+        }
+
+        static method onInit() {
+            thistype.destX[0] = 5947.087575; thistype.destY[0] = 1203.095928;
+            thistype.destX[1] = 4608.000; thistype.destY[1] = 2176.000;
+            thistype.destX[2] = 3268.912425; thistype.destY[2] = 1203.095928;
+            thistype.destX[3] = 3780.398365; thistype.destY[3] = -371.0959281;
+            thistype.destX[4] = 5435.601635; thistype.destY[4] = -371.0959281;
+            thistype.reset();
+        }
+    }
+
     public struct FireShiftConsts {
         static real AOE = 200.0;
         static real selfDamageRatio = 0.2;

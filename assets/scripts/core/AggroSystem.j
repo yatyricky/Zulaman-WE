@@ -428,13 +428,13 @@ constant integer MAX_PLAYER_UNITS = 50;
                 AggroList.create(u);
                 thistype.units[thistype.n] = u;
                 thistype.n += 1;
+                ii = 0;
+                while (ii < responseAggroN) {
+                    responseAggroCallList[ii].evaluate(u);
+                    ii += 1;
+                }
             } else {
                 // print(SCOPE_PREFIX+">|cffff0000Error|r, unit already in mob list");
-            }
-            ii = 0;
-            while (ii < responseAggroN) {
-                responseAggroCallList[ii].evaluate(u);
-                ii += 1;
             }
         }
         
