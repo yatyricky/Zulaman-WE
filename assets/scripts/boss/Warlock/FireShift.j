@@ -44,10 +44,17 @@ library FireShift requires WarlockGlobal {
         FireShiftConsts.ps.remove(p);
     }
 
+    function counteredRemove(CastingBar cd) {
+        Point p = Point(cd.extraData);
+        p.destroy();
+        FireShiftConsts.ps.remove(p);
+    }
+
     function onChannel() {
         CastingBar cb = CastingBar.create(response);
         cb.extraData = Point.new(SpellEvent.TargetX, SpellEvent.TargetY);
         cb.setVisuals(ART_FireBallMissile);
+        cb.setCounteredCallback(counteredRemove);
         cb.launch();
         VisualEffects.drawCircle(ART_FireTrapUp, SpellEvent.TargetX, SpellEvent.TargetY, FireShiftConsts.AOE, 15, 0.15, 2.0);
         FireShiftConsts.ps.push(cb.extraData);

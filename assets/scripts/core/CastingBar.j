@@ -100,6 +100,7 @@ library CastingBar requires SpellEvent, TimerUtils, SpellData, UnitAbilityCD, ZA
         static HandleTable ht;
         SpellData sd;
         CastBarFinishCast finishResponse;
+        CastBarFinishCast counteredResponse;
         unit caster, target;
         real targetX, targetY;
         effect bar;
@@ -146,8 +147,9 @@ library CastingBar requires SpellEvent, TimerUtils, SpellData, UnitAbilityCD, ZA
         static method create(CastBarFinishCast cbfc) -> thistype {
             thistype this = thistype.allocate();
             this.lvl = GetUnitAbilityLevel(SpellEvent.CastingUnit, SpellEvent.AbilityId);
-            this.haste = 0.0;   
+            this.haste = 0.0;
             this.finishResponse = cbfc;
+            this.counteredResponse = 0;
             this.sd = SpellData.inst(SpellEvent.AbilityId, SCOPE_PREFIX);
             this.cost = this.sd.Cost(this.lvl);
             this.cast = this.sd.Cast(this.lvl);
@@ -198,6 +200,11 @@ library CastingBar requires SpellEvent, TimerUtils, SpellData, UnitAbilityCD, ZA
                 i += 1;
             }
             eff = null;
+            return this;
+        }
+
+        method setCounteredCallback(CastBarFinishCast cbfc) -> thistype {
+            this.counteredResponse = cbfc;
             return this;
         }
 
@@ -301,6 +308,9 @@ library CastingBar requires SpellEvent, TimerUtils, SpellData, UnitAbilityCD, ZA
                 lastChannelSuccess[SpellEvent.CastingUnit] = 0;
                 if (!cb.success) {
                     SimError(GetOwningPlayer(SpellEvent.CastingUnit), "Spell Countered");
+                    if (cb.counteredResponse != 0) {
+                        cb.counteredResponse.evaluate(cb);
+                    }
                 } else if (GetUnitState(SpellEvent.CastingUnit, UNIT_STATE_MANA) < cb.cost) {
                     SimError(GetOwningPlayer(SpellEvent.CastingUnit), "Not Enough Mana");
                 } else {

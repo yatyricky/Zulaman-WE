@@ -408,6 +408,14 @@ library Command requires Console, Assertion, StunUtils, UnitProperty, BuffSystem
         DestroyGroup(g);
     }
 
+    function printPlayerUnitList(string str) {
+        PlayerUnits.prettyPrint();
+    }
+
+    function printMobList(string str) {
+        MobList.prettyPrint();
+    }
+
     private function onInit() {
         Console[Player(0)].add("cls", screenClear);
         Console[Player(0)].add("l", levelUp);
@@ -421,6 +429,8 @@ library Command requires Console, Assertion, StunUtils, UnitProperty, BuffSystem
         Console[Player(0)].add("dood", doodAnimation);
         Console[Player(0)].add("z", printStats);
         Console[Player(0)].add("t", teleportUnit);
+        Console[Player(0)].add("p", printPlayerUnitList);
+        Console[Player(0)].add("m", printMobList);
         Console[Player(0)].add("ceff", createEffect);
         Console[Player(0)].add("effq", setEffectYaw);
         Console[Player(0)].add("effw", setEffectPitch);

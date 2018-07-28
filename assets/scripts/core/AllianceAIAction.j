@@ -227,7 +227,7 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, FrostNov
         real k1, b1, k2, b2, sx, sy, ym, xm, yo, xo, yt, xt;
         NodeObject iter;
         Point p;
-        
+
         // position on firebomb
         if (DBMWarlock.isFireBomb) {
             safe = true;
@@ -283,7 +283,11 @@ library AllianceAIAction requires AggroSystem, CombatFacts, CastingBar, FrostNov
                 iter = iter.next;
             }
             if (safe == false) {
-                IssuePointOrderById(source, OID_MOVE, 2 * GetUnitX(source) - p.x, 2 * GetUnitY(source) - p.y);
+                if (dis < 1) {
+                    p.x += 1;
+                    p.y += 1;
+                }
+                IssuePointOrderById(source, OID_MOVE, (2 * GetUnitX(source) - p.x) * FireShiftConsts.AOE, (2 * GetUnitY(source) - p.y) * FireShiftConsts.AOE);
                 return false;
             }
         }

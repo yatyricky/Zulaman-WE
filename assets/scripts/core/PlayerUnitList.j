@@ -318,6 +318,17 @@ library PlayerUnitList requires NefUnion, GroupUtils, ZAMCore {
                 return ret;
             }
         }
+
+        static method prettyPrint() {
+            integer i = 0;
+            logi("=== === === PlayerUnits === === ===");
+            logi("n = " + I2S(PlayerUnits.n));
+            while (i < thistype.n) {
+                logi(GetUnitNameEx(PlayerUnits.units[i]));
+                i += 1;
+            }
+            logi("--- --- --- PlayerUnits --- --- ---");
+        }
         
         static method remove(integer i) {
             if (i != -1) {

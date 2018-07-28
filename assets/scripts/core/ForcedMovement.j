@@ -120,6 +120,7 @@ library ForcedMovement requires TimerUtils, ZAMCore {
     }
     
     public function ForceMoveUnitPolar(unit u, real dx, real dy, integer frames, real accerlaration) {
+        if (IsUnitBoss(u) == true) return;
         ForcedMovement.start(u, dx, dy, frames, accerlaration);
     }
 

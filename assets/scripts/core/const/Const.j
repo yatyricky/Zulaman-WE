@@ -1085,6 +1085,7 @@ public constant string ART_FireTrapUp = "Doodads\\Cinematic\\FireTrapUp\\FireTra
 public constant string ART_VolcanoMissile = "Abilities\\Spells\\Other\\Volcano\\VolcanoMissile.mdl";
 public constant string ART_FaerieFireTarget = "Abilities\\Spells\\NightElf\\FaerieFire\\FaerieFireTarget.mdl";
 public constant string ART_LavaSpawnMissile = "Abilities\\Weapons\\LavaSpawnMissile\\LavaSpawnMissile.mdl";
+public constant string ART_SerpentWardMissile = "Abilities\\Weapons\\SerpentWardMissile\\SerpentWardMissile.mdl";
 
 public constant string BTNVolcano = "ReplaceableTextures\\CommandButtons\\BTNVolcano.blp";
 public constant string BTNEarthquake = "ReplaceableTextures\\CommandButtons\\BTNEarthquake.blp";

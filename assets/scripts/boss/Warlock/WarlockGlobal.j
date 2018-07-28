@@ -52,7 +52,7 @@ library WarlockGlobal requires NefUnion, ZAMCore, Table {
 
     public struct FireShiftConsts {
         static real AOE = 200.0;
-        static real selfDamageRatio = 0.2;
+        static real selfDamageRatio = 0.4;
         static ListObject ps;
 
         static method onInit() {

@@ -59,7 +59,7 @@ library FlameThrow requires SpellEvent, DamageSystem, GroupUtils {
                             p = Projectile.create();
                             p.caster = this.caster;
                             p.target = tar;
-                            p.path = ART_FireBallMissile;
+                            p.path = ART_SerpentWardMissile;
                             p.pr = thistype.onHit;
                             p.speed = 600.0;
                             p.r0 = 250.0;

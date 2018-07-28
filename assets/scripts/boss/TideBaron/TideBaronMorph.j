@@ -12,6 +12,7 @@ library TideBaronMorph requires BuffSystem, SpellEvent, AggroSystem {
             
             if (iid == OID_BEARFORM) {
                 UnitProp.inst(u, SCOPE_PREFIX).spellTaken += 0.5;
+                UnitAbilityCD.make(u, SID_ALKALINE_WATER, 12);
             } else {
                 UnitProp.inst(u, SCOPE_PREFIX).spellTaken -= 0.5;
             }

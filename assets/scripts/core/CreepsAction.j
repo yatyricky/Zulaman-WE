@@ -1390,7 +1390,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
             ip = IntegerPool.create();
             ip.add(0, 30);
-            if (UnitCanUse(source, SID_FIRE_SHIFT) && GetUnitStatePercent(source, UNIT_STATE_LIFE, UNIT_STATE_MAX_LIFE) >= FireShiftConsts.selfDamageRatio * 150) {
+            if (UnitCanUse(source, SID_FIRE_SHIFT) && GetUnitStatePercent(source, UNIT_STATE_LIFE, UNIT_STATE_MAX_LIFE) >= FireShiftConsts.selfDamageRatio * 100) {
                 ip.add(SID_FIRE_SHIFT, 30);
             }
             res = ip.get();

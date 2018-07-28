@@ -494,7 +494,7 @@ constant integer MAX_PLAYER_UNITS = 50;
                         td = GetWidgetLife(thistype.units[i]) / damageReduc;
                         // hardcode for lava spawn
                         if (GetUnitTypeId(thistype.units[i]) == UTID_LAVA_SPAWN) {
-                            if (GetUnitStatePercent(thistype.units[i], UNIT_STATE_LIFE, UNIT_STATE_MAX_LIFE) >= 30) {
+                            if (GetUnitStatePercent(thistype.units[i], UNIT_STATE_LIFE, UNIT_STATE_MAX_LIFE) > 40) {
                                 td *= 100000;
                             }
                         }
@@ -577,6 +577,17 @@ constant integer MAX_PLAYER_UNITS = 50;
             if (i != -1) {
                 thistype.remove(i);
             }
+        }
+
+        static method prettyPrint() {
+            integer i = 0;
+            logi("=== === === MobList === === ===");
+            logi("n = " + I2S(MobList.n));
+            while (i < thistype.n) {
+                logi(GetUnitNameEx(MobList.units[i]));
+                i += 1;
+            }
+            logi("--- --- --- MobList --- --- ---");
         }
         
         static method addToAll(unit u) {
