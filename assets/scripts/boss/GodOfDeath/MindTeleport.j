@@ -1,8 +1,7 @@
 //! zinc
-library MindTeleport {
-constant string  ART  = "tp effect";
+library MindTeleport requires ZAMCore, SpellEvent, GodOfDeathGlobal {
 
-    function dpsGoFirst(unit u1, unit u2) {
+    function dpsGoFirst(unit u1, unit u2) -> boolean {
         return IsUnitDPS(u2);
     }
     
@@ -11,7 +10,7 @@ constant string  ART  = "tp effect";
         integer n;
         Point p;
         UnitListSortRule ulsr;
-        p = GodOfDeathPlatform.getRandomPoint();
+        p = GodOfDeathPlatform.getRandomPlatform();
         if (p != 0) {
             ulsr = dpsGoFirst;
             PlayerUnits.sortByRule(ulsr);
@@ -19,14 +18,14 @@ constant string  ART  = "tp effect";
             if (n > PlayerUnits.n) {n = PlayerUnits.n;}
             for (0 <= i < n) {
                 SetUnitPosition(PlayerUnits.units[i], p.x, p.y);
-                AddTimedEffect.atUnit(ART, PlayerUnits.units[i], "origin", 1.0);
+                AddTimedEffect.atUnit(ART_MASS_TELEPORT_TARGET, PlayerUnits.units[i], "origin", 1.0);
             }
             p.destroy();
         }
     }
 
     function onInit() {
-        RegisterSpellEffectResponse(SID, onCast);
+        RegisterSpellEffectResponse(SID_TELEPORT_PLAYERS, onCast);
     }
 
 }

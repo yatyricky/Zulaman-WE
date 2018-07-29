@@ -1285,7 +1285,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         }
         if (!IsUnitChanneling(source)) {
             ip = IntegerPool.create();
-            if (GetUnitMana(source) > 999) {
+            if (GetUnitMana(source) > 999 && combatTime > 10) {
                 // wipe
                 ip.add(SID_ANNIHILATION, 100);
             } else {
@@ -1293,10 +1293,10 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
                 if (UnitCanUse(source, SID_SUMMON_UNHOLY_TENTACLES)) {
                     ip.add(SID_SUMMON_UNHOLY_TENTACLES, 60);
                 }
-                if (UnitCanUse(source, SID_MIND_BLAST) && combatTime > 5) {
+                if (UnitCanUse(source, SID_MIND_BLAST) && combatTime > 15) {
                     ip.add(SID_MIND_BLAST, 60);
                 }
-                if (UnitCanUse(source, SID_TELEPORT_PLAYERS) && combatTime > 10) {
+                if (UnitCanUse(source, SID_TELEPORT_PLAYERS) && combatTime > 30) {
                     ip.add(SID_TELEPORT_PLAYERS, 60);
                 }
                 // 3 kinds of tentacles
@@ -1336,6 +1336,11 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
             }
 
             res = ip.get();
+            if (res != 0) {
+                logi("Yogg result = " + SpellData.inst(res, "TEST").name);
+            } else {
+                logi("Yogg result = 0");
+            }
             if (res == 0) {
                 // do nothing
             } else if (SpellData.inst(res, SCOPE_PREFIX).otp == ORDER_TYPE_IMMEDIATE) {
@@ -1347,7 +1352,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
                 i = 0;
                 tu = null;
                 while (i < PlayerUnits.n) {
-                    if (GodOfDeathPlatform.isUnitInPlatform(PlayerUnits.units[i]) == true) {
+                    if (GodOfDeathPlatform.isUnitInPlatform(PlayerUnits.units[i]) == false) {
                         accu += 1;
                         if (GetRandomInt(1, accu) == 1) {
                             tu = PlayerUnits.units[i];
@@ -1399,6 +1404,44 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
                 tu = PlayerUnits.getRandomHero();
                 IssuePointOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, GetUnitX(tu), GetUnitY(tu));
                 tu = null;
+            }
+            ip.destroy();
+        }
+    }
+
+    function makeOrderFilthyTentacle(unit source, unit target, real combatTime) {
+        IntegerPool ip;
+        integer res;
+        if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
+            ip = IntegerPool.create();
+            ip.add(0, 30);
+            if (UnitCanUse(source, SID_FILTHY_TENTACLE_DRAG)) {
+                ip.add(SID_FILTHY_TENTACLE_DRAG, 20);
+            }
+            res = ip.get();
+            if (res == 0) {
+                IssueTargetOrderById(source, OID_ATTACK, target);
+            } else {
+                IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, PlayerUnits.getRandomHero());
+            }
+            ip.destroy();
+        }
+    }
+
+    function makeOrderViciousTentacle(unit source, unit target, real combatTime) {
+        IntegerPool ip;
+        integer res;
+        if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
+            ip = IntegerPool.create();
+            ip.add(0, 30);
+            if (UnitCanUse(source, SID_VICIOUS_TENTACLE_STUN)) {
+                ip.add(SID_VICIOUS_TENTACLE_STUN, 20);
+            }
+            res = ip.get();
+            if (res == 0) {
+                IssueTargetOrderById(source, OID_ATTACK, target);
+            } else {
+                IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, PlayerUnits.getRandomHero());
             }
             ip.destroy();
         }
@@ -1465,6 +1508,13 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
         unitCallBack[UTID_KORAGG] = makeOrderKoragg;
 
         unitCallBack[UTID_GOD_OF_DEATH] = makeOrderGodOfDeath;
+        unitCallBack[UTID_UNHOLY_TENTACLE] = makeOrderJustAttack;
+        unitCallBack[UTID_FILTHY_TENTACLE] = makeOrderFilthyTentacle;
+        unitCallBack[UTID_VICIOUS_TENTACLE] = makeOrderViciousTentacle;
+        unitCallBack[UTID_FOUL_TENTACLE] = makeOrderJustAttack;
+        unitCallBack[UTID_ROOT_OF_FILTH] = makeOrderFilthyTentacle;
+        unitCallBack[UTID_ROOT_OF_VICIOUSNESS] = makeOrderViciousTentacle;
+        unitCallBack[UTID_ROOT_OF_FOULNESS] = makeOrderJustAttack;
         
         // ============= Area 1, 2 ==================
         unitCallBack[UTID_NAGA_SIREN] = makeOrderNagaSiren;

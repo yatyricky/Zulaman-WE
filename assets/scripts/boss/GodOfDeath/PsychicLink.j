@@ -1,5 +1,5 @@
 //! zinc
-library PsychicLink {
+library PsychicLink requires ZAMCore {
 
     struct PsychicLink {
         private timer tm;
@@ -61,7 +61,7 @@ library PsychicLink {
     }
 
     function onInit() {
-        RegisterSpellEffectResponse(SID, onCast);
+        RegisterSpellEffectResponse(SID_PSYCHIC_LINK, onCast);
     }
 }
 //! endzinc

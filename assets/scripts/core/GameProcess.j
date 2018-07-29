@@ -186,6 +186,9 @@ library GameProcess requires PlayerUnitList, MobInit, AggroSystem {
             MobInitAllowArea(7);
             openRockGate(gg_rct_AreaEntrance7);
         }
+        if (utid == UTID_HEX_LORD) {
+            MobInitAllowArea(8);
+        }
     }
 
     function bossAggro(unit u) {
@@ -211,6 +214,9 @@ library GameProcess requires PlayerUnitList, MobInit, AggroSystem {
                 }
                 if (utid == UTID_FEL_GUARD) {
                     BossFightCloseGate[6].close();
+                }
+                if (utid == UTID_GOD_OF_DEATH) {
+                    SetUnitState(u, UNIT_STATE_MANA, 0);
                 }
             }
         } else {
@@ -242,7 +248,7 @@ library GameProcess requires PlayerUnitList, MobInit, AggroSystem {
 
     function onInit() {
         TimerStart(CreateTimer(), 2.0, false, function() {
-            MobInitAllowArea(1);
+            MobInitAllowArea(8);
         });
         RegisterUnitDeath(openNewArea);
         RegisterAggroEvent(bossAggro);

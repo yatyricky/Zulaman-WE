@@ -1,8 +1,7 @@
 //! zinc
-library FilthyTentacle {
-constant real INTERVAL = 0.04;
-constant integer SPEED = 72;
-constant real SLOW = 0.5;
+library FilthyTentacle requires BuffSystem {
+
+    constant integer SPEED = 20;
     
     function onEffect(Buff buf) {
         UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModSpeed(0 - buf.bd.i0);
@@ -44,7 +43,7 @@ constant real SLOW = 0.5;
                     SetUnitPosition(this.target, this.vt.x, this.vt.y);
                 }
 
-                AddTimedLight.atUnits("BPSE", this.target, this.caster, INTERVAL);
+                AddTimedLight.atUnits("BPSE", this.target, this.caster, 0.04);
             }
         }
 
@@ -58,21 +57,17 @@ constant real SLOW = 0.5;
             this.vt = vector.create(GetUnitX(target), GetUnitY(target), 0);
             this.dir = vector.create(0, 0, 0);
             SetTimerData(this.tm, this);
-            TimerStart(this.tm, INTERVAL, true, function thistype.run);
+            TimerStart(this.tm, 0.04, true, function thistype.run);
 
             // slow effect
-            buf = Buff.cast(caster, target, BID);
+            buf = Buff.cast(caster, target, BID_FILTHY_TENTACLE_DRAG);
             buf.bd.tick = -1;
             buf.bd.interval = 10;
             UnitProp.inst(buf.bd.target, SCOPE_PREFIX).ModSpeed(buf.bd.i0);
-            buf.bd.i0 = Rounding(UnitProp.inst(buf.bd.target, SCOPE_PREFIX).Speed() * SLOW);
-            // effect
+            buf.bd.i0 = Rounding(UnitProp.inst(buf.bd.target, SCOPE_PREFIX).Speed() * 0.5);
             buf.bd.boe = onEffect;
             buf.bd.bor = onRemove;
             buf.run();
-
-            //
-            // AddTimedEffect.atUnit(ART_PLAGUE, SpellEvent.TargetUnit, "origin", 0.2);
         }
     }
 
@@ -81,11 +76,9 @@ constant real SLOW = 0.5;
     }
 
     function onInit() {
-        RegisterSpellEffectResponse(SID, onCast);
-        BuffType.register(BID, BUFF_MAGE, BUFF_NEG);
+        RegisterSpellEffectResponse(SID_FILTHY_TENTACLE_DRAG, onCast);
+        BuffType.register(BID_FILTHY_TENTACLE_DRAG, BUFF_MAGE, BUFF_NEG);
     }
-
-
 
 }
 //! endzinc

@@ -249,8 +249,10 @@ library SpellData requires Table, Integer {
             SpellData.create(SID_SUMMON_UNHOLY_TENTACLES,"summon unholy tentacles",0,0,40,OrderId("howlofterror"),1,ORDER_TYPE_IMMEDIATE);
             SpellData.create(SID_TELEPORT_PLAYERS,"teleport players",0,0,20,OrderId("divineshield"),1,ORDER_TYPE_IMMEDIATE);
             SpellData.create(SID_SUMMON_FILTHY_TENTACLE,"summon filthy tentacle",0,0,40,OrderId("resurrection"),1,ORDER_TYPE_IMMEDIATE);
+            SpellData.create(SID_FILTHY_TENTACLE_DRAG,"filthy tentacle drag",0,0,10,OrderId("slow"),1,ORDER_TYPE_TARGET);
             SpellData.create(SID_PSYCHIC_LINK,"psychic link",0,0,40,OrderId("thunderclap"),1,ORDER_TYPE_IMMEDIATE);
             SpellData.create(SID_SUMMON_VICIOUS_TENTACLE,"summon vicious tentacle",0,0,40,OrderId("stomp"),1,ORDER_TYPE_IMMEDIATE);
+            SpellData.create(SID_VICIOUS_TENTACLE_STUN,"vicious tentacle stun",0,0,20,OrderId("slow"),1,ORDER_TYPE_TARGET);
             SpellData.create(SID_EYE_BEAM,"eye beam",0,18,50,OrderId("tranquility"),2,ORDER_TYPE_IMMEDIATE);
             SpellData.create(SID_SUMMON_FOUL_TENTACLE,"summon foul tentacle",0,0,40,OrderId("fanofknives"),1,ORDER_TYPE_IMMEDIATE);
             SpellData.create(SID_LUNATIC_GAZE,"lunatic gaze",0,8,30,OrderId("starfall"),2,ORDER_TYPE_IMMEDIATE);
