@@ -12,6 +12,7 @@ library Drum requires BuffSystem {
         private method destroy() {
             ReleaseTimer(this.tm);
             thistype.ht.flush(this.u);
+            BlzSetSpecialEffectAlpha(this.eff, 0);
             DestroyEffect(this.eff);
             this.eff = null;
             this.tm = null;
@@ -19,38 +20,33 @@ library Drum requires BuffSystem {
             this.deallocate();
         }
 
-        static method onEffect(Buff buf) {
-        }
-
         static method onRemove(Buff buf) {
-            UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageDealt -= buf.bd.r0;
-            UnitProp.inst(buf.bd.target, SCOPE_PREFIX).healTaken -= 0.1;
+            UnitProp.inst(buf.bd.target, SCOPE_PREFIX).healTaken -= buf.bd.r0;
+            UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageDealt -= buf.bd.r1;
         }
         
         private static method run() {
             thistype this = GetTimerData(GetExpiredTimer());
             integer i = 0;
             Buff buf;
-            real amt;
+            real damp, hamp;
             if (!IsUnitDead(this.u)) {
-                amt = ItemExAttributes.getUnitAttrVal(this.u, IATTR_AURA_WARSONG, SCOPE_PREFIX);
+                damp = ItemExAttributes.getUnitAttrVal(this.u, IATTR_AURA_WARSONG, SCOPE_PREFIX);
+                hamp = 0.1;
                 while (i < PlayerUnits.n) {
                     if (GetDistance.units2d(PlayerUnits.units[i], this.u) < 600 && !IsUnitDead(PlayerUnits.units[i])) {
                         buf = Buff.cast(this.u, PlayerUnits.units[i], BID_WARSONG_AURA);
                         buf.bd.tick = -1;
-                        buf.bd.interval = 1.5;
-                        if (buf.bd.i0 != 6) {
-                            buf.bd.r0 = amt;
-                            UnitProp.inst(buf.bd.target, SCOPE_PREFIX).healTaken += 0.1;
-                            UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageDealt += amt;
-                            buf.bd.i0 = 6;
-                        } else {
-                            if (amt > buf.bd.r0) {
-                                UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageDealt += (amt - buf.bd.r0);
-                            }
-                            buf.bd.r0 = amt;
+                        buf.bd.interval = 1.1;
+                        if (buf.bd.r0 < hamp) {
+                            UnitProp.inst(buf.bd.target, SCOPE_PREFIX).healTaken += (hamp - buf.bd.r0);
+                            buf.bd.r0 = hamp;
                         }
-                        buf.bd.boe = thistype.onEffect;
+                        if (buf.bd.r1 < damp) {
+                            UnitProp.inst(buf.bd.target, SCOPE_PREFIX).damageDealt += (damp - buf.bd.r1);
+                            buf.bd.r1 = damp;
+                        }
+                        buf.bd.boe = Buff.noEffect;
                         buf.bd.bor = thistype.onRemove;
                         buf.run();
                     }

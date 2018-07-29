@@ -5,6 +5,7 @@ library SummonParasiticalRoach requires SpellEvent {
         Point p = GetUnitFrontPoint(SpellEvent.CastingUnit, 150.0);
         unit u = CreateUnit(Player(MOB_PID), UTID_PARASITICAL_ROACH, p.x, p.y, GetUnitFacing(SpellEvent.CastingUnit));
         AddTimedEffect.atUnit(ART_RAISE_SKELETON, u, "origin", 0.1);
+        UnitAbilityCD.make(u, SID_PARASITE, 30);
         p.destroy();
         u = null;
     }

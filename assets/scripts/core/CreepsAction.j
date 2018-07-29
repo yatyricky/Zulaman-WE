@@ -696,7 +696,6 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
             } else if (SpellData.inst(res, SCOPE_PREFIX).otp == ORDER_TYPE_TARGET) {
                 IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, PlayerUnits.getRandomHero());
             } else if (SpellData.inst(res, SCOPE_PREFIX).otp == ORDER_TYPE_IMMEDIATE) {
-                logi("issued order " + ID2S(res));
                 IssueImmediateOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid);
             }
             ip.destroy();
@@ -865,7 +864,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
 
     function makeOrderParasiticalRoach(unit source, unit target, real combatTime) {
         if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
-            if (combatTime > 10.0) {
+            if (combatTime > 10.0 && UnitCanUse(source, SID_PARASITE)) {
                 ParasiteOnTarget(source, PlayerUnits.getRandomHero());
             } else {
                 IssueTargetOrderById(source, OID_ATTACK, target);

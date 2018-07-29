@@ -154,7 +154,7 @@ ModelInfo.rg(UTID_CHMP_FEL_WAR_BRINGER,ATT_NON,69999,750,150,5,0.05,0.15,240,0.8
 ModelInfo.rg(UTID_DEMONIC_WITCH,ATT_NON,31999,400,200,5,0.05,0,0,1,0.05,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNChaosWarlock.blp");
 ModelInfo.rg(UTID_SMOLDERING_TOWER,ATT_NON,9999,1000,200,50,0,0,0,0.5,0,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNAdvancedDeathTower.blp");
 ModelInfo.rg(UTID_NOXIOUS_SPIDER,ATT_NON,87499,700,300,5,0.05,0,0,1,0.05,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNCryptFiend.blp");
-ModelInfo.rg(UTID_PARASITICAL_ROACH,ATT_NON,54999,300,100,0,0.05,0,0,0.95,0.05,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNCarrionScarabs.blp");
+ModelInfo.rg(UTID_PARASITICAL_ROACH,ATT_NON,9999,300,100,0,0.05,0,0,0.95,0.05,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNCarrionScarabs.blp");
 ModelInfo.rg(UTID_ZOMBIE,ATT_NON,94999,400,300,5,0,0,0,1,0.05,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNZombie.blp");
 ModelInfo.rg(UTID_SKELETAL_MAGE,ATT_NON,79999,300,300,25,0.25,0,0,0.8,0.01,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNSkeletonMage.blp");
 ModelInfo.rg(UTID_OBSIDIAN_CONSTRUCT,ATT_NON,99999,500,0,30,0,0,0,0.7,0,CAREER_TYPE_CREEP,"ReplaceableTextures\\CommandButtons\\BTNObsidianStatue.blp");

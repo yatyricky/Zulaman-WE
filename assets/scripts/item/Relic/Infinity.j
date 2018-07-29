@@ -12,6 +12,7 @@ library Infinity requires DamageSystem, Sounds {
         private method destroy() {
             ReleaseTimer(this.tm);
             thistype.ht.flush(this.u);
+            BlzSetSpecialEffectAlpha(this.eff, 0);
             DestroyEffect(this.eff);
             this.eff = null;
             this.tm = null;

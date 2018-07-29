@@ -36,6 +36,8 @@ library WELA requires CastingBar, SpellData, AggroSystem {
     }
 
     function damageRecord() {
+        if (IsUnitDead(DamageResult.source)) return;
+        if (IsUnitDead(DamageResult.target)) return;
         wela[welaI] = R2S(GetGameTime()) /*
         2  */ + "|damage|" /*
         3  */ + GetUnitNameEx(DamageResult.source) + "|" /*

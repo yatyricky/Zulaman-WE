@@ -11,6 +11,7 @@ library Insight requires DamageSystem {
         private method destroy() {
             ReleaseTimer(this.tm);
             thistype.caht.flush(this.u);
+            BlzSetSpecialEffectAlpha(this.eff, 0);
             DestroyEffect(this.eff);
             this.eff = null;
             this.tm = null;

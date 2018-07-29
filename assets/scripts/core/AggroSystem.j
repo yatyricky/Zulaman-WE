@@ -363,7 +363,7 @@ constant integer MAX_PLAYER_UNITS = 50;
             thistype.combatTime = -1.0;
             while (thistype.n > 0) {
                 thistype.n -= 1;
-                if (IsUnitSummoned(thistype.units[thistype.n]) || !CanUnitAttack(thistype.units[thistype.n])) {
+                if (IsUnitSummoned(thistype.units[thistype.n])) {
                     KillUnit(thistype.units[thistype.n]);
                 } else {
                     ResetMob(thistype.units[thistype.n]);

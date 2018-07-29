@@ -69,7 +69,7 @@ library Wraith requires UnitProperty, AggroSystem {
     function doSummonWraith(DelayTask dt) {
         unit u;
         if (IsInCombat() == true) {
-            u = CreateUnit(Player(MOB_PID), UTID_WRAITH, 9788, 9467, 180);
+            u = CreateUnit(Player(MOB_PID), UTID_WRAITH, 9216, 9465, 180);
             AddTimedEffect.atUnit(ART_DarkSummonTarget, u, "origin", 0.2);
             if (AbyssArchonGlobal.wraiths.count() == 0) {
                 TimerStart(wraithCheck, 0.34, true, function checkRun);
@@ -78,12 +78,12 @@ library Wraith requires UnitProperty, AggroSystem {
             AbyssArchonGlobal.wraiths.push(Unit2Int(u));
             u = null;
         }
-        SetDoodadAnimation(9788, 9467, 200, 'D032', false, "Stand", false);
+        SetDoodadAnimation(9216, 9465, 200, 'D032', false, "Stand", false);
     }
 
     function onCast() {
         DelayTask dt = DelayTask.create(doSummonWraith, 5.0);
-        SetDoodadAnimation(9788, 9467, 200, 'D032', false, "Stand Work", false);
+        SetDoodadAnimation(9216, 9465, 200, 'D032', false, "Stand Work", false);
     }
 
     function onInit() {

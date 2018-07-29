@@ -7,8 +7,12 @@ library Parasite requires BuffSystem, DamageSystem {
     }
 
     function onRemove(Buff buf) {
-        CreateUnit(Player(MOB_PID), UTID_PARASITICAL_ROACH, GetUnitX(buf.bd.target), GetUnitY(buf.bd.target), GetRandomReal(0, 359));
-        CreateUnit(Player(MOB_PID), UTID_PARASITICAL_ROACH, GetUnitX(buf.bd.target), GetUnitY(buf.bd.target), GetRandomReal(0, 359));
+        unit u;
+        u = CreateUnit(Player(MOB_PID), UTID_PARASITICAL_ROACH, GetUnitX(buf.bd.target), GetUnitY(buf.bd.target), GetRandomReal(0, 359));
+        UnitAbilityCD.make(u, SID_PARASITE, 30);
+        u = CreateUnit(Player(MOB_PID), UTID_PARASITICAL_ROACH, GetUnitX(buf.bd.target), GetUnitY(buf.bd.target), GetRandomReal(0, 359));
+        UnitAbilityCD.make(u, SID_PARASITE, 30);
+        u = null;
     }
 
     public function ParasiteOnTarget(unit caster, unit target) {
