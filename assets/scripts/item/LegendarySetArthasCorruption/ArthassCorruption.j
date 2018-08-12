@@ -135,19 +135,19 @@ library ArthassCorruption requires DamageDeathCoil {
         // }
         // setInfo += "FrostMourne" + COLOR_R + "|n";
         if (list.count() >= 2) {
-            setInfo += COLOR_CFF + COLOR_ITEM_SET_NAME;
+            setInfo += COLOR_CFF + COLOR_ITEM_SET_ACQUIRED;
         } else {
             setInfo += COLOR_CFF + COLOR_ITEM_SET_MISSING;
         }
         setInfo += "(2 Set) On Attack: 15% chance to cast Death Coil|r|n";
         if (list.count() >= 3) {
-            setInfo += COLOR_CFF + COLOR_ITEM_SET_NAME;
+            setInfo += COLOR_CFF + COLOR_ITEM_SET_ACQUIRED;
         } else {
             setInfo += COLOR_CFF + COLOR_ITEM_SET_MISSING;
         }
         setInfo += "(3 Set) +20 All stats|r|n";
         if (list.count() >= 4) {
-            setInfo += COLOR_CFF + COLOR_ITEM_SET_NAME;
+            setInfo += COLOR_CFF + COLOR_ITEM_SET_ACQUIRED;
         } else {
             setInfo += COLOR_CFF + COLOR_ITEM_SET_MISSING;
         }
@@ -158,7 +158,7 @@ library ArthassCorruption requires DamageDeathCoil {
             if (ti != null) {
                 itid = GetItemTypeId(ti);
                 if (itid == ITID_DETERMINATION_OF_VENGEANCE || itid == ITID_STRATHOLME_TRAGEDY || itid == ITID_PATRICIDE || itid == ITID_FROSTMOURNE) {
-                    // BlzSetItemExtendedTooltip(ti, ItemExAttributes.inst(ti, SCOPE_PREFIX).forgeUbertip() + setInfo);
+                    BlzSetItemExtendedTooltip(ti, ItemExAttributes.inst(ti, SCOPE_PREFIX).forgeUbertip() + setInfo);
                 }
             }
             ii += 1;

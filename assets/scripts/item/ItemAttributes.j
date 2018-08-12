@@ -22,6 +22,9 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
     rect ExpertAnvil;
     rect MasterAnvil;
     integer countReforge;
+    boolean reforgeTypeCheck;
+    integer reforgeClosureQlvl;
+    item reforgingItem;
     ListObject shouldDestroy;
 
     public struct ItemExAttributes {
@@ -274,7 +277,10 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
         }
 
         method updateUbertip() {
-            // BlzSetItemExtendedTooltip(this.theItem, this.forgeUbertip());
+            string uber = this.forgeUbertip();
+            BlzSetItemExtendedTooltip(this.theItem, uber);
+            BlzSetItemDescription(this.theItem, uber);
+            uber = null;
         }
 
         method updateName() {
@@ -436,10 +442,10 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
                 thistype.create(ITID_ZULS_STAFF,"|cffff8c00Zul's Staff|r","").append(21,100,200).append(14,5,10).append(20,0.03,0.05).append(99,120,270).append(98,0,0);
                 thistype.create(ITID_MC_SWORD,"|cffff8c00MC Sword|r","").append(24,100,100).append(71,3000,3000);
                 thistype.create(ITID_THUNDERFURY_BLESSED_BLADE_OF_THE_WINDSEEKER,"|cffff8c00Thunderfury, Blessed Blade of the Windseeker|r","").append(13,5,10).append(21,75,150).append(11,0.03,0.05).append(57,10,30).append(89,50,120).append(62,0.03,0.07);
-                thistype.create(ITID_DETERMINATION_OF_VENGEANCE,"|cffff8c00Determination of Vengeance|r","|cffffdeadThe determination to revenge Mal'Ganis is unshakeable.|r").append(17,100,200).append(21,100,200).append(1,0.01,0.02).append(97,0,0);
-                thistype.create(ITID_STRATHOLME_TRAGEDY,"|cffff8c00Stratholme Tragedy|r","|cffffdeadIn disregard of Jaina's advice, Stratholme became a hell on earth in merely one night.|r").append(9,10,20).append(24,11,17).append(67,0.05,0.09).append(97,0,0);
+                thistype.create(ITID_DETERMINATION_OF_VENGEANCE,"|cff8b66ffDetermination of Vengeance|r","|cffffdeadThe determination to revenge Mal'Ganis is unshakeable.|r").append(17,100,200).append(21,100,200).append(1,0.01,0.02).append(97,0,0);
+                thistype.create(ITID_STRATHOLME_TRAGEDY,"|cff8b66ffStratholme Tragedy|r","|cffffdeadIn disregard of Jaina's advice, Stratholme became a hell on earth in merely one night.|r").append(9,10,20).append(24,11,17).append(67,0.05,0.09).append(97,0,0);
                 thistype.create(ITID_PATRICIDE,"|cffff8c00Patricide|r","|cffffdeadOne last step!|r").append(9,5,10).append(52,26,48).append(55,0.05,0.1).append(12,3,5).append(97,0,0);
-                thistype.create(ITID_FROSTMOURNE,"|cffff8c00Frostmourne|r","|cffffdeadA gift from the Lich King.|r").append(4,5,10).append(71,7,12).append(43,0.01,0.025).append(58,24,55).append(97,0,0).append(73,20,20).append(21,150,166.66666666666666).append(2,0.05,0.05);
+                thistype.create(ITID_FROSTMOURNE,"|cffff8c00Frostmourne|r","|cffffdeadA gift from the Lich King.|r").append(4,5,10).append(71,7,12).append(43,0.01,0.025).append(58,24,55).append(97,0,0);
                 //:template.end
             });
         }
@@ -958,6 +964,32 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
         }
     }
 
+    function reforgeItem(rect whichAnvil, integer qlvl, integer forgeLevel, integer returnGold, integer returnLumber, string typeMismatch, player whichPlayer) {
+        ItemExAttributes iea;
+        countReforge = 0;
+        reforgeTypeCheck = true;
+        reforgingItem = null;
+        reforgeClosureQlvl = qlvl;
+        EnumItemsInRect(whichAnvil, null, function() {
+            reforgingItem = GetEnumItem();
+            countReforge += 1;
+            if (GetItemLevel(reforgingItem) != reforgeClosureQlvl) {
+                reforgeTypeCheck = false;
+            }
+        });
+        if (countReforge != 1 || reforgeTypeCheck == false) {
+            SimError(whichPlayer, "Place exact one " + typeMismatch + " item in circle please.");
+            AdjustPlayerStateSimpleBJ(whichPlayer, PLAYER_STATE_RESOURCE_GOLD, returnGold);
+            AdjustPlayerStateSimpleBJ(whichPlayer, PLAYER_STATE_RESOURCE_LUMBER, returnLumber);
+        } else {
+            iea = ItemExAttributes.inst(reforgingItem, "reforge");
+            iea.reforge(forgeLevel);
+            iea.updateUbertip();
+            iea.updateName();
+            AddTimedEffect.atCoord(ART_TOME_OF_STRENGTH, GetItemX(reforgingItem), GetItemY(reforgingItem), 0.5);
+        }
+    }
+
     function itemon() -> boolean {
         item it = GetManipulatedItem();
         integer itid = GetItemTypeId(it);
@@ -969,24 +1001,23 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
         if (GetItemLevel(it) < 2) {
             // reforge
             if (itid == ITID_REFORGE_UNCOMMON_L1) {
-                countReforge = 0;
-                EnumItemsInRect(ApprenticeAnvil, null, function() {countReforge += 1;});
-                if (countReforge == 1) {
-                    EnumItemsInRect(ApprenticeAnvil, null, function() {
-                        ItemExAttributes iea = ItemExAttributes.inst(GetEnumItem(), "reforge");
-                        iea.reforge(1);
-                        iea.updateUbertip();
-                        iea.updateName();
-                    });
-                } else {
-                    SimError(GetOwningPlayer(u), "Place exact one item in circle, current: " + I2S(countReforge));
-                    AdjustPlayerStateSimpleBJ(GetOwningPlayer(u), PLAYER_STATE_RESOURCE_LUMBER, 5);
-                }
+                RemoveItem(it);
+                reforgeItem(ApprenticeAnvil, 2, 1, 0, 5, "uncommon (green)", GetOwningPlayer(u));
             } else if (itid == ITID_REFORGE_UNCOMMON_L2) {
+                RemoveItem(it);
+                reforgeItem(ExpertAnvil, 2, 2, 0, 10, "uncommon (green)", GetOwningPlayer(u));
             } else if (itid == ITID_REFORGE_UNCOMMON_L3) {
+                RemoveItem(it);
+                reforgeItem(MasterAnvil, 2, 3, 0, 15, "uncommon (green)", GetOwningPlayer(u));
             } else if (itid == ITID_REFORGE_RARE_L2) {
+                RemoveItem(it);
+                reforgeItem(ExpertAnvil, 3, 2, 0, 50, "rare (purple)", GetOwningPlayer(u));
             } else if (itid == ITID_REFORGE_RARE_L3) {
+                RemoveItem(it);
+                reforgeItem(MasterAnvil, 3, 3, 0, 75, "rare (purple)", GetOwningPlayer(u));
             } else if (itid == ITID_REFORGE_LEGENDARY_L3) {
+                RemoveItem(it);
+                reforgeItem(MasterAnvil, 4, 3, 1, 300, "legendary (orange)", GetOwningPlayer(u));
             } else {
                 // stack charges
                 i = 0;
@@ -1111,7 +1142,7 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
     function onInit() {
         ApprenticeAnvil = Rect(6206, -11838, 6434, -11596);
         ExpertAnvil = Rect(6239, 8227, 6466, 8450);
-        MasterAnvil = Rect(6267, -11776, 6394, -11638);
+        MasterAnvil = Rect(-2718, 3811, -2436, 4089);
         shouldDestroy = ListObject.create();
         
         TriggerAnyUnit(EVENT_PLAYER_UNIT_PICKUP_ITEM, function itemon);
@@ -1157,7 +1188,7 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
         ipSufix.add(SUFIX_WIZARD, 10);
         ipSufix.add(SUFIX_PRIEST, 10);
         ipSufix.add(SUFIX_GUARDIAN, 10);
-        ipSufix.add(SUFIX_MASTERY, 100);
+        ipSufix.add(SUFIX_MASTERY, 10);
         ipSufix.add(SUFIX_BLUR, 10);
         ipSufix.add(SUFIX_STRONGHOLD, 10);
         ipSufix.add(SUFIX_DEEP_SEA, 10);

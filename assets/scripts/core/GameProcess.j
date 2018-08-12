@@ -248,7 +248,7 @@ library GameProcess requires PlayerUnitList, MobInit, AggroSystem {
 
     function onInit() {
         TimerStart(CreateTimer(), 2.0, false, function() {
-            MobInitAllowArea(8);
+            MobInitAllowArea(1);
         });
         RegisterUnitDeath(openNewArea);
         RegisterAggroEvent(bossAggro);

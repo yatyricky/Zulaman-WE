@@ -51,7 +51,7 @@ public constant string COLOR_ITEM_LEGENDARY = "ff8c00";
 public constant string COLOR_ITEM_RELIC = "ff8c00";
 public constant string COLOR_ITEM_SET_NAME = "ffcc00";
 public constant string COLOR_ITEM_SET_MISSING = "999999";
-public constant string COLOR_ITEM_SET_ACQUIRED = "ffffff";
+public constant string COLOR_ITEM_SET_ACQUIRED = "ffdead";
 public constant string COLOR_ITEM_LORE_TRIVIA = "999999";
 public constant string COLOR_ITEM_LORE_SIGNIFICANT = "ffdead";
 public constant string COLOR_DAMAGE_MOB = "ffffff";
@@ -1093,6 +1093,7 @@ public constant string ART_LavaSpawnMissile = "Abilities\\Weapons\\LavaSpawnMiss
 public constant string ART_SerpentWardMissile = "Abilities\\Weapons\\SerpentWardMissile\\SerpentWardMissile.mdl";
 public constant string ART_DruidoftheTalonMissile = "Abilities\\Weapons\\DruidoftheTalonMissile\\DruidoftheTalonMissile.mdl";
 public constant string ART_SOUL_THEFT_EFFECT = "Abilities\\Spells\\Items\\AIso\\AIsoTarget.mdl";
+public constant string ART_TOME_OF_STRENGTH = "Abilities\\Spells\\Items\\AIsm\\AIsmTarget.mdl";
 
 public constant string BTNVolcano = "ReplaceableTextures\\CommandButtons\\BTNVolcano.blp";
 public constant string BTNEarthquake = "ReplaceableTextures\\CommandButtons\\BTNEarthquake.blp";

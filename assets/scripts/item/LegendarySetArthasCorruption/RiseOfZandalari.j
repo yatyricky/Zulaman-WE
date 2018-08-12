@@ -116,19 +116,19 @@ library RiseOfZandalari {
         RiseOfZandalari.equiped(dt.u0, list.count());
         // set text
         if (list.count() >= 3) {
-            setInfo += COLOR_CFF + COLOR_ITEM_SET_NAME;
+            setInfo += COLOR_CFF + COLOR_ITEM_SET_ACQUIRED;
         } else {
             setInfo += COLOR_CFF + COLOR_ITEM_SET_MISSING;
         }
         setInfo += "(3 Set) Regens 60 HP per second|r|n";
         if (list.count() >= 4) {
-            setInfo += COLOR_CFF + COLOR_ITEM_SET_NAME;
+            setInfo += COLOR_CFF + COLOR_ITEM_SET_ACQUIRED;
         } else {
             setInfo += COLOR_CFF + COLOR_ITEM_SET_MISSING;
         }
         setInfo += "(4 Set) +500 Max HP|r|n";
         if (list.count() >= 5) {
-            setInfo += COLOR_CFF + COLOR_ITEM_SET_NAME;
+            setInfo += COLOR_CFF + COLOR_ITEM_SET_ACQUIRED;
         } else {
             setInfo += COLOR_CFF + COLOR_ITEM_SET_MISSING;
         }
@@ -139,7 +139,7 @@ library RiseOfZandalari {
             if (ti != null) {
                 itid = GetItemTypeId(ti);
                 if (itid == ITID_BULWARK_OF_THE_AMANI_EMPIRE || itid == ITID_SHINING_JEWEL_OF_TANARIS || itid == ITID_DRAKKARI_DECAPITATOR || itid == ITID_GURUBASHI_VOODOO_VIALS || itid == ITID_ZULS_STAFF) {
-                    // BlzSetItemExtendedTooltip(ti, ItemExAttributes.inst(ti, SCOPE_PREFIX).forgeUbertip() + setInfo);
+                    BlzSetItemExtendedTooltip(ti, ItemExAttributes.inst(ti, SCOPE_PREFIX).forgeUbertip() + setInfo);
                 }
             }
             ii += 1;

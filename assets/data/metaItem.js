@@ -67,7 +67,6 @@ function parseSheet(sheet) {
 parseSheet(workbook.sheets["Uncommon"]);
 parseSheet(workbook.sheets["Rare"]);
 parseSheet(workbook.sheets["Legendary"]);
-parseSheet(workbook.sheets["Relic"]);
 
 // working on Attributes
 let sheet = workbook.sheets["Attributes"];

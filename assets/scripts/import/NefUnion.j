@@ -359,6 +359,10 @@ library NefUnion requires TimerUtils, Math {
             return "FALSE";
         }
     }
+
+    public function Rect2S(rect r) -> string {
+        return "Rect[" + R2S(GetRectMinX(r)) + ", " + R2S(GetRectMinY(r)) + ", " + R2S(GetRectMaxX(r)) + ", " + R2S(GetRectMaxY(r)) + "]";
+    }
     
     public function B2IS(boolean b) -> string {
         if (b) {
