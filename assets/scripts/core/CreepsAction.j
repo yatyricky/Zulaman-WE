@@ -60,34 +60,33 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
             ip.destroy();
         }
     }
-    
+
     // nage sea witch
-    function makeOrderHvsh(unit source, unit target, real combatTime) {        
+    function makeOrderHvsh(unit source, unit target, real combatTime) {
         IntegerPool ip;
         integer res;
         unit tu;
         if (!IsUnitChanneling(source) && !UnitProp.inst(source, SCOPE_PREFIX).stunned) {
             ip = IntegerPool.create();
-            if (UnitCanUse(source, 'A03O') && combatTime > 49) {
-                ip.add('A03O', 30);
+            if (UnitCanUse(source, SID_THUNDER_STORM) && combatTime > 49) {
+                ip.add(SID_THUNDER_STORM, 30);
             } else {
-                if (UnitCanUse(source, 'A03Q') && combatTime > 300) {
-                    ip.add('A03Q', 30);
+                if (UnitCanUse(source, SID_RAGE_CREEP) && combatTime > 300) {
+                    ip.add(SID_RAGE_CREEP, 30);
                 } else {
-                    if (UnitCanUse(source, 'A03P') && GetUnitStatePercent(source, UNIT_STATE_LIFE, UNIT_STATE_MAX_LIFE) < 21) {
-                        ip.add('A03P', 30);
+                    if (GetUnitStatePercent(source, UNIT_STATE_LIFE, UNIT_STATE_MAX_LIFE) < 21) {
+                        if (UnitCanUse(source, SID_FRENZY_CREEP)) {
+                            ip.add(SID_FRENZY_CREEP, 30);
+                        }
+                        if (UnitCanUse(source, SID_SUMMON_SERPENTS) && combatTime > 30) {
+                            ip.add(SID_SUMMON_SERPENTS, 50);
+                        }
                     } else {
-                        if (UnitCanUse(source, 'A03L') && combatTime > 10) {
-                            //print("1");
-                            ip.add('A03L', 30);
+                        if (UnitCanUse(source, SID_FUCKED_LIGHTNING) && combatTime > 10) {
+                            ip.add(SID_FUCKED_LIGHTNING, 30);
                         }
-                        if (UnitCanUse(source, 'A03M') && combatTime > 20) {
-                            //print("2");
-                            ip.add('A03M', 30);
-                        }
-                        if (UnitCanUse(source, 'A03N') && combatTime > 30) {
-                            //print("3");
-                            ip.add('A03N', 30);
+                        if (UnitCanUse(source, SID_STRONG_BREEZE) && combatTime > 20) {
+                            ip.add(SID_STRONG_BREEZE, 30);
                         }
                         ip.add(0, 50);
                     }
@@ -97,8 +96,7 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
             if (res == 0) {
                 IssueTargetOrderById(source, OID_ATTACK, target);
             } else if (SpellData.inst(res, SCOPE_PREFIX).otp == ORDER_TYPE_TARGET) {
-                //NotAttacking(source);
-                if (res == 'A03L') {
+                if (res == SID_FUCKED_LIGHTNING) {
                     IssueTargetOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid, PlayerUnits.getFarest(source));
                 } else {
                     tu = PlayerUnits.getRandomHero(); // to avoid that strong breeze clashes with thunder storm
@@ -107,14 +105,13 @@ library CreepsAction requires SpellData, UnitAbilityCD, CastingBar, PlayerUnitLi
                     }
                 }
             } else if (SpellData.inst(res, SCOPE_PREFIX).otp == ORDER_TYPE_IMMEDIATE) {
-                //NotAttacking(source);
                 IssueImmediateOrderById(source, SpellData.inst(res, SCOPE_PREFIX).oid);
             }
             ip.destroy();
-        }    
+        }
         tu = null;
     }
-    
+
     // Arch Tinker Morph
     function makeOrderNrob(unit source, unit target, real combatTime) {
         IntegerPool ip;
