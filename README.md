@@ -5,9 +5,8 @@ Zul'Aman - Reinvented with World Editor
 ## System Requirements
 
 - Windows NT
-- Warcraft III TFT 1.29+
+- Warcraft III TFT 1.30+
 - [JassHelper 0.2.A.B](http://www.wc3c.net/showthread.php?t=88142)
-- [w3x2lni](https://github.com/sumneko/w3x2lni) (optional)
 
 You can try other versions, but not tested.
 
@@ -15,7 +14,7 @@ You can try other versions, but not tested.
 
 1. Set system environment variables, include JassHelper and Warcraft III to PATH
 2. ```make.bat```
-3. ```run.bat``` (or ```run.bat s``` if you dont have [w3x2lni](https://github.com/sumneko/w3x2lni))
+3. ```run.bat```
 
 ## Map Information
 
