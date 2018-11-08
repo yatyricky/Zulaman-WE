@@ -6,7 +6,7 @@ Zul'Aman - Reinvented with World Editor
 
 - Windows NT
 - Warcraft III TFT 1.30+
-- [JassHelper 0.2.A.B](http://www.wc3c.net/showthread.php?t=88142)
+- [JassHelper 0.A.2.B](http://www.wc3c.net/showthread.php?t=88142)
 
 You can try other versions, but not tested.
 
