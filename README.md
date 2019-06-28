@@ -5,10 +5,13 @@ Zul'Aman - Reinvented with World Editor
 ## System Requirements
 
 - Windows NT
-- Warcraft III TFT 1.30+
+- Warcraft III TFT 1.30
 - [JassHelper 0.A.2.B](http://www.wc3c.net/showthread.php?t=88142)
 
 You can try other versions, but not tested.
+
+Not compatible with version lower than 1.29 because of the item editing APIs.
+Probably not compatible with version higher than 1.31.1 because of the lastest Lua feature.
 
 ## Build
 
