@@ -276,14 +276,7 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
             return str;
         }
 
-        method updateUbertip() {
-            string uber = this.forgeUbertip();
-            BlzSetItemExtendedTooltip(this.theItem, uber);
-            BlzSetItemDescription(this.theItem, uber);
-            uber = null;
-        }
-
-        method updateName() {
+        method calculateName() -> string {
             string rawName = ItemAttributesMeta.inst(GetItemTypeId(this.theItem), "updateName").name;
             NodeObject it = this.affixes.head;
             ItemAffix ia;
@@ -299,7 +292,33 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
                 }
                 it = it.next;
             }
-            BlzSetItemName(this.theItem, prefix + rawName + sufix);
+            return prefix + sufix + rawName;
+        }
+
+        method updateUbertip() {
+            string uber = this.calculateName() + "|n" + this.forgeUbertip();
+            BlzSetItemExtendedTooltip(this.theItem, uber);
+            BlzSetItemDescription(this.theItem, uber);
+            uber = null;
+        }
+
+        method updateName() {
+            // string rawName = ItemAttributesMeta.inst(GetItemTypeId(this.theItem), "updateName").name;
+            // NodeObject it = this.affixes.head;
+            // ItemAffix ia;
+            // AffixMeta meta;
+            // string sufix = "";
+            // string prefix = "";
+            // while (it != 0) {
+            //     meta = AffixMeta[ItemAffix(it.data).id];
+            //     if (meta.slot == 1) {
+            //         prefix = prefix + meta.text;
+            //     } else {
+            //         sufix = sufix + meta.text;
+            //     }
+            //     it = it.next;
+            // }
+            // BlzSetItemName(this.theItem, prefix + rawName + sufix);
         }
 
         method reforge(integer level) {
@@ -546,46 +565,46 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
         }
 
         static method onInit() {
-            thistype.put(SUFIX_LETHALITY, 1, 2, IATTR_CRIT, 0.03, 0.07, " of Lethality");
-            thistype.put(SUFIX_SNAKE, 1, 2, IATTR_SCRIT, 0.03, 0.07, " of Snake");
-            thistype.put(SUFIX_QUICKNESS, 1, 2, IATTR_IAS, 3, 7, " of Quickness");
-            thistype.put(SUFIX_WIND_SERPENT, 1, 2, IATTR_SHASTE, 0.03, 0.07, " of Wind Serpent");
-            thistype.put(SUFIX_BRUTE, 1, 2, IATTR_STR, 8, 15, " of Brute");
-            thistype.put(SUFIX_DEXTERITY, 1, 2, IATTR_AGI, 8, 15, " of Dexterity");
-            thistype.put(SUFIX_WISDOM, 1, 2, IATTR_INT, 8, 15, " of Wisdom");
-            thistype.put(SUFIX_VITALITY, 1, 2, IATTR_HP, 113, 225, " of Vitality");
-            thistype.put(SUFIX_CHAMPION, 1, 2, IATTR_STR, 5, 9, " of Champion").addAttribute(IATTR_AP, 6, 11);
-            thistype.put(SUFIX_BUTCHER, 1, 2, IATTR_STR, 5, 9, " of Butcher").addAttribute(IATTR_CRIT, 0.02, 0.05);
-            thistype.put(SUFIX_ASSASSIN, 1, 2, IATTR_AGI, 5, 9, " of Assassin").addAttribute(IATTR_CRIT, 0.02, 0.05);
-            thistype.put(SUFIX_RANGER, 1, 2, IATTR_AGI, 5, 9, " of Ranger").addAttribute(IATTR_AP, 6, 11);
-            thistype.put(SUFIX_WIZARD, 1, 2, IATTR_INT, 5, 9, " of Wizard").addAttribute(IATTR_SHASTE, 0.02, 0.05);
-            thistype.put(SUFIX_PRIEST, 1, 2, IATTR_INT, 5, 9, " of Priest").addAttribute(IATTR_MREG, 1, 2);
-            thistype.put(SUFIX_GUARDIAN, 1, 2, IATTR_HP, 68, 135, " of Guardian").addAttribute(IATTR_DODGE, 0.02, 0.03);
-            thistype.put(SUFIX_MASTERY, 1, 2, IATTR_LP, 1, 3, " of Mastery");
-            thistype.put(SUFIX_BLUR, 1, 2, IATTR_DODGE, 0.02, 0.05, " of Blur");
-            thistype.put(SUFIX_STRONGHOLD, 1, 2, IATTR_DEF, 2, 5, " of Stronghold");
-            thistype.put(SUFIX_DEEP_SEA, 1, 2, IATTR_MREG, 2, 3, " of Deep Sea");
-            thistype.put(SUFIX_VOID, 1, 2, IATTR_SP, 10, 20, " of Void");
-            thistype.put(SUFIX_VAMPIRE, 1, 2, IATTR_ATK_LL, 0.01, 0.02, " of Vampire");
-            thistype.put(SUFIX_SUCCUBUS, 1, 2, IATTR_ATK_ML, 0.01, 0.02, " of Succubus");
-            thistype.put(PREFIX_HEAVY, 1, 1, IATTR_STR, 4, 7, "Heavy ");
-            thistype.put(PREFIX_STRONG, 2, 1, IATTR_STR, 8, 15, "Strong ");
-            thistype.put(PREFIX_SHARP, 1, 1, IATTR_AGI, 4, 7, "Sharp ");
-            thistype.put(PREFIX_AGILE, 2, 1, IATTR_AGI, 8, 15, "Agile ");
-            thistype.put(PREFIX_SHIMERING, 1, 1, IATTR_INT, 4, 7, "Shimering ");
-            thistype.put(PREFIX_INTELLIGENT, 2, 1, IATTR_INT, 8, 15, "Intelligent ");
-            thistype.put(PREFIX_ENDURABLE, 1, 1, IATTR_HP, 57, 112, "Endurable ");
-            thistype.put(PREFIX_VIBRANT, 2, 1, IATTR_HP, 113, 225, "Vibrant ");
-            thistype.put(PREFIX_SKILLED, 1, 1, IATTR_AP, 5, 10, "Skilled ");
-            thistype.put(PREFIX_CRUEL, 2, 1, IATTR_AP, 10, 20, "Cruel ");
-            thistype.put(PREFIX_ENCHANTED, 1, 1, IATTR_SP, 8, 12, "Enchanted ");
-            thistype.put(PREFIX_SORCEROUS, 2, 1, IATTR_SP, 13, 20, "Sorcerous ");
-            thistype.put(PREFIX_MYSTERIOUS, 1, 1, IATTR_MREG, 1, 1, "Mysterious ");
-            thistype.put(PREFIX_ETERNAL, 2, 1, IATTR_MREG, 2, 3, "Eternal ");
-            thistype.put(PREFIX_STEADY, 1, 1, IATTR_DEF, 1, 2, "Steady ");
-            thistype.put(PREFIX_TOUGH, 2, 1, IATTR_DEF, 3, 5, "Tough ");
-            thistype.put(PREFIX_HEALTHY, 1, 1, IATTR_HREG, 2, 4, "Healthy ");
-            thistype.put(PREFIX_EVERLASTING, 2, 1, IATTR_HREG, 4, 8, "Everlasting ");
+            thistype.put(SUFIX_LETHALITY, 1, 2, IATTR_CRIT, 0.03, 0.07, "致命的");
+            thistype.put(SUFIX_SNAKE, 1, 2, IATTR_SCRIT, 0.03, 0.07, "蛇的");
+            thistype.put(SUFIX_QUICKNESS, 1, 2, IATTR_IAS, 3, 7, "快速的");
+            thistype.put(SUFIX_WIND_SERPENT, 1, 2, IATTR_SHASTE, 0.03, 0.07, "风蛇的");
+            thistype.put(SUFIX_BRUTE, 1, 2, IATTR_STR, 8, 15, "野蛮的");
+            thistype.put(SUFIX_DEXTERITY, 1, 2, IATTR_AGI, 8, 15, "灵巧的");
+            thistype.put(SUFIX_WISDOM, 1, 2, IATTR_INT, 8, 15, "智慧的");
+            thistype.put(SUFIX_VITALITY, 1, 2, IATTR_HP, 113, 225, "耐力的");
+            thistype.put(SUFIX_CHAMPION, 1, 2, IATTR_STR, 5, 9, "冠军的").addAttribute(IATTR_AP, 6, 11);
+            thistype.put(SUFIX_BUTCHER, 1, 2, IATTR_STR, 5, 9, "屠夫的").addAttribute(IATTR_CRIT, 0.02, 0.05);
+            thistype.put(SUFIX_ASSASSIN, 1, 2, IATTR_AGI, 5, 9, "刺客的").addAttribute(IATTR_CRIT, 0.02, 0.05);
+            thistype.put(SUFIX_RANGER, 1, 2, IATTR_AGI, 5, 9, "射手的").addAttribute(IATTR_AP, 6, 11);
+            thistype.put(SUFIX_WIZARD, 1, 2, IATTR_INT, 5, 9, "巫师的").addAttribute(IATTR_SHASTE, 0.02, 0.05);
+            thistype.put(SUFIX_PRIEST, 1, 2, IATTR_INT, 5, 9, "牧师的").addAttribute(IATTR_MREG, 1, 2);
+            thistype.put(SUFIX_GUARDIAN, 1, 2, IATTR_HP, 68, 135, "护卫的").addAttribute(IATTR_DODGE, 0.02, 0.03);
+            thistype.put(SUFIX_MASTERY, 1, 2, IATTR_LP, 1, 3, "精通的");
+            thistype.put(SUFIX_BLUR, 1, 2, IATTR_DODGE, 0.02, 0.05, "模糊的");
+            thistype.put(SUFIX_STRONGHOLD, 1, 2, IATTR_DEF, 2, 5, "据点的");
+            thistype.put(SUFIX_DEEP_SEA, 1, 2, IATTR_MREG, 2, 3, "深海的");
+            thistype.put(SUFIX_VOID, 1, 2, IATTR_SP, 10, 20, "虚空的");
+            thistype.put(SUFIX_VAMPIRE, 1, 2, IATTR_ATK_LL, 0.01, 0.02, "吸血鬼的");
+            thistype.put(SUFIX_SUCCUBUS, 1, 2, IATTR_ATK_ML, 0.01, 0.02, "魅魔的");
+            thistype.put(PREFIX_HEAVY, 1, 1, IATTR_STR, 4, 7, "厚重之");
+            thistype.put(PREFIX_STRONG, 2, 1, IATTR_STR, 8, 15, "强壮之");
+            thistype.put(PREFIX_SHARP, 1, 1, IATTR_AGI, 4, 7, "锋利之");
+            thistype.put(PREFIX_AGILE, 2, 1, IATTR_AGI, 8, 15, "敏捷之");
+            thistype.put(PREFIX_SHIMERING, 1, 1, IATTR_INT, 4, 7, "微光之");
+            thistype.put(PREFIX_INTELLIGENT, 2, 1, IATTR_INT, 8, 15, "智力之");
+            thistype.put(PREFIX_ENDURABLE, 1, 1, IATTR_HP, 57, 112, "耐久之");
+            thistype.put(PREFIX_VIBRANT, 2, 1, IATTR_HP, 113, 225, "活力之");
+            thistype.put(PREFIX_SKILLED, 1, 1, IATTR_AP, 5, 10, "技巧之");
+            thistype.put(PREFIX_CRUEL, 2, 1, IATTR_AP, 10, 20, "残忍之");
+            thistype.put(PREFIX_ENCHANTED, 1, 1, IATTR_SP, 8, 12, "附魔之");
+            thistype.put(PREFIX_SORCEROUS, 2, 1, IATTR_SP, 13, 20, "巫术之");
+            thistype.put(PREFIX_MYSTERIOUS, 1, 1, IATTR_MREG, 1, 1, "神秘之");
+            thistype.put(PREFIX_ETERNAL, 2, 1, IATTR_MREG, 2, 3, "永恒之");
+            thistype.put(PREFIX_STEADY, 1, 1, IATTR_DEF, 1, 2, "稳固之");
+            thistype.put(PREFIX_TOUGH, 2, 1, IATTR_DEF, 3, 5, "坚韧之");
+            thistype.put(PREFIX_HEALTHY, 1, 1, IATTR_HREG, 2, 4, "强健之");
+            thistype.put(PREFIX_EVERLASTING, 2, 1, IATTR_HREG, 4, 8, "持久之");
         }
     }
 
@@ -861,56 +880,56 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
         static method onInit() {
             //:template.id = attributeMeta
             //:template.indentation = 3
-            thistype.put(IATTR_STR,1,100,0,"+"," Strength",thistype.callbackSTR);
-            thistype.put(IATTR_STRPL,1,101,0,"+"," Strength/level",thistype.callbackSTRPL);
-            thistype.put(IATTR_AGI,1,102,0,"+"," Agility",thistype.callbackAGI);
-            thistype.put(IATTR_INT,1,104,0,"+"," Intelligence",thistype.callbackINT);
-            thistype.put(IATTR_ALLSTAT,1,106,0,"+"," All stats",thistype.callbackALLSTAT);
-            thistype.put(IATTR_HP,1,110,0,"+"," Max HP",thistype.callbackHP);
-            thistype.put(IATTR_HPPCT,1,111,0,"+"," Max HP",thistype.callbackHPPCT);
-            thistype.put(IATTR_HPPL,1,112,0,"+"," Max HP/level",thistype.callbackHPPL);
-            thistype.put(IATTR_MP,1,114,0,"+"," Max MP",thistype.callbackMP);
-            thistype.put(IATTR_AP,1,120,0,"+"," Attack power",thistype.callbackAP);
-            thistype.put(IATTR_APPL,1,121,0,"+"," Attack power/level",thistype.callbackAPPL);
-            thistype.put(IATTR_CRIT,1,122,0,"+"," Attack critical",thistype.callbackCRIT);
-            thistype.put(IATTR_IAS,1,124,0,"+","% Attack speed",thistype.callbackIAS);
-            thistype.put(IATTR_SP,1,130,0,"+"," Spell power",thistype.callbackSP);
-            thistype.put(IATTR_SCRIT,1,132,0,"+"," Spell critical",thistype.callbackSCRIT);
-            thistype.put(IATTR_SHASTE,1,134,0,"+"," Spell haste",thistype.callbackSHASTE);
-            thistype.put(IATTR_DEF,1,140,0,"+"," Armor",thistype.callbackDEF);
-            thistype.put(IATTR_DEFPL,1,141,0,"+"," Armor/level",thistype.callbackDEFPL);
-            thistype.put(IATTR_BR,1,142,0,"+"," Block chance",thistype.callbackBR);
-            thistype.put(IATTR_BP,1,144,0,"+"," Block points",thistype.callbackBP);
-            thistype.put(IATTR_DODGE,1,146,0,"+"," Dodge chance",thistype.callbackDODGE);
-            thistype.put(IATTR_DR,1,150,0,"-"," All damage taken",thistype.callbackDR);
-            thistype.put(IATTR_MDR,1,152,0,"-"," magical damage taken",thistype.callbackMDR);
-            thistype.put(IATTR_AMP,1,154,0,"+"," Damage and healing dealt",thistype.callbackAMP);
-            thistype.put(IATTR_HAMP,1,156,0,"+"," Healing taken",thistype.callbackHAMP);
-            thistype.put(IATTR_MREG,1,160,0,"Regens "," MP per second",thistype.callbackMREG);
-            thistype.put(IATTR_HREG,1,162,0,"Regens "," HP per second",thistype.callbackHREG);
-            thistype.put(IATTR_HLOST,1,164,0,"Lost "," HP per second during combat",thistype.callbackHLOST);
-            thistype.put(IATTR_MS,1,170,0,"+"," Movement speed",thistype.callbackMS);
-            thistype.put(IATTR_MSPL,1,171,0,"+"," Movement speed/level",thistype.callbackMSPL);
-            thistype.put(IATTR_LP,1,195,0,"Improve item |cff33ff33special power|r + ","",thistype.callbackLP);
-            thistype.put(IATTR_ATK_ML,3,200,0,"|cff87ceeb+"," Mana stolen per hit|r",thistype.callbackATK_ML);
-            thistype.put(IATTR_ATK_LL,3,202,0,"|cff87ceeb+"," Life stolen per hit|r",thistype.callbackATK_LL);
-            thistype.put(IATTR_ATK_LLML,3,204,0,"|cff87ceeb+"," Life and mana stolen per hit|r",thistype.callbackATK_LLML);
-            thistype.put(IATTR_ATK_MD,3,210,0,"|cff87ceebDeals "," extra magical damage per hit|r",thistype.callbackATK_MD);
-            thistype.put(IATTR_ATK_MDK,3,211,0,"|cff87ceebDeals "," extra magical damage per hit, scaled up by target HP lost|r",thistype.callbackATK_MDK);
-            thistype.put(IATTR_RG_ONESHOT,3,250,0,"|cff87ceebOne-shot target when it's HP is less than yours","|r",thistype.callbackRG_ONESHOT);
-            thistype.put(IATTR_MCVT,3,253,0,"|cff87ceebConverts your normal attacks into magical damage","|r",thistype.callbackMCVT);
-            thistype.put(IATTR_PL_SHOCK,3,256,0,"|cff87ceebHoly Shock always deals critical healing","|r",thistype.callbackPL_SHOCK);
-            thistype.put(IATTR_PR_SHIELD,3,259,0,"|cff87ceebRemoves weakness effect of Shield","|r",thistype.callbackPR_SHIELD);
-            thistype.put(IATTR_PL_LIGHT,3,262,0,"|cff87ceebFlash Light dispels one debuff from target","|r",thistype.callbackPL_LIGHT);
-            thistype.put(IATTR_DT_MREGEN,3,266,0,"|cff87ceebRegens MP from "," of the damage taken|r",thistype.callbackDT_MREGEN);
-            thistype.put(IATTR_USE_TP,3,268,0,"|cff87ceebUse: Teleports to an ally","|r",thistype.callbackUSE_TP);
-            thistype.put(IATTR_BM_VALOR,2,300,0.33,"|cff33ff33Regenerates "," more valor points|r",thistype.callbackBM_VALOR);
-            thistype.put(IATTR_RG_RUSH,2,302,0.16,"|cff33ff33Sinister Strike and Eviscerate deal "," extra damage to target below 30% max HP|r",thistype.callbackRG_RUSH);
-            thistype.put(IATTR_CRKILLER,2,303,0.5,"|cff33ff33Deals "," extra damage to non-hero targets|r",thistype.callbackCRKILLER);
-            thistype.put(IATTR_KG_REGRCD,2,305,0.33,"|cff33ff33Reduce cooldown of Instant Regrowth by "," seconds (unique)|r",thistype.callbackKG_REGRCD);
-            thistype.put(IATTR_LEECHAURA,2,307,0.33,"|cff33ff33Absorb "," HP from all enemies nearby every second|r",thistype.callbackLEECHAURA);
-            thistype.put(IATTR_PR_POHDEF,2,308,0.2,"|cff33ff33Prayer of healing increases armor of target by ","|r",thistype.callbackPR_POHDEF);
-            thistype.put(IATTR_DR_MAXHP,2,310,0.16,"|cff33ff33Survival Instincts provides "," extra healing and max HP|r",thistype.callbackDR_MAXHP);
+            thistype.put(IATTR_STR,1,100,0,"+","力量",thistype.callbackSTR);
+            thistype.put(IATTR_STRPL,1,101,0,"+","力量/级",thistype.callbackSTRPL);
+            thistype.put(IATTR_AGI,1,102,0,"+","敏捷",thistype.callbackAGI);
+            thistype.put(IATTR_INT,1,104,0,"+","智力",thistype.callbackINT);
+            thistype.put(IATTR_ALLSTAT,1,106,0,"+","全属性",thistype.callbackALLSTAT);
+            thistype.put(IATTR_HP,1,110,0,"+","生命",thistype.callbackHP);
+            thistype.put(IATTR_HPPCT,1,111,0,"+","生命",thistype.callbackHPPCT);
+            thistype.put(IATTR_HPPL,1,112,0,"+","生命/级",thistype.callbackHPPL);
+            thistype.put(IATTR_MP,1,114,0,"+","法力",thistype.callbackMP);
+            thistype.put(IATTR_AP,1,120,0,"+","攻击",thistype.callbackAP);
+            thistype.put(IATTR_APPL,1,121,0,"+","攻击/级",thistype.callbackAPPL);
+            thistype.put(IATTR_CRIT,1,122,0,"+","暴击",thistype.callbackCRIT);
+            thistype.put(IATTR_IAS,1,124,0,"+","攻速",thistype.callbackIAS);
+            thistype.put(IATTR_SP,1,130,0,"+","法术强度",thistype.callbackSP);
+            thistype.put(IATTR_SCRIT,1,132,0,"+","法术暴击",thistype.callbackSCRIT);
+            thistype.put(IATTR_SHASTE,1,134,0,"+","法术急速",thistype.callbackSHASTE);
+            thistype.put(IATTR_DEF,1,140,0,"+","护甲",thistype.callbackDEF);
+            thistype.put(IATTR_DEFPL,1,141,0,"+","护甲/级",thistype.callbackDEFPL);
+            thistype.put(IATTR_BR,1,142,0,"+","格挡率",thistype.callbackBR);
+            thistype.put(IATTR_BP,1,144,0,"+","格挡值",thistype.callbackBP);
+            thistype.put(IATTR_DODGE,1,146,0,"+","闪避",thistype.callbackDODGE);
+            thistype.put(IATTR_DR,1,150,0,"-","受到的所有伤害",thistype.callbackDR);
+            thistype.put(IATTR_MDR,1,152,0,"-","受到的法术伤害",thistype.callbackMDR);
+            thistype.put(IATTR_AMP,1,154,0,"+","伤害和治疗",thistype.callbackAMP);
+            thistype.put(IATTR_HAMP,1,156,0,"+","受到的治疗",thistype.callbackHAMP);
+            thistype.put(IATTR_MREG,1,160,0,"恢复","法力/秒",thistype.callbackMREG);
+            thistype.put(IATTR_HREG,1,162,0,"恢复","生命/秒",thistype.callbackHREG);
+            thistype.put(IATTR_HLOST,1,164,0,"流失","生命/秒",thistype.callbackHLOST);
+            thistype.put(IATTR_MS,1,170,0,"+","移动速度",thistype.callbackMS);
+            thistype.put(IATTR_MSPL,1,171,0,"+","移动速度/级",thistype.callbackMSPL);
+            thistype.put(IATTR_LP,1,195,0,"增强物品|cff33ff33特效|r + ","",thistype.callbackLP);
+            thistype.put(IATTR_ATK_ML,3,200,0,"|cff87ceeb+","法力吸取|r",thistype.callbackATK_ML);
+            thistype.put(IATTR_ATK_LL,3,202,0,"|cff87ceeb+","生命吸取|r",thistype.callbackATK_LL);
+            thistype.put(IATTR_ATK_LLML,3,204,0,"|cff87ceeb+","生命和法力吸取|r",thistype.callbackATK_LLML);
+            thistype.put(IATTR_ATK_MD,3,210,0,"|cff87ceeb造成 ","额外法术伤害/击|r",thistype.callbackATK_MD);
+            thistype.put(IATTR_ATK_MDK,3,211,0,"|cff87ceeb造成 ","额外法术伤害/击，目标生命越少伤害越高|r",thistype.callbackATK_MDK);
+            thistype.put(IATTR_RG_ONESHOT,3,250,0,"|cff87ceeb秒杀生命值少于你的目标","|r",thistype.callbackRG_ONESHOT);
+            thistype.put(IATTR_MCVT,3,253,0,"|cff87ceeb普通攻击转化为法术攻击","|r",thistype.callbackMCVT);
+            thistype.put(IATTR_PL_SHOCK,3,256,0,"|cff87ceeb神圣冲击必定造成极效治疗","|r",thistype.callbackPL_SHOCK);
+            thistype.put(IATTR_PR_SHIELD,3,259,0,"|cff87ceeb移除护盾的灵魂虚弱效果","|r",thistype.callbackPR_SHIELD);
+            thistype.put(IATTR_PL_LIGHT,3,262,0,"|cff87ceeb圣光闪现可以驱散一个有害法术效果","|r",thistype.callbackPL_LIGHT);
+            thistype.put(IATTR_DT_MREGEN,3,266,0,"|cff87ceeb受伤的","转化为法力|r",thistype.callbackDT_MREGEN);
+            thistype.put(IATTR_USE_TP,3,268,0,"|cff87ceeb使用：传送到一个友军位置","|r",thistype.callbackUSE_TP);
+            thistype.put(IATTR_BM_VALOR,2,300,0.33,"|cff33ff33产生","更多的勇气点数|r",thistype.callbackBM_VALOR);
+            thistype.put(IATTR_RG_RUSH,2,302,0.16,"|cff33ff33邪恶攻击和剔骨对低于30%生命的目标造成","额外伤害|r",thistype.callbackRG_RUSH);
+            thistype.put(IATTR_CRKILLER,2,303,0.5,"|cff33ff33对非英雄目标造成","额外伤害|r",thistype.callbackCRKILLER);
+            thistype.put(IATTR_KG_REGRCD,2,305,0.33,"|cff33ff33减少瞬发愈合的冷却时间","秒(唯一)|r",thistype.callbackKG_REGRCD);
+            thistype.put(IATTR_LEECHAURA,2,307,0.33,"|cff33ff33每秒从附近敌人吸收","点生命|r",thistype.callbackLEECHAURA);
+            thistype.put(IATTR_PR_POHDEF,2,308,0.2,"|cff33ff33治疗祷言提高","点护甲|r",thistype.callbackPR_POHDEF);
+            thistype.put(IATTR_DR_MAXHP,2,310,0.16,"|cff33ff33求生本能可以提供","额外的生命和生命上限|r",thistype.callbackDR_MAXHP);
             thistype.put(IATTR_CT_PAIN,2,313,0.4,"|cff33ff33Marrow Squeeze extends the Pain on target by "," seconds|r",thistype.callbackCT_PAIN);
             thistype.put(IATTR_BD_SHIELD,2,314,0.33,"|cff33ff33Shield of Sin'dorei provides "," extra damage reduction, and forces all nearby enemies to attack you|r",thistype.callbackBD_SHIELD);
             thistype.put(IATTR_RG_PARALZ,2,315,0.33,"|cff33ff33Sinister Strike has a "," chance to paralyze target, reduce target spell haste by 20% and gain an extra combo point|r",thistype.callbackRG_PARALZ);
