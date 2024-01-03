@@ -42,6 +42,8 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+.vscode
+
 ~*
 *.fw.png
 node_modules
@@ -51,3 +53,4 @@ war3map.*
 w3a.json
 build
 tmp.txt
+config.json

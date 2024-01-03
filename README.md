@@ -5,19 +5,17 @@ Zul'Aman - Reinvented with World Editor
 ## System Requirements
 
 - Windows NT
-- Warcraft III TFT 1.30
-- [JassHelper 0.A.2.B](http://www.wc3c.net/showthread.php?t=88142)
+- Warcraft III Reforged 1.36
+- Nodejs
 
 You can try other versions, but not tested.
 
 Not compatible with version lower than 1.29 because of the item editing APIs.
-Probably not compatible with version higher than 1.31.1 because of the lastest Lua feature.
 
 ## Build
 
-1. Set system environment variables, include JassHelper and Warcraft III to PATH
-2. ```make.bat```
-3. ```run.bat```
+1. Create a file named `config.json` and config wc3path to your wc3 installation path
+2. `node run`
 
 ## Map Information
 
