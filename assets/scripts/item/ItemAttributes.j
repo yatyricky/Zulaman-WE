@@ -302,7 +302,7 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
         }
 
         method updateUbertip() {
-            string uber = this.calculateName() + "|n" + this.forgeUbertip();
+            string uber = this.forgeUbertip();
             BlzSetItemExtendedTooltip(this.theItem, uber);
             BlzSetItemDescription(this.theItem, uber);
             BlzSetItemTooltip(this.theItem, uber);
@@ -310,22 +310,8 @@ library ItemAttributes requires UnitProperty, List, BreathOfTheDying, WindForce,
         }
 
         method updateName() {
-            // string rawName = ItemAttributesMeta.inst(GetItemTypeId(this.theItem), "updateName").name;
-            // NodeObject it = this.affixes.head;
-            // ItemAffix ia;
-            // AffixMeta meta;
-            // string sufix = "";
-            // string prefix = "";
-            // while (it != 0) {
-            //     meta = AffixMeta[ItemAffix(it.data).id];
-            //     if (meta.slot == 1) {
-            //         prefix = prefix + meta.text;
-            //     } else {
-            //         sufix = sufix + meta.text;
-            //     }
-            //     it = it.next;
-            // }
-            // BlzSetItemName(this.theItem, prefix + rawName + sufix);
+            string itemName = this.calculateName();
+            BlzSetItemName(this.theItem, itemName);
         }
 
         method reforge(integer level) {
