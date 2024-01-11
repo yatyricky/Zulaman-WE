@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/yatyricky/Zulaman-WE/issues"
   },
-  "homepage": "https://github.com/yatyricky/Zulaman-WE#readme"
+  "homepage": "https://github.com/yatyricky/Zulaman-WE#readme",
+  "dependencies": {
+    "xlsx": "^0.18.5"
+  }
 }
