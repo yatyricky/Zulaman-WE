@@ -15,6 +15,21 @@ library StringUtils {
         return -1;
     }
 
+    public function StringFindLast(string str, string find, integer i) -> integer {
+        integer ls = StringLength(str);
+        integer lf = StringLength(find);
+        integer diff = ls - lf;
+
+        while (i <= diff) {
+            if (SubString(str, diff - i, ls - i) == find) {
+                return i;
+            }
+            i += 1;
+        }
+
+        return -1;
+    }
+
     public function StringReplace(string str, string pattern, string replace) -> string {
         integer index = StringFind(str, pattern, 0);
         integer ls, lp;
@@ -35,6 +50,18 @@ library StringUtils {
         string ret = StringReplace(template, "{0}", s1);
         ret = StringReplace(ret, "{1}", s2);
         return ret;
+    }
+
+    public function StringDye(string str, string color) -> string {
+        integer index = StringFind(str, "|c");
+        string temp;
+        if (index == -1) {
+            return "|c" + color + str + "|r";
+        }
+
+        temp = StringReplace(str, "|c", "|r|c");
+
+        return return "|c" + color +  + "|r";
     }
 }
 //! endzinc

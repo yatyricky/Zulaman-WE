@@ -247,6 +247,8 @@ library GameProcess requires PlayerUnitList, MobInit, AggroSystem {
     }
 
     function onInit() {
+        string s1,s2,ss,sx;
+
         TimerStart(CreateTimer(), 2.0, false, function() {
             MobInitAllowArea(1);
         });
@@ -259,6 +261,35 @@ library GameProcess requires PlayerUnitList, MobInit, AggroSystem {
         outOfTheCrypt = CreateTrigger();
         TriggerRegisterEnterRectSimple(outOfTheCrypt, gg_rct_OutOfCatacomb);
         TriggerAddCondition(outOfTheCrypt, Condition(function outOfTheCryptAction));
+
+        s1 = "Lorem ipsum";
+        s2 = "中文and英文";
+        ss = "造成{0}%SUPER伤害RTX";
+        sx = "有{0}%概率造成{1}暗影伤害";
+        print(I2S(StringLength(s1)));
+        print(I2S(StringLength(s2)));
+        print(SubString(s2, 0, 6));
+        print(SubString(s2, 3, 12));
+
+        print("---");
+
+        print(I2S(StringFind(s1, "ipsum", 0)));
+        print(I2S(StringFind(s1, "Lorem", 0)));
+        print(I2S(StringFind(s1, "lorem", 0)));
+        print(I2S(StringFind(s2, "英文", 0)));
+        print(I2S(StringFind(ss, "{0}", 0)));
+        print(I2S(StringFind(s2, "{0}", 0)));
+        print("---");
+
+        print(StringReplace(ss, "{0}", "32767"));
+        print(StringReplace(s1, "Lorem", "WOO!"));
+        print(StringReplace(s2, "英文", "English"));
+        print(StringReplace(ss, "{1}", "32767"));
+        print(StringReplace(s2, "and", ""));
+        print("---");
+        print(StringFormat1(ss, "75"));
+        print(StringFormat2(sx, "25", "255"));
+        print(StringFormat1(s2, "哦啦啦啦"));
     }
 }
 //! endzinc
