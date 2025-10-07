@@ -4,7 +4,11 @@
   "description": "Zul'Aman - Reinvented with World Editor\r ===\r *My old Warcraft III World Editor project that pains in my ass.*",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node index.js build",
+    "start": "node index.js run",
+    "run": "node index.js run --no-build",
+    "replay": "node index.js replay"
   },
   "repository": {
     "type": "git",

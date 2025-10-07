@@ -15,7 +15,51 @@ Not compatible with version lower than 1.29 because of the item editing APIs.
 ## Build
 
 1. Create a file named `config.json` and config wc3path to your wc3 installation path
-2. `node run`
+2. Use the new combined CLI:
+
+### Quick Start
+```bash
+# Build and run the map
+npm start
+# or
+node index.js run
+
+# Build only
+npm run build
+# or  
+node index.js build
+
+# Run without building (use existing build)
+npm run run
+# or
+node index.js run --no-build
+
+# Watch last replay
+npm run replay
+# or
+node index.js replay
+```
+
+### Windows Batch File
+For convenience, you can also use the included batch file:
+```cmd
+# Build and run
+zam.bat run
+
+# Build only
+zam.bat build
+
+# Show help
+zam.bat help
+```
+
+### Legacy Commands
+The original separate files (`make.js`, `run.js`, `replay.js`) are still available if needed:
+```bash
+node make.js    # Build only
+node run.js     # Build and run
+node replay.js  # Watch replay
+```
 
 ## Map Information
 
