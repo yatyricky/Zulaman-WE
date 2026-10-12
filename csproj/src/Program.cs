@@ -1,7 +1,9 @@
+using StdLib;
+
 public class Program
 {
     public static void Main()
     {
-        BJDebugMsg("Hello lua");
+        GameObject.RunGameObjects();
     }
 }
