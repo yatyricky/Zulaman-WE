@@ -78,6 +78,17 @@ public class Dictionary<K, V> : IPairs<K, V>
         return false;
     }
 
+    public bool Remove(K key)
+    {
+        if (key == null) throw new Exception("Key cannot be null");
+        if (LuaInterop.Get<V>(_table, key) == null) return false;
+        LuaInterop.Set(_table, key, null);
+        Count--;
+        _keys.Remove(key);
+        _version++;
+        return true;
+    }
+
     public Enumerator GetEnumerator() => default!;
 
     public class Enumerator

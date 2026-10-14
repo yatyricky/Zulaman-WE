@@ -2,22 +2,11 @@ using StdLib;
 
 public class Program
 {
-    private void SetupDamagedEvent()
-    {
-        var obj = new GameObject("DamagedEventRoot");
-        obj.AddComponent<DamagedEvent>();
-    }
-
-    private static int counter = 0;
-
-    private static void DamageEventFunc(DamagedEvent.NativeDamageData data)
+    private static void DamageEventFunc(DamagedEventData data)
     {
         var damage = data.damage;
         var damageSource = data.damageSource;
         var damageTarget = data.damageTarget;
-        counter++;
-
-        BJDebugMsg($"{GetUnitName(damageSource)} damaged {GetUnitName(damageTarget)} for {damage} damage, isAttack: {data.isAttack}, damageType is {Helper.DamageType2String(data.damageType)}");
 
         if (data.isAttack && data.damageType != DAMAGE_TYPE_DIVINE)
         {
@@ -49,8 +38,13 @@ public class Program
     private void Start()
     {
         GameObject.RunGameObjects();
+        _ = SpellChannelEvent.Instance;
+        _ = SpellCastEvent.Instance;
+        _ = SpellEffectEvent.Instance;
+        _ = SpellFinishEvent.Instance;
+        _ = SpellEndCastEvent.Instance;
 
-        SetupDamagedEvent();
+        InvokeAbility.Instance.Init();
 
         Test();
     }

@@ -27,11 +27,9 @@ public class CreateUnitEvent : Component
 
     public void Register(Action<unit> callback)
     {
-        if (_callbacks.IndexOf(callback) != -1)
+        if (!_callbacks.Contains(callback))
         {
-            return;
+            _callbacks.Add(callback);
         }
-
-        _callbacks.Add(callback);
     }
 }

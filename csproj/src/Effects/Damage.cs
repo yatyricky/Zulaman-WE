@@ -19,6 +19,5 @@ public class Damage : Effect
     public void Run()
     {
         UnitDamageTarget(args.source, args.target, args.amount, args.isAttack, true, ATTACK_TYPE_CHAOS, DAMAGE_TYPE_DIVINE, args.wtype);
-        BJDebugMsg($"{GetUnitName(args.source)} damaged {GetUnitName(args.target)} for {args.amount}");
     }
 }

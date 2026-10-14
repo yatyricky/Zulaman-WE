@@ -96,6 +96,11 @@ public class List<T> : IIpairs<T>
         return -1;
     }
 
+    public bool Contains(T item)
+    {
+        return IndexOf(item) != -1;
+    }
+
     private static int DefaultCompare(T a, T b)
     {
         if (LuaInterop.Eq(a, b)) return 0;
