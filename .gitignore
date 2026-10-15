@@ -5,3 +5,4 @@ logs
 *.sf-build.w3x
 */obj
 bundle.lua
+war3map.lua

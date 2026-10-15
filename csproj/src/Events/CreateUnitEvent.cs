@@ -1,35 +1,30 @@
-using System;
-using StdLib;
-
-public class CreateUnitEvent : Component
+public struct CreateUnitEventData
 {
-    public static CreateUnitEvent Instance { get; private set; } = null!;
-    private List<Action<unit>> _callbacks = new();
+    public unit u;
+}
 
-    public override void Awake()
+public class CreateUnitEvent : EventBase<CreateUnitEventData>
+{
+    public static CreateUnitEvent _instance { get; private set; } = null!;
+
+    public static CreateUnitEvent Instance
     {
-        Instance = this;
+        get
+        {
+            _instance ??= new CreateUnitEvent();
+            return _instance;
+        }
+    }
 
+    public CreateUnitEvent()
+    {
         var mapRect = CreateRegion();
         RegionAddRect(mapRect, bj_mapInitialPlayableArea);
         var trigger = CreateTrigger();
         TriggerRegisterEnterRegion(trigger, mapRect, Filter(() => !Helper.IsUnitDummy(GetFilterUnit())));
-        TriggerAddCondition(trigger, Condition(() =>
+        TriggerAddAction(trigger, () =>
         {
-            var u = GetTriggerUnit();
-            foreach (var callback in _callbacks)
-            {
-                callback(u);
-            }
-            return false;
-        }));
-    }
-
-    public void Register(Action<unit> callback)
-    {
-        if (!_callbacks.Contains(callback))
-        {
-            _callbacks.Add(callback);
-        }
+            ResponseCall(new CreateUnitEventData { u = GetTriggerUnit() });
+        });
     }
 }

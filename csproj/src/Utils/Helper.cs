@@ -39,4 +39,17 @@ public class Helper
         if (dt == DAMAGE_TYPE_UNIVERSAL) return "UNIVERSAL";
         return "UNDEFINED";
     }
+
+    public static string GetUnitNameEx(unit u)
+    {
+        if (u == null) return "NULL";
+        if (IsUnitType(u, UNIT_TYPE_HERO))
+        {
+            return GetHeroProperName(u);
+        }
+        else
+        {
+            return GetUnitName(u);
+        }
+    }
 }

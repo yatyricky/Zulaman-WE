@@ -8,7 +8,7 @@ namespace StdLib;
 /// C# indexer (dict[key]) maps to direct table field access via get_Item/set_Item.
 /// </summary>
 [Lua(PackStruct = true)]
-public class Dictionary<K, V> : IPairs<K, V>
+public class Dictionary<K, V> : IPairs<K, V>, System.Collections.IEnumerable
 {
     private LuaObject _table;
     private int _version;
@@ -89,7 +89,14 @@ public class Dictionary<K, V> : IPairs<K, V>
         return true;
     }
 
+    public void Add(K key, V value)
+    {
+        this[key] = value;
+    }
+
     public Enumerator GetEnumerator() => default!;
+
+    System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => default!;
 
     public class Enumerator
     {

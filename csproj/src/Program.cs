@@ -45,6 +45,8 @@ public class Program
         _ = SpellEndCastEvent.Instance;
 
         InvokeAbility.Instance.Init();
+        StatsComponent.Init();
+        Const.UnitsRoot = new GameObject("Units");
 
         Test();
     }

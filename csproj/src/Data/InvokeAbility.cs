@@ -1,3 +1,7 @@
+
+using System;
+using StdLib;
+
 public class InvokeAbility
 {
     public static InvokeAbility _instance { get; private set; } = null!;
@@ -11,9 +15,19 @@ public class InvokeAbility
         }
     }
 
+    public static Dictionary<int, Func<unit, unit, float>> Formulas = new()
+    {
+        {
+            SpellAbilityId.ArcaneShock, (caster, target) =>
+            {
+                return 0f;
+            }
+        }
+    };
+
     public void Init()
     {
-        SpellEffectEvent.Instance.Register(FourCC("A004"), (data) =>
+        SpellEffectEvent.Instance.Register(SpellAbilityId.ArcaneShock, (data) =>
         {
             var dmg = new Damage
             {

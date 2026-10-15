@@ -9,7 +9,7 @@ namespace StdLib;
 /// C# indexer (0-based) maps to Lua table (1-based) via get_Item/set_Item.
 /// </summary>
 [Lua(PackStruct = true)]
-public class List<T> : IIpairs<T>
+public class List<T> : IIpairs<T>, System.Collections.Generic.IEnumerable<T>
 {
     private LuaObject _items;
     private int _version;
@@ -131,11 +131,7 @@ public class List<T> : IIpairs<T>
         };
     }
 
-    public Enumerator GetEnumerator() => default!;
+    public System.Collections.Generic.IEnumerator<T> GetEnumerator() => default!;
 
-    public class Enumerator
-    {
-        public T Current => default!;
-        public bool MoveNext() => default!;
-    }
+    System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => default!;
 }
