@@ -36,12 +36,12 @@ public class List<T> : IIpairs<T>, System.Collections.Generic.IEnumerable<T>
     {
         get
         {
-            if (index < 0 || index >= Count) throw new Exception("Index out of range");
+            if (index < 0 || index >= Count) throw new Exception(Diagnostics.Fail("Index out of range: index=" + index + " count=" + Count));
             return LuaInterop.Get<T>(_items, index + 1);
         }
         set
         {
-            if (index < 0 || index >= Count) throw new Exception("Index out of range");
+            if (index < 0 || index >= Count) throw new Exception(Diagnostics.Fail("Index out of range: index=" + index + " count=" + Count));
             LuaInterop.Set(_items, index + 1, value);
         }
     }

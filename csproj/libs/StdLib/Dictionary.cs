@@ -28,7 +28,7 @@ public class Dictionary<K, V> : IPairs<K, V>, System.Collections.IEnumerable
         get
         {
             if (key == null) throw new Exception("Key cannot be null");
-            return LuaInterop.Get<V>(_table, key) ?? throw new Exception("Key not found");
+            return LuaInterop.Get<V>(_table, key) ?? throw new Exception(Diagnostics.Fail("Key not found: " + key));
         }
         set
         {
@@ -50,7 +50,7 @@ public class Dictionary<K, V> : IPairs<K, V>, System.Collections.IEnumerable
         var index = 0;
         return () =>
         {
-            if (version != _version) throw new Exception("Collection was modified");
+            if (version != _version) throw new Exception(Diagnostics.Fail("Collection was modified"));
             index++;
             if (index > _keys.Count) return default;
             var key = _keys[index - 1];

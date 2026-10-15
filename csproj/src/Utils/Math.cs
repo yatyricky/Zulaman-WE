@@ -33,6 +33,22 @@ public class Math
         }
     }
 
+    public static int Clamp(int value, int min, int max)
+    {
+        if (value < min)
+        {
+            return min;
+        }
+        else if (value > max)
+        {
+            return max;
+        }
+        else
+        {
+            return value;
+        }
+    }
+
     public static float Clamp01(float value)
     {
         return Clamp(value, 0, 1);
