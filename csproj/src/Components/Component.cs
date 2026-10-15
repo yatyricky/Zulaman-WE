@@ -2,6 +2,8 @@ public class Component
 {
     public GameObject gameObject { get; internal set; } = null!;
 
+    internal bool _started;
+
     public virtual string GetInspectorText()
     {
         return string.Empty;

@@ -14,6 +14,10 @@ public class GameObject
             var count = _gameObjs.Count;
             for (int i = 0; i < count; i++)
             {
+                _gameObjs[i].StartPendingComponents();
+            }
+            for (int i = 0; i < count; i++)
+            {
                 _gameObjs[i].Update();
             }
             for (int i = 0; i < count; i++)
@@ -117,7 +121,6 @@ public class GameObject
         _components.Add(comp);
         comp.Awake();
         comp.OnEnable();
-        comp.Start();
         return comp;
     }
 
@@ -134,18 +137,38 @@ public class GameObject
         }
     }
 
+    internal void StartPendingComponents()
+    {
+        if (isDestroyQueued || isDestroyed) return;
+        var snapshot = new List<Component>(_components);
+        foreach (var comp in snapshot)
+        {
+            if (comp._started) continue;
+            comp._started = true;
+            comp.Start();
+        }
+    }
+
     public void Update()
     {
         if (isDestroyQueued || isDestroyed) return;
         var snapshot = new List<Component>(_components);
-        foreach (var comp in snapshot) comp.Update();
+        foreach (var comp in snapshot)
+        {
+            if (!comp._started) continue;
+            comp.Update();
+        }
     }
 
     public void LateUpdate()
     {
         if (isDestroyQueued || isDestroyed) return;
         var snapshot = new List<Component>(_components);
-        foreach (var comp in snapshot) comp.LateUpdate();
+        foreach (var comp in snapshot)
+        {
+            if (!comp._started) continue;
+            comp.LateUpdate();
+        }
     }
 
     public void Destroy()
