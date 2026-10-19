@@ -3,13 +3,14 @@ using StdLib;
 /// <summary>
 /// FrameComponent 的图片填充：在同名 GameObject 上创建 BACKDROP 子帧，
 /// BlzFrameSetAllPoints 跟随 FrameComponent 的 rect。texture 为 null 时隐藏。
+/// 可见性 = enabled（组件有效状态）∧ GameObject activeInHierarchy ∧ texture != null，
+/// 不暴露独立 visible。
 /// </summary>
 public class FrameImage : Component
 {
     private static int _nextId = 1;
 
     private string? _texture;
-    private bool _visible = true;
     private bool _dirty = true;
     private framehandle? _native;
     private FrameComponent? _frame;
@@ -19,12 +20,6 @@ public class FrameImage : Component
     {
         get { return _texture; }
         set { _texture = value; SetDirty(); }
-    }
-
-    public bool visible
-    {
-        get { return _visible; }
-        set { _visible = value; SetDirty(); }
     }
 
     public override void Start()
@@ -72,7 +67,7 @@ public class FrameImage : Component
         if (tex != null)
         {
             BlzFrameSetTexture(native, tex, 0, false);
-            BlzFrameSetVisible(native, _visible);
+            BlzFrameSetVisible(native, true); // 能执行到这里说明 enabled 且 activeInHierarchy
         }
         else
         {
@@ -80,6 +75,11 @@ public class FrameImage : Component
         }
 
         _dirty = false;
+    }
+
+    public framehandle? nativeFrame
+    {
+        get { return _native; }
     }
 
     internal void DestroyNative()

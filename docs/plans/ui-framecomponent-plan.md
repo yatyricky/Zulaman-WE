@@ -57,7 +57,7 @@ GameObject("UI")          →      FrameComponent (root)      →   BlzGetOrigin
    - `OnDestroy()`：先销毁登记的 FrameImage 的 BACKDROP，再 `BlzDestroyFrame(native)`（规避孤儿帧销毁顺序问题）；
    - 所有属性 setter 调 `SetDirty()`。
 3. **`csproj/src/Components/FrameImage.cs`**（新建）— 图片填充：
-   - `texture` 属性（string 路径，空 = 隐藏）；
+   - `texture` 属性（string 路径，空 = 隐藏）；**不暴露 visible**：可见性 = `enabled`（组件有效状态）∧ GameObject activeInHierarchy ∧ texture != null（2026-10-19 Component.enabled 已实现）；
    - Start 时 `GetComponent<FrameComponent>()`，`BlzCreateFrameByType("BACKDROP", …, frameComp.nativeFrame, "", 0)` + `BlzFrameSetAllPoints`（自动跟随父 rect，guide §2.2）；
    - LateUpdate 应用 `BlzFrameSetTexture(tex, 0, false)` 与可见性；向所属 FrameComponent 登记，销毁由 FrameComponent 统一处理。
 4. **`csproj/src/Utils/Const.cs`** — 增加 `public static GameObject UiRoot = null!;`（镜像 UnitsRoot 模式）。

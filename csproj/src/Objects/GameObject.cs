@@ -135,13 +135,7 @@ public class GameObject
         var count = _components.Count;
         for (int i = 0; i < count; i++)
         {
-            var comp = _components[i];
-            if (!comp._awoke)
-            {
-                comp.Awake();
-                comp._awoke = true;
-            }
-            comp.OnEnable();
+            _components[i].UpdateOnState();
         }
         var children = transform.children;
         var childCount = children.Count;
@@ -156,7 +150,7 @@ public class GameObject
         var count = _components.Count;
         for (int i = 0; i < count; i++)
         {
-            _components[i].OnDisable();
+            _components[i].UpdateOnState();
         }
         var children = transform.children;
         var childCount = children.Count;
@@ -204,9 +198,7 @@ public class GameObject
         _components.Add(comp);
         if (activeInHierarchy)
         {
-            comp.Awake();
-            comp._awoke = true;
-            comp.OnEnable();
+            comp.UpdateOnState();
         }
         return comp;
     }
@@ -230,7 +222,7 @@ public class GameObject
         var snapshot = new List<Component>(_components);
         foreach (var comp in snapshot)
         {
-            if (comp._started) continue;
+            if (comp._started || !comp.enabled) continue;
             comp._started = true;
             comp.Start();
         }
@@ -242,7 +234,7 @@ public class GameObject
         var snapshot = new List<Component>(_components);
         foreach (var comp in snapshot)
         {
-            if (!comp._started) continue;
+            if (!comp._started || !comp.enabled) continue;
             comp.Update();
         }
     }
@@ -253,7 +245,7 @@ public class GameObject
         var snapshot = new List<Component>(_components);
         foreach (var comp in snapshot)
         {
-            if (!comp._started) continue;
+            if (!comp._started || !comp.enabled) continue;
             comp.LateUpdate();
         }
     }
