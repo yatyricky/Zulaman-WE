@@ -1,4 +1,4 @@
 public enum EffectType
 {
-    DAMAGE,
+    Damage,
 }

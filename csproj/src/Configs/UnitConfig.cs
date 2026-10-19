@@ -3,7 +3,7 @@ using StdLib;
 public class UnitConfigEntry
 {
     public int UTID;
-    public Dictionary<StatId, StatValue> BaseStats;
+    public Dictionary<StatId, StatValue> BaseStats = null!;
 }
 
 
@@ -17,7 +17,7 @@ public class UnitConfig
 {
     public static List<UnitConfigEntry> Data = new()
     {
-        new UnitConfigEntry{UTID = FourCC("Hmkg"), BaseStats = new(){ {StatId.BASE_HP, new (){intVal = 759}} }},
+        new UnitConfigEntry{UTID = FourCC("Hmkg"), BaseStats = new(){ {StatId.BaseHp, new (){intVal = 759}} }},
     };
 
     public static UnitConfigEntry FindByUTID(int utid)

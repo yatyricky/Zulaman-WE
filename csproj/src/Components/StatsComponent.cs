@@ -15,10 +15,10 @@ public class StatsComponent : Component
             var val = new StatValue();
             switch (config.Type)
             {
-                case StatType.INT:
+                case StatType.Int:
                     val.intVal = 0;
                     break;
-                case StatType.FLOAT:
+                case StatType.Float:
                     val.floatVal = 0f;
                     break;
                 default:
@@ -45,8 +45,8 @@ public class StatsComponent : Component
 
     private static Dictionary<StatEventType, Action<StatsComponent>> statEventCalls = new()
     {
-        {StatEventType.NONE, (u) => {}},
-        {StatEventType.MAX_HP, UpdateMaxHp},
+        {StatEventType.None, (u) => {}},
+        {StatEventType.MaxHp, UpdateMaxHp},
     };
 
     private static readonly List<int> PosLifeArr = [FourCC("AHP0"), FourCC("AHP1"), FourCC("AHP2"), FourCC("AHP3"), FourCC("AHP4"), FourCC("AHP5"), FourCC("AHP6"), FourCC("AHP7"), FourCC("AHP8"), FourCC("AHP9"), FourCC("AHP:"), FourCC("AHP;"), FourCC("AHP<"), FourCC("AHP="), FourCC("AHP>"), FourCC("AHP?"), FourCC("AHP@"), FourCC("AHPA"), FourCC("AHPB"), FourCC("AHPC"), FourCC("AHPD")];
@@ -127,7 +127,7 @@ public class StatsComponent : Component
 
     public static void UpdateMaxHp(StatsComponent comp)
     {
-        var amount = comp.stats[StatId.BASE_HP].intVal + comp.stats[StatId.EX_MAX_HP].intVal;
+        var amount = comp.stats[StatId.BaseHp].intVal + comp.stats[StatId.ExMaxHp].intVal;
         UpdateStats(comp.owner, amount, PosLifeArr, 0);
     }
 

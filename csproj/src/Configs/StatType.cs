@@ -1,6 +1,6 @@
 public enum StatType
 {
-    INT,
-    FLOAT,
+    Int,
+    Float,
     
 }
