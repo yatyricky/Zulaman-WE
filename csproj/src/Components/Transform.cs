@@ -64,6 +64,8 @@ public class Transform : Component
 
     public void SetParent(Transform? newParent)
     {
+        var wasActive = gameObject.activeInHierarchy;
+
         if (parent != null)
         {
             parent.children.Remove(this);
@@ -74,6 +76,18 @@ public class Transform : Component
         if (parent != null)
         {
             parent.children.Add(this);
+        }
+
+        if (gameObject.isDestroyQueued || gameObject.isDestroyed) return;
+
+        var isActive = gameObject.activeInHierarchy;
+        if (wasActive && !isActive)
+        {
+            gameObject.DeactivateBranch();
+        }
+        else if (!wasActive && isActive)
+        {
+            gameObject.ActivateBranch();
         }
     }
 

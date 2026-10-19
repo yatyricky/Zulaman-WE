@@ -3,6 +3,7 @@ public class Component
     public GameObject gameObject { get; internal set; } = null!;
 
     internal bool _started;
+    internal bool _awoke;
 
     public virtual string GetInspectorText()
     {

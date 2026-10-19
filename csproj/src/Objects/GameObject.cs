@@ -61,6 +61,8 @@ public class GameObject
             return;
         }
 
+        var wasActive = obj.activeInHierarchy;
+
         var children = obj.transform.children;
         for (int i = children.Count - 1; i >= 0; i--)
         {
@@ -70,7 +72,10 @@ public class GameObject
         obj.transform.SetParent(null);
         foreach (var comp in obj._components)
         {
-            comp.OnDisable();
+            if (wasActive)
+            {
+                comp.OnDisable();
+            }
             comp.OnDestroy();
         }
 
@@ -86,6 +91,84 @@ public class GameObject
     public List<Component> components => _components;
     public bool isDestroyQueued { get; private set; }
     public bool isDestroyed { get; private set; }
+
+    private bool _activeSelf = true;
+
+    public bool activeSelf => _activeSelf;
+
+    public bool activeInHierarchy
+    {
+        get
+        {
+            var go = this;
+            while (true)
+            {
+                if (!go._activeSelf) return false;
+                var t = go.transform;
+                if (t == null) return true; // 构造中 transform 尚未赋值，此时必无父节点
+                var parentTransform = t.parent;
+                if (parentTransform == null) return true;
+                go = parentTransform.gameObject;
+            }
+        }
+    }
+
+    public void SetActive(bool value)
+    {
+        if (_activeSelf == value) return;
+        var wasActive = activeInHierarchy;
+        _activeSelf = value;
+        var isActive = activeInHierarchy;
+        if (wasActive && !isActive)
+        {
+            DeactivateBranch();
+        }
+        else if (!wasActive && isActive)
+        {
+            ActivateBranch();
+        }
+    }
+
+    internal void ActivateBranch()
+    {
+        if (!_activeSelf) return;
+        var count = _components.Count;
+        for (int i = 0; i < count; i++)
+        {
+            var comp = _components[i];
+            if (!comp._awoke)
+            {
+                comp.Awake();
+                comp._awoke = true;
+            }
+            comp.OnEnable();
+        }
+        var children = transform.children;
+        var childCount = children.Count;
+        for (int i = 0; i < childCount; i++)
+        {
+            children[i].gameObject.ActivateBranch();
+        }
+    }
+
+    internal void DeactivateBranch()
+    {
+        var count = _components.Count;
+        for (int i = 0; i < count; i++)
+        {
+            _components[i].OnDisable();
+        }
+        var children = transform.children;
+        var childCount = children.Count;
+        for (int i = 0; i < childCount; i++)
+        {
+            var child = children[i].gameObject;
+            if (child._activeSelf)
+            {
+                child.DeactivateBranch();
+            }
+        }
+    }
 
     public GameObject(string name)
     {
@@ -119,8 +202,12 @@ public class GameObject
             gameObject = this
         };
         _components.Add(comp);
-        comp.Awake();
-        comp.OnEnable();
+        if (activeInHierarchy)
+        {
+            comp.Awake();
+            comp._awoke = true;
+            comp.OnEnable();
+        }
         return comp;
     }
 
@@ -139,7 +226,7 @@ public class GameObject
 
     internal void StartPendingComponents()
     {
-        if (isDestroyQueued || isDestroyed) return;
+        if (isDestroyQueued || isDestroyed || !activeInHierarchy) return;
         var snapshot = new List<Component>(_components);
         foreach (var comp in snapshot)
         {
@@ -151,7 +238,7 @@ public class GameObject
 
     public void Update()
     {
-        if (isDestroyQueued || isDestroyed) return;
+        if (isDestroyQueued || isDestroyed || !activeInHierarchy) return;
         var snapshot = new List<Component>(_components);
         foreach (var comp in snapshot)
         {
@@ -162,7 +249,7 @@ public class GameObject
 
     public void LateUpdate()
     {
-        if (isDestroyQueued || isDestroyed) return;
+        if (isDestroyQueued || isDestroyed || !activeInHierarchy) return;
         var snapshot = new List<Component>(_components);
         foreach (var comp in snapshot)
         {
