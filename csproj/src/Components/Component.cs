@@ -2,6 +2,8 @@ public class Component
 {
     public GameObject gameObject { get; internal set; } = null!;
 
+    public Transform transform => gameObject.transform;
+
     internal bool _started;
     internal bool _awoke;
 
