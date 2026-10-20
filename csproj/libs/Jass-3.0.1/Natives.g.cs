@@ -408,7 +408,7 @@ public static partial class JASS
     /// <summary>JASS function <c>SetTerrainFogExVBJ</c>.</summary>
     public static void SetTerrainFogExVBJ(int style, float zstart, float zend, float density, float heightStart, float heightEnd, float linearStart, float linearEnd, float red, float green, float blue) => throw null!;
     /// <summary>JASS function <c>BlzSetTerrainFogStyleBJ</c>.</summary>
-    public static void BlzSetTerrainFogStyleBJ(fogstyle style) => throw null!;
+    public static void BlzSetTerrainFogStyleBJ(int style) => throw null!;
     /// <summary>JASS function <c>BlzSetTerrainFogZStartBJ</c>.</summary>
     public static void BlzSetTerrainFogZStartBJ(float zStart) => throw null!;
     /// <summary>JASS function <c>BlzSetTerrainFogZEndBJ</c>.</summary>
@@ -587,12 +587,18 @@ public static partial class JASS
     public static effect AddSpecialEffectTargetUnitBJ(string attachPointName, widget targetWidget, string modelName) => throw null!;
     /// <summary>JASS function <c>DestroyEffectBJ</c>.</summary>
     public static void DestroyEffectBJ(effect whichEffect) => throw null!;
+    /// <summary>JASS function <c>RemoveEffectBJ</c>.</summary>
+    public static void RemoveEffectBJ(effect whichEffect) => throw null!;
     /// <summary>JASS function <c>GetLastCreatedEffectBJ</c>.</summary>
     public static effect GetLastCreatedEffectBJ() => throw null!;
     /// <summary>JASS function <c>DestroyEffectAsyncBJ</c>.</summary>
     public static void DestroyEffectAsyncBJ() => throw null!;
     /// <summary>JASS function <c>DestroyEffectAfterTimeBJ</c>.</summary>
     public static void DestroyEffectAfterTimeBJ(effect whichEffect, float time) => throw null!;
+    /// <summary>JASS function <c>RemoveEffectAsyncBJ</c>.</summary>
+    public static void RemoveEffectAsyncBJ() => throw null!;
+    /// <summary>JASS function <c>RemoveEffectAfterTimeBJ</c>.</summary>
+    public static void RemoveEffectAfterTimeBJ(effect whichEffect, float time) => throw null!;
     /// <summary>JASS function <c>CreateCommandButtonEffectBJ</c>.</summary>
     public static commandbuttoneffect CreateCommandButtonEffectBJ(int abilityId, string order) => throw null!;
     /// <summary>JASS function <c>CreateTrainCommandButtonEffectBJ</c>.</summary>
@@ -757,6 +763,8 @@ public static partial class JASS
     public static int ChooseRandomItemExBJ(int level, itemtype whichType) => throw null!;
     /// <summary>JASS function <c>ChooseRandomItemExWithFilterBJ</c>.</summary>
     public static int ChooseRandomItemExWithFilterBJ(int level, itemtype whichType, equipmentType whichEquipmentType, itemTag whichTag) => throw null!;
+    /// <summary>JASS function <c>ChooseRandomItemExWithFilterAndIncludesBJ</c>.</summary>
+    public static int ChooseRandomItemExWithFilterAndIncludesBJ(int level, itemtype whichType, equipmentType whichEquipmentType, itemTag whichTag, bool includeInvalidMorphs, bool includeNonPickRandom) => throw null!;
     /// <summary>JASS function <c>ChooseRandomNPBuildingBJ</c>.</summary>
     public static int ChooseRandomNPBuildingBJ() => throw null!;
     /// <summary>JASS function <c>ChooseRandomCreepBJ</c>.</summary>
@@ -855,6 +863,10 @@ public static partial class JASS
     public static bool IsUnitDeadBJ(unit whichUnit) => throw null!;
     /// <summary>JASS function <c>IsUnitAliveBJ</c>.</summary>
     public static bool IsUnitAliveBJ(unit whichUnit) => throw null!;
+    /// <summary>JASS function <c>UnitIsDeadBJ</c>.</summary>
+    public static bool UnitIsDeadBJ(unit whichUnit) => throw null!;
+    /// <summary>JASS function <c>UnitIsAliveBJ</c>.</summary>
+    public static bool UnitIsAliveBJ(unit whichUnit) => throw null!;
     /// <summary>JASS function <c>IsUnitGroupDeadBJEnum</c>.</summary>
     public static void IsUnitGroupDeadBJEnum() => throw null!;
     /// <summary>JASS function <c>IsUnitGroupDeadBJ</c>.</summary>
@@ -989,6 +1001,10 @@ public static partial class JASS
     public static bool UnitDamagePointLoc(unit whichUnit, float delay, float radius, location loc, float amount, attacktype whichAttack, damagetype whichDamage) => throw null!;
     /// <summary>JASS function <c>UnitDamageTargetBJ</c>.</summary>
     public static bool UnitDamageTargetBJ(unit whichUnit, unit target, float amount, attacktype whichAttack, damagetype whichDamage) => throw null!;
+    /// <summary>JASS function <c>UnitHealBJ</c>.</summary>
+    public static float UnitHealBJ(unit whichUnit, float life) => throw null!;
+    /// <summary>JASS function <c>UnitHealFromOtherBJ</c>.</summary>
+    public static float UnitHealFromOtherBJ(unit whichUnit, unit source, float life) => throw null!;
     /// <summary>JASS function <c>CreateDestructableLoc</c>.</summary>
     public static destructable CreateDestructableLoc(int objectid, location loc, float facing, float scale, int variation) => throw null!;
     /// <summary>JASS function <c>CreateDeadDestructableLocBJ</c>.</summary>
@@ -2821,8 +2837,12 @@ public static partial class JASS
     public static item GetManipulatedItem() => throw null!;
     /// <summary>JASS native <c>GetEquippedItem</c>.</summary>
     public static item GetEquippedItem() => throw null!;
+    /// <summary>JASS native <c>BlzGetEquippedItem</c>.</summary>
+    public static item BlzGetEquippedItem() => throw null!;
     /// <summary>JASS native <c>GetUnequippedItem</c>.</summary>
     public static item GetUnequippedItem() => throw null!;
+    /// <summary>JASS native <c>BlzGetUnequippedItem</c>.</summary>
+    public static item BlzGetUnequippedItem() => throw null!;
     /// <summary>JASS native <c>BlzGetAbsorbingItem</c>.</summary>
     public static item BlzGetAbsorbingItem() => throw null!;
     /// <summary>JASS native <c>BlzGetManipulatedItemWasAbsorbed</c>.</summary>
@@ -3011,6 +3031,8 @@ public static partial class JASS
     public static void SetItemPosition(item i, float x, float y) => throw null!;
     /// <summary>JASS native <c>SetItemColor</c>.</summary>
     public static void SetItemColor(item whichItem, playercolor whichColor) => throw null!;
+    /// <summary>JASS native <c>BlzSetItemColor</c>.</summary>
+    public static void BlzSetItemColor(item whichItem, playercolor whichColor) => throw null!;
     /// <summary>JASS native <c>SetItemDropOnDeath</c>.</summary>
     public static void SetItemDropOnDeath(item whichItem, bool flag) => throw null!;
     /// <summary>JASS native <c>SetItemDroppable</c>.</summary>
@@ -3027,6 +3049,10 @@ public static partial class JASS
     public static bool IsItemEquipped(item whichItem) => throw null!;
     /// <summary>JASS native <c>IsItemInBag</c>.</summary>
     public static bool IsItemInBag(item whichItem) => throw null!;
+    /// <summary>JASS native <c>BlzIsItemEquipped</c>.</summary>
+    public static bool BlzIsItemEquipped(item whichItem) => throw null!;
+    /// <summary>JASS native <c>BlzIsItemInBag</c>.</summary>
+    public static bool BlzIsItemInBag(item whichItem) => throw null!;
     /// <summary>JASS native <c>SetItemVisible</c>.</summary>
     public static void SetItemVisible(item whichItem, bool show) => throw null!;
     /// <summary>JASS native <c>IsItemVisible</c>.</summary>
@@ -3067,6 +3093,10 @@ public static partial class JASS
     public static equipmentType GetItemEquipmentType(item whichItem) => throw null!;
     /// <summary>JASS native <c>GetItemTag</c>.</summary>
     public static itemTag GetItemTag(item whichItem) => throw null!;
+    /// <summary>JASS native <c>BlzGetItemEquipmentType</c>.</summary>
+    public static equipmentType BlzGetItemEquipmentType(item whichItem) => throw null!;
+    /// <summary>JASS native <c>BlzGetItemTag</c>.</summary>
+    public static itemTag BlzGetItemTag(item whichItem) => throw null!;
     /// <summary>JASS native <c>CreateUnit</c>.</summary>
     public static unit CreateUnit(player id, int unitid, float x, float y, float face) => throw null!;
     /// <summary>JASS native <c>CreateUnitByName</c>.</summary>
@@ -3237,6 +3267,8 @@ public static partial class JASS
     public static bool UnitAddItem(unit whichUnit, item whichItem) => throw null!;
     /// <summary>JASS native <c>UnitEquipItem</c>.</summary>
     public static bool UnitEquipItem(unit whichUnit, item whichItem) => throw null!;
+    /// <summary>JASS native <c>BlzUnitEquipItem</c>.</summary>
+    public static bool BlzUnitEquipItem(unit whichUnit, item whichItem) => throw null!;
     /// <summary>JASS native <c>UnitAddItemById</c>.</summary>
     public static item UnitAddItemById(unit whichUnit, int itemId) => throw null!;
     /// <summary>JASS native <c>UnitAddItemToSlotById</c>.</summary>
@@ -3247,18 +3279,26 @@ public static partial class JASS
     public static item UnitRemoveItemFromSlot(unit whichUnit, int itemSlot) => throw null!;
     /// <summary>JASS native <c>UnitUnequipItem</c>.</summary>
     public static void UnitUnequipItem(unit whichUnit, item whichItem) => throw null!;
+    /// <summary>JASS native <c>BlzUnitUnequipItem</c>.</summary>
+    public static void BlzUnitUnequipItem(unit whichUnit, item whichItem) => throw null!;
     /// <summary>JASS native <c>UnitUnequipItemFromSlot</c>.</summary>
     public static item UnitUnequipItemFromSlot(unit whichUnit, loadoutslot slot) => throw null!;
+    /// <summary>JASS native <c>BlzUnitUnequipItemFromSlot</c>.</summary>
+    public static item BlzUnitUnequipItemFromSlot(unit whichUnit, loadoutslot slot) => throw null!;
     /// <summary>JASS native <c>UnitHasItem</c>.</summary>
     public static bool UnitHasItem(unit whichUnit, item whichItem) => throw null!;
     /// <summary>JASS native <c>UnitHasItemBagged</c>.</summary>
     public static bool UnitHasItemBagged(unit whichUnit, item whichItem) => throw null!;
+    /// <summary>JASS native <c>BlzUnitHasItemBagged</c>.</summary>
+    public static bool BlzUnitHasItemBagged(unit whichUnit, item whichItem) => throw null!;
     /// <summary>JASS native <c>UnitItemInSlot</c>.</summary>
     public static item UnitItemInSlot(unit whichUnit, int itemSlot) => throw null!;
     /// <summary>JASS native <c>UnitInventorySize</c>.</summary>
     public static int UnitInventorySize(unit whichUnit) => throw null!;
     /// <summary>JASS native <c>UnitExtendedInventorySize</c>.</summary>
     public static int UnitExtendedInventorySize(unit whichUnit) => throw null!;
+    /// <summary>JASS native <c>BlzUnitExtendedInventorySize</c>.</summary>
+    public static int BlzUnitExtendedInventorySize(unit whichUnit) => throw null!;
     /// <summary>JASS native <c>UnitItemInBagSlot</c>.</summary>
     public static item UnitItemInBagSlot(unit whichUnit, int itemSlot) => throw null!;
     /// <summary>JASS native <c>UnitItemInEquipmentSlot</c>.</summary>
@@ -3273,6 +3313,20 @@ public static partial class JASS
     public static bool UnitHasItemEquipmentOfType(unit whichUnit, equipmentType equipmentId) => throw null!;
     /// <summary>JASS native <c>UnitCanEquipItemOfEquipmentType</c>.</summary>
     public static bool UnitCanEquipItemOfEquipmentType(unit whichUnit, equipmentType equipmentId) => throw null!;
+    /// <summary>JASS native <c>BlzUnitItemInBagSlot</c>.</summary>
+    public static item BlzUnitItemInBagSlot(unit whichUnit, int itemSlot) => throw null!;
+    /// <summary>JASS native <c>BlzUnitItemInEquipmentSlot</c>.</summary>
+    public static item BlzUnitItemInEquipmentSlot(unit whichUnit, loadoutslot itemSlot) => throw null!;
+    /// <summary>JASS native <c>BlzUnitHasItemEquipped</c>.</summary>
+    public static bool BlzUnitHasItemEquipped(unit whichUnit, item whichItem) => throw null!;
+    /// <summary>JASS native <c>BlzUnitHasLoadoutSlotEmpty</c>.</summary>
+    public static bool BlzUnitHasLoadoutSlotEmpty(unit whichUnit, loadoutslot itemSlot) => throw null!;
+    /// <summary>JASS native <c>BlzUnitHasAnyItemEquipped</c>.</summary>
+    public static bool BlzUnitHasAnyItemEquipped(unit whichUnit) => throw null!;
+    /// <summary>JASS native <c>BlzUnitHasItemEquipmentOfType</c>.</summary>
+    public static bool BlzUnitHasItemEquipmentOfType(unit whichUnit, equipmentType equipmentId) => throw null!;
+    /// <summary>JASS native <c>BlzUnitCanEquipItemOfEquipmentType</c>.</summary>
+    public static bool BlzUnitCanEquipItemOfEquipmentType(unit whichUnit, equipmentType equipmentId) => throw null!;
     /// <summary>JASS native <c>UnitDropItemPoint</c>.</summary>
     public static bool UnitDropItemPoint(unit whichUnit, item whichItem, float x, float y) => throw null!;
     /// <summary>JASS native <c>UnitDropItemSlot</c>.</summary>
@@ -3401,6 +3455,8 @@ public static partial class JASS
     public static bool UnitCanSleepPerm(unit whichUnit) => throw null!;
     /// <summary>JASS native <c>UnitIsSleeping</c>.</summary>
     public static bool UnitIsSleeping(unit whichUnit) => throw null!;
+    /// <summary>JASS native <c>BlzUnitIsAlive</c>.</summary>
+    public static bool BlzUnitIsAlive(unit whichUnit) => throw null!;
     /// <summary>JASS native <c>UnitWakeUp</c>.</summary>
     public static void UnitWakeUp(unit whichUnit) => throw null!;
     /// <summary>JASS native <c>UnitApplyTimedLife</c>.</summary>
@@ -3423,6 +3479,8 @@ public static partial class JASS
     public static bool UnitDamagePoint(unit whichUnit, float delay, float radius, float x, float y, float amount, bool attack, bool ranged, attacktype attackType, damagetype damageType, weapontype weaponType) => throw null!;
     /// <summary>JASS native <c>UnitDamageTarget</c>.</summary>
     public static bool UnitDamageTarget(unit whichUnit, widget target, float amount, bool attack, bool ranged, attacktype attackType, damagetype damageType, weapontype weaponType) => throw null!;
+    /// <summary>JASS native <c>BlzUnitHeal</c>.</summary>
+    public static float BlzUnitHeal(unit whichUnit, unit source, float life, bool isItem, bool applyStatBonuses) => throw null!;
     /// <summary>JASS native <c>IssueImmediateOrder</c>.</summary>
     public static bool IssueImmediateOrder(unit whichUnit, string order) => throw null!;
     /// <summary>JASS native <c>IssueImmediateOrderById</c>.</summary>
@@ -3509,6 +3567,8 @@ public static partial class JASS
     public static int GetUnitUserData(unit whichUnit) => throw null!;
     /// <summary>JASS native <c>SetUnitUserData</c>.</summary>
     public static void SetUnitUserData(unit whichUnit, int data) => throw null!;
+    /// <summary>JASS native <c>BlzResetUnitTalents</c>.</summary>
+    public static void BlzResetUnitTalents(unit whichUnit) => throw null!;
     /// <summary>JASS native <c>Player</c>.</summary>
     public static player Player(int number) => throw null!;
     /// <summary>JASS native <c>GetLocalPlayer</c>.</summary>
@@ -3989,6 +4049,8 @@ public static partial class JASS
     public static int ChooseRandomItemEx(itemtype whichType, int level) => throw null!;
     /// <summary>JASS native <c>ChooseRandomItemExWithFilter</c>.</summary>
     public static int ChooseRandomItemExWithFilter(itemtype whichType, int level, equipmentType whichEquipmentType, itemTag whichTag) => throw null!;
+    /// <summary>JASS native <c>ChooseRandomItemExWithFilterAndIncludes</c>.</summary>
+    public static int ChooseRandomItemExWithFilterAndIncludes(itemtype whichType, int level, equipmentType whichEquipmentType, itemTag whichTag, bool includeInvalidMorphs, bool includeNonPickRandom) => throw null!;
     /// <summary>JASS native <c>SetRandomSeed</c>.</summary>
     public static void SetRandomSeed(int seed) => throw null!;
     /// <summary>JASS native <c>SetTerrainFog</c>.</summary>
@@ -4155,6 +4217,14 @@ public static partial class JASS
     public static void EnablePreSelect(bool state, bool ui) => throw null!;
     /// <summary>JASS native <c>EnableSelect</c>.</summary>
     public static void EnableSelect(bool state, bool ui) => throw null!;
+    /// <summary>JASS native <c>BlzGetHUDScale</c>.</summary>
+    public static float BlzGetHUDScale() => throw null!;
+    /// <summary>JASS native <c>BlzSetHUDScale</c>.</summary>
+    public static void BlzSetHUDScale(int percentage) => throw null!;
+    /// <summary>JASS native <c>BlzLockHUDScale</c>.</summary>
+    public static void BlzLockHUDScale() => throw null!;
+    /// <summary>JASS native <c>BlzUnlockHUDScale</c>.</summary>
+    public static void BlzUnlockHUDScale() => throw null!;
     /// <summary>JASS native <c>CreateTrackable</c>.</summary>
     public static trackable CreateTrackable(string trackableModelPath, float x, float y, float facing) => throw null!;
     /// <summary>JASS native <c>CreateQuest</c>.</summary>
@@ -4365,6 +4435,10 @@ public static partial class JASS
     public static void SetCameraTargetController(unit whichUnit, float xoffset, float yoffset, bool inheritOrientation) => throw null!;
     /// <summary>JASS native <c>SetCameraOrientController</c>.</summary>
     public static void SetCameraOrientController(unit whichUnit, float xoffset, float yoffset) => throw null!;
+    /// <summary>JASS native <c>BlzGetCameraAllowsHotkeyTargetLock</c>.</summary>
+    public static bool BlzGetCameraAllowsHotkeyTargetLock() => throw null!;
+    /// <summary>JASS native <c>BlzSetCameraAllowsHotkeyTargetLock</c>.</summary>
+    public static void BlzSetCameraAllowsHotkeyTargetLock(bool allows) => throw null!;
     /// <summary>JASS native <c>BlzCameraSetCameraType</c>.</summary>
     public static void BlzCameraSetCameraType(int cameraType) => throw null!;
     /// <summary>JASS native <c>BlzCameraGetCameraType</c>.</summary>
@@ -4541,6 +4615,8 @@ public static partial class JASS
     public static void SetMusicPlayPosition(int millisecs) => throw null!;
     /// <summary>JASS native <c>SetThematicMusicVolume</c>.</summary>
     public static void SetThematicMusicVolume(int volume) => throw null!;
+    /// <summary>JASS native <c>BlzSetThematicMusicAbsoluteVolume</c>.</summary>
+    public static void BlzSetThematicMusicAbsoluteVolume(int volume) => throw null!;
     /// <summary>JASS native <c>SetThematicMusicPlayPosition</c>.</summary>
     public static void SetThematicMusicPlayPosition(int millisecs) => throw null!;
     /// <summary>JASS native <c>SetSoundDuration</c>.</summary>
@@ -4601,6 +4677,8 @@ public static partial class JASS
     public static effect AddSpecialEffectTarget(string modelName, widget targetWidget, string attachPointName) => throw null!;
     /// <summary>JASS native <c>DestroyEffect</c>.</summary>
     public static void DestroyEffect(effect whichEffect) => throw null!;
+    /// <summary>JASS native <c>BlzRemoveEffect</c>.</summary>
+    public static void BlzRemoveEffect(effect whichEffect) => throw null!;
     /// <summary>JASS native <c>AddSpellEffect</c>.</summary>
     public static effect AddSpellEffect(string abilityString, effecttype t, float x, float y) => throw null!;
     /// <summary>JASS native <c>AddSpellEffectLoc</c>.</summary>
