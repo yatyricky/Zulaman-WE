@@ -5,7 +5,7 @@ public class EventBase<T>
 {
     private List<Action<T>> _callbacks = new();
 
-    protected void ResponseCall(T data)
+    public void ResponseCall(T data)
     {
         foreach (var callback in _callbacks)
         {

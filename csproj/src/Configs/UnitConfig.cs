@@ -11,6 +11,25 @@ public class StatValue
 {
     public int intVal;
     public float floatVal;
+
+    public static StatValue operator +(StatValue left, StatValue right)
+    {
+        return new StatValue
+        {
+            intVal = left.intVal + right.intVal,
+            floatVal = left.floatVal + right.floatVal,
+        };
+    }
+
+    public static bool operator ==(StatValue left, StatValue right)
+    {
+        return left.intVal == right.intVal && left.floatVal == right.floatVal;
+    }
+
+    public static bool operator !=(StatValue left, StatValue right)
+    {
+        return !(left == right);
+    }
 }
 
 public class UnitConfig

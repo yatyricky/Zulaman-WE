@@ -4,9 +4,8 @@ using StdLib;
 
 public class StatsComponent : Component
 {
-
     public unit owner = null!;
-    private Dictionary<StatId, StatValue> stats = new();
+    private readonly Dictionary<StatId, StatValue> stats = [];
 
     public override void Start()
     {
@@ -29,31 +28,14 @@ public class StatsComponent : Component
 
         var utid = GetUnitTypeId(owner);
         var unitConfig = UnitConfig.FindByUTID(utid);
-        var events = new Dictionary<StatEventType, int>();
-        foreach (var (key, value) in unitConfig.BaseStats)
-        {
-            AddValueInPlace(stats[key], value);
-            var modStat = StatConfig.FindByID(key);
-            events[modStat.EventType] = 1;
-        }
-
-        foreach (var (et, _) in events)
-        {
-            statEventCalls[et](this);
-        }
+        ModStats(unitConfig.BaseStats);
     }
-
-    private static Dictionary<StatEventType, Action<StatsComponent>> statEventCalls = new()
-    {
-        {StatEventType.None, (u) => {}},
-        {StatEventType.MaxHp, UpdateMaxHp},
-    };
 
     private static readonly List<int> PosLifeArr = [FourCC("AHP0"), FourCC("AHP1"), FourCC("AHP2"), FourCC("AHP3"), FourCC("AHP4"), FourCC("AHP5"), FourCC("AHP6"), FourCC("AHP7"), FourCC("AHP8"), FourCC("AHP9"), FourCC("AHP:"), FourCC("AHP;"), FourCC("AHP<"), FourCC("AHP="), FourCC("AHP>"), FourCC("AHP?"), FourCC("AHP@"), FourCC("AHPA"), FourCC("AHPB"), FourCC("AHPC"), FourCC("AHPD")];
 
     private static void UpdateStats(unit u, int amount, List<int> posArr, int negId)
     {
-        var cap = 2 ^ posArr.Count;
+        var cap = (int)math.pow(2, posArr.Count);
         // validation
         if (amount < 0 && negId == 0)
         {
@@ -131,12 +113,6 @@ public class StatsComponent : Component
         UpdateStats(comp.owner, amount, PosLifeArr, 0);
     }
 
-    public static void AddValueInPlace(StatValue left, StatValue right)
-    {
-        left.intVal += right.intVal;
-        left.floatVal += right.floatVal;
-    }
-
     public static void NewUnit(CreateUnitEventData data)
     {
         var obj = new GameObject(Helper.GetUnitNameEx(data.u), Const.UnitsRoot);
@@ -144,8 +120,93 @@ public class StatsComponent : Component
         comp.owner = data.u;
     }
 
+    private static void UnitStatUpdate(UnitStatEventData data)
+    {
+    }
+
+    private static readonly Dictionary<StatId, List<StatId>> statUseGraph = [];
+
+    private static void ConstructReversedDependencyGraph()
+    {
+        foreach (var config in StatConfig.Data)
+        {
+            foreach (var dep in config.Dependencies)
+            {
+                if (!statUseGraph.ContainsKey(dep))
+                {
+                    statUseGraph[dep] = [];
+                }
+                if (!statUseGraph[dep].Contains(config.ID))
+                {
+                    statUseGraph[dep].Add(config.ID);
+                }
+            }
+        }
+
+        UnitStatEvent.Instance.Register(UnitStatUpdate);
+    }
+
     public static void Init()
     {
         CreateUnitEvent.Instance.Register(NewUnit);
+        ConstructReversedDependencyGraph();
+    }
+
+    public void ModStats(Dictionary<StatId, StatValue> values)
+    {
+        var changed = new List<StatId>();
+        foreach (var (key, val) in values)
+        {
+            if (!stats.ContainsKey(key)) throw new Exception($"Unknown stat {key}");
+            if (statCalculators.ContainsKey(key)) throw new Exception($"Derived stat {key} cannot be modified directly");
+            var old = stats[key];
+            var nv = old + val;
+            stats[key] = nv;
+            if (nv != old) changed.Add(key);
+        }
+
+        // 收集受影响的派生属性（BFS 传递闭包，List.Contains 去重）
+        var affected = new List<StatId>();
+        affected.AddRange(changed);
+        for (var i = 0; i < affected.Count; i++)
+        {
+            if (statUseGraph.TryGetValue(affected[i], out var dependents))
+            {
+                foreach (var d in dependents)
+                {
+                    if (!affected.Contains(d))
+                        affected.Add(d);
+                }
+            }
+        }
+
+        // 按拓扑序重算派生属性，值变化才计入 changed
+        foreach (var id in statTopoOrder)
+        {
+            if (!affected.Contains(id)) continue;
+            var old = stats[id];
+            var nv = statCalculators[id](this);
+            stats[id] = nv;
+            if (!nv.IsSameValue(old)) changed.Add(id);
+        }
+
+        // fire events
+        foreach (var id in changed)
+        {
+            UnitStatEvent.Instance.ResponseCall(new UnitStatEventData { target = owner, statId = id, comp = this });
+        }
+    }
+
+    private static readonly Dictionary<StatId, Func<StatsComponent, StatValue>> statCalculators = new()
+    {
+        { StatId.RMaxHp, CalcRMaxHp },
+    };
+
+    private static StatValue CalcRMaxHp(StatsComponent comp)
+    {
+        var baseHp = comp.stats[StatId.BaseHp].intVal;
+        var exMaxHp = comp.stats[StatId.ExMaxHp].intVal;
+        var exPct = comp.stats[StatId.ExMapHpPct].floatVal;
+        return new StatValue { intVal = (int)math.floor((baseHp + exMaxHp) * (1f + exPct)) };
     }
 }
