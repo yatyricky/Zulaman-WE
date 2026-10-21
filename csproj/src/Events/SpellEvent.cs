@@ -1,7 +1,7 @@
 using StdLib;
 using System;
 
-public class SpellEventData
+public class SpellEventContext
 {
     public bool effectDone = false;
     public int AbilityId;
@@ -13,20 +13,22 @@ public class SpellEventData
     public float TargetY = 0f;
     public bool CastFinished = false;
 
-    public SpellEventData interrupt = null!;
+    public SpellEventContext interrupt = null!;
+
+    public List<unit> RTTargets = [];
 }
 
-public class SpellEventBase : EventBase<SpellEventData>
+public class SpellEventBase : EventBase<SpellEventContext>
 {
-    private Dictionary<int, Action<SpellEventData>> _spellCalls = new();
+    private Dictionary<int, Action<SpellEventContext>> _spellCalls = new();
 
-    protected void ResponseCall(int abilityId, SpellEventData data)
+    protected void ResponseCall(int abilityId, SpellEventContext data)
     {
         _spellCalls.TryGetValue(abilityId, out var call);
         call?.Invoke(data);
     }
 
-    public void Register(int abilityId, Action<SpellEventData> callback)
+    public void Register(int abilityId, Action<SpellEventContext> callback)
     {
         _spellCalls[abilityId] = callback;
     }
@@ -50,7 +52,7 @@ public class SpellChannelEvent : SpellEventBase
         }
     }
 
-    public Dictionary<unit, SpellEventData> casterTable = new();
+    public Dictionary<unit, SpellEventContext> casterTable = new();
 
     private SpellChannelEvent()
     {
@@ -59,7 +61,7 @@ public class SpellChannelEvent : SpellEventBase
         TriggerAddAction(t, () =>
         {
             // init
-            var s = new SpellEventData
+            var s = new SpellEventContext
             {
                 AbilityId = GetSpellAbilityId(),
                 CastingUnit = GetTriggerUnit(),

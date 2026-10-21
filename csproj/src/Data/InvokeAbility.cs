@@ -15,37 +15,41 @@ public class InvokeAbility
         }
     }
 
-    public static Dictionary<int, Func<unit, unit, float>> Formulas = new()
+    private static void Exec(SpellEventContext spellEventCtx)
     {
+        var abilityConfig = AbilityConfig.FindByID(spellEventCtx.AbilityId);
+
+        var pipeline = new Pipeline
         {
-            SpellAbilityId.ArcaneShock, (caster, target) =>
-            {
-                return 0f;
-            }
+            SpellCtx = spellEventCtx
+        };
+
+        var targets = new List<unit>();
+        switch (abilityConfig.SUType)
+        {
+            case SpellUnitType.TargetUnit:
+                targets.Add(spellEventCtx.TargetUnit);
+                break;
+            default:
+                throw new Exception($"Unhandled SpellUnitType: {abilityConfig.SUType}");
         }
-    };
+
+        pipeline.SpellCtx.RTTargets.AddRange(targets);
+
+        abilityConfig.Model.Process(pipeline, 0);
+
+        foreach (var effectId in abilityConfig.Effects)
+        {
+            var effect = EffectConfig.FindByID(effectId);
+            InvokeEffect.Exec(effect, pipeline);
+        }
+    }
 
     public void Init()
     {
-        SpellEffectEvent.Instance.Register(SpellAbilityId.ArcaneShock, (data) =>
+        foreach (var entry in AbilityConfig.Data)
         {
-            var dmg = new Damage
-            {
-                args = new Damage.Args
-                {
-                    source = data.CastingUnit,
-                    target = data.TargetUnit,
-                    amount = 100,
-                    name = I2S(data.AbilityId),
-                    isPhyx = false,
-                    isAttack = false,
-                    isDirect = true,
-                    canCrit = true,
-                    canDodge = false,
-                    wtype = WEAPON_TYPE_WHOKNOWS,
-                }
-            };
-            dmg.Run();
-        });
+            SpellEffectEvent.Instance.Register(entry.ID, Exec);
+        }
     }
 }

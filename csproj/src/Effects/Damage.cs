@@ -1,23 +1,25 @@
 public class Damage : Effect
 {
-    public struct Args
+    public class Context
     {
-        public unit source;
-        public unit target;
         public float amount;
-        public string name;
+        public string name = null!;
         public bool isPhyx;
         public bool isAttack;
         public bool isDirect;
         public bool canCrit;
         public bool canDodge;
-        public weapontype wtype;
+        public weapontype wtype = null!;
     }
 
-    public Args args;
-
-    public void Run()
+    public static void Exec(Pipeline pipeline)
     {
-        UnitDamageTarget(args.source, args.target, args.amount, args.isAttack, true, ATTACK_TYPE_CHAOS, DAMAGE_TYPE_DIVINE, args.wtype);
+        var spellCtx = pipeline.SpellCtx;
+        var dmgCtx = pipeline.DamageCtx ?? throw new System.Exception("Damage context is null");
+
+        foreach (var target in spellCtx.RTTargets)
+        {
+            UnitDamageTarget(spellCtx.CastingUnit, target, dmgCtx.amount, dmgCtx.isAttack, true, ATTACK_TYPE_CHAOS, DAMAGE_TYPE_DIVINE, dmgCtx.wtype);
+        }
     }
 }
