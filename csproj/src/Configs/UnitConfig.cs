@@ -3,6 +3,7 @@ using StdLib;
 public class UnitConfigEntry
 {
     public int UTID;
+    public UnitAttrType PrimaryAttr;
     public Dictionary<StatId, StatValue> BaseStats = null!;
 }
 
@@ -36,7 +37,8 @@ public class UnitConfig
 {
     public static List<UnitConfigEntry> Data = new()
     {
-        new UnitConfigEntry{UTID = FourCC("Hmkg"), BaseStats = new(){ {StatId.BaseHp, new (){intVal = 760}} }},
+        new UnitConfigEntry{UTID = FourCC("Hmkg"), PrimaryAttr = UnitAttrType.Strength, BaseStats = new(){ {StatId.BaseHp, new (){intVal = 760}},{StatId.BaseMp, new (){intVal = 220}} }},
+        new UnitConfigEntry{UTID = FourCC("Hjai"), PrimaryAttr = UnitAttrType.Intelligence, BaseStats = new(){ {StatId.BaseHp, new (){intVal = 350}},{StatId.BaseMp, new (){intVal = 440}} }},
     };
 
     public static UnitConfigEntry FindByUTID(int utid)

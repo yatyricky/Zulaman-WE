@@ -158,6 +158,12 @@ public class Command
                     throw new Exception("xczxcxc");
             }
         }
+
+        BJDebugMsg($"str: {comp.strength}");
+        BJDebugMsg($"agi: {comp.agility}");
+        BJDebugMsg($"int: {comp.intelligence}");
+        BJDebugMsg($"melee: {comp.meleeLow} - {comp.meleeHigh}");
+        BJDebugMsg($"armor: {comp.armor} ({comp.phyxDamageTakenPct})");
     }
 
     private static void CmdStest(string str)

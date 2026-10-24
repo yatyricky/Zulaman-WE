@@ -42,9 +42,9 @@ public class StatsComponent : Component
         var utid = GetUnitTypeId(owner);
         var unitConfig = UnitConfig.FindByUTID(utid);
         ModStats(unitConfig.BaseStats);
-    }
 
-    private static readonly List<int> PosLifeArr = [FourCC("AHP0"), FourCC("AHP1"), FourCC("AHP2"), FourCC("AHP3"), FourCC("AHP4"), FourCC("AHP5"), FourCC("AHP6"), FourCC("AHP7"), FourCC("AHP8"), FourCC("AHP9"), FourCC("AHP:"), FourCC("AHP;"), FourCC("AHP<"), FourCC("AHP="), FourCC("AHP>"), FourCC("AHP?"), FourCC("AHP@"), FourCC("AHPA"), FourCC("AHPB"), FourCC("AHPC"), FourCC("AHPD")];
+        SetUnitState(owner, UNIT_STATE_MANA, GetStat(StatId.RMaxMp).intVal);
+    }
 
     private static void UpdateStats(unit u, int amount, List<int> posArr, int negId)
     {
@@ -120,9 +120,15 @@ public class StatsComponent : Component
         }
     }
 
+    private static readonly List<int> PosLifeArr = [FourCC("AHP0"), FourCC("AHP1"), FourCC("AHP2"), FourCC("AHP3"), FourCC("AHP4"), FourCC("AHP5"), FourCC("AHP6"), FourCC("AHP7"), FourCC("AHP8"), FourCC("AHP9"), FourCC("AHP:"), FourCC("AHP;"), FourCC("AHP<"), FourCC("AHP="), FourCC("AHP>"), FourCC("AHP?"), FourCC("AHP@"), FourCC("AHPA"), FourCC("AHPB"), FourCC("AHPC"), FourCC("AHPD")];
     public static void UpdateMaxHp(StatsComponent comp)
     {
         UpdateStats(comp.owner, comp.stats[StatId.RMaxHp].intVal - 1, PosLifeArr, 0);
+    }
+    private static readonly List<int> PosManaArr = [FourCC("ALT0"), FourCC("ALT1"), FourCC("ALT2"), FourCC("ALT3"), FourCC("ALT4"), FourCC("ALT5"), FourCC("ALT6"), FourCC("ALT7"), FourCC("ALT8"), FourCC("ALT9"), FourCC("ALT:"), FourCC("ALT;"), FourCC("ALT<"), FourCC("ALT="), FourCC("ALT>"), FourCC("ALT?"), FourCC("ALT@")];
+    public static void UpdateMaxMp(StatsComponent comp)
+    {
+        UpdateStats(comp.owner, comp.stats[StatId.RMaxMp].intVal, PosManaArr, 0);
     }
 
     public static void NewUnit(CreateUnitEventData data)
@@ -297,12 +303,14 @@ public class StatsComponent : Component
     private static readonly Dictionary<StatId, Func<StatsComponent, StatValue>> statCalculators = new()
     {
         { StatId.RMaxHp, CalcRMaxHp },
+        { StatId.RMaxMp, CalcRMaxMp },
     };
 
     // 派生属性变更后立即写回 war3 层的同步器,在 ModStats 提交路径内按拓扑序调用
     private static readonly Dictionary<StatId, Action<StatsComponent>> statAppliers = new()
     {
         { StatId.RMaxHp, UpdateMaxHp },
+        { StatId.RMaxMp, UpdateMaxMp },
     };
 
     private static StatValue CalcRMaxHp(StatsComponent comp)
@@ -313,11 +321,79 @@ public class StatsComponent : Component
         return new StatValue { intVal = MathRound((comp.strength * 10 + baseHp + exMaxHp) * (1f + exPct)) };
     }
 
-    public int strength
+    private static StatValue CalcRMaxMp(StatsComponent comp)
+    {
+        var baseV = comp.stats[StatId.BaseMp].intVal;
+        var exV = comp.stats[StatId.ExMaxMp].intVal;
+        var pctV = comp.stats[StatId.ExMapMpPct].floatVal;
+        return new StatValue { intVal = MathRound((comp.intelligence * 10 + baseV + exV) * (1f + pctV)) };
+    }
+
+    public int strength => GetHeroStr(owner, true);
+    public int agility => GetHeroAgi(owner, true);
+    public int intelligence => GetHeroInt(owner, true);
+
+    public int primaryAttr
     {
         get
         {
-            return GetHeroStr(owner, true);
+            var uc = UnitConfig.FindByUTID(GetUnitTypeId(owner));
+            switch (uc.PrimaryAttr)
+            {
+                case UnitAttrType.Strength:
+                    return strength;
+                case UnitAttrType.Agility:
+                    return agility;
+                case UnitAttrType.Intelligence:
+                    return intelligence;
+            }
+            return 0;
+        }
+    }
+
+    public int meleeLow
+    {
+        get
+        {
+            return BlzGetUnitBaseDamage(owner, 0) + BlzGetUnitDiceNumber(owner, 0);
+        }
+    }
+
+    public int meleeHigh
+    {
+        get
+        {
+            return BlzGetUnitBaseDamage(owner, 0) + BlzGetUnitDiceNumber(owner, 0) * BlzGetUnitDiceSides(owner, 0);
+        }
+    }
+
+    public float armor
+    {
+        get
+        {
+            return BlzGetUnitArmor(owner);
+        }
+    }
+
+    public float phyxDamageTakenPct
+    {
+        get
+        {
+            // armor
+            var amr = armor;
+            var v = 0f;
+            if (armor > 0)
+            {
+                var t = amr * 0.02f;
+                v = 1 - t / (1 + t);
+            }
+            else
+            {
+                v = 1 - math.pow(amr, 0.98f);
+            }
+            // phyx res
+            v *= 1 - (GetStat(StatId.PhyxDamageRes).floatVal + GetStat(StatId.AllDamageRes).floatVal);
+            return v;
         }
     }
 }
