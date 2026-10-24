@@ -44,6 +44,8 @@ public class Program
 
         InvokeAbility.Instance.Init();
         StatsComponent.Init();
+        Selection.Init();
+        Command.Init();
         Const.UnitsRoot = new GameObject("Units");
         Const.UiRoot = new GameObject("UI");
 

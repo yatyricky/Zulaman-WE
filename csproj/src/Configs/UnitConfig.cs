@@ -36,7 +36,7 @@ public class UnitConfig
 {
     public static List<UnitConfigEntry> Data = new()
     {
-        new UnitConfigEntry{UTID = FourCC("Hmkg"), BaseStats = new(){ {StatId.BaseHp, new (){intVal = 759}} }},
+        new UnitConfigEntry{UTID = FourCC("Hmkg"), BaseStats = new(){ {StatId.BaseHp, new (){intVal = 760}} }},
     };
 
     public static UnitConfigEntry FindByUTID(int utid)
