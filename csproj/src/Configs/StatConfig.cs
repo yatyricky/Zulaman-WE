@@ -26,6 +26,7 @@ public enum StatId
     Dodge,
     Parry,
     ParryPts,
+    Fortitude,
 
     PhyxThorns,
     MageThorns,
