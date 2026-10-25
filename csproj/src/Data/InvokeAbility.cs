@@ -24,6 +24,7 @@ public class InvokeAbility
             SpellCtx = spellEventCtx
         };
 
+        // gather targets
         var targets = new List<unit>();
         switch (abilityConfig.SUType)
         {
@@ -33,10 +34,7 @@ public class InvokeAbility
             default:
                 throw new Exception($"Unhandled SpellUnitType: {abilityConfig.SUType}");
         }
-
         pipeline.SpellCtx.RTTargets.AddRange(targets);
-
-        abilityConfig.Model.Process(pipeline, 0);
 
         foreach (var effectId in abilityConfig.Effects)
         {

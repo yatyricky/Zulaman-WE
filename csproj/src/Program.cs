@@ -1,36 +1,10 @@
+using System.Threading.Tasks;
+
 public class Program
 {
-    private static void DamageEventFunc(DamagedEventData data)
+    private static async void Test()
     {
-        var damage = data.damage;
-        var damageSource = data.damageSource;
-        var damageTarget = data.damageTarget;
-
-        // if (data.isAttack && data.damageType != DAMAGE_TYPE_DIVINE)
-        // {
-        //     var dmg = new Damage
-        //     {
-        //         args = new Damage.Args
-        //         {
-        //             source = damageSource,
-        //             target = damageTarget,
-        //             amount = data.damage,
-        //             name = "普通攻击",
-        //             isPhyx = true,
-        //             isAttack = true,
-        //             isDirect = true,
-        //             canCrit = true,
-        //             canDodge = true,
-        //             wtype = WEAPON_TYPE_WHOKNOWS,
-        //         }
-        //     };
-        //     dmg.Run();
-        // }
-    }
-
-    private void Test()
-    {
-        DamagedEvent.Instance.Register(DamageEventFunc);
+        CreateUnit(Player(11), FourCC("hfoo"), 6287, -12370, 0);
     }
 
     private void Start()
@@ -41,6 +15,8 @@ public class Program
         _ = SpellEffectEvent.Instance;
         _ = SpellFinishEvent.Instance;
         _ = SpellEndCastEvent.Instance;
+
+        _ = new MeleeAttack();
 
         InvokeAbility.Instance.Init();
         StatsComponent.Init();

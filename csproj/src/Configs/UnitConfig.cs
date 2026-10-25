@@ -31,6 +31,11 @@ public class StatValue
     {
         return !(left == right);
     }
+
+    // public static implicit operator float(StatValue v)
+    // {
+    //     return v.floatVal;
+    // }
 }
 
 public class UnitConfig
@@ -39,6 +44,7 @@ public class UnitConfig
     {
         new UnitConfigEntry{UTID = FourCC("Hmkg"), PrimaryAttr = UnitAttrType.Strength, BaseStats = new(){ {StatId.BaseHp, new (){intVal = 760}},{StatId.BaseMp, new (){intVal = 220}} }},
         new UnitConfigEntry{UTID = FourCC("Hjai"), PrimaryAttr = UnitAttrType.Intelligence, BaseStats = new(){ {StatId.BaseHp, new (){intVal = 350}},{StatId.BaseMp, new (){intVal = 440}} }},
+        new UnitConfigEntry{UTID = FourCC("hfoo"), PrimaryAttr = UnitAttrType.None, BaseStats = new(){ {StatId.BaseHp, new (){intVal = 420}} }},
     };
 
     public static UnitConfigEntry FindByUTID(int utid)

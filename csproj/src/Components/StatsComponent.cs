@@ -10,6 +10,15 @@ public class StatsComponent : Component
     // unit -> StatsComponent 反查,NewUnit 时登记
     public static readonly Dictionary<unit, StatsComponent> Components = new();
 
+    public static StatsComponent FindComp(unit u)
+    {
+        if (Components.TryGetValue(u, out var ret))
+        {
+            return ret;
+        }
+        throw new Exception($"comp not found: {Helper.GetUnitNameEx(u)} {I2S(GetUnitTypeId(u))}");
+    }
+
     public StatValue GetStat(StatId id)
     {
         return stats[id];
@@ -391,9 +400,15 @@ public class StatsComponent : Component
             {
                 v = 1 - math.pow(amr, 0.98f);
             }
-            // phyx res
-            v *= 1 - (GetStat(StatId.PhyxDamageRes).floatVal + GetStat(StatId.AllDamageRes).floatVal);
+            // res
+            v *= 1 - GetStat(StatId.AllDamageRes).floatVal;
             return v;
         }
     }
+
+    public float mageDamageTakenPct => 1 - GetStat(StatId.MageDamageRes).floatVal - GetStat(StatId.AllDamageRes).floatVal;
+
+    public float phyxDamageDealt => GetStat(StatId.PhyxAmp).floatVal + GetStat(StatId.AllAmp).floatVal;
+    public float mageDamageDealt => GetStat(StatId.MageAmp).floatVal + GetStat(StatId.AllAmp).floatVal;
+    public float sp => intelligence + GetStat(StatId.ExSp).floatVal;
 }
