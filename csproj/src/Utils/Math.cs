@@ -3,12 +3,9 @@ using System;
 
 public class Math
 {
-    public static void FuzzyEquals(float a, float b, float epsilon = 0.0001f)
+    public static bool FuzzyEquals(float a, float b, float epsilon = 0.0001f)
     {
-        if (math.abs(a - b) > epsilon)
-        {
-            throw new Exception($"FuzzyEquals failed: {a} != {b}");
-        }
+        return math.abs(a - b) <= epsilon;
     }
 
     public static float Bezier3(float t, float c1, float c2, float c3)

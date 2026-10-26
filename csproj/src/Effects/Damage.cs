@@ -31,7 +31,7 @@ public class Damage : Effect
             }
             else
             {
-                dmg *= targetStats.mageDamageTakenPct + casterStats.GetStat(StatId.MagePierce).floatVal;
+                dmg *= targetStats.mageDamageTakenPct + casterStats.GetStat(StatId.MagePierce);
             }
             dmg = math.max(0, dmg);
             UnitDamageTarget(spellCtx.CastingUnit, target, dmg, false, true, ATTACK_TYPE_CHAOS, DAMAGE_TYPE_DIVINE, data.wtype);

@@ -33,19 +33,7 @@ public class StatsComponent : Component
     {
         foreach (var config in StatConfig.Data)
         {
-            var val = new StatValue();
-            switch (config.Type)
-            {
-                case StatType.Int:
-                    val.intVal = 0;
-                    break;
-                case StatType.Float:
-                    val.floatVal = 0f;
-                    break;
-                default:
-                    throw new Exception($"Unhandled stat config {config.ID}");
-            }
-            stats[config.ID] = val;
+            stats[config.ID] = new StatValue(config.Type);
         }
 
         var utid = GetUnitTypeId(owner);
@@ -327,7 +315,7 @@ public class StatsComponent : Component
         var baseHp = comp.stats[StatId.BaseHp].intVal;
         var exMaxHp = comp.stats[StatId.ExMaxHp].intVal;
         var exPct = comp.stats[StatId.ExMapHpPct].floatVal;
-        return new StatValue { intVal = MathRound((comp.strength * 10 + baseHp + exMaxHp) * (1f + exPct)) };
+        return MathRound((comp.strength * 10 + baseHp + exMaxHp) * (1f + exPct));
     }
 
     private static StatValue CalcRMaxMp(StatsComponent comp)
@@ -335,7 +323,7 @@ public class StatsComponent : Component
         var baseV = comp.stats[StatId.BaseMp].intVal;
         var exV = comp.stats[StatId.ExMaxMp].intVal;
         var pctV = comp.stats[StatId.ExMapMpPct].floatVal;
-        return new StatValue { intVal = MathRound((comp.intelligence * 10 + baseV + exV) * (1f + pctV)) };
+        return MathRound((comp.intelligence * 10 + baseV + exV) * (1f + pctV));
     }
 
     public int strength => GetHeroStr(owner, true);

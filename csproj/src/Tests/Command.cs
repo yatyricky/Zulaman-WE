@@ -46,16 +46,6 @@ public class Command
         return comp;
     }
 
-    private static StatValue SI(int v)
-    {
-        return new StatValue { intVal = v };
-    }
-
-    private static StatValue SR(float v)
-    {
-        return new StatValue { floatVal = v };
-    }
-
     private static Dictionary<StatId, StatValue> Mod1(StatId a, StatValue va)
     {
         return new Dictionary<StatId, StatValue>() { { a, va } };
@@ -97,21 +87,21 @@ public class Command
     {
         var comp = SelComp("-hp");
         if (comp == null) return;
-        comp.ModStats(Mod1(StatId.BaseHp, SI(S2I(SubString(str, 4, StringLength(str))))));
+        comp.ModStats(Mod1(StatId.BaseHp, S2I(SubString(str, 4, StringLength(str)))));
     }
 
     private static void CmdExhp(string str)
     {
         var comp = SelComp("-exhp");
         if (comp == null) return;
-        comp.ModStats(Mod1(StatId.ExMaxHp, SI(S2I(SubString(str, 6, StringLength(str))))));
+        comp.ModStats(Mod1(StatId.ExMaxHp, S2I(SubString(str, 6, StringLength(str)))));
     }
 
     private static void CmdPct(string str)
     {
         var comp = SelComp("-pct");
         if (comp == null) return;
-        comp.ModStats(Mod1(StatId.ExMapHpPct, SR(S2R(SubString(str, 5, StringLength(str))))));
+        comp.ModStats(Mod1(StatId.ExMapHpPct, S2R(SubString(str, 5, StringLength(str)))));
     }
 
     private static void CmdSt(string str)
@@ -192,40 +182,40 @@ public class Command
         var nativeMax = GetUnitState(u, UNIT_STATE_MAX_LIFE);
 
         // A: 整数反复加减,净变化为零
-        comp.ModStats(Mod1(StatId.BaseHp, SI(100)));
-        comp.ModStats(Mod1(StatId.BaseHp, SI(50)));
-        comp.ModStats(Mod1(StatId.BaseHp, SI(-30)));
-        comp.ModStats(Mod1(StatId.BaseHp, SI(-120)));
+        comp.ModStats(Mod1(StatId.BaseHp, 100));
+        comp.ModStats(Mod1(StatId.BaseHp, 50));
+        comp.ModStats(Mod1(StatId.BaseHp, -30));
+        comp.ModStats(Mod1(StatId.BaseHp, -120));
         Check("A basehp +100+50-30-120", comp.GetStat(StatId.BaseHp) == ob);
 
         // B: 浮点百分比,只用二进制精确值(0.25/0.5),中间值与还原都精确
-        comp.ModStats(Mod1(StatId.ExMapHpPct, SR(0.25f)));
-        comp.ModStats(Mod1(StatId.ExMapHpPct, SR(0.25f)));
+        comp.ModStats(Mod1(StatId.ExMapHpPct, 0.25f));
+        comp.ModStats(Mod1(StatId.ExMapHpPct, 0.25f));
         Check("B pct mid exact 0.5", comp.GetStat(StatId.ExMapHpPct).floatVal == op.floatVal + 0.5f);
-        comp.ModStats(Mod1(StatId.ExMapHpPct, SR(-0.5f)));
+        comp.ModStats(Mod1(StatId.ExMapHpPct, -0.5f));
         Check("B pct restore", comp.GetStat(StatId.ExMapHpPct) == op);
 
         // C: 单次调用批量改三项,逐项核对并对照派生公式,再批量还原
-        comp.ModStats(Mod3(StatId.BaseHp, SI(50), StatId.ExMaxHp, SI(25), StatId.ExMapHpPct, SR(0.5f)));
-        Check("C basehp +50", comp.GetStat(StatId.BaseHp) == ob + SI(50));
-        Check("C exmaxhp +25", comp.GetStat(StatId.ExMaxHp) == oe + SI(25));
-        Check("C pct +0.5", comp.GetStat(StatId.ExMapHpPct) == op + SR(0.5f));
+        comp.ModStats(Mod3(StatId.BaseHp, 50, StatId.ExMaxHp, 25, StatId.ExMapHpPct, 0.5f));
+        Check("C basehp +50", comp.GetStat(StatId.BaseHp) == ob + 50);
+        Check("C exmaxhp +25", comp.GetStat(StatId.ExMaxHp) == oe + 25);
+        Check("C pct +0.5", comp.GetStat(StatId.ExMapHpPct) == op + 0.5f);
         Check("C rmaxhp derived", comp.GetStat(StatId.RMaxHp).intVal == ExpectedRMaxHp(comp));
-        comp.ModStats(Mod3(StatId.BaseHp, SI(-50), StatId.ExMaxHp, SI(-25), StatId.ExMapHpPct, SR(-0.5f)));
+        comp.ModStats(Mod3(StatId.BaseHp, -50, StatId.ExMaxHp, -25, StatId.ExMapHpPct, -0.5f));
         Check("C restore all", comp.GetStat(StatId.BaseHp) == ob && comp.GetStat(StatId.ExMaxHp) == oe && comp.GetStat(StatId.ExMapHpPct) == op && comp.GetStat(StatId.RMaxHp) == orv);
 
         // D: 零增量不产生任何变化
-        comp.ModStats(Mod1(StatId.BaseHp, SI(0)));
-        comp.ModStats(Mod1(StatId.ExMapHpPct, SR(0f)));
+        comp.ModStats(Mod1(StatId.BaseHp, 0));
+        comp.ModStats(Mod1(StatId.ExMapHpPct, 0f));
         Check("D noop keeps all", comp.GetStat(StatId.BaseHp) == ob && comp.GetStat(StatId.ExMaxHp) == oe && comp.GetStat(StatId.ExMapHpPct) == op && comp.GetStat(StatId.RMaxHp) == orv);
 
         // E: 交错加减三轮,每步之后派生值都要与对照公式一致
         var round = 0;
         while (round < 3)
         {
-            comp.ModStats(Mod2(StatId.BaseHp, SI(10), StatId.ExMapHpPct, SR(0.125f)));
+            comp.ModStats(Mod2(StatId.BaseHp, 10, StatId.ExMapHpPct, 0.125f));
             Check("E rmaxhp after + round " + I2S(round), comp.GetStat(StatId.RMaxHp).intVal == ExpectedRMaxHp(comp));
-            comp.ModStats(Mod2(StatId.BaseHp, SI(-10), StatId.ExMapHpPct, SR(-0.125f)));
+            comp.ModStats(Mod2(StatId.BaseHp, -10, StatId.ExMapHpPct, -0.125f));
             Check("E rmaxhp after - round " + I2S(round), comp.GetStat(StatId.RMaxHp).intVal == ExpectedRMaxHp(comp));
             round += 1;
         }
@@ -235,10 +225,10 @@ public class Command
         var n = 0;
         while (n < 100)
         {
-            comp.ModStats(Mod1(StatId.ExMaxHp, SI(7)));
+            comp.ModStats(Mod1(StatId.ExMaxHp, 7));
             n += 1;
         }
-        comp.ModStats(Mod1(StatId.ExMaxHp, SI(-700)));
+        comp.ModStats(Mod1(StatId.ExMaxHp, -700));
         Check("F exmaxhp stress restore", comp.GetStat(StatId.ExMaxHp) == oe);
 
         // G: 终检 — 属性值与 war3 层最大生命完全还原,不允许任何误差
