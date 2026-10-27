@@ -16,7 +16,7 @@ public class MeleeAttack
             }
         };
 
-        InvokeEffect.Exec(melee, pipe);
+        InvokeEffect.Exec(melee, pipe, data.damageTarget);
     }
 
     public MeleeAttack()

@@ -36,10 +36,13 @@ public class InvokeAbility
         }
         pipeline.SpellCtx.RTTargets.AddRange(targets);
 
-        foreach (var effectId in abilityConfig.Effects)
+        foreach (var target in targets)
         {
-            var effect = EffectConfig.FindByID(effectId);
-            InvokeEffect.Exec(effect, pipeline);
+            foreach (var effectId in abilityConfig.Effects)
+            {
+                var effect = EffectConfig.FindByID(effectId);
+                InvokeEffect.Exec(effect, pipeline, target);
+            }
         }
     }
 
