@@ -1,6 +1,6 @@
 public class MeleeAttack
 {
-    private static EffectConfigEntry _melee;
+    private static EffectConfigEntry _melee = null!;
     private static EffectConfigEntry melee => _melee ??= EffectConfig.FindByID("002");
 
     private static void DamageEventFunc(DamagedEventData data)
