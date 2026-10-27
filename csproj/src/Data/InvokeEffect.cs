@@ -7,6 +7,9 @@ public class InvokeEffect
             case EffectType.Damage:
                 Damage.Exec(effect, pipeline, currentTarget);
                 break;
+            case EffectType.PlaySFX:
+                PlaySFX.Exec(effect, pipeline, currentTarget);
+                break;
             default:
                 throw new System.Exception($"Unhandled EffectType: {effect.Type}");
         }

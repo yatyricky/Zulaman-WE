@@ -13,6 +13,14 @@ public class DamageData : EffectDataBase
     public weapontype wtype = WEAPON_TYPE_WHOKNOWS;
 }
 
+public class PlaySFXData : EffectDataBase
+{
+    public SpellUnitType whichTarget;
+    public string attachPoint = "origin";
+    public float duration;
+    public string filePath = "";
+}
+
 public class EffectConfigEntry
 {
     public string ID = null!;
@@ -26,6 +34,7 @@ public class EffectConfig
     [
         new() {ID = "001", Type = EffectType.Damage, Data = new DamageData(){amount = 100, spScale = 1, name = "arcane shock dmg", isPhyx = false}},
         new() {ID = "002", Type = EffectType.Damage, Data = new DamageData(){apScale = 1, name = "managed melee attack"}},
+        new() { ID = "003", Type = EffectType.PlaySFX, Data = new PlaySFXData() { filePath = "Abilities/Spells/Human/ManaFlare/ManaFlareBoltImpact.mdl", whichTarget = SpellUnitType.CurrentTargetUnit } }
     ];
 
     public static EffectConfigEntry FindByID(string id)

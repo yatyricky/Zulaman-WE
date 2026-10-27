@@ -134,6 +134,8 @@ public class StatsComponent : Component
         var comp = obj.AddComponent<StatsComponent>();
         comp.owner = data.u;
         Components[data.u] = comp;
+
+        obj.AddComponent<BuffHolder>();
     }
 
     private static readonly Dictionary<StatId, List<StatId>> statUseGraph = [];
