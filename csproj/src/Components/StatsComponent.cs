@@ -28,6 +28,11 @@ public class StatsComponent : Component
         return stats.Count > 0;
     }
 
+    public static bool IsDerivedStat(StatId id)
+    {
+        return statCalculators.ContainsKey(id);
+    }
+
     public override void Start()
     {
         foreach (var config in StatConfig.Data)
@@ -129,6 +134,16 @@ public class StatsComponent : Component
 
     public static void NewUnit(CreateUnitEventData data)
     {
+        var reused = UnitRemovedEvent.Cancel(data.u);
+        if (reused && Components.TryGetValue(data.u, out var oldComp))
+        {
+            Components.Remove(data.u);
+            if (!oldComp.gameObject.isDestroyQueued && !oldComp.gameObject.isDestroyed)
+            {
+                oldComp.gameObject.Destroy();
+            }
+        }
+
         var obj = new GameObject(Helper.GetUnitNameEx(data.u), Const.UnitsRoot);
         var comp = obj.AddComponent<StatsComponent>();
         comp.owner = data.u;
@@ -235,7 +250,12 @@ public class StatsComponent : Component
 
     private static void OnUnitRemoved(UnitRemovedEventData data)
     {
+        if (!Components.TryGetValue(data.u, out var comp)) return;
         Components.Remove(data.u);
+        if (!comp.gameObject.isDestroyQueued && !comp.gameObject.isDestroyed)
+        {
+            comp.gameObject.Destroy();
+        }
     }
 
     public static void Init()

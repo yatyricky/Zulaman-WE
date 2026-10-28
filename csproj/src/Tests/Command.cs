@@ -22,6 +22,15 @@ public class Command
         AddCmd("-sshow", ShowStats);
         AddCmd("-mathtest", CmdMathTest);
         AddCmd("-time", CmdTime);
+        AddCmd("-buff", CmdBuff);
+        AddCmd("-buffst", CmdBuffSt);
+        AddCmd("-buffdur", CmdBuffDur);
+        AddCmd("-buffint", CmdBuffInt);
+        AddCmd("-buffref", CmdBuffRef);
+        AddCmd("-buffpause", CmdBuffPause);
+        AddCmd("-buffresume", CmdBuffResume);
+        AddCmd("-buffclear", CmdBuffClear);
+        AddCmd("-buffxfer", CmdBuffXfer);
 #endif
     }
 
@@ -148,6 +157,172 @@ public class Command
     {
         BJDebugMsg("GameTime.NowMs=" + I2S(GameTime.NowMs()));
     }
+
+    private static BuffHolder? SelHolder(string tag)
+    {
+        var comp = SelComp(tag);
+        if (comp == null) return null;
+        var holder = comp.gameObject.GetComponent<BuffHolder>();
+        if (holder == null)
+        {
+            BJDebugMsg(tag + ": unit has no BuffHolder");
+            return null;
+        }
+        return holder;
+    }
+
+    private static Buff? FirstBuff(BuffHolder holder)
+    {
+        var snapshot = holder.Snapshot();
+        if (snapshot.Count == 0) return null;
+        return snapshot[0];
+    }
+
+    private static unit NearestOther(unit from, float range)
+    {
+        var g = CreateGroup();
+        GroupEnumUnitsInRange(g, GetUnitX(from), GetUnitY(from), range, Filter(() => true));
+        unit best = null!;
+        var bestDist = range * range;
+        while (true)
+        {
+            var u = FirstOfGroup(g);
+            if (u == null) break;
+            GroupRemoveUnit(g, u);
+            if (u == from || IsUnitDeadBJ(u) || Helper.IsUnitDummy(u)) continue;
+            var dx = GetUnitX(u) - GetUnitX(from);
+            var dy = GetUnitY(u) - GetUnitY(from);
+            var dist = dx * dx + dy * dy;
+            if (dist < bestDist)
+            {
+                bestDist = dist;
+                best = u;
+            }
+        }
+        DestroyGroup(g);
+        return best;
+    }
+
+    private static void CmdBuff(string str)
+    {
+        var len = StringLength(str);
+        if (len > 5 && SubString(str, 5, 6) != " ") return;
+
+        var comp = SelComp("-buff");
+        if (comp == null) return;
+
+        var id = FourCC("B001");
+        if (len > 6) id = S2I(SubString(str, 6, len));
+        BuffSystem.Apply(comp.owner, id, comp.owner);
+    }
+
+    private static void CmdBuffSt(string str)
+    {
+        var holder = SelHolder("-buffst");
+        if (holder == null) return;
+
+        BJDebugMsg("buffst count=" + I2S(holder.Count));
+        foreach (var buff in holder.Snapshot())
+        {
+            BJDebugMsg("  id=" + buff.Config.ID
+                + " name=" + buff.Config.Name
+                + " stacks=" + I2S(buff.Stacks)
+                + " rem=" + I2S(buff.RemainingMs())
+                + " next=" + I2S(buff.NextTickInMs())
+                + " paused=" + (buff.Paused ? "1" : "0"));
+        }
+    }
+
+    private static void CmdBuffDur(string str)
+    {
+        var holder = SelHolder("-buffdur");
+        if (holder == null) return;
+        var buff = FirstBuff(holder);
+        if (buff == null) return;
+
+        var len = StringLength(str);
+        if (len <= 9)
+        {
+            BJDebugMsg("-buffdur: missing ms");
+            return;
+        }
+        buff.SetDuration(S2I(SubString(str, 9, len)));
+    }
+
+    private static void CmdBuffInt(string str)
+    {
+        var holder = SelHolder("-buffint");
+        if (holder == null) return;
+        var buff = FirstBuff(holder);
+        if (buff == null) return;
+
+        var len = StringLength(str);
+        if (len <= 9)
+        {
+            BJDebugMsg("-buffint: missing ms");
+            return;
+        }
+        var interval = S2I(SubString(str, 9, len));
+        if (interval < 0)
+        {
+            BJDebugMsg("-buffint: invalid ms");
+            return;
+        }
+        buff.SetInterval(interval);
+    }
+
+    private static void CmdBuffRef(string str)
+    {
+        var holder = SelHolder("-buffref");
+        if (holder == null) return;
+        var buff = FirstBuff(holder);
+        if (buff == null) return;
+        buff.Refresh(true, true);
+    }
+
+    private static void CmdBuffPause(string str)
+    {
+        var holder = SelHolder("-buffpause");
+        if (holder == null) return;
+        var buff = FirstBuff(holder);
+        if (buff == null) return;
+        buff.Pause();
+    }
+
+    private static void CmdBuffResume(string str)
+    {
+        var holder = SelHolder("-buffresume");
+        if (holder == null) return;
+        var buff = FirstBuff(holder);
+        if (buff == null) return;
+        buff.Resume();
+    }
+
+    private static void CmdBuffClear(string str)
+    {
+        var comp = SelComp("-buffclear");
+        if (comp == null) return;
+        BJDebugMsg("-buffclear removed=" + I2S(BuffSystem.Clear(comp.owner, BuffRemoveReason.Manual)));
+    }
+
+    private static void CmdBuffXfer(string str)
+    {
+        var comp = SelComp("-buffxfer");
+        if (comp == null) return;
+        var holder = comp.gameObject.GetComponent<BuffHolder>();
+        if (holder == null) return;
+        var buff = FirstBuff(holder);
+        if (buff == null) return;
+
+        var target = NearestOther(comp.owner, 600f);
+        if (target == null)
+        {
+            BJDebugMsg("-buffxfer: no target");
+            return;
+        }
+        BJDebugMsg("-buffxfer ok=" + (BuffSystem.Transfer(buff, target, comp.owner) ? "1" : "0"));
+    }
+
     private static void CmdSt(string str)
     {
         var comp = SelComp("-st");

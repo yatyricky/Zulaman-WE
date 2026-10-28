@@ -10,6 +10,15 @@ public class StatValue
         _type = type;
     }
 
+    public StatValue Scale(int factor)
+    {
+        return new StatValue(_type)
+        {
+            intVal = intVal * factor,
+            floatVal = floatVal * factor,
+        };
+    }
+
     public static StatValue operator +(StatValue left, StatValue right)
     {
         if (!left._isNumber || !right._isNumber) throw new System.Exception("left/right must be number");

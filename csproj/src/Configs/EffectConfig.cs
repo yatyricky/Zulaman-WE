@@ -21,6 +21,14 @@ public class PlaySFXData : EffectDataBase
     public string filePath = "";
 }
 
+public class ApplyBuffData : EffectDataBase
+{
+    public int BuffId;
+    public SpellUnitType whichTarget = SpellUnitType.CurrentTargetUnit;
+    public int duration = -1;
+    public int stacks = 1;
+}
+
 public class EffectConfigEntry
 {
     public string ID = null!;
@@ -34,7 +42,8 @@ public class EffectConfig
     [
         new() {ID = "001", Type = EffectType.Damage, Data = new DamageData(){amount = 100, spScale = 1, name = "arcane shock dmg", isPhyx = false}},
         new() {ID = "002", Type = EffectType.Damage, Data = new DamageData(){apScale = 1, name = "managed melee attack"}},
-        new() { ID = "003", Type = EffectType.PlaySFX, Data = new PlaySFXData() { filePath = "Abilities/Spells/Human/ManaFlare/ManaFlareBoltImpact.mdl", whichTarget = SpellUnitType.CurrentTargetUnit } }
+        new() { ID = "003", Type = EffectType.PlaySFX, Data = new PlaySFXData() { filePath = "Abilities/Spells/Human/ManaFlare/ManaFlareBoltImpact.mdl", whichTarget = SpellUnitType.CurrentTargetUnit } },
+        new() { ID = "004", Type = EffectType.ApplyBuff, Data = new ApplyBuffData() { BuffId = FourCC("B001"), whichTarget = SpellUnitType.CurrentTargetUnit } }
     ];
 
     public static EffectConfigEntry FindByID(string id)

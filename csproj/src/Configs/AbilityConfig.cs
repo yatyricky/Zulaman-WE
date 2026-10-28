@@ -1,17 +1,18 @@
 using StdLib;
 
-public class AbilityConfigEntry
-{
-    public int ID;
-    public SpellUnitType SUType;
-    public List<string> Effects = null!;
-}
-
 public class AbilityConfig
 {
+
+    public class AbilityConfigEntry
+    {
+        public int ID { get; internal set; }
+        public SpellUnitType SUType { get; internal set; }
+        public List<string> Effects { get; internal set; } = null!;
+    }
+
     public static List<AbilityConfigEntry> Data =
     [
-        new(){ID = FourCC("A004"), SUType = SpellUnitType.TargetUnit, Effects = ["001", "003"]},
+        new(){ID = FourCC("A004"), SUType = SpellUnitType.TargetUnit, Effects = ["001", "003", "004"]},
     ];
 
     public static AbilityConfigEntry FindByID(int id)

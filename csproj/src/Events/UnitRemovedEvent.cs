@@ -46,6 +46,7 @@ public class UnitRemovedEvent : EventBase<UnitRemovedEventData>
         if (!valid) return;
         if (cur != token) return;
         _pending.Remove(u);
+        if (GetUnitTypeId(u) != 0 && IsUnitAliveBJ(u)) return;
         ResponseCall(new UnitRemovedEventData { u = u });
     }
 
@@ -56,5 +57,11 @@ public class UnitRemovedEvent : EventBase<UnitRemovedEventData>
         Instance._pending.Remove(u);
         RemoveUnit(u);
         Instance.ResponseCall(new UnitRemovedEventData { u = u });
+    }
+
+    public static bool Cancel(unit u)
+    {
+        if (u == null) return false;
+        return Instance._pending.Remove(u);
     }
 }
