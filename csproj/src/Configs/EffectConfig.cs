@@ -17,7 +17,7 @@ public class PlaySFXData : EffectDataBase
 {
     public SpellUnitType whichTarget;
     public string attachPoint = "origin";
-    public float duration;
+    public int duration = 0;
     public string filePath = "";
 }
 

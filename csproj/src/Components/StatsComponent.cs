@@ -1,5 +1,4 @@
 using System;
-using SFLib.Interop;
 using StdLib;
 
 public class StatsComponent : Component
@@ -45,7 +44,7 @@ public class StatsComponent : Component
 
     private static void UpdateStats(unit u, int amount, List<int> posArr, int negId)
     {
-        var cap = (int)math.pow(2, posArr.Count);
+        var cap = Math.PowInt(2, posArr.Count);
         // validation
         if (amount < 0 && negId == 0)
         {
@@ -103,7 +102,7 @@ public class StatsComponent : Component
                         UnitRemoveAbility(u, posArr[i]);
                     }
                 }
-                amount = (int)math.floor(amount / 2);
+                amount = Math.FloorToInt(amount / 2f);
                 i += 1;
             }
             while (i < posArr.Count)
@@ -317,7 +316,7 @@ public class StatsComponent : Component
         var baseHp = comp.stats[StatId.BaseHp].intVal;
         var exMaxHp = comp.stats[StatId.ExMaxHp].intVal;
         var exPct = comp.stats[StatId.ExMapHpPct].floatVal;
-        return MathRound((comp.strength * 10 + baseHp + exMaxHp) * (1f + exPct));
+        return Math.RoundToInt((comp.strength * 10 + baseHp + exMaxHp) * (1f + exPct));
     }
 
     private static StatValue CalcRMaxMp(StatsComponent comp)
@@ -325,7 +324,7 @@ public class StatsComponent : Component
         var baseV = comp.stats[StatId.BaseMp].intVal;
         var exV = comp.stats[StatId.ExMaxMp].intVal;
         var pctV = comp.stats[StatId.ExMapMpPct].floatVal;
-        return MathRound((comp.intelligence * 10 + baseV + exV) * (1f + pctV));
+        return Math.RoundToInt((comp.intelligence * 10 + baseV + exV) * (1f + pctV));
     }
 
     public int strength => GetHeroStr(owner, true);
@@ -388,7 +387,7 @@ public class StatsComponent : Component
             }
             else
             {
-                v = 1 - math.pow(amr, 0.98f);
+                v = 1 - Math.Pow(amr, 0.98f);
             }
             // res
             v *= 1 - GetStat(StatId.AllDamageRes).floatVal;

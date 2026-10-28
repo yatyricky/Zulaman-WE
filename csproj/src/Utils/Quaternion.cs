@@ -1,5 +1,3 @@
-using SFLib.Interop;
-
 public struct Quaternion
 {
     public static Quaternion identity => new(0, 0, 0, 1);
@@ -28,17 +26,17 @@ public struct Quaternion
 
     public static Quaternion Euler(float pitch, float yaw, float roll)
     {
-        pitch *= bj_DEGTORAD;
-        yaw *= bj_DEGTORAD;
-        roll *= bj_DEGTORAD;
+        pitch = Math.DegToRad(pitch);
+        yaw = Math.DegToRad(yaw);
+        roll = Math.DegToRad(roll);
 
         // https://en.wikipedia.org/wiki/Conversion_between_quaternions_and_Euler_angles#Source_Code_2
-        var cy = math.cos(yaw * 0.5f);
-        var sy = math.sin(yaw * 0.5f);
-        var cp = math.cos(pitch * 0.5f);
-        var sp = math.sin(pitch * 0.5f);
-        var cr = math.cos(roll * 0.5f);
-        var sr = math.sin(roll * 0.5f);
+        var cy = Math.Cos(yaw * 0.5f);
+        var sy = Math.Sin(yaw * 0.5f);
+        var cp = Math.Cos(pitch * 0.5f);
+        var sp = Math.Sin(pitch * 0.5f);
+        var cr = Math.Cos(roll * 0.5f);
+        var sr = Math.Sin(roll * 0.5f);
 
         return new Quaternion
         {
@@ -60,7 +58,7 @@ public struct Quaternion
         var worldUp = Vector3.ProjectOnPlane(upwards, worldForward).normalized;
         if (worldUp.sqrMagnitude < 0.0001f)
         {
-            var fallbackUp = math.abs(worldForward.z) < 0.999f ? Vector3.up : Vector3.right;
+            var fallbackUp = Math.Abs(worldForward.z) < 0.999f ? Vector3.up : Vector3.right;
             worldUp = Vector3.ProjectOnPlane(fallbackUp, worldForward).normalized;
         }
 
@@ -84,7 +82,7 @@ public struct Quaternion
         var trace = m00 + m11 + m22;
         if (trace > 0f)
         {
-            var s = math.sqrt(trace + 1f) * 2f;
+            var s = Math.Sqrt(trace + 1f) * 2f;
             w = 0.25f * s;
             x = (m21 - m12) / s;
             y = (m02 - m20) / s;
@@ -92,7 +90,7 @@ public struct Quaternion
         }
         else if (m00 > m11 && m00 > m22)
         {
-            var s = math.sqrt(1f + m00 - m11 - m22) * 2f;
+            var s = Math.Sqrt(1f + m00 - m11 - m22) * 2f;
             w = (m21 - m12) / s;
             x = 0.25f * s;
             y = (m01 + m10) / s;
@@ -100,7 +98,7 @@ public struct Quaternion
         }
         else if (m11 > m22)
         {
-            var s = math.sqrt(1f + m11 - m00 - m22) * 2f;
+            var s = Math.Sqrt(1f + m11 - m00 - m22) * 2f;
             w = (m02 - m20) / s;
             x = (m01 + m10) / s;
             y = 0.25f * s;
@@ -108,7 +106,7 @@ public struct Quaternion
         }
         else
         {
-            var s = math.sqrt(1f + m22 - m00 - m11) * 2f;
+            var s = Math.Sqrt(1f + m22 - m00 - m11) * 2f;
             w = (m10 - m01) / s;
             x = (m02 + m20) / s;
             y = (m12 + m21) / s;
@@ -125,7 +123,7 @@ public struct Quaternion
 
     private static Quaternion Normalize(Quaternion q)
     {
-        var magnitude = math.sqrt(q.x * q.x + q.y * q.y + q.z * q.z + q.w * q.w);
+        var magnitude = Math.Sqrt(q.x * q.x + q.y * q.y + q.z * q.z + q.w * q.w);
         if (magnitude < 0.0001f)
         {
             return identity;
@@ -146,20 +144,20 @@ public struct Quaternion
             // https://en.wikipedia.org/wiki/Conversion_between_quaternions_and_Euler_angles#Source_Code_2
             var sinr_cosp = 2 * (w * x + y * z);
             var cosr_cosp = 1 - 2 * (x * x + y * y);
-            var roll = math.atan(sinr_cosp, cosr_cosp);
+            var roll = Math.Atan2(sinr_cosp, cosr_cosp);
 
             var sinp = 2 * (w * y - z * x);
             float pitch;
-            if (math.abs(sinp) >= 1)
-                pitch = Math.Sign(sinp) * math.pi / 2; // use 90 degrees if out of range
+            if (Math.Abs(sinp) >= 1)
+                pitch = Math.Sign(sinp) * Math.PI / 2; // use 90 degrees if out of range
             else
-                pitch = math.asin(sinp);
+                pitch = Math.Asin(sinp);
 
             var siny_cosp = 2 * (w * z + x * y);
             var cosy_cosp = 1 - 2 * (y * y + z * z);
-            var yaw = math.atan(siny_cosp, cosy_cosp);
+            var yaw = Math.Atan2(siny_cosp, cosy_cosp);
 
-            return new Vector3(pitch * bj_RADTODEG, yaw * bj_RADTODEG, roll * bj_RADTODEG);
+            return new Vector3(Math.RadToDeg(pitch), Math.RadToDeg(yaw), Math.RadToDeg(roll));
         }
     }
 
@@ -186,6 +184,6 @@ public struct Quaternion
     public void ApplyToEffect(effect e)
     {
         var angles = eulerAngles;
-        BlzSetSpecialEffectOrientation(e, angles.y * bj_DEGTORAD, angles.x * bj_DEGTORAD, angles.z * bj_DEGTORAD);
+        BlzSetSpecialEffectOrientation(e, Math.DegToRad(angles.y), Math.DegToRad(angles.x), Math.DegToRad(angles.z));
     }
 }

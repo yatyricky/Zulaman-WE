@@ -1,5 +1,4 @@
 using System;
-using SFLib.Interop;
 using StdLib;
 
 /// <summary>
@@ -21,6 +20,8 @@ public class Command
         AddCmd("-st", CmdSt);
         AddCmd("-stest", CmdStest);
         AddCmd("-sshow", ShowStats);
+        AddCmd("-mathtest", CmdMathTest);
+        AddCmd("-time", CmdTime);
 #endif
     }
 
@@ -67,7 +68,7 @@ public class Command
         var b = comp.GetStat(StatId.BaseHp).intVal;
         var e = comp.GetStat(StatId.ExMaxHp).intVal;
         var p = comp.GetStat(StatId.ExMapHpPct).floatVal;
-        return MathRound((comp.strength * 10 + b + e) * (1f + p));
+        return Math.RoundToInt((comp.strength * 10 + b + e) * (1f + p));
     }
 
     private static void Check(string name, bool ok)
@@ -104,6 +105,49 @@ public class Command
         comp.ModStats(Mod1(StatId.ExMapHpPct, S2R(SubString(str, 5, StringLength(str)))));
     }
 
+    private static void CmdMathTest(string str)
+    {
+        _fail = 0;
+        var a = 0.2f;
+        var b = 0.3f;
+        var c = 0.8f;
+        var sum03 = a + b;
+        var sum08 = a + c;
+
+        Check("math 0.2+0.3 round", Math.RoundToInt(sum03) == 1);
+        Check("math 0.2+0.8 round", Math.RoundToInt(sum08) == 1);
+        Check("math 0.2+0.8 floor", Math.FloorToInt(sum08) == 1);
+        Check("math 0.2+0.8 ceil", Math.CeilToInt(sum08) == 1);
+        Check("math 0.2+0.8 trunc", Math.TruncateToInt(sum08) == 1);
+        Check("math 0.49999997 round", Math.RoundToInt(0.49999997f) == 1);
+        Check("math 0.499 round", Math.RoundToInt(0.499f) == 0);
+        Check("math 0.99999997 floor", Math.FloorToInt(0.99999997f) == 1);
+        Check("math 1.00000003 ceil", Math.CeilToInt(1.00000003f) == 1);
+        Check("math 1.5 round", Math.RoundToInt(1.5f) == 2);
+        Check("math -1.5 round", Math.RoundToInt(-1.5f) == -2);
+        Check("math -1.5 floor", Math.FloorToInt(-1.5f) == -2);
+        Check("math -1.5 ceil", Math.CeilToInt(-1.5f) == -1);
+        Check("math -1.5 trunc", Math.TruncateToInt(-1.5f) == -1);
+        Check("math abs float", Math.Abs(-0.5f) == 0.5f);
+        Check("math abs int", Math.Abs(-3) == 3);
+        Check("math powint", Math.PowInt(2, 10) == 1024);
+        Check("math random int", Math.RandomInt(1, 1) == 1);
+        Check("math fuzzy", Math.FuzzyEquals(sum03, 0.5f));
+
+        if (_fail == 0)
+        {
+            BJDebugMsg("mathtest: ALL PASSED");
+        }
+        else
+        {
+            BJDebugMsg("mathtest: " + I2S(_fail) + " FAILURES");
+        }
+    }
+
+    private static void CmdTime(string str)
+    {
+        BJDebugMsg("GameTime.NowMs=" + I2S(GameTime.NowMs()));
+    }
     private static void CmdSt(string str)
     {
         var comp = SelComp("-st");

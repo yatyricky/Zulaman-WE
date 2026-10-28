@@ -1,5 +1,3 @@
-using SFLib.Interop;
-
 public class Damage : Effect
 {
     public static void Exec(EffectConfigEntry effect, Pipeline pipeline, unit currentTarget)
@@ -13,7 +11,7 @@ public class Damage : Effect
         var amount = data.amount;
         if (data.isPhyx)
         {
-            amount += GetRandomInt(casterStats.meleeLow, casterStats.meleeHigh) * data.apScale;
+            amount += Math.RandomInt(casterStats.meleeLow, casterStats.meleeHigh) * data.apScale;
             amount *= 1 + casterStats.phyxDamageDealt;
         }
         else
@@ -32,7 +30,7 @@ public class Damage : Effect
         {
             dmg *= targetStats.mageDamageTakenPct + casterStats.GetStat(StatId.MagePierce);
         }
-        dmg = math.max(0, dmg);
+        dmg = Math.Max(0f, dmg);
         UnitDamageTarget(spellCtx.CastingUnit, currentTarget, dmg, false, true, ATTACK_TYPE_CHAOS, DAMAGE_TYPE_DIVINE, data.wtype);
     }
 }

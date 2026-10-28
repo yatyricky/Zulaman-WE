@@ -17,7 +17,7 @@ public class PlaySFX : Effect
                 throw new System.Exception("Unhandled case");
         }
         var eff = AddSpecialEffectTarget(data.filePath, t, data.attachPoint);
-        await Task.Delay((int)(data.duration * 1000));
+        await Task.Delay(Math.Max(0, data.duration));
         DestroyEffect(eff);
     }
 }

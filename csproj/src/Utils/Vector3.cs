@@ -1,5 +1,3 @@
-using SFLib.Interop;
-
 public enum UnitVec3Mode
 {
     ForceFlying,
@@ -132,14 +130,14 @@ public struct Vector3
         var targetNorm = target / targetMag;
 
         var dot = Math.Clamp(Dot(currentNorm, targetNorm), -1f, 1f);
-        var angle = math.acos(dot);
+        var angle = Math.Acos(dot);
 
         if (angle == 0f)
         {
             return MoveTowards(current, target, maxMagnitudeDelta);
         }
 
-        var t = math.min(1f, maxRadiansDelta / angle);
+        var t = Math.Min(1f, maxRadiansDelta / angle);
         var newDir = Slerp(currentNorm, targetNorm, t);
         var newMag = Math.MoveTowards(currentMag, targetMag, maxMagnitudeDelta);
         return newDir * newMag;
@@ -157,24 +155,24 @@ public struct Vector3
 
         if (magA == 0f || magB == 0f)
         {
-            return MoveTowards(a, b, math.huge);
+            return MoveTowards(a, b, Math.Huge);
         }
 
         var normA = a / magA;
         var normB = b / magB;
 
         var dot = Math.Clamp(Dot(normA, normB), -1f, 1f);
-        var angle = math.acos(dot);
-        var sinAngle = math.sin(angle);
+        var angle = Math.Acos(dot);
+        var sinAngle = Math.Sin(angle);
 
         if (sinAngle < 0.0001f)
         {
-            return MoveTowards(a, b, math.huge);
+            return MoveTowards(a, b, Math.Huge);
         }
 
         var tAngle = angle * t;
-        var sinTA = math.sin(tAngle);
-        var sinTOneMinusA = math.sin(angle - tAngle);
+        var sinTA = Math.Sin(tAngle);
+        var sinTOneMinusA = Math.Sin(angle - tAngle);
 
         var newDir = (normA * sinTOneMinusA + normB * sinTA) / sinAngle;
         var newMag = Math.Lerp(magA, magB, t);
@@ -199,7 +197,7 @@ public struct Vector3
     public float z;
 
     public float sqrMagnitude => x * x + y * y + z * z;
-    public float magnitude => math.sqrt(sqrMagnitude);
+    public float magnitude => Math.Sqrt(sqrMagnitude);
 
     public Vector3 normalized
     {
@@ -241,7 +239,7 @@ public struct Vector3
         {
             case UnitVec3Mode.ForceFlying:
                 Helper.SetUnitFlyable(u);
-                SetUnitFlyHeight(u, math.max(minZ, z) - minZ, 0f);
+                SetUnitFlyHeight(u, Math.Max(minZ, z) - minZ, 0f);
                 break;
             case UnitVec3Mode.ForceGround:
                 SetUnitFlyHeight(u, defaultFlyHeight, 0f);
@@ -249,7 +247,7 @@ public struct Vector3
             case UnitVec3Mode.Auto:
                 if (IsUnitType(u, UNIT_TYPE_FLYING))
                 {
-                    SetUnitFlyHeight(u, math.max(minZ, z) - minZ, 0f);
+                    SetUnitFlyHeight(u, Math.Max(minZ, z) - minZ, 0f);
                 }
                 else
                 {

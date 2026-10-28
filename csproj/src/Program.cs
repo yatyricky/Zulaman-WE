@@ -9,6 +9,7 @@ public class Program
 
     private void Start()
     {
+        GameTime.Init();
         GameObject.RunGameObjects();
         _ = SpellChannelEvent.Instance;
         _ = SpellCastEvent.Instance;
