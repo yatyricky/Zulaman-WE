@@ -28,6 +28,11 @@ public class StatsComponent : Component
         return stats.Count > 0;
     }
 
+    public static bool IsDerivedStat(StatId id)
+    {
+        return statCalculators.ContainsKey(id);
+    }
+
     public override void Start()
     {
         foreach (var config in StatConfig.Data)
@@ -42,9 +47,29 @@ public class StatsComponent : Component
         SetUnitState(owner, UNIT_STATE_MANA, GetStat(StatId.RMaxMp).intVal);
     }
 
+    private static void SetAbility(unit u, int abilityId, bool enabled)
+    {
+        var level = GetUnitAbilityLevel(u, abilityId);
+        if (enabled)
+        {
+            if (level == 0)
+            {
+                UnitAddAbility(u, abilityId);
+                UnitMakeAbilityPermanent(u, true, abilityId);
+            }
+            return;
+        }
+
+        if (level > 0)
+        {
+            UnitRemoveAbility(u, abilityId);
+        }
+    }
+
     private static void UpdateStats(unit u, int amount, List<int> posArr, int negId)
     {
-        var cap = Math.PowInt(2, posArr.Count);
+        var cap = 1 << posArr.Count;
+
         // validation
         if (amount < 0 && negId == 0)
         {
@@ -52,67 +77,20 @@ public class StatsComponent : Component
         }
         amount = Math.Clamp(amount, 0 - cap, cap - 1);
 
-        if (amount == 0)
+        var negative = amount < 0;
+        if (negative)
         {
-            if (negId != 0 && GetUnitAbilityLevel(u, negId) > 0)
-            {
-                UnitRemoveAbility(u, negId);
-            }
-            foreach (var aid in posArr)
-            {
-                if (GetUnitAbilityLevel(u, aid) > 0)
-                {
-                    UnitRemoveAbility(u, aid);
-                }
-            }
+            amount += cap;
         }
-        else
+
+        if (negId != 0)
         {
-            if (amount < 0)
-            {
-                amount += cap;
-                if (negId != 0 && GetUnitAbilityLevel(u, negId) == 0)
-                {
-                    UnitAddAbility(u, negId);
-                    UnitMakeAbilityPermanent(u, true, negId);
-                }
-            }
-            else
-            {
-                if (negId != 0 && GetUnitAbilityLevel(u, negId) > 0)
-                {
-                    UnitRemoveAbility(u, negId);
-                }
-            }
-            var i = 0;
-            while (amount > 0)
-            {
-                if (amount % 2 == 1)
-                {
-                    if (GetUnitAbilityLevel(u, posArr[i]) == 0)
-                    {
-                        UnitAddAbility(u, posArr[i]);
-                        UnitMakeAbilityPermanent(u, true, posArr[i]);
-                    }
-                }
-                else
-                {
-                    if (GetUnitAbilityLevel(u, posArr[i]) > 0)
-                    {
-                        UnitRemoveAbility(u, posArr[i]);
-                    }
-                }
-                amount = Math.FloorToInt(amount / 2f);
-                i += 1;
-            }
-            while (i < posArr.Count)
-            {
-                if (GetUnitAbilityLevel(u, posArr[i]) > 0)
-                {
-                    UnitRemoveAbility(u, posArr[i]);
-                }
-                i += 1;
-            }
+            SetAbility(u, negId, negative);
+        }
+
+        for (var i = 0; i < posArr.Count; i++)
+        {
+            SetAbility(u, posArr[i], (amount & (1 << i)) != 0);
         }
     }
 
@@ -129,6 +107,16 @@ public class StatsComponent : Component
 
     public static void NewUnit(CreateUnitEventData data)
     {
+        var reused = UnitRemovedEvent.Cancel(data.u);
+        if (reused && Components.TryGetValue(data.u, out var oldComp))
+        {
+            Components.Remove(data.u);
+            if (!oldComp.gameObject.isDestroyQueued && !oldComp.gameObject.isDestroyed)
+            {
+                oldComp.gameObject.Destroy();
+            }
+        }
+
         var obj = new GameObject(Helper.GetUnitNameEx(data.u), Const.UnitsRoot);
         var comp = obj.AddComponent<StatsComponent>();
         comp.owner = data.u;
@@ -235,7 +223,12 @@ public class StatsComponent : Component
 
     private static void OnUnitRemoved(UnitRemovedEventData data)
     {
+        if (!Components.TryGetValue(data.u, out var comp)) return;
         Components.Remove(data.u);
+        if (!comp.gameObject.isDestroyQueued && !comp.gameObject.isDestroyed)
+        {
+            comp.gameObject.Destroy();
+        }
     }
 
     public static void Init()
