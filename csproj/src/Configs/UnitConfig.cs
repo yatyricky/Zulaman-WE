@@ -16,7 +16,7 @@ public class UnitConfig
         new UnitConfigEntry{UTID = FourCC("hfoo"), PrimaryAttr = UnitAttrType.None, BaseStats = new(){ {StatId.BaseHp,  420} }},
     };
 
-    public static UnitConfigEntry FindByUTID(int utid)
+    public static UnitConfigEntry? TryFindByUTID(int utid)
     {
         foreach (var item in Data)
         {
@@ -25,6 +25,11 @@ public class UnitConfig
                 return item;
             }
         }
-        throw new System.Exception($"unit not configured {utid}");
+        return null;
+    }
+
+    public static UnitConfigEntry FindByUTID(int utid)
+    {
+        return TryFindByUTID(utid) ?? throw new System.Exception($"unit not configured {utid}");
     }
 }

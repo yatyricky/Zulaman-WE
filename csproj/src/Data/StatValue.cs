@@ -5,9 +5,32 @@ public class StatValue
     public int intVal = 0;
     public float floatVal = 0f;
 
+    public StatType Type => _type;
+
     public StatValue(StatType type)
     {
         _type = type;
+    }
+
+    public static StatValue operator *(StatValue left, int factor)
+    {
+        if (!left._isNumber) throw new System.Exception("left must be number");
+        return _mult(left, factor);
+    }
+
+    public static StatValue operator *(int factor, StatValue right)
+    {
+        if (!right._isNumber) throw new System.Exception("right must be number");
+        return _mult(right, factor);
+    }
+
+    private static StatValue _mult(StatValue sv, int factor)
+    {
+        return new StatValue(sv._type)
+        {
+            intVal = sv.intVal * factor,
+            floatVal = sv.floatVal * factor,
+        };
     }
 
     public static StatValue operator +(StatValue left, StatValue right)
@@ -19,6 +42,18 @@ public class StatValue
         {
             intVal = left.intVal + right.intVal,
             floatVal = left.floatVal + right.floatVal,
+        };
+    }
+
+    public static StatValue operator -(StatValue left, StatValue right)
+    {
+        if (!left._isNumber || !right._isNumber) throw new System.Exception("left/right must be number");
+
+        var t = left._type == StatType.Int && right._type == StatType.Int ? StatType.Int : StatType.Float;
+        return new StatValue(t)
+        {
+            intVal = left.intVal - right.intVal,
+            floatVal = left.floatVal - right.floatVal,
         };
     }
 

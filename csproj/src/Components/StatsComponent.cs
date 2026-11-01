@@ -3,15 +3,32 @@ using StdLib;
 
 public class StatsComponent : Component
 {
-    public unit owner = null!;
+    private unit? _owner;
+    public unit owner => _owner ?? throw new InvalidOperationException("StatsComponent owner is not assigned");
     private readonly Dictionary<StatId, StatValue> stats = [];
 
     // unit -> StatsComponent 反查,NewUnit 时登记
-    public static readonly Dictionary<unit, StatsComponent> Components = new();
+    private static readonly Dictionary<unit, StatsComponent> Components = new();
+
+    internal void Bind(unit u)
+    {
+        _owner = u;
+    }
+
+    public static bool TryFindComp(unit? u, out StatsComponent comp)
+    {
+        if (u != null && Components.TryGetValue(u, out var ret))
+        {
+            comp = ret;
+            return true;
+        }
+        comp = null!;
+        return false;
+    }
 
     public static StatsComponent FindComp(unit u)
     {
-        if (Components.TryGetValue(u, out var ret))
+        if (TryFindComp(u, out var ret))
         {
             return ret;
         }
@@ -33,18 +50,43 @@ public class StatsComponent : Component
         return statCalculators.ContainsKey(id);
     }
 
+    private bool _initialized;
+    private bool _initializing;
+
+    /// <summary>
+    /// Initializes base stats immediately after the unit owner is assigned.
+    /// BuffHolder registers during the same creation frame and needs HasStats()
+    /// to be true before gameplay code can apply buffs to the new unit.
+    /// </summary>
+    public void EnsureInitialized()
+    {
+        if (_initialized) return;
+        if (_initializing) throw new InvalidOperationException("reentrant StatsComponent initialization");
+
+        _initializing = true;
+        try
+        {
+            foreach (var config in StatConfig.Data)
+            {
+                stats[config.ID] = new StatValue(config.Type);
+            }
+
+            var utid = GetUnitTypeId(owner);
+            var unitConfig = UnitConfig.FindByUTID(utid);
+            ModStats(unitConfig.BaseStats);
+
+            SetUnitState(owner, UNIT_STATE_MANA, GetStat(StatId.RMaxMp).intVal);
+            _initialized = true;
+        }
+        finally
+        {
+            _initializing = false;
+        }
+    }
+
     public override void Start()
     {
-        foreach (var config in StatConfig.Data)
-        {
-            stats[config.ID] = new StatValue(config.Type);
-        }
-
-        var utid = GetUnitTypeId(owner);
-        var unitConfig = UnitConfig.FindByUTID(utid);
-        ModStats(unitConfig.BaseStats);
-
-        SetUnitState(owner, UNIT_STATE_MANA, GetStat(StatId.RMaxMp).intVal);
+        EnsureInitialized();
     }
 
     private static void SetAbility(unit u, int abilityId, bool enabled)
@@ -105,24 +147,82 @@ public class StatsComponent : Component
         UpdateStats(comp.owner, comp.stats[StatId.RMaxMp].intVal, PosManaArr, 0);
     }
 
-    public static void NewUnit(CreateUnitEventData data)
+    private static void NewUnit(CreateUnitEventData data)
     {
-        var reused = UnitRemovedEvent.Cancel(data.u);
-        if (reused && Components.TryGetValue(data.u, out var oldComp))
+        RegisterUnit(data.u);
+    }
+
+    private static void RegisterUnit(unit u, bool reportMissing = true)
+    {
+        if (GetUnitTypeId(u) == 0) return;
+        if (Helper.IsUnitDummy(u)) return;
+
+        var reused = UnitRemovedEvent.Cancel(u);
+        if (Components.TryGetValue(u, out var oldComp))
         {
-            Components.Remove(data.u);
-            if (!oldComp.gameObject.isDestroyQueued && !oldComp.gameObject.isDestroyed)
+            if (reused)
             {
-                oldComp.gameObject.Destroy();
+                Components.Remove(u);
+                if (!oldComp.gameObject.isDestroyQueued && !oldComp.gameObject.isDestroyed)
+                {
+                    oldComp.gameObject.Destroy();
+                }
+            }
+            else
+            {
+                throw new InvalidOperationException($"unit already registered: {Helper.GetUnitNameEx(u)} {I2S(GetUnitTypeId(u))}");
             }
         }
 
-        var obj = new GameObject(Helper.GetUnitNameEx(data.u), Const.UnitsRoot);
-        var comp = obj.AddComponent<StatsComponent>();
-        comp.owner = data.u;
-        Components[data.u] = comp;
+        if (UnitConfig.TryFindByUTID(GetUnitTypeId(u)) == null)
+        {
+            if (reportMissing)
+            {
+                ReportRegistrationError($"unit not configured: {Helper.GetUnitNameEx(u)} {I2S(GetUnitTypeId(u))}");
+            }
+            return;
+        }
 
-        obj.AddComponent<BuffHolder>();
+        var obj = new GameObject(Helper.GetUnitNameEx(u), Const.UnitsRoot);
+        var comp = obj.AddComponent<StatsComponent>();
+        comp.Bind(u);
+        Components[u] = comp;
+
+        try
+        {
+            comp.EnsureInitialized();
+            obj.AddComponent<BuffHolder>();
+        }
+        catch
+        {
+            Components.Remove(u);
+            if (!obj.isDestroyQueued)
+            {
+                obj.Destroy();
+            }
+            throw;
+        }
+    }
+
+    private static void RegisterExistingUnits()
+    {
+        var group = CreateGroup();
+        GroupEnumUnitsInRect(group, bj_mapInitialPlayableArea, Filter(() => true));
+        while (true)
+        {
+            var u = FirstOfGroup(group);
+            if (u == null) break;
+            GroupRemoveUnit(group, u);
+            if (Components.ContainsKey(u)) continue;
+            RegisterUnit(u, false);
+        }
+        DestroyGroup(group);
+    }
+
+    private static void ReportRegistrationError(string message)
+    {
+        Log.Info(Diagnostics.Fail(message));
+        BJDebugMsg(message);
     }
 
     private static readonly Dictionary<StatId, List<StatId>> statUseGraph = [];
@@ -236,6 +336,7 @@ public class StatsComponent : Component
         CreateUnitEvent.Instance.Register(NewUnit);
         ConstructStatGraphs();
         UnitRemovedEvent.Instance.Register(OnUnitRemoved);
+        RegisterExistingUnits();
     }
 
     public void ModStats(Dictionary<StatId, StatValue> values)

@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using StdLib;
 
 /// <summary>
@@ -14,6 +15,7 @@ public class Command
     public static void Init()
     {
 #if DEBUG
+        BuffSystem.RegisterFactory("001", () => new TestBuff());
         AddCmd("-hp", CmdHp);
         AddCmd("-exhp", CmdExhp);
         AddCmd("-pct", CmdPct);
@@ -22,6 +24,16 @@ public class Command
         AddCmd("-sshow", ShowStats);
         AddCmd("-mathtest", CmdMathTest);
         AddCmd("-time", CmdTime);
+        AddCmd("-buff", CmdBuff);
+        AddCmd("-buffst", CmdBuffSt);
+        AddCmd("-buffdur", CmdBuffDur);
+        AddCmd("-buffint", CmdBuffInt);
+        AddCmd("-buffref", CmdBuffRef);
+        AddCmd("-buffpause", CmdBuffPause);
+        AddCmd("-buffresume", CmdBuffResume);
+        AddCmd("-buffclear", CmdBuffClear);
+        AddCmd("-buffxfer", CmdBuffXfer);
+        AddCmd("-bufftest", CmdBuffTest);
 #endif
     }
 
@@ -39,7 +51,7 @@ public class Command
             BJDebugMsg(tag + ": no selection");
             return null!;
         }
-        if (!StatsComponent.Components.TryGetValue(u, out var comp))
+        if (!StatsComponent.TryFindComp(u, out var comp))
         {
             BJDebugMsg(tag + ": unit has no StatsComponent");
             return null!;
@@ -148,6 +160,172 @@ public class Command
     {
         BJDebugMsg("GameTime.NowMs=" + I2S(GameTime.NowMs()));
     }
+
+    private static BuffHolder? SelHolder(string tag)
+    {
+        var comp = SelComp(tag);
+        if (comp == null) return null;
+        var holder = comp.gameObject.GetComponent<BuffHolder>();
+        if (holder == null)
+        {
+            BJDebugMsg(tag + ": unit has no BuffHolder");
+            return null;
+        }
+        return holder;
+    }
+
+    private static Buff? FirstBuff(BuffHolder holder)
+    {
+        var snapshot = holder.Snapshot();
+        if (snapshot.Count == 0) return null;
+        return snapshot[0];
+    }
+
+    private static unit NearestOther(unit from, float range)
+    {
+        var g = CreateGroup();
+        GroupEnumUnitsInRange(g, GetUnitX(from), GetUnitY(from), range, Filter(() => true));
+        unit best = null!;
+        var bestDist = range * range;
+        while (true)
+        {
+            var u = FirstOfGroup(g);
+            if (u == null) break;
+            GroupRemoveUnit(g, u);
+            if (u == from || IsUnitDeadBJ(u) || Helper.IsUnitDummy(u)) continue;
+            var dx = GetUnitX(u) - GetUnitX(from);
+            var dy = GetUnitY(u) - GetUnitY(from);
+            var dist = dx * dx + dy * dy;
+            if (dist < bestDist)
+            {
+                bestDist = dist;
+                best = u;
+            }
+        }
+        DestroyGroup(g);
+        return best;
+    }
+
+    private static void CmdBuff(string str)
+    {
+        var len = StringLength(str);
+        if (len > 5 && SubString(str, 5, 6) != " ") return;
+
+        var comp = SelComp("-buff");
+        if (comp == null) return;
+
+        var id = "001";
+        if (len > 6) id = SubString(str, 6, len);
+        BuffSystem.Apply(comp.owner, id, comp.owner);
+    }
+
+    private static void CmdBuffSt(string str)
+    {
+        var holder = SelHolder("-buffst");
+        if (holder == null) return;
+
+        BJDebugMsg("buffst count=" + I2S(holder.count));
+        foreach (var buff in holder.Snapshot())
+        {
+            BJDebugMsg("  id=" + buff.Config.ID
+                + " name=" + buff.Config.Name
+                + " stacks=" + I2S(buff.Stacks)
+                + " rem=" + I2S(buff.RemainingMs())
+                + " next=" + I2S(buff.NextTickInMs())
+                + " paused=" + (buff.Paused ? "1" : "0"));
+        }
+    }
+
+    private static void CmdBuffDur(string str)
+    {
+        var holder = SelHolder("-buffdur");
+        if (holder == null) return;
+        var buff = FirstBuff(holder);
+        if (buff == null) return;
+
+        var len = StringLength(str);
+        if (len <= 9)
+        {
+            BJDebugMsg("-buffdur: missing ms");
+            return;
+        }
+        buff.SetDuration(S2I(SubString(str, 9, len)));
+    }
+
+    private static void CmdBuffInt(string str)
+    {
+        var holder = SelHolder("-buffint");
+        if (holder == null) return;
+        var buff = FirstBuff(holder);
+        if (buff == null) return;
+
+        var len = StringLength(str);
+        if (len <= 9)
+        {
+            BJDebugMsg("-buffint: missing ms");
+            return;
+        }
+        var interval = S2I(SubString(str, 9, len));
+        if (interval < 0)
+        {
+            BJDebugMsg("-buffint: invalid ms");
+            return;
+        }
+        buff.SetInterval(interval);
+    }
+
+    private static void CmdBuffRef(string str)
+    {
+        var holder = SelHolder("-buffref");
+        if (holder == null) return;
+        var buff = FirstBuff(holder);
+        if (buff == null) return;
+        buff.Refresh(true, true);
+    }
+
+    private static void CmdBuffPause(string str)
+    {
+        var holder = SelHolder("-buffpause");
+        if (holder == null) return;
+        var buff = FirstBuff(holder);
+        if (buff == null) return;
+        buff.Pause();
+    }
+
+    private static void CmdBuffResume(string str)
+    {
+        var holder = SelHolder("-buffresume");
+        if (holder == null) return;
+        var buff = FirstBuff(holder);
+        if (buff == null) return;
+        buff.Resume();
+    }
+
+    private static void CmdBuffClear(string str)
+    {
+        var comp = SelComp("-buffclear");
+        if (comp == null) return;
+        BJDebugMsg("-buffclear removed=" + I2S(BuffSystem.Clear(comp.owner, BuffRemoveReason.Manual)));
+    }
+
+    private static void CmdBuffXfer(string str)
+    {
+        var comp = SelComp("-buffxfer");
+        if (comp == null) return;
+        var holder = comp.gameObject.GetComponent<BuffHolder>();
+        if (holder == null) return;
+        var buff = FirstBuff(holder);
+        if (buff == null) return;
+
+        var target = NearestOther(comp.owner, 600f);
+        if (target == null)
+        {
+            BJDebugMsg("-buffxfer: no target");
+            return;
+        }
+        BJDebugMsg("-buffxfer ok=" + (BuffSystem.Transfer(buff, target, comp.owner) ? "1" : "0"));
+    }
+
     private static void CmdSt(string str)
     {
         var comp = SelComp("-st");
@@ -165,7 +343,7 @@ public class Command
             BJDebugMsg("stest: no selection");
             return;
         }
-        if (!StatsComponent.Components.TryGetValue(u, out var comp))
+        if (!StatsComponent.TryFindComp(u, out var comp))
         {
             BJDebugMsg("stest: unit has no StatsComponent");
             return;
@@ -207,7 +385,7 @@ public class Command
             BJDebugMsg("stest: no selection");
             return;
         }
-        if (!StatsComponent.Components.TryGetValue(u, out var comp))
+        if (!StatsComponent.TryFindComp(u, out var comp))
         {
             BJDebugMsg("stest: unit has no StatsComponent");
             return;
@@ -285,6 +463,225 @@ public class Command
         else
         {
             BJDebugMsg("stest: " + I2S(_fail) + " FAILURES");
+        }
+    }
+
+    private static void SafeRemoveUnit(unit u)
+    {
+        if (u == null || GetUnitTypeId(u) == 0) return;
+        UnitRemovedEvent.Remove(u);
+    }
+
+    private static void CmdBuffTest(string str)
+    {
+        _ = RunBuffTest();
+    }
+
+    private static async Task RunBuffTest()
+    {
+        _fail = 0;
+
+        if (!Selection.PlayerSelection.TryGetValue(GetPlayerId(GetLocalPlayer()), out var caster))
+        {
+            BJDebugMsg("bufftest: no selection");
+            return;
+        }
+        if (!StatsComponent.TryFindComp(caster, out var casterComp))
+        {
+            BJDebugMsg("bufftest: selected unit has no StatsComponent");
+            return;
+        }
+        var casterHolder = casterComp.gameObject.GetComponent<BuffHolder>();
+        if (casterHolder == null)
+        {
+            BJDebugMsg("bufftest: selected unit has no BuffHolder");
+            return;
+        }
+
+        unit target = null!;
+        unit other = null!;
+        unit victim = null!;
+        unit dyingCaster = null!;
+
+        try
+        {
+            var x = GetUnitX(caster);
+            var y = GetUnitY(caster);
+
+            target = CreateUnit(Player(0), FourCC("hfoo"), x, y, 0);
+
+            Buff? sameFrame = null;
+            try
+            {
+                sameFrame = BuffSystem.Apply(target, "001", caster);
+            }
+            catch (Exception e)
+            {
+                BJDebugMsg("bufftest same-frame apply threw: " + e.Message);
+            }
+            Check("bufftest same-frame apply", sameFrame != null);
+            Check("bufftest same-frame registration", StatsComponent.TryFindComp(target, out _));
+            sameFrame?.Remove();
+
+            await Task.Delay(100);
+
+            if (!StatsComponent.TryFindComp(target, out var comp))
+            {
+                throw new Exception("bufftest target stats are missing");
+            }
+            var holder = comp.gameObject.GetComponent<BuffHolder>();
+            Check("bufftest target holder", holder != null);
+            if (holder == null) throw new Exception("bufftest target holder is missing");
+
+            var first = BuffSystem.Apply(target, "001", caster);
+            Check("bufftest apply 001", first != null && holder.Find("001") != null && holder.count == 1);
+
+            var second = BuffSystem.Apply(target, "001", caster);
+            Check("bufftest add stack", second != null && second.Stacks == 2);
+
+            var i = 0;
+            while (i < 4)
+            {
+                BuffSystem.Apply(target, "001", caster);
+                i += 1;
+            }
+            Check("bufftest max stacks", holder.Find("001")!.Stacks == 3);
+
+            Check("bufftest clear", BuffSystem.Clear(target, BuffRemoveReason.Manual) == 1 && holder.count == 0);
+
+            var resBase = comp.GetStat(StatId.AllDamageRes).floatVal;
+            var statBuff = BuffSystem.Apply(target, "001", caster);
+            Check("bufftest stat buff applied", statBuff != null && holder.Find("001") != null);
+            if (statBuff != null)
+            {
+                Check("bufftest stat stack 1", Math.FuzzyEquals(comp.GetStat(StatId.AllDamageRes).floatVal, resBase + 0.25f));
+                BuffSystem.Apply(target, "001", caster);
+                Check("bufftest stat stack 2", Math.FuzzyEquals(comp.GetStat(StatId.AllDamageRes).floatVal, resBase + 0.5f));
+
+                var statRound = 0;
+                while (statRound < 4)
+                {
+                    BuffSystem.Apply(target, "001", caster);
+                    statRound += 1;
+                }
+                Check("bufftest stat max stacks", Math.FuzzyEquals(comp.GetStat(StatId.AllDamageRes).floatVal, resBase + 0.75f));
+
+                statBuff.Remove();
+                Check("bufftest stat restore", Math.FuzzyEquals(comp.GetStat(StatId.AllDamageRes).floatVal, resBase));
+            }
+
+            var refreshBuff = BuffSystem.Apply(target, "001", caster);
+            Check("bufftest refresh buff applied", refreshBuff != null && holder.Find("001") != null);
+            if (refreshBuff != null)
+            {
+                await Task.Delay(100);
+                var before = refreshBuff.RemainingMs();
+                refreshBuff.Refresh();
+                Check("bufftest reset duration refresh", refreshBuff.RemainingMs() > before);
+                refreshBuff.Remove();
+            }
+
+            var pauseBuff = BuffSystem.Apply(target, "001", caster);
+            Check("bufftest pause buff applied", pauseBuff != null);
+            if (pauseBuff != null)
+            {
+                pauseBuff.Pause();
+                var pausedRemaining = pauseBuff.RemainingMs();
+                await Task.Delay(150);
+                Check("bufftest pause freezes remaining", pauseBuff.RemainingMs() == pausedRemaining);
+                pauseBuff.Resume();
+                Check("bufftest resume", !pauseBuff.Paused);
+                pauseBuff.Remove();
+            }
+
+            other = CreateUnit(Player(0), FourCC("hfoo"), x, y, 0);
+            await Task.Delay(100);
+            if (!StatsComponent.TryFindComp(other, out var otherComp))
+            {
+                throw new Exception("bufftest transfer target stats are missing");
+            }
+            var otherHolder = otherComp.gameObject.GetComponent<BuffHolder>();
+            Check("bufftest transfer target holder", otherHolder != null);
+            if (otherHolder == null) throw new Exception("bufftest transfer target holder is missing");
+
+            var transferBuff = BuffSystem.Apply(target, "001", caster);
+            Check("bufftest transfer source applied", transferBuff != null);
+            if (transferBuff != null)
+            {
+                Check("bufftest transfer", BuffSystem.Transfer(transferBuff, other, caster));
+                Check("bufftest transfer source empty", holder.count == 0);
+                Check("bufftest transfer target has buff", otherHolder.count == 1);
+            }
+
+            BuffSystem.Clear(other, BuffRemoveReason.Manual);
+            var mergeA = BuffSystem.Apply(target, "001", caster);
+            var mergeB = BuffSystem.Apply(other, "001", caster);
+            Check("bufftest merge sources", mergeA != null && mergeB != null);
+            if (mergeA != null && mergeB != null)
+            {
+                Check("bufftest merge transfer", BuffSystem.Transfer(mergeB, target, caster));
+                Check("bufftest merge result", holder.count == 1 && holder.Find("001")?.Stacks == 2);
+                Check("bufftest merge source consumed", otherHolder.count == 0);
+            }
+            BuffSystem.Clear(target, BuffRemoveReason.Manual);
+
+            victim = CreateUnit(Player(0), FourCC("hfoo"), x, y, 0);
+            await Task.Delay(100);
+            if (!StatsComponent.TryFindComp(victim, out var victimComp))
+            {
+                throw new Exception("bufftest victim stats are missing");
+            }
+            var victimHolder = victimComp.gameObject.GetComponent<BuffHolder>();
+            Check("bufftest victim holder", victimHolder != null);
+            if (victimHolder == null) throw new Exception("bufftest victim holder is missing");
+
+            BuffSystem.Apply(victim, "001", caster);
+            Check("bufftest victim buff", victimHolder.count == 1);
+
+            KillUnit(victim);
+            await Task.Delay(100);
+            Check("bufftest death removes RemoveOnDeath", victimHolder.Find("001") == null);
+
+            UnitRemovedEvent.Remove(victim);
+            UnitRemovedEvent.Remove(victim);
+            Check("bufftest unit removed idempotently", !StatsComponent.TryFindComp(victim, out _));
+            victim = null!;
+
+            dyingCaster = CreateUnit(Player(0), FourCC("hfoo"), x, y, 0);
+            await Task.Delay(100);
+            if (!StatsComponent.TryFindComp(dyingCaster, out _))
+            {
+                throw new Exception("bufftest dying caster stats are missing");
+            }
+            var casterBuff = BuffSystem.Apply(target, "001", dyingCaster);
+            Check("bufftest caster-death buff applied", casterBuff != null && holder.Find("001") != null);
+            KillUnit(dyingCaster);
+            await Task.Delay(100);
+            Check("bufftest caster death clears caster", casterBuff != null && casterBuff.Caster == null && casterBuff.IsRemoved == false);
+            casterBuff?.Remove();
+            UnitRemovedEvent.Remove(dyingCaster);
+            dyingCaster = null!;
+        }
+        catch (Exception e)
+        {
+            _fail += 1;
+            BJDebugMsg("bufftest exception: " + e.Message);
+        }
+        finally
+        {
+            SafeRemoveUnit(other);
+            SafeRemoveUnit(victim);
+            SafeRemoveUnit(dyingCaster);
+            SafeRemoveUnit(target);
+        }
+
+        if (_fail == 0)
+        {
+            BJDebugMsg("bufftest: ALL PASSED");
+        }
+        else
+        {
+            BJDebugMsg("bufftest: " + I2S(_fail) + " FAILURES");
         }
     }
 }

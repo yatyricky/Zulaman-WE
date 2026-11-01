@@ -4,20 +4,22 @@ public class PlaySFX : Effect
 {
     public async static void Exec(EffectConfigEntry effect, Pipeline pipeline, unit currentTarget)
     {
-        var data = effect.Data as PlaySFXData;
-        if (data == null) throw new System.Exception($"effect {effect.ID} expects DamageData, got null");
+        if (effect.Data is not PlaySFXData data) throw new System.Exception($"effect {effect.ID} expects PlaySFXData");
 
-        unit t;
-        switch (data.whichTarget)
+        var target = data.whichTarget switch
         {
-            case SpellUnitType.CurrentTargetUnit:
-                t = currentTarget;
-                break;
-            default:
-                throw new System.Exception("Unhandled case");
-        }
-        var eff = AddSpecialEffectTarget(data.filePath, t, data.attachPoint);
+            SpellUnitType.CastingUnit => pipeline.SpellCtx.CastingUnit,
+            SpellUnitType.TargetUnit => pipeline.SpellCtx.TargetUnit,
+            SpellUnitType.CurrentTargetUnit => currentTarget,
+            _ => throw new System.Exception("Unhandled case"),
+        };
+        if (target == null) return;
+
+        var eff = AddSpecialEffectTarget(data.filePath, target, data.attachPoint);
         await Task.Delay(Math.Max(0, data.duration));
-        DestroyEffect(eff);
+        if (eff != null)
+        {
+            DestroyEffect(eff);
+        }
     }
 }

@@ -2,11 +2,9 @@ public class Damage : Effect
 {
     public static void Exec(EffectConfigEntry effect, Pipeline pipeline, unit currentTarget)
     {
+        if (effect.Data is not DamageData data) throw new System.Exception($"effect {effect.ID} expects DamageData, got null");
+
         var spellCtx = pipeline.SpellCtx;
-
-        var data = effect.Data as DamageData;
-        if (data == null) throw new System.Exception($"effect {effect.ID} expects DamageData, got null");
-
         var casterStats = StatsComponent.FindComp(spellCtx.CastingUnit);
         var amount = data.amount;
         if (data.isPhyx)

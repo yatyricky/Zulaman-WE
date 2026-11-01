@@ -55,6 +55,7 @@ public class UnitRemovedEvent : EventBase<UnitRemovedEventData>
     {
         if (u == null) return;
         Instance._pending.Remove(u);
+        if (GetUnitTypeId(u) == 0) return;
         RemoveUnit(u);
         Instance.ResponseCall(new UnitRemovedEventData { u = u });
     }

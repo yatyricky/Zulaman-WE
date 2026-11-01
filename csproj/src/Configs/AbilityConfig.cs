@@ -11,7 +11,7 @@ public class AbilityConfig
 {
     public static List<AbilityConfigEntry> Data =
     [
-        new(){ID = FourCC("A004"), SUType = SpellUnitType.TargetUnit, Effects = ["001", "003"]},
+        new(){ID = FourCC("A004"), SUType = SpellUnitType.TargetUnit, Effects = ["001", "003", "004"]},
     ];
 
     public static AbilityConfigEntry FindByID(int id)

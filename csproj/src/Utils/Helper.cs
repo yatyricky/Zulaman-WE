@@ -1,5 +1,6 @@
 public class Helper
 {
+    #region Unit
     private static int _abilIdAmrf = FourCC("Amrf");
 
     public static void SetUnitFlyable(unit u)
@@ -12,6 +13,25 @@ public class Helper
     {
         return GetUnitPointValue(u) % 2 == 0;
     }
+
+    public static bool IsUnitDead(unit u)
+    {
+        return u == null || GetWidgetLife(u) <= 0.405 || IsUnitType(u, UNIT_TYPE_DEAD);
+    }
+
+    public static string GetUnitNameEx(unit u)
+    {
+        if (u == null) return "NULL";
+        if (IsUnitType(u, UNIT_TYPE_HERO))
+        {
+            return GetHeroProperName(u);
+        }
+        else
+        {
+            return GetUnitName(u);
+        }
+    }
+    #endregion
 
     public static string DamageType2String(damagetype dt)
     {
@@ -38,18 +58,5 @@ public class Helper
         if (dt == DAMAGE_TYPE_SHADOW_STRIKE) return "SHADOW_STRIKE";
         if (dt == DAMAGE_TYPE_UNIVERSAL) return "UNIVERSAL";
         return "UNDEFINED";
-    }
-
-    public static string GetUnitNameEx(unit u)
-    {
-        if (u == null) return "NULL";
-        if (IsUnitType(u, UNIT_TYPE_HERO))
-        {
-            return GetHeroProperName(u);
-        }
-        else
-        {
-            return GetUnitName(u);
-        }
     }
 }

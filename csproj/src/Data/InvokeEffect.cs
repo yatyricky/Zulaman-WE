@@ -10,6 +10,9 @@ public class InvokeEffect
             case EffectType.PlaySFX:
                 PlaySFX.Exec(effect, pipeline, currentTarget);
                 break;
+            case EffectType.ApplyBuff:
+                ApplyBuff.Exec(effect, pipeline, currentTarget);
+                break;
             default:
                 throw new System.Exception($"Unhandled EffectType: {effect.Type}");
         }

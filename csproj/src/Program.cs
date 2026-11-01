@@ -20,11 +20,15 @@ public class Program
         _ = new MeleeAttack();
 
         InvokeAbility.Instance.Init();
+
+        Const.SystemRoot = new GameObject("Systems");
+        Const.SystemRoot.AddComponent<BuffSystem>();
+        Const.UnitsRoot = new GameObject("Units");
+        Const.UiRoot = new GameObject("UI");
+
         StatsComponent.Init();
         Selection.Init();
         Command.Init();
-        Const.UnitsRoot = new GameObject("Units");
-        Const.UiRoot = new GameObject("UI");
 
         Test();
     }
