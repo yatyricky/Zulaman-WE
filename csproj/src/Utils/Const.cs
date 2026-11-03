@@ -7,4 +7,8 @@ public class Const
     public static GameObject UnitsRoot = null!;
 
     public static GameObject UiRoot = null!;
+
+    public static BuffSystem buffSys = null!;
+
+    public static UnitSystem unitSys = null!;
 }

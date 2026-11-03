@@ -15,7 +15,7 @@ public class ApplyBuff : Effect
 
         if (target == null) throw new System.Exception("ApplyBuff effect " + effect.ID + " has a null target");
 
-        var applied = BuffSystem.Apply(target, data.BuffId, caster, data.duration, data.stacks);
+        var applied = Const.buffSys.Apply(target, data.BuffId, caster, data.duration, data.stacks);
         if (applied != null) return;
 
         // Apply deliberately ignores dead/removed targets. Anything else is a

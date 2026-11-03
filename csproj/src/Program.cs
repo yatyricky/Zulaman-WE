@@ -22,11 +22,12 @@ public class Program
         InvokeAbility.Instance.Init();
 
         Const.SystemRoot = new GameObject("Systems");
-        Const.SystemRoot.AddComponent<BuffSystem>();
         Const.UnitsRoot = new GameObject("Units");
         Const.UiRoot = new GameObject("UI");
 
-        StatsComponent.Init();
+        Const.buffSys = Const.SystemRoot.AddComponent<BuffSystem>();
+        Const.unitSys = Const.SystemRoot.AddComponent<UnitSystem>();
+
         Selection.Init();
         Command.Init();
 

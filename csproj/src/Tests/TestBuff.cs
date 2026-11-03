@@ -25,7 +25,7 @@ public class TestBuff : Buff
 
     public override void OnRemove(BuffRemoveReason reason)
     {
-        var name = !Holder.nativeValid ? "removed" : Helper.GetUnitNameEx(Owner);
+        var name = !Holder.ownerValid ? "removed" : Helper.GetUnitNameEx(Owner);
         BJDebugMsg("[Buff] remove " + Config.Name + " -> " + name + " reason=" + I2S((int)reason));
     }
 

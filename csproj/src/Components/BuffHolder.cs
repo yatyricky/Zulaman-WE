@@ -3,38 +3,23 @@ using System;
 
 public class BuffHolder : Component
 {
-    private StatsComponent? _statsComp;
+    private UnitEntity _entity = null!;
     private List<Buff> _buffs = [];
     private Dictionary<int, int> _iconRefs = [];
-    private bool _destroyed;
 
-    public unit owner { get; private set; } = null!;
-    public bool nativeValid { get; private set; } = true;
-
-    internal StatsComponent stats => _statsComp ?? throw new InvalidOperationException("StatsComponent is not bound");
+    public unit owner => _entity.owner;
     public int count => _buffs.Count;
     public bool ownerValid => GetUnitTypeId(owner) != 0;
 
     public override void Awake()
     {
-        _statsComp = gameObject.GetComponent<StatsComponent>() ?? throw new System.Exception("unable to find StatsComponent in object");
-        owner = _statsComp.owner;
-        BuffSystem.Register(this);
+        _entity = gameObject.GetComponent<UnitEntity>() ?? throw new Exception("BuffHolder requires UnitEntity");
     }
 
     public override void OnDestroy()
     {
-        if (_destroyed) return;
-        _destroyed = true;
-        SetNativeValid(false);
         Clear(BuffRemoveReason.UnitRemoved);
-        BuffSystem.Unregister(this);
         _iconRefs = [];
-    }
-
-    internal void SetNativeValid(bool valid)
-    {
-        nativeValid = valid;
     }
 
     public Buff? Find(string configId)
@@ -64,25 +49,22 @@ public class BuffHolder : Component
         return new List<Buff>(_buffs);
     }
 
-    internal void Tick(int now)
+    internal void Tick(int now, int frame)
     {
-        if (_destroyed || _buffs.Count == 0) return;
+        if (_buffs.Count == 0) return;
         var snapshot = new List<Buff>(_buffs);
-        var bs = BuffSystem.Instance ?? throw new Exception("BuffSystem not found in scene");
         foreach (var buff in snapshot)
         {
             if (buff.IsRemoving || buff.IsRemoved) continue;
             if (buff.Holder != this) continue;
-
-            if (buff.LastTickFrame == bs.Frame) continue;
-
-            buff.Tick(now);
+            if (buff.LastTickFrame == frame) continue;
+            buff.Tick(now, frame);
         }
     }
 
     internal void AddBuff(Buff buff)
     {
-        if (_destroyed)
+        if (gameObject.isDestroyQueued || gameObject.isDestroyed)
         {
             throw new InvalidOperationException("cannot add buff to a destroying BuffHolder");
         }
@@ -123,7 +105,7 @@ public class BuffHolder : Component
 
     public void AddIcon(int abilityId)
     {
-        if (abilityId == 0 || !nativeValid || !ownerValid) return;
+        if (abilityId == 0 || !ownerValid) return;
         if (!_iconRefs.TryGetValue(abilityId, out var count))
         {
             count = 0;
@@ -143,7 +125,7 @@ public class BuffHolder : Component
         if (count <= 1)
         {
             _iconRefs.Remove(abilityId);
-            if (nativeValid && ownerValid && GetUnitAbilityLevel(owner, abilityId) > 0)
+            if (ownerValid && GetUnitAbilityLevel(owner, abilityId) > 0)
             {
                 UnitRemoveAbility(owner, abilityId);
             }

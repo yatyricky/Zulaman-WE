@@ -5,7 +5,7 @@ public class Buff
 {
     public BuffConfigEntry Config { get; private set;} = null!;
     public BuffHolder Holder { get; private set;} = null!;
-    public unit Owner { get; private set;} = null!;
+    public unit Owner => Holder.owner;
     public unit? Caster { get; private set;} = null;
     public int Stacks { get; private set;} = 1;
     public int Duration { get; private set;} = -1;
@@ -33,8 +33,7 @@ public class Buff
 
         Config = config;
         Holder = holder;
-        Owner = holder.owner;
-        Caster = caster ?? Owner;
+        Caster = caster ?? holder.owner;
         Stacks = stacks;
         Duration = duration < 0 ? config.Duration : duration;
         Interval = config.Interval;
@@ -58,9 +57,6 @@ public class Buff
             _appliedOnce = true;
             OnApply();
         }
-
-        var bs = BuffSystem.Instance ?? throw new Exception("BuffSystem not found in scene");
-        LastTickFrame = bs.IsTicking ? bs.Frame : -1;
     }
 
     private void Detach(BuffDetachReason reason)
@@ -108,7 +104,6 @@ public class Buff
         old.RemoveBuff(this);
 
         Holder = target;
-        Owner = target.owner;
         if (newCaster != null) Caster = newCaster;
         Holder.AddBuff(this);
         ApplyNativeIcon();
@@ -124,13 +119,16 @@ public class Buff
             OnTransfer(old);
         }
 
-        var bs = BuffSystem.Instance ?? throw new Exception("BuffSystem not found in scene");
-        LastTickFrame = bs.IsTicking ? bs.Frame : -1;
         IsTransferring = false;
         return !IsRemoved;
     }
 
-    internal void Tick(int now)
+    internal void MarkTickFrame(int frame)
+    {
+        LastTickFrame = frame;
+    }
+
+    internal void Tick(int now, int frame)
     {
         if (Paused || IsRemoving || IsRemoved) return;
         if (GetUnitTypeId(Owner) == 0)
@@ -139,8 +137,7 @@ public class Buff
             return;
         }
 
-        var bs = BuffSystem.Instance ?? throw new Exception("BuffSystem not found in scene");
-        LastTickFrame = bs.Frame;
+        LastTickFrame = frame;
         var ownerDead = Helper.IsUnitDead(Owner);
 
         var guard = 0;
@@ -479,10 +476,12 @@ public class Buff
     /// already-applied mods. A single delta avoids temporarily removing a max-HP
     /// buff (which would clamp the owner's current HP) before re-adding it.
     /// </summary>
+    private bool HolderGone => !Holder.ownerValid || Holder.gameObject.isDestroyQueued || Holder.gameObject.isDestroyed;
+
     private void SyncStats()
     {
         var next = CollectStats();
-        if (!Holder.nativeValid)
+        if (HolderGone)
         {
             _appliedStats = [];
             return;
@@ -510,7 +509,9 @@ public class Buff
 
         if (delta.Count > 0)
         {
-            Holder.stats.ModStats(delta);
+            var stats = Const.unitSys.GetUnit(Owner)?.GetComponent<StatsComponent>()
+                ?? throw new Exception("StatsComponent not found for buff owner");
+            stats.ModStats(delta);
         }
         _appliedStats = next;
     }
@@ -518,18 +519,21 @@ public class Buff
     internal void RemoveAppliedStats()
     {
         if (_appliedStats.Count == 0) return;
-        if (!Holder.nativeValid)
+        if (HolderGone)
         {
             _appliedStats = [];
             return;
         }
+
+        var stats = Const.unitSys.GetUnit(Owner)?.GetComponent<StatsComponent>()
+            ?? throw new Exception("StatsComponent not found for buff owner");
 
         var mods = new Dictionary<StatId, StatValue>();
         foreach (var (statId, value) in _appliedStats)
         {
             mods[statId] = value * -1;
         }
-        Holder.stats.ModStats(mods);
+        stats.ModStats(mods);
         _appliedStats = [];
     }
 
